@@ -1,0 +1,215 @@
+# Sports & Loisirs — une question par ligne.
+#
+# niveau | énoncé ? | bonne réponse | leurre | leurre | leurre
+# F facile · M moyen · D difficile
+#
+# Les propositions sont mêlées au tirage : l'ordre n'a aucune importance.
+# Un leurre doit être faux mais crédible — un leurre absurde ne fait pas
+# une question, il fait une question à trois propositions.
+
+F | Combien de joueurs une équipe de football aligne-t-elle sur le terrain ? | 11 | 10 | 12 | 9
+F | Tous les combien d'années se tiennent les Jeux olympiques d'été ? | 4 ans | 2 ans | 3 ans | 5 ans
+F | Quel sport se pratique à Roland-Garros ? | Le tennis | Le golf | L'athlétisme | Le cyclisme
+M | De quelle couleur est le maillot du leader du Tour de France ? | Jaune | Vert | Blanc | À pois rouges
+M | Combien de cases compte un échiquier ? | 64 | 81 | 100 | 49
+M | Combien de points vaut un essai au rugby à XV ? | 5 | 3 | 7 | 4
+M | Dans quelle ville se sont tenus les premiers Jeux olympiques modernes, en 1896 ? | Athènes | Paris | Londres | Rome
+D | Quel pays a remporté la première Coupe du monde de football, en 1930 ? | L'Uruguay | Le Brésil | L'Argentine | L'Italie
+D | Quelle est la distance officielle d'un marathon ? | 42,195 km | 40 km | 45,5 km | 38,600 km
+D | Combien de minutes dure un quart-temps en NBA ? | 12 | 10 | 15 | 8
+F | Combien de joueurs une équipe de basket-ball aligne-t-elle sur le terrain ? | Cinq | Six | Sept | Quatre
+F | Dans quel sport réalise-t-on un « spare » ? | Le bowling | Le baseball | Le tennis | Le golf
+F | Dans quel sport parle-t-on d'un « birdie » ? | Le golf | Le tennis | Le cricket | Le baseball
+M | Combien de minutes dure un match de football réglementaire ? | 90 | 80 | 100 | 60
+M | Quel pays a accueilli les Jeux olympiques d'été tenus en 2021 ? | Le Japon | La Chine | Le Brésil | La Corée du Sud
+M | Combien de pions chaque joueur aligne-t-il au début d'une partie d'échecs ? | Huit | Six | Dix | Douze
+M | Qui porte le maillot à pois rouges sur le Tour de France ? | Le meilleur grimpeur | Le meilleur sprinteur | Le meilleur jeune | Le plus combatif
+D | Combien d'anneaux compte le drapeau olympique ? | Cinq | Quatre | Six | Sept
+D | Combien de joueurs une équipe de volley-ball aligne-t-elle sur le terrain ? | Six | Cinq | Sept | Quatre
+D | Quelle nation a remporté le plus de Coupes du monde de football ? | Le Brésil | L'Allemagne | L'Italie | L'Argentine
+F | Combien de joueurs compte une équipe de rugby à XV ? | 15 | 13 | 11 | 17
+F | Quel sport se pratique sur un tatami ? | Le judo | L'escrime | La gymnastique | Le tir à l'arc
+F | Quel sport se joue avec une raquette et un volant ? | Le badminton | Le squash | Le tennis de table | Le padel
+M | Combien de temps dure un round de boxe professionnelle ? | 3 minutes | 2 minutes | 5 minutes | 1 minute
+M | Dans quel pays le judo est-il né ? | Le Japon | La Chine | La Corée | La Thaïlande
+M | Combien de joueurs une équipe de handball aligne-t-elle sur le terrain ? | 7 | 6 | 8 | 5
+M | Quelle course automobile française dure vingt-quatre heures ? | Les 24 Heures du Mans | Le Grand Prix de Monaco | Le rallye de Monte-Carlo | Le Bol d'or
+D | Quel nageur a remporté le plus de médailles olympiques ? | Michael Phelps | Mark Spitz | Ian Thorpe | Alain Bernard
+D | Dans quel sport décerne-t-on la Coupe Davis ? | Le tennis | Le golf | L'aviron | La voile
+D | En quelle année Paris a-t-elle accueilli les Jeux olympiques pour la troisième fois ? | 2024 | 2020 | 2016 | 2028
+
+# ————— Deuxième fournée —————
+
+F | Combien de trous compte un parcours de golf réglementaire ? | 18 | 9 | 24 | 12
+F | Dans quel sport marque-t-on un « home run » ? | Le baseball | Le cricket | Le softball | Le hockey
+F | Combien de joueurs une équipe de water-polo aligne-t-elle dans l'eau ? | Sept | Six | Huit | Cinq
+F | Quel sport se pratique sur un ring ? | La boxe | L'escrime | Le judo | Le tir à l'arc
+F | De quelle couleur est la ceinture la plus élevée au karaté ? | Noire | Rouge | Blanche | Marron
+F | Quel sport oppose deux équipes de cinq sur un parquet avec un panier ? | Le basket-ball | Le handball | Le volley-ball | Le futsal
+F | Combien de temps dure un match de basket-ball en NBA ? | 48 minutes | 40 minutes | 60 minutes | 36 minutes
+F | Dans quel sport parle-t-on de « service » et de « smash » ? | Le tennis | Le football | Le rugby | Le cyclisme
+F | Quelle épreuve d'athlétisme consiste à lancer un disque ? | Le lancer du disque | Le lancer du poids | Le javelot | Le marteau
+F | Sur quelle surface se joue le tournoi de Wimbledon ? | Le gazon | La terre battue | Le dur | La moquette
+F | Combien de joueurs compte une équipe de football américain sur le terrain ? | Onze | Neuf | Treize | Quinze
+F | Quel sport se pratique avec un ballon ovale ? | Le rugby | Le football | Le basket-ball | Le volley-ball
+F | Quel sport d'hiver se pratique avec des lattes aux pieds et des bâtons ? | Le ski | Le patinage | La luge | Le bobsleigh
+F | Combien de pièces chaque joueur a-t-il au début d'une partie d'échecs ? | Seize | Douze | Vingt | Huit
+F | Quel sport se pratique dans un vélodrome ? | Le cyclisme sur piste | Le patinage | L'athlétisme | La course automobile
+F | Combien de faces compte un dé classique ? | Six | Quatre | Huit | Douze
+F | Quelle est la couleur du maillot du meilleur jeune sur le Tour de France ? | Blanc | Jaune | Vert | Rose
+F | Dans quel sport utilise-t-on une crosse et une rondelle ? | Le hockey sur glace | Le golf | Le polo | Le cricket
+F | Quel animal accompagne le cavalier dans une épreuve d'équitation ? | Le cheval | Le poney seulement | Le mulet | L'âne
+F | Combien de temps dure une mi-temps au football ? | 45 minutes | 30 minutes | 40 minutes | 50 minutes
+F | Quel sport a rendu célèbre Zinédine Zidane ? | Le football | Le rugby | Le handball | Le basket-ball
+F | Quel tournoi de tennis se joue à New York ? | L'US Open | Roland-Garros | Wimbledon | L'Open d'Australie
+F | Quel sport consiste à faire tomber des quilles ? | Le bowling | La pétanque | Le curling | Le billard
+F | Quelle balle est la plus petite : celle du golf ou celle du tennis ? | Celle du golf | Celle du tennis | Elles sont identiques | Celle du ping-pong
+F | Combien de joueurs compte une équipe de rugby à XIII ? | Treize | Quinze | Onze | Neuf
+M | Combien de temps dure un match de hockey sur glace en NHL ? | 60 minutes | 45 minutes | 80 minutes | 40 minutes
+M | Quelle ville a accueilli les premiers Jeux olympiques d'hiver, en 1924 ? | Chamonix | Saint-Moritz | Oslo | Innsbruck
+M | Combien de coureurs composent une équipe sur le Tour de France ? | Huit | Neuf | Six | Dix
+M | Quel pays a inventé le rugby ? | L'Angleterre | Le pays de Galles | L'Écosse | La Nouvelle-Zélande
+M | Quelle distance sépare le lanceur du batteur au baseball ? | Environ 18 mètres | Environ 10 mètres | Environ 30 mètres | Environ 25 mètres
+M | Quel trophée récompense le vainqueur du championnat de la NBA ? | Le trophée Larry O'Brien | La coupe Stanley | Le trophée Vince Lombardi | La coupe Davis
+M | Combien de médailles d'or Usain Bolt a-t-il remportées aux Jeux olympiques ? | Huit | Six | Dix | Quatre
+M | Quel sport se dispute à Roland-Garros sur terre battue ? | Le tennis | Le padel | Le squash | Le badminton
+M | En quelle année la France a-t-elle remporté sa première Coupe du monde de football ? | 1998 | 2018 | 1986 | 1958
+M | Quelle nation domine historiquement le rugby de l'hémisphère Sud ? | La Nouvelle-Zélande | L'Australie | L'Afrique du Sud | L'Argentine
+M | Combien de points vaut une pénalité au rugby à XV ? | Trois | Deux | Cinq | Sept
+M | Quel est le nom du championnat automobile le plus prestigieux ? | La Formule 1 | Le rallye WRC | Le MotoGP | L'IndyCar
+M | Combien de joueurs se trouvent sur un terrain de football à onze au total ? | Vingt-deux | Vingt | Vingt-quatre | Dix-huit
+M | Quel sport combine natation, cyclisme et course à pied ? | Le triathlon | Le pentathlon | Le décathlon | Le biathlon
+M | Quel pays a accueilli la Coupe du monde de football en 1998 ? | La France | L'Italie | L'Allemagne | L'Espagne
+M | Combien de flèches compte une volée en tir à l'arc olympique ? | Trois | Six | Une | Dix
+M | Quel sport se pratique sur un « green » ? | Le golf | Le cricket | Le croquet | Le bowling
+M | Quel nageur français a été champion olympique du 100 mètres nage libre en 2008 ? | Alain Bernard | Camille Lacourt | Yannick Agnel | Florent Manaudou
+M | Quelle discipline associe le ski de fond et le tir à la carabine ? | Le biathlon | Le combiné nordique | Le skiathlon | Le saut à ski
+M | Combien de sets faut-il gagner pour remporter un match de tennis masculin en Grand Chelem ? | Trois | Deux | Quatre | Cinq
+M | Quel pays a remporté le plus de médailles olympiques au total ? | Les États-Unis | La Russie | L'Allemagne | La Chine
+M | Quel joueur est surnommé « Le Roi » au football brésilien ? | Pelé | Ronaldo | Zico | Garrincha
+M | Quel est le nom du terrain de baseball ? | Le diamant | Le carré | Le losange vert | Le stade
+M | Combien de temps dure une prolongation au football ? | Deux fois quinze minutes | Deux fois dix minutes | Une fois trente minutes | Deux fois vingt minutes
+M | Quelle course cycliste italienne se dispute au printemps ? | Le Giro | La Vuelta | Paris-Roubaix | Le Tour des Flandres
+D | Quel athlète détient le record du monde du 100 mètres ? | Usain Bolt | Carl Lewis | Tyson Gay | Yohan Blake
+D | En quelle année le doping a-t-il fait annuler sept titres à Lance Armstrong ? | 2012 | 2005 | 2008 | 2015
+D | Quelle équipe a remporté la première Coupe d'Europe des clubs champions ? | Le Real Madrid | Le Benfica Lisbonne | Le Milan AC | L'Ajax Amsterdam
+D | Quel est le nom du trophée de la Coupe du monde de rugby ? | La coupe Webb Ellis | La coupe Jules Rimet | Le trophée Six Nations | La coupe Bledisloe
+D | Quelle nation a remporté le plus de Coupes Davis ? | Les États-Unis | L'Australie | La France | L'Espagne
+D | Sur combien d'agrès se disputent les épreuves masculines de gymnastique artistique ? | Six | Quatre | Huit | Cinq
+D | Quel pilote a remporté sept titres de champion du monde de Formule 1 avant 2010 ? | Michael Schumacher | Ayrton Senna | Alain Prost | Juan Manuel Fangio
+D | Quelle course d'endurance moto se dispute au Mans ? | Les 24 Heures Moto | Le Bol d'or | Le Dakar | Le Tourist Trophy
+D | Quel joueur de tennis a remporté le plus de titres du Grand Chelem chez les femmes ? | Margaret Court | Serena Williams | Steffi Graf | Martina Navrátilová
+D | Quelle épreuve du décathlon ouvre la compétition ? | Le 100 mètres | Le saut en longueur | Le lancer du poids | Le 400 mètres
+D | En quelle année les femmes ont-elles participé pour la première fois aux Jeux olympiques ? | 1900 | 1896 | 1912 | 1928
+D | Quel est le record du monde du saut à la perche masculin, approximativement ? | Plus de 6,20 m | Plus de 5,50 m | Plus de 7 m | Plus de 5 m
+D | Quel club de football a remporté le plus de Ligues des champions ? | Le Real Madrid | Le Milan AC | Le Bayern Munich | Le FC Barcelone
+D | Quelle est la longueur d'un bassin olympique ? | 50 mètres | 25 mètres | 100 mètres | 33 mètres
+D | Quel pays a remporté la Coupe du monde de rugby en 1995 ? | L'Afrique du Sud | La Nouvelle-Zélande | L'Australie | L'Angleterre
+D | Combien de temps dure un match de polo, environ ? | Une heure et demie | Trois heures | Une heure | Deux heures et demie
+D | Quel sport olympique se dispute sur un tapis de douze mètres sur douze ? | La lutte | Le judo | Le taekwondo | La boxe
+D | Quelle est la hauteur d'un panier de basket-ball ? | 3,05 mètres | 2,80 mètres | 3,50 mètres | 3,00 mètres
+D | Quel coureur a remporté cinq Tours de France et est surnommé « le Blaireau » ? | Bernard Hinault | Jacques Anquetil | Eddy Merckx | Miguel Indurain
+D | Quel pays a organisé les Jeux olympiques d'hiver de 1992 ? | La France | L'Italie | La Norvège | Le Japon
+
+# ————— Troisième fournée —————
+
+F | Combien de joueurs une équipe de baseball aligne-t-elle en défense ? | Neuf | Sept | Onze | Cinq
+F | Quel sport se pratique avec des palmes et un tuba ? | La plongée | La voile | L'aviron | Le surf
+F | Dans quel sport parle-t-on de « KO » ? | La boxe | Le tennis | Le golf | L'escrime
+F | Quel sport olympique se dispute sur un cheval d'arçons ? | La gymnastique | L'équitation | L'athlétisme | La lutte
+F | Combien de temps dure un match de tennis de table en points ? | Onze points par manche | Vingt et un points | Quinze points | Sept points
+F | Quel sport se joue avec un maillet à cheval ? | Le polo | Le croquet | Le hockey | Le cricket
+F | Quelle est la distance d'un cent mètres ? | Cent mètres | Cent yards | Cent pas | Cent pieds
+F | Quel pays a inventé le judo ? | Le Japon | La Chine | La Corée | Le Viêt Nam
+F | Dans quel sport marque-t-on des « points de mêlée » ? | Le rugby | Le football | Le handball | Le basket-ball
+F | Quel sport de glisse se pratique sur une planche unique ? | Le snowboard | Le ski | La luge | Le patinage
+F | Combien de joueurs par équipe au beach-volley ? | Deux | Trois | Quatre | Six
+F | Quel sport a rendu célèbre Michael Jordan ? | Le basket-ball | Le baseball | Le football américain | Le golf
+F | Quelle est la couleur du tapis de billard traditionnel ? | Vert | Bleu | Rouge | Gris
+F | Quel sport se pratique sur un tremplin en hiver ? | Le saut à ski | Le patinage | Le bobsleigh | Le curling
+F | Dans quel sport un joueur peut-il faire un « ace » ? | Le tennis | Le football | Le rugby | Le cyclisme
+F | Combien de temps dure une période au hockey sur glace ? | Vingt minutes | Quinze minutes | Trente minutes | Douze minutes
+F | Quel sport combine tir et équitation dans le pentathlon moderne ? | Les deux à la fois | Seulement le tir | Seulement l'équitation | Ni l'un ni l'autre
+F | Quelle balle est utilisée au ping-pong ? | Une balle en celluloïd | Une balle en cuir | Une balle en caoutchouc | Une balle en liège
+F | Quel sport pratique-t-on dans un dojo ? | Les arts martiaux | La natation | L'athlétisme | Le tir à l'arc
+F | Combien de joueurs sur un terrain de futsal par équipe ? | Cinq | Sept | Six | Quatre
+F | Quel sport se dispute au stade Vélodrome à Marseille ? | Le football | Le cyclisme | Le rugby | L'athlétisme
+F | Quel sport utilise un shuttlecock, ou volant ? | Le badminton | Le tennis | Le squash | Le padel
+F | Quelle épreuve d'athlétisme se court sur 42 kilomètres ? | Le marathon | Le semi-marathon | Le dix kilomètres | Le cross
+F | Quel animal court dans une course hippique ? | Le cheval | Le lévrier | Le chameau | L'autruche
+F | Combien de manches gagnantes faut-il en volley-ball ? | Trois | Deux | Quatre | Cinq
+M | Quel est le nom du trophée de la Coupe du monde de football ? | Le trophée de la Coupe du monde | La coupe Jules Rimet | La coupe Webb Ellis | Le trophée Henri Delaunay
+M | Combien de temps dure un match de rugby à XV ? | Quatre-vingts minutes | Soixante minutes | Quatre-vingt-dix minutes | Soixante-dix minutes
+M | Quel pays a remporté l'Euro de football en 2016 ? | Le Portugal | La France | L'Espagne | L'Allemagne
+M | Quelle course de voiliers fait le tour du monde en solitaire ? | Le Vendée Globe | La Route du Rhum | La Transat | La Solitaire du Figaro
+M | Combien de joueurs compte une équipe de cricket ? | Onze | Neuf | Treize | Quinze
+M | Quel trophée récompense le vainqueur du Super Bowl ? | Le trophée Vince Lombardi | La coupe Stanley | Le trophée Larry O'Brien | Le trophée Commissioner
+M | Quelle nation a remporté le plus de Tours de France ? | La France | La Belgique | L'Espagne | L'Italie
+M | Dans quel sport décerne-t-on le maillot arc-en-ciel ? | Le cyclisme | Le ski | L'athlétisme | La natation
+M | Quel pays a organisé la Coupe du monde de football en 2022 ? | Le Qatar | La Russie | Le Brésil | L'Afrique du Sud
+M | Combien de médailles compte une épreuve olympique individuelle ? | Trois | Deux | Quatre | Une
+M | Quelle épreuve de natation est la plus rapide sur cent mètres ? | Le crawl | La brasse | Le dos | Le papillon
+M | Quel joueur de tennis a remporté le plus de Roland-Garros ? | Rafael Nadal | Björn Borg | Roger Federer | Novak Djokovic
+M | Quelle est la longueur d'un terrain de handball ? | Quarante mètres | Trente mètres | Cinquante mètres | Soixante mètres
+M | Quel sport olympique se pratique avec un sabre, une épée ou un fleuret ? | L'escrime | Le tir | Le pentathlon | Le tir à l'arc
+M | Quel club français a remporté la Ligue des champions en 1993 ? | L'Olympique de Marseille | Le Paris Saint-Germain | L'AS Monaco | L'Olympique lyonnais
+M | Quelle course automobile américaine se dispute sur un ovale de 500 miles ? | Les 500 Miles d'Indianapolis | Les 24 Heures de Daytona | La NASCAR Cup | Le Grand Prix des États-Unis
+M | Combien de temps dure un round de MMA professionnel ? | Cinq minutes | Trois minutes | Deux minutes | Quatre minutes
+M | Quel pays a remporté la Coupe du monde de rugby en 2023 ? | L'Afrique du Sud | La Nouvelle-Zélande | La France | L'Angleterre
+M | Quel est le nom du tournoi de rugby européen entre six nations ? | Le Tournoi des Six Nations | La Coupe d'Europe | Le Championnat continental | La Coupe des nations
+M | Combien de trous compte un parcours de golf en compétition sur quatre jours ? | Soixante-douze | Trente-six | Cinquante-quatre | Quatre-vingt-dix
+M | Quelle nage se pratique sur le dos ? | Le dos crawlé | La brasse | Le papillon | Le crawl
+M | Quel sport se dispute à Roland-Garros, Wimbledon, Melbourne et New York ? | Le tennis | Le golf | L'athlétisme | Le cyclisme
+M | Quelle est la hauteur d'un filet de volley-ball masculin ? | 2,43 mètres | 2,24 mètres | 2,00 mètres | 2,60 mètres
+M | Quel pilote français a été champion du monde de Formule 1 quatre fois ? | Alain Prost | Jacques Laffite | René Arnoux | Jean Alesi
+M | Combien de joueurs compte une équipe de rugby à VII ? | Sept | Neuf | Cinq | Onze
+D | Quel athlète a remporté neuf médailles d'or olympiques en athlétisme dans les années 1980 et 1990 ? | Carl Lewis | Michael Johnson | Jesse Owens | Usain Bolt
+D | Quelle ville a accueilli les Jeux olympiques d'été de 1936 ? | Berlin | Los Angeles | Amsterdam | Anvers
+D | Quel joueur a marqué le but dit « de la main de Dieu » ? | Diego Maradona | Pelé | Zico | Romário
+D | Quelle équipe nationale est surnommée la Squadra Azzurra ? | L'Italie | L'Espagne | L'Argentine | L'Uruguay
+D | Quel cycliste belge a remporté cinq Tours de France et est surnommé le Cannibale ? | Eddy Merckx | Rik Van Looy | Roger De Vlaeminck | Freddy Maertens
+D | Quelle épreuve olympique combine le saut, la course et le lancer sur deux jours ? | Le décathlon | Le pentathlon | L'heptathlon | Le triathlon
+D | Quel pays a remporté la première Coupe du monde de rugby en 1987 ? | La Nouvelle-Zélande | L'Australie | La France | L'Afrique du Sud
+D | Quelle joueuse de tennis a remporté le Grand Chelem calendaire en 1988 ? | Steffi Graf | Martina Navrátilová | Chris Evert | Monica Seles
+D | Quelle est la distance d'un tour de piste d'athlétisme en couloir intérieur ? | 400 mètres | 500 mètres | 300 mètres | 200 mètres
+D | Quel club anglais a remporté la Ligue des champions en 2005 après avoir été mené 3-0 ? | Liverpool | Manchester United | Chelsea | Arsenal
+D | Quelle nation domine historiquement le tennis de table ? | La Chine | Le Japon | La Corée du Sud | La Suède
+D | Combien de temps dure une prolongation au basket-ball ? | Cinq minutes | Trois minutes | Dix minutes | Deux minutes
+D | Quel athlète jamaïcain détient le record du 200 mètres ? | Usain Bolt | Yohan Blake | Asafa Powell | Michael Johnson
+D | Quelle course cycliste est surnommée l'Enfer du Nord ? | Paris-Roubaix | Le Tour des Flandres | Liège-Bastogne-Liège | Milan-San Remo
+D | Quel pays a accueilli les Jeux olympiques d'été de 2016 ? | Le Brésil | La Chine | Le Royaume-Uni | La Grèce
+D | Quel boxeur était surnommé « The Greatest » ? | Muhammad Ali | Mike Tyson | Joe Frazier | George Foreman
+D | Quelle est la hauteur d'une haie du 110 mètres haies masculin ? | 1,067 mètre | 0,914 mètre | 1,20 mètre | 0,84 mètre
+D | Quel skieur alpin a remporté le plus de globes de cristal ? | Marcel Hirscher | Ingemar Stenmark | Hermann Maier | Alberto Tomba
+D | Quelle nation a remporté le plus de médailles aux Jeux olympiques d'hiver ? | La Norvège | L'Allemagne | Les États-Unis | La Russie
+D | Quel gardien de but a remporté la Coupe du monde 1998 avec la France ? | Fabien Barthez | Bernard Lama | Ulrich Ramé | Lionel Charbonnier
+D | Quel sport olympique a fait son retour en 2016 après plus d'un siècle ? | Le golf | Le rugby à XV | Le squash | Le karaté
+D | Quelle épreuve de ski de fond est la plus longue aux Jeux olympiques masculins ? | Le cinquante kilomètres | Le trente kilomètres | Le quinze kilomètres | Le dix kilomètres
+D | Quel joueur a remporté le plus de Ballons d'or avant 2020 ? | Lionel Messi | Cristiano Ronaldo | Michel Platini | Johan Cruyff
+D | Quelle ville a accueilli les premiers Jeux paralympiques d'été ? | Rome | Tokyo | Londres | Munich
+D | Quel pays a remporté le premier Tournoi des Cinq Nations en 1910 ? | L'Angleterre | Le pays de Galles | L'Écosse | La France
+F | Quel sport se pratique avec une planche et une voile ? | La planche à voile | Le surf | Le kitesurf | L'aviron
+F | Dans quel sport crie-t-on « touché » ? | L'escrime | La boxe | Le judo | Le tir
+F | Quel sport olympique consiste à soulever une barre chargée ? | L'haltérophilie | La lutte | Le lancer du poids | La gymnastique
+F | Quel sport nautique se pratique sur une planche tractée par un bateau ? | Le ski nautique | La voile | L'aviron | Le canoë
+F | Quel sport se joue avec des boules d'acier sur un terrain de sable ? | La pétanque | Le bowling | Le curling | Le croquet
+F | Quel symbole représente les Jeux olympiques ? | Cinq anneaux entrelacés | Une flamme seule | Trois cercles | Une couronne de laurier
+F | Quel sport oppose deux équipes autour d'une corde ? | Le tir à la corde | Le lancer du marteau | La lutte | Le rugby
+F | Quel sport de raquette se joue contre un mur ? | Le squash | Le tennis | Le badminton | Le tennis de table
+F | Quel est le sport d'hiver le plus populaire au Canada ? | Le hockey sur glace | Le curling | Le ski | Le patinage
+M | Quelle est la largeur d'un but de football ? | 7,32 mètres | 5 mètres | 10 mètres | 6 mètres
+M | Combien de temps dure un match de basket-ball selon les règles internationales ? | Quarante minutes | Quarante-huit minutes | Soixante minutes | Trente-six minutes
+M | Quel pays a remporté le plus de Coupes du monde féminines de football ? | Les États-Unis | L'Allemagne | La Norvège | Le Japon
+M | Quelle course d'aviron oppose Oxford à Cambridge ? | La Boat Race | La Henley Regatta | La Head of the River | La Thames Cup
+M | Combien de points vaut une transformation au rugby à XV ? | Deux | Trois | Cinq | Un
+M | Dans quel pays le badminton moderne a-t-il été codifié ? | L'Angleterre | L'Inde | La Chine | Le Danemark
+M | Quelle est la longueur d'un court de tennis ? | 23,77 mètres | 20 mètres | 26 mètres | 18 mètres
+M | Quel sport de combat est originaire de Corée ? | Le taekwondo | Le karaté | Le judo | Le kung-fu
+M | Quel pays a remporté le plus de Coupes d'Afrique des nations ? | L'Égypte | Le Cameroun | Le Ghana | Le Nigeria
+D | Quel athlète a franchi le premier les huit mètres au saut en longueur ? | Jesse Owens | Carl Lewis | Bob Beamon | Mike Powell
+D | Quel pays a accueilli la première Coupe du monde féminine de football ? | La Chine | Les États-Unis | La Suède | La Norvège
+D | Quel joueur a inscrit le plus de points en Coupe du monde de rugby ? | Jonny Wilkinson | Dan Carter | Gavin Hastings | Michael Lynagh
+D | Quelle épreuve de natation enchaîne les quatre nages ? | Le quatre nages | Le relais mixte | Le papillon long | Le nage libre combiné
+D | Quel pilote a remporté le plus de Grands Prix de Formule 1 ? | Lewis Hamilton | Michael Schumacher | Sebastian Vettel | Ayrton Senna
+D | Quelle ville a accueilli les Jeux olympiques d'hiver de 2018 ? | Pyeongchang | Sotchi | Vancouver | Turin
+D | Quelle course automobile se dispute sur le circuit de Monaco ? | Le Grand Prix de Monaco | Les 24 Heures du Mans | Le rallye Monte-Carlo | Le Grand Prix de France

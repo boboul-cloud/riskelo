@@ -1,0 +1,215 @@
+# Histoire — une question par ligne.
+#
+# niveau | énoncé ? | bonne réponse | leurre | leurre | leurre
+# F facile · M moyen · D difficile
+#
+# Les propositions sont mêlées au tirage : l'ordre n'a aucune importance.
+# Un leurre doit être faux mais crédible — un leurre absurde ne fait pas
+# une question, il fait une question à trois propositions.
+
+F | En quelle année la Bastille a-t-elle été prise ? | 1789 | 1793 | 1776 | 1815
+F | En quelle année le mur de Berlin est-il tombé ? | 1989 | 1991 | 1985 | 1979
+F | Qui fut le premier empereur des Français ? | Napoléon Bonaparte | Charlemagne | Louis XIV | Napoléon III
+M | Quelle bataille de 1815 met fin à l'Empire napoléonien ? | Waterloo | Austerlitz | Iéna | Leipzig
+M | Quel roi de France a signé l'édit de Nantes en 1598 ? | Henri IV | François Ier | Louis XIII | Charles IX
+M | Quelle civilisation a bâti le Machu Picchu ? | Les Incas | Les Aztèques | Les Mayas | Les Olmèques
+M | En quelle année Jules César a-t-il été assassiné ? | 44 av. J.-C. | 27 av. J.-C. | 79 apr. J.-C. | 146 av. J.-C.
+D | Quel traité de 1919 met fin à la Première Guerre mondiale ? | Le traité de Versailles | Le traité de Vienne | Le traité de Trianon | Le traité de Westphalie
+D | Quelle dynastie chinoise a bâti l'essentiel de la Grande Muraille visible aujourd'hui ? | Les Ming | Les Han | Les Tang | Les Qing
+D | Quel empereur romain a autorisé le christianisme en 313 ? | Constantin | Auguste | Néron | Dioclétien
+F | Quel peuple a bâti les pyramides de Gizeh ? | Les Égyptiens | Les Romains | Les Grecs | Les Perses
+F | En quelle année s'est achevée la Seconde Guerre mondiale ? | 1945 | 1944 | 1946 | 1939
+F | Qui atteint l'Amérique pour l'Europe en 1492 ? | Christophe Colomb | Magellan | Vasco de Gama | Amerigo Vespucci
+M | Quelle souveraine fut la dernière du royaume d'Égypte ptolémaïque ? | Cléopâtre VII | Néfertiti | Hatchepsout | Nitocris
+M | Quel mur séparait la Bretagne romaine des Pictes ? | Le mur d'Hadrien | Le mur d'Aurélien | Le limes de Germanie | Le mur de Servius
+M | En quelle année un homme a-t-il marché sur la Lune ? | 1969 | 1965 | 1972 | 1961
+M | Quelle guerre opposa le Nord et le Sud des États-Unis ? | La guerre de Sécession | La guerre d'Indépendance | La guerre du Mexique | La guerre de 1812
+D | Qui fut chancelier de l'Empire allemand à sa fondation, en 1871 ? | Otto von Bismarck | Guillaume II | Metternich | Helmuth von Moltke
+D | Quelle bataille navale de 1805 assura la maîtrise anglaise des mers ? | Trafalgar | Aboukir | Lépante | Le Jutland
+D | Quel empire Gengis Khan a-t-il fondé ? | L'Empire mongol | L'Empire ottoman | L'Empire perse | L'Empire moghol
+F | Quel roi de France est surnommé le Roi-Soleil ? | Louis XIV | Louis XV | François Ier | Henri IV
+F | Quelle ville a été ensevelie par le Vésuve en 79 ? | Pompéi | Ostie | Syracuse | Carthage
+F | En quelle année a débuté la Première Guerre mondiale ? | 1914 | 1912 | 1916 | 1918
+M | Qui a fondé la Ve République en 1958 ? | Charles de Gaulle | Georges Pompidou | Vincent Auriol | Pierre Mendès France
+M | Quelle civilisation a inventé l'écriture cunéiforme ? | Les Sumériens | Les Égyptiens | Les Phéniciens | Les Hittites
+M | Quel navigateur portugais a mené la première circumnavigation ? | Magellan | Vasco de Gama | Bartolomeu Dias | Pedro Álvares Cabral
+M | En quelle année la Révolution russe a-t-elle éclaté ? | 1917 | 1905 | 1921 | 1789
+D | Quelle bataille de 732 arrête l'avancée arabe en Gaule ? | Poitiers | Roncevaux | Tolbiac | Alésia
+D | Quel pharaon a fait bâtir la grande pyramide de Gizeh ? | Khéops | Toutânkhamon | Ramsès II | Khéphren
+D | En quelle année l'esclavage a-t-il été définitivement aboli en France ? | 1848 | 1789 | 1794 | 1865
+
+# ————— Deuxième fournée —————
+
+F | Qui fut le premier président des États-Unis ? | George Washington | Thomas Jefferson | Abraham Lincoln | Benjamin Franklin
+F | Quelle reine d'Angleterre a régné le plus longtemps ? | Élisabeth II | Victoria | Élisabeth Ire | Anne
+F | Qui a pris la tête de la Terreur en 1793 ? | Robespierre | Danton | Marat | Saint-Just
+F | Qui a fondé Rome selon la légende ? | Romulus | Énée | Numa Pompilius | Jules César
+F | Quelle langue parlait-on dans la Rome antique ? | Le latin | Le grec | L'étrusque | L'araméen
+F | Qui a mené les Français à la victoire d'Orléans en 1429 ? | Jeanne d'Arc | Du Guesclin | Bayard | Charles VII
+F | En quelle année ont eu lieu les attentats du 11-Septembre ? | 2001 | 1999 | 2003 | 2005
+F | Quel pays Napoléon a-t-il envahi en 1812 ? | La Russie | L'Autriche | La Prusse | L'Espagne
+F | Qui a mis au point l'imprimerie en Europe ? | Gutenberg | Léonard de Vinci | Copernic | Érasme
+F | En quelle année l'euro est-il entré en circulation ? | 2002 | 1999 | 2000 | 2004
+F | Quel peuple de l'Antiquité a inventé les Jeux olympiques ? | Les Grecs | Les Romains | Les Égyptiens | Les Perses
+F | Quel chef gaulois a été vaincu à Alésia ? | Vercingétorix | Brennus | Ambiorix | Astérix
+F | Quel paquebot a sombré en 1912 ? | Le Titanic | Le Lusitania | Le Britannic | Le Normandie
+F | Quelle guerre a opposé la France et l'Angleterre plus de cent ans ? | La guerre de Cent Ans | La guerre de Trente Ans | La guerre de Sept Ans | La guerre des Deux-Roses
+F | Qui a rédigé la Déclaration d'indépendance américaine ? | Thomas Jefferson | George Washington | John Adams | James Madison
+F | En quelle année Napoléon est-il mort ? | 1821 | 1815 | 1830 | 1804
+F | Quel pays a offert la statue de la Liberté aux États-Unis ? | La France | Le Royaume-Uni | L'Espagne | Les Pays-Bas
+F | Qui était le dieu principal des Romains ? | Jupiter | Mars | Neptune | Apollon
+F | Quelle dynastie régnait en France à la veille de la Révolution ? | Les Bourbons | Les Valois | Les Capétiens | Les Carolingiens
+F | En quelle année a eu lieu le débarquement de Normandie ? | 1944 | 1943 | 1945 | 1942
+F | Qui a conquis l'Empire perse au IVᵉ siècle avant notre ère ? | Alexandre le Grand | Jules César | Darius | Cyrus
+F | Quelle civilisation a bâti Chichén Itzá ? | Les Mayas | Les Aztèques | Les Incas | Les Toltèques
+F | Quel roi anglais a fondé l'Église anglicane ? | Henri VIII | Édouard VI | Richard III | Jacques Ier
+F | Quel explorateur a atteint le pôle Sud le premier ? | Roald Amundsen | Robert Scott | Ernest Shackleton | Fridtjof Nansen
+F | Quelle ville était la capitale de l'Empire byzantin ? | Constantinople | Athènes | Alexandrie | Antioche
+M | Quels traités de 1648 mettent fin à la guerre de Trente Ans ? | Les traités de Westphalie | Le traité des Pyrénées | La paix d'Augsbourg | Le traité d'Utrecht
+M | Quel président a proclamé l'abolition de l'esclavage aux États-Unis ? | Abraham Lincoln | Andrew Jackson | Ulysses Grant | Thomas Jefferson
+M | Quelle bataille de 1066 a livré l'Angleterre aux Normands ? | Hastings | Azincourt | Bouvines | Crécy
+M | En quelle année Rome est-elle tombée aux mains des Wisigoths ? | 410 | 476 | 313 | 395
+M | Quelle reine d'Angleterre a fait exécuter Marie Stuart ? | Élisabeth Ire | Marie Tudor | Anne Boleyn | Victoria
+M | Quel président américain a démissionné après le Watergate ? | Richard Nixon | Lyndon Johnson | Gerald Ford | Jimmy Carter
+M | Quelle organisation a succédé à la Société des Nations ? | L'ONU | L'OTAN | L'UNESCO | Le Conseil de l'Europe
+M | Qui dirigeait le gouvernement britannique pendant la Seconde Guerre mondiale ? | Winston Churchill | Neville Chamberlain | Clement Attlee | Anthony Eden
+M | Quel dirigeant soviétique a lancé la perestroïka ? | Mikhaïl Gorbatchev | Léonid Brejnev | Nikita Khrouchtchev | Boris Eltsine
+M | Quelle ville a été détruite par une bombe atomique le 6 août 1945 ? | Hiroshima | Nagasaki | Tokyo | Kobe
+M | Quel roi de France a été guillotiné en 1793 ? | Louis XVI | Louis XV | Charles X | Louis XVIII
+M | Quel empire Soliman le Magnifique a-t-il dirigé ? | L'Empire ottoman | L'Empire perse | L'Empire moghol | L'Empire byzantin
+M | Qui a découvert le tombeau de Toutânkhamon ? | Howard Carter | Champollion | Heinrich Schliemann | Flinders Petrie
+M | Quelle guerre a opposé Athènes et Sparte ? | La guerre du Péloponnèse | Les guerres médiques | La guerre de Troie | Les guerres puniques
+M | Quel pays a colonisé le Brésil ? | Le Portugal | L'Espagne | La France | Les Pays-Bas
+M | Quel traité a partagé le Nouveau Monde entre l'Espagne et le Portugal ? | Le traité de Tordesillas | Le traité de Saragosse | La bulle Inter caetera | Le traité d'Alcáçovas
+M | Quel chancelier allemand a mené la réunification de 1990 ? | Helmut Kohl | Helmut Schmidt | Willy Brandt | Gerhard Schröder
+M | Quelle bataille de 1916 a duré près de dix mois ? | Verdun | La Somme | La Marne | Ypres
+M | Quel roi a fait bâtir le château de Versailles ? | Louis XIV | François Ier | Louis XIII | Henri IV
+M | Quelle femme a reçu deux fois le prix Nobel ? | Marie Curie | Irène Joliot-Curie | Rosalind Franklin | Lise Meitner
+M | Quel peuple venu de Scandinavie a envahi l'Angleterre au IXᵉ siècle ? | Les Vikings | Les Saxons | Les Normands | Les Francs
+M | Quel empereur a fait bâtir le Colisée ? | Vespasien | Auguste | Trajan | Hadrien
+M | Quel événement a déclenché la Première Guerre mondiale ? | L'assassinat de l'archiduc François-Ferdinand | L'invasion de la Belgique | La crise d'Agadir | Le naufrage du Lusitania
+M | Quel pays a lancé le premier satellite artificiel ? | L'URSS | Les États-Unis | La France | Le Royaume-Uni
+M | Qui a mené la marche du sel en Inde ? | Gandhi | Nehru | Ambedkar | Bose
+D | Quel congrès de 1815 réorganise l'Europe après Napoléon ? | Le congrès de Vienne | Le congrès de Berlin | Le congrès de Prague | Le congrès de Paris
+D | Quelle dynastie a précédé les Bourbons sur le trône de France ? | Les Valois | Les Capétiens | Les Carolingiens | Les Orléans
+D | En quelle année l'édit de Nantes a-t-il été révoqué ? | 1685 | 1598 | 1610 | 1715
+D | Quel roi wisigoth a pris Rome en 410 ? | Alaric | Théodoric | Genséric | Odoacre
+D | Quelle bataille navale de 1571 arrête l'expansion ottomane en Méditerranée ? | Lépante | Actium | Salamine | Aboukir
+D | Qui a fondé l'Empire moghol en Inde ? | Babur | Akbar | Aurangzeb | Shah Jahan
+D | Quelle ville était la capitale de l'Empire aztèque ? | Tenochtitlan | Cuzco | Teotihuacan | Tikal
+D | En quelle année la Chine est-elle devenue une république populaire ? | 1949 | 1911 | 1927 | 1958
+D | Quel pape a lancé la première croisade ? | Urbain II | Grégoire VII | Innocent III | Clément V
+D | Quelle guerre a opposé la France à la Prusse en 1870 ? | La guerre franco-prussienne | La guerre de Crimée | La guerre des Duchés | La guerre austro-prussienne
+D | Qui a écrit « Le Prince » en 1513 ? | Machiavel | Érasme | Thomas More | Guichardin
+D | Quel empereur moghol a fait bâtir le Taj Mahal ? | Shah Jahan | Akbar | Babur | Aurangzeb
+D | Quelle assemblée a proclamé la Première République française ? | La Convention | L'Assemblée constituante | Le Directoire | Les États généraux
+D | Quel empire africain a prospéré autour de Tombouctou au XIVᵉ siècle ? | L'Empire du Mali | L'Empire du Ghana | L'Empire songhaï | Le royaume du Kongo
+D | Quel roi de Macédoine était le père d'Alexandre le Grand ? | Philippe II | Ptolémée | Antipater | Perdiccas
+D | Quel traité a créé la Communauté économique européenne en 1957 ? | Le traité de Rome | Le traité de Maastricht | Le traité de Paris | Le traité de Lisbonne
+D | Quelle femme a régné en pharaon au XVᵉ siècle avant notre ère ? | Hatchepsout | Néfertiti | Cléopâtre | Nitocris
+D | En quelle année l'Inde a-t-elle obtenu son indépendance ? | 1947 | 1950 | 1930 | 1962
+D | Quel général carthaginois a franchi les Alpes avec des éléphants ? | Hannibal | Hamilcar | Hasdrubal | Scipion
+D | Quelle dynastie chinoise a été renversée par la révolution de 1911 ? | Les Qing | Les Ming | Les Han | Les Tang
+
+# ————— Troisième fournée —————
+
+F | Qui a été sacré empereur d'Occident en l'an 800 ? | Charlemagne | Clovis | Otton Ier | Louis le Pieux
+F | Quel roi franc s'est converti au christianisme vers 496 ? | Clovis | Charlemagne | Dagobert | Childéric
+F | Quel héros grec avait un talon vulnérable ? | Achille | Ulysse | Hector | Ajax
+F | Quel régime a succédé à la monarchie en France en 1792 ? | La République | L'Empire | Le Consulat | Le Directoire
+F | Quelle civilisation a inventé le papier ? | La Chine | L'Égypte | La Grèce | L'Inde
+F | Quel pharaon est célèbre pour son masque d'or ? | Toutânkhamon | Ramsès II | Khéops | Akhenaton
+F | En quelle année le Viêt Nam a-t-il été réunifié ? | 1975 | 1954 | 1968 | 1980
+F | Qui a dirigé l'Allemagne nazie ? | Adolf Hitler | Hermann Göring | Heinrich Himmler | Joseph Goebbels
+F | En quelle année le mur de Berlin a-t-il été construit ? | 1961 | 1949 | 1955 | 1968
+F | Quel pays a largué les premières bombes atomiques ? | Les États-Unis | L'URSS | Le Royaume-Uni | L'Allemagne
+F | Qui présidait la France en mai 1968 ? | Charles de Gaulle | Georges Pompidou | Valéry Giscard d'Estaing | René Coty
+F | Quelle reine a été guillotinée en 1793 ? | Marie-Antoinette | Catherine de Médicis | Marie de Médicis | Anne d'Autriche
+F | Quel voyageur italien a raconté ses années passées en Chine ? | Marco Polo | Christophe Colomb | Améric Vespuce | Jean de Plan Carpin
+F | Quel peuple a diffusé l'alphabet en Méditerranée ? | Les Phéniciens | Les Grecs | Les Étrusques | Les Égyptiens
+F | Quel navigateur a donné son nom à l'Amérique ? | Amerigo Vespucci | Christophe Colomb | Magellan | Jean Cabot
+F | Quelle épidémie a ravagé l'Europe au XIVᵉ siècle ? | La peste noire | Le choléra | La variole | La grippe espagnole
+F | Qui a été le premier homme envoyé dans l'espace ? | Youri Gagarine | Neil Armstrong | Alan Shepard | Guerman Titov
+F | Quel roi anglais a signé la Grande Charte en 1215 ? | Jean sans Terre | Richard Cœur de Lion | Henri II | Édouard Ier
+F | Quelle ville italienne fut le berceau de la Renaissance ? | Florence | Rome | Venise | Milan
+F | Quel empire a duré en Orient jusqu'en 1453 ? | L'Empire byzantin | L'Empire ottoman | L'Empire perse | L'Empire romain d'Occident
+F | Quel président français a fait abolir la peine de mort ? | François Mitterrand | Valéry Giscard d'Estaing | Georges Pompidou | Jacques Chirac
+F | Quel texte de 1787 fonde le régime des États-Unis ? | La Constitution | La Déclaration d'indépendance | Le Bill of Rights | Les Articles de Confédération
+F | Quel peuple nomade a bâti un empire de la Chine à l'Europe au XIIIᵉ siècle ? | Les Mongols | Les Huns | Les Turcs | Les Scythes
+F | Quelle femme a dirigé le Royaume-Uni de 1979 à 1990 ? | Margaret Thatcher | Theresa May | Élisabeth II | Barbara Castle
+F | Quel roi de France a été surnommé le Bien-Aimé ? | Louis XV | Louis XIV | Louis XIII | Louis XVI
+F | En quelle année la Seconde Guerre mondiale a-t-elle commencé ? | 1939 | 1938 | 1940 | 1941
+F | Qui a fondé l'islam au VIIᵉ siècle ? | Mahomet | Ali | Omar | Abou Bakr
+F | Quel philosophe grec a été le précepteur d'Alexandre le Grand ? | Aristote | Platon | Socrate | Épicure
+F | Sur quelle île Napoléon a-t-il été exilé jusqu'à sa mort ? | Sainte-Hélène | L'île d'Elbe | La Corse | Madère
+F | Dans quel pays la révolution industrielle a-t-elle commencé ? | L'Angleterre | La France | L'Allemagne | Les Pays-Bas
+F | Quel ingénieur français a dirigé le percement du canal de Suez ? | Ferdinand de Lesseps | Gustave Eiffel | Vauban | Freycinet
+F | Quel maréchal a dirigé le régime de Vichy ? | Philippe Pétain | Maxime Weygand | Pierre Laval | Ferdinand Foch
+F | Quel passage de rivière a marqué la retraite de Russie en 1812 ? | La Bérézina | Le Niémen | La Vistule | Le Dniepr
+F | Quelle alliance militaire a été créée en 1949 face à l'URSS ? | L'OTAN | Le pacte de Varsovie | La CEE | L'ONU
+F | Quel pays a acheté la Louisiane à la France en 1803 ? | Les États-Unis | Le Royaume-Uni | L'Espagne | Le Mexique
+M | Quelle dynastie chinoise a précédé les Ming ? | Les Yuan | Les Song | Les Tang | Les Qing
+M | Quel sultan a pris Constantinople en 1453 ? | Mehmed II | Soliman | Bayezid | Osman
+M | Quel cardinal a été le principal ministre de Louis XIII ? | Richelieu | Mazarin | Fleury | Retz
+M | Quelle assemblée a voté la Déclaration des droits de l'homme en 1789 ? | L'Assemblée constituante | La Convention | Les États généraux | Le Directoire
+M | Quel empereur romain a persécuté les chrétiens après l'incendie de Rome ? | Néron | Caligula | Domitien | Tibère
+M | Quelle bataille de 1805 a opposé Napoléon aux Austro-Russes ? | Austerlitz | Iéna | Wagram | Eylau
+M | Quel pays a été divisé en deux États de 1949 à 1990 ? | L'Allemagne | La Corée | Le Viêt Nam | L'Autriche
+M | Quelle guerre a opposé la Russie à une coalition européenne à partir de 1853 ? | La guerre de Crimée | La guerre russo-turque | La guerre du Caucase | La guerre russo-japonaise
+M | Qui a été le premier consul de la République française ? | Napoléon Bonaparte | Sieyès | Barras | Cambacérès
+M | Quelle révolution de 1830 a chassé Charles X ? | Les Trois Glorieuses | La révolution de Février | La Commune | Le coup d'État de Brumaire
+M | Quel régime a succédé à la Commune de Paris ? | La Troisième République | Le Second Empire | La Restauration | L'État français
+M | Quel capitaine français a été injustement condamné en 1894 ? | Alfred Dreyfus | Ferdinand Esterhazy | Georges Picquart | Hubert Henry
+M | Quelle loi française de 1905 sépare les Églises et l'État ? | La loi de séparation | La loi Ferry | La loi Falloux | La loi Le Chapelier
+M | Quels accords de 1938 ont livré les Sudètes à Hitler ? | Les accords de Munich | Le pacte germano-soviétique | Le traité de Locarno | Les accords de Yalta
+M | Quel débarquement a libéré la Provence en août 1944 ? | L'opération Dragoon | L'opération Overlord | L'opération Torch | L'opération Husky
+M | Quel pays a accordé le droit de vote aux femmes le premier ? | La Nouvelle-Zélande | Les États-Unis | Le Royaume-Uni | La Finlande
+M | En quelle année les Françaises ont-elles voté pour la première fois ? | 1945 | 1919 | 1936 | 1958
+M | Quelle guerre d'indépendance s'est achevée par les accords d'Évian ? | La guerre d'Algérie | La guerre d'Indochine | La guerre du Rif | La guerre de Tunisie
+M | Quel dirigeant chinois a mené la Longue Marche ? | Mao Zedong | Zhou Enlai | Deng Xiaoping | Tchang Kaï-chek
+M | Quel pays a envahi la Pologne à l'est en septembre 1939 ? | L'URSS | La Tchécoslovaquie | La Lituanie | La Hongrie
+M | Quelle conférence de 1945 a partagé l'Europe entre les vainqueurs ? | La conférence de Yalta | La conférence de Munich | La conférence de Versailles | La conférence de Vienne
+M | Quel président américain a lancé le plan Marshall ? | Harry Truman | Franklin Roosevelt | Dwight Eisenhower | John Kennedy
+M | Quelle crise de 1962 a failli déclencher une guerre nucléaire ? | La crise des missiles de Cuba | Le blocus de Berlin | La guerre de Corée | La crise de Suez
+M | Qui a prononcé le discours « I have a dream » ? | Martin Luther King | Malcolm X | Rosa Parks | Nelson Mandela
+M | Quel pays a colonisé l'Indochine ? | La France | Le Royaume-Uni | Les Pays-Bas | Le Portugal
+M | Quel empire d'Europe centrale a disparu à l'issue de la Première Guerre mondiale ? | L'Empire austro-hongrois | L'Empire allemand | L'Empire russe | L'Empire ottoman
+M | Quelle bataille de 1942 marque le tournant du front de l'Est ? | Stalingrad | Koursk | Moscou | Leningrad
+M | Quel pays a envoyé le premier homme sur la Lune ? | Les États-Unis | L'URSS | La Chine | Le Royaume-Uni
+M | Quel roi de France a été assassiné par Ravaillac ? | Henri IV | Henri III | Louis XIII | Charles IX
+M | Quelle reine a uni l'Espagne avec Ferdinand d'Aragon ? | Isabelle de Castille | Jeanne la Folle | Marie de Bourgogne | Blanche de Navarre
+M | Quel savant a été brûlé en 1600 pour ses idées sur l'univers ? | Giordano Bruno | Galilée | Copernic | Kepler
+M | Quelles guerres ont opposé la Grèce à la Perse au Vᵉ siècle avant notre ère ? | Les guerres médiques | La guerre du Péloponnèse | Les guerres puniques | La guerre de Troie
+M | Quelle bataille de 490 avant notre ère a donné son nom à une course ? | Marathon | Salamine | Platées | Les Thermopyles
+M | Quel empire a été fondé par Cyrus le Grand ? | L'Empire perse | L'Empire assyrien | L'Empire babylonien | L'Empire hittite
+M | Quelle ville de Gaule a été fondée par les Phocéens vers 600 avant notre ère ? | Marseille | Nice | Lyon | Narbonne
+D | Quel traité a démantelé l'Empire ottoman après la Première Guerre mondiale ? | Le traité de Sèvres | Le traité de Lausanne | Le traité de Trianon | Le traité de Saint-Germain
+D | Quelle dynastie a régné sur l'Égypte après Alexandre le Grand ? | Les Lagides | Les Séleucides | Les Antigonides | Les Attalides
+D | Quel empereur a fait rassembler le grand code de lois romain ? | Justinien | Théodose | Constantin | Dioclétien
+D | Quelle bataille de 1214 assoit le pouvoir de Philippe Auguste ? | Bouvines | Azincourt | Crécy | Castillon
+D | Quel concile a été convoqué en 1545 face à la Réforme ? | Le concile de Trente | Le concile de Nicée | Le concile de Latran | Le concile de Constance
+D | Quel moine allemand a affiché ses quatre-vingt-quinze thèses en 1517 ? | Martin Luther | Jean Calvin | Ulrich Zwingli | Philippe Mélanchthon
+D | Quel massacre de protestants a eu lieu à Paris en 1572 ? | La Saint-Barthélemy | Les Vêpres siciliennes | La journée des Dupes | Le sac de Rome
+D | Quel roi d'Angleterre a été décapité en 1649 ? | Charles Ier | Charles II | Jacques II | Guillaume III
+D | Qui a dirigé l'Angleterre après l'exécution de Charles Ier ? | Oliver Cromwell | Thomas More | Robert Walpole | John Pym
+D | Quelle guerre a opposé la France et l'Angleterre de 1756 à 1763 ? | La guerre de Sept Ans | La guerre de Succession d'Espagne | La guerre de Succession d'Autriche | La guerre de Trente Ans
+D | Quel traité a mis fin à la guerre d'indépendance américaine ? | Le traité de Paris | Le traité de Gand | Le traité de Versailles | Le traité de Londres
+D | Quel amiral britannique est mort à Trafalgar ? | Horatio Nelson | Cuthbert Collingwood | John Jervis | Edward Hawke
+D | Quel congrès de 1878 a réorganisé les Balkans ? | Le congrès de Berlin | Le congrès de Vienne | Le congrès de Paris | Le congrès de Prague
+D | Quelle conférence de 1884 a partagé l'Afrique entre les puissances européennes ? | La conférence de Berlin | La conférence d'Algésiras | Le congrès de Vienne | La conférence de Bruxelles
+D | Quel pays a perdu la guerre russo-japonaise de 1905 ? | La Russie | Le Japon | La Chine | La Corée
+D | Quel révolutionnaire mexicain est associé au soulèvement de 1910 ? | Emiliano Zapata | Benito Juárez | Porfirio Díaz | Miguel Hidalgo
+D | Quel homme d'État a fondé la Turquie moderne ? | Mustafa Kemal Atatürk | Enver Pacha | Ismet Inönü | Abdülhamid II
+D | Quel traité a créé l'État libre d'Irlande ? | Le traité anglo-irlandais | Le traité de Limerick | L'Acte d'Union | Le Home Rule
+D | Quelle guerre civile a opposé républicains et nationalistes de 1936 à 1939 ? | La guerre d'Espagne | La guerre civile grecque | La guerre civile russe | La guerre des Carlistes
+D | Quel dirigeant soviétique a succédé à Lénine ? | Staline | Trotski | Khrouchtchev | Kamenev
+D | Quels accords de 1975 ont reconnu les frontières européennes issues de la guerre ? | Les accords d'Helsinki | Les accords de Genève | Les accords de Vienne | Les accords de Camp David
+D | En quelle année l'Union soviétique a-t-elle disparu ? | 1991 | 1989 | 1993 | 1985
+D | Quel conquistador a renversé l'Empire inca ? | Francisco Pizarro | Hernán Cortés | Vasco Núñez de Balboa | Pedro de Alvarado
+D | Quel conquistador a renversé l'Empire aztèque ? | Hernán Cortés | Francisco Pizarro | Diego de Almagro | Juan Ponce de León
+D | Quelle route commerciale reliait la Chine à la Méditerranée ? | La route de la soie | La route de l'encens | La route des épices | La route de l'ambre
+D | Quel royaume africain a fait tailler les églises de Lalibela ? | L'Éthiopie | Le Mali | Le Kongo | Le Zimbabwe
+D | Quelle dynastie de shoguns a gouverné le Japon jusqu'en 1868 ? | Les Tokugawa | Les Minamoto | Les Ashikaga | Les Fujiwara
+D | Quelle ère du Japon commence en 1868 ? | L'ère Meiji | L'ère Taishō | L'ère Shōwa | L'ère Edo
+D | Quel roi de Babylone a fait graver un code de lois ? | Hammurabi | Nabuchodonosor | Sargon | Assurbanipal
+D | Quel empire a bâti Angkor ? | L'Empire khmer | L'Empire môn | L'Empire de Srivijaya | L'Empire Majapahit

@@ -1,0 +1,215 @@
+# Géographie — une question par ligne.
+#
+# niveau | énoncé ? | bonne réponse | leurre | leurre | leurre
+# F facile · M moyen · D difficile
+#
+# Les propositions sont mêlées au tirage : l'ordre n'a aucune importance.
+# Un leurre doit être faux mais crédible — un leurre absurde ne fait pas
+# une question, il fait une question à trois propositions.
+
+F | Quelle est la capitale de l'Australie ? | Canberra | Sydney | Melbourne | Perth
+F | Quel est le plus long fleuve d'Europe ? | La Volga | Le Danube | Le Rhin | La Loire
+F | Sur quel continent se trouve le désert du Kalahari ? | L'Afrique | L'Asie | L'Amérique du Sud | L'Océanie
+M | Quel détroit sépare l'Espagne du Maroc ? | Le détroit de Gibraltar | Le Bosphore | Le pas de Calais | Le détroit de Messine
+M | Quel est le plus grand lac d'Afrique ? | Le lac Victoria | Le lac Tchad | Le lac Tanganyika | Le lac Malawi
+M | Quelle chaîne de montagnes sépare traditionnellement l'Europe de l'Asie ? | L'Oural | Le Caucase | Les Carpates | L'Altaï
+M | Quel pays a pour capitale Asuncion ? | Le Paraguay | L'Uruguay | La Bolivie | L'Équateur
+D | Quel pays a pour capitale Oulan-Bator ? | La Mongolie | Le Kirghizistan | Le Népal | Le Tadjikistan
+D | Dans quel pays se trouve le désert d'Atacama ? | Le Chili | Le Pérou | L'Argentine | La Namibie
+D | Quelle est la capitale du Kazakhstan ? | Astana | Almaty | Tachkent | Bichkek
+F | Quel est le plus vaste océan du monde ? | Le Pacifique | L'Atlantique | L'océan Indien | L'océan Arctique
+F | Quelle est la capitale du Portugal ? | Lisbonne | Porto | Madrid | Séville
+F | Quel pays a la forme d'une botte ? | L'Italie | La Grèce | L'Espagne | La Croatie
+M | Quel est le plus haut sommet d'Afrique ? | Le Kilimandjaro | Le mont Kenya | Le Toubkal | Le Ruwenzori
+M | Quelle mer borde la Turquie au nord ? | La mer Noire | La mer Égée | La mer Caspienne | La mer Adriatique
+M | De combien de nations le Royaume-Uni est-il composé ? | Quatre | Trois | Deux | Cinq
+M | Quel fleuve traverse Le Caire ? | Le Nil | L'Euphrate | Le Jourdain | Le Niger
+D | Quelle est la plus grande île du monde ? | Le Groenland | La Nouvelle-Guinée | Bornéo | Madagascar
+D | Quel détroit sépare l'Asie de l'Amérique ? | Le détroit de Béring | Le détroit de Malacca | Le détroit d'Ormuz | Le détroit de Magellan
+D | Dans quel pays se trouve Tombouctou ? | Le Mali | Le Niger | Le Sénégal | Le Tchad
+F | Quelle est la capitale de l'Italie ? | Rome | Milan | Naples | Florence
+F | Quel désert couvre le nord de l'Afrique ? | Le Sahara | Le Kalahari | Le Gobi | L'Atacama
+F | Quelle mer borde la Côte d'Azur ? | La Méditerranée | L'Atlantique | La mer du Nord | La mer Noire
+M | Quelle est la plus longue chaîne de montagnes du monde ? | La cordillère des Andes | L'Himalaya | Les Rocheuses | Les Alpes
+M | Quel pays entoure complètement le Lesotho ? | L'Afrique du Sud | La Namibie | Le Botswana | Le Zimbabwe
+M | Dans quelle ville se trouve le Kremlin ? | Moscou | Saint-Pétersbourg | Kiev | Minsk
+M | Quel canal relie la Méditerranée à la mer Rouge ? | Le canal de Suez | Le canal de Panama | Le canal de Corinthe | Le canal de Kiel
+D | Quel est le plus haut sommet d'Amérique du Sud ? | L'Aconcagua | Le Chimborazo | L'Illimani | Le Huascarán
+D | Quel pays possède le plus long littoral du monde ? | Le Canada | La Russie | L'Indonésie | L'Australie
+D | Quelle est la capitale de l'Éthiopie ? | Addis-Abeba | Nairobi | Khartoum | Asmara
+
+# ————— Deuxième fournée —————
+
+F | Quelle est la capitale de l'Espagne ? | Madrid | Barcelone | Valence | Séville
+F | Quelle est la capitale de l'Allemagne ? | Berlin | Munich | Hambourg | Francfort
+F | Quelle est la capitale du Japon ? | Tokyo | Kyoto | Osaka | Nagoya
+F | Quelle est la capitale du Canada ? | Ottawa | Toronto | Montréal | Vancouver
+F | Quelle est la capitale de la Belgique ? | Bruxelles | Anvers | Liège | Gand
+F | Sur quel continent se trouve le Brésil ? | L'Amérique du Sud | L'Amérique du Nord | L'Afrique | L'Océanie
+F | Quelle est la plus haute montagne du monde ? | L'Everest | Le K2 | Le Mont Blanc | Le Kilimandjaro
+F | Quel océan sépare l'Europe de l'Amérique ? | L'Atlantique | Le Pacifique | L'océan Indien | L'océan Arctique
+F | Quel fleuve traverse Paris ? | La Seine | La Loire | Le Rhône | La Garonne
+F | Dans quel pays se trouve la Grande Muraille ? | La Chine | Le Japon | La Corée | La Mongolie
+F | Quelle est la capitale de la Suisse ? | Berne | Zurich | Genève | Bâle
+F | Quel pays est surnommé l'Hexagone ? | La France | L'Espagne | L'Italie | La Belgique
+F | Dans quel pays coule l'essentiel de l'Amazone ? | Le Brésil | Le Pérou | La Colombie | Le Venezuela
+F | Quel canal relie l'Atlantique au Pacifique ? | Le canal de Panama | Le canal de Suez | Le canal de Corinthe | Le canal de Kiel
+F | Quel pays est à lui seul un continent ? | L'Australie | Le Groenland | Madagascar | Le Brésil
+F | Quelle est la monnaie du Royaume-Uni ? | La livre sterling | L'euro | Le franc | La couronne
+F | Quel fleuve traverse Londres ? | La Tamise | La Severn | La Mersey | La Clyde
+F | Quelle est la capitale de la Chine ? | Pékin | Shanghai | Hong Kong | Canton
+F | Quel pays a pour capitale Vienne ? | L'Autriche | La Suisse | La Hongrie | La Slovaquie
+F | Combien la Terre compte-t-elle d'océans ? | Cinq | Quatre | Trois | Six
+F | Quel pays est surnommé le pays du Soleil-Levant ? | Le Japon | La Chine | La Corée du Sud | Les Philippines
+F | Dans quel pays se trouve le Taj Mahal ? | L'Inde | Le Pakistan | Le Bangladesh | Le Népal
+F | Quelle est la plus grande île de la Méditerranée ? | La Sicile | La Sardaigne | La Corse | Chypre
+F | Quel pays a pour capitale Rabat ? | Le Maroc | L'Algérie | La Tunisie | La Libye
+F | Quelle chaîne de montagnes sépare la France de l'Espagne ? | Les Pyrénées | Les Alpes | Le Jura | Les Vosges
+M | Quel est le plus petit État du monde ? | Le Vatican | Monaco | Saint-Marin | Le Liechtenstein
+M | Quel fleuve traverse Vienne et Budapest ? | Le Danube | Le Rhin | L'Elbe | La Vistule
+M | Quel pays compte le plus d'habitants d'Afrique ? | Le Nigeria | L'Égypte | L'Éthiopie | L'Afrique du Sud
+M | Quel détroit sépare l'Europe de l'Asie à Istanbul ? | Le Bosphore | Les Dardanelles | Le détroit de Messine | Le détroit d'Ormuz
+M | Quel pays est bordé par la mer Baltique et la mer du Nord ? | Le Danemark | La Norvège | La Pologne | Les Pays-Bas
+M | Quel pays possède le plus de lacs au monde ? | Le Canada | La Russie | La Finlande | La Suède
+M | Quelle est la capitale de l'Argentine ? | Buenos Aires | Córdoba | Rosario | Mendoza
+M | Quel volcan domine Naples ? | Le Vésuve | L'Etna | Le Stromboli | Le Krakatoa
+M | Quel pays a pour capitale Hanoï ? | Le Viêt Nam | La Thaïlande | le Cambodge | Le Laos
+M | Quel est le plus haut sommet des Alpes ? | Le Mont Blanc | Le Cervin | Le Mont Rose | La Jungfrau
+M | Quelle mer se trouve entre l'Italie et les Balkans ? | L'Adriatique | La mer Ionienne | La mer Égée | La mer Tyrrhénienne
+M | Quel est le plus vaste pays d'Europe ? | La Russie | L'Ukraine | La France | L'Espagne
+M | Quel pays de l'Union européenne compte le plus d'habitants ? | L'Allemagne | La France | L'Italie | L'Espagne
+M | Quel fleuve traverse Kinshasa avant de rejoindre l'Atlantique ? | Le Congo | Le Niger | Le Zambèze | L'Orange
+M | Quelle est la capitale de la Turquie ? | Ankara | Istanbul | Izmir | Bursa
+M | Quel pays partage les chutes d'Iguazú avec l'Argentine ? | Le Brésil | Le Paraguay | L'Uruguay | La Bolivie
+M | Dans quelle mer se jette le Rhône ? | La Méditerranée | L'Atlantique | La mer du Nord | La mer Noire
+M | Quel pays entoure entièrement le Vatican ? | L'Italie | La Suisse | Saint-Marin | L'Autriche
+M | Quelle est la plus grande forêt du monde ? | L'Amazonie | La taïga sibérienne | Le bassin du Congo | La forêt boréale canadienne
+M | Quel pays a pour monnaie le yen ? | Le Japon | La Chine | La Corée du Sud | Taïwan
+M | Quelle est la capitale du Pérou ? | Lima | Cuzco | Arequipa | Trujillo
+M | Quel est le plus grand désert froid du monde ? | L'Antarctique | Le Gobi | La toundra sibérienne | Le Groenland
+M | Quel océan borde la Californie ? | Le Pacifique | L'Atlantique | L'océan Indien | Le golfe du Mexique
+M | Quel pays a pour capitale Nairobi ? | Le Kenya | La Tanzanie | l'Ouganda | L'Éthiopie
+M | Quelle est la plus grande ville d'Australie ? | Sydney | Melbourne | Brisbane | Perth
+D | Quelle est la capitale de la Nouvelle-Zélande ? | Wellington | Auckland | Christchurch | Dunedin
+D | Quel pays a pour capitale Ouagadougou ? | Le Burkina Faso | Le Mali | Le Niger | Le Bénin
+D | Quel pays d'Amérique centrale n'a pas d'armée ? | Le Costa Rica | Le Panama | Le Honduras | Le Nicaragua
+D | Quel est le plus haut sommet d'Amérique du Nord ? | Le Denali | Le mont Logan | Le mont Whitney | Le Popocatépetl
+D | Quelle est la capitale du Brésil ? | Brasilia | Rio de Janeiro | São Paulo | Salvador
+D | Quel pays possède le plus long fleuve d'Asie ? | La Chine | L'Inde | La Russie | Le Viêt Nam
+D | Quel fleuve a le plus grand débit du monde ? | L'Amazone | Le Nil | Le Congo | Le Yangtsé
+D | Quelle est la capitale de la Corée du Sud ? | Séoul | Busan | Incheon | Daegu
+D | Quel pays a pour capitale Tbilissi ? | La Géorgie | L'Arménie | L'Azerbaïdjan | La Moldavie
+D | Quel pays possède la plus grande barrière de corail ? | L'Australie | Les Philippines | Le Belize | L'Indonésie
+D | Quel pays possède l'enclave de Kaliningrad ? | La Russie | La Pologne | La Lituanie | La Biélorussie
+D | Quelle est la capitale de l'Islande ? | Reykjavik | Akureyri | Kópavogur | Hafnarfjörður
+D | Quel pays a pour capitale Katmandou ? | Le Népal | Le Bhoutan | Le Tibet | Le Bangladesh
+D | Quel pays africain a pour capitale Dakar ? | Le Sénégal | La Gambie | La Guinée | La Mauritanie
+D | Quelle étendue d'eau est la plus salée du monde ? | La mer Morte | La mer Rouge | La mer Caspienne | Le Grand Lac Salé
+D | Quel fleuve marque une partie de la frontière franco-allemande ? | Le Rhin | La Moselle | La Meuse | L'Escaut
+D | Quel pays compte le plus de volcans actifs ? | L'Indonésie | Le Japon | Les États-Unis | Le Chili
+D | Quel pays a pour capitale La Havane ? | Cuba | La République dominicaine | Haïti | La Jamaïque
+D | Quel État américain est le plus vaste ? | L'Alaska | Le Texas | La Californie | Le Montana
+M | Quel pays possède le plus long réseau de chemins de fer au monde ? | Les États-Unis | La Chine | La Russie | L'Inde
+
+# ————— Troisième fournée —————
+
+F | Quelle est la plus grande ville de France ? | Paris | Marseille | Lyon | Toulouse
+F | Quelle mer borde la Bretagne au nord ? | La Manche | La mer du Nord | L'Atlantique | La mer d'Iroise
+F | Dans quelle région française se trouve Bordeaux ? | La Nouvelle-Aquitaine | L'Occitanie | Les Pays de la Loire | Le Centre-Val de Loire
+F | Quel fleuve rejoint la Saône à Lyon ? | Le Rhône | La Loire | La Seine | La Garonne
+F | Quelle est la plus haute montagne de France ? | Le Mont Blanc | Le Mont Ventoux | Le pic du Midi | La Barre des Écrins
+F | Quel pays a pour drapeau un cercle rouge sur fond blanc ? | Le Japon | La Corée du Sud | Le Bangladesh | La Suisse
+F | Quel pays a pour drapeau une feuille d'érable ? | Le Canada | La Suède | La Norvège | La Finlande
+F | Quelle est la monnaie de la Suisse ? | Le franc suisse | L'euro | La couronne | Le mark
+F | Quelle est la monnaie des États-Unis ? | Le dollar | La livre | L'euro | Le peso
+F | Quel pays n'a de frontière terrestre qu'avec l'Espagne ? | Le Portugal | L'Andorre | Le Maroc | La France
+F | Quelle île française se trouve en Méditerranée ? | La Corse | La Réunion | La Guadeloupe | Belle-Île
+F | Quel océan borde le Portugal ? | L'Atlantique | La Méditerranée | Le Pacifique | La mer du Nord
+F | Quelle est la capitale de l'Égypte ? | Le Caire | Alexandrie | Louxor | Assouan
+F | Quel continent est le plus peuplé ? | L'Asie | L'Afrique | L'Europe | L'Amérique
+F | Quel continent est le plus froid ? | L'Antarctique | L'Arctique | L'Asie | L'Europe
+F | Quelle est la capitale de la Pologne ? | Varsovie | Cracovie | Gdansk | Wroclaw
+F | Quelle est la capitale de la Hongrie ? | Budapest | Debrecen | Szeged | Pécs
+F | Quel pays est célèbre pour ses moulins et ses tulipes ? | Les Pays-Bas | La Belgique | Le Danemark | L'Allemagne
+F | Quelle est la capitale du Mexique ? | Mexico | Guadalajara | Monterrey | Cancún
+F | Quel est le plus vaste pays du monde ? | La Russie | Le Canada | La Chine | Les États-Unis
+F | Quel pays compte le plus d'habitants au monde ? | L'Inde | La Chine | Les États-Unis | L'Indonésie
+F | Quelle chaîne de montagnes traverse le Népal ? | L'Himalaya | Le Karakoram | L'Hindou Kouch | Le Pamir
+F | Quelle est la capitale de l'Inde ? | New Delhi | Bombay | Calcutta | Bangalore
+F | Quel pays est célèbre pour ses fjords ? | La Norvège | La Suède | Le Danemark | L'Islande
+F | Quelle est la capitale de l'Écosse ? | Édimbourg | Glasgow | Aberdeen | Dundee
+F | Quelle est la plus grande ville des États-Unis ? | New York | Los Angeles | Chicago | Houston
+F | Quel est le plus petit des océans ? | L'océan Arctique | L'océan Indien | L'Atlantique | Le Pacifique
+F | Quel pays d'Amérique du Sud porte le nom de la ligne qui le traverse ? | L'Équateur | Le Pérou | La Colombie | Le Chili
+F | Quelle est la capitale de la Roumanie ? | Bucarest | Cluj | Timisoara | Iasi
+F | Quel pays a pour capitale Prague ? | La Tchéquie | La Slovaquie | La Hongrie | La Pologne
+F | Quelle est la capitale de la Bulgarie ? | Sofia | Plovdiv | Varna | Bourgas
+F | Quel pays est entouré par la France, l'Allemagne et la Belgique ? | Le Luxembourg | La Suisse | Les Pays-Bas | Le Liechtenstein
+F | Quel pays a un drapeau rouge orné de cinq étoiles jaunes ? | La Chine | Le Viêt Nam | La Corée du Nord | Cuba
+F | Quelle est la capitale de la Croatie ? | Zagreb | Split | Dubrovnik | Rijeka
+F | Quelle ville française est surnommée la cité des Papes ? | Avignon | Arles | Nîmes | Orange
+M | Quel fleuve sépare le Texas du Mexique ? | Le Rio Grande | Le Colorado | Le Mississippi | Le Missouri
+M | Quels deux pays partagent la plus longue frontière terrestre du monde ? | Le Canada et les États-Unis | La Russie et la Chine | L'Inde et la Chine | L'Argentine et le Chili
+M | Quel pays compte le plus d'habitants d'Amérique du Sud ? | Le Brésil | L'Argentine | La Colombie | Le Pérou
+M | Quel est le lac le plus profond du monde ? | Le lac Baïkal | Le lac Tanganyika | Le lac Supérieur | La mer Caspienne
+M | Quel pays a pour capitale Bratislava ? | La Slovaquie | La Slovénie | La Tchéquie | La Croatie
+M | Quel volcan domine la Sicile ? | L'Etna | Le Vésuve | Le Stromboli | Le Vulcano
+M | Quelle est la capitale de la Serbie ? | Belgrade | Novi Sad | Nis | Kragujevac
+M | Dans quel pays le Nil Bleu et le Nil Blanc se rejoignent-ils ? | Le Soudan | L'Égypte | L'Éthiopie | Le Soudan du Sud
+M | Quel pays africain a pour capitale Asmara ? | L'Érythrée | Djibouti | La Somalie | L'Éthiopie
+M | Quel fleuve traverse Bagdad ? | Le Tigre | L'Euphrate | Le Jourdain | L'Oronte
+M | Quelle est la capitale de la Thaïlande ? | Bangkok | Chiang Mai | Phuket | Pattaya
+M | Quelle est la capitale des Philippines ? | Manille | Cebu | Davao | Quezon
+M | Quel détroit sépare la Sicile de l'Italie continentale ? | Le détroit de Messine | Le détroit d'Otrante | Le canal de Sicile | Le détroit de Bonifacio
+M | Quelle est la capitale de l'Ukraine ? | Kiev | Kharkiv | Odessa | Lviv
+M | Quel micro-État se niche entre la France et l'Espagne ? | L'Andorre | Monaco | Saint-Marin | Le Liechtenstein
+M | Quelle est la plus grande île du Japon ? | Honshū | Hokkaidō | Kyūshū | Shikoku
+M | Quel pays a pour capitale Amman ? | La Jordanie | Le Liban | La Syrie | l'Irak
+M | Quelle chaîne traverse l'ouest des États-Unis du Canada au Nouveau-Mexique ? | Les montagnes Rocheuses | Les Appalaches | La Sierra Nevada | Les Cascades
+M | Quelle est la capitale de la Colombie ? | Bogota | Medellín | Cali | Carthagène
+M | Quel pays abrite le plus haut immeuble du monde ? | Les Émirats arabes unis | La Chine | L'Arabie saoudite | Les États-Unis
+M | Quelle mer borde la Grèce à l'est ? | La mer Égée | La mer Ionienne | L'Adriatique | La mer Noire
+M | Quel pays a pour capitale Helsinki ? | La Finlande | L'Estonie | La Suède | La Lettonie
+M | Quel pays d'Amérique du Sud s'étire le plus du nord au sud ? | Le Chili | L'Argentine | Le Brésil | Le Pérou
+M | Quelle est la capitale de l'Algérie ? | Alger | Oran | Constantine | Annaba
+M | Quel est le plus long fleuve de France ? | La Loire | La Seine | Le Rhône | La Garonne
+M | Quel pays a pour capitale Riyad ? | L'Arabie saoudite | Le Koweït | Le Qatar | Bahreïn
+M | Quelle est la capitale de la Norvège ? | Oslo | Bergen | Trondheim | Stavanger
+M | Quel pays possède le plus grand glacier d'Europe ? | L'Islande | La Norvège | La Suisse | L'Autriche
+M | Quelle mer sépare la Suède de la Finlande ? | La mer Baltique | La mer du Nord | La mer Blanche | La mer de Norvège
+M | Quel pays a pour capitale Téhéran ? | L'Iran | l'Irak | L'Afghanistan | Le Turkménistan
+M | Quelle est la plus grande ville du Brésil ? | São Paulo | Rio de Janeiro | Brasilia | Salvador
+M | Quel pays d'Amérique centrale est traversé par un canal reliant deux océans ? | Le Panama | Le Nicaragua | Le Costa Rica | Le Honduras
+M | Quelle est la plus grande ville du Maroc ? | Casablanca | Rabat | Marrakech | Fès
+M | Quel pays a pour capitale Tunis ? | La Tunisie | L'Algérie | La Libye | Le Maroc
+M | Quelle est la capitale du Ghana ? | Accra | Kumasi | Tamale | Takoradi
+D | Quel pays a pour capitale Vilnius ? | La Lituanie | La Lettonie | L'Estonie | La Biélorussie
+D | Quelle est la capitale de la Lettonie ? | Riga | Vilnius | Tallinn | Kaunas
+D | Quel pays a pour capitale Tallinn ? | L'Estonie | La Lettonie | La Lituanie | La Finlande
+D | Quel pays a pour capitale Tachkent ? | L'Ouzbékistan | Le Kazakhstan | Le Turkménistan | Le Tadjikistan
+D | Quelle est la capitale du Cambodge ? | Phnom Penh | Siem Reap | Battambang | Vientiane
+D | Quel pays a pour capitale Naypyidaw ? | La Birmanie | Le Laos | La Thaïlande | Le Bangladesh
+D | Quelle est la capitale du Bangladesh ? | Dacca | Chittagong | Khulna | Sylhet
+D | Quel pays a pour capitale Bakou ? | L'Azerbaïdjan | L'Arménie | La Géorgie | Le Turkménistan
+D | Quelle est la capitale de l'Arménie ? | Erevan | Bakou | Tbilissi | Gyumri
+D | Quel pays a pour capitale Minsk ? | La Biélorussie | L'Ukraine | La Lituanie | La Moldavie
+D | Quelle est la capitale de la Slovénie ? | Ljubljana | Maribor | Zagreb | Bratislava
+D | Quel pays a pour capitale Chisinau ? | La Moldavie | La Roumanie | L'Ukraine | La Bulgarie
+D | Quelle est la capitale de l'Albanie ? | Tirana | Durrës | Vlora | Shkodër
+D | Quel pays a pour capitale Skopje ? | La Macédoine du Nord | Le Kosovo | Le Monténégro | L'Albanie
+D | Quel est le plus grand lac d'Amérique du Nord ? | Le lac Supérieur | Le lac Michigan | Le lac Huron | Le Grand Lac de l'Ours
+D | Quelle est la plus haute chute d'eau du monde ? | Le Salto Ángel | Les chutes Victoria | Les chutes du Niagara | Les chutes d'Iguazú
+D | Dans quel pays se dresse le point culminant de l'Afrique ? | La Tanzanie | Le Kenya | l'Ouganda | L'Éthiopie
+D | Quel désert s'étend sur la Mongolie et la Chine ? | Le Gobi | Le Taklamakan | Le Karakoum | Le Thar
+D | Quelle est la capitale de l'Uruguay ? | Montevideo | Salto | Paysandú | Rivera
+D | Quel pays a pour capitale Quito ? | L'Équateur | Le Pérou | La Colombie | La Bolivie
+D | Quelle est la capitale du Venezuela ? | Caracas | Maracaibo | Valencia | Barquisimeto
+D | Quel détroit sépare l'Iran de la péninsule Arabique ? | Le détroit d'Ormuz | Le détroit de Bab-el-Mandeb | Le canal de Suez | Le détroit de Malacca
+D | Quel pays a pour capitale Doha ? | Le Qatar | Bahreïn | Le Koweït | Oman
+D | Quelle est la capitale d'Oman ? | Mascate | Doha | Manama | Dubaï
+D | Quel pays a pour capitale Abou Dabi ? | Les Émirats arabes unis | Le Qatar | Le Koweït | Bahreïn
+D | Quelle est la plus grande île d'Océanie après l'Australie ? | La Nouvelle-Guinée | La Nouvelle-Zélande | La Tasmanie | La Nouvelle-Calédonie
+D | Quel archipel équatorien a inspiré Darwin ? | Les Galápagos | Les Açores | Les Canaries | Les Fidji
+D | Quel pays abrite le plus long tunnel ferroviaire du monde ? | La Suisse | Le Japon | La France | La Norvège
+D | Quelle est la capitale de la Namibie ? | Windhoek | Swakopmund | Walvis Bay | Gaborone
+D | Quel est le plus vaste pays d'Afrique ? | L'Algérie | La République démocratique du Congo | Le Soudan | La Libye

@@ -1,0 +1,215 @@
+# Arts & Lettres — une question par ligne.
+#
+# niveau | énoncé ? | bonne réponse | leurre | leurre | leurre
+# F facile · M moyen · D difficile
+#
+# Les propositions sont mêlées au tirage : l'ordre n'a aucune importance.
+# Un leurre doit être faux mais crédible — un leurre absurde ne fait pas
+# une question, il fait une question à trois propositions.
+
+F | Qui a peint La Joconde ? | Léonard de Vinci | Michel-Ange | Raphaël | Botticelli
+F | Qui a écrit Les Misérables ? | Victor Hugo | Émile Zola | Balzac | Alexandre Dumas
+F | Qui a écrit Roméo et Juliette ? | William Shakespeare | Molière | Christopher Marlowe | Racine
+M | Qui a sculpté Le Penseur ? | Auguste Rodin | Camille Claudel | Aristide Maillol | Antoine Bourdelle
+M | Quel peintre néerlandais s'est mutilé l'oreille ? | Vincent van Gogh | Rembrandt | Vermeer | Piet Mondrian
+M | Quel compositeur, devenu sourd, a écrit la Neuvième Symphonie ? | Ludwig van Beethoven | Mozart | Schubert | Brahms
+M | Qui a écrit À la recherche du temps perdu ? | Marcel Proust | André Gide | Gustave Flaubert | Louis Aragon
+D | Qui a écrit Le Rouge et le Noir ? | Stendhal | Balzac | Flaubert | Maupassant
+D | Quel tableau de Monet a donné son nom à l'impressionnisme ? | Impression, soleil levant | Les Nymphéas | La Gare Saint-Lazare | Le Déjeuner sur l'herbe
+D | Qui a écrit Cent ans de solitude ? | Gabriel García Márquez | Jorge Luis Borges | Mario Vargas Llosa | Julio Cortázar
+F | Qui a écrit Le Petit Prince ? | Antoine de Saint-Exupéry | Jules Verne | Albert Camus | Jacques Prévert
+F | Quel musée abrite la Vénus de Milo ? | Le Louvre | Le musée d'Orsay | Le Prado | Le British Museum
+F | Qui a écrit Vingt mille lieues sous les mers ? | Jules Verne | Victor Hugo | Alexandre Dumas | Émile Zola
+M | Quel peintre espagnol a peint Guernica ? | Pablo Picasso | Salvador Dalí | Joan Miró | Francisco de Goya
+M | Qui a composé Les Quatre Saisons ? | Antonio Vivaldi | Jean-Sébastien Bach | Georg Friedrich Haendel | Mozart
+M | Quel poète a écrit Les Fleurs du mal ? | Charles Baudelaire | Arthur Rimbaud | Paul Verlaine | Stéphane Mallarmé
+M | Quel dramaturge français a écrit Le Misanthrope ? | Molière | Racine | Corneille | Marivaux
+D | Quel architecte a conçu la Sagrada Família ? | Antoni Gaudí | Le Corbusier | Gustave Eiffel | Mies van der Rohe
+D | Qui a écrit L'Étranger ? | Albert Camus | Jean-Paul Sartre | André Malraux | André Gide
+D | Quel mouvement André Breton a-t-il théorisé ? | Le surréalisme | Le cubisme | Le dadaïsme | Le futurisme
+F | Qui a écrit Les Trois Mousquetaires ? | Alexandre Dumas | Victor Hugo | Jules Verne | Stendhal
+F | Dans quelle ville se dresse la statue de la Liberté ? | New York | Boston | Philadelphie | Washington
+F | Qui a peint le plafond de la chapelle Sixtine ? | Michel-Ange | Raphaël | Léonard de Vinci | Le Caravage
+M | Qui a écrit Madame Bovary ? | Gustave Flaubert | Guy de Maupassant | Honoré de Balzac | Émile Zola
+M | Qui a écrit Germinal ? | Émile Zola | Victor Hugo | Alphonse Daudet | Jules Vallès
+M | Quel peintre a fondé le cubisme avec Picasso ? | Georges Braque | Fernand Léger | Juan Gris | Robert Delaunay
+M | Quel compositeur autrichien a laissé un Requiem inachevé ? | Mozart | Joseph Haydn | Franz Schubert | Anton Bruckner
+D | Quel écrivain russe a écrit Guerre et Paix ? | Léon Tolstoï | Fiodor Dostoïevski | Anton Tchekhov | Nicolas Gogol
+D | Quel courant Victor Hugo défend-il dans la préface de Cromwell ? | Le romantisme | Le naturalisme | Le symbolisme | Le classicisme
+D | Qui a peint Le Cri ? | Edvard Munch | Vassily Kandinsky | Egon Schiele | James Ensor
+
+# ————— Deuxième fournée —————
+
+F | Qui a écrit Le Petit Chaperon rouge dans sa version française ? | Charles Perrault | Les frères Grimm | Hans Christian Andersen | Jean de La Fontaine
+F | Qui a écrit les Fables du Corbeau et du Renard ? | Jean de La Fontaine | Charles Perrault | Molière | Victor Hugo
+F | Dans quel musée parisien se trouve La Joconde ? | Le Louvre | Le musée d'Orsay | Le Centre Pompidou | Le Grand Palais
+F | De quelle matière est faite la Vénus de Milo ? | Le marbre | Le bronze | Le bois | L'argile
+F | Quel peintre est célèbre pour ses tournesols ? | Vincent van Gogh | Claude Monet | Paul Gauguin | Henri Matisse
+F | Qui a écrit Le Tour du monde en quatre-vingts jours ? | Jules Verne | Alexandre Dumas | Victor Hugo | Émile Zola
+F | Quel instrument possède un archet et quatre cordes ? | Le violon | La guitare | La harpe | Le piano
+F | Qui a écrit Notre-Dame de Paris ? | Victor Hugo | Alexandre Dumas | Balzac | Zola
+F | Quelle est la couleur dominante de la période dite « bleue » de Picasso ? | Le bleu | Le rose | Le gris | Le vert
+F | Qui a peint Les Tournesols et La Nuit étoilée ? | Vincent van Gogh | Paul Cézanne | Édouard Manet | Camille Pissarro
+F | Quel poète a écrit « Demain, dès l'aube » ? | Victor Hugo | Alfred de Musset | Lamartine | Rimbaud
+F | Quel monument parisien Gustave Eiffel a-t-il conçu ? | La tour Eiffel | L'Arc de Triomphe | Le Panthéon | L'Opéra Garnier
+F | Qui a écrit Le Malade imaginaire ? | Molière | Racine | Corneille | Beaumarchais
+F | Quel art désigne la sculpture, la peinture et l'architecture réunies ? | Les arts plastiques | La musicologie | La littérature | Les arts du spectacle
+F | Qui a écrit l'Odyssée ? | Homère | Virgile | Hésiode | Sophocle
+F | Quel compositeur a écrit La Lettre à Élise ? | Beethoven | Mozart | Chopin | Schubert
+F | Quel peintre a peint des nénuphars à Giverny ? | Claude Monet | Auguste Renoir | Edgar Degas | Alfred Sisley
+F | Qui a écrit Les Fleurs du mal ? | Charles Baudelaire | Paul Verlaine | Arthur Rimbaud | Alfred de Vigny
+F | Quel roman raconte l'histoire d'un capitaine obsédé par une baleine blanche ? | Moby Dick | L'Île au trésor | Vingt mille lieues sous les mers | Le Vieil Homme et la Mer
+F | Quel instrument comporte des touches noires et blanches ? | Le piano | La harpe | Le violoncelle | La flûte
+F | Qui a peint le tableau de la Liberté guidant le peuple ? | Eugène Delacroix | Théodore Géricault | Jacques-Louis David | Gustave Courbet
+F | Quel écrivain a créé le personnage de Cyrano de Bergerac ? | Edmond Rostand | Victor Hugo | Alfred de Musset | Alexandre Dumas
+F | Combien de cordes possède un violon ? | Quatre | Six | Cinq | Trois
+F | Qui a écrit Les Aventures de Tom Sawyer ? | Mark Twain | Jack London | Herman Melville | Charles Dickens
+F | Quel style d'architecture caractérise les cathédrales aux arcs brisés ? | Le gothique | Le roman | Le baroque | Le classique
+M | Qui a peint Le Radeau de La Méduse ? | Théodore Géricault | Eugène Delacroix | Jacques-Louis David | Camille Corot
+M | Quel écrivain russe a écrit Crime et Châtiment ? | Fiodor Dostoïevski | Léon Tolstoï | Anton Tchekhov | Ivan Tourgueniev
+M | Quel compositeur a écrit Le Lac des cygnes ? | Piotr Ilitch Tchaïkovski | Igor Stravinski | Sergueï Prokofiev | Nikolaï Rimski-Korsakov
+M | Qui a écrit En attendant Godot ? | Samuel Beckett | Eugène Ionesco | Jean Genet | Harold Pinter
+M | Quel mouvement Andy Warhol représente-t-il ? | Le pop art | Le surréalisme | L'expressionnisme | Le minimalisme
+M | Qui a écrit Le Rouge et le Noir et La Chartreuse de Parme ? | Stendhal | Balzac | Flaubert | Mérimée
+M | Quel peintre hollandais a peint La Jeune Fille à la perle ? | Johannes Vermeer | Rembrandt | Frans Hals | Jan Steen
+M | Qui a composé Le Boléro ? | Maurice Ravel | Claude Debussy | Erik Satie | Camille Saint-Saëns
+M | Quel écrivain a créé le personnage de Don Quichotte ? | Miguel de Cervantès | Lope de Vega | Calderón | Góngora
+M | Quel peintre a fondé le fauvisme avec Derain ? | Henri Matisse | Georges Braque | Raoul Dufy | Maurice de Vlaminck
+M | Qui a écrit La Métamorphose ? | Franz Kafka | Thomas Mann | Robert Musil | Hermann Hesse
+M | Quel sculpteur suisse est connu pour ses silhouettes filiformes ? | Alberto Giacometti | Constantin Brancusi | Henry Moore | Jean Arp
+M | Quel compositeur allemand a écrit L'Anneau du Nibelung ? | Richard Wagner | Johannes Brahms | Robert Schumann | Felix Mendelssohn
+M | Qui a écrit Les Misérables et Ruy Blas ? | Victor Hugo | Alexandre Dumas | Alfred de Musset | Prosper Mérimée
+M | Quel peintre espagnol a peint des montres molles ? | Salvador Dalí | Joan Miró | Pablo Picasso | Francisco Goya
+M | Quel poète français est mort à trente-sept ans après avoir cessé d'écrire à vingt ans ? | Arthur Rimbaud | Paul Verlaine | Charles Baudelaire | Gérard de Nerval
+M | Qui a écrit Orgueil et Préjugés ? | Jane Austen | Charlotte Brontë | Emily Brontë | George Eliot
+M | Quel architecte a conçu la Villa Savoye ? | Le Corbusier | Auguste Perret | Frank Lloyd Wright | Walter Gropius
+M | Quel compositeur a écrit les Nocturnes pour piano ? | Frédéric Chopin | Franz Liszt | Robert Schumann | Johannes Brahms
+M | Qui a écrit Le Vieil Homme et la Mer ? | Ernest Hemingway | John Steinbeck | William Faulkner | Francis Scott Fitzgerald
+M | Quel peintre a peint Le Déjeuner sur l'herbe ? | Édouard Manet | Claude Monet | Auguste Renoir | Edgar Degas
+M | Quel dramaturge norvégien a écrit Une maison de poupée ? | Henrik Ibsen | August Strindberg | Knut Hamsun | Bjørnson
+M | Qui a écrit Les Trois Sœurs et La Cerisaie ? | Anton Tchekhov | Maxime Gorki | Nicolas Gogol | Ivan Tourgueniev
+M | Quel peintre a représenté des danseuses de l'Opéra de Paris ? | Edgar Degas | Auguste Renoir | Henri de Toulouse-Lautrec | Édouard Manet
+M | Quel écrivain a créé Sherlock Holmes ? | Arthur Conan Doyle | Agatha Christie | Edgar Allan Poe | Wilkie Collins
+D | Quel peintre flamand a peint Le Jardin des délices ? | Jérôme Bosch | Pieter Bruegel | Jan van Eyck | Rogier van der Weyden
+D | Qui a écrit À l'ombre des jeunes filles en fleurs ? | Marcel Proust | André Gide | Paul Valéry | Colette
+D | Quel compositeur a écrit Les Noces de Figaro ? | Mozart | Rossini | Verdi | Donizetti
+D | Quel écrivain irlandais a écrit Ulysse ? | James Joyce | Samuel Beckett | Oscar Wilde | William Butler Yeats
+D | Quel peintre a peint Les Demoiselles d'Avignon ? | Pablo Picasso | Georges Braque | Juan Gris | Fernand Léger
+D | Qui a écrit Voyage au bout de la nuit ? | Louis-Ferdinand Céline | André Malraux | Jean Giono | Georges Bernanos
+D | Quel sculpteur roumain a réalisé L'Oiseau dans l'espace ? | Constantin Brancusi | Alberto Giacometti | Jean Arp | Henry Moore
+D | Quel compositeur a écrit Le Sacre du printemps ? | Igor Stravinski | Claude Debussy | Béla Bartók | Maurice Ravel
+D | Qui a écrit Le Nom de la rose ? | Umberto Eco | Italo Calvino | Primo Levi | Alberto Moravia
+D | Quel peintre a peint La Ronde de nuit ? | Rembrandt | Vermeer | Rubens | Van Dyck
+D | Quel écrivain a reçu le prix Nobel de littérature en 1957 ? | Albert Camus | Jean-Paul Sartre | André Malraux | Saint-John Perse
+D | Quel architecte a conçu le musée Guggenheim de New York ? | Frank Lloyd Wright | Le Corbusier | Mies van der Rohe | Louis Kahn
+D | Quel poète a écrit Une saison en enfer ? | Arthur Rimbaud | Paul Verlaine | Stéphane Mallarmé | Lautréamont
+D | Quel peintre autrichien a peint Le Baiser recouvert d'or ? | Gustav Klimt | Egon Schiele | Oskar Kokoschka | Alfons Mucha
+D | Qui a écrit Le Bruit et la Fureur ? | William Faulkner | Ernest Hemingway | John Dos Passos | Francis Scott Fitzgerald
+D | Quel compositeur a écrit les Suites pour violoncelle seul ? | Jean-Sébastien Bach | Antonio Vivaldi | Georg Friedrich Haendel | Arcangelo Corelli
+D | Quel écrivain japonais a écrit Kafka sur le rivage ? | Haruki Murakami | Yukio Mishima | Kenzaburō Ōe | Yasunari Kawabata
+D | Quel mouvement pictural Kandinsky a-t-il ouvert ? | L'art abstrait | Le futurisme | Le dadaïsme | Le constructivisme
+D | Quel écrivain a écrit Le Meilleur des mondes ? | Aldous Huxley | George Orwell | H. G. Wells | Ray Bradbury
+D | Quel peintre a peint la série des Cathédrales de Rouen ? | Claude Monet | Camille Pissarro | Alfred Sisley | Gustave Caillebotte
+
+# ————— Troisième fournée —————
+
+F | Qui a écrit Le Comte de Monte-Cristo ? | Alexandre Dumas | Victor Hugo | Jules Verne | Stendhal
+F | Quel peintre a peint la Chambre à Arles ? | Vincent van Gogh | Paul Gauguin | Paul Cézanne | Henri Matisse
+F | Qui a écrit Les Fourberies de Scapin ? | Molière | Racine | Corneille | Marivaux
+F | Quel écrivain a créé le personnage de Gavroche ? | Victor Hugo | Émile Zola | Alphonse Daudet | Jules Vallès
+F | Quel instrument possède des pédales et des marteaux ? | Le piano | L'orgue | La harpe | Le clavecin
+F | Qui a écrit Robinson Crusoé ? | Daniel Defoe | Jonathan Swift | Walter Scott | Charles Dickens
+F | Quel peintre italien a peint la Cène ? | Léonard de Vinci | Michel-Ange | Raphaël | Le Titien
+F | Qui a écrit Le Petit Nicolas avec Sempé ? | René Goscinny | Uderzo | Hergé | Franquin
+F | Quel monument romain accueillait les combats de gladiateurs ? | Le Colisée | Le Panthéon | Le Forum | Les thermes de Caracalla
+F | Qui a écrit L'Avare ? | Molière | Beaumarchais | Marivaux | Voltaire
+F | Quel écrivain britannique a créé Oliver Twist ? | Charles Dickens | Thomas Hardy | William Thackeray | George Eliot
+F | Quel peintre a peint des ballerines et des courses de chevaux ? | Edgar Degas | Claude Monet | Auguste Renoir | Édouard Manet
+F | Qui a écrit Les Voyages de Gulliver ? | Jonathan Swift | Daniel Defoe | Laurence Sterne | Henry Fielding
+F | Quelle est la forme d'écriture des poèmes de quatorze vers ? | Le sonnet | L'ode | La ballade | Le rondeau
+F | Qui a écrit Candide ? | Voltaire | Rousseau | Diderot | Montesquieu
+F | Quel peintre a peint L'Origine du monde ? | Gustave Courbet | Édouard Manet | Eugène Delacroix | Jean-François Millet
+F | Qui a écrit Germinie Lacerteux ? | Les frères Goncourt | Émile Zola | Guy de Maupassant | Alphonse Daudet
+F | Quel compositeur a écrit la Symphonie du Nouveau Monde ? | Antonín Dvořák | Bedřich Smetana | Leoš Janáček | Béla Bartók
+F | Qui a écrit Les Contes de ma mère l'Oye ? | Charles Perrault | Les frères Grimm | Andersen | Madame d'Aulnoy
+F | Quel peintre est l'auteur des Ménines ? | Diego Vélasquez | Francisco Goya | Le Greco | Murillo
+F | Quel écrivain a écrit Vingt Ans après ? | Alexandre Dumas | Victor Hugo | Eugène Sue | Paul Féval
+F | Quel style musical est né à La Nouvelle-Orléans ? | Le jazz | Le blues | Le rock | La country
+F | Qui a écrit La Peau de chagrin ? | Honoré de Balzac | Stendhal | Flaubert | Mérimée
+F | Quel instrument à vent est le plus grave de l'orchestre ? | Le tuba | Le trombone | Le basson | La clarinette basse
+F | Qui a écrit Le Lion, la Sorcière blanche et l'Armoire magique ? | C. S. Lewis | J. R. R. Tolkien | Lewis Carroll | Roald Dahl
+M | Quel peintre a peint Le Bassin aux nymphéas ? | Claude Monet | Camille Pissarro | Berthe Morisot | Gustave Caillebotte
+M | Qui a écrit Bel-Ami ? | Guy de Maupassant | Émile Zola | Alphonse Daudet | Jules Renard
+M | Quel compositeur a écrit la Symphonie fantastique ? | Hector Berlioz | Camille Saint-Saëns | César Franck | Gabriel Fauré
+M | Quel peintre a peint le plafond de l'Opéra Garnier ? | Marc Chagall | Pablo Picasso | Henri Matisse | Fernand Léger
+M | Qui a écrit Le Grand Meaulnes ? | Alain-Fournier | Marcel Proust | Julien Gracq | Georges Bernanos
+M | Quel sculpteur a réalisé Le Baiser en marbre ? | Auguste Rodin | Camille Claudel | Antonio Canova | Aristide Maillol
+M | Qui a écrit Salammbô ? | Gustave Flaubert | Théophile Gautier | Pierre Loti | Anatole France
+M | Quel courant musical Claude Debussy représente-t-il ? | L'impressionnisme | Le romantisme | Le classicisme | Le sérialisme
+M | Qui a écrit L'Amour au temps du choléra ? | Gabriel García Márquez | Mario Vargas Llosa | Isabel Allende | Julio Cortázar
+M | Quel peintre a peint Le Sacre de Napoléon ? | Jacques-Louis David | Antoine-Jean Gros | François Gérard | Ingres
+M | Qui a écrit Les Liaisons dangereuses ? | Choderlos de Laclos | L'abbé Prévost | Rétif de la Bretonne | Sade
+M | Quel compositeur a écrit Ainsi parlait Zarathoustra ? | Richard Strauss | Gustav Mahler | Anton Bruckner | Richard Wagner
+M | Quel écrivain russe a écrit Anna Karénine ? | Léon Tolstoï | Dostoïevski | Tourgueniev | Gontcharov
+M | Quel peintre a peint la Tour de Babel ? | Pieter Bruegel l'Ancien | Jérôme Bosch | Jan van Eyck | Albrecht Dürer
+M | Qui a écrit Le Deuxième Sexe ? | Simone de Beauvoir | Colette | Marguerite Duras | Nathalie Sarraute
+M | Quel architecte a dessiné les plans de la basilique Saint-Pierre ? | Michel-Ange | Bramante | Bernin | Raphaël
+M | Qui a écrit Le Horla ? | Guy de Maupassant | Edgar Allan Poe | Villiers de l'Isle-Adam | Théophile Gautier
+M | Quel compositeur autrichien a écrit La Truite ? | Franz Schubert | Joseph Haydn | Mozart | Beethoven
+M | Quel peintre a peint la série des Meules ? | Claude Monet | Alfred Sisley | Camille Pissarro | Paul Signac
+M | Qui a écrit La Ferme des animaux ? | George Orwell | Aldous Huxley | Arthur Koestler | Anthony Burgess
+M | Quel écrivain a écrit Voyage au centre de la Terre ? | Jules Verne | H. G. Wells | Conan Doyle | Rider Haggard
+M | Quel compositeur a écrit Casse-Noisette ? | Piotr Ilitch Tchaïkovski | Sergueï Prokofiev | Igor Stravinski | Alexandre Borodine
+M | Qui a écrit Le Lys dans la vallée ? | Honoré de Balzac | Stendhal | George Sand | Alfred de Musset
+M | Quel peintre a peint Le Chevalier, la Mort et le Diable ? | Albrecht Dürer | Lucas Cranach | Hans Holbein | Matthias Grünewald
+M | Quel écrivain a créé le capitaine Nemo ? | Jules Verne | Herman Melville | Joseph Conrad | Pierre Loti
+D | Quel peintre a peint Le Tricheur à l'as de carreau ? | Georges de La Tour | Le Caravage | Nicolas Poussin | Philippe de Champaigne
+D | Qui a écrit Les Faux-Monnayeurs ? | André Gide | Marcel Proust | Paul Valéry | Roger Martin du Gard
+D | Quel compositeur a écrit Pelléas et Mélisande ? | Claude Debussy | Maurice Ravel | Gabriel Fauré | Paul Dukas
+D | Quel peintre a peint la série des Ménines revisitées ? | Pablo Picasso | Salvador Dalí | Joan Miró | Antoni Tàpies
+D | Qui a écrit Belle du Seigneur ? | Albert Cohen | Romain Gary | Emmanuel Bove | Jean Giono
+D | Quel architecte a conçu l'Opéra de Sydney ? | Jørn Utzon | Oscar Niemeyer | Renzo Piano | Norman Foster
+D | Quel écrivain a reçu le prix Nobel de littérature en 2014 ? | Patrick Modiano | Le Clézio | Annie Ernaux | Claude Simon
+D | Quel peintre a peint Le Verrou ? | Jean-Honoré Fragonard | François Boucher | Antoine Watteau | Jean-Baptiste Greuze
+D | Quel compositeur a écrit les Variations Goldberg ? | Jean-Sébastien Bach | Georg Friedrich Haendel | Domenico Scarlatti | François Couperin
+D | Qui a écrit Le Guépard ? | Giuseppe Tomasi di Lampedusa | Alberto Moravia | Italo Svevo | Cesare Pavese
+D | Quel sculpteur a réalisé le Moïse de Saint-Pierre-aux-Liens ? | Michel-Ange | Donatello | Le Bernin | Ghiberti
+D | Quel peintre norvégien a peint La Danse de la vie ? | Edvard Munch | Christian Krohg | Harald Sohlberg | Nikolai Astrup
+D | Qui a écrit Le Maître et Marguerite ? | Mikhaïl Boulgakov | Boris Pasternak | Vassili Grossman | Andreï Platonov
+D | Quel compositeur a écrit le Requiem allemand ? | Johannes Brahms | Giuseppe Verdi | Gabriel Fauré | Hector Berlioz
+D | Quel peintre a peint Le Char de foin ? | Jérôme Bosch | Pieter Bruegel | Joachim Patinir | Quentin Metsys
+D | Qui a écrit Les Mots ? | Jean-Paul Sartre | Albert Camus | Simone de Beauvoir | Raymond Aron
+D | Quel architecte a conçu la pyramide du Louvre ? | Ieoh Ming Pei | Jean Nouvel | Renzo Piano | Christian de Portzamparc
+D | Qui a écrit Pedro Páramo ? | Juan Rulfo | Octavio Paz | Carlos Fuentes | Jorge Luis Borges
+D | Quel peintre a peint Le Massacre de Scio ? | Eugène Delacroix | Théodore Géricault | Antoine-Jean Gros | Horace Vernet
+D | Quel compositeur a écrit L'Oiseau de feu ? | Igor Stravinski | Sergueï Diaghilev | Claude Debussy | Maurice Ravel
+D | Qui a écrit Sous le volcan ? | Malcolm Lowry | Graham Greene | Evelyn Waugh | Lawrence Durrell
+D | Quel peintre a peint le retable d'Issenheim ? | Matthias Grünewald | Albrecht Dürer | Hans Holbein | Lucas Cranach
+D | Quel écrivain autrichien a écrit Le Joueur d'échecs ? | Stefan Zweig | Robert Musil | Joseph Roth | Arthur Schnitzler
+D | Quel compositeur a écrit Don Giovanni ? | Mozart | Gluck | Salieri | Haydn
+D | Qui a écrit Le Désert des Tartares ? | Dino Buzzati | Italo Calvino | Elsa Morante | Cesare Pavese
+F | Quel écrivain a créé le personnage de Tarzan ? | Edgar Rice Burroughs | Rudyard Kipling | Jack London | Jules Verne
+F | Quel peintre a peint le Bal du moulin de la Galette ? | Auguste Renoir | Claude Monet | Édouard Manet | Edgar Degas
+F | Qui a écrit Le Livre de la jungle ? | Rudyard Kipling | Robert Louis Stevenson | Jack London | H. Rider Haggard
+F | Quel instrument tient-on sous le menton ? | Le violon | Le violoncelle | La contrebasse | La harpe
+F | Qui a écrit Michel Strogoff ? | Jules Verne | Alexandre Dumas | Pierre Loti | Paul d'Ivoi
+M | Quel peintre a peint Les Glaneuses ? | Jean-François Millet | Gustave Courbet | Camille Corot | Théodore Rousseau
+M | Qui a écrit Thérèse Raquin ? | Émile Zola | Guy de Maupassant | Alphonse Daudet | Edmond de Goncourt
+M | Quel compositeur a écrit le Requiem de 1791 resté inachevé ? | Mozart | Haydn | Salieri | Cherubini
+M | Quel peintre a peint la Naissance de Vénus ? | Sandro Botticelli | Raphaël | Le Titien | Giorgione
+M | Qui a écrit Les Confessions ? | Jean-Jacques Rousseau | Voltaire | Diderot | Montaigne
+M | Quel écrivain a écrit Le Portrait de Dorian Gray ? | Oscar Wilde | Bram Stoker | Robert Louis Stevenson | Henry James
+M | Quel peintre a peint L'Angélus ? | Jean-François Millet | Gustave Courbet | Camille Pissarro | Charles-François Daubigny
+D | Quel compositeur a écrit Le Vaisseau fantôme ? | Richard Wagner | Carl Maria von Weber | Robert Schumann | Franz Liszt
+D | Qui a écrit Le Rivage des Syrtes ? | Julien Gracq | André Breton | Michel Butor | Alain Robbe-Grillet
+D | Non, quel peintre a peint L'Atelier du peintre ? | Gustave Courbet | Eugène Delacroix | Édouard Manet | Honoré Daumier
+D | Quel écrivain portugais a écrit Le Livre de l'intranquillité ? | Fernando Pessoa | José Saramago | Eça de Queiroz | António Lobo Antunes
+D | Quel compositeur a écrit les Tableaux d'une exposition ? | Modeste Moussorgski | Nikolaï Rimski-Korsakov | Alexandre Borodine | César Cui
+D | Quel peintre a peint Le Déjeuner des canotiers ? | Auguste Renoir | Claude Monet | Gustave Caillebotte | Berthe Morisot
+D | Qui a écrit Le Bruit des choses qui tombent ? | Juan Gabriel Vásquez | Mario Vargas Llosa | Roberto Bolaño | Javier Cercas
+D | Quel architecte a conçu la tour Montparnasse ? | Eugène Beaudouin | Le Corbusier | Auguste Perret | Jean Nouvel
+D | Quel compositeur a écrit la Symphonie Jupiter ? | Mozart | Haydn | Beethoven | Schubert
+D | Qui a écrit Le Tambour ? | Günter Grass | Heinrich Böll | Thomas Mann | Hermann Hesse
+D | Quel peintre a peint Les Époux Arnolfini ? | Jan van Eyck | Rogier van der Weyden | Hans Memling | Robert Campin
+D | Quel écrivain a écrit Si c'est un homme ? | Primo Levi | Elie Wiesel | Imre Kertész | Jorge Semprún
+D | Quel compositeur a écrit Le Beau Danube bleu ? | Johann Strauss fils | Johann Strauss père | Franz Lehár | Jacques Offenbach

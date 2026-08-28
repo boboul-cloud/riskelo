@@ -1,0 +1,215 @@
+# Sciences & Nature — une question par ligne.
+#
+# niveau | énoncé ? | bonne réponse | leurre | leurre | leurre
+# F facile · M moyen · D difficile
+#
+# Les propositions sont mêlées au tirage : l'ordre n'a aucune importance.
+# Un leurre doit être faux mais crédible — un leurre absurde ne fait pas
+# une question, il fait une question à trois propositions.
+
+F | Quel est le symbole chimique de l'or ? | Au | Ag | Or | Fe
+F | Quelle planète est la plus proche du Soleil ? | Mercure | Vénus | Mars | La Terre
+F | Combien d'os compte le squelette d'un adulte ? | 206 | 180 | 256 | 312
+M | Quel gaz les plantes absorbent-elles pour la photosynthèse ? | Le dioxyde de carbone | L'oxygène | L'azote | Le méthane
+M | Quel organe produit l'insuline ? | Le pancréas | Le foie | La rate | Le rein
+M | Combien de paires de chromosomes compte une cellule humaine ? | 23 | 24 | 46 | 21
+M | Quel est le plus grand organe du corps humain ? | La peau | Le foie | Les poumons | L'intestin grêle
+D | Quelle est l'unité de mesure de la résistance électrique ? | L'ohm | Le volt | L'ampère | Le watt
+D | Quel astronome a énoncé les lois du mouvement des planètes ? | Johannes Kepler | Tycho Brahe | Galilée | Copernic
+D | Quelle est la planète la plus dense du système solaire ? | La Terre | Mercure | Jupiter | Saturne
+F | Quel gaz est le plus abondant dans l'atmosphère terrestre ? | L'azote | L'oxygène | Le dioxyde de carbone | L'argon
+F | Combien de pattes compte une araignée ? | Huit | Six | Dix | Quatre
+F | Quel organe met le sang en mouvement ? | Le cœur | Le poumon | Le foie | Le rein
+M | Quelle est la formule chimique de l'eau ? | H₂O | CO₂ | O₂ | H₂O₂
+M | Quel est l'os le plus long du corps humain ? | Le fémur | Le tibia | L'humérus | Le radius
+M | Quelle planète porte les anneaux les plus visibles ? | Saturne | Jupiter | Uranus | Neptune
+M | À quelle température l'eau bout-elle au niveau de la mer ? | 100 °C | 90 °C | 110 °C | 80 °C
+D | Quel métal est liquide à température ambiante ? | Le mercure | Le plomb | Le zinc | L'étain
+D | Quelle est l'unité de mesure de la fréquence ? | Le hertz | Le newton | Le joule | Le pascal
+D | Quel savant a énoncé le principe de la poussée sur les corps immergés ? | Archimède | Newton | Pascal | Torricelli
+F | Quelle planète est surnommée la planète rouge ? | Mars | Vénus | Jupiter | Mercure
+F | Quel est le plus grand animal du monde ? | La baleine bleue | L'éléphant d'Afrique | Le requin-baleine | Le cachalot
+F | Combien de dents compte un adulte ? | 32 | 28 | 36 | 24
+M | Quelle est la vitesse de la lumière dans le vide ? | Environ 300 000 km/s | Environ 30 000 km/s | Environ 3 000 km/s | Environ 3 000 000 km/s
+M | Quel savant a découvert la pénicilline ? | Alexander Fleming | Louis Pasteur | Robert Koch | Edward Jenner
+M | Quelle partie de l'œil lui donne sa couleur ? | L'iris | La cornée | La rétine | Le cristallin
+M | En combien de temps la Terre fait-elle le tour du Soleil ? | Un an | Un mois | Dix ans | Une journée
+D | Quel élément est le plus abondant dans l'univers ? | L'hydrogène | L'oxygène | L'hélium | Le carbone
+D | Quelle unité mesure la puissance électrique ? | Le watt | Le volt | Le coulomb | Le farad
+D | Qui a établi le tableau périodique des éléments ? | Dmitri Mendeleïev | Antoine Lavoisier | Marie Curie | Niels Bohr
+
+# ————— Deuxième fournée —————
+
+F | Combien de planètes compte le système solaire ? | Huit | Neuf | Sept | Dix
+F | Quel est le symbole chimique de l'oxygène ? | O | Ox | Og | O₂
+F | Quel organe filtre le sang ? | Les reins | Le foie | La rate | Le pancréas
+F | Combien de pattes a un insecte ? | Six | Huit | Quatre | Dix
+F | Quel est l'animal terrestre le plus rapide à la course ? | Le guépard | Le lion | L'antilope | Le cheval
+F | De quelle couleur est le sang riche en oxygène ? | Rouge vif | Rouge sombre | Bleu | Violet
+F | Quel gaz l'être humain rejette-t-il en expirant ? | Le dioxyde de carbone | L'oxygène | L'azote | L'hélium
+F | Quelle est la plus grande planète du système solaire ? | Jupiter | Saturne | Neptune | La Terre
+F | Quel est le plus petit os du corps humain ? | L'étrier | Le marteau | L'enclume | La rotule
+F | À quelle température l'eau gèle-t-elle ? | 0 °C | 10 °C | -10 °C | 5 °C
+F | Quel animal pond des œufs et allaite ses petits ? | L'ornithorynque | Le kangourou | Le hérisson | La chauve-souris
+F | Combien de cavités compte le cœur humain ? | Quatre | Deux | Trois | Cinq
+F | Quel astre éclaire la nuit en reflétant la lumière du Soleil ? | La Lune | Vénus | Mars | Sirius
+F | Quel est le symbole chimique du fer ? | Fe | Fr | F | Ir
+F | Quel organe permet de respirer ? | Les poumons | Le cœur | Le foie | L'estomac
+F | Quel est le plus grand des félins ? | Le tigre | Le lion | Le jaguar | Le léopard
+F | En combien de temps la Lune fait-elle le tour de la Terre ? | Environ 28 jours | Environ 7 jours | Environ 90 jours | Environ 365 jours
+F | Quel arbre produit les glands ? | Le chêne | Le hêtre | Le châtaignier | Le noyer
+F | Quel métal est le plus utilisé au monde ? | Le fer | L'aluminium | Le cuivre | Le zinc
+F | Quelle force nous retient au sol ? | La gravité | Le magnétisme | La pression | L'inertie
+F | Quel sens l'oreille assure-t-elle en plus de l'ouïe ? | L'équilibre | Le goût | L'odorat | Le toucher
+F | Combien de doigts compte une main humaine ? | Cinq | Quatre | Six | Trois
+F | Quel est le plus grand mammifère terrestre ? | L'éléphant d'Afrique | Le rhinocéros | L'hippopotame | La girafe
+F | Quel liquide transporte l'oxygène dans le corps ? | Le sang | La lymphe | La bile | La salive
+F | Quelle est la principale source d'énergie de la Terre ? | Le Soleil | Le noyau terrestre | La Lune | Les océans
+M | Quel est le symbole chimique du sodium ? | Na | So | Sd | S
+M | Quelle cellule transporte l'oxygène dans le sang ? | Le globule rouge | Le globule blanc | La plaquette | Le lymphocyte
+M | Quel savant a énoncé la loi de la gravitation universelle ? | Isaac Newton | Galilée | Kepler | Einstein
+M | Combien de côtes compte le squelette humain ? | 24 | 20 | 26 | 12
+M | Quel gaz compose l'essentiel du Soleil ? | L'hydrogène | L'hélium | L'oxygène | Le carbone
+M | Quelle unité mesure l'intensité d'un courant électrique ? | L'ampère | Le volt | Le watt | L'ohm
+M | Quel organe produit la bile ? | Le foie | La vésicule | Le pancréas | L'estomac
+M | Quelle est la plus grande artère du corps humain ? | L'aorte | La carotide | La fémorale | La pulmonaire
+M | En combien de temps la lumière du Soleil atteint-elle la Terre ? | Environ 8 minutes | Environ 1 seconde | Environ 1 heure | Environ 1 jour
+M | Quel savant a proposé la théorie de l'évolution par sélection naturelle ? | Charles Darwin | Lamarck | Mendel | Cuvier
+M | Quelle planète tourne pratiquement couchée sur son orbite ? | Uranus | Neptune | Vénus | Saturne
+M | Quel est le plus dur des minéraux naturels ? | Le diamant | Le quartz | Le corindon | La topaze
+M | Quelle partie de la plante absorbe l'eau du sol ? | Les racines | Les feuilles | La tige | Les fleurs
+M | De quoi sont faits les anneaux de Saturne ? | De glace et de roche | De gaz | De poussière métallique | De lave refroidie
+M | Quel appareil mesure la pression atmosphérique ? | Le baromètre | Le thermomètre | L'hygromètre | L'anémomètre
+M | Quel élément chimique a pour symbole Pb ? | Le plomb | Le platine | Le palladium | Le phosphore
+M | Quelle est la vitesse du son dans l'air ? | Environ 340 m/s | Environ 34 m/s | Environ 3 400 m/s | Environ 1 000 m/s
+M | Quel animal possède trois cœurs ? | La pieuvre | Le ver de terre | La méduse | L'étoile de mer
+M | Quelle maladie la vaccination a-t-elle éradiquée de la planète ? | La variole | La peste | La polio | Le choléra
+M | Quel astronome a été condamné pour avoir soutenu que la Terre tourne ? | Galilée | Copernic | Kepler | Giordano Bruno
+M | Quelle particule du noyau porte une charge positive ? | Le proton | Le neutron | L'électron | Le photon
+M | Quelle glande règle le métabolisme ? | La thyroïde | L'hypophyse | Le pancréas | La surrénale
+M | Combien de dents de lait un enfant possède-t-il ? | 20 | 24 | 28 | 32
+M | Comment nomme-t-on le processus par lequel les plantes fabriquent leur nourriture ? | La photosynthèse | La respiration | La fermentation | L'osmose
+M | Quelle est la plus grande lune du système solaire ? | Ganymède | La Lune | Titan | Europe
+D | Quelle est l'unité de mesure de la force ? | Le newton | Le joule | Le pascal | Le watt
+D | Quel physicien a formulé le principe d'incertitude ? | Werner Heisenberg | Niels Bohr | Max Planck | Erwin Schrödinger
+D | Quelle particule ne porte aucune charge électrique ? | Le neutron | Le proton | L'électron | L'ion
+D | Combien de temps dure une année sur Mars ? | Environ 687 jours | Environ 365 jours | Environ 225 jours | Environ 1 000 jours
+D | De quelle nature sont les micro-ondes ? | Des ondes électromagnétiques | Des ondes sonores | Des ondes sismiques | Des ondes mécaniques
+D | Quelle molécule porte l'information génétique ? | L'ADN | L'ARN messager | Une protéine | Un lipide
+D | Qui a décrit la structure en double hélice de l'ADN ? | Watson et Crick | Pasteur et Koch | Mendel et Morgan | Curie et Becquerel
+D | Quelle est la température du zéro absolu ? | -273,15 °C | -100 °C | -459 °C | 0 °C
+D | Quel gaz noble est le plus abondant dans l'atmosphère ? | L'argon | L'hélium | Le néon | Le krypton
+D | Quelle est l'unité de mesure de la quantité de matière ? | La mole | Le gramme | Le litre | Le kelvin
+D | Quel savant a inventé la pile électrique ? | Alessandro Volta | André-Marie Ampère | Michael Faraday | Georg Ohm
+D | Quelle partie du cerveau règle l'équilibre et la coordination ? | Le cervelet | Le cortex | Le bulbe rachidien | L'hypothalamus
+D | Quelle est la plus grande des planètes telluriques ? | La Terre | Vénus | Mars | Mercure
+D | Qu'est-ce qui explique la couleur bleue du ciel ? | La diffusion de la lumière | La couleur des océans | L'ozone | La vapeur d'eau
+D | Quelle est la masse d'un litre d'eau pure ? | Un kilogramme | Cent grammes | Dix kilogrammes | Un gramme
+D | Combien d'éléments compte aujourd'hui le tableau périodique ? | 118 | 92 | 103 | 150
+D | Quel savant a mis au point le vaccin contre la rage ? | Louis Pasteur | Robert Koch | Edward Jenner | Alexander Fleming
+D | Quelle couche de l'atmosphère nous protège des ultraviolets ? | La couche d'ozone | La stratosphère | L'ionosphère | La mésosphère
+D | À quelle vitesse la Terre tourne-t-elle sur elle-même à l'équateur ? | Environ 1 670 km/h | Environ 170 km/h | Environ 17 000 km/h | Environ 100 km/h
+D | Quel est le deuxième os le plus long du corps humain ? | Le tibia | L'humérus | Le péroné | Le radius
+
+# ————— Troisième fournée —————
+
+F | Quel est le symbole chimique du carbone ? | C | Ca | Co | Cr
+F | Combien de jours compte une année bissextile ? | 366 | 365 | 364 | 367
+F | Quel animal est le plus grand des oiseaux ? | L'autruche | L'aigle | Le condor | L'albatros
+F | Quelle planète est la plus éloignée du Soleil ? | Neptune | Uranus | Pluton | Saturne
+F | Quel organe abrite la mémoire ? | Le cerveau | Le cœur | Le foie | L'estomac
+F | Quel est l'élément le plus abondant de la croûte terrestre ? | L'oxygène | Le silicium | Le fer | L'aluminium
+F | De quoi se nourrit un animal herbivore ? | De végétaux | De viande | D'insectes | De poissons
+F | Quel gaz fait briller les tubes néon ? | Le néon | L'hélium | L'argon | Le xénon
+F | Combien de pattes a un crabe ? | Dix | Huit | Six | Douze
+F | Quel est le plus long os du corps humain ? | Le fémur | Le tibia | L'humérus | La colonne vertébrale
+F | Comment appelle-t-on un animal qui mange de tout ? | Un omnivore | Un carnivore | Un herbivore | Un insectivore
+F | Quelle est la couleur de la chlorophylle ? | Verte | Rouge | Jaune | Bleue
+F | Quel appareil sert à observer les étoiles ? | Le télescope | Le microscope | Le stéthoscope | Le périscope
+F | Quel est le symbole chimique de l'argent ? | Ag | Ar | Au | As
+F | De quel animal provient la laine ? | Du mouton | De la vache | Du cheval | Du porc
+F | Quelle est la partie de la fleur qui produit le pollen ? | L'étamine | Le pistil | Le pétale | La sépale
+F | Combien de temps dure une journée sur Terre ? | 24 heures | 12 heures | 36 heures | 48 heures
+F | Quel animal change de couleur pour se camoufler ? | Le caméléon | Le crocodile | L'iguane | La tortue
+F | Quel est l'organe du goût ? | La langue | Le nez | La gorge | Le palais
+F | Quelle énergie produit un panneau solaire ? | L'électricité | La chaleur seule | Le gaz | Le pétrole
+F | Quel animal est le plus grand du monde aujourd'hui ? | La baleine bleue | L'éléphant | Le cachalot | La girafe
+F | Quel est le symbole chimique du cuivre ? | Cu | Co | Cr | Ca
+F | Combien de continents la Terre compte-t-elle traditionnellement ? | Six | Quatre | Huit | Dix
+F | Quel insecte fabrique le miel ? | L'abeille | La guêpe | Le frelon | Le bourdon
+F | Quel est l'état de l'eau sous forme de vapeur ? | Gazeux | Liquide | Solide | Plasma
+F | Combien de vertèbres compte le cou d'une girafe ? | Sept | Douze | Vingt | Trois
+F | Quel organe stocke l'urine ? | La vessie | Le rein | L'uretère | Le colon
+F | Quelle est la plus petite unité du vivant ? | La cellule | L'atome | La molécule | Le tissu
+F | Quel animal marin possède huit bras ? | La pieuvre | Le calmar | La seiche | L'étoile de mer
+F | Quel astre est au centre du système solaire ? | Le Soleil | La Terre | Jupiter | La Lune
+F | De quelle couleur devient le papier de tournesol dans un acide ? | Rouge | Bleu | Vert | Jaune
+F | Quel est le symbole chimique de l'azote ? | N | Az | Ni | Na
+F | Quel animal hiberne l'hiver dans une grotte ? | L'ours | Le loup | Le renard | Le cerf
+F | Combien de poumons possède l'être humain ? | Deux | Un | Trois | Quatre
+F | Quelle est la source d'énergie des éoliennes ? | Le vent | Le soleil | L'eau | La chaleur
+M | Quel est le symbole chimique du calcium ? | Ca | Cl | Cd | Cs
+M | Quelle est l'unité de mesure de l'énergie ? | Le joule | Le newton | Le watt | Le pascal
+M | Quel organe produit les globules rouges ? | La moelle osseuse | Le foie | La rate | Le cœur
+M | Quelle planète possède la plus grande tempête connue ? | Jupiter | Saturne | Neptune | Mars
+M | Quel est le pH d'une solution neutre ? | 7 | 0 | 14 | 1
+M | Quel savant a formulé la théorie de la relativité restreinte ? | Albert Einstein | Isaac Newton | Max Planck | Niels Bohr
+M | Combien de chromosomes une cellule humaine contient-elle ? | 46 | 23 | 48 | 44
+M | Quelle est la vitesse de libération de la Terre ? | Environ 11 km/s | Environ 1 km/s | Environ 100 km/s | Environ 300 km/s
+M | Quel gaz est responsable de l'effet de serre en premier lieu ? | La vapeur d'eau | Le dioxyde de carbone | Le méthane | L'ozone
+M | Quel est le nom du plus grand volcan connu du système solaire ? | Olympus Mons | Le Mauna Loa | Le Vésuve | Le Krakatoa
+M | Quelle molécule les plantes rejettent-elles pendant la photosynthèse ? | L'oxygène | Le dioxyde de carbone | L'azote | L'hydrogène
+M | Combien de temps met la lumière de la Lune pour nous atteindre ? | Environ une seconde | Environ une minute | Environ une heure | Environ un jour
+M | Quel savant a décrit les lois de l'hérédité avec des pois ? | Gregor Mendel | Charles Darwin | Louis Pasteur | Jean-Baptiste Lamarck
+M | Quelle est la plus petite planète du système solaire ? | Mercure | Mars | Vénus | Pluton
+M | Quel type de roche est le granite ? | Une roche magmatique | Une roche sédimentaire | Une roche métamorphique | Une roche organique
+M | Quelle partie de l'œil fait la mise au point ? | Le cristallin | La cornée | La rétine | L'iris
+M | Quel est le composant principal du gaz naturel ? | Le méthane | Le propane | Le butane | L'éthane
+M | Quel physicien a découvert la radioactivité naturelle ? | Henri Becquerel | Marie Curie | Ernest Rutherford | Wilhelm Röntgen
+M | Quelle échelle mesure la magnitude des séismes ? | L'échelle de Richter | L'échelle de Beaufort | L'échelle de Mohs | L'échelle Celsius
+M | Quel organe sécrète l'adrénaline ? | Les glandes surrénales | La thyroïde | Le pancréas | L'hypophyse
+M | Combien de temps dure la révolution de Jupiter autour du Soleil ? | Environ douze ans | Environ deux ans | Environ trente ans | Environ cent ans
+M | Quel est le métal le plus léger ? | Le lithium | L'aluminium | Le magnésium | Le titane
+M | Quelle particule a été découverte en 2012 au CERN ? | Le boson de Higgs | Le neutrino | Le quark top | Le muon
+M | Quel animal possède le plus grand cerveau ? | Le cachalot | L'éléphant | L'homme | La baleine bleue
+M | Quelle est l'unité de mesure de la pression ? | Le pascal | Le newton | Le joule | Le bar
+M | Quel gaz respire-t-on en altitude en moindre quantité ? | L'oxygène | L'azote | Le dioxyde de carbone | L'hélium
+M | Quel savant a mis au point la classification des espèces vivantes ? | Carl von Linné | Georges Cuvier | Buffon | Lamarck
+M | Combien de temps met le sang à faire le tour du corps ? | Environ une minute | Environ dix minutes | Environ une heure | Environ dix secondes
+M | Quelle couche de la Terre est la plus épaisse ? | Le manteau | La croûte | Le noyau externe | Le noyau interne
+M | Quel est le seul métal liquide à température ambiante ? | Le mercure | Le gallium | Le césium | Le francium
+M | Quelle vitamine le soleil aide-t-il à produire ? | La vitamine D | La vitamine C | La vitamine A | La vitamine B12
+M | Quel élément chimique porte le numéro atomique 6 ? | Le carbone | L'oxygène | L'azote | Le bore
+M | Quelle est la durée d'une journée sur Vénus par rapport à son année ? | Plus longue | Plus courte | La même | La moitié
+D | Quelle particule véhicule la force électromagnétique ? | Le photon | Le gluon | Le boson W | Le graviton
+D | Quel est le nom du plus grand accélérateur de particules ? | Le LHC | Le Tevatron | Le SLAC | Le RHIC
+D | Quelle loi relie la pression et le volume d'un gaz à température constante ? | La loi de Boyle-Mariotte | La loi de Charles | La loi d'Avogadro | La loi de Gay-Lussac
+D | Quel savant a proposé la dérive des continents ? | Alfred Wegener | Charles Lyell | James Hutton | Arthur Holmes
+D | Combien de temps met la lumière d'Alpha du Centaure à nous atteindre ? | Environ quatre ans | Environ quatre mois | Environ quarante ans | Environ quatre siècles
+D | Quelle enzyme digère l'amidon dans la salive ? | L'amylase | La pepsine | La lipase | La trypsine
+D | Quel est le nom de la théorie de la formation de l'univers ? | Le Big Bang | L'état stationnaire | L'inflation seule | La relativité générale
+D | Quelle est l'unité de mesure de la radioactivité ? | Le becquerel | Le gray | Le sievert | Le curie
+D | Quel élément est le plus abondant dans le corps humain en masse ? | L'oxygène | Le carbone | L'hydrogène | L'azote
+D | Quelle structure du neurone transmet le signal vers une autre cellule ? | L'axone | La dendrite | Le noyau | Le corps cellulaire
+D | Quelle est la température de surface du Soleil, approximativement ? | Environ 5 500 °C | Environ 1 000 °C | Environ 100 000 °C | Environ 500 °C
+D | Quel savant a formulé les trois lois du mouvement ? | Isaac Newton | Galilée | Descartes | Huygens
+D | Quel est le nom du processus de division cellulaire produisant les gamètes ? | La méiose | La mitose | La fission | La cytokinèse
+D | Quelle est la constante utilisée pour compter les atomes d'une mole ? | Le nombre d'Avogadro | La constante de Planck | La constante de Boltzmann | Le nombre d'or
+D | Quel astronome a mesuré le premier la vitesse de la lumière ? | Ole Rømer | Galilée | Fizeau | Michelson
+D | Quelle est la planète la plus chaude du système solaire ? | Vénus | Mercure | Mars | Jupiter
+D | Quel physicien a découvert les rayons X ? | Wilhelm Röntgen | Henri Becquerel | Marie Curie | J. J. Thomson
+D | Quelle est la formule chimique du sel de table ? | NaCl | KCl | CaCO₃ | NaHCO₃
+D | Quel type d'étoile notre Soleil est-il ? | Une naine jaune | Une géante rouge | Une naine blanche | Une supergéante
+D | Quelle est l'unité de mesure de la capacité électrique ? | Le farad | Le henry | Le coulomb | Le siemens
+D | Quelle loi explique qu'un corps immergé subisse une poussée vers le haut ? | La poussée d'Archimède | La loi de Pascal | La loi de Boyle | Le principe de Bernoulli
+D | Quelle est la distance moyenne de la Terre au Soleil ? | Environ 150 millions de km | Environ 15 millions de km | Environ 1,5 milliard de km | Environ 300 millions de km
+D | Quelle est la couche la plus externe de l'atmosphère du Soleil ? | La couronne | La photosphère | La chromosphère | La zone convective
+D | Quelle molécule transporte l'oxygène dans le globule rouge ? | L'hémoglobine | La myoglobine | L'albumine | Le fibrinogène
+D | Quel est le nom de la force qui maintient les noyaux atomiques ? | L'interaction forte | L'interaction faible | La gravité | L'électromagnétisme
+D | Quelle est la durée de vie estimée du Soleil restante ? | Environ cinq milliards d'années | Environ cinq millions d'années | Environ cinq cents millions d'années | Environ cinquante milliards d'années
+F | Quel animal est le plus venimeux des serpents d'Europe ? | La vipère | La couleuvre | L'orvet | La coronelle
+M | Quelle est l'unité de mesure de la température dans le système international ? | Le kelvin | Le degré Celsius | Le degré Fahrenheit | Le calorie
+M | Quel organe du corps humain se régénère le mieux ? | Le foie | Le cœur | Le cerveau | Le rein
+D | Quel savant a établi la première table périodique des éléments par masse ? | Dmitri Mendeleïev | Antoine Lavoisier | John Dalton | Robert Boyle
+D | Quelle particule les réactions nucléaires du Soleil produisent-elles en abondance ? | Les neutrinos | Les protons libres | Les positons seuls | Les muons
+D | Quel est le nom de l'étoile la plus proche du Soleil ? | Proxima du Centaure | Sirius | Alpha du Centaure A | Barnard

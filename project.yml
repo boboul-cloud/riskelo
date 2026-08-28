@@ -1,0 +1,88 @@
+name: Riskelo
+options:
+  bundleIdPrefix: com.oulhen
+  deploymentTarget:
+    iOS: "17.0"
+    macOS: "14.0"
+  createIntermediateGroups: true
+  developmentLanguage: fr
+
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    # Posée ici et non dans Xcode : « xcodegen generate » réécrit le projet,
+    # et une équipe renseignée à la main disparaîtrait à la régénération.
+    DEVELOPMENT_TEAM: 38DQ8FW23J
+    CODE_SIGN_STYLE: Automatic
+
+targets:
+  Riskelo:
+    type: application
+    # Une seule cible pour les trois machines : le plateau est dessiné en
+    # coordonnées relatives, il n'a pas d'opinion sur la taille de l'écran.
+    supportedDestinations: [iOS, macOS]
+    sources:
+      - path: Sources
+      # Les questions sont des ressources et non du code : mille lignes de
+      # texte n'ont rien à faire dans un fichier Swift.
+      - path: Resources/Questions
+    info:
+      path: Resources/Info.plist
+      properties:
+        CFBundleDisplayName: Riskelo
+        # Aucun chiffrement propre : la déclaration est posée ici une fois
+        # pour toutes plutôt que répondue à la main à chaque envoi.
+        ITSAppUsesNonExemptEncryption: false
+        UIApplicationSupportsIndirectInputEvents: true
+        UILaunchScreen: {}
+        # Un plateau se regarde dans les deux sens, sur les trois machines.
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        UISupportedInterfaceOrientations~ipad:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationPortraitUpsideDown
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        # Le jeu à deux appareils passe par le réseau local. Sans ces deux
+        # entrées, le système le refuse en silence : les appareils ne se
+        # voient jamais et rien n'explique pourquoi.
+        NSLocalNetworkUsageDescription: >-
+          Riskelo s'en sert pour trouver l'autre appareil et jouer la partie à deux.
+        NSBonjourServices:
+          - _riskelo-jeu._tcp
+          - _riskelo-jeu._udp
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.oulhen.riskelo
+        PRODUCT_NAME: Riskelo
+        GENERATE_INFOPLIST_FILE: NO
+        ENABLE_PREVIEWS: YES
+        # L'icône est engendrée par « outils/icone.swift » — les onze images du
+        # catalogue ne sont pas retouchées à la main, elles se refont.
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        TARGETED_DEVICE_FAMILY: "1,2"
+
+  RiskeloTests:
+    type: bundle.unit-test
+    supportedDestinations: [iOS, macOS]
+    sources:
+      - path: Tests
+    dependencies:
+      - target: Riskelo
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.oulhen.riskelo.tests
+        GENERATE_INFOPLIST_FILE: YES
+
+schemes:
+  Riskelo:
+    build:
+      targets:
+        Riskelo: all
+        RiskeloTests: [test]
+    test:
+      targets: [RiskeloTests]

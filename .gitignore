@@ -1,0 +1,19 @@
+# macOS
+.DS_Store
+
+# Le projet Xcode est engendré par « xcodegen generate » depuis project.yml,
+# qui est la seule source de vérité. Le versionner reviendrait à suivre un
+# fichier réécrit à chaque commande — et à laisser deux descriptions du même
+# projet diverger en silence.
+Riskelo.xcodeproj/
+
+# Xcode
+build/
+DerivedData/
+*.xcuserstate
+xcuserdata/
+*.moved-aside
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM

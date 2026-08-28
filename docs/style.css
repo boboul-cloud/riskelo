@@ -1,0 +1,163 @@
+/* Riskelo — la feuille de style du site.
+   Les couleurs sont exactement celles du plateau : le site et le jeu ne
+   doivent pas avoir l'air de deux produits différents. */
+
+:root {
+  --sea:   #171f29;
+  --panel: #242b36;
+  --ink:   #edf0f2;
+  --dim:   #949ead;
+  --held:  #5cb873;
+  --lost:  #db594d;
+  --bleu:  #3d82c7;
+  --rouge: #cc4f3d;
+  --ambre: #dea833;
+  --trait: rgba(148, 158, 173, .22);
+  --rayon: 14px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--sea);
+  color: var(--ink);
+  font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--bleu); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.enveloppe { max-width: 780px; margin: 0 auto; padding: 0 22px; }
+
+/* En-tête ------------------------------------------------------------- */
+
+header.barre {
+  border-bottom: 1px solid var(--trait);
+  background: rgba(23, 31, 41, .92);
+  backdrop-filter: saturate(140%) blur(10px);
+  position: sticky; top: 0; z-index: 10;
+}
+header.barre .enveloppe {
+  display: flex; align-items: center; gap: 18px;
+  min-height: 58px; flex-wrap: wrap;
+}
+header.barre .marque {
+  font-weight: 700; font-size: 18px; color: var(--ink);
+  display: flex; align-items: center; gap: 9px;
+}
+header.barre .marque img { width: 26px; height: 26px; border-radius: 7px; }
+header.barre nav { margin-left: auto; display: flex; gap: 16px; flex-wrap: wrap; }
+header.barre nav a { color: var(--dim); font-size: 14.5px; }
+header.barre nav a:hover, header.barre nav a[aria-current] { color: var(--ink); }
+
+/* Bandeau ------------------------------------------------------------- */
+
+.bandeau { padding: 62px 0 46px; text-align: center; }
+.bandeau img.icone {
+  width: 116px; height: 116px; border-radius: 26px;
+  box-shadow: 0 18px 46px rgba(0,0,0,.5);
+}
+.bandeau h1 {
+  font-size: 44px; margin: 24px 0 10px; letter-spacing: -.5px;
+}
+.bandeau p.accroche {
+  font-size: 20px; color: var(--dim); margin: 0 auto; max-width: 30em;
+}
+.pastilles {
+  display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
+  margin-top: 26px;
+}
+.pastille {
+  border: 1px solid var(--trait); border-radius: 999px;
+  padding: 6px 14px; font-size: 13.5px; color: var(--dim);
+}
+
+/* Contenu ------------------------------------------------------------- */
+
+main { padding-bottom: 70px; }
+section { padding: 34px 0; border-top: 1px solid var(--trait); }
+section:first-of-type { border-top: none; }
+
+h2 { font-size: 26px; margin: 0 0 14px; letter-spacing: -.3px; }
+h3 { font-size: 18px; margin: 30px 0 8px; }
+h4 { font-size: 15px; margin: 22px 0 6px; color: var(--dim);
+     text-transform: uppercase; letter-spacing: .06em; }
+p { margin: 0 0 14px; }
+ul, ol { margin: 0 0 14px; padding-left: 22px; }
+li { margin-bottom: 7px; }
+strong { color: #fff; }
+small { color: var(--dim); }
+
+.grille {
+  display: grid; gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(228px, 1fr));
+}
+.carte {
+  background: var(--panel); border: 1px solid var(--trait);
+  border-radius: var(--rayon); padding: 17px;
+}
+.carte h3 { margin: 0 0 6px; font-size: 16.5px; }
+.carte p { margin: 0; color: var(--dim); font-size: 14.5px; }
+
+table {
+  width: 100%; border-collapse: collapse; margin: 0 0 16px;
+  background: var(--panel); border-radius: var(--rayon); overflow: hidden;
+  font-size: 15px;
+}
+th, td { text-align: left; padding: 10px 13px; border-top: 1px solid var(--trait); }
+th { color: var(--dim); font-weight: 600; font-size: 13.5px;
+     text-transform: uppercase; letter-spacing: .04em; border-top: none; }
+
+pre {
+  background: rgba(0,0,0,.3); border-radius: var(--rayon);
+  padding: 14px 16px; overflow-x: auto; font-size: 13.5px; line-height: 1.6;
+  color: var(--ink);
+}
+
+.note {
+  background: rgba(92, 184, 115, .12); border: 1px solid rgba(92, 184, 115, .4);
+  border-radius: var(--rayon); padding: 14px 16px; margin: 0 0 16px;
+}
+.note p:last-child { margin-bottom: 0; }
+
+.attention {
+  background: rgba(219, 89, 77, .12); border-color: rgba(219, 89, 77, .45);
+}
+
+.boutons { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
+           margin-top: 30px; }
+.bouton {
+  display: inline-block; padding: 12px 22px; border-radius: 999px;
+  font-weight: 600; font-size: 15px;
+}
+.bouton.plein { background: var(--bleu); color: #fff; }
+.bouton.creux { border: 1px solid var(--trait); color: var(--ink); }
+.bouton:hover { text-decoration: none; opacity: .9; }
+
+/* Sommaire du mode d'emploi ------------------------------------------- */
+
+.sommaire { background: var(--panel); border: 1px solid var(--trait);
+            border-radius: var(--rayon); padding: 16px 20px; }
+.sommaire ol { margin: 0; padding-left: 20px; column-count: 2; column-gap: 26px; }
+.sommaire li { margin-bottom: 5px; }
+@media (max-width: 560px) { .sommaire ol { column-count: 1; } }
+
+/* Pied ---------------------------------------------------------------- */
+
+footer {
+  border-top: 1px solid var(--trait); padding: 26px 0 40px;
+  color: var(--dim); font-size: 14px;
+}
+footer .enveloppe { display: flex; gap: 16px; flex-wrap: wrap;
+                    align-items: center; justify-content: space-between; }
+footer nav { display: flex; gap: 16px; flex-wrap: wrap; }
+
+@media (max-width: 560px) {
+  .bandeau h1 { font-size: 34px; }
+  .bandeau p.accroche { font-size: 17px; }
+}

@@ -394,11 +394,15 @@ Le réglage ne s'applique qu'au Mac — `project.yml` le pose sous
 les trois clés, la version iPhone n'en reçoit aucune, et les deux se
 construisent.
 
-### Ce qui reste : dix minutes, votre Mac et votre iPhone
+### Essayé, et la liaison tient
 
-C'est le seul point de tout ce dossier qu'aucune commande ne peut vérifier à
-votre place. Il s'agit de s'assurer que le jeu à plusieurs appareils marche
-**toujours** maintenant que le Mac est enfermé.
+**28 août 2026 — vérifié sur un vrai Mac et un vrai iPhone : la partie à deux
+appareils fonctionne avec le bac à sable actif.** C'était le seul point du
+dossier qu'aucune commande ne pouvait établir, et il est levé : la version Mac
+peut partir en même temps que celle de l'iPhone.
+
+La marche à suivre reste écrite ici — elle servira à chaque version, parce
+qu'une autorisation retirée par inadvertance ne se voit qu'à l'essai :
 
 1. Wi-Fi allumé des deux côtés, les deux machines dans la même pièce.
 2. Sur le Mac : ouvrir le projet et lancer le jeu (`⌘R`).
@@ -412,17 +416,11 @@ votre place. Il s'agit de s'assurer que le jeu à plusieurs appareils marche
    dire que le bac à sable est en cause.
 
 **Ce qu'on cherche à savoir :** le Mac voit-il encore l'iPhone, et l'iPhone
-voit-il encore le Mac ? Si oui, la version Mac est prête à partir. Si le Mac
-est devenu aveugle alors qu'il voyait avant — et seulement dans ce cas — c'est
-le bac à sable, et le réglage se retire d'une commande :
+voit-il encore le Mac ? Au 28 août 2026, oui.
 
-```bash
-git revert HEAD   # annule le commit qui pose le bac à sable
-xcodegen generate
-```
-
-**Rien n'oblige à soumettre les deux le même jour.** L'iPhone peut partir seul,
-et le Mac s'ajouter plus tard sous le même enregistrement.
+**Rien n'oblige pour autant à soumettre les deux le même jour.** L'iPhone peut
+partir seul, et le Mac s'ajouter plus tard sous le même enregistrement — c'est
+une question de calendrier, plus d'un obstacle technique.
 
 ---
 
@@ -459,5 +457,5 @@ relecteur : un fil qui traîne repart en bas de la file.
 | Le prix | Gratuit fait des joueurs, payant fait un revenu. Le jeu n'a ni publicité ni achat intégré : c'est l'un ou l'autre. |
 | Le numéro de téléphone de la revue | Apple l'exige ; il n'est jamais rendu public. |
 | Publication automatique ou manuelle | Manuelle si vous voulez choisir le jour. |
-| macOS maintenant ou plus tard | Le bac à sable est posé ; il reste dix minutes d'essai à deux machines, section 9. |
+| macOS maintenant ou plus tard | Plus aucun obstacle : le bac à sable est posé et la liaison Mac ↔ iPhone est vérifiée avec. Pure question de calendrier. |
 | Le sous-titre | Trois propositions en section 4 ; c'est le seul texte qui se lit avant la description. |

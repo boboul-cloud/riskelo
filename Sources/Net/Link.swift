@@ -22,7 +22,15 @@ final class Link: NSObject {
 
     /// Le nom du service. Quinze caractères au plus, minuscules et tirets :
     /// c'est une contrainte de Bonjour, pas un goût.
-    static let service = "riskelo-jeu"
+    ///
+    /// `nonisolated`, comme tout le vocabulaire qui suit : la classe est
+    /// posée sur l'acteur principal — c'est ce que veut son état — mais une
+    /// chaîne de caractères figée à la compilation n'est pas de l'état, et il
+    /// n'y a rien à y protéger. Or elle se lit précisément là où l'acteur
+    /// n'est pas : les rappels de MultipeerConnectivity arrivent sur son
+    /// propre fil, et les tests s'exécutent hors acteur. Sans ce mot, le
+    /// compilateur avertit à chaque lecture — et Swift 6 en fera une erreur.
+    nonisolated static let service = "riskelo-jeu"
 
     /// Ce que chaque appareil dit de lui dans son annonce.
     ///
@@ -36,8 +44,8 @@ final class Link: NSObject {
     /// matériel : un iPad hébergeait, l'iPhone le voyait parfaitement et ne
     /// parvenait jamais à résoudre son adresse ; les rôles inversés, la partie
     /// démarrait en onze secondes.
-    static let cleRole = "r", cleCible = "c"
-    static let hote = "h", invite = "i"
+    nonisolated static let cleRole = "r", cleCible = "c"
+    nonisolated static let hote = "h", invite = "i"
 
     enum State: Equatable {
         case aLArret

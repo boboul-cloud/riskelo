@@ -1,7 +1,15 @@
 # Soumission à l'App Store — Riskelo 1.0
 
-Tout ce qu'App Store Connect demande, préparé et vérifiable. Les textes sont
-prêts à coller ; la liste ci-dessous se coche de haut en bas.
+Tout ce qu'App Store Connect demande, préparé et vérifiable.
+
+**Un seul fichier suffit le jour de la soumission :**
+[FICHE-DE-SOUMISSION.md](FICHE-DE-SOUMISSION.md) — les identifiants, les
+adresses, tous les textes à coller, les réponses aux questionnaires, les
+captures, les commandes d'envoi et l'ordre des opérations, dans l'ordre où
+App Store Connect les demande.
+
+Les quatre fichiers ci-dessous en sont le détail, pour qui veut le pourquoi
+plutôt que le quoi.
 
 | Fichier | Ce qu'il contient |
 |---|---|
@@ -80,6 +88,13 @@ L'application est une **cible unique pour iOS et macOS**. Dans App Store
 Connect, cela fait deux plateformes sous le même enregistrement : ajouter
 **macOS** à l'app existante, avec ses propres captures d'écran et sa propre
 build. Les métadonnées textuelles peuvent être identiques.
+
+- [ ] **Avant la build macOS** : poser les entitlements du bac à sable, que le
+      Mac App Store exige et que le projet n'a pas encore — les trois clés et
+      le pourquoi sont à la section 9 de
+      [FICHE-DE-SOUMISSION.md](FICHE-DE-SOUMISSION.md). Sans elles, le dépôt
+      est refusé ; avec elles, il faut réessayer le jeu à plusieurs appareils
+      depuis le Mac.
 
 ### Après l'envoi
 

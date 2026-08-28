@@ -191,6 +191,9 @@ enum Bloc {
     case code(String)
     /// Ce qu'il ne faut pas manquer.
     case note(String)
+    /// Des liens qui sortent de l'application : un titre, ce qu'on y trouve,
+    /// et l'adresse. Le seul endroit du manuel qui mène dehors.
+    case liens([(String, String, String)])
 }
 
 private struct BlocView: View {
@@ -262,6 +265,38 @@ private struct BlocView: View {
                 .padding(12)
                 .background(Color.black.opacity(0.25), in: RoundedRectangle(cornerRadius: 12))
 
+        case let .liens(items):
+            VStack(spacing: 0) {
+                ForEach(Array(items.enumerated()), id: \.offset) { i, item in
+                    if i > 0 { Divider().overlay(Palette.dim.opacity(0.25)) }
+                    // Une adresse mal formée ne donne pas une ligne morte :
+                    // elle ne donne pas de ligne du tout.
+                    // `SwiftUI.Link` en toutes lettres : dans ce module,
+                    // `Link` tout court désigne le fil entre deux appareils.
+                    if let url = URL(string: item.2) {
+                        SwiftUI.Link(destination: url) {
+                            HStack(spacing: 10) {
+                                VStack(alignment: .leading, spacing: 2) {
+                                    Text(item.0).font(.subheadline.weight(.semibold))
+                                        .foregroundStyle(Palette.ink)
+                                    Text(item.1).font(.caption).foregroundStyle(Palette.dim)
+                                        .fixedSize(horizontal: false, vertical: true)
+                                }
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                Image(systemName: item.2.hasPrefix("mailto:")
+                                      ? "envelope" : "arrow.up.right.square")
+                                    .font(.footnote).foregroundStyle(teinte)
+                            }
+                            .padding(.horizontal, 13).padding(.vertical, 12)
+                            // Toute la ligne répond, pas seulement le texte.
+                            .contentShape(Rectangle())
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+            }
+            .background(Palette.panel, in: RoundedRectangle(cornerRadius: 14))
+
         case let .note(texte):
             HStack(alignment: .top, spacing: 9) {
                 Image(systemName: "lightbulb.fill").font(.caption)
@@ -313,6 +348,14 @@ enum Manuel {
     static let version = "version 1.0"
     static let site = "boboul-cloud.github.io/riskelo"
     static let contact = "bob.oulhen@gmail.com"
+
+    /// Les quatre adresses de l'application, écrites ici et nulle part
+    /// ailleurs : l'écran d'accueil y puise les siennes. Un site qui
+    /// déménage se corrige donc en un seul endroit.
+    static let siteURL = "https://boboul-cloud.github.io/riskelo/"
+    static let confidentialiteURL = "https://boboul-cloud.github.io/riskelo/confidentialite.html"
+    static let conditionsURL = "https://boboul-cloud.github.io/riskelo/conditions.html"
+    static let contactURL = "mailto:bob.oulhen@gmail.com"
 
     static func apres(_ c: Chapitre) -> Chapitre? {
         guard let i = chapitres.firstIndex(of: c), i + 1 < chapitres.count else { return nil }
@@ -878,10 +921,24 @@ enum Manuel {
                 + "direct, et rien n'en est conservé.",
                 "Aucune connexion à Internet n'est nécessaire pour jouer.",
             ]),
+            .h("Les textes complets"),
+            .liens([
+                ("Politique de confidentialité",
+                 "Ce qui est enregistré, où, et ce qui ne quitte jamais l'appareil.",
+                 confidentialiteURL),
+                ("Conditions d'utilisation",
+                 "Licence, propriété, garanties, droit applicable.",
+                 conditionsURL),
+                ("Le site de Riskelo",
+                 site,
+                 siteURL),
+            ]),
             .h("Contact"),
-            .p("Une question, une coquille, une panne : \(contact)"),
-            .p("La politique de confidentialité et les conditions d'utilisation "
-               + "complètes sont sur \(site)."),
+            .p("Une question, une coquille dans une question, une panne : écrivez, "
+               + "on vous répondra."),
+            .liens([
+                ("Écrire à l'auteur", contact, contactURL),
+            ]),
             .h("Mentions"),
             .p("Riskelo est un jeu indépendant, inspiré des jeux de conquête "
                + "traditionnels. Il n'est affilié à aucun éditeur de jeu de société ni "

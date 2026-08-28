@@ -236,7 +236,14 @@ struct SetupView: View {
                                 .frame(maxWidth: .infinity).padding(.vertical, 12)
                         }
                         .buttonStyle(.bordered).tint(Palette.dim)
-                        .padding(.bottom, 30)
+
+                        // Les textes légaux sont aussi dans le mode d'emploi,
+                        // mais personne ne cherche ses conditions d'utilisation
+                        // au chapitre quatorze d'un manuel : elles se veulent
+                        // là où l'on se demande à quoi l'on s'engage, avant de
+                        // commencer. Trois liens, en petit, sous tout le reste.
+                        piedDeMentions
+                            .padding(.bottom, 30)
                     }
                     .frame(maxWidth: 460)
                     .padding(.horizontal, 22)
@@ -245,6 +252,35 @@ struct SetupView: View {
             }
         }
         .preferredColorScheme(.dark)
+    }
+
+    /// Confidentialité, conditions, site : les trois adresses publiques, en
+    /// bas de l'accueil. Elles sortent de l'application — le système ouvre le
+    /// navigateur — et sont donc écrites en gris, comme tout ce qui n'est pas
+    /// un coup à jouer.
+    private var piedDeMentions: some View {
+        HStack(spacing: 9) {
+            lien("Confidentialité", Manuel.confidentialiteURL)
+            separateur
+            lien("Conditions", Manuel.conditionsURL)
+            separateur
+            lien("Site", Manuel.siteURL)
+        }
+        .font(.caption)
+        .frame(maxWidth: .infinity)
+    }
+
+    private var separateur: some View {
+        Text("·").font(.caption).foregroundStyle(Palette.dim.opacity(0.45))
+    }
+
+    /// `SwiftUI.Link` en toutes lettres : dans ce module, `Link` tout court
+    /// désigne le fil entre deux appareils, et c'est lui qui gagne.
+    @ViewBuilder private func lien(_ titre: String, _ adresse: String) -> some View {
+        if let url = URL(string: adresse) {
+            SwiftUI.Link(titre, destination: url)
+                .foregroundStyle(Palette.dim)
+        }
     }
 
     private func reglage<C: View>(_ titre: String, @ViewBuilder _ contenu: () -> C) -> some View {

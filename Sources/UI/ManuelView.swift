@@ -611,14 +611,16 @@ enum Manuel {
                 "Deux doigts pour agrandir, un doigt qui glisse pour déplacer la carte. "
                 + "Le bouton en bas à droite la recentre.",
                 "Les territoires jouables sont les seuls qui ne soient pas dans l'ombre.",
-                "Un liseré marque les frontières de continent ; un trait fin, les liaisons "
-                + "maritimes. Le bonus d'un continent s'affiche dès que vous le tenez "
-                + "entièrement.",
+                "Un liseré vif marque les frontières de continent ; un trait fin, les "
+                + "liaisons maritimes.",
             ]),
             .h("La barre des camps"),
             .p("Sous la carte : chaque joueur, ses territoires, ses hommes, et un "
                + "drapeau à sa couleur sur celui qui a la main. Un joueur éliminé est "
                + "barré."),
+            .p("En dessous, une bande nomme les continents avec leur bonus. Celui qui "
+               + "est tenu entièrement prend la couleur de son maître : c'est ainsi "
+               + "qu'on voit d'un coup d'œil qui touche au bonus."),
             .h("La barre du bas"),
             .termes([
                 ("La consigne", "Ce qu'on attend de vous. Elle a la forme d'un bouton "

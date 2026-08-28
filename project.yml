@@ -65,6 +65,12 @@ targets:
         # catalogue ne sont pas retouchées à la main, elles se refont.
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         TARGETED_DEVICE_FAMILY: "1,2"
+        # Le bac à sable, pour le Mac seulement — iOS l'a déjà d'office, et
+        # ces clés-là n'y ont pas cours. Sans ce fichier, le Mac App Store
+        # refuse le dépôt ; avec lui mais sans ses deux clés de réseau, la
+        # liaison entre appareils se tairait. Voir
+        # soumission/FICHE-DE-SOUMISSION.md, section 9.
+        CODE_SIGN_ENTITLEMENTS[sdk=macosx*]: Resources/Riskelo-mac.entitlements
 
   RiskeloTests:
     type: bundle.unit-test

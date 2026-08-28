@@ -89,12 +89,12 @@ Connect, cela fait deux plateformes sous le même enregistrement : ajouter
 **macOS** à l'app existante, avec ses propres captures d'écran et sa propre
 build. Les métadonnées textuelles peuvent être identiques.
 
-- [ ] **Avant la build macOS** : poser les entitlements du bac à sable, que le
-      Mac App Store exige et que le projet n'a pas encore — les trois clés et
-      le pourquoi sont à la section 9 de
-      [FICHE-DE-SOUMISSION.md](FICHE-DE-SOUMISSION.md). Sans elles, le dépôt
-      est refusé ; avec elles, il faut réessayer le jeu à plusieurs appareils
-      depuis le Mac.
+- [x] Le **bac à sable** exigé par le Mac App Store est posé —
+      `Resources/Riskelo-mac.entitlements`, appliqué à macOS seulement.
+- [ ] **Avant la build macOS** : rejouer une partie Mac ↔ iPhone pour vérifier
+      que la liaison tient une fois le bac à sable actif. C'est le seul point
+      du dossier qu'aucune commande ne vérifie — marche à suivre à la
+      section 9 de [FICHE-DE-SOUMISSION.md](FICHE-DE-SOUMISSION.md).
 
 ### Après l'envoi
 

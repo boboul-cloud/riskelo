@@ -5,6 +5,35 @@ bloc encadré se colle tel quel. Ce qui reste à décider est marqué **à déci
 
 ---
 
+## En clair : ce qu'il vous reste à faire
+
+Ce document est une **liste de cases à recopier** dans le site d'Apple. Il n'y
+a plus rien à programmer : le jeu est fini, le site est en ligne, les textes
+sont écrits. Dans l'ordre :
+
+1. **S'inscrire chez Apple** — 99 $ par an, sur `developer.apple.com`. Rien ne
+   part sans cela, et la signature du contrat prend parfois un jour.
+2. **Créer la fiche du jeu** sur `appstoreconnect.apple.com`. C'est le moment
+   où le nom « Riskelo » est réservé à vous. Les valeurs à saisir sont en
+   section 1, les adresses du site en section 2.
+3. **Photographier cinq écrans du jeu** — la liste des cinq et la commande qui
+   les prend à la bonne taille sont en section 7.
+4. **Envoyer l'application** depuis votre Mac — deux commandes et un bouton,
+   en section 8.
+5. **Recopier les textes** de la section 4 dans les cases du site, répondre
+   aux questionnaires avec la section 5, coller les notes de la section 6.
+6. **Cliquer « Soumettre »**, et attendre un à deux jours.
+
+Le reste du document est le détail de ces six étapes. Si une phrase vous
+arrête, elle appartient sans doute à une étape que vous n'avez pas encore
+atteinte — laissez-la.
+
+Deux choses seulement demandent une décision de votre part, et elles sont
+rassemblées en section 11 : **le prix**, et **si le Mac part en même temps que
+l'iPhone**.
+
+---
+
 ## 1. Les identifiants
 
 | Champ | Valeur |
@@ -337,50 +366,63 @@ le projet.
 
 ---
 
-## 9. Le Mac App Store — le point à régler avant
+## 9. Le Mac App Store — c'est posé, il reste à l'essayer
 
-L'application est une cible unique pour iOS et macOS ; dans App Store Connect,
-cela fait **deux plateformes sous le même enregistrement**, chacune avec ses
-captures et sa build. Les textes peuvent être identiques.
+L'application est une cible unique pour iPhone, iPad et Mac ; dans App Store
+Connect, cela fait **deux plateformes sous le même enregistrement**, chacune
+avec ses captures et son envoi. Les textes peuvent être identiques.
 
-**Mais le Mac App Store impose le bac à sable, et le projet n'a aucun fichier
-d'entitlements.** En l'état, la build macOS sera refusée au dépôt. Il manque
-trois clés — le bac à sable, et les deux qui rendent `MultipeerConnectivity`
-possible dedans :
+### Ce qui a été fait
 
-```yaml
-# project.yml, dans targets ▸ Riskelo ▸ settings ▸ base
-        # Le bac à sable est exigé par le Mac App Store, et il coupe le réseau
-        # par défaut : sans « client » ni « server », les appareils ne se
-        # voient plus. Posé pour macOS seulement — iOS est déjà bac à sable et
-        # n'a que faire de ces clés.
-        CODE_SIGN_ENTITLEMENTS[sdk=macosx*]: Resources/Riskelo-mac.entitlements
+Le Mac App Store impose le **bac à sable** : l'application y est enfermée dans
+son propre dossier et ne voit rien du reste du Mac. C'est obligatoire, sans
+exception — et le projet n'avait pas ce réglage. Il l'a maintenant, dans
+`Resources/Riskelo-mac.entitlements`, avec trois clés :
+
+| Clé | Ce qu'elle dit |
+|---|---|
+| `com.apple.security.app-sandbox` | Enferme l'application. Exigé par le Mac App Store. |
+| `com.apple.security.network.client` | La laisse sortir chercher l'autre appareil. |
+| `com.apple.security.network.server` | La laisse se faire trouver par lui. |
+
+Les deux dernières comptent autant que la première : **le bac à sable coupe le
+réseau avec le reste**, et sans elles le Mac et l'iPhone cesseraient de se voir
+sans que rien à l'écran ne dise pourquoi.
+
+Le réglage ne s'applique qu'au Mac — `project.yml` le pose sous
+`CODE_SIGN_ENTITLEMENTS[sdk=macosx*]`. Vérifié : la version Mac embarque bien
+les trois clés, la version iPhone n'en reçoit aucune, et les deux se
+construisent.
+
+### Ce qui reste : dix minutes, votre Mac et votre iPhone
+
+C'est le seul point de tout ce dossier qu'aucune commande ne peut vérifier à
+votre place. Il s'agit de s'assurer que le jeu à plusieurs appareils marche
+**toujours** maintenant que le Mac est enfermé.
+
+1. Wi-Fi allumé des deux côtés, les deux machines dans la même pièce.
+2. Sur le Mac : ouvrir le projet et lancer le jeu (`⌘R`).
+3. Sur l'iPhone : le brancher, le choisir comme destination, lancer (`⌘R`).
+4. Sur l'une des deux : **Jouer à plusieurs appareils** ▸ *Ouvrir la table*.
+5. Sur l'autre : **Jouer à plusieurs appareils** ▸ *Rejoindre une table*, puis
+   toucher le nom qui apparaît.
+6. Si le Mac demande l'autorisation d'utiliser le réseau local, **accepter**.
+7. Si rien ne vient au bout d'une minute : **inverser les rôles** — que celui
+   qui cherchait ouvre la table. C'est le remède habituel, et il ne veut pas
+   dire que le bac à sable est en cause.
+
+**Ce qu'on cherche à savoir :** le Mac voit-il encore l'iPhone, et l'iPhone
+voit-il encore le Mac ? Si oui, la version Mac est prête à partir. Si le Mac
+est devenu aveugle alors qu'il voyait avant — et seulement dans ce cas — c'est
+le bac à sable, et le réglage se retire d'une commande :
+
+```bash
+git revert HEAD   # annule le commit qui pose le bac à sable
+xcodegen generate
 ```
 
-```xml
-<!-- Resources/Riskelo-mac.entitlements -->
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-    <key>com.apple.security.app-sandbox</key>
-    <true/>
-    <key>com.apple.security.network.client</key>
-    <true/>
-    <key>com.apple.security.network.server</key>
-    <true/>
-</dict>
-</plist>
-```
-
-À vérifier ensuite, sur un Mac, avant de déposer : que le jeu à plusieurs
-appareils fonctionne toujours depuis le Mac une fois le bac à sable actif.
-C'est exactement ce que ces deux clés protègent, et c'est le genre de chose
-qui ne se voit qu'à l'essai.
-
-**Si le Mac attend**, rien n'oblige à soumettre les deux le même jour : la
-plateforme iOS peut partir seule, et macOS s'ajouter plus tard sous le même
-enregistrement.
+**Rien n'oblige à soumettre les deux le même jour.** L'iPhone peut partir seul,
+et le Mac s'ajouter plus tard sous le même enregistrement.
 
 ---
 
@@ -417,5 +459,5 @@ relecteur : un fil qui traîne repart en bas de la file.
 | Le prix | Gratuit fait des joueurs, payant fait un revenu. Le jeu n'a ni publicité ni achat intégré : c'est l'un ou l'autre. |
 | Le numéro de téléphone de la revue | Apple l'exige ; il n'est jamais rendu public. |
 | Publication automatique ou manuelle | Manuelle si vous voulez choisir le jour. |
-| macOS maintenant ou plus tard | Voir la section 9 : il reste le bac à sable à poser et à essayer. |
+| macOS maintenant ou plus tard | Le bac à sable est posé ; il reste dix minutes d'essai à deux machines, section 9. |
 | Le sous-titre | Trois propositions en section 4 ; c'est le seul texte qui se lit avant la description. |

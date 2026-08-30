@@ -83,6 +83,18 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.oulhen.riskelo.tests
         GENERATE_INFOPLIST_FILE: YES
+      # Une cible pour deux systèmes, mais un paquet d'application n'a pas la
+      # même forme sur les deux : l'exécutable est à la racine sur iOS, dans
+      # « Contents/MacOS » sur Mac. Le chemin engendré est celui d'iOS, et les
+      # tests ne se lançaient donc jamais sur Mac — la seule machine où on
+      # puisse les lancer sans simulateur.
+      configs:
+        Debug:
+          TEST_HOST[sdk=macosx*]: "$(BUILT_PRODUCTS_DIR)/Riskelo.app/Contents/MacOS/Riskelo"
+          BUNDLE_LOADER[sdk=macosx*]: "$(TEST_HOST)"
+        Release:
+          TEST_HOST[sdk=macosx*]: "$(BUILT_PRODUCTS_DIR)/Riskelo.app/Contents/MacOS/Riskelo"
+          BUNDLE_LOADER[sdk=macosx*]: "$(TEST_HOST)"
 
 schemes:
   Riskelo:

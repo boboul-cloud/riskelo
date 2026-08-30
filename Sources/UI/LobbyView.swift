@@ -108,7 +108,7 @@ struct LobbyView: View {
                     .font(.subheadline).foregroundStyle(Palette.dim)
                 if rienEnVue {
                     Text("Aucune table en vue.")
-                        .font(.headline).foregroundStyle(Palette.lost)
+                        .font(.headline).foregroundStyle(Palette.lostVif)
                     VStack(alignment: .leading, spacing: 6) {
                         cause("Le **Wi-Fi doit rester actif**. Coupez-le depuis le "
                               + "centre de contrôle si besoin — jamais depuis les "
@@ -154,9 +154,9 @@ struct LobbyView: View {
             // reste sur la liste des appareils à se demander si l'appui a été
             // pris. Il faut donc nommer la cause et dire où la corriger.
             Image(systemName: "wifi.exclamationmark")
-                .font(.system(size: 34)).foregroundStyle(Palette.lost)
+                .font(.system(size: 34)).foregroundStyle(Palette.lostVif)
             Text("La liaison n'a pas pu s'établir")
-                .font(.headline).foregroundStyle(Palette.lost)
+                .font(.headline).foregroundStyle(Palette.lostVif)
             Text(nom.isEmpty
                  ? "Le système a refusé d'ouvrir le réseau local."
                  : "\(nom) n'a pas répondu.")
@@ -188,9 +188,9 @@ struct LobbyView: View {
 
         case .perdu(let nom):
             Image(systemName: "wifi.slash")
-                .font(.system(size: 34)).foregroundStyle(Palette.lost)
+                .font(.system(size: 34)).foregroundStyle(Palette.lostVif)
             Text("Liaison perdue avec \(nom).")
-                .font(.subheadline).foregroundStyle(Palette.lost)
+                .font(.subheadline).foregroundStyle(Palette.lostVif)
             bouton("Réessayer", "arrow.clockwise", Palette.camp(0)) { link.arreter() }
         }
     }
@@ -205,8 +205,8 @@ struct LobbyView: View {
     @ViewBuilder private func enAttente(de nom: String) -> some View {
         if desaccord {
             Image(systemName: "exclamationmark.triangle.fill")
-                .font(.system(size: 34)).foregroundStyle(Palette.lost)
-            Text("Versions différentes").font(.headline).foregroundStyle(Palette.lost)
+                .font(.system(size: 34)).foregroundStyle(Palette.lostVif)
+            Text("Versions différentes").font(.headline).foregroundStyle(Palette.lostVif)
             Text("\(nom) a envoyé une partie que cet appareil ne sait pas lire. "
                  + "Installez la même version de Riskelo sur les deux, puis "
                  + "recommencez.")
@@ -217,7 +217,7 @@ struct LobbyView: View {
             Text("Relié à \(nom)").font(.headline).foregroundStyle(Palette.held)
             if silence {
                 Text("Rien n'est venu de \(nom).")
-                    .font(.subheadline).foregroundStyle(Palette.lost)
+                    .font(.subheadline).foregroundStyle(Palette.lostVif)
                 Text("La liaison est bonne : c'est le lancement qui n'arrive pas. "
                      + "Vérifiez que \(nom) a bien touché « Commencer », et que les "
                      + "deux appareils ont la même version de Riskelo.")

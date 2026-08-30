@@ -30,6 +30,31 @@ enum Palette {
         camps[((player % camps.count) + camps.count) % camps.count]
     }
 
+    /// Les mêmes camps, mais assez clairs pour se lire en petit.
+    ///
+    /// Les couleurs ci-dessus sont faites pour **remplir** un hexagone :
+    /// sombres, afin que le chiffre blanc posé dessus se détache. Réduites à
+    /// un filet, à un point de huit points ou à une coche de neuf, sur le fond
+    /// mat du panneau, la même valeur disparaît — le rouge brique à 50 %
+    /// d'opacité donne 1,7 de contraste sur 21, autant dire rien. Le bleu et
+    /// le violet ne valent guère mieux.
+    ///
+    /// D'où ce second jeu, plus clair d'un cran et demi : on reconnaît le
+    /// camp, mais on le voit. Il est réservé à ce qui est mince ou petit — un
+    /// trait, une pastille, une coche. Une surface pleine garde la couleur
+    /// sombre, sans quoi le texte blanc qu'elle porte s'y perdrait à son tour.
+    static let campsVifs: [Color] = [
+        Color(red: 0.45, green: 0.70, blue: 0.98),   // bleu ardoise, éclairci
+        Color(red: 0.98, green: 0.48, blue: 0.41),   // rouge brique, éclairci
+        Color(red: 0.54, green: 0.82, blue: 0.54),   // vert olive, éclairci
+        Color(red: 1.00, green: 0.79, blue: 0.34),   // ambre, éclairci
+        Color(red: 0.74, green: 0.60, blue: 0.94),   // violet, éclairci
+    ]
+
+    static func campVif(_ player: PlayerID) -> Color {
+        campsVifs[((player % campsVifs.count) + campsVifs.count) % campsVifs.count]
+    }
+
     /// Les continents. Prises au rang du continent et non à la lettre de son
     /// plan — un plateau peut en avoir six ou huit, et ils doivent tous se
     /// distinguer.
@@ -76,6 +101,9 @@ enum Palette {
     static let panel = Color(red: 0.14, green: 0.17, blue: 0.21)
     static let held = Color(red: 0.36, green: 0.72, blue: 0.45)
     static let lost = Color(red: 0.86, green: 0.35, blue: 0.30)
+    /// Le rouge de l'alerte, pour les mêmes usages menus que `campsVifs` :
+    /// un filet ou un signe sur le panneau, jamais une surface pleine.
+    static let lostVif = Color(red: 0.99, green: 0.53, blue: 0.47)
 }
 
 /// Une traversée, droite ou en arc.

@@ -89,6 +89,12 @@ struct BoardView: View {
             .onChange(of: session.stage) { _, _ in
                 cadrerSurLAssaut(dans: geo.size, side: side, aspect: layout.aspect)
             }
+            // Et dès qu'on désigne une cible : le panneau qui monte alors
+            // cache justement le bas du plateau, où les deux places se
+            // trouvaient peut-être.
+            .onChange(of: session.target) { _, _ in
+                cadrerSurLAssaut(dans: geo.size, side: side, aspect: layout.aspect)
+            }
             .overlay(alignment: .bottomTrailing) {
                 if deplace {
                     Button {
@@ -108,27 +114,57 @@ struct BoardView: View {
         }
     }
 
-    /// Amène le milieu des deux places au centre de l'écran.
+    /// Amène le milieu des deux places au centre de ce qui reste visible.
     ///
-    /// Sans effet si tout le plateau tient déjà : rien ne serait plus agaçant
-    /// qu'une carte entièrement visible qui se met à glisser toute seule.
+    /// Sans effet si elles s'y trouvent déjà : rien ne serait plus agaçant
+    /// qu'une carte qui se met à glisser toute seule sans qu'on y gagne rien.
     private func cadrerSurLAssaut(dans taille: CGSize, side: CGFloat, aspect: Double) {
-        guard let a = session.assault,
-              let depart = session.game.board.layout.centers[a.from],
-              let arrivee = session.game.board.layout.centers[a.to] else { return }
-        let large = side * echelle, haut = side * CGFloat(aspect) * echelle
-        guard large > taille.width + 1 || haut > taille.height + 1 else { return }
+        guard let (de, vers) = placesEnJeu,
+              let depart = session.game.board.layout.centers[de],
+              let arrivee = session.game.board.layout.centers[vers] else { return }
+        // Rien à faire si les deux places tiennent déjà dans ce qui reste
+        // visible : une carte qui glisse sans raison gêne plus que le
+        // recadrage ne rend service. Un plateau entier à l'écran, et rien
+        // par-dessus, tombe de lui-même dans ce cas — c'est l'ancienne règle,
+        // mais dite en termes de ce qu'on voit et non de ce qui existe.
+        let rayon = CGFloat(session.game.board.layout.cellRadius) * side * echelle
+        if enVue(depart, dans: taille, side: side, aspect: aspect, marge: rayon),
+           enVue(arrivee, dans: taille, side: side, aspect: aspect, marge: rayon) { return }
 
         let milieu = CGPoint(x: (depart.x + arrivee.x) / 2 * side,
                              y: (depart.y + arrivee.y) / 2 * side)
-        // La feuille du duel mange le bas : le centre de ce qu'on voit remonte
-        // d'autant, et le combat doit s'y poser.
+        // La feuille du duel — ou le panneau de préparation — mange le bas :
+        // le centre de ce qu'on voit remonte d'autant, et les deux places
+        // doivent s'y poser.
         let remonte = taille.height * CGFloat(session.partCouverte) / 2
         withAnimation(.easeInOut(duration: 0.45)) {
             decalage = CGSize(width: -echelle * (milieu.x - side / 2),
                               height: -echelle * (milieu.y - side * CGFloat(aspect) / 2) - remonte)
             borner(dans: taille, side: side, aspect: aspect)
         }
+    }
+
+    /// Les deux places que la vue doit garder à l'œil : celles de l'assaut en
+    /// cours, ou, tant qu'il n'est pas déclaré, celles qu'on est en train de
+    /// choisir. Un départ sans cible ne compte pas : la carte n'a pas à
+    /// glisser au premier appui, seulement quand un panneau vient la couvrir.
+    private var placesEnJeu: (TerritoryID, TerritoryID)? {
+        if let a = session.assault { return (a.from, a.to) }
+        if let base = session.selected, let cible = session.target { return (base, cible) }
+        return nil
+    }
+
+    /// Une place est-elle là où on peut la voir : dans l'écran, et au-dessus
+    /// du panneau qui en mange le bas ?
+    private func enVue(_ p: Point, dans taille: CGSize, side: CGFloat, aspect: Double,
+                       marge: CGFloat) -> Bool {
+        let x = taille.width / 2 + decalage.width
+            + echelle * (CGFloat(p.x) * side - side / 2)
+        let y = taille.height / 2 + decalage.height
+            + echelle * (CGFloat(p.y) * side - side * CGFloat(aspect) / 2)
+        let bas = taille.height * (1 - CGFloat(session.partCouverte))
+        return x > marge && x < taille.width - marge
+            && y > marge && y < bas - marge
     }
 
     /// Empêche le plateau de partir hors de l'écran : on garde toujours de

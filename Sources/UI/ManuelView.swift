@@ -379,7 +379,7 @@ enum Manuel {
                + "attaquez, une question de culture générale décide de l'issue."),
             .h("Le premier tour"),
             .puces([
-                "Touchez « Commencer » : deux joueurs, le plateau de l'Anneau, une "
+                "Touchez « Partie rapide » : deux joueurs, le plateau de l'Anneau, une "
                 + "machine de culture moyenne. Les réglages viennent après.",
                 "Vos territoires portent votre couleur et le nombre d'hommes qui les "
                 + "tiennent. Ceux qui ne sont pas jouables restent dans l'ombre.",
@@ -557,7 +557,7 @@ enum Manuel {
 
     private static let miseEnPlace = Chapitre(
         id: "reglages", titre: "La mise en place",
-        resume: "Tous les réglages de l'écran d'accueil, un par un.",
+        resume: "Tous les réglages du bouton « Réglages », un par un.",
         icone: "slider.horizontal.3", teinte: Palette.category(.sciences),
         blocs: [
             .h("Mode de jeu"),
@@ -614,10 +614,21 @@ enum Manuel {
                 ("Guerre totale", "Il faut tous les territoires, sans exception. "
                  + "Environ deux fois plus de questions."),
             ]),
-            .h("Les trois boutons du bas"),
+            .h("Son"),
+            .p("Une note sourde et brève à chaque homme que vous posez — assez discrète "
+               + "pour se répéter dix fois de suite sans lasser. Puis une note à l'issue "
+               + "de chaque échange : montante quand il tourne pour vous, descendante "
+               + "quand il tourne contre vous. Deux machines qui s'affrontent ne sonnent "
+               + "pas — vous n'y êtes pour rien. À quoi s'ajoute l'ouverture, au "
+               + "lancement de l'application."),
+            .p("C'est le seul réglage de cet écran qui ne concerne pas la partie : il "
+               + "vaut pour l'application entière et se garde d'une partie à l'autre. "
+               + "Sur un iPhone, le bouton silence le fait taire, et la musique que "
+               + "vous écoutiez continue."),
+            .h("Les boutons du bas"),
             .termes([
-                ("Reprendre la partie en cours", "N'apparaît que s'il y en a une. Elle "
-                 + "est retrouvée exactement où vous l'avez laissée."),
+                ("Commencer", "Lance la partie avec ce qui est réglé au-dessus. La "
+                 + "reprise d'une partie en cours, elle, est sur l'accueil."),
                 ("Parties enregistrées", "La bibliothèque des instants — voir le chapitre "
                  + "« Reprendre, marquer, revenir »."),
                 ("Jouer à plusieurs appareils", "Un appareil par joueur, jusqu'à quatre, "
@@ -676,7 +687,9 @@ enum Manuel {
                  + "elle en est du sien."),
                 ("Le bouton", "« À l'attaque », « Au déplacement », « Fin du tour ». Il "
                  + "reste éteint tant qu'une obligation n'est pas levée — des renforts "
-                 + "non posés, un assaut en cours, cinq cartes en main."),
+                 + "non posés, un assaut en cours, cinq cartes en main. « Au "
+                 + "déplacement » demande confirmation avant de fermer l'attaque, "
+                 + "qui ne se rouvre pas du tour."),
             ]),
             .h("Suivre la machine"),
             .p("Quand elle attaque, la partie passe par la carte avant le duel : les "
@@ -850,10 +863,10 @@ enum Manuel {
 
     private static let banque = Chapitre(
         id: "questions", titre: "Les questions",
-        resume: "Six thèmes, mille deux cents questions, trois niveaux.",
+        resume: "Six thèmes, deux mille quatre cents questions, trois niveaux.",
         icone: "text.book.closed.fill", teinte: Palette.category(.sports),
         blocs: [
-            .p("Mille deux cents questions à choix multiple, deux cents par thème, "
+            .p("Deux mille quatre cents questions à choix multiple, quatre cents par thème, "
                + "toutes en français. Elles sont dans l'application : aucune connexion "
                + "n'est nécessaire pour jouer."),
             .tableau(["Thème", "Ce qu'on y trouve"],
@@ -869,7 +882,7 @@ enum Manuel {
                + "ne sort jamais du thème demandé : épuisé, il recommence plutôt que de "
                + "déborder."),
             .p("Une partie pose de cinquante à cent soixante questions, et un seul thème "
-               + "peut en brûler vingt-cinq. Deux cents par thème, c'est la banque qui "
+               + "peut en brûler vingt-cinq. Quatre cents par thème, c'est la banque qui "
                + "tient des mois sans se répéter."),
             .note("Une coquille dans une question ? Écrivez-la à \(contact) : elle sera "
                   + "corrigée dans la version suivante."),

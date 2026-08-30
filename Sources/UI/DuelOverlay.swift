@@ -89,7 +89,7 @@ struct DuelOverlay: View {
                     if a.mise > 1 {
                         Label("Enjeu doublé : deux hommes", systemImage: "arrow.up.circle.fill")
                             .font(.footnote.weight(.semibold))
-                            .foregroundStyle(Palette.lost)
+                            .foregroundStyle(Palette.lostVif)
                     }
                 }
                 .multilineTextAlignment(.center)
@@ -155,7 +155,7 @@ struct DuelOverlay: View {
             if siege > 0 {
                 Text("\(siege + 1)ᵉ question sur cette place ce tour-ci — le temps se resserre")
                     .font(.caption)
-                    .foregroundStyle(Palette.lost.opacity(0.9))
+                    .foregroundStyle(Palette.lostVif.opacity(0.9))
                     .multilineTextAlignment(.center)
             }
         }
@@ -207,12 +207,12 @@ struct DuelOverlay: View {
                             .padding(.vertical, 10)
                     }
                     .buttonStyle(.bordered)
-                    .tint(Palette.lost)
+                    .tint(Palette.lostVif)
                     .transition(.opacity)
                 } else if let a = session.assault, a.mise > 1, session.report == nil {
                     Label("Enjeu doublé : deux hommes", systemImage: "arrow.up.circle.fill")
                         .font(.caption.weight(.semibold))
-                        .foregroundStyle(Palette.lost)
+                        .foregroundStyle(Palette.lostVif)
                 }
 
                 if session.thinking {
@@ -339,7 +339,7 @@ struct DuelOverlay: View {
         let jeLEmporte = attaquantEstMoi
             ? r.outcome == .attackerBreaks
             : r.outcome == .defenderHolds
-        return jeLEmporte ? Palette.held : Palette.lost
+        return jeLEmporte ? Palette.held : Palette.lostVif
     }
 
     /// Ce que la réponse valait, dit dans les termes du Risk.
@@ -453,7 +453,7 @@ struct DuelOverlay: View {
                 .foregroundStyle(Palette.camp(joueur))
             Image(systemName: juste ? "checkmark" : "xmark")
                 .font(.caption2.weight(.bold))
-                .foregroundStyle(juste ? Palette.held : Palette.lost)
+                .foregroundStyle(juste ? Palette.held : Palette.lostVif)
             Text(texte).font(.caption).foregroundStyle(Palette.ink)
                 .lineLimit(1).truncationMode(.tail)
             Spacer(minLength: 4)
@@ -524,7 +524,7 @@ struct DuelOverlay: View {
             Text(titre).font(.caption).foregroundStyle(Palette.dim)
             Text("−\(pertes)")
                 .font(.title2.weight(.bold).monospacedDigit())
-                .foregroundStyle(pertes > 0 ? Palette.lost : Palette.dim)
+                .foregroundStyle(pertes > 0 ? Palette.lostVif : Palette.dim)
             Circle().fill(Palette.camp(camp)).frame(width: 10, height: 10)
         }
     }

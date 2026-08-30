@@ -35,12 +35,17 @@ struct RiskeloApp: App {
 @MainActor
 final class RootModel {
     var session: GameSession?
-    var repriseTentee = false
     /// La mise en place d'une partie à deux appareils, quand elle est ouverte.
     var salon: (regles: Rules, plateau: Boards)?
     var bibliotheque = false
     /// Le mode d'emploi, ouvert depuis l'accueil.
     var manuel = false
+    /// Les réglages, ouverts depuis l'accueil. Ils étaient l'accueil ; ils
+    /// n'en sont plus qu'une porte.
+    var reglages = false
+    /// L'ouverture — les deux camps qui se rejoignent — ne se joue qu'une
+    /// fois par lancement.
+    var ouvertureJouee = false
 }
 
 struct RootView: View {
@@ -61,6 +66,7 @@ struct RootView: View {
                 ArchivesView(onOpen: { etat in
                     withAnimation {
                         model.bibliotheque = false
+                        model.reglages = false
                         // Une branche neuve : revenir sur une partie ne doit
                         // pas effacer la partie sur laquelle on revient.
                         model.session = GameSession(resuming: etat, partie: UUID())
@@ -71,46 +77,65 @@ struct RootView: View {
             } else if let salon = model.salon {
                 LobbyView(plateau: salon.plateau, regles: salon.regles,
                           onReady: { partie in
-                              withAnimation { model.salon = nil; model.session = partie }
+                              withAnimation {
+                                  model.salon = nil
+                                  model.reglages = false
+                                  model.session = partie
+                              }
                           },
+                          // Renoncer à la table rend les réglages tels qu'on
+                          // les avait laissés, et non l'accueil : on venait
+                          // d'y choisir un plateau et un mode.
                           onCancel: { withAnimation { model.salon = nil } })
-            } else if model.repriseTentee {
+            } else if model.reglages {
                 SetupView(onStart: { joueurs, regles, plateau in
                     withAnimation {
+                        model.reglages = false
                         model.session = GameSession(players: joueurs, rules: regles, board: plateau)
                     }
                 }, onNetwork: { regles, plateau in
                     withAnimation { model.salon = (regles, plateau) }
-                }, onResume: GameStore.shared.hasSavedGame ? {
-                    if let sauvee = GameStore.shared.load() {
-                        withAnimation { model.session = GameSession(resuming: sauvee) }
-                    }
-                } : nil,
+                },
                 onManuel: { withAnimation { model.manuel = true } },
                 onArchives: Archives.shared.liste().isEmpty ? nil : {
                     withAnimation { model.bibliotheque = true }
-                })
+                },
+                onRetour: { withAnimation { model.reglages = false } })
             } else {
-                // Le temps que la partie enregistrée soit relue.
-                //
-                // Ce cas manquait, et son absence donnait un écran **noir** :
-                // aucune branche ne s'appliquait, il ne restait que le fond.
-                // Un écran vide ne dit pas qu'il attend — il dit que
-                // l'application est morte.
-                ProgressView().tint(Palette.dim)
-            }
-        }
-        .task {
-            guard !model.repriseTentee else { return }
-            // Posé par `defer` : quoi qu'il arrive à la lecture, on sort de
-            // l'écran d'attente. Sans cela, une reprise qui n'aboutit pas
-            // laisse l'application sur son fond, sans rien, pour toujours.
-            defer { model.repriseTentee = true }
-            if let sauvee = GameStore.shared.load() {
-                model.session = GameSession(resuming: sauvee)
+                AccueilView(
+                    onPartieRapide: {
+                        depuisAccueil {
+                            model.session = GameSession(players: PartieRapide.joueurs(),
+                                                        rules: PartieRapide.regles(),
+                                                        board: PartieRapide.plateau)
+                        }
+                    },
+                    onReglages: { depuisAccueil { model.reglages = true } },
+                    // L'application reprenait la partie enregistrée d'elle-même
+                    // au lancement. Elle ne le fait plus : un accueil qu'on ne
+                    // voit jamais n'est pas un accueil. La reprise est le
+                    // premier bouton, et le seul en vert.
+                    onResume: GameStore.shared.hasSavedGame ? {
+                        if let sauvee = GameStore.shared.load() {
+                            depuisAccueil { model.session = GameSession(resuming: sauvee) }
+                        }
+                    } : nil,
+                    onManuel: { depuisAccueil { model.manuel = true } },
+                    onArchives: Archives.shared.liste().isEmpty ? nil : {
+                        depuisAccueil { model.bibliotheque = true }
+                    },
+                    anime: !model.ouvertureJouee)
             }
         }
         .preferredColorScheme(.dark)
+    }
+
+    /// Quitter l'accueil. On note au passage que l'ouverture a été vue : sans
+    /// cela, les deux camps se rejoindraient à nouveau à chaque retour de
+    /// partie, et ce qui charme au lancement devient un péage.
+    private func depuisAccueil(_ geste: () -> Void) {
+        model.ouvertureJouee = true
+        withAnimation { geste() }
     }
 }
 

@@ -26,11 +26,16 @@ struct GameScreen: View {
         ZStack {
             Palette.sea.ignoresSafeArea()
             VStack(spacing: 0) {
+                // L'état de la partie en haut, ce qu'on peut en faire en bas.
+                // Les deux se suivaient sous la carte, et le bas de l'écran
+                // portait quatre lignes : qui joue, les continents, la
+                // consigne et le bouton. On lisait le compte des terres à
+                // l'endroit même où l'on cherchait le prochain geste.
+                StandingsBar(session: session)
                 BoardView(session: session)
                     .padding(.horizontal, 8)
                     .padding(.vertical, 6)
                     .overlay { AnnonceDePhase(session: session) }
-                StandingsBar(session: session)
                 BottomBar(session: session)
             }
             if session.target != nil, case .attack = session.game.phase {
@@ -126,7 +131,7 @@ private struct TopBar: View {
                     }
                 }
                 .buttonStyle(.plain)
-                .foregroundStyle(g.doitEchanger(g.currentPlayer.id) ? Palette.lost : Palette.dim)
+                .foregroundStyle(g.doitEchanger(g.currentPlayer.id) ? Palette.lostVif : Palette.dim)
             }
             Button {
                 session.marquer()
@@ -257,7 +262,7 @@ private struct StandingsBar: View {
         return HStack(spacing: 4) {
             Image(systemName: aLaMain ? "flag.fill" : "circle.fill")
                 .font(.system(size: aLaMain ? 11 : 8))
-                .foregroundStyle(Palette.camp(j.id))
+                .foregroundStyle(Palette.campVif(j.id))
             Text(j.name + (moi ? " (vous)" : ""))
                 .font(.caption.weight(aLaMain ? .bold : .medium))
                 .foregroundStyle(Palette.ink)
@@ -276,7 +281,7 @@ private struct StandingsBar: View {
         .padding(.horizontal, 9).padding(.vertical, 5)
         .background(aLaMain ? Palette.camp(j.id).opacity(0.22) : Color.white.opacity(0.04),
                     in: Capsule())
-        .overlay(Capsule().strokeBorder(aLaMain ? Palette.camp(j.id).opacity(0.85) : .clear,
+        .overlay(Capsule().strokeBorder(aLaMain ? Palette.campVif(j.id).opacity(0.9) : .clear,
                                         lineWidth: 1.3))
         .opacity(j.eliminated ? 0.4 : 1)
         .animation(.snappy(duration: 0.25), value: aLaMain)
@@ -294,6 +299,11 @@ private struct StandingsBar: View {
 
 private struct BottomBar: View {
     let session: GameSession
+
+    /// Le déplacement ne se dédit pas : une fois l'attaque close, on n'y
+    /// revient plus du tour. Le bouton se trouve pourtant sous le pouce, à
+    /// l'endroit où l'on appuie sans lire — d'où cette question posée avant.
+    @State private var quitterLAttaque = false
 
     var body: some View {
         let g = session.game
@@ -315,7 +325,7 @@ private struct BottomBar: View {
                                    && !g.doitEchanger(g.currentPlayer.id)) { session.endPhase() }
                     case .attack:
                         action("Au déplacement", "figure.walk",
-                               enabled: session.assault == nil) { session.endPhase() }
+                               enabled: session.assault == nil) { quitterLAttaque = true }
                     case .fortify:
                         action("Fin du tour", "checkmark.circle.fill") { session.endTurn() }
                     default:
@@ -333,6 +343,32 @@ private struct BottomBar: View {
         // disparaît sur un iPhone au profit des seuls jalons numérotés.
         .padding(.horizontal, 10).padding(.top, 10).padding(.bottom, 12)
         .background(Palette.panel)
+        // Une alerte et non une feuille de choix : sur un iPhone, la feuille se
+        // rend en bulle accrochée au bouton, et n'y montre que « Oui » — on
+        // annulait en touchant à côté, sans que rien ne le dise. Une alerte
+        // porte ses deux réponses, sur les trois machines.
+        .alert("Avez-vous fini d'attaquer ?", isPresented: $quitterLAttaque) {
+            // « Oui » sans le rôle destructeur : ce n'est pas une perte,
+            // seulement une porte qui se ferme. Le refus prend le rôle
+            // d'annulation, donc la place du geste qui échappe.
+            Button("Oui, au déplacement") {
+                // La phase a pu tourner pendant que la question était posée.
+                if case .attack = session.game.phase { session.endPhase() }
+            }
+            Button("Non, je continue d'attaquer", role: .cancel) { }
+        } message: {
+            Text(avertissementDeplacement)
+        }
+    }
+
+    /// Ce qu'on risque en passant. La seconde phrase n'apparaît que si elle a
+    /// lieu d'être : rien de conquis ce tour, donc pas de carte à la fin — et
+    /// c'est précisément le regret qu'on veut éviter au joueur pressé.
+    private var avertissementDeplacement: String {
+        let g = session.game
+        let base = "On ne revient pas à l'attaque une fois le déplacement commencé."
+        guard g.rules.territoryCards, !g.conqueredThisTurn else { return base }
+        return base + " Et sans une seule conquête ce tour, vous ne piochez pas de carte."
     }
 
     /// La consigne a la forme du bouton — même capsule, même largeur — mais
@@ -359,8 +395,8 @@ private struct BottomBar: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, 14).padding(.vertical, 9)
-            .background(teinte.opacity(0.16), in: Capsule())
-            .overlay(Capsule().stroke(teinte.opacity(0.5), lineWidth: 1))
+            .background(teinte.opacity(0.13), in: Capsule())
+            .overlay(Capsule().stroke(teinte.opacity(0.8), lineWidth: 1.2))
         }
     }
 
@@ -377,13 +413,15 @@ private struct BottomBar: View {
     /// de jouer.
     private var tonDeLaConsigne: (Color, String) {
         let g = session.game
+        // La teinte vive, et non celle du plateau : ici elle ne remplit rien,
+        // elle cerne d'un filet et dessine un signe de la taille d'un mot.
         if !session.aMoiDeJouer && !g.isOver {
-            return (Palette.camp(g.currentPlayer.id), "ellipsis.bubble.fill")
+            return (Palette.campVif(g.currentPlayer.id), "ellipsis.bubble.fill")
         }
         if g.doitEchanger(g.currentPlayer.id), case .reinforcement = g.phase {
-            return (Palette.lost, "exclamationmark.triangle.fill")
+            return (Palette.lostVif, "exclamationmark.triangle.fill")
         }
-        return (Palette.camp(g.currentPlayer.id), "hand.tap.fill")
+        return (Palette.campVif(g.currentPlayer.id), "hand.tap.fill")
     }
 
     /// Ce que la machine s'apprête à faire. Dit ici, sous la carte, et non
@@ -395,7 +433,7 @@ private struct BottomBar: View {
         Button { session.skipAhead() } label: {
             VStack(spacing: 3) {
                 HStack(spacing: 6) {
-                    Circle().fill(Palette.camp(a.attacker)).frame(width: 8, height: 8)
+                    Circle().fill(Palette.campVif(a.attacker)).frame(width: 8, height: 8)
                     Text("\(session.player(a.attacker)?.name ?? "?") attaque")
                         .font(.caption).foregroundStyle(Palette.dim)
                 }
@@ -525,15 +563,19 @@ private struct FilDuTour: View {
 
     private func fil(_ courante: Etape, mots: Mots) -> some View {
         let camp = Palette.camp(session.game.currentPlayer.id)
+        // Le fil n'est fait que de traits de deux points et de cercles de
+        // dix-huit : c'est le vif qu'il lui faut. Seul le jalon en cours reste
+        // plein de la couleur sombre — il porte un chiffre blanc.
+        let vif = Palette.campVif(session.game.currentPlayer.id)
         return HStack(spacing: 5) {
             ForEach(Array(Etape.allCases.enumerated()), id: \.element) { rang, etape in
                 if rang > 0 {
                     Capsule()
                         .fill(etape.rawValue <= courante.rawValue
-                              ? camp.opacity(0.5) : Palette.dim.opacity(0.3))
+                              ? vif.opacity(0.8) : Palette.dim.opacity(0.3))
                         .frame(width: 9, height: 2)
                 }
-                jalon(etape, courante: courante, camp: camp,
+                jalon(etape, courante: courante, camp: camp, vif: vif,
                       mot: mots == .toutes || (mots == .celleEnCours && etape == courante))
             }
         }
@@ -542,23 +584,28 @@ private struct FilDuTour: View {
         .fixedSize()
     }
 
-    private func jalon(_ etape: Etape, courante: Etape, camp: Color, mot: Bool) -> some View {
+    private func jalon(_ etape: Etape, courante: Etape, camp: Color, vif: Color,
+                       mot: Bool) -> some View {
         let passee = etape.rawValue < courante.rawValue
         let ici = etape == courante
         return HStack(spacing: 5) {
             ZStack {
                 Circle()
                     .fill(ici ? camp : Color.clear)
+                    // L'étape en cours porte un anneau vif par-dessus son
+                    // fond sombre : elle s'allume sans que son chiffre blanc
+                    // ait à perdre en lisibilité.
                     .overlay(
-                        Circle().stroke(passee ? camp.opacity(0.5)
-                                               : Palette.dim.opacity(ici ? 0 : 0.45),
+                        Circle().stroke(ici ? vif
+                                             : (passee ? vif.opacity(0.8)
+                                                       : Palette.dim.opacity(0.45)),
                                         lineWidth: 1.5)
                     )
                     .frame(width: 18, height: 18)
                 if passee {
                     Image(systemName: "checkmark")
                         .font(.system(size: 9, weight: .bold))
-                        .foregroundStyle(camp.opacity(0.85))
+                        .foregroundStyle(vif)
                 } else {
                     Text("\(etape.rawValue + 1)")
                         .font(.system(size: 10, weight: .semibold))
@@ -585,6 +632,7 @@ private struct AssaultPanel: View {
         let g = session.game
         if let base = session.selected, let cible = session.target,
            let defenseur = g.owner[cible] {
+            let attaquant = g.owner[base] ?? g.currentPlayer.id
             VStack(spacing: 0) {
                 Spacer()
                 VStack(alignment: .leading, spacing: 16) {
@@ -644,6 +692,12 @@ private struct AssaultPanel: View {
                 }
                 .padding(18)
                 .background(Palette.panel, in: RoundedRectangle(cornerRadius: 20))
+                // Le panneau prend la couleur de celui qui attaque, en liseré
+                // seulement : le fond reste mat, sinon les six camemberts
+                // posés dessus deviendraient illisibles. Assez pour rappeler,
+                // à deux sur le même écran, qui tient le doigt sur le bouton.
+                .overlay(RoundedRectangle(cornerRadius: 20)
+                    .strokeBorder(Palette.campVif(attaquant).opacity(0.7), lineWidth: 3))
                 .padding(10)
                 .frame(maxWidth: 560)
             }
@@ -689,12 +743,12 @@ private struct AssaultPanel: View {
                 HStack(spacing: 3) {
                     if pointFaible {
                         Image(systemName: "scope").font(.system(size: 9))
-                            .foregroundStyle(Palette.lost)
+                            .foregroundStyle(Palette.lostVif)
                     }
                     Text(score.asked == 0 ? "—" : "\(score.correct)/\(score.asked)")
                         .font(.caption2.weight(.semibold).monospacedDigit())
                         .foregroundStyle(score.asked == 0 ? Palette.dim
-                                         : (score.rate < 0.5 ? Palette.lost : Palette.held))
+                                         : (score.rate < 0.5 ? Palette.lostVif : Palette.held))
                 }
             }
             .frame(maxWidth: .infinity).padding(.vertical, 9)
@@ -822,7 +876,7 @@ private struct CartesSheet: View {
                         .font(.caption).foregroundStyle(Palette.dim)
                     if g.doitEchanger(g.currentPlayer.id) {
                         Text("Cinq cartes en main : l'échange est obligatoire.")
-                            .font(.caption.weight(.semibold)).foregroundStyle(Palette.lost)
+                            .font(.caption.weight(.semibold)).foregroundStyle(Palette.lostVif)
                     }
                 }
 
@@ -894,7 +948,7 @@ private struct DossierSheet: View {
                                 Text(s.asked == 0 ? "—" : "\(s.correct)/\(s.asked)")
                                     .font(.caption.monospacedDigit())
                                     .foregroundStyle(s.asked == 0 ? Palette.dim
-                                                     : (s.rate < 0.5 ? Palette.lost : Palette.held))
+                                                     : (s.rate < 0.5 ? Palette.lostVif : Palette.held))
                             }
                         }
                     }

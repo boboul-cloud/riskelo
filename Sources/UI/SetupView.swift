@@ -14,26 +14,33 @@ import SwiftUI
 
 struct SetupView: View {
 
-    @State private var count = 2
-    @State private var humains = 1
-    @State private var niveau = 0.65
-    @State private var manoeuvre: Bot.Style = .moyenne
+    // Cet écran s'ouvre sur la partie rapide : « Réglages » n'est pas un
+    // autre jeu, c'est le même, ouvert. Les valeurs sont donc prises là où
+    // l'accueil les prend, et non recopiées ici.
+    @State private var count = PartieRapide.camps
+    @State private var humains = PartieRapide.humains
+    @State private var niveau = PartieRapide.niveau
+    @State private var manoeuvre: Bot.Style = PartieRapide.manoeuvre
     /// Zéro retire la règle ; sinon, une bonne réponse sur tant vaut un homme.
-    @State private var erudition = 5
-    @State private var dosage: Rules.Dosage = .melees
-    @State private var plateau: Boards = .anneau
-    @State private var cartes = false
-    @State private var guerreTotale = false
-    @State private var mode: Rules.Mode = .classique
+    @State private var erudition = PartieRapide.erudition
+    @State private var dosage: Rules.Dosage = PartieRapide.dosage
+    @State private var plateau: Boards = PartieRapide.plateau
+    @State private var cartes = PartieRapide.cartes
+    @State private var guerreTotale = PartieRapide.guerreTotale
+    @State private var mode: Rules.Mode = PartieRapide.mode
+    /// Le son n'est pas une règle du jeu : il vaut pour l'application et se
+    /// garde d'une partie à l'autre. D'où les préférences du système plutôt
+    /// qu'un état de cette vue.
+    @AppStorage(Sons.cle) private var sons = true
     var onStart: ([Player], Rules, Boards) -> Void
-    /// Proposé seulement s'il y a une partie en attente : un bouton qui ne
-    /// mène nulle part vaut mieux absent.
     var onNetwork: (Rules, Boards) -> Void = { _, _ in }
-    var onResume: (() -> Void)?
     /// Le mode d'emploi complet — il s'ouvre aussi depuis la partie.
     var onManuel: () -> Void = { }
     /// Proposé seulement s'il y a quelque chose sur les rayons.
     var onArchives: (() -> Void)?
+    /// Le retour à l'accueil. La reprise d'une partie en cours s'y trouve
+    /// désormais : elle n'a rien à faire au milieu des curseurs.
+    var onRetour: () -> Void = { }
 
     var body: some View {
         ZStack {
@@ -45,25 +52,12 @@ struct SetupView: View {
             GeometryReader { geo in
                 ScrollView {
                     VStack(spacing: 26) {
-                        VStack(spacing: 6) {
-                            Text("Riskelo").font(.system(size: 40, weight: .bold, design: .rounded))
-                                .foregroundStyle(Palette.ink)
-                            Text(mode == .classique
-                                 ? "Le dé est remplacé par une question.\nL'attaquant choisit le terrain, le défenseur répond."
-                                 : "Le dé est remplacé par une question.\nLes deux la reçoivent : le plus sûr, ou le plus vif, l'emporte.")
-                                .font(.subheadline).foregroundStyle(Palette.dim)
-                                .multilineTextAlignment(.center)
-                        }
-                        .padding(.top, 30)
-
-                        if let onResume {
-                        Button(action: onResume) {
-                            Label("Reprendre la partie en cours", systemImage: "arrow.uturn.backward")
-                                .font(.headline)
-                                .frame(maxWidth: .infinity).padding(.vertical, 13)
-                        }
-                        .buttonStyle(.borderedProminent).tint(Palette.held)
-                    }
+                        Text(mode == .classique
+                             ? "Le dé est remplacé par une question.\nL'attaquant choisit le terrain, le défenseur répond."
+                             : "Le dé est remplacé par une question.\nLes deux la reçoivent : le plus sûr, ou le plus vif, l'emporte.")
+                            .font(.subheadline).foregroundStyle(Palette.dim)
+                            .multilineTextAlignment(.center)
+                            .padding(.top, 22)
 
                         reglage("Mode de jeu") {
                             Picker("", selection: $mode) {
@@ -194,6 +188,23 @@ struct SetupView: View {
                             .tint(Palette.lost)
                         }
 
+                        reglage("Son") {
+                            Toggle(isOn: $sons) {
+                                VStack(alignment: .leading, spacing: 2) {
+                                    Text("Sons du jeu")
+                                        .font(.subheadline.weight(.medium))
+                                        .foregroundStyle(Palette.ink)
+                                    Text("Une note brève à chaque homme posé, une autre à "
+                                         + "l'issue de chaque échange — montante quand il "
+                                         + "tourne pour vous, descendante sinon — et "
+                                         + "l'ouverture au lancement. Vaut pour toutes les "
+                                         + "parties, et non pour celle-ci seule.")
+                                        .font(.caption2).foregroundStyle(Palette.dim)
+                                }
+                            }
+                            .tint(Palette.held)
+                        }
+
                         VStack(spacing: 4) {
                             Text(guerreTotale
                                  ? "Victoire à la conquête intégrale des \(plateau.board.map.order.count) territoires"
@@ -251,7 +262,31 @@ struct SetupView: View {
                 }
             }
         }
+        // La barre est posée en marge de sécurité plutôt qu'en tête du
+        // défilement : la page est longue, et un retour qui s'en va dès qu'on
+        // descend n'est plus un retour.
+        .safeAreaInset(edge: .top, spacing: 0) { entete }
         .preferredColorScheme(.dark)
+    }
+
+    private var entete: some View {
+        HStack {
+            Button(action: onRetour) {
+                Label("Accueil", systemImage: "chevron.left")
+                    .font(.subheadline.weight(.medium))
+            }
+            .buttonStyle(.plain).foregroundStyle(Palette.dim)
+            Spacer(minLength: 12)
+        }
+        // Le titre par-dessus plutôt qu'entre deux ressorts : il reste centré
+        // sur la barre quelle que soit la longueur du bouton de gauche.
+        .overlay {
+            Text("Réglages").font(.headline).foregroundStyle(Palette.ink)
+        }
+        .frame(maxWidth: 560)
+        .padding(.horizontal, 16).padding(.vertical, 12)
+        .frame(maxWidth: .infinity)
+        .background(Palette.panel)
     }
 
     /// Confidentialité, conditions, site : les trois adresses publiques, en
@@ -292,14 +327,7 @@ struct SetupView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 
-    private var libelleNiveau: String {
-        switch niveau {
-        case ..<0.45: "Distraite"
-        case ..<0.60: "Honnête"
-        case ..<0.75: "Cultivée"
-        default: "Redoutable"
-        }
-    }
+    private var libelleNiveau: String { PartieRapide.niveauDit(niveau) }
 
     private var seuil: Int {
         Rules().dominationThreshold(territories: plateau.board.map.order.count,
@@ -309,19 +337,12 @@ struct SetupView: View {
     private var compensation: Int { Rules().compensation(playerCount: count) }
 
     private var regles: Rules {
-        var r = Rules()
-        r.answersPerBonusMan = erudition == 0 ? nil : erudition
-        r.difficultyWeights = dosage.poids
-        r.territoryCards = cartes
-        r.mode = mode
-        if guerreTotale { r.dominationOverride = 0 }
-        return r
+        PartieRapide.regles(erudition: erudition, dosage: dosage, cartes: cartes,
+                            mode: mode, guerreTotale: guerreTotale)
     }
 
     private var joueurs: [Player] {
-        return (0..<count).map { i in
-            Player(id: i, name: Boards.nomDeCamp(i),
-                   kind: i < humains ? .humain : .machine(niveau: niveau, style: manoeuvre))
-        }
+        PartieRapide.joueurs(nombre: count, humains: humains,
+                             niveau: niveau, manoeuvre: manoeuvre)
     }
 }

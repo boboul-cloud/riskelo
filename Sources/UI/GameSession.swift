@@ -92,9 +92,23 @@ final class GameSession {
     /// non sous elle.
     var partCouverte: Double {
         switch stage {
-        case .handover, .asking, .revealed, .summary: 0.55
-        case .adversaireRepond: 0.4
-        default: 0
+        case .handover, .asking, .revealed, .summary: return 0.55
+        case .adversaireRepond: return 0.4
+        default: break
+        }
+        // Les deux panneaux de préparation prennent le bas de l'écran comme le
+        // fait la feuille du duel, et le plateau doit leur céder autant de
+        // place : on choisissait son terrain sans plus voir ce qu'on attaque.
+        // Celui de l'assaut est haut — six terrains, le nombre de questions,
+        // le bouton ; celui du déplacement tient en trois lignes.
+        guard target != nil else { return 0 }
+        // Mesurées sur l'écran plutôt que déduites : le panneau d'assaut
+        // couvre les six dixièmes de la carte sur un iPhone, celui du
+        // déplacement à peine plus d'un dixième.
+        switch game.phase {
+        case .attack:  return 0.60
+        case .fortify: return 0.12
+        default:       return 0
         }
     }
 
@@ -386,8 +400,9 @@ final class GameSession {
             await pause(Tempo.annonce)
             if Task.isCancelled { return }
         case .answer:
-            report = rapport
-            stage = .revealed
+            // En face à face, la première des deux réponses ne tranche rien :
+            // il n'y a pas de rapport, donc rien à montrer ni à sonner.
+            if let rapport { devoiler(rapport) } else { report = nil; stage = .revealed }
             await pause(Tempo.verdict)
             if Task.isCancelled { return }
             report = nil
@@ -469,6 +484,34 @@ final class GameSession {
     /// Qui doit répondre — ou, la question une fois résolue, qui vient de le
     /// faire : la feuille du verdict s'affiche après que le moteur a rangé la
     /// question, et elle a encore besoin de nommer quelqu'un.
+    /// Le verdict paraît, et sonne. Passer par ici plutôt que d'affecter le
+    /// rapport à la main : c'est le seul endroit d'où le son part, donc aucun
+    /// verdict ne peut l'oublier — la même règle que pour l'enregistrement.
+    private func devoiler(_ rapport: DuelReport) {
+        report = rapport
+        stage = .revealed
+        guard let a = game.assault, let cote = monCote(a) else { return }
+        let gagne = rapport.outcome == .attackerBreaks ? cote == a.attacker
+                                                       : cote == a.defender
+        Sons.shared.jouer(gagne ? .gagne : .perdu)
+    }
+
+    /// De quel côté de l'assaut se tient celui qui a l'appareil en main.
+    ///
+    /// En réseau, mon rang — et rien si l'assaut ne me concerne pas. Sinon
+    /// l'humain qui répond, puisque c'est lui qui tient l'appareil au moment
+    /// du verdict, et à défaut l'humain qui attaque. Deux machines qui
+    /// s'affrontent ne sonnent pas : « gagné » et « perdu » ne veulent rien
+    /// dire pour qui regarde sans jouer.
+    private func monCote(_ a: Assault) -> PlayerID? {
+        if enReseau {
+            return a.attacker == monRang || a.defender == monRang ? monRang : nil
+        }
+        if !(player(a.defender)?.isBot ?? true) { return a.defender }
+        if !(player(a.attacker)?.isBot ?? true) { return a.attacker }
+        return nil
+    }
+
     var repondeur: PlayerID? { game.quiRepond ?? game.assault?.defender }
 
     var repondeurEstHumain: Bool {
@@ -495,7 +538,15 @@ final class GameSession {
         let moi = game.currentPlayer.id
         switch game.phase {
         case .reinforcement:
-            if game.owner[id] == moi { jouer(.place(id)) }
+            if game.owner[id] == moi {
+                // La note ne tombe que si l'homme est vraiment posé : le coup
+                // peut être refusé — plus de renforts en réserve, ou cinq
+                // cartes en main qu'il faut échanger d'abord — et un son qui
+                // sonne quand rien ne se passe apprend à ne plus l'écouter.
+                let avant = game.armies(id)
+                jouer(.place(id))
+                if game.armies(id) > avant { Sons.shared.jouer(.pose) }
+            }
             if case .attack = game.phase { selected = nil }
 
         case .attack:
@@ -567,8 +618,7 @@ final class GameSession {
             resume()
             return
         }
-        report = rapport
-        stage = .revealed
+        devoiler(rapport)
         pump?.cancel()
         pump = Task { @MainActor [weak self] in
             guard let self else { return }
@@ -733,8 +783,7 @@ final class GameSession {
                                                      rules: game.rules, joueur: qui,
                                                      using: &game.rng))
                 guard let rapport else { stage = nil; continue }
-                report = rapport
-                stage = .revealed
+                devoiler(rapport)
                 await pause(tempsDeVerdict, de: charniere, a: 0)
                 if Task.isCancelled { return }
                 report = nil

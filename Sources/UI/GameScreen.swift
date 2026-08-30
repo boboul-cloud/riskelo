@@ -216,17 +216,18 @@ private struct StandingsBar: View {
             // Chaque camp nommé, et un drapeau à celui qui a la main. La
             // pastille seule ne suffisait pas : elle disait la couleur, pas
             // qui c'était, et « qui joue » se lisait à une nuance d'opacité.
-            // Une grille et non une bande qui défile : à quatre joueurs, le
-            // quatrième sortait de l'écran, et un joueur qu'on ne voit pas
-            // n'existe pas. Elle se replie en deux lignes sur un téléphone et
-            // tient sur une seule dès qu'il y a la place.
-            // En réseau, le nom porte « (vous) » : la colonne doit s'élargir
-            // d'autant, sinon le compte des terres et des hommes se replie sur
-            // deux lignes au milieu de la pastille.
-            let colonne: CGFloat = session.enReseau ? 190 : 148
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: colonne), spacing: 8)], spacing: 6) {
-                ForEach(g.players) { j in camp(j).fixedSize() }
-            }
+            //
+            // C'était une grille, et elle se repliait en deux lignes dès trois
+            // joueurs sur un téléphone : deux lignes prises au plateau, qui
+            // est ce qu'on est venu regarder. Elle défile donc, comme la bande
+            // des continents juste en dessous.
+            //
+            // L'objection à la bande qui défile tenait, et elle tient encore :
+            // un joueur qu'on ne voit pas n'existe pas. Elle est levée non par
+            // la grille mais par le défilement lui-même — celui qui a la main
+            // est ramené sous les yeux à chaque changement de tour, et c'est
+            // le seul qu'on ait vraiment besoin de voir à cet instant.
+            camps(g)
 
             // Défilement horizontal : « Îles Britanniques » et « Europe
             // centrale » ne tiennent pas côte à côte sur un téléphone, et
@@ -251,6 +252,32 @@ private struct StandingsBar: View {
             }
         }
         .padding(.horizontal, 14).padding(.vertical, 8)
+    }
+
+    /// Les camps sur une seule ligne, ramenée sur celui qui joue.
+    ///
+    /// `ScrollViewReader` plutôt qu'un ordre figé : les camps gardent leur
+    /// rang de table — on les cherche toujours à la même place — et c'est la
+    /// vue qui se déplace, non eux.
+    private func camps(_ g: GameState) -> some View {
+        ScrollViewReader { lecteur in
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 8) {
+                    ForEach(g.players) { j in camp(j).fixedSize().id(j.id) }
+                }
+                .padding(.vertical, 1)
+                // De quoi respirer aux deux bouts : sans cela, la dernière
+                // pastille colle au bord et l'on ne sait plus si la bande est
+                // finie ou seulement coupée.
+                .padding(.horizontal, 2)
+            }
+            .onChange(of: g.currentPlayer.id) { _, qui in
+                withAnimation(.snappy(duration: 0.35)) {
+                    lecteur.scrollTo(qui, anchor: .center)
+                }
+            }
+            .onAppear { lecteur.scrollTo(g.currentPlayer.id, anchor: .center) }
+        }
     }
 
     private func camp(_ j: Player) -> some View {

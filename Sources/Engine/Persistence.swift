@@ -39,17 +39,21 @@ extension SeededRandom: Codable {
 }
 
 extension QuestionBank: Codable {
-    private enum CodingKeys: String, CodingKey { case served }
+    private enum CodingKeys: String, CodingKey { case served, places }
 
     init(from decoder: Decoder) throws {
         let c = try decoder.container(keyedBy: CodingKeys.self)
         self.init()
         restore(served: try c.decode(Set<String>.self, forKey: .served))
+        // Le sac des places voyage avec elle : une sauvegarde d'avant le sac
+        // n'en a pas, et repart d'un sac plein — ce qui est sans conséquence.
+        restore(places: try c.decodeIfPresent([Int].self, forKey: .places) ?? [])
     }
 
     func encode(to encoder: Encoder) throws {
         var c = encoder.container(keyedBy: CodingKeys.self)
         try c.encode(alreadyServed, forKey: .served)
+        try c.encode(placesRestantes, forKey: .places)
     }
 }
 

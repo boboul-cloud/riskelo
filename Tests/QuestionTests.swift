@@ -113,6 +113,53 @@ struct QuestionTests {
         #expect(positions.count == 4, "la bonne réponse tombe toujours au même endroit")
     }
 
+    /// La bonne réponse ne s'installe pas sur une ligne.
+    ///
+    /// Le tirage libre était honnête — un quart par ligne, mesuré — et
+    /// donnait pourtant trois fois de suite la même ligne dans plus de neuf
+    /// parties sur dix. Le sac des places l'interdit : quatre questions,
+    /// quatre lignes, une fois chacune.
+    @Test func lesPlacesSeBrassentSansTroisFoisDeSuite() {
+        var bank = QuestionBank()
+        var rng = SeededRandom(seed: 21)
+        var lignes: [Int] = []
+        for _ in 0 ..< 400 {
+            guard let q = bank.draw(category: nil, difficulty: nil, using: &rng) else { break }
+            #expect(q.choices[q.answer] == q.question.correct, "la bonne réponse a bougé")
+            lignes.append(q.answer)
+        }
+        #expect(lignes.count == 400)
+        for debut in stride(from: 0, to: lignes.count, by: QuestionBank.lignes) {
+            let groupe = lignes[debut ..< debut + QuestionBank.lignes]
+            #expect(Set(groupe).count == QuestionBank.lignes,
+                    "groupe \(debut / QuestionBank.lignes) : deux fois la même ligne")
+        }
+        for i in 2 ..< lignes.count {
+            #expect(!(lignes[i] == lignes[i - 1] && lignes[i - 1] == lignes[i - 2]),
+                    "trois fois la même ligne au tirage \(i)")
+        }
+    }
+
+    /// Une partie reprise ne rebat pas au milieu d'un groupe : ce qui reste
+    /// dans le sac se remet en place comme la liste des questions servies.
+    /// Le voyage par la sauvegarde, lui, est éprouvé avec la partie entière.
+    @Test func leSacDesPlacesSeRemetEnPlace() {
+        var bank = QuestionBank()
+        var rng = SeededRandom(seed: 4)
+        _ = bank.draw(category: .sciences, difficulty: nil, using: &rng)
+        _ = bank.draw(category: .sciences, difficulty: nil, using: &rng)
+        let reste = bank.placesRestantes
+        #expect(reste.count == QuestionBank.lignes - 2)
+        var reprise = QuestionBank()
+        reprise.restore(served: bank.alreadyServed)
+        reprise.restore(places: reste)
+        #expect(reprise.placesRestantes == reste)
+        // Une place hors des quatre lignes ne se restaure pas : une
+        // sauvegarde abîmée ferait sinon tomber la bonne réponse nulle part.
+        reprise.restore(places: [0, 9, 2])
+        #expect(reprise.placesRestantes == [0, 2])
+    }
+
     @Test func uneQuestionNeRevientPasTantQuIlEnResteDAutres() {
         var bank = QuestionBank()
         var rng = SeededRandom(seed: 3)

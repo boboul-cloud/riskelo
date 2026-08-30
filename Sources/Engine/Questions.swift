@@ -72,13 +72,23 @@ struct Question: Identifiable, Hashable, Codable {
     let correct: String
     let decoys: [String]
 
-    /// La question telle qu'elle est posée : propositions mêlées.
-    func asked<G: RandomNumberGenerator>(using rng: inout G) -> AskedQuestion {
-        var choices = decoys + [correct]
+    /// La question telle qu'elle est posée, la bonne réponse à la ligne
+    /// demandée. Les leurres, eux, sont toujours mêlés entre eux : c'est la
+    /// place de la bonne réponse, et elle seule, que la banque tient à l'œil.
+    func asked<G: RandomNumberGenerator>(placingCorrectAt ligne: Int,
+                                         using rng: inout G) -> AskedQuestion {
+        var choices = decoys
         choices.shuffle(using: &rng)
-        return AskedQuestion(question: self,
-                             choices: choices,
-                             answer: choices.firstIndex(of: correct) ?? 0)
+        let place = min(max(0, ligne), choices.count)
+        choices.insert(correct, at: place)
+        return AskedQuestion(question: self, choices: choices, answer: place)
+    }
+
+    /// Sans consigne de place : elle est tirée au sort. C'est la porte des
+    /// essais — la banque, elle, passe toujours par le sac des places.
+    func asked<G: RandomNumberGenerator>(using rng: inout G) -> AskedQuestion {
+        let ligne = Int.random(in: 0 ... decoys.count, using: &rng)
+        return asked(placingCorrectAt: ligne, using: &rng)
     }
 }
 
@@ -96,8 +106,29 @@ struct AskedQuestion: Identifiable, Hashable, Codable {
 /// Le stock de questions, et la mémoire de ce qui a déjà été posé : dans une
 /// même partie, une question ne revient pas tant qu'il en reste d'autres.
 struct QuestionBank {
+
+    /// Combien de propositions porte une question : quatre lignes.
+    static let lignes = 4
+
     private(set) var questions: [Question]
     private var served: Set<String> = []
+
+    /// Le sac des places — sur quelle ligne tombe la bonne réponse.
+    ///
+    /// Le tirage était honnête, et c'était le défaut. Une pièce honnête donne
+    /// trois fois face d'affilée une fois sur huit ; sur les soixante
+    /// questions d'une partie, voir trois fois de suite la bonne réponse à la
+    /// même ligne arrive dans quatre-vingt-quinze parties sur cent. Le joueur
+    /// n'y voit pas du hasard — il y voit une habitude de la machine, et il
+    /// se met à jouer contre elle plutôt que contre la question. Une seule
+    /// suite suffit à installer le soupçon, et rien ensuite ne l'enlève.
+    ///
+    /// Les quatre places se tirent donc comme quatre cartes d'un paquet :
+    /// sans remise, et l'on rebat quand il est vide. Chaque groupe de quatre
+    /// questions porte la bonne réponse une fois sur chaque ligne, dans un
+    /// ordre imprévisible ; deux d'affilée au même endroit est le plus qu'on
+    /// puisse voir, et jamais trois.
+    private var places: [Int] = []
 
     init(questions: [Question] = QuestionBank.francaises) {
         self.questions = questions
@@ -111,6 +142,27 @@ struct QuestionBank {
 
     mutating func restore(served: Set<String>) {
         self.served = served.filter { id in questions.contains { $0.id == id } }
+    }
+
+    /// Ce qui reste dans le sac des places : une partie reprise doit le
+    /// retrouver tel quel, sans quoi elle rebat au milieu d'un groupe.
+    var placesRestantes: [Int] { places }
+
+    mutating func restore(places: [Int]) {
+        self.places = places.filter { (0 ..< QuestionBank.lignes).contains($0) }
+    }
+
+    /// La prochaine place, tirée du sac ; le sac se rebat quand il est vide.
+    private mutating func placeSuivante<G: RandomNumberGenerator>(parmi nombre: Int,
+                                                                  using rng: inout G) -> Int {
+        if places.isEmpty {
+            places = Array(0 ..< QuestionBank.lignes)
+            places.shuffle(using: &rng)
+        }
+        let tiree = places.removeLast()
+        // Une question qui n'aurait pas ses quatre propositions ne doit pas
+        // pour autant tomber toujours au bout : elle reprend le tirage libre.
+        return tiree < nombre ? tiree : Int.random(in: 0 ..< nombre, using: &rng)
     }
 
     func count(in category: Category) -> Int {
@@ -143,6 +195,10 @@ struct QuestionBank {
         else { return nil }
 
         served.insert(tiree.id)
-        return tiree.asked(using: &rng)
+        // La place d'abord, la question ensuite : deux accès à `rng` dans un
+        // même appel ne passeraient pas, et l'ordre doit rester le même sur
+        // les deux appareils.
+        let ligne = placeSuivante(parmi: tiree.decoys.count + 1, using: &rng)
+        return tiree.asked(placingCorrectAt: ligne, using: &rng)
     }
 }

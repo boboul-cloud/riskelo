@@ -696,6 +696,7 @@ struct GameTests {
         #expect(reprise.phase == g.phase)
         #expect(reprise.journal.count == g.journal.count)
         #expect(reprise.bank.alreadyServed == g.bank.alreadyServed)
+        #expect(reprise.bank.placesRestantes == g.bank.placesRestantes)
         #expect(g.map.order.allSatisfy {
             reprise.owner[$0] == g.owner[$0] && reprise.armies($0) == g.armies($0)
         })
@@ -709,6 +710,9 @@ struct GameTests {
             BotRunner.step(&suivie)
             BotRunner.step(&reprise)
             #expect(reprise.turn == suivie.turn, "divergence au coup \(coup)")
+            #expect(reprise.assault?.current?.question.choices
+                    == suivie.assault?.current?.question.choices,
+                    "les propositions ne tombent pas dans le même ordre au coup \(coup)")
             #expect(reprise.assault?.current?.question.id == suivie.assault?.current?.question.id,
                     "question différente au coup \(coup)")
         }

@@ -45,8 +45,13 @@ struct GameScreen: View {
                 FortifyPanel(session: session).transition(.move(edge: .bottom).combined(with: .opacity))
             }
             DuelOverlay(session: session)
-            if case let .finished(vainqueur) = session.game.phase {
+            // Pas dès que le moteur a tranché : la dernière question va au
+            // bout d'abord — sa bonne réponse, la place qui tombe, le nom du
+            // vainqueur sur le plateau — et l'écran de victoire ferme la
+            // marche. Il recouvrait tout cela.
+            if session.victoireMontree, case let .finished(vainqueur) = session.game.phase {
                 VictoryOverlay(session: session, winner: vainqueur, onQuit: onQuit)
+                    .transition(.opacity)
             }
         }
         // La barre du haut est posée en marge de sécurité, et non dans la
@@ -65,6 +70,7 @@ struct GameScreen: View {
         .animation(.snappy(duration: 0.15), value: session.target)
         .animation(.snappy(duration: 0.22), value: session.stage)
         .animation(.spring(response: 0.26, dampingFraction: 0.72), value: session.annonce)
+        .animation(.easeOut(duration: 0.4), value: session.victoireMontree)
         .sheet(isPresented: Binding(get: { session.journalOpen },
                                     set: { session.journalOpen = $0 })) {
             JournalSheet(session: session)

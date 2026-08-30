@@ -117,11 +117,13 @@ final class GameSession {
     /// changement ne peut échapper.
     private func noterChangementDePhase(depuis avant: GameState) {
         guard !game.isOver else {
-            if case let .finished(gagnant) = game.phase, !avant.isOver {
-                montrer(Annonce(titre: "\(game.players.first { $0.id == gagnant }?.name ?? "?") l'emporte !",
-                                sous: nil, camp: gagnant))
-                archiver("Fin de partie")
-            }
+            // Le vainqueur ne s'annonce pas ici. La partie se décide au milieu
+            // d'une question — la dernière place tombe sur une réponse — et
+            // l'annoncer sur-le-champ recouvrait la réponse qu'on était en
+            // train de lire. C'est `annoncerLaVictoire` qui s'en charge, une
+            // fois la feuille du duel refermée. Le rangement, lui, ne se voit
+            // pas et peut partir tout de suite.
+            if case .finished = game.phase, !avant.isOver { archiver("Fin de partie") }
             return
         }
         let nouveauTour = avant.current != game.current
@@ -183,6 +185,17 @@ final class GameSession {
     private var annonceWork: Task<Void, Never>?
 
     private(set) var stage: Stage?
+
+    /// L'écran de victoire est-il dû ?
+    ///
+    /// Le moteur tranche à l'instant où la dernière place tombe, c'est-à-dire
+    /// au beau milieu d'une question : l'écran de victoire se posait donc
+    /// par-dessus la réponse en cours, et l'on ne voyait jamais si l'on avait
+    /// eu juste, ni la place tomber. On finit l'action, on annonce le
+    /// vainqueur sur le plateau, et l'écran de victoire vient en dernier.
+    private(set) var victoireMontree = false
+    private var victoireAnnoncee = false
+
     private(set) var report: DuelReport?
     private(set) var remaining: TimeInterval = 0
     private(set) var thinking = false
@@ -879,5 +892,23 @@ final class GameSession {
         }
         stage = nil
         thinking = false
+        await annoncerLaVictoire()
+    }
+
+    /// La fin, dans son ordre : la feuille du duel s'est refermée, le plateau
+    /// montre la dernière place prise, on nomme le vainqueur, puis seulement
+    /// l'écran de victoire se pose.
+    private func annoncerLaVictoire() async {
+        guard case let .finished(gagnant) = game.phase else { return }
+        if !victoireAnnoncee {
+            victoireAnnoncee = true
+            montrer(Annonce(titre: "\(game.playerName(gagnant)) l'emporte !",
+                            sous: nil, camp: gagnant))
+            // Une attente qui se laisse interrompre : la boucle est relancée
+            // à chaque coup, et un écran de victoire qui n'arrive jamais
+            // serait pire que celui qui arrive trop tôt.
+            try? await Task.sleep(for: .milliseconds(1_700))
+        }
+        victoireMontree = true
     }
 }

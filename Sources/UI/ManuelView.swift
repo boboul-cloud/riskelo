@@ -614,6 +614,16 @@ enum Manuel {
                 ("Guerre totale", "Il faut tous les territoires, sans exception. "
                  + "Environ deux fois plus de questions."),
             ]),
+            .h("Vous"),
+            .p("Un nom, facultatif, pour celui qui tient l'appareil. Il s'ajoute à la "
+               + "couleur du camp sans la remplacer — « Bleu · Robert » — parce que le "
+               + "plateau ne connaît que des couleurs : un nom qui ne s'y retrouve pas "
+               + "ne servirait à rien. Quatorze signes au plus, pour que la bande des "
+               + "camps tienne sur une ligne."),
+            .p("En réseau, il fait le voyage : chaque appareil dit son nom en arrivant "
+               + "au salon, et les quatre écrans montrent les mêmes joueurs. Le vôtre "
+               + "porte « moi » à la fin — sans quoi, tout le monde voyant la même "
+               + "chose, plus rien ne dirait lequel est le vôtre."),
             .h("Son"),
             .p("Une note sourde et brève à chaque homme que vous posez — assez discrète "
                + "pour se répéter dix fois de suite sans lasser. Puis une note à l'issue "
@@ -647,8 +657,9 @@ enum Manuel {
             .termes([
                 ("Le chevron", "Quitte la partie. Elle est enregistrée avant de sortir : "
                  + "rien ne se perd."),
-                ("La pastille et le nom", "Le camp qui a la main. En réseau, le vôtre "
-                 + "porte « (vous) »."),
+                ("La pastille et le nom", "Le camp qui a la main. Le vôtre se lit "
+                 + "« Rouge · Marie · moi » : la couleur, le nom que vous vous êtes "
+                 + "donné dans les réglages, et « moi » pour dire que c'est le vôtre."),
                 ("Tour, et le compte", "Le numéro du tour de table, et vos territoires "
                  + "sur le seuil de victoire."),
                 ("Le paquet de cartes", "Votre main, quand la règle est en jeu. La "

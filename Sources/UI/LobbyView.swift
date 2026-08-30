@@ -28,6 +28,9 @@ struct LobbyView: View {
     var onCancel: () -> Void
 
     @State private var link = Link()
+    /// Le nom que chaque appareil relié s'est donné. Vide tant qu'il n'a pas
+    /// dit bonjour — ou qu'il n'a pas de nom, ce qui revient au même ici.
+    @State private var noms: [MCPeerID: String] = [:]
     @State private var joueurs = 2
     @State private var lancee = false
     /// La partie est arrivée, mais dans une langue qu'on ne parle pas.
@@ -259,9 +262,9 @@ struct LobbyView: View {
             }
 
             VStack(spacing: 6) {
-                ligne("Vous", camp: 0)
+                ligne(Pseudo.actuel ?? "Vous", camp: 0)
                 ForEach(Array(link.relies.enumerated()), id: \.element) { i, pair in
-                    ligne(pair.displayName, camp: i + 1)
+                    ligne(noms[pair] ?? pair.displayName, camp: i + 1)
                 }
             }
             Text("Sur les autres appareils : « Rejoindre une table ».\n"
@@ -306,8 +309,19 @@ struct LobbyView: View {
     /// Qui rejoint attend la partie avant d'afficher quoi que ce soit — sans
     /// cela il verrait une partie factice le temps d'un battement.
     private func preparer() {
-        link.onReceive = { data, _ in
+        // Chacun dit son nom en arrivant, sans attendre qu'on le lui demande :
+        // à quatre appareils, une demande par appareil serait quatre fois
+        // l'occasion de se perdre.
+        link.onConnected = { _, pair in
+            if let data = Message.bonjour(nom: Pseudo.actuel ?? "").data {
+                link.envoyer(data, a: pair)
+            }
+        }
+        link.onReceive = { data, pair in
             switch Message.lire(data) {
+            case let .message(.bonjour(nom)):
+                noms[pair] = nom.isEmpty ? nil : nom
+
             case let .message(.partie(etat, rang, numero)):
                 lancee = true
                 onReady(GameSession(link: link, heberge: false, game: etat,
@@ -332,8 +346,19 @@ struct LobbyView: View {
     /// d'arrivée. Chaque appareil reçoit le sien, et lui seul.
     private func lancer() {
         link.fermerLaTable()
-        let noms = (0..<joueurs).map { Player(id: $0, name: Boards.nomDeCamp($0)) }
-        let partie = GameState.start(board: plateau, players: noms, rules: regles)
+        // Chaque camp porte le nom de qui le tient, quand il s'en est donné
+        // un : « Rouge · Marie ». Le nom part avec l'état, et les quatre
+        // appareils voient donc les mêmes joueurs — c'est le seul endroit où
+        // cette composition se fait, et le seul moment où l'hôte les connaît
+        // tous.
+        let camps = (0..<joueurs).map { rang -> Player in
+            let camp = Boards.nomDeCamp(rang)
+            let choisi = rang == 0 ? Pseudo.actuel
+                                   : link.relies.indices.contains(rang - 1)
+                                     ? noms[link.relies[rang - 1]] : nil
+            return Player(id: rang, name: choisi.map { "\(camp) · \($0)" } ?? camp)
+        }
+        let partie = GameState.start(board: plateau, players: camps, rules: regles)
 
         var rangs: [MCPeerID: PlayerID] = [:]
         for (i, pair) in link.relies.enumerated() {

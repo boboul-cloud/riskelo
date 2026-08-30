@@ -35,7 +35,8 @@ enum Message: Codable {
     /// désormais devant, dans une enveloppe qui ne change jamais de forme.
     ///
     /// 3 : le dialecte sort du message et passe dans l'enveloppe.
-    static let dialecte = 3
+    /// 4 : chacun dit son nom en arrivant — `bonjour`.
+    static let dialecte = 4
 
     /// La partie entière, envoyée par celui qui l'a ouverte — à chacun son
     /// rang, et le compte des coups déjà joués.
@@ -50,6 +51,19 @@ enum Message: Codable {
     case coup(Action, numero: Int, empreinte: UInt64)
     /// « Je ne suis plus à la même partie que vous, renvoyez-la. »
     case perdu
+    /// « Voici comment je m'appelle. »
+    ///
+    /// Envoyé par chacun dès la liaison établie, avant toute partie. Celui
+    /// qui héberge s'en sert pour nommer les camps : le nom part alors avec
+    /// l'état, et tous les appareils voient les mêmes joueurs.
+    ///
+    /// Le nom de l'appareil n'aurait pas suffi. Depuis iOS 16, il répond
+    /// « iPhone » à qui n'a pas l'autorisation d'en demander plus : deux
+    /// téléphones se présentent au salon sous le même nom.
+    ///
+    /// Vide quand on ne s'est pas donné de nom — le camp garde alors sa
+    /// couleur pour seul nom, et c'est très bien.
+    case bonjour(nom: String)
 
     /// Ce qu'on trouve dans un paquet reçu.
     ///

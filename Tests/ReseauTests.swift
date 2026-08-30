@@ -160,6 +160,26 @@ struct ReseauTests {
         }
     }
 
+    /// Le nom qu'on se donne fait le voyage. C'est lui qui permet à un
+    /// appareil de nommer les camps des autres : s'il se perdait, chacun
+    /// verrait « Rouge » là où l'autre voit « Rouge · Marie », et rien à
+    /// l'écran ne dirait pourquoi.
+    @Test func leNomChoisiPasseLeFil() {
+        guard let data = Message.bonjour(nom: "Marie").data,
+              case let .message(.bonjour(nom)) = Message.lire(data) else {
+            Issue.record("le salut ne survit pas au fil"); return
+        }
+        #expect(nom == "Marie")
+
+        // Sans nom, le salut part quand même : l'hôte doit pouvoir distinguer
+        // « je n'ai pas de nom » de « je n'ai rien dit ».
+        guard let vide = Message.bonjour(nom: "").data,
+              case let .message(.bonjour(rien)) = Message.lire(vide) else {
+            Issue.record("un salut sans nom ne se lit pas"); return
+        }
+        #expect(rien.isEmpty)
+    }
+
     /// Tout ce qui part porte le dialecte, sans exception : c'est la seule
     /// façon que l'autre bout ait toujours de quoi trancher.
     @Test func toutPaquetPorteSonDialecte() {
@@ -167,6 +187,7 @@ struct ReseauTests {
             .partie(partieNeuve(), votreRang: 2, numero: 0),
             .coup(.endTurn, numero: 1, empreinte: 7),
             .perdu,
+            .bonjour(nom: "Robert"),
         ]
         for message in messages {
             guard let data = message.data,

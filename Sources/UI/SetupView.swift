@@ -32,6 +32,9 @@ struct SetupView: View {
     /// garde d'une partie à l'autre. D'où les préférences du système plutôt
     /// qu'un état de cette vue.
     @AppStorage(Sons.cle) private var sons = true
+    /// Le nom de celui qui tient l'appareil. Comme le son, il vaut pour
+    /// l'application et non pour une partie.
+    @AppStorage(Pseudo.cle) private var pseudo = ""
     var onStart: ([Player], Rules, Boards) -> Void
     var onNetwork: (Rules, Boards) -> Void = { _, _ in }
     /// Le mode d'emploi complet — il s'ouvre aussi depuis la partie.
@@ -186,6 +189,30 @@ struct SetupView: View {
                                 }
                             }
                             .tint(Palette.lost)
+                        }
+
+                        reglage("Vous") {
+                            TextField("Sans nom", text: $pseudo)
+                                .textFieldStyle(.plain)
+                                .autocorrectionDisabled()
+                                .font(.subheadline)
+                                .foregroundStyle(Palette.ink)
+                                .padding(.horizontal, 14).padding(.vertical, 10)
+                                .background(Color.white.opacity(0.06), in: Capsule())
+                                .overlay(Capsule().stroke(Palette.dim.opacity(0.3), lineWidth: 1))
+                                // Borné à la saisie et non à l'affichage : la
+                                // bande des camps tient sur une seule ligne, et
+                                // un nom à rallonge la ferait défiler pour rien.
+                                .onChange(of: pseudo) { _, saisi in
+                                    let court = String(saisi.prefix(Pseudo.maximum))
+                                    if court != saisi { pseudo = court }
+                                }
+                            Text("Facultatif. Votre camp se lira « Bleu · "
+                                 + "\(Pseudo.actuel ?? "Robert") · moi » — la couleur, votre "
+                                 + "nom, et « moi » pour dire que c'est le vôtre. En réseau, "
+                                 + "il fait le voyage : les autres vous verront ainsi, et "
+                                 + "vous les verrez de même.")
+                                .font(.caption2).foregroundStyle(Palette.dim)
                         }
 
                         reglage("Son") {

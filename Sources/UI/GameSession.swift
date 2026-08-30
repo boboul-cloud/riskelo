@@ -355,6 +355,12 @@ final class GameSession {
             annoncerOuverture()
             resume()
 
+        case .bonjour:
+            // Un salut arrivé après le lancement : les noms sont fixés depuis
+            // que la partie est partie, il n'y a plus rien à en faire. Le
+            // taire plutôt que de le compter pour un défaut.
+            break
+
         case let .coup(action, numero, empreinte):
             // Déjà joué : à quatre, l'hôte relaie, et le coup peut arriver
             // deux fois. On le reconnaît à son numéro.
@@ -510,6 +516,43 @@ final class GameSession {
         if !(player(a.defender)?.isBot ?? true) { return a.defender }
         if !(player(a.attacker)?.isBot ?? true) { return a.attacker }
         return nil
+    }
+
+    /// Le camp de celui qui tient l'appareil, s'il en tient un.
+    ///
+    /// En réseau, mon rang. Hors réseau, le premier humain de la table : à
+    /// deux humains sur un même appareil, c'est celui qui l'a ouvert.
+    var monCamp: PlayerID? {
+        enReseau ? monRang : game.players.first { !$0.isBot }?.id
+    }
+
+    /// Le nom d'un camp tel qu'il s'affiche.
+    ///
+    /// Trois éléments au plus, du plus durable au plus personnel :
+    ///
+    ///     Rouge · Marie · moi
+    ///     └ le camp   └ qui  └ c'est mon camp
+    ///
+    /// La couleur d'abord, parce que c'est elle qui relie le nom au plateau.
+    /// Le nom ensuite, quand il y en a un. Et « moi » en dernier, pour le
+    /// camp de celui qui tient l'appareil : en réseau, chacun voit les mêmes
+    /// noms sur les quatre écrans, et plus rien ne dirait sans cela lequel
+    /// est le sien. C'est ce que l'ancien « (vous) » disait, en moins bien —
+    /// il ne pouvait pas cohabiter avec un nom.
+    ///
+    /// `avecMoi` est faux pour la barre du haut : elle ne montre qu'un camp,
+    /// celui qui a la main, et le reste de l'écran dit déjà que c'est à vous.
+    /// Le « moi » n'y apprenait rien et faisait passer le nom sur deux
+    /// lignes — la barre grandissait d'autant, aux dépens du plateau.
+    func nomAffiche(_ j: Player, avecMoi: Bool = true) -> String {
+        // Un nom déjà composé arrive tel quel de l'autre appareil : l'hôte l'a
+        // posé au lancement, et y ajouter le pseudo d'ici lui collerait le
+        // mien. On ne compose donc soi-même que ce qui n'a pas été composé.
+        var nom = j.name
+        if nom == Boards.nomDeCamp(j.id), j.id == monCamp, let pseudo = Pseudo.actuel {
+            nom += " · \(pseudo)"
+        }
+        return avecMoi && j.id == monCamp ? nom + " · moi" : nom
     }
 
     var repondeur: PlayerID? { game.quiRepond ?? game.assault?.defender }

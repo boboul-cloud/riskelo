@@ -104,9 +104,11 @@ private struct TopBar: View {
             // La phase était écrite ici en toutes lettres. Le fil du bas la
             // montre désormais, et en la situant dans les trois étapes du
             // tour : la dire deux fois à deux endroits n'apprenait rien.
-            Text(g.currentPlayer.name
-                 + (session.enReseau && g.currentPlayer.id == session.monRang ? " (vous)" : ""))
+            Text(session.nomAffiche(g.currentPlayer, avecMoi: false))
                 .font(.subheadline.weight(.semibold)).foregroundStyle(Palette.ink)
+                // Un nom long ne pousse ni le tour ni les cinq boutons qui
+                // suivent : il se resserre, et se rogne s'il le faut.
+                .lineLimit(1).minimumScaleFactor(0.75)
             Spacer()
             VStack(alignment: .trailing, spacing: 1) {
                 Text("Tour \(g.turn)").font(.caption).foregroundStyle(Palette.dim)
@@ -283,14 +285,13 @@ private struct StandingsBar: View {
     private func camp(_ j: Player) -> some View {
         let g = session.game
         let aLaMain = j.id == g.currentPlayer.id && !g.isOver
-        let moi = session.enReseau && j.id == session.monRang
         let terres = g.territories(of: j.id).count
         let hommes = g.territories(of: j.id).reduce(0) { $0 + g.armies($1) }
         return HStack(spacing: 4) {
             Image(systemName: aLaMain ? "flag.fill" : "circle.fill")
                 .font(.system(size: aLaMain ? 11 : 8))
                 .foregroundStyle(Palette.campVif(j.id))
-            Text(j.name + (moi ? " (vous)" : ""))
+            Text(session.nomAffiche(j))
                 .font(.caption.weight(aLaMain ? .bold : .medium))
                 .foregroundStyle(Palette.ink)
                 .strikethrough(j.eliminated, color: Palette.dim)
@@ -960,7 +961,7 @@ private struct DossierSheet: View {
                     VStack(alignment: .leading, spacing: 6) {
                         HStack(spacing: 7) {
                             Circle().fill(Palette.camp(j.id)).frame(width: 9, height: 9)
-                            Text(j.name).font(.subheadline.weight(.semibold))
+                            Text(session.nomAffiche(j)).font(.subheadline.weight(.semibold))
                                 .foregroundStyle(Palette.ink)
                             if j.eliminated {
                                 Text("éliminé").font(.caption).foregroundStyle(Palette.dim)

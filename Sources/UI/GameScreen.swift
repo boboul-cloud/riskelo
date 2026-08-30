@@ -242,18 +242,37 @@ private struct StandingsBar: View {
             // repliés dans leur pastille ils devenaient illisibles.
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 6) {
+                    // La pastille garde la couleur du continent, tenu ou non.
+                    // Elle passait entièrement à la couleur de son maître, et
+                    // la bande cessait alors de renvoyer à la carte : les
+                    // Îles Britanniques étaient cerclées de jaune sur le
+                    // plateau et bleues ici. Or c'est bien la couleur qui
+                    // relie les deux — c'est à cela qu'elle sert.
+                    //
+                    // Qui le tient se dit donc autrement, et dans les termes
+                    // de la ligne du dessus : la pastille du camp et le
+                    // liseré à sa couleur, ceux-là mêmes qui marquent le
+                    // joueur à la main. Le fond se fait un peu plus franc,
+                    // pour qu'un continent tenu se repère sans lire.
                     ForEach(g.map.continentsInOrder) { c in
                         let maitre = tenu(c)
+                        let teinte = Palette.continent(rang: c.tint)
                         HStack(spacing: 3) {
+                            if let maitre {
+                                Image(systemName: "circle.fill")
+                                    .font(.system(size: 7))
+                                    .foregroundStyle(Palette.campVif(maitre))
+                            }
                             Text(c.name).font(.system(size: 10, weight: .medium))
                             Text("+\(c.bonus)").font(.system(size: 10, weight: .bold))
                         }
                         .fixedSize()
                         .padding(.horizontal, 7).padding(.vertical, 4)
-                        .background(maitre.map { Palette.camp($0).opacity(0.85) }
-                                    ?? Palette.continent(rang: c.tint).opacity(0.16),
-                                    in: Capsule())
-                        .foregroundStyle(maitre != nil ? Color.white : Palette.continent(rang: c.tint))
+                        .background(teinte.opacity(maitre != nil ? 0.30 : 0.16), in: Capsule())
+                        .overlay(Capsule().strokeBorder(
+                            maitre.map { Palette.campVif($0).opacity(0.9) } ?? .clear,
+                            lineWidth: 1.2))
+                        .foregroundStyle(teinte)
                     }
                 }
                 .padding(.vertical, 1)

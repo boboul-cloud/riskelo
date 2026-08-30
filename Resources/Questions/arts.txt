@@ -48,7 +48,7 @@ F | Quel peintre est célèbre pour ses tournesols ? | Vincent van Gogh | Claude
 F | Qui a écrit Le Tour du monde en quatre-vingts jours ? | Jules Verne | Alexandre Dumas | Victor Hugo | Émile Zola
 F | Quel instrument possède un archet et quatre cordes ? | Le violon | La guitare | La harpe | Le piano
 F | Qui a écrit Notre-Dame de Paris ? | Victor Hugo | Alexandre Dumas | Balzac | Zola
-F | Quelle est la couleur dominante de la période dite « bleue » de Picasso ? | Le bleu | Le rose | Le gris | Le vert
+F | Quelle période de Picasso a suivi sa période bleue ? | La période rose | La période verte | La période noire | La période dorée
 F | Qui a peint Les Tournesols et La Nuit étoilée ? | Vincent van Gogh | Paul Cézanne | Édouard Manet | Camille Pissarro
 F | Quel poète a écrit « Demain, dès l'aube » ? | Victor Hugo | Alfred de Musset | Lamartine | Rimbaud
 F | Quel monument parisien Gustave Eiffel a-t-il conçu ? | La tour Eiffel | L'Arc de Triomphe | Le Panthéon | L'Opéra Garnier
@@ -202,7 +202,7 @@ M | Quel écrivain a écrit Le Portrait de Dorian Gray ? | Oscar Wilde | Bram St
 M | Quel peintre a peint L'Angélus ? | Jean-François Millet | Gustave Courbet | Camille Pissarro | Charles-François Daubigny
 D | Quel compositeur a écrit Le Vaisseau fantôme ? | Richard Wagner | Carl Maria von Weber | Robert Schumann | Franz Liszt
 D | Qui a écrit Le Rivage des Syrtes ? | Julien Gracq | André Breton | Michel Butor | Alain Robbe-Grillet
-D | Non, quel peintre a peint L'Atelier du peintre ? | Gustave Courbet | Eugène Delacroix | Édouard Manet | Honoré Daumier
+D | Quel peintre a peint L'Atelier du peintre ? | Gustave Courbet | Eugène Delacroix | Édouard Manet | Honoré Daumier
 D | Quel écrivain portugais a écrit Le Livre de l'intranquillité ? | Fernando Pessoa | José Saramago | Eça de Queiroz | António Lobo Antunes
 D | Quel compositeur a écrit les Tableaux d'une exposition ? | Modeste Moussorgski | Nikolaï Rimski-Korsakov | Alexandre Borodine | César Cui
 D | Quel peintre a peint Le Déjeuner des canotiers ? | Auguste Renoir | Claude Monet | Gustave Caillebotte | Berthe Morisot
@@ -213,3 +213,209 @@ D | Qui a écrit Le Tambour ? | Günter Grass | Heinrich Böll | Thomas Mann | H
 D | Quel peintre a peint Les Époux Arnolfini ? | Jan van Eyck | Rogier van der Weyden | Hans Memling | Robert Campin
 D | Quel écrivain a écrit Si c'est un homme ? | Primo Levi | Elie Wiesel | Imre Kertész | Jorge Semprún
 D | Quel compositeur a écrit Le Beau Danube bleu ? | Johann Strauss fils | Johann Strauss père | Franz Lehár | Jacques Offenbach
+
+# — Lettres, pensée et mythes —
+
+F | Qui a écrit Le Bourgeois gentilhomme ? | Molière | Racine | Corneille | Marivaux
+F | Qui a écrit Le Cid ? | Corneille | Racine | Molière | Voltaire
+F | Qui a écrit Le Père Goriot ? | Balzac | Flaubert | Stendhal | Zola
+F | Qui a écrit L'Assommoir ? | Zola | Balzac | Maupassant | Daudet
+F | Qui a écrit La Peste ? | Albert Camus | Jean-Paul Sartre | André Malraux | Louis Aragon
+F | Qui a écrit 1984 ? | George Orwell | Aldous Huxley | Ray Bradbury | H. G. Wells
+F | Qui a écrit Le Seigneur des anneaux ? | J. R. R. Tolkien | C. S. Lewis | George R. R. Martin | Ursula Le Guin
+F | Qui a écrit Hamlet ? | William Shakespeare | Christopher Marlowe | Ben Jonson | John Milton
+F | Qui a écrit l'Iliade ? | Homère | Virgile | Hésiode | Sophocle
+F | Qui a créé Tintin ? | Hergé | Franquin | Peyo | Morris
+F | Qui a créé les Schtroumpfs ? | Peyo | Hergé | Franquin | Uderzo
+F | Qui a créé Lucky Luke ? | Morris | Goscinny | Franquin | Jacobs
+F | Quelle ville accueille chaque année le grand festival français de la bande dessinée ? | Angoulême | Avignon | Cannes | Deauville
+F | Qui est le roi des dieux dans la mythologie grecque ? | Zeus | Poséidon | Hadès | Apollon
+F | Quel dieu grec règne sur les mers ? | Poséidon | Zeus | Hadès | Héphaïstos
+F | Quel héros grec a accompli douze travaux ? | Héraclès | Thésée | Persée | Ulysse
+F | Quel personnage a volé le feu aux dieux ? | Prométhée | Icare | Sisyphe | Tantale
+F | Quel philosophe a dit « Je pense, donc je suis » ? | René Descartes | Blaise Pascal | Emmanuel Kant | Baruch Spinoza
+F | Quel philosophe grec a bu la ciguë ? | Socrate | Platon | Aristote | Diogène
+M | Qui a écrit Phèdre ? | Racine | Corneille | Molière | Voltaire
+M | Qui a écrit Tartuffe ? | Molière | Racine | Beaumarchais | Marivaux
+M | Qui a écrit Le Mariage de Figaro ? | Beaumarchais | Molière | Marivaux | Musset
+M | Qui a écrit Les Lettres persanes ? | Montesquieu | Voltaire | Diderot | Rousseau
+M | Qui a écrit Du contrat social ? | Jean-Jacques Rousseau | Voltaire | Montesquieu | Diderot
+M | Qui a dirigé la rédaction de l'Encyclopédie avec d'Alembert ? | Denis Diderot | Voltaire | Montesquieu | Buffon
+M | Qui a écrit Jacques le Fataliste ? | Denis Diderot | Voltaire | Rousseau | Marivaux
+M | Qui a écrit Les Contemplations ? | Victor Hugo | Alfred de Vigny | Lamartine | Musset
+M | Qui a écrit Illusions perdues ? | Balzac | Stendhal | Zola | Flaubert
+M | Quel cycle romanesque Balzac a-t-il intitulé du nom de la société ? | La Comédie humaine | Les Rougon-Macquart | Les Thibault | Les Hommes de bonne volonté
+M | Quel cycle de vingt romans Zola a-t-il consacré à une famille ? | Les Rougon-Macquart | La Comédie humaine | Les Thibault | Le Cycle de Jean-Christophe
+M | Qui a écrit Au Bonheur des Dames ? | Émile Zola | Balzac | Maupassant | Huysmans
+M | Qui a écrit L'Éducation sentimentale ? | Gustave Flaubert | Balzac | Stendhal | Zola
+M | Qui a écrit Boule de Suif ? | Guy de Maupassant | Alphonse Daudet | Émile Zola | Prosper Mérimée
+M | Qui a écrit Alcools et Calligrammes ? | Guillaume Apollinaire | Paul Valéry | Paul Éluard | Blaise Cendrars
+M | Quel poète a écrit « Il pleure dans mon cœur » ? | Paul Verlaine | Arthur Rimbaud | Charles Baudelaire | Stéphane Mallarmé
+M | Qui a écrit La Condition humaine ? | André Malraux | Albert Camus | Jean-Paul Sartre | Paul Nizan
+M | Qui a écrit La Nausée ? | Jean-Paul Sartre | Albert Camus | Simone de Beauvoir | Maurice Merleau-Ponty
+M | Qui a écrit Huis clos ? | Jean-Paul Sartre | Albert Camus | Jean Anouilh | Eugène Ionesco
+M | Qui a écrit Mémoires d'Hadrien ? | Marguerite Yourcenar | Marguerite Duras | Colette | Nathalie Sarraute
+M | Quelle écrivaine fut la première femme élue à l'Académie française ? | Marguerite Yourcenar | Colette | Simone de Beauvoir | Marguerite Duras
+M | Qui a écrit L'Amant ? | Marguerite Duras | Marguerite Yourcenar | Françoise Sagan | Annie Ernaux
+M | Qui a écrit L'Écume des jours ? | Boris Vian | Raymond Queneau | Georges Perec | Romain Gary
+M | Qui a écrit Zazie dans le métro ? | Raymond Queneau | Boris Vian | Georges Perec | Marcel Aymé
+M | Qui a écrit La Vie mode d'emploi ? | Georges Perec | Raymond Queneau | Michel Butor | Alain Robbe-Grillet
+M | Qui a écrit Le Hussard sur le toit ? | Jean Giono | Marcel Pagnol | Henri Bosco | Jean Carrière
+M | Qui a écrit La Gloire de mon père ? | Marcel Pagnol | Jean Giono | Alphonse Daudet | Henri Bosco
+M | Quelle écrivaine française a reçu le prix Nobel de littérature en 2022 ? | Annie Ernaux | Marguerite Duras | Christine Angot | Amélie Nothomb
+M | Quel écrivain français a reçu le prix Nobel de littérature en 2008 ? | J. M. G. Le Clézio | Patrick Modiano | Michel Houellebecq | Claude Simon
+M | Qui a écrit Faust ? | Goethe | Schiller | Novalis | Heine
+M | Qui a écrit La Divine Comédie ? | Dante | Pétrarque | Boccace | L'Arioste
+M | Qui a écrit Le Procès ? | Franz Kafka | Thomas Mann | Robert Musil | Hermann Hesse
+M | Qui a écrit Les Raisins de la colère ? | John Steinbeck | Ernest Hemingway | William Faulkner | Sinclair Lewis
+M | Qui a écrit Les Hauts de Hurlevent ? | Emily Brontë | Charlotte Brontë | Jane Austen | George Eliot
+M | Qui a écrit Jane Eyre ? | Charlotte Brontë | Emily Brontë | Anne Brontë | Elizabeth Gaskell
+M | Qui a écrit Un chant de Noël ? | Charles Dickens | Lewis Carroll | Robert Louis Stevenson | Wilkie Collins
+M | Qui a écrit L'Île au trésor ? | Robert Louis Stevenson | Daniel Defoe | Jack London | Herman Melville
+M | Qui a écrit L'Appel de la forêt ? | Jack London | Rudyard Kipling | Fenimore Cooper | Mark Twain
+M | Qui a écrit Alice au pays des merveilles ? | Lewis Carroll | J. M. Barrie | Roald Dahl | Kenneth Grahame
+M | Qui a écrit l'Énéide ? | Virgile | Ovide | Horace | Lucrèce
+M | Qui a écrit Les Métamorphoses en latin ? | Ovide | Virgile | Apulée | Sénèque
+M | Qui a écrit Fictions ? | Jorge Luis Borges | Julio Cortázar | Gabriel García Márquez | Carlos Fuentes
+M | Qui a créé Astérix avec Uderzo ? | René Goscinny | Jean Giraud | Jacques Tardi | Marcel Gotlib
+M | Qui a créé Gaston Lagaffe ? | Franquin | Peyo | Morris | Hergé
+M | Qui a créé Corto Maltese ? | Hugo Pratt | Milo Manara | Guido Crepax | Sergio Toppi
+M | Qui a créé Blake et Mortimer ? | Edgar P. Jacobs | Hergé | Jacques Martin | Bob de Moor
+M | Qui a créé Titeuf ? | Zep | Zidrou | Midam | Tome
+M | Quelle dessinatrice iranienne a raconté son enfance dans Persepolis ? | Marjane Satrapi | Claire Bretécher | Pénélope Bagieu | Catel
+M | Qui a tué le Minotaure dans le labyrinthe ? | Thésée | Héraclès | Persée | Jason
+M | Quel héros grec a tranché la tête de Méduse ? | Persée | Thésée | Héraclès | Bellérophon
+M | Quel musicien est descendu aux Enfers chercher sa femme ? | Orphée | Apollon | Amphion | Marsyas
+M | Quelle déesse grecque incarne la beauté ? | Aphrodite | Héra | Athéna | Artémis
+M | Quel dieu romain correspond au grec Arès ? | Mars | Jupiter | Mercure | Vulcain
+M | Quel roi transformait en or tout ce qu'il touchait ? | Midas | Crésus | Tantale | Priam
+M | Qui a conçu le labyrinthe de Crète ? | Dédale | Icare | Hephaïstos | Minos
+M | Quel navire emmenait Jason à la conquête de la Toison d'or ? | L'Argo | Le Pélée | L'Éole | Le Nautile
+M | Quelle boîte a répandu tous les maux sur le monde ? | La boîte de Pandore | L'urne d'Éole | Le coffre de Danaé | La corne d'Amalthée
+M | Qui a écrit La République ? | Platon | Aristote | Socrate | Cicéron
+M | Qui a écrit l'Éthique à Nicomaque ? | Aristote | Platon | Épicure | Sénèque
+M | Quel philosophe vivait dans un tonneau ? | Diogène | Épicure | Zénon | Héraclite
+M | Qui a écrit Les Essais ? | Michel de Montaigne | Blaise Pascal | La Rochefoucauld | La Bruyère
+M | Qui a écrit les Pensées ? | Blaise Pascal | Montaigne | Descartes | Malebranche
+M | Qui a écrit la Critique de la raison pure ? | Emmanuel Kant | Hegel | Fichte | Schopenhauer
+M | Qui a écrit Le Capital ? | Karl Marx | Friedrich Engels | Pierre-Joseph Proudhon | Ferdinand Lassalle
+M | Qui a écrit L'Être et le Néant ? | Jean-Paul Sartre | Martin Heidegger | Maurice Merleau-Ponty | Albert Camus
+D | Qui a écrit Le Neveu de Rameau ? | Denis Diderot | Voltaire | Marivaux | Chamfort
+D | Qui a écrit Adolphe ? | Benjamin Constant | Chateaubriand | Senancour | Nodier
+D | Qui a écrit Les Mémoires d'outre-tombe ? | Chateaubriand | Lamartine | Vigny | Michelet
+D | Quel poète a écrit Le Lac ? | Alphonse de Lamartine | Alfred de Musset | Victor Hugo | Gérard de Nerval
+D | Qui a écrit Aurélia et Les Chimères ? | Gérard de Nerval | Charles Baudelaire | Théophile Gautier | Alfred de Vigny
+D | Qui a écrit À rebours ? | Joris-Karl Huysmans | Émile Zola | Villiers de L'Isle-Adam | Barbey d'Aurevilly
+D | Qui a écrit L'Après-midi d'un faune ? | Stéphane Mallarmé | Paul Verlaine | Arthur Rimbaud | Paul Valéry
+D | Qui a écrit Le Cimetière marin ? | Paul Valéry | Stéphane Mallarmé | Saint-John Perse | Paul Claudel
+D | Quel roman de Georges Perec est écrit sans la lettre e ? | La Disparition | Les Choses | W ou le souvenir d'enfance | Un homme qui dort
+D | Quel écrivain a reçu deux fois le prix Goncourt sous deux noms ? | Romain Gary | Marcel Aymé | Julien Gracq | Michel Tournier
+D | Quel écrivain a refusé le prix Goncourt en 1951 ? | Julien Gracq | Jean-Paul Sartre | Louis-Ferdinand Céline | André Malraux
+D | Qui a écrit Le Roi des Aulnes ? | Michel Tournier | Julien Gracq | Patrick Modiano | Claude Simon
+D | Qui a écrit La Route des Flandres ? | Claude Simon | Alain Robbe-Grillet | Nathalie Sarraute | Michel Butor
+D | Qui a écrit La Jalousie ? | Alain Robbe-Grillet | Claude Simon | Michel Butor | Nathalie Sarraute
+D | Qui a écrit Bonjour tristesse à dix-huit ans ? | Françoise Sagan | Marguerite Duras | Simone de Beauvoir | Colette
+D | Qui a écrit Les Souffrances du jeune Werther ? | Goethe | Schiller | Novalis | Hölderlin
+D | Qui a écrit La Montagne magique ? | Thomas Mann | Hermann Hesse | Robert Musil | Stefan Zweig
+D | Qui a écrit L'Homme sans qualités ? | Robert Musil | Thomas Mann | Hermann Broch | Joseph Roth
+D | Qui a écrit Le Loup des steppes ? | Hermann Hesse | Thomas Mann | Stefan Zweig | Franz Werfel
+
+# — Peinture, sculpture, architecture, musique et scène —
+
+F | Qui a sculpté le David de Florence ? | Michel-Ange | Donatello | Cellini | Bernin
+F | Qui a peint La Création d'Adam au plafond de la Sixtine ? | Michel-Ange | Raphaël | Léonard de Vinci | Le Titien
+F | Qui a composé La Flûte enchantée ? | Mozart | Beethoven | Haydn | Gluck
+F | Qui a composé Carmen ? | Georges Bizet | Jules Massenet | Charles Gounod | Camille Saint-Saëns
+F | Qui a composé La Traviata ? | Giuseppe Verdi | Giacomo Puccini | Gioachino Rossini | Vincenzo Bellini
+F | Dans quel pays Ludwig van Beethoven est-il né ? | En Allemagne | En Autriche | En Hongrie | Aux Pays-Bas
+F | Combien de symphonies Beethoven a-t-il achevées ? | Neuf | Cinq | Douze | Quarante et une
+F | Combien de touches compte un piano de concert ? | 88 | 66 | 100 | 72
+F | Combien de musiciens compte un quatuor ? | Quatre | Trois | Cinq | Six
+F | Comment appelle-t-on la voix de femme la plus aiguë ? | La soprano | La contralto | Le mezzo | La basse
+F | Quelle ville accueille chaque été le grand festival français de théâtre ? | Avignon | Cannes | Angoulême | Aix-en-Provence
+F | Quel théâtre parisien est surnommé la maison de Molière ? | La Comédie-Française | L'Odéon | Le Châtelet | Le théâtre de la Ville
+F | Quelle basilique blanche domine la butte Montmartre ? | Le Sacré-Cœur | La Madeleine | Saint-Sulpice | Le Panthéon
+F | Quel musée parisien occupe une ancienne gare ? | Le musée d'Orsay | Le Louvre | Le Centre Pompidou | Le Petit Palais
+F | Qui a sculpté la statue de la Liberté ? | Auguste Bartholdi | Auguste Rodin | Gustave Eiffel | Antoine Bourdelle
+M | Qui a peint L'École d'Athènes ? | Raphaël | Michel-Ange | Léonard de Vinci | Le Pérugin
+M | Qui a peint Le Printemps et La Naissance de Vénus ? | Botticelli | Raphaël | Le Titien | Giotto
+M | Qui a peint La Vierge aux rochers ? | Léonard de Vinci | Raphaël | Michel-Ange | Le Corrège
+M | Qui a peint Les Noces de Cana conservées au Louvre ? | Véronèse | Le Tintoret | Le Titien | Caravage
+M | Quel peintre italien a bouleversé la peinture par ses contrastes d'ombre ? | Le Caravage | Le Titien | Raphaël | Botticelli
+M | Qui a peint Le Trois Mai 1808 ? | Goya | Vélasquez | Murillo | Zurbarán
+M | Qui a peint La Grande Odalisque ? | Ingres | Delacroix | Géricault | David
+M | Qui a peint Le Serment des Horaces ? | Jacques-Louis David | Ingres | Girodet | Gros
+M | Qui a peint La Mort de Marat ? | Jacques-Louis David | Delacroix | Géricault | Prud'hon
+M | Qui a peint Un enterrement à Ornans ? | Gustave Courbet | Jean-François Millet | Camille Corot | Honoré Daumier
+M | Qui a peint Olympia ? | Édouard Manet | Claude Monet | Edgar Degas | Auguste Renoir
+M | Qui a peint La Montagne Sainte-Victoire ? | Paul Cézanne | Vincent van Gogh | Paul Gauguin | Georges Braque
+M | Qui a peint Les Joueurs de cartes ? | Paul Cézanne | Édouard Manet | Gustave Courbet | Camille Pissarro
+M | Quel peintre a inventé le pointillisme ? | Georges Seurat | Paul Signac | Camille Pissarro | Henri-Edmond Cross
+M | Sur quelle île du Pacifique Gauguin a-t-il peint ses dernières toiles ? | En Polynésie française | À Cuba | Aux Açores | À Madagascar
+M | Qui a peint Ceci n'est pas une pipe ? | René Magritte | Salvador Dalí | Max Ernst | Yves Tanguy
+M | Qui a peint Le Fils de l'homme, au visage caché par une pomme ? | René Magritte | Salvador Dalí | Giorgio de Chirico | Paul Delvaux
+M | Quel peintre néerlandais a composé des grilles de rouge, jaune et bleu ? | Piet Mondrian | Theo van Doesburg | Kazimir Malevitch | Josef Albers
+M | Quel peintre américain versait la peinture sur des toiles au sol ? | Jackson Pollock | Mark Rothko | Willem de Kooning | Barnett Newman
+M | Quelle peintre mexicaine est célèbre pour ses autoportraits ? | Frida Kahlo | Remedios Varo | Leonora Carrington | Tina Modotti
+M | Quel musée parisien abrite les grands Nymphéas de Monet ? | Le musée de l'Orangerie | Le musée d'Orsay | Le Louvre | Le musée Marmottan
+M | Quel musée de Madrid abrite Les Ménines ? | Le Prado | Le Reina Sofía | Le Thyssen | L'Escurial
+M | Quel musée de Madrid abrite Guernica ? | Le Reina Sofía | Le Prado | Le Thyssen | La Casa de Campo
+M | Quel musée de Florence abrite La Naissance de Vénus ? | Les Offices | Le palais Pitti | Le Bargello | L'Accademia
+M | Quel musée d'Amsterdam abrite La Ronde de nuit ? | Le Rijksmuseum | Le musée Van Gogh | Le Stedelijk | La maison d'Anne Frank
+M | Quel grand musée se trouve à Saint-Pétersbourg ? | L'Ermitage | La galerie Tretiakov | Le Kremlin | Le musée Pouchkine
+M | Dans quel musée se trouve la Victoire de Samothrace ? | Le Louvre | Le British Museum | Le Prado | Les Offices
+M | Qui a sculpté la Pietà conservée au Vatican ? | Michel-Ange | Donatello | Le Bernin | Raphaël
+M | Qui a sculpté Les Bourgeois de Calais ? | Auguste Rodin | Camille Claudel | Aristide Maillol | Antoine Bourdelle
+M | Quelle sculptrice fut l'élève et la compagne de Rodin ? | Camille Claudel | Suzanne Valadon | Berthe Morisot | Sarah Bernhardt
+M | Quel style architectural précède le gothique ? | Le roman | Le baroque | Le classique | Le byzantin
+M | Qui a dessiné les jardins du château de Versailles ? | André Le Nôtre | Jules Hardouin-Mansart | Louis Le Vau | Charles Le Brun
+M | Quel architecte a agrandi Versailles pour Louis XIV ? | Jules Hardouin-Mansart | André Le Nôtre | Claude Perrault | Philibert Delorme
+M | Quelle cathédrale française est célèbre pour le bleu de ses vitraux ? | Chartres | Amiens | Bourges | Beauvais
+M | Quel monument parisien abrite le tombeau de Napoléon ? | Les Invalides | Le Panthéon | Notre-Dame | L'Arc de triomphe
+M | Quel palais accueillit les papes au XIVᵉ siècle en France ? | Le palais des Papes d'Avignon | Le Louvre | Le palais du Latran | Le palais de Fontainebleau
+M | Quel château de la Loire possède un escalier à double révolution ? | Chambord | Chenonceau | Amboise | Blois
+M | Quels architectes ont conçu le Centre Pompidou ? | Renzo Piano et Richard Rogers | Le Corbusier et Perret | Jean Nouvel et Gehry | Norman Foster et Ando
+M | Quel architecte a conçu le musée Guggenheim de Bilbao ? | Frank Gehry | Frank Lloyd Wright | Norman Foster | Zaha Hadid
+M | Qui a composé La Bohème ? | Giacomo Puccini | Giuseppe Verdi | Ruggero Leoncavallo | Pietro Mascagni
+M | Qui a composé Madame Butterfly ? | Giacomo Puccini | Giuseppe Verdi | Jules Massenet | Georges Bizet
+M | Qui a composé Aïda ? | Giuseppe Verdi | Giacomo Puccini | Gaetano Donizetti | Vincenzo Bellini
+M | Qui a composé Le Barbier de Séville ? | Gioachino Rossini | Giuseppe Verdi | Wolfgang Mozart | Gaetano Donizetti
+M | Qui a composé Guillaume Tell ? | Gioachino Rossini | Giuseppe Verdi | Carl Maria von Weber | Daniel Auber
+M | Qui a composé Le Messie ? | Georg Friedrich Haendel | Jean-Sébastien Bach | Joseph Haydn | Antonio Vivaldi
+M | Qui a composé la Passion selon saint Matthieu ? | Jean-Sébastien Bach | Georg Friedrich Haendel | Heinrich Schütz | Georg Philipp Telemann
+M | Qui a composé la suite Peer Gynt ? | Edvard Grieg | Jean Sibelius | Carl Nielsen | Franz Berwald
+M | Qui a composé Finlandia ? | Jean Sibelius | Edvard Grieg | Antonín Dvorák | Bedrich Smetana
+M | Qui a composé les Rhapsodies hongroises ? | Franz Liszt | Johannes Brahms | Béla Bartók | Frédéric Chopin
+M | Qui a composé Clair de lune ? | Claude Debussy | Maurice Ravel | Erik Satie | Gabriel Fauré
+M | Qui a composé les Gymnopédies ? | Erik Satie | Claude Debussy | Maurice Ravel | Francis Poulenc
+M | Qui a composé le chant devenu l'hymne national français ? | Rouget de Lisle | Hector Berlioz | Étienne Méhul | François Gossec
+M | Quel est le plus grand des instruments à vent ? | L'orgue | Le tuba | La contrebasse | Le basson
+M | Comment appelle-t-on la voix d'homme la plus grave ? | La basse | Le ténor | Le baryton | La haute-contre
+M | Qui a écrit La Cantatrice chauve ? | Eugène Ionesco | Samuel Beckett | Jean Genet | Arthur Adamov
+M | Qui a écrit Rhinocéros ? | Eugène Ionesco | Samuel Beckett | Jean Anouilh | Jean-Paul Sartre
+M | Qui a écrit l'Antigone jouée à Paris en 1944 ? | Jean Anouilh | Jean Giraudoux | Jean Cocteau | Paul Claudel
+M | Qui a écrit Ubu roi ? | Alfred Jarry | Guillaume Apollinaire | Antonin Artaud | Tristan Tzara
+M | Combien d'actes compte une tragédie classique française ? | Cinq | Trois | Quatre | Deux
+M | Quelle règle du théâtre classique impose temps, lieu et action uniques ? | La règle des trois unités | La règle de bienséance | La règle du quatrième mur | L'unité de ton
+D | Qui a peint La Reddition de Breda ? | Vélasquez | Goya | Murillo | Ribera
+D | Qui a peint Un dimanche après-midi à l'île de la Grande Jatte ? | Georges Seurat | Paul Signac | Camille Pissarro | Claude Monet
+D | Qui a peint Le Christ jaune ? | Paul Gauguin | Vincent van Gogh | Émile Bernard | Maurice Denis
+D | Qui a peint Le Fifre ? | Édouard Manet | Edgar Degas | Gustave Courbet | James Whistler
+D | Qui a peint Le Cri après avoir traversé un fjord au crépuscule ? | Edvard Munch | Ernst Ludwig Kirchner | James Ensor | Egon Schiele
+D | Quel peintre russe a peint un carré noir sur fond blanc ? | Kazimir Malevitch | Vassily Kandinsky | Marc Chagall | Alexandre Rodtchenko
+D | Quel peintre a couvert ses toiles de villages russes et de violonistes volants ? | Marc Chagall | Kazimir Malevitch | Vassily Kandinsky | Chaïm Soutine
+D | Quel peintre britannique a peint des papes hurlants ? | Francis Bacon | Lucian Freud | David Hockney | Graham Sutherland
+D | Quel peintre américain a peint des solitudes urbaines et des bars la nuit ? | Edward Hopper | Andrew Wyeth | Grant Wood | Norman Rockwell
+D | Qui a sculpté La Danse pour la façade de l'Opéra Garnier ? | Jean-Baptiste Carpeaux | Auguste Rodin | François Rude | James Pradier
+D | Qui a sculpté le haut-relief de La Marseillaise sur l'Arc de triomphe ? | François Rude | Jean-Baptiste Carpeaux | Antoine Étex | David d'Angers
+D | Quel ingénieur a conçu l'armature intérieure de la statue de la Liberté ? | Gustave Eiffel | Auguste Bartholdi | Viollet-le-Duc | Eugène Freyssinet
+D | Quel architecte a restauré Notre-Dame de Paris au XIXᵉ siècle ? | Viollet-le-Duc | Haussmann | Garnier | Labrouste
+D | Quel architecte allemand a dirigé le Bauhaus à sa fondation ? | Walter Gropius | Mies van der Rohe | Hannes Meyer | Bruno Taut
+D | Quel architecte a résumé son art par la formule moins c'est plus ? | Mies van der Rohe | Le Corbusier | Walter Gropius | Louis Sullivan
+D | Quelle architecte irako-britannique a conçu des bâtiments tout en courbes ? | Zaha Hadid | Kazuyo Sejima | Odile Decq | Denise Scott Brown
+D | Qui a composé la Symphonie du destin, dite la Cinquième ? | Ludwig van Beethoven | Franz Schubert | Johannes Brahms | Gustav Mahler
+D | Qui a composé la Symphonie inachevée ? | Franz Schubert | Ludwig van Beethoven | Anton Bruckner | Gustav Mahler
+D | Qui a composé le Chant de la terre ? | Gustav Mahler | Richard Strauss | Anton Bruckner | Hugo Wolf
+D | Qui a composé les Danses hongroises ? | Johannes Brahms | Franz Liszt | Antonín Dvorák | Béla Bartók
+D | Qui a composé Le Château de Barbe-Bleue ? | Béla Bartók | Zoltán Kodály | Leos Janácek | György Ligeti
+D | Qui a composé Boris Godounov ? | Modeste Moussorgski | Piotr Tchaïkovski | Nikolaï Rimski-Korsakov | Alexandre Borodine

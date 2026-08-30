@@ -48,7 +48,7 @@ F | De quelle couleur est la ceinture la plus élevée au karaté ? | Noire | Ro
 F | Quel sport oppose deux équipes de cinq sur un parquet avec un panier ? | Le basket-ball | Le handball | Le volley-ball | Le futsal
 F | Combien de temps dure un match de basket-ball en NBA ? | 48 minutes | 40 minutes | 60 minutes | 36 minutes
 F | Dans quel sport parle-t-on de « service » et de « smash » ? | Le tennis | Le football | Le rugby | Le cyclisme
-F | Quelle épreuve d'athlétisme consiste à lancer un disque ? | Le lancer du disque | Le lancer du poids | Le javelot | Le marteau
+F | Combien d'épreuves de lancer figurent au programme olympique d'athlétisme ? | Quatre | Trois | Deux | Six
 F | Sur quelle surface se joue le tournoi de Wimbledon ? | Le gazon | La terre battue | Le dur | La moquette
 F | Combien de joueurs compte une équipe de football américain sur le terrain ? | Onze | Neuf | Treize | Quinze
 F | Quel sport se pratique avec un ballon ovale ? | Le rugby | Le football | Le basket-ball | Le volley-ball
@@ -63,7 +63,7 @@ F | Combien de temps dure une mi-temps au football ? | 45 minutes | 30 minutes |
 F | Quel sport a rendu célèbre Zinédine Zidane ? | Le football | Le rugby | Le handball | Le basket-ball
 F | Quel tournoi de tennis se joue à New York ? | L'US Open | Roland-Garros | Wimbledon | L'Open d'Australie
 F | Quel sport consiste à faire tomber des quilles ? | Le bowling | La pétanque | Le curling | Le billard
-F | Quelle balle est la plus petite : celle du golf ou celle du tennis ? | Celle du golf | Celle du tennis | Elles sont identiques | Celle du ping-pong
+F | Quelle balle de sport est creusée de petites alvéoles ? | La balle de golf | La balle de tennis | La balle de ping-pong | La balle de squash
 F | Combien de joueurs compte une équipe de rugby à XIII ? | Treize | Quinze | Onze | Neuf
 M | Combien de temps dure un match de hockey sur glace en NHL ? | 60 minutes | 45 minutes | 80 minutes | 40 minutes
 M | Quelle ville a accueilli les premiers Jeux olympiques d'hiver, en 1924 ? | Chamonix | Saint-Moritz | Oslo | Innsbruck
@@ -119,7 +119,7 @@ F | Dans quel sport parle-t-on de « KO » ? | La boxe | Le tennis | Le golf | L
 F | Quel sport olympique se dispute sur un cheval d'arçons ? | La gymnastique | L'équitation | L'athlétisme | La lutte
 F | Combien de temps dure un match de tennis de table en points ? | Onze points par manche | Vingt et un points | Quinze points | Sept points
 F | Quel sport se joue avec un maillet à cheval ? | Le polo | Le croquet | Le hockey | Le cricket
-F | Quelle est la distance d'un cent mètres ? | Cent mètres | Cent yards | Cent pas | Cent pieds
+F | Quelle est la plus courte course de sprint au programme olympique ? | Le cent mètres | Le deux cents mètres | Le soixante mètres | Le quatre cents mètres
 F | Quel pays a inventé le judo ? | Le Japon | La Chine | La Corée | Le Viêt Nam
 F | Dans quel sport marque-t-on des « points de mêlée » ? | Le rugby | Le football | Le handball | Le basket-ball
 F | Quel sport de glisse se pratique sur une planche unique ? | Le snowboard | Le ski | La luge | Le patinage
@@ -138,7 +138,7 @@ F | Quel sport utilise un shuttlecock, ou volant ? | Le badminton | Le tennis | 
 F | Quelle épreuve d'athlétisme se court sur 42 kilomètres ? | Le marathon | Le semi-marathon | Le dix kilomètres | Le cross
 F | Quel animal court dans une course hippique ? | Le cheval | Le lévrier | Le chameau | L'autruche
 F | Combien de manches gagnantes faut-il en volley-ball ? | Trois | Deux | Quatre | Cinq
-M | Quel est le nom du trophée de la Coupe du monde de football ? | Le trophée de la Coupe du monde | La coupe Jules Rimet | La coupe Webb Ellis | Le trophée Henri Delaunay
+M | Quel trophée a récompensé le vainqueur de la Coupe du monde jusqu'en 1970 ? | La coupe Jules Rimet | La coupe Webb Ellis | Le trophée Henri Delaunay | Le trophée Havelange
 M | Combien de temps dure un match de rugby à XV ? | Quatre-vingts minutes | Soixante minutes | Quatre-vingt-dix minutes | Soixante-dix minutes
 M | Quel pays a remporté l'Euro de football en 2016 ? | Le Portugal | La France | L'Espagne | L'Allemagne
 M | Quelle course de voiliers fait le tour du monde en solitaire ? | Le Vendée Globe | La Route du Rhum | La Transat | La Solitaire du Figaro
@@ -156,7 +156,7 @@ M | Quel club français a remporté la Ligue des champions en 1993 ? | L'Olympiq
 M | Quelle course automobile américaine se dispute sur un ovale de 500 miles ? | Les 500 Miles d'Indianapolis | Les 24 Heures de Daytona | La NASCAR Cup | Le Grand Prix des États-Unis
 M | Combien de temps dure un round de MMA professionnel ? | Cinq minutes | Trois minutes | Deux minutes | Quatre minutes
 M | Quel pays a remporté la Coupe du monde de rugby en 2023 ? | L'Afrique du Sud | La Nouvelle-Zélande | La France | L'Angleterre
-M | Quel est le nom du tournoi de rugby européen entre six nations ? | Le Tournoi des Six Nations | La Coupe d'Europe | Le Championnat continental | La Coupe des nations
+M | Combien de nations disputaient le Tournoi avant l'arrivée de l'Italie ? | Cinq | Quatre | Six | Sept
 M | Combien de trous compte un parcours de golf en compétition sur quatre jours ? | Soixante-douze | Trente-six | Cinquante-quatre | Quatre-vingt-dix
 M | Quelle nage se pratique sur le dos ? | Le dos crawlé | La brasse | Le papillon | Le crawl
 M | Quel sport se dispute à Roland-Garros, Wimbledon, Melbourne et New York ? | Le tennis | Le golf | L'athlétisme | Le cyclisme
@@ -188,13 +188,13 @@ D | Quelle épreuve de ski de fond est la plus longue aux Jeux olympiques mascul
 D | Quel joueur a remporté le plus de Ballons d'or avant 2020 ? | Lionel Messi | Cristiano Ronaldo | Michel Platini | Johan Cruyff
 D | Quelle ville a accueilli les premiers Jeux paralympiques d'été ? | Rome | Tokyo | Londres | Munich
 D | Quel pays a remporté le premier Tournoi des Cinq Nations en 1910 ? | L'Angleterre | Le pays de Galles | L'Écosse | La France
-F | Quel sport se pratique avec une planche et une voile ? | La planche à voile | Le surf | Le kitesurf | L'aviron
+F | Quel sport de glisse se pratique sur les vagues, sans voile ni moteur ? | Le surf | La planche à voile | Le kitesurf | Le ski nautique
 F | Dans quel sport crie-t-on « touché » ? | L'escrime | La boxe | Le judo | Le tir
 F | Quel sport olympique consiste à soulever une barre chargée ? | L'haltérophilie | La lutte | Le lancer du poids | La gymnastique
-F | Quel sport nautique se pratique sur une planche tractée par un bateau ? | Le ski nautique | La voile | L'aviron | Le canoë
+F | Quel sport nautique se pratique sur deux skis tractés par un bateau ? | Le ski nautique | Le wakeboard | La voile | L'aviron
 F | Quel sport se joue avec des boules d'acier sur un terrain de sable ? | La pétanque | Le bowling | Le curling | Le croquet
 F | Quel symbole représente les Jeux olympiques ? | Cinq anneaux entrelacés | Une flamme seule | Trois cercles | Une couronne de laurier
-F | Quel sport oppose deux équipes autour d'une corde ? | Le tir à la corde | Le lancer du marteau | La lutte | Le rugby
+F | Le tir à la corde a-t-il déjà figuré au programme des Jeux olympiques ? | Oui, jusqu'en 1920 | Non, jamais | Oui, depuis 1996 | Oui, une seule fois en 1936
 F | Quel sport de raquette se joue contre un mur ? | Le squash | Le tennis | Le badminton | Le tennis de table
 F | Quel est le sport d'hiver le plus populaire au Canada ? | Le hockey sur glace | Le curling | Le ski | Le patinage
 M | Quelle est la largeur d'un but de football ? | 7,32 mètres | 5 mètres | 10 mètres | 6 mètres
@@ -209,7 +209,213 @@ M | Quel pays a remporté le plus de Coupes d'Afrique des nations ? | L'Égypte 
 D | Quel athlète a franchi le premier les huit mètres au saut en longueur ? | Jesse Owens | Carl Lewis | Bob Beamon | Mike Powell
 D | Quel pays a accueilli la première Coupe du monde féminine de football ? | La Chine | Les États-Unis | La Suède | La Norvège
 D | Quel joueur a inscrit le plus de points en Coupe du monde de rugby ? | Jonny Wilkinson | Dan Carter | Gavin Hastings | Michael Lynagh
-D | Quelle épreuve de natation enchaîne les quatre nages ? | Le quatre nages | Le relais mixte | Le papillon long | Le nage libre combiné
+D | Dans quel ordre les nages s'enchaînent-elles au quatre nages individuel ? | Papillon, dos, brasse, nage libre | Dos, brasse, papillon, nage libre | Brasse, dos, papillon, nage libre | Nage libre, dos, brasse, papillon
 D | Quel pilote a remporté le plus de Grands Prix de Formule 1 ? | Lewis Hamilton | Michael Schumacher | Sebastian Vettel | Ayrton Senna
 D | Quelle ville a accueilli les Jeux olympiques d'hiver de 2018 ? | Pyeongchang | Sotchi | Vancouver | Turin
 D | Quelle course automobile se dispute sur le circuit de Monaco ? | Le Grand Prix de Monaco | Les 24 Heures du Mans | Le rallye Monte-Carlo | Le Grand Prix de France
+
+# — Terrains, pistes et podiums —
+
+F | À quelle distance du but se tire un penalty au football ? | Onze mètres | Neuf mètres | Treize mètres | Sept mètres
+F | Quel club espagnol joue au Camp Nou ? | Le FC Barcelone | Le Real Madrid | L'Atlético de Madrid | Valence
+F | Quel club anglais joue à Old Trafford ? | Manchester United | Liverpool | Arsenal | Chelsea
+F | Quel stade parisien accueille le Paris Saint-Germain ? | Le Parc des Princes | Le Stade de France | Roland-Garros | Jean-Bouin
+F | Quel pays a remporté la Coupe du monde de football en 2018 ? | La France | La Croatie | L'Allemagne | Le Brésil
+F | Quel pays a remporté la Coupe du monde de football en 2014 ? | L'Allemagne | L'Argentine | Le Brésil | L'Espagne
+F | Combien de fois le Brésil a-t-il remporté la Coupe du monde de football ? | Cinq | Trois | Quatre | Six
+F | Quelle danse les All Blacks exécutent-ils avant un match ? | Le haka | Le sipi tau | Le cibi | Le siva tau
+F | Combien de points vaut un drop au rugby à XV ? | Trois | Deux | Cinq | Un
+F | Quel tournoi du Grand Chelem se joue à Melbourne ? | L'Open d'Australie | Wimbledon | Roland-Garros | L'US Open
+F | Combien de haies compte le 110 mètres haies ? | Dix | Huit | Douze | Quinze
+F | Combien d'épreuves compte le décathlon ? | Dix | Sept | Douze | Cinq
+F | De quelle couleur est le maillot du meilleur sprinteur du Tour de France ? | Vert | Blanc | Rouge | Bleu
+F | Quel sport d'hiver se joue avec des pierres et des balais ? | Le curling | Le hockey | Le bobsleigh | Le skeleton
+F | Qui a rénové les Jeux olympiques modernes ? | Pierre de Coubertin | Jules Rimet | Henri Desgrange | Paul Doumer
+F | D'où part traditionnellement la flamme olympique ? | D'Olympie | D'Athènes | De Delphes | De Sparte
+F | Quel sport basque se joue contre un mur avec une chistera ? | La pelote basque | Le squash | Le racquetball | Le jai alai libre
+F | Combien de quilles vise-t-on au bowling ? | Dix | Neuf | Douze | Huit
+M | Quelle est la hauteur d'un but de football ? | 2,44 mètres | 2 mètres | 3 mètres | 2,20 mètres
+M | Quel club anglais joue à Anfield ? | Liverpool | Everton | Manchester City | Tottenham
+M | Quels deux clubs se partagent le stade de San Siro ? | Le Milan AC et l'Inter | La Juventus et le Torino | La Roma et la Lazio | Naples et Salerne
+M | Quel pays a remporté la Coupe du monde de football en 2010 ? | L'Espagne | Les Pays-Bas | L'Allemagne | L'Uruguay
+M | Quel joueur a marqué deux buts de la tête en finale de la Coupe du monde 1998 ? | Zinédine Zidane | Emmanuel Petit | Didier Deschamps | Christophe Dugarry
+M | Quel sélectionneur a mené la France au titre mondial en 1998 ? | Aimé Jacquet | Michel Hidalgo | Roger Lemerre | Raymond Domenech
+M | Quel joueur brésilien a remporté la Coupe du monde à dix-sept ans ? | Pelé | Garrincha | Ronaldo | Zico
+M | Quel pays a remporté le Championnat d'Europe de football en 1984 ? | La France | L'Espagne | L'Italie | Les Pays-Bas
+M | Quel poste porte le numéro 9 au rugby à XV ? | Le demi de mêlée | Le demi d'ouverture | Le pilier | L'arrière
+M | Quel pays a rejoint le Tournoi des Six Nations en 2000 ? | L'Italie | L'Argentine | La Roumanie | La Géorgie
+M | Combien de jeux faut-il gagner pour remporter un set de tennis ? | Six, avec deux jeux d'écart | Cinq | Sept | Quatre
+M | Sur quelle surface se joue l'US Open de tennis ? | Le dur | La terre battue | Le gazon | La moquette
+M | Quel athlète a remporté quatre médailles d'or aux Jeux de Berlin en 1936 ? | Jesse Owens | Carl Lewis | Paavo Nurmi | Emil Zátopek
+M | Quel athlète a couru le mile sous les quatre minutes le premier ? | Roger Bannister | John Landy | Herb Elliott | Peter Snell
+M | Combien pèse le poids lancé par les hommes en athlétisme ? | 7,26 kilos | 5 kilos | 10 kilos | 4 kilos
+M | Combien d'épreuves compte l'heptathlon féminin ? | Sept | Cinq | Dix | Huit
+M | Quel col des Alpes compte vingt et un virages numérotés ? | L'Alpe d'Huez | Le Galibier | Le Tourmalet | Le mont Ventoux
+M | Quelle classique cycliste est surnommée la Doyenne ? | Liège-Bastogne-Liège | Paris-Roubaix | Le Tour des Flandres | Milan-San Remo
+M | Quel coureur espagnol a remporté cinq Tours de France consécutifs ? | Miguel Indurain | Pedro Delgado | Alberto Contador | Federico Bahamontes
+M | Quel est le troisième grand tour cycliste, après le Tour et le Giro ? | La Vuelta | Le Tour de Suisse | Paris-Nice | Le Critérium du Dauphiné
+M | Combien de joueurs compte une équipe de curling ? | Quatre | Cinq | Trois | Six
+M | Quelle discipline associe le saut à ski et le ski de fond ? | Le combiné nordique | Le biathlon | Le ski-alpinisme | Le télémark
+M | Quel sport de luge se pratique tête la première ? | Le skeleton | La luge | Le bobsleigh | Le monobob
+M | Quelle ville française a accueilli les Jeux olympiques d'hiver en 1968 ? | Grenoble | Chamonix | Albertville | Annecy
+M | Sur quel circuit se disputent les 24 Heures du Mans ? | Le circuit de la Sarthe | Le circuit Paul-Ricard | Magny-Cours | Le circuit de Spa
+M | Quel pilote brésilien est mort à Imola en 1994 ? | Ayrton Senna | Nelson Piquet | Emerson Fittipaldi | Rubens Barrichello
+M | Quelle écurie détient le plus de titres de champion du monde des constructeurs ? | Ferrari | McLaren | Williams | Mercedes
+M | Quelle ville a accueilli les Jeux olympiques d'été de 1992 ? | Barcelone | Séville | Atlanta | Sydney
+M | Quelle ville a accueilli les Jeux olympiques d'été de 2004 ? | Athènes | Sydney | Pékin | Rome
+M | Quelle ville a accueilli les Jeux olympiques d'été de 2012 ? | Londres | Pékin | Rio | Tokyo
+M | Quelle est la devise olympique en latin ? | Citius, Altius, Fortius | Fortior, Melior, Celerior | Ludus, Virtus, Honos | Semper Excelsior
+M | Quel sport se joue en équipe avec un disque volant ? | L'ultimate | Le disc-golf | Le kin-ball | Le tchoukball
+M | Quel sport nautique associe une planche et un cerf-volant ? | Le kitesurf | Le windsurf | Le wakeboard | Le paddle
+M | Quelle est la hauteur du filet de tennis en son centre ? | 0,914 mètre | 1,07 mètre | 0,80 mètre | 1,20 mètre
+M | Quelle est la longueur d'une table de tennis de table ? | 2,74 mètres | 2 mètres | 3 mètres | 2,50 mètres
+M | Combien de boules de couleur compte le billard américain ? | Quinze | Neuf | Vingt et un | Douze
+M | Combien de boules chaque joueur lance-t-il en triplette de pétanque ? | Deux | Trois | Quatre | Une
+M | Comment appelle-t-on la petite boule visée à la pétanque ? | Le cochonnet | Le jack | Le but rond | La perle
+D | Quel club a remporté la première Coupe des clubs champions en 1956 ? | Le Real Madrid | Benfica | Le Milan AC | L'Ajax
+D | Quel club néerlandais a remporté trois Coupes d'Europe consécutives dans les années 1970 ? | L'Ajax Amsterdam | Le PSV Eindhoven | Feyenoord | L'AZ Alkmaar
+D | Quel gardien italien a remporté la Coupe du monde 2006 ? | Gianluigi Buffon | Walter Zenga | Dino Zoff | Francesco Toldo
+D | Contre quelle sélection Zinédine Zidane a-t-il disputé sa dernière finale ? | L'Italie | Le Brésil | L'Allemagne | Le Portugal
+D | Quelle sélection est surnommée la Mannschaft ? | L'Allemagne | L'Autriche | La Suisse | La Belgique
+D | Quelle sélection de football est surnommée les Diables rouges ? | La Belgique | Le Portugal | Le Chili | La Serbie
+D | Quel entraîneur écossais a dirigé Manchester United pendant vingt-six ans ? | Alex Ferguson | Matt Busby | Bill Shankly | Brian Clough
+D | Quel joueur néerlandais a donné son nom à une feinte devenue classique ? | Johan Cruyff | Marco van Basten | Ruud Gullit | Dennis Bergkamp
+D | Quel pays a remporté le Tournoi des Six Nations sans perdre un match en 2010 ? | La France | L'Angleterre | Le pays de Galles | L'Irlande
+D | Combien de joueurs composent une mêlée au rugby à XV, par équipe ? | Huit | Six | Sept | Neuf
+D | Quel trophée oppose l'Angleterre à l'Écosse au rugby ? | La Calcutta Cup | La Millennium Trophy | La Centenary Quaich | Le Triple Crown
+D | Quelle équipe nationale de rugby est surnommée les Springboks ? | L'Afrique du Sud | L'Australie | L'Argentine | Les Fidji
+D | Quelle équipe nationale de rugby est surnommée les Wallabies ? | L'Australie | La Nouvelle-Zélande | L'Afrique du Sud | Les Samoa
+D | Quel joueur de tennis suédois a remporté six fois Roland-Garros ? | Björn Borg | Mats Wilander | Stefan Edberg | Thomas Muster
+D | Quelle joueuse allemande a remporté vingt-deux titres du Grand Chelem ? | Steffi Graf | Angelique Kerber | Anke Huber | Sabine Lisicki
+D | Quel joueur américain a remporté quatorze titres du Grand Chelem entre 1990 et 2002 ? | Pete Sampras | Andre Agassi | Jim Courier | Michael Chang
+D | Quel joueur français a remporté Roland-Garros en 1983 ? | Yannick Noah | Henri Leconte | Guy Forget | Cédric Pioline
+D | Quels joueurs français des années 1920 étaient surnommés les Mousquetaires ? | Borotra, Brugnon, Cochet et Lacoste | Les frères Doherty | Les Renshaw | Les Wilding
+D | Quel athlète tchèque a remporté trois titres olympiques de fond en 1952 ? | Emil Zátopek | Paavo Nurmi | Vladimir Kuts | Lasse Virén
+D | Quel athlète finlandais est surnommé le Finlandais volant ? | Paavo Nurmi | Lasse Virén | Hannes Kolehmainen | Ville Ritola
+D | Quel athlète américain a remporté quatre titres consécutifs au saut en longueur ? | Carl Lewis | Bob Beamon | Mike Powell | Jesse Owens
+D | Qui détenait le record du monde du saut en longueur depuis Mexico en 1968 ? | Bob Beamon | Carl Lewis | Ralph Boston | Igor Ter-Ovanessian
+D | Quel athlète marocain détient le record du monde du 1500 mètres depuis 1998 ? | Hicham El Guerrouj | Saïd Aouita | Noureddine Morceli | Brahim Boulami
+D | Quel coureur cycliste italien a été le grand rival de Fausto Coppi ? | Gino Bartali | Learco Guerra | Felice Gimondi | Fiorenzo Magni
+D | Quel cycliste français a remporté le Tour de France en 1985 ? | Bernard Hinault | Laurent Fignon | Greg LeMond | Stephen Roche
+D | Quel cycliste français a remporté le Tour de France en 1983 et 1984 ? | Laurent Fignon | Bernard Hinault | Charly Mottet | Luis Ocaña
+D | Quelle course cycliste d'un jour part de Milan pour rejoindre la Riviera ? | Milan-San Remo | Le Tour de Lombardie | La Flèche wallonne | Gand-Wevelgem
+D | Quel skieur français a remporté trois titres olympiques à Grenoble en 1968 ? | Jean-Claude Killy | Guy Périllat | Léo Lacroix | Henri Duvillard
+D | Quelle skieuse française a été sacrée championne olympique de descente en 2002 ? | Carole Montillet | Marielle Goitschel | Isabelle Mir | Ingrid Jacquemod
+D | Quel biathlète français a remporté cinq titres olympiques ? | Martin Fourcade | Raphaël Poirée | Vincent Defrasne | Simon Fourcade
+D | Quelle patineuse française a été sacrée championne olympique en danse sur glace en 2002 ? | Marina Anissina | Sarah Abitbol | Isabelle Delobel | Nathalie Péchalat
+D | Quel circuit de Formule 1 comprend le virage de l'Eau Rouge ? | Spa-Francorchamps | Monza | Silverstone | Suzuka
+D | Quel circuit de Formule 1 est surnommé le temple de la vitesse ? | Monza | Spa-Francorchamps | Silverstone | Hockenheim
+D | Quel pilote français a remporté le rallye Dakar à moto à cinq reprises ? | Cyril Despres | Stéphane Peterhansel | Hubert Auriol | David Casteu
+D | Quel pilote a remporté le Dakar en moto puis en auto ? | Stéphane Peterhansel | Cyril Despres | Ari Vatanen | Jacky Ickx
+D | Quelle ville a accueilli les Jeux olympiques d'été de 1900 ? | Paris | Athènes | Saint-Louis | Londres
+D | Quelle ville a accueilli les Jeux olympiques d'été de 1924 ? | Paris | Amsterdam | Anvers | Los Angeles
+D | Quel pays a boycotté les Jeux olympiques de Moscou en 1980 ? | Les États-Unis | L'Union soviétique | La Chine | Cuba
+D | Quels Jeux olympiques ont été endeuillés par une prise d'otages en 1972 ? | Munich | Mexico | Montréal | Moscou
+D | Quel athlète a levé le poing sur le podium de Mexico en 1968 ? | Tommie Smith | Jesse Owens | Bob Beamon | Ralph Boston
+D | Quel nageur américain a remporté sept médailles d'or à Munich en 1972 ? | Mark Spitz | Matt Biondi | Don Schollander | Johnny Weissmuller
+D | Quel nageur français a été sacré champion olympique du 200 mètres nage libre en 2012 ? | Yannick Agnel | Alain Bernard | Camille Lacourt | Florent Manaudou
+D | Quel sport se pratique sur un anneau de quatre cents mètres en patins ? | Le patinage de vitesse | Le short-track | Le roller de course | Le patinage artistique
+D | Quel sport de raquette se joue à deux dans une salle fermée avec une balle noire ? | Le squash | Le racquetball | Le padel | Le badminton
+D | Quel sport de raquette se joue à quatre sur un court vitré ? | Le padel | Le squash | Le beach-tennis | Le pickleball
+
+# — Loisirs, jeux et plateaux —
+
+F | Combien de cartes compte un jeu de tarot français ? | 78 | 52 | 32 | 54
+F | Combien de dominos compte un jeu double-six ? | 28 | 21 | 32 | 36
+F | Combien de cases compte le plateau du Monopoly ? | 40 | 36 | 44 | 32
+F | Quelle est la rue la plus chère du Monopoly français ? | La rue de la Paix | L'avenue des Champs-Élysées | Le boulevard Malesherbes | L'avenue Foch
+F | Combien de lettres un joueur garde-t-il en main au Scrabble ? | Sept | Six | Huit | Cinq
+F | Quel jeu japonais se joue avec des pierres noires et blanches ? | Le go | Le shogi | Le mahjong | Le sudoku
+F | Combien de couleurs compte un Rubik's Cube ? | Six | Quatre | Huit | Douze
+F | Combien de pièces différentes existe-t-il aux échecs ? | Six | Cinq | Sept | Huit
+F | Quelle pièce doit-on protéger avant toute autre aux échecs ? | Le roi | La dame | La tour | Le cavalier
+F | Quel jeu de cartes français se joue à quatre avec des annonces et des atouts ? | La belote | Le bridge | Le rami | La crapette
+F | Combien de dés lance-t-on au Yam's ? | Cinq | Trois | Six | Quatre
+F | Quel jeu consiste à faire deviner un mot en le dessinant ? | Le Pictionary | Le Cluedo | Le Trivial Pursuit | Le Taboo
+F | Quel jeu de société consiste à trouver le coupable, l'arme et le lieu ? | Le Cluedo | Le Monopoly | Le Risk | Le Scrabble
+F | Quel jeu de société consiste à conquérir des territoires avec des armées ? | Le Risk | Le Monopoly | Le Cluedo | Les Colons de Catane
+F | Quel jeu de plateau se joue avec des tuiles à assembler formant des routes ? | Carcassonne | Les Colons de Catane | Puerto Rico | Agricola
+F | Quel oiseau de papier plié est l'emblème de l'origami ? | La grue | La colombe | Le héron | Le cygne
+M | Combien d'atouts compte un jeu de tarot, sans compter l'excuse ? | Vingt et un | Vingt-deux | Dix-huit | Vingt-quatre
+M | Combien de jetons compte un jeu de Scrabble français ? | 102 | 100 | 98 | 110
+M | Quelle lettre vaut dix points au Scrabble français ? | Le W | Le K | Le J | Le Z
+M | Combien de cases compte un damier international ? | Cent | Soixante-quatre | Quatre-vingt-un | Cent quarante-quatre
+M | Combien de pions chaque joueur aligne-t-il aux dames internationales ? | Vingt | Douze | Seize | Vingt-quatre
+M | Combien d'intersections compte un goban de dix-neuf lignes ? | 361 | 324 | 400 | 289
+M | Quel coup permet au roi et à une tour de se déplacer ensemble ? | Le roque | La prise en passant | La promotion | Le pat
+M | Comment nomme-t-on une partie d'échecs nulle par blocage du roi ? | Le pat | L'échec et mat | Le roque | Le zugzwang
+M | Combien de tuiles compte un jeu de mahjong complet ? | 144 | 108 | 136 | 120
+M | Quel jeu de cartes se joue à quatre en deux camps avec des enchères ? | Le bridge | La belote | Le poker | Le tarot
+M | Quelle main du poker bat une couleur ? | Le full | La quinte | La paire | Le brelan
+M | Quelle est la meilleure main possible au poker ? | La quinte flush royale | Le carré | Le full | La couleur
+M | Combien de cartes reçoit chaque joueur au Texas hold'em ? | Deux | Cinq | Trois | Quatre
+M | Combien de pions compte un jeu de backgammon par joueur ? | Quinze | Douze | Dix-huit | Vingt
+M | Combien de cases compte le plateau d'Othello, ou Reversi ? | Soixante-quatre | Cent | Quatre-vingt-un | Trente-six
+M | Quel jeu de plateau nordique oppose un roi et ses défenseurs à des assaillants ? | Le hnefatafl | Le senet | Le mancala | Le pachisi
+M | Quel jeu de plateau égyptien antique a été retrouvé dans les tombes ? | Le senet | Le go | Le backgammon | L'awalé
+M | Quel jeu africain se joue avec des graines dans des cavités ? | L'awalé | Le senet | Le pachisi | Le nard
+M | Quel jeu de dés et de pions vient d'Inde et a inspiré les petits chevaux ? | Le pachisi | Le backgammon | Le mahjong | Le senet
+M | Quelle discipline de plein air associe carte, boussole et course ? | La course d'orientation | Le trail | Le raid | Le canyoning
+M | Quelle activité de plein air consiste à marcher plusieurs jours sac au dos ? | La randonnée itinérante | Le trail | Le géocaching | L'orientation
+M | Quel massif le GR20 traverse-t-il ? | La Corse | Les Pyrénées | Le Massif central | Les Vosges
+M | Quel chemin de pèlerinage mène à Saint-Jacques-de-Compostelle ? | Le camino francés | La via Appia | La via Francigena | Le chemin de Stevenson
+M | Quel écrivain a donné son nom à un chemin de randonnée en Cévennes ? | Robert Louis Stevenson | Jean Giono | Jules Verne | Alexandre Dumas
+M | Quelle activité consiste à descendre une rivière en gorges avec cordes et sauts ? | Le canyoning | Le rafting | Le kayak | La spéléologie
+M | Quelle discipline explore les grottes et les gouffres ? | La spéléologie | L'alpinisme | Le canyoning | La géologie de terrain
+M | Quel sommet des Alpes fut gravi pour la première fois en 1786 ? | Le mont Blanc | Le Cervin | Le mont Rose | Les Grandes Jorasses
+M | En quelle année l'Everest a-t-il été gravi pour la première fois ? | En 1953 | En 1924 | En 1963 | En 1978
+M | Quel alpiniste néo-zélandais a atteint le sommet de l'Everest avec Tensing Norgay ? | Edmund Hillary | George Mallory | Chris Bonington | Reinhold Messner
+M | Quel alpiniste italien a gravi les quatorze sommets de plus de huit mille mètres ? | Reinhold Messner | Walter Bonatti | Riccardo Cassin | Simone Moro
+M | Quel sommet a été gravi par une expédition française en 1950, le premier de plus de huit mille mètres ? | L'Annapurna | L'Everest | Le K2 | Le Nanga Parbat
+M | Quel alpiniste français a mené l'expédition de l'Annapurna en 1950 ? | Maurice Herzog | Lionel Terray | Gaston Rébuffat | Louis Lachenal
+M | Quelle pêche se pratique en fouettant l'eau d'une ligne légère ? | La pêche à la mouche | La pêche au coup | La pêche au lancer | La pêche à la traîne
+M | Quel poisson d'eau douce est la prise reine des pêcheurs de rivière rapide ? | La truite | La carpe | Le gardon | Le brochet
+D | Quelle est la valeur du dix de der à la belote ? | Dix points | Vingt points | Cinq points | Un point
+D | Combien de points vaut la belote et rebelote ? | Vingt points | Dix points | Trente points | Cinquante points
+D | Combien de points compte un jeu complet de belote coinchée ? | Cent soixante-deux | Cent cinquante | Cent quatre-vingts | Cent vingt
+D | Quel joueur d'échecs a été champion du monde de 1985 à 2000 ? | Garry Kasparov | Anatoli Karpov | Vladimir Kramnik | Bobby Fischer
+D | Quel Américain a battu Boris Spassky en 1972 à Reykjavik ? | Bobby Fischer | Samuel Reshevsky | Paul Morphy | Larry Evans
+D | Quel ordinateur a battu le champion du monde d'échecs en 1997 ? | Deep Blue | Watson | AlphaZero | Deep Thought
+D | Quel programme a battu un champion de go en 2016 ? | AlphaGo | Deep Blue | Stockfish | Zen
+D | Quelle ouverture d'échecs commence par les deux pions du roi face à face ? | La partie ouverte | La défense sicilienne | Le gambit dame | La défense française
+D | Quelle défense aux échecs répond au pion roi par le pion de la dame côté dame ? | La défense sicilienne | La défense française | La défense Caro-Kann | La défense scandinave
+D | Quel joueur cubain a été champion du monde d'échecs dans les années 1920 ? | José Raúl Capablanca | Emanuel Lasker | Alexandre Alekhine | Max Euwe
+D | Quel champion du monde d'échecs est mort à Estoril en 1946, titre en main ? | Alexandre Alekhine | Emanuel Lasker | José Raúl Capablanca | Wilhelm Steinitz
+D | Quel jeu de rôle sur table a été publié pour la première fois en 1974 ? | Donjons et Dragons | L'Appel de Cthulhu | Warhammer | Runequest
+D | Quel jeu de cartes à collectionner est né en 1993 ? | Magic l'Assemblée | Pokémon | Yu-Gi-Oh | Hearthstone
+D | Quel auteur allemand a créé Les Colons de Catane ? | Klaus Teuber | Reiner Knizia | Wolfgang Kramer | Uwe Rosenberg
+D | Quel prix récompense chaque année le meilleur jeu de société en Allemagne ? | Le Spiel des Jahres | Le Golden Geek | L'As d'or | Le Diamant
+D | Quel salon français récompense les jeux de société par l'As d'or ? | Le festival de Cannes du jeu | Le salon de Paris | Le salon d'Essen | La Gen Con
+D | Quel jeu de construction danois a été fondé en 1932 ? | Lego | Meccano | Playmobil | Kapla
+D | De quel mot danois le nom Lego vient-il ? | Bien jouer | Petite brique | Assembler | Bâtir haut
+D | Quel jeu de patience se joue seul avec cinquante-deux cartes en colonnes ? | La réussite | Le rami | La crapette | Le bésigue
+D | Comment appelle-t-on la grosse bille avec laquelle on tire, dans les cours d'école ? | Le calot | Le boulet | Le mammouth | Le roi
+D | Combien de trous compte un jeu de mancala traditionnel ? | Douze | Huit | Seize | Vingt
+D | Quelle randonnée relie la mer du Nord à la Méditerranée à travers la France ? | Le GR5 | Le GR10 | Le GR20 | Le GR65
+D | Quel sentier de grande randonnée longe les Pyrénées côté français ? | Le GR10 | Le GR11 | Le GR20 | Le GR65
+D | Par quelle arête passe la voie normale française du mont Blanc ? | L'arête des Bosses | L'arête de Peuterey | L'éperon de la Brenva | L'arête de l'Innominata
+D | Quelle est l'altitude du mont Blanc, approximativement ? | 4 800 mètres | 4 200 mètres | 5 200 mètres | 3 900 mètres
+D | Dans quel département la grotte de Lascaux a-t-elle été découverte ? | La Dordogne | Le Lot | L'Ardèche | La Corrèze
+D | Quelle discipline sportive de plein air consiste à courir longtemps en montagne ? | Le trail | La course d'orientation | Le raid multisports | Le fell running
+D | Quelle course de trail fait le tour du mont Blanc chaque été ? | L'Ultra-Trail du Mont-Blanc | La Diagonale des fous | La Saintélyon | Le Grand Raid des Pyrénées
+D | Quelle course de trail traverse l'île de La Réunion ? | La Diagonale des fous | L'Ultra-Trail du Mont-Blanc | Le Marathon des Sables | La Transvulcania
+D | Quelle course à pied traverse le Sahara marocain en autonomie ? | Le Marathon des Sables | La Transvulcania | La Badwater | La Yukon Arctic
+D | Quel navigateur français a remporté le Vendée Globe en 1989, la première édition ? | Titouan Lamazou | Alain Gautier | Christophe Auguin | Michel Desjoyeaux
+D | Quelle course à la voile relie Saint-Malo à Pointe-à-Pitre ? | La Route du Rhum | Le Vendée Globe | La Transat Jacques-Vabre | La Solitaire du Figaro
+D | Quelle course à la voile se dispute en équipage entre Le Havre et le Brésil ? | La Transat Jacques-Vabre | La Route du Rhum | Le Vendée Globe | La Mini-Transat
+D | Quel dériveur solitaire est devenu série olympique en 1996 ? | Le Laser | L'Optimist | Le 470 | Le Vaurien
+D | Quel poisson remonte les rivières depuis la mer pour se reproduire ? | Le saumon | Le brochet | La perche | Le sandre
+D | Quelle discipline équestre associe dressage, cross et saut d'obstacles ? | Le concours complet | Le concours hippique | Le horse-ball | L'attelage
+D | Quelle épreuve équestre fait évoluer le cheval sur une reprise en musique ? | Le dressage | Le cross | Le saut d'obstacles | Le trec
+D | Quelle course hippique se dispute chaque année à Longchamp en octobre ? | Le prix de l'Arc de Triomphe | Le prix d'Amérique | Le Grand Steeple-Chase | Le prix du Jockey Club
+D | Quelle course de trot se dispute à Vincennes en janvier ? | Le prix d'Amérique | Le prix de l'Arc de Triomphe | Le Grand Prix de Paris | Le prix Ganay
+D | Quel jeu d'adresse consiste à lancer des fers autour d'un piquet ? | Le lancer de fer à cheval | Le palet breton | Le mölkky | La quille finlandaise
+D | Quel jeu finlandais consiste à renverser des quilles numérotées ? | Le mölkky | Le kubb | Le palet | Le hnefatafl
+D | Quel jeu suédois consiste à renverser des blocs de bois avec un bâton ? | Le kubb | Le mölkky | Le palet vendéen | Le boulodrome
+D | Quel nœud marin est surnommé le roi des nœuds ? | Le nœud de chaise | Le nœud plat | Le nœud de cabestan | La demi-clé
+D | Quel jeu de café se joue en faisant tomber une quille avec une boule pendue à une corde ? | Le billard hollandais | Le mölkky | La galoche | Le jeu de massacre
+D | Quelle activité consiste à repérer des caches à l'aide d'un GPS ? | Le géocaching | Le géoguessing | L'orientation | Le raid nature
+D | Quel loisir consiste à collectionner les timbres ? | La philatélie | La numismatique | La cartophilie | La deltiologie
+D | Quel loisir consiste à collectionner les monnaies ? | La numismatique | La philatélie | La cartophilie | La vexillologie
+D | Quelle discipline étudie et collectionne les drapeaux ? | La vexillologie | La numismatique | L'héraldique | La philatélie
+D | Quelle science étudie les blasons et les armoiries ? | L'héraldique | La vexillologie | La sigillographie | La généalogie

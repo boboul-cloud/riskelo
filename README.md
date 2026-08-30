@@ -368,7 +368,7 @@ Sources/Engine/     le jeu, sans une ligne de SwiftUI — il compile et tourne s
 Sources/UI/         le plateau, le duel, les panneaux
 Sources/App/        le point d'entrée
 Sources/Resources/  le catalogue d'icônes, engendré — voir plus bas
-Resources/Questions/ 1 200 questions, un fichier par thème, une ligne chacune
+Resources/Questions/ 2 400 questions, un fichier par thème, une ligne chacune
 Tests/              37 tests
 outils/             la simulation et le dessin de l'icône, hors cible
 ```
@@ -416,7 +416,7 @@ swiftc -O -parse-as-library -o /tmp/icone outils/icone.swift && /tmp/icone
 
 ## La banque de questions
 
-Mille deux cents questions, **deux cents par thème**, dans
+Deux mille quatre cents questions, **quatre cents par thème**, dans
 `Resources/Questions/` — un fichier par thème, une ligne par question :
 
 ```
@@ -444,7 +444,7 @@ une phrase absurde. C'est exactement la classe de faute qu'une relecture
 humaine laisse passer sur mille lignes et qu'un test attrape à tous les coups.
 
 Une partie pose de cinquante à cent soixante questions, et un thème peut en
-brûler vingt-cinq dans une seule. Deux cents par thème, c'est la banque qui
+brûler vingt-cinq dans une seule. Quatre cents par thème, c'est la banque qui
 tient des mois sans se répéter.
 
 ---

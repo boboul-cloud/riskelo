@@ -213,3 +213,209 @@ D | Quel archipel équatorien a inspiré Darwin ? | Les Galápagos | Les Açores
 D | Quel pays abrite le plus long tunnel ferroviaire du monde ? | La Suisse | Le Japon | La France | La Norvège
 D | Quelle est la capitale de la Namibie ? | Windhoek | Swakopmund | Walvis Bay | Gaborone
 D | Quel est le plus vaste pays d'Afrique ? | L'Algérie | La République démocratique du Congo | Le Soudan | La Libye
+
+# — Les départements et leurs chefs-lieux —
+
+F | Quel est le chef-lieu du département du Rhône ? | Lyon | Villeurbanne | Saint-Étienne | Valence
+F | Quel est le chef-lieu de la Gironde ? | Bordeaux | Arcachon | Libourne | Pau
+F | Quel est le chef-lieu du département du Nord ? | Lille | Roubaix | Dunkerque | Valenciennes
+F | Quel est le chef-lieu des Bouches-du-Rhône ? | Marseille | Aix-en-Provence | Arles | Toulon
+F | Quel est le chef-lieu de la Haute-Garonne ? | Toulouse | Albi | Auch | Montauban
+F | Quel est le chef-lieu de l'Hérault ? | Montpellier | Béziers | Sète | Nîmes
+F | Quel est le chef-lieu de l'Ille-et-Vilaine ? | Rennes | Saint-Malo | Vannes | Fougères
+F | Quel est le chef-lieu de la Loire-Atlantique ? | Nantes | Saint-Nazaire | La Baule | Ancenis
+F | Quel est le chef-lieu de la Seine-Maritime ? | Rouen | Le Havre | Dieppe | Fécamp
+F | Quel est le chef-lieu du Bas-Rhin ? | Strasbourg | Haguenau | Saverne | Sélestat
+F | Quel est le chef-lieu de l'Isère ? | Grenoble | Vienne | Bourgoin-Jallieu | Voiron
+F | Quel est le chef-lieu des Alpes-Maritimes ? | Nice | Cannes | Antibes | Grasse
+F | Quel est le chef-lieu du Loiret ? | Orléans | Montargis | Gien | Pithiviers
+M | Quel est le chef-lieu du Finistère ? | Quimper | Brest | Morlaix | Concarneau
+M | Quel est le chef-lieu du Morbihan ? | Vannes | Lorient | Auray | Pontivy
+M | Quel est le chef-lieu des Côtes-d'Armor ? | Saint-Brieuc | Dinan | Lannion | Guingamp
+M | Quel est le chef-lieu du Calvados ? | Caen | Bayeux | Lisieux | Deauville
+M | Quel est le chef-lieu de la Manche ? | Saint-Lô | Cherbourg | Avranches | Granville
+M | Quel est le chef-lieu de l'Orne ? | Alençon | Argentan | Flers | L'Aigle
+M | Quel est le chef-lieu de l'Eure ? | Évreux | Vernon | Louviers | Bernay
+M | Quel est le chef-lieu de l'Aveyron ? | Rodez | Millau | Villefranche-de-Rouergue | Espalion
+M | Quel est le chef-lieu du Cantal ? | Aurillac | Saint-Flour | Mauriac | Murat
+M | Quel est le chef-lieu de la Haute-Loire ? | Le Puy-en-Velay | Brioude | Yssingeaux | Monistrol-sur-Loire
+M | Quel est le chef-lieu du Puy-de-Dôme ? | Clermont-Ferrand | Issoire | Riom | Thiers
+M | Quel est le chef-lieu de la Corrèze ? | Tulle | Brive-la-Gaillarde | Ussel | Uzerche
+M | Quel est le chef-lieu de la Dordogne ? | Périgueux | Bergerac | Sarlat-la-Canéda | Nontron
+M | Quel est le chef-lieu du Lot ? | Cahors | Figeac | Gourdon | Souillac
+M | Quel est le chef-lieu des Landes ? | Mont-de-Marsan | Dax | Biscarrosse | Capbreton
+M | Quel est le chef-lieu des Pyrénées-Atlantiques ? | Pau | Bayonne | Biarritz | Oloron-Sainte-Marie
+M | Quel est le chef-lieu des Hautes-Pyrénées ? | Tarbes | Lourdes | Bagnères-de-Bigorre | Argelès-Gazost
+M | Quel est le chef-lieu des Pyrénées-Orientales ? | Perpignan | Céret | Prades | Collioure
+M | Quel est le chef-lieu de l'Aude ? | Carcassonne | Narbonne | Limoux | Castelnaudary
+M | Quel est le chef-lieu du Tarn ? | Albi | Castres | Gaillac | Mazamet
+M | Quel est le chef-lieu du Haut-Rhin ? | Colmar | Mulhouse | Guebwiller | Thann
+M | Quel est le chef-lieu de la Moselle ? | Metz | Thionville | Sarreguemines | Forbach
+M | Quel est le chef-lieu de la Meurthe-et-Moselle ? | Nancy | Lunéville | Toul | Briey
+M | Quel est le chef-lieu des Vosges ? | Épinal | Saint-Dié-des-Vosges | Remiremont | Gérardmer
+M | Quel est le chef-lieu de l'Aube ? | Troyes | Bar-sur-Aube | Romilly-sur-Seine | Nogent-sur-Seine
+M | Quel est le chef-lieu de la Côte-d'Or ? | Dijon | Beaune | Nuits-Saint-Georges | Montbard
+M | Quel est le chef-lieu du Doubs ? | Besançon | Montbéliard | Pontarlier | Morteau
+M | Quel est le chef-lieu de la Saône-et-Loire ? | Mâcon | Chalon-sur-Saône | Autun | Le Creusot
+M | Quel est le chef-lieu de la Nièvre ? | Nevers | Cosne-Cours-sur-Loire | Clamecy | Decize
+M | Quel est le chef-lieu de l'Yonne ? | Auxerre | Sens | Avallon | Tonnerre
+M | Quel est le chef-lieu de l'Eure-et-Loir ? | Chartres | Dreux | Châteaudun | Nogent-le-Rotrou
+M | Quel est le chef-lieu du Loir-et-Cher ? | Blois | Vendôme | Romorantin-Lanthenay | Chambord
+M | Quel est le chef-lieu de l'Indre-et-Loire ? | Tours | Amboise | Chinon | Loches
+M | Quel est le chef-lieu du Cher ? | Bourges | Vierzon | Saint-Amand-Montrond | Sancerre
+M | Quel est le chef-lieu de la Sarthe ? | Le Mans | La Flèche | Sablé-sur-Sarthe | Mamers
+M | Quel est le chef-lieu de la Mayenne ? | Laval | Château-Gontier | Mayenne | Ernée
+M | Quel est le chef-lieu du Maine-et-Loire ? | Angers | Cholet | Saumur | Segré
+M | Quel est le chef-lieu de la Vendée ? | La Roche-sur-Yon | Les Sables-d'Olonne | Fontenay-le-Comte | Challans
+M | Quel est le chef-lieu des Deux-Sèvres ? | Niort | Parthenay | Bressuire | Thouars
+M | Quel est le chef-lieu de la Vienne ? | Poitiers | Châtellerault | Loudun | Montmorillon
+M | Quel est le chef-lieu de la Haute-Vienne ? | Limoges | Saint-Junien | Bellac | Rochechouart
+M | Quel est le chef-lieu de la Charente ? | Angoulême | Cognac | Confolens | Jarnac
+M | Quel est le chef-lieu de la Charente-Maritime ? | La Rochelle | Rochefort | Saintes | Royan
+M | Quel est le chef-lieu de la Savoie ? | Chambéry | Albertville | Aix-les-Bains | Moûtiers
+M | Quel est le chef-lieu de la Haute-Savoie ? | Annecy | Chamonix | Thonon-les-Bains | Évian-les-Bains
+M | Quel est le chef-lieu de la Drôme ? | Valence | Montélimar | Romans-sur-Isère | Die
+M | Quel est le chef-lieu du Vaucluse ? | Avignon | Orange | Carpentras | Cavaillon
+M | Quel est le chef-lieu du Var ? | Toulon | Draguignan | Hyères | Fréjus
+M | Quel est le chef-lieu du Gard ? | Nîmes | Alès | Uzès | Bagnols-sur-Cèze
+M | Quel est le chef-lieu du département de la Loire ? | Saint-Étienne | Roanne | Montbrison | Firminy
+M | Quel est le chef-lieu de l'Ain ? | Bourg-en-Bresse | Oyonnax | Belley | Gex
+M | Quel est le chef-lieu de l'Oise ? | Beauvais | Compiègne | Creil | Senlis
+M | Quel est le chef-lieu de la Somme ? | Amiens | Abbeville | Péronne | Albert
+M | Quel est le chef-lieu du Pas-de-Calais ? | Arras | Calais | Boulogne-sur-Mer | Lens
+M | Quel est le chef-lieu des Yvelines ? | Versailles | Saint-Germain-en-Laye | Mantes-la-Jolie | Rambouillet
+M | Quel est le chef-lieu de la Seine-et-Marne ? | Melun | Meaux | Fontainebleau | Chelles
+M | Quel est le chef-lieu de la Seine-Saint-Denis ? | Bobigny | Saint-Denis | Montreuil | Aubervilliers
+M | Quel est le chef-lieu du Val-de-Marne ? | Créteil | Vincennes | Ivry-sur-Seine | Nogent-sur-Marne
+M | Quel est le chef-lieu des Hauts-de-Seine ? | Nanterre | Boulogne-Billancourt | Neuilly-sur-Seine | Courbevoie
+M | Quel est le chef-lieu de la Martinique ? | Fort-de-France | Le Lamentin | Saint-Pierre | Le Marin
+M | Quel est le chef-lieu de La Réunion ? | Saint-Denis | Saint-Pierre | Saint-Paul | Le Tampon
+M | Quel est le chef-lieu de la Guyane ? | Cayenne | Kourou | Saint-Laurent-du-Maroni | Maripasoula
+M | Quel département a pour numéro 13 ? | Les Bouches-du-Rhône | Le Var | Le Vaucluse | Les Alpes-Maritimes
+D | Quel est le chef-lieu de la Creuse ? | Guéret | Aubusson | La Souterraine | Bourganeuf
+D | Quel est le chef-lieu de l'Ardèche ? | Privas | Aubenas | Annonay | Tournon-sur-Rhône
+D | Quel est le chef-lieu de la Lozère ? | Mende | Florac | Marvejols | Langogne
+D | Quel est le chef-lieu de l'Ariège ? | Foix | Pamiers | Saint-Girons | Mirepoix
+D | Quel est le chef-lieu du Gers ? | Auch | Condom | Mirande | Lectoure
+D | Quel est le chef-lieu de l'Allier ? | Moulins | Vichy | Montluçon | Cusset
+D | Quel est le chef-lieu du Lot-et-Garonne ? | Agen | Villeneuve-sur-Lot | Marmande | Nérac
+D | Quel est le chef-lieu du Tarn-et-Garonne ? | Montauban | Moissac | Castelsarrasin | Caussade
+D | Quel est le chef-lieu de la Meuse ? | Bar-le-Duc | Verdun | Commercy | Saint-Mihiel
+D | Quel est le chef-lieu de la Haute-Marne ? | Chaumont | Saint-Dizier | Langres | Joinville
+D | Quel est le chef-lieu de la Marne ? | Châlons-en-Champagne | Reims | Épernay | Vitry-le-François
+D | Quel est le chef-lieu du Jura ? | Lons-le-Saunier | Dole | Saint-Claude | Arbois
+D | Quel est le chef-lieu de la Haute-Saône ? | Vesoul | Gray | Luxeuil-les-Bains | Lure
+D | Quel est le chef-lieu de l'Indre ? | Châteauroux | Issoudun | Le Blanc | La Châtre
+D | Quel est le chef-lieu des Alpes-de-Haute-Provence ? | Digne-les-Bains | Manosque | Sisteron | Forcalquier
+D | Quel est le chef-lieu des Hautes-Alpes ? | Gap | Briançon | Embrun | Veynes
+D | Quel est le chef-lieu de l'Aisne ? | Laon | Saint-Quentin | Soissons | Château-Thierry
+D | Quel est le chef-lieu des Ardennes ? | Charleville-Mézières | Sedan | Rethel | Givet
+D | Quel est le chef-lieu de la Corse-du-Sud ? | Ajaccio | Bonifacio | Porto-Vecchio | Propriano
+D | Quel est le chef-lieu de la Haute-Corse ? | Bastia | Corte | Calvi | L'Île-Rousse
+D | Quel est le chef-lieu de la Guadeloupe ? | Basse-Terre | Pointe-à-Pitre | Le Gosier | Sainte-Anne
+D | Quel département porte le numéro 01 ? | L'Ain | L'Aisne | L'Allier | L'Ardèche
+D | Combien la France compte-t-elle de départements ? | 101 | 96 | 100 | 95
+D | Quel est le plus petit département français par la superficie ? | Paris | Le Territoire de Belfort | Le Val-de-Marne | Les Hauts-de-Seine
+
+# — Les régions, les fleuves et leurs affluents —
+
+F | Quel est le chef-lieu de la région Auvergne-Rhône-Alpes ? | Lyon | Clermont-Ferrand | Grenoble | Annecy
+F | Quel est le chef-lieu de la région Occitanie ? | Toulouse | Montpellier | Nîmes | Perpignan
+F | Quel est le chef-lieu de la région Bretagne ? | Rennes | Brest | Quimper | Lorient
+F | Quel est le chef-lieu de la région Pays de la Loire ? | Nantes | Angers | Le Mans | Laval
+F | Quel est le chef-lieu de la région Provence-Alpes-Côte d'Azur ? | Marseille | Nice | Toulon | Avignon
+M | Quel est le chef-lieu de la région Nouvelle-Aquitaine ? | Bordeaux | Limoges | Poitiers | Angoulême
+M | Quel est le chef-lieu de la région Grand Est ? | Strasbourg | Nancy | Metz | Reims
+M | Quel est le chef-lieu de la région Hauts-de-France ? | Lille | Amiens | Arras | Beauvais
+M | Quel est le chef-lieu de la région Bourgogne-Franche-Comté ? | Dijon | Besançon | Belfort | Auxerre
+M | Quel est le chef-lieu de la région Centre-Val de Loire ? | Orléans | Tours | Bourges | Chartres
+M | Quel est le chef-lieu de la région Normandie ? | Rouen | Caen | Le Havre | Évreux
+M | De quelle région Ajaccio est-elle le chef-lieu ? | La Corse | La Provence-Alpes-Côte d'Azur | L'Occitanie | Les Pays de la Loire
+M | Combien la France métropolitaine compte-t-elle de régions ? | Treize | Vingt-deux | Douze | Quinze
+M | Quelle région française est la plus peuplée ? | L'Île-de-France | L'Auvergne-Rhône-Alpes | Les Hauts-de-France | La Nouvelle-Aquitaine
+M | Quelle est la plus vaste région de France métropolitaine ? | La Nouvelle-Aquitaine | L'Occitanie | L'Auvergne-Rhône-Alpes | Le Grand Est
+D | Quelle région est née de la fusion de l'Alsace, de la Lorraine et de la Champagne-Ardenne ? | Le Grand Est | Les Hauts-de-France | La Bourgogne-Franche-Comté | Le Centre-Val de Loire
+D | Quelle ancienne région avait Châlons-en-Champagne pour chef-lieu ? | La Champagne-Ardenne | La Lorraine | La Picardie | La Bourgogne
+M | Quelle est la plus grande ville de la région Grand Est ? | Strasbourg | Reims | Metz | Nancy
+F | Quel fleuve se jette dans l'Atlantique à Saint-Nazaire ? | La Loire | La Garonne | La Vilaine | La Charente
+F | Dans quelle mer la Seine se jette-t-elle ? | La Manche | La mer du Nord | La mer Baltique | La mer d'Irlande
+F | Quel fleuve traverse Orléans ? | La Loire | Le Loiret | Le Cher | L'Yonne
+M | Quel fleuve traverse Toulouse ? | La Garonne | Le Tarn | L'Aude | L'Ariège
+M | Quel fleuve traverse Bordeaux ? | La Garonne | La Dordogne | L'Adour | La Charente
+M | Quel fleuve traverse Rouen ? | La Seine | L'Eure | La Somme | L'Orne
+M | Quel fleuve traverse Amiens ? | La Somme | L'Escaut | L'Aisne | L'Oise
+M | Quelle rivière traverse Angers ? | La Maine | La Sarthe | La Mayenne | Le Loir
+M | Quel fleuve traverse Rennes ? | La Vilaine | Le Blavet | L'Oust | L'Aulne
+M | Quel fleuve traverse Avignon ? | Le Rhône | La Durance | La Sorgue | L'Ouvèze
+M | Quel fleuve traverse Metz ? | La Moselle | La Meuse | La Sarre | La Seille
+M | Quel fleuve traverse Besançon ? | Le Doubs | La Saône | L'Ognon | La Loue
+M | Quelle rivière traverse Limoges ? | La Vienne | La Creuse | La Gartempe | La Vézère
+M | Quelle rivière traverse Grenoble ? | L'Isère | Le Drac | La Romanche | La Bourne
+D | Quelle rivière traverse Périgueux ? | L'Isle | La Dordogne | La Vézère | La Dronne
+M | Quelle rivière traverse Strasbourg avant de rejoindre le Rhin ? | L'Ill | La Bruche | La Moder | La Zorn
+D | Quel fleuve arrose Montpellier avant de rejoindre la Méditerranée ? | Le Lez | L'Hérault | Le Vidourle | L'Orb
+M | Quel fleuve arrose Bayonne ? | L'Adour | La Nive | La Bidassoa | Le Gave de Pau
+M | Quel est le plus long affluent de la Seine ? | La Marne | L'Oise | L'Yonne | L'Aube
+M | De quel fleuve l'Oise est-elle un affluent ? | La Seine | La Somme | L'Escaut | La Meuse
+M | De quel fleuve l'Allier est-il le principal affluent ? | La Loire | La Garonne | La Dordogne | Le Rhône
+D | Près de quelle ville l'Allier rejoint-il la Loire ? | Nevers | Moulins | Vichy | Roanne
+M | De quel fleuve le Cher est-il un affluent ? | La Loire | La Seine | La Garonne | La Dordogne
+M | De quel fleuve la Vienne est-elle un affluent ? | La Loire | La Garonne | La Charente | La Dordogne
+M | De quelle rivière la Creuse est-elle un affluent ? | La Vienne | La Loire | L'Indre | Le Cher
+M | De quel fleuve la Saône est-elle le principal affluent ? | Le Rhône | La Loire | La Seine | Le Doubs
+M | De quelle rivière le Doubs est-il un affluent ? | La Saône | Le Rhône | L'Ain | La Loue
+M | De quel fleuve l'Isère est-elle un affluent ? | Le Rhône | La Loire | La Durance | La Saône
+M | De quel fleuve la Durance est-elle un affluent ? | Le Rhône | La Garonne | Le Var | L'Hérault
+M | De quel fleuve le Tarn est-il un affluent ? | La Garonne | La Loire | Le Rhône | La Dordogne
+M | De quelle rivière l'Aveyron est-il un affluent ? | Le Tarn | Le Lot | La Garonne | La Dordogne
+M | De quel fleuve le Lot est-il un affluent ? | La Garonne | La Dordogne | Le Tarn | L'Adour
+M | De quelle rivière la Vézère est-elle un affluent ? | La Dordogne | La Garonne | L'Isle | Le Lot
+M | De quel fleuve l'Ariège est-elle un affluent ? | La Garonne | L'Aude | Le Tarn | L'Adour
+D | De quel fleuve la Nive est-elle un affluent ? | L'Adour | La Garonne | La Bidassoa | Le Gave d'Oloron
+M | De quel fleuve la Meurthe est-elle un affluent ? | La Moselle | La Meuse | Le Rhin | La Sarre
+M | De quel fleuve la Moselle est-elle un affluent ? | Le Rhin | La Meuse | L'Escaut | La Seine
+M | Quel estuaire la Garonne forme-t-elle avec la Dordogne ? | La Gironde | Le bassin d'Arcachon | La baie de Somme | La rade de Brest
+M | Quel fleuve prend sa source au mont Gerbier-de-Jonc ? | La Loire | L'Allier | Le Rhône | La Dordogne
+M | Sur quel plateau la Seine prend-elle sa source ? | Le plateau de Langres | Le Morvan | Les Vosges | Le plateau de Millevaches
+M | Dans quel pays le Rhône prend-il sa source ? | La Suisse | La France | L'Italie | L'Allemagne
+M | Quel lac le Rhône traverse-t-il avant d'entrer en France ? | Le lac Léman | Le lac de Constance | Le lac d'Annecy | Le lac du Bourget
+M | Quel fleuve français forme la Camargue à son embouchure ? | Le Rhône | L'Hérault | L'Aude | Le Var
+M | Quel est le plus grand lac naturel des Alpes françaises ? | Le lac du Bourget | Le lac d'Annecy | Le lac de Serre-Ponçon | Le lac de Sainte-Croix
+M | Quel est le point culminant du Massif central ? | Le puy de Sancy | Le puy de Dôme | Le mont Mézenc | Le plomb du Cantal
+M | Quel est le point culminant des Vosges ? | Le Grand Ballon | Le Hohneck | Le ballon d'Alsace | Le Donon
+D | Quel est le point culminant du Jura français ? | Le crêt de la Neige | Le mont d'Or | Le Reculet | La Dôle
+M | Quel est le plus haut sommet des Pyrénées ? | L'Aneto | Le Vignemale | Le pic du Midi d'Ossau | Le Canigou
+D | Quel est le plus haut sommet des Pyrénées françaises ? | Le Vignemale | L'Aneto | Le pic du Midi de Bigorre | Le Canigou
+M | Quel est le plus haut sommet de Corse ? | Le monte Cinto | Le monte Rotondo | Le monte d'Oro | Le San Petrone
+D | Quel est le plus haut col routier des Alpes françaises ? | Le col de l'Iseran | Le col du Galibier | Le col de l'Izoard | Le col du Tourmalet
+M | Quelle chaîne de volcans endormis domine Clermont-Ferrand ? | La chaîne des Puys | Les monts du Cantal | Le Cézallier | Les monts Dore
+M | Quel est le plus vaste massif forestier de France ? | La forêt des Landes | La forêt de Fontainebleau | La forêt d'Orléans | La forêt de Tronçais
+M | Quelle est la plus grande île de France métropolitaine après la Corse ? | L'île d'Oléron | L'île de Ré | Belle-Île-en-Mer | L'île d'Yeu
+M | À quelle ville l'île de Ré est-elle reliée par un pont ? | La Rochelle | Rochefort | Royan | Les Sables-d'Olonne
+M | Dans quel département se trouve la pointe du Raz ? | Le Finistère | Le Morbihan | Les Côtes-d'Armor | La Manche
+M | Quel cap français est le plus proche de l'Angleterre ? | Le cap Gris-Nez | Le cap de la Hague | La pointe du Hoc | Le cap Fréhel
+D | Quel détroit sépare la Corse de la Sardaigne ? | Le détroit de Bonifacio | Le détroit de Messine | Le canal d'Otrante | Le détroit de Malte
+M | Quelle mer sépare la Corse de l'Italie continentale ? | La mer Tyrrhénienne | La mer Adriatique | La mer Ionienne | La mer Égée
+M | Combien de pays la France métropolitaine borde-t-elle ? | Huit | Six | Sept | Neuf
+F | Quel pays borde la France au sud-est ? | L'Italie | Le Portugal | L'Autriche | La Slovénie
+M | Quel État minuscule est enclavé sur la Côte d'Azur ? | Monaco | Andorre | Saint-Marin | Le Liechtenstein
+F | Quel océan borde le Maroc à l'ouest ? | L'Atlantique | La Méditerranée | L'océan Indien | La mer Rouge
+M | Quelle est la capitale de l'Irlande ? | Dublin | Belfast | Cork | Galway
+F | Quelle est la capitale de la Suède ? | Stockholm | Göteborg | Malmö | Uppsala
+F | Quelle est la capitale du Danemark ? | Copenhague | Aarhus | Odense | Aalborg
+M | Quelle est la capitale de la Grèce ? | Athènes | Thessalonique | Le Pirée | Patras
+M | Quel fleuve traverse Rome ? | Le Tibre | L'Arno | Le Pô | L'Adige
+M | Quel fleuve traverse Florence ? | L'Arno | Le Tibre | Le Pô | L'Adige
+M | Quel est le plus long fleuve d'Italie ? | Le Pô | Le Tibre | L'Adige | L'Arno
+M | Quel fleuve traverse Séville ? | Le Guadalquivir | Le Tage | L'Èbre | Le Douro
+M | Quel fleuve traverse Lisbonne ? | Le Tage | Le Douro | Le Guadiana | Le Mondego
+M | Quel fleuve traverse Prague ? | La Vltava | L'Elbe | Le Danube | L'Oder
+M | Quel fleuve traverse Berlin ? | La Sprée | L'Elbe | Le Rhin | L'Oder
+M | Quel fleuve traverse Hambourg ? | L'Elbe | Le Weser | L'Oder | Le Rhin
+M | Quel fleuve traverse Cologne ? | Le Rhin | L'Elbe | La Moselle | Le Main
+M | Quel fleuve traverse Varsovie ? | La Vistule | L'Oder | Le Bug | Le Niémen
+M | Quel fleuve traverse Moscou ? | La Moskova | La Volga | Le Don | La Neva
+D | Quel fleuve traverse Saint-Pétersbourg ? | La Neva | La Volga | La Dvina | La Moskova
+D | Quel fleuve traverse Dublin ? | La Liffey | La Shannon | La Boyne | La Lee
+D | Quel est le plus long fleuve du Royaume-Uni ? | La Severn | La Tamise | La Trent | La Mersey
+D | Quel fleuve traverse Glasgow ? | La Clyde | La Tay | La Forth | La Tweed

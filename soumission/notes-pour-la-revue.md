@@ -18,7 +18,7 @@ Tout le contenu est accessible dès le lancement. Il n'y a donc pas
 d'identifiants de démonstration à fournir.
 
 POUR ESSAYER EN UNE MINUTE
-1. Touchez « Commencer » (les réglages par défaut conviennent).
+1. Touchez « Partie rapide » sur l'écran d'accueil.
 2. Touchez vos territoires pour poser vos renforts, puis « À l'attaque ».
 3. Touchez un de vos territoires d'au moins deux hommes, puis un voisin ennemi.
 4. Choisissez un thème et « Lancer l'assaut » : une question apparaît.
@@ -46,7 +46,7 @@ autre — ni position, ni photos, ni contacts, ni micro, ni notifications.
 CONFIDENTIALITÉ
 Aucune donnée n'est collectée ni transmise. L'application n'intègre aucun kit
 tiers et n'effectue aucune requête vers un serveur. Elle fonctionne
-entièrement hors ligne : les 1 200 questions sont incluses dans le bundle.
+entièrement hors ligne : les 2 400 questions sont incluses dans le bundle.
 
 CONTENU
 Les questions, les plateaux, les dessins et l'icône sont des créations

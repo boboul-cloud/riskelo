@@ -122,7 +122,7 @@ le nom d'autrui.
 ### Texte promotionnel — 170 caractères max, modifiable sans nouvelle version
 
 ```
-Mille deux cents questions, trois plateaux, deux modes de duel. Aucune publicité, aucun compte, aucune connexion : tout le jeu est dans l'application.
+Deux mille quatre cents questions, trois plateaux, deux modes de duel. Aucune publicité, aucun compte, aucune connexion : tout le jeu est dans l'application.
 ```
 
 ### Description — 4 000 caractères max
@@ -159,9 +159,9 @@ LES RÈGLES DE LA BOÎTE, EN OPTION
 • Guerre totale : tous les territoires, sans exception — une partie de soirée entière.
 • Renfort d'érudition : un homme de plus toutes les N bonnes réponses dans un même thème.
 
-MILLE DEUX CENTS QUESTIONS
+DEUX MILLE QUATRE CENTS QUESTIONS
 
-Six thèmes — Géographie, Histoire, Sciences & Nature, Arts & Lettres, Sports & Loisirs, Écrans & Musique — deux cents questions chacun, trois niveaux de difficulté. Le dosage se choisit à la mise en place : faciles pour jouer avec des enfants, mêlées comme dans une boîte de jeu, corsées pour ceux qui trouvent le reste trop facile. Le tirage ne sort jamais du thème demandé : quand vous choisissez le terrain, il est tenu.
+Six thèmes — Géographie, Histoire, Sciences & Nature, Arts & Lettres, Sports & Loisirs, Écrans & Musique — quatre cents questions chacun, trois niveaux de difficulté. Le dosage se choisit à la mise en place : faciles pour jouer avec des enfants, mêlées comme dans une boîte de jeu, corsées pour ceux qui trouvent le reste trop facile. Le tirage ne sort jamais du thème demandé : quand vous choisissez le terrain, il est tenu.
 
 LA PARTIE SE GARDE
 
@@ -169,7 +169,7 @@ Elle se retrouve où vous l'avez laissée. Et la bibliothèque enregistre chaque
 
 CE QUE RISKELO NE FAIT PAS
 
-Aucune publicité. Aucun achat intégré. Aucun compte. Aucun traceur, aucune mesure d'audience. Aucune connexion à Internet n'est nécessaire : les mille deux cents questions sont dans l'application, et vos parties ne quittent jamais votre appareil.
+Aucune publicité. Aucun achat intégré. Aucun compte. Aucun traceur, aucune mesure d'audience. Aucune connexion à Internet n'est nécessaire : les deux mille quatre cents questions sont dans l'application, et vos parties ne quittent jamais votre appareil.
 
 iPhone, iPad et Mac — une seule application, en français.
 ```
@@ -282,7 +282,7 @@ autre — ni position, ni photos, ni contacts, ni micro, ni notifications.
 CONFIDENTIALITÉ
 Aucune donnée n'est collectée ni transmise. L'application n'intègre aucun kit
 tiers et n'effectue aucune requête vers un serveur. Elle fonctionne
-entièrement hors ligne : les 1 200 questions sont incluses dans le bundle.
+entièrement hors ligne : les 2 400 questions sont incluses dans le bundle.
 
 CONTENU
 Les questions, les plateaux, les dessins et l'icône sont des créations

@@ -120,7 +120,7 @@ F | Quelle planète est la plus éloignée du Soleil ? | Neptune | Uranus | Plut
 F | Quel organe abrite la mémoire ? | Le cerveau | Le cœur | Le foie | L'estomac
 F | Quel est l'élément le plus abondant de la croûte terrestre ? | L'oxygène | Le silicium | Le fer | L'aluminium
 F | De quoi se nourrit un animal herbivore ? | De végétaux | De viande | D'insectes | De poissons
-F | Quel gaz fait briller les tubes néon ? | Le néon | L'hélium | L'argon | Le xénon
+F | De quelle couleur brille un tube empli de néon pur ? | Rouge orangé | Bleu | Vert | Blanc
 F | Combien de pattes a un crabe ? | Dix | Huit | Six | Douze
 F | Quel est le plus long os du corps humain ? | Le fémur | Le tibia | L'humérus | La colonne vertébrale
 F | Comment appelle-t-on un animal qui mange de tout ? | Un omnivore | Un carnivore | Un herbivore | Un insectivore
@@ -213,3 +213,209 @@ M | Quel organe du corps humain se régénère le mieux ? | Le foie | Le cœur |
 D | Quel savant a établi la première table périodique des éléments par masse ? | Dmitri Mendeleïev | Antoine Lavoisier | John Dalton | Robert Boyle
 D | Quelle particule les réactions nucléaires du Soleil produisent-elles en abondance ? | Les neutrinos | Les protons libres | Les positons seuls | Les muons
 D | Quel est le nom de l'étoile la plus proche du Soleil ? | Proxima du Centaure | Sirius | Alpha du Centaure A | Barnard
+
+# — Corps humain, chimie, physique, mathématiques —
+
+F | Quel est le symbole chimique de l'hydrogène ? | H | Hy | Hg | Ho
+F | Quel est le symbole chimique de l'aluminium ? | Al | Am | Ag | Au
+F | Quel est le symbole chimique de l'hélium ? | He | Hé | Hl | H2
+F | Quelle est la formule chimique du dioxyde de carbone ? | CO2 | CO | C2O | CaO
+F | Combien de côtés compte un hexagone ? | Six | Cinq | Sept | Huit
+F | Combien de degrés font la somme des angles d'un triangle ? | 180 degrés | 360 degrés | 90 degrés | 270 degrés
+F | Combien de faces compte un cube ? | Six | Quatre | Huit | Douze
+F | Quel est le plus petit nombre premier ? | 2 | 1 | 3 | 0
+F | Quelle est la valeur approchée du nombre pi ? | 3,14 | 3,41 | 2,17 | 1,62
+F | Quel est le premier élément du tableau périodique ? | L'hydrogène | L'hélium | Le lithium | L'oxygène
+F | Quelle unité mesure l'intensité d'un son ? | Le décibel | Le hertz | Le watt | Le lumen
+F | Quel est l'élément le plus léger ? | L'hydrogène | L'hélium | Le lithium | Le carbone
+F | Quel appareil mesure une tension électrique ? | Le voltmètre | L'ampèremètre | L'ohmmètre | Le baromètre
+F | Combien de vertèbres cervicales l'être humain possède-t-il ? | Sept | Cinq | Douze | Neuf
+F | Quelle vitamine manque au marin atteint du scorbut ? | La vitamine C | La vitamine A | La vitamine D | La vitamine K
+F | Combien de litres de sang compte environ un adulte ? | Cinq litres | Deux litres | Dix litres | Vingt litres
+M | Quel est le symbole chimique du potassium ? | K | P | Po | Ka
+M | Quel est le symbole chimique du zinc ? | Zn | Zi | Z | Zc
+M | Quel est le symbole chimique de l'étain ? | Sn | Et | Sa | Ti
+M | Quel est le symbole chimique du chlore ? | Cl | Ch | C | Cr
+M | Quel est le symbole chimique du soufre ? | S | So | Su | Sf
+M | Quel est le symbole chimique du mercure ? | Hg | Me | Mr | Hm
+M | Quelle est la formule chimique du méthane ? | CH4 | C2H6 | CH2 | CO2
+M | Quelle est la formule chimique de l'ammoniac ? | NH3 | NH4 | N2H | NO3
+M | Quelle est la formule chimique de l'ozone ? | O3 | O2 | OH | O4
+M | Quel acide se trouve dans l'estomac ? | L'acide chlorhydrique | L'acide sulfurique | L'acide nitrique | L'acide acétique
+M | De quel élément le diamant et le graphite sont-ils tous deux faits ? | Le carbone | Le silicium | Le calcium | Le soufre
+M | Quel alliage obtient-on en mêlant du cuivre et de l'étain ? | Le bronze | Le laiton | L'acier | Le fer-blanc
+M | Quel alliage obtient-on en mêlant du cuivre et du zinc ? | Le laiton | Le bronze | L'acier | Le maillechort
+M | Quels deux éléments composent l'acier ? | Le fer et le carbone | Le fer et le zinc | Le cuivre et l'étain | Le fer et le nickel
+M | Comment appelle-t-on le passage direct du solide au gaz ? | La sublimation | La vaporisation | La condensation | La fusion
+M | Comment appelle-t-on le passage du liquide au solide ? | La solidification | La fusion | La sublimation | La condensation
+M | Comment appelle-t-on le passage du gaz au liquide ? | La liquéfaction | La sublimation | La fusion | La solidification
+M | Quel élément est présent dans tous les composés organiques ? | Le carbone | L'azote | Le fer | Le calcium
+M | Quel gaz utilise-t-on pour gonfler les ballons qui montent ? | L'hélium | L'oxygène | L'azote | Le dioxyde de carbone
+M | Quelle loi porte le nom U égale R fois I ? | La loi d'Ohm | La loi de Joule | La loi de Lenz | La loi de Faraday
+M | Quelle est l'unité de base de la longueur dans le système international ? | Le mètre | Le centimètre | Le kilomètre | Le pied
+M | Quelle est l'unité de base de la masse dans le système international ? | Le kilogramme | Le gramme | La tonne | La livre
+M | Combien d'unités de base compte le système international ? | Sept | Cinq | Dix | Trois
+M | Quel phénomène dévie un rayon lumineux entrant dans l'eau ? | La réfraction | La réflexion | La diffraction | L'absorption
+M | Qui a décomposé la lumière blanche à l'aide d'un prisme ? | Isaac Newton | Christian Huygens | René Descartes | Robert Hooke
+M | Quelles sont les trois couleurs primaires de la lumière ? | Rouge, vert et bleu | Rouge, jaune et bleu | Cyan, magenta et jaune | Rouge, vert et jaune
+M | Quel effet explique qu'une sirène change de son en s'approchant ? | L'effet Doppler | L'effet Larsen | L'effet de serre | L'effet photoélectrique
+M | Quel savant américain a inventé le paratonnerre ? | Benjamin Franklin | Thomas Edison | Nikola Tesla | Alexander Graham Bell
+M | Quel effet vaut à Einstein son prix Nobel de 1921 ? | L'effet photoélectrique | La relativité générale | Le mouvement brownien | L'équivalence masse-énergie
+M | Quelle particule gravite autour du noyau de l'atome ? | L'électron | Le proton | Le neutron | Le photon
+M | Quel théorème relie les trois côtés d'un triangle rectangle ? | Le théorème de Pythagore | Le théorème de Thalès | Le théorème d'Euclide | Le théorème de Fermat
+M | Quel mathématicien grec a écrit les Éléments ? | Euclide | Pythagore | Archimède | Thalès
+M | Combien de côtés compte un dodécagone ? | Douze | Dix | Onze | Vingt
+M | Quelle est la racine carrée de 144 ? | 12 | 14 | 16 | 11
+M | Combien de zéros compte un milliard ? | Neuf | Six | Douze | Huit
+M | Quelle est la somme des angles d'un quadrilatère ? | 360 degrés | 180 degrés | 540 degrés | 270 degrés
+M | Combien de valeurs différentes un octet peut-il représenter ? | 256 | 128 | 512 | 64
+M | Quel mathématicien a donné son nom à un triangle de nombres ? | Blaise Pascal | Pierre de Fermat | René Descartes | Leonhard Euler
+M | Quelle est la valeur approchée du nombre d'or ? | 1,618 | 3,142 | 2,718 | 1,414
+M | Quel groupe sanguin est donneur universel ? | O négatif | AB positif | A positif | B négatif
+M | Quel groupe sanguin est receveur universel ? | AB positif | O négatif | A négatif | B positif
+M | Quelle glande produit l'hormone de croissance ? | L'hypophyse | La thyroïde | Le pancréas | Le foie
+M | Quel élément la thyroïde utilise-t-elle pour ses hormones ? | L'iode | Le fer | Le calcium | Le zinc
+M | Quel organe stocke le glycogène ? | Le foie | La rate | Le pancréas | Le rein
+M | Quelles cellules du sang produisent les anticorps ? | Les lymphocytes B | Les globules rouges | Les plaquettes | Les lymphocytes T
+M | Quel est le tissu le plus dur du corps humain ? | L'émail dentaire | L'os du fémur | Le cartilage | La dentine
+M | Quel liquide protège le cerveau et la moelle épinière ? | Le liquide céphalorachidien | La lymphe | Le plasma | La synovie
+M | Quelle carence provoque le rachitisme chez l'enfant ? | La vitamine D | La vitamine C | Le fer | Le magnésium
+M | Combien de semaines dure en moyenne une grossesse humaine ? | Quarante semaines | Trente semaines | Cinquante semaines | Trente-six semaines
+M | Quel est le plus gros muscle du corps humain ? | Le grand fessier | Le quadriceps | Le grand dorsal | Le mollet
+M | Combien de temps vit un globule rouge en moyenne ? | Environ 120 jours | Environ 10 jours | Environ un an | Environ 30 jours
+M | Combien de compartiments compte l'estomac d'une vache ? | Quatre | Deux | Trois | Un
+M | Quel nerf conduit les images de l'œil au cerveau ? | Le nerf optique | Le nerf vague | Le nerf sciatique | Le nerf trijumeau
+M | Combien de muscles compte environ le corps humain ? | Environ six cents | Environ deux cents | Environ mille cinq cents | Environ cent
+D | Quel est le symbole chimique du tungstène ? | W | Tu | Tg | Ts
+D | Quel est le symbole chimique du magnésium ? | Mg | Ma | Mn | Mg2
+D | De quel mot latin le symbole Fe du fer vient-il ? | Ferrum | Ferox | Fervum | Ferrare
+D | Quel est le symbole chimique de l'uranium ? | U | Ur | Un | Ua
+D | Quel élément porte le numéro atomique 26 ? | Le fer | Le cuivre | Le zinc | Le nickel
+D | Quel élément porte le numéro atomique 79 ? | L'or | L'argent | Le platine | Le mercure
+D | Quelle est la formule de l'acide sulfurique ? | H2SO4 | HCl | HNO3 | H2SO3
+D | Quel gaz noble est utilisé dans les lasers rouges des lecteurs ? | L'hélium-néon | Le krypton | Le xénon | L'argon
+D | Quelle grandeur le nombre d'Avogadro compte-t-il ? | Les entités d'une mole | Les électrons d'un atome | Les joules d'une calorie | Les neutrons d'un noyau
+D | Quel physicien a donné son nom à l'unité de température absolue ? | Lord Kelvin | James Joule | Anders Celsius | Daniel Fahrenheit
+D | Quelle loi de Newton s'écrit force égale masse fois accélération ? | La deuxième | La première | La troisième | La loi de la gravitation
+D | Quel principe affirme que toute action entraîne une réaction opposée ? | La troisième loi de Newton | Le principe d'inertie | Le principe d'Archimède | La loi de Hooke
+D | Quelle machine transforme l'énergie mécanique en courant alternatif ? | L'alternateur | Le transformateur | Le condensateur | Le redresseur
+D | Quel physicien danois a proposé un modèle de l'atome en 1913 ? | Niels Bohr | Ernest Rutherford | Max Planck | Joseph Thomson
+D | Quel physicien a découvert le noyau de l'atome ? | Ernest Rutherford | Niels Bohr | James Chadwick | Joseph Thomson
+D | Quel physicien a découvert le neutron en 1932 ? | James Chadwick | Ernest Rutherford | Enrico Fermi | Niels Bohr
+D | Quel savant a fondé la théorie des quanta en 1900 ? | Max Planck | Albert Einstein | Werner Heisenberg | Erwin Schrödinger
+D | Quel chat imaginaire illustre un paradoxe de la physique quantique ? | Le chat de Schrödinger | Le chat de Cheshire | Le démon de Maxwell | L'âne de Buridan
+D | Quelle expérience de pensée oppose un démon au second principe ? | Le démon de Maxwell | Le chat de Schrödinger | Le paradoxe des jumeaux | Le pari de Pascal
+D | Quel principe interdit à deux électrons d'occuper le même état ? | Le principe d'exclusion de Pauli | Le principe d'incertitude | Le principe de Fermat | Le principe de Curie
+D | Quelle est la racine carrée de 2, approximativement ? | 1,414 | 1,618 | 1,732 | 2,236
+D | Quel nombre est la base des logarithmes naturels ? | e | pi | 10 | 2
+D | Combien de faces compte un dodécaèdre régulier ? | Douze | Vingt | Huit | Six
+D | Combien de solides de Platon existe-t-il ? | Cinq | Trois | Six | Quatre
+D | Quel mathématicien a laissé un théorème démontré seulement en 1994 ? | Pierre de Fermat | Blaise Pascal | Évariste Galois | Henri Poincaré
+D | Quel jeune mathématicien français est mort en duel à vingt ans ? | Évariste Galois | Niels Abel | Blaise Pascal | Joseph Fourier
+D | Quel est le plus petit muscle du corps humain ? | Le muscle de l'étrier | Le muscle oculaire | Le muscle du petit doigt | Le muscle de la langue
+D | Quelle aire du cerveau commande la production de la parole ? | L'aire de Broca | L'aire de Wernicke | L'hippocampe | Le thalamus
+D | Quelle partie du cerveau commande la compréhension du langage ? | L'aire de Wernicke | L'aire de Broca | Le cervelet | L'amygdale
+D | Quelle hormone est sécrétée pendant le sommeil et règle son rythme ? | La mélatonine | La sérotonine | Le cortisol | La dopamine
+D | Quelle hormone monte en cas de stress prolongé ? | Le cortisol | L'insuline | La mélatonine | La thyroxine
+
+# — Ciel, vivant, Terre et techniques —
+
+F | Quelle galaxie abrite notre système solaire ? | La Voie lactée | Andromède | Le Triangle | Le Grand Nuage de Magellan
+F | Comment appelle-t-on un astre si dense que la lumière n'en sort pas ? | Un trou noir | Une naine blanche | Une supernova | Un quasar
+F | Comment appelle-t-on l'explosion d'une étoile en fin de vie ? | Une supernova | Une nova froide | Une éclipse | Une éruption solaire
+F | Quel astronaute a marché sur la Lune le premier ? | Neil Armstrong | Buzz Aldrin | Youri Gagarine | Michael Collins
+F | Quel télescope spatial a été lancé en 1990 ? | Hubble | James-Webb | Kepler | Spitzer
+F | Quelle planète a été reclassée en planète naine en 2006 ? | Pluton | Neptune | Cérès | Éris
+F | Qu'est-ce qui provoque les marées sur Terre ? | L'attraction de la Lune | Les vents dominants | La rotation de la Terre seule | Les courants chauds
+F | Quel mammifère est capable de voler ? | La chauve-souris | L'écureuil volant | Le colibri | La taupe
+F | Que mange principalement le panda géant ? | Du bambou | Des poissons | Des fruits secs | De la viande
+F | Quel est le plus grand poisson du monde ? | Le requin-baleine | Le grand requin blanc | La raie manta | L'espadon
+F | Quel oiseau est le plus rapide en piqué ? | Le faucon pèlerin | L'aigle royal | Le martinet | L'albatros
+F | De quel arbre le ver à soie mange-t-il les feuilles ? | Le mûrier | Le chêne | Le noyer | Le figuier
+F | Quel arbre est le plus haut du monde ? | Le séquoia | Le chêne | Le baobab | L'eucalyptus
+F | Quel arbre donne les châtaignes ? | Le châtaignier | Le marronnier | Le noisetier | Le hêtre
+F | Quelle plante grimpante produit le raisin ? | La vigne | Le lierre | Le houblon | La glycine
+F | Quel appareil enregistre les tremblements de terre ? | Le sismographe | Le baromètre | L'anémomètre | Le pluviomètre
+F | Combien de bits compte un octet ? | Huit | Quatre | Seize | Dix
+F | Qui a inventé le téléphone ? | Alexander Graham Bell | Thomas Edison | Guglielmo Marconi | Nikola Tesla
+F | Quel médecin grec est considéré comme le père de la médecine ? | Hippocrate | Galien | Aristote | Asclépios
+M | Combien de lunes Mars possède-t-elle ? | Deux | Une | Quatre | Aucune
+M | Quelle est la plus grosse lune de Saturne ? | Titan | Encelade | Rhéa | Japet
+M | Quelle lune de Jupiter est la plus volcanique du système solaire ? | Io | Europe | Ganymède | Callisto
+M | Qui a découvert les quatre grandes lunes de Jupiter ? | Galilée | Copernic | Kepler | Newton
+M | Quelle sonde a quitté la première le système solaire ? | Voyager 1 | Pioneer 11 | New Horizons | Cassini
+M | Quelle galaxie voisine se rapproche de la Voie lactée ? | Andromède | Le Triangle | Le Sombrero | Le Tourbillon
+M | Quelle constellation contient l'étoile Polaire ? | La Petite Ourse | La Grande Ourse | Cassiopée | Orion
+M | Quelle est l'étoile la plus brillante du ciel nocturne ? | Sirius | Véga | Bételgeuse | Polaris
+M | Combien de constellations les astronomes reconnaissent-ils officiellement ? | 88 | 12 | 48 | 120
+M | Comment appelle-t-on un fragment céleste qui atteint le sol ? | Une météorite | Un météore | Une comète | Un astéroïde
+M | Entre quelles planètes se trouve la ceinture d'astéroïdes ? | Entre Mars et Jupiter | Entre la Terre et Mars | Entre Jupiter et Saturne | Entre Vénus et la Terre
+M | Quelle unité sert à mesurer les distances entre les étoiles ? | L'année-lumière | Le kilomètre cube | Le parsec carré | Le degré
+M | Quelle mission a posé un module sur une comète en 2014 ? | Rosetta | Cassini | Juno | Dawn
+M | Combien de temps dure la gestation d'une éléphante ? | Environ vingt-deux mois | Environ neuf mois | Environ quinze mois | Environ trois ans
+M | Combien de cavités compte le cœur d'un poisson ? | Deux | Quatre | Trois | Une
+M | Quel animal est le plus proche parent de l'être humain ? | Le chimpanzé | Le gorille | L'orang-outan | Le gibbon
+M | Quel insecte transmet le paludisme ? | Le moustique anophèle | La mouche tsé-tsé | La tique | Le pou
+M | Quel est le plus grand reptile vivant ? | Le crocodile marin | Le python réticulé | Le varan de Komodo | L'alligator
+M | Quel oiseau est le plus petit du monde ? | Le colibri | Le troglodyte | Le roitelet | La mésange
+M | Quelle transformation fait passer la chenille au papillon ? | La métamorphose | La mue simple | La régénération | La diapause
+M | Quel oiseau accomplit la plus longue migration annuelle ? | La sterne arctique | La cigogne blanche | L'oie sauvage | Le martinet noir
+M | Comment appelle-t-on les animaux dépourvus de colonne vertébrale ? | Les invertébrés | Les mollusques | Les arthropodes | Les cnidaires
+M | Combien d'yeux une abeille possède-t-elle ? | Cinq | Deux | Trois | Huit
+M | Quelle fleur est l'emblème des Pays-Bas ? | La tulipe | La rose | Le lys | Le tournesol
+M | De quelle plante tire-t-on le sucre cultivé en France ? | La betterave | La canne à sucre | Le maïs | Le sorgho
+M | Quel champignon microscopique fait lever le pain ? | La levure | Le penicillium | Le mycélium | La truffe
+M | De quel arbre le cacao provient-il ? | Le cacaoyer | Le caféier | Le manguier | Le palmier
+M | Quelle famille de plantes réunit le pois et le haricot ? | Les légumineuses | Les graminées | Les solanacées | Les crucifères
+M | Quelle plante carnivore referme ses deux lobes sur sa proie ? | La dionée | Le népenthès | Le drosera | La sarracénie
+M | Quelle échelle mesure la force du vent ? | L'échelle de Beaufort | L'échelle de Richter | L'échelle de Mohs | L'échelle de Fujita
+M | Quel instrument mesure la vitesse du vent ? | L'anémomètre | Le baromètre | L'hygromètre | Le pluviomètre
+M | Quel instrument mesure l'humidité de l'air ? | L'hygromètre | Le baromètre | L'anémomètre | Le thermomètre
+M | Quel nuage annonce l'orage ? | Le cumulonimbus | Le cirrus | Le stratus | L'altocumulus
+M | Comment nomme-t-on un cyclone dans le Pacifique occidental ? | Un typhon | Un ouragan | Une tornade | Un blizzard
+M | Comment appelle-t-on une roche formée par dépôt de sédiments ? | Une roche sédimentaire | Une roche magmatique | Une roche métamorphique | Une roche volcanique
+M | Quelle est la couche externe solide de la Terre ? | La croûte terrestre | Le manteau | Le noyau externe | La lithosphère profonde
+M | Quel âge a la Terre approximativement ? | Environ 4,5 milliards d'années | Environ 1 milliard d'années | Environ 100 millions d'années | Environ 13 milliards d'années
+M | Quelle période a suivi le Jurassique ? | Le Crétacé | Le Trias | Le Permien | Le Paléogène
+M | Comment s'appelait le supercontinent d'il y a 250 millions d'années ? | La Pangée | Le Gondwana | La Laurasie | La Panthalassa
+M | Que signifie le sigle ADN ? | Acide désoxyribonucléique | Acide dinucléique naturel | Agent de nucléation | Acide dinitrique
+M | Qui a inventé le World Wide Web ? | Tim Berners-Lee | Bill Gates | Vinton Cerf | Steve Jobs
+M | Quel mathématicien britannique a fondé la théorie du calcul mécanique ? | Alan Turing | Charles Babbage | John von Neumann | George Boole
+M | Qui a inventé la dynamite ? | Alfred Nobel | Antoine Lavoisier | Louis Pasteur | Justus von Liebig
+M | Qui a mis au point le stéthoscope ? | René Laennec | Ambroise Paré | Claude Bernard | Xavier Bichat
+M | Qui a réalisé le premier vol motorisé en 1903 ? | Les frères Wright | Clément Ader | Louis Blériot | Santos-Dumont
+M | Qui a inventé l'écriture en relief pour les aveugles ? | Louis Braille | Valentin Haüy | Charles Barbier | Samuel Morse
+M | Quel couple de savants a découvert le radium ? | Pierre et Marie Curie | Les Lumière | Les Montgolfier | Les Becquerel
+M | Qui a pratiqué la première vaccination contre la variole ? | Edward Jenner | Louis Pasteur | Robert Koch | Alexander Fleming
+M | Quel chirurgien a réalisé la première greffe du cœur ? | Christiaan Barnard | Alexis Carrel | Michael DeBakey | Norman Shumway
+M | Quelle maladie une piqûre de tique peut-elle transmettre ? | La maladie de Lyme | Le paludisme | La dengue | Le typhus
+M | Quelle imagerie médicale utilise un champ magnétique intense ? | L'IRM | Le scanner | La radiographie | L'échographie
+M | Quelle échelle de température est encore employée aux États-Unis ? | Le Fahrenheit | Le Celsius | Le Kelvin | Le Rankine
+D | Combien de temps la Lune met-elle à tourner sur elle-même ? | Le même temps qu'autour de la Terre | Vingt-quatre heures | Sept jours | Un an
+D | Quel nuage de comètes entoure le système solaire à sa limite ? | Le nuage de Oort | La ceinture de Kuiper | Le disque de Hills | Le halo galactique
+D | Quelle ceinture d'objets glacés s'étend au-delà de Neptune ? | La ceinture de Kuiper | Le nuage de Oort | La ceinture principale | L'anneau E
+D | Quel type d'étoile est le stade final d'une étoile comme le Soleil ? | Une naine blanche | Une géante bleue | Un trou noir | Une étoile à neutrons
+D | Comment appelle-t-on le reste ultra-dense d'une étoile massive effondrée ? | Une étoile à neutrons | Une naine brune | Une nébuleuse | Un quasar
+D | Quelle sonde a survolé Pluton en 2015 ? | New Horizons | Voyager 2 | Cassini | Juno
+D | Quel astronome a donné son nom à une comète revenant tous les 76 ans ? | Edmond Halley | Charles Messier | William Herschel | Giovanni Cassini
+D | Quel astronome français a dressé un catalogue de nébuleuses au XVIIIᵉ siècle ? | Charles Messier | Urbain Le Verrier | Camille Flammarion | Pierre-Simon Laplace
+D | Quel astronome a prédit par le calcul l'existence de Neptune ? | Urbain Le Verrier | Charles Messier | Edmond Halley | William Herschel
+D | Quel animal possède des empreintes digitales presque semblables aux nôtres ? | Le koala | Le chimpanzé | Le raton laveur | Le lémurien
+D | Quelle est la plus grande fleur du monde ? | La rafflésie | Le tournesol géant | La fleur de lotus | L'arum titan
+D | Quel est le nom du plus grand désert de sel du monde ? | Le salar d'Uyuni | La vallée de la Mort | Le Danakil | Le Makgadikgadi
+D | Quelle échelle classe la dureté des minéraux ? | L'échelle de Mohs | L'échelle de Richter | L'échelle de Beaufort | L'échelle de Baumé
+D | Quelle échelle mesure la force des tornades ? | L'échelle de Fujita | L'échelle de Beaufort | L'échelle de Saffir-Simpson | L'échelle de Mercalli
+D | Quelle échelle mesure les dégâts d'un séisme plutôt que son énergie ? | L'échelle de Mercalli | L'échelle de Richter | L'échelle de Mohs | L'échelle de Fujita
+D | Quel savant a établi que rien ne se perd et rien ne se crée ? | Antoine Lavoisier | Louis Pasteur | Joseph Priestley | Henry Cavendish
+D | Quel savant français a réfuté la génération spontanée ? | Louis Pasteur | Claude Bernard | Antoine Lavoisier | Marcellin Berthelot
+D | Quel médecin allemand a identifié le bacille de la tuberculose ? | Robert Koch | Rudolf Virchow | Paul Ehrlich | Emil von Behring
+D | Quel Français a réalisé la plus ancienne photographie conservée ? | Nicéphore Niépce | Louis Daguerre | Nadar | Hippolyte Bayard
+D | Quel ingénieur écossais a perfectionné la machine à vapeur ? | James Watt | Thomas Newcomen | George Stephenson | Richard Trevithick
+D | Quel physicien a donné son nom à l'unité de puissance ? | James Watt | James Joule | André-Marie Ampère | Alessandro Volta
+D | Quel savant a donné son nom à l'unité de charge électrique ? | Charles-Augustin Coulomb | Michael Faraday | Georg Ohm | Heinrich Hertz
+D | Quel physicien anglais a lié électricité et magnétisme par l'induction ? | Michael Faraday | James Maxwell | Hans Ørsted | Joseph Henry
+D | Quel physicien écossais a unifié électricité, magnétisme et lumière ? | James Clerk Maxwell | Michael Faraday | Lord Kelvin | Isaac Newton
+D | Quelle molécule sert de monnaie d'énergie dans les cellules ? | L'ATP | L'ADN | Le glucose | L'ARN
+D | Quel organite fournit l'énergie de la cellule ? | La mitochondrie | Le noyau | Le ribosome | Le lysosome
+D | Quel organite fabrique les protéines dans la cellule ? | Le ribosome | La mitochondrie | Le lysosome | Le centriole
+D | Quelle molécule copie l'information de l'ADN pour la traduire ? | L'ARN messager | L'ATP | Le glucose | L'hémoglobine

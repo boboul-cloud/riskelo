@@ -9,11 +9,14 @@ répétitives.
 | Plateforme | Taille exigée | Résolution (portrait) | Appareil du simulateur |
 |---|---|---|---|
 | iPhone | 6,9 pouces | 1290 × 2796 ou 1320 × 2868 | iPhone 17 Pro Max |
-| iPad | 13 pouces | 2064 × 2752 | iPad Pro 13" (M4) |
+| iPhone | 6,5 pouces | 1242 × 2688 | iPhone 11 Pro Max |
+| iPad | 13 pouces | 2064 × 2752 | iPad Pro 13" (M5) |
 | Mac | — | 2880 × 1800 (16:10) | fenêtre de l'app, 1440 × 900 en points |
 
 Une capture d'iPhone 6,9" suffit pour toutes les autres tailles d'iPhone :
-Apple les met à l'échelle. Le paysage est accepté, à condition de ne pas
+Apple les met à l'échelle. Le 6,5" n'est donc pas exigé — il est fourni quand
+même, parce qu'il ne coûte qu'un appareil de plus dans la même commande et
+qu'un dossier complet ne se refait pas la veille d'un dépôt. Le paysage est accepté, à condition de ne pas
 mélanger les orientations dans une même série.
 
 ## Les cinq écrans à photographier
@@ -33,12 +36,39 @@ recherche, et c'est lui qui doit dire ce qu'est le jeu :
 5. **L'écran de mise en place** — il montre d'un coup d'œil tout ce qui se
    règle.
 
-Une sixième, facultative : la bibliothèque des parties, si l'on veut insister
-sur le fait qu'on peut revenir en arrière.
+Une sixième, prise elle aussi : l'accueil. Elle ne dit pas ce qu'est le jeu —
+c'est pourquoi elle vient en dernier — mais elle montre l'icône, et le seul
+bouton dont un joueur a besoin pour commencer.
 
 ## Comment les prendre
 
-Sur le simulateur, la capture sort exactement à la bonne résolution :
+D'une commande. `outils/captures.py` joue la partie tout seul sur les trois
+appareils, prend les six écrans et les range dans `soumission/captures/`, aux
+noms et dans l'ordre de cette fiche :
+
+```bash
+python3 outils/captures.py
+```
+
+Il attend une `Riskelo.app` pour simulateur dans `build/` :
+
+```bash
+xcodebuild -project Riskelo.xcodeproj -scheme Riskelo \
+    -destination 'platform=iOS Simulator,name=iPhone 17 Pro Max' \
+    -derivedDataPath build/dd build
+cp -R build/dd/Build/Products/Debug-iphonesimulator/Riskelo.app build/
+```
+
+Il règle aussi la barre d'état à 9:41, charge pleine et réseau plein sur les
+trois appareils — le simulateur affiche l'heure réelle par défaut, et une
+heure qui change d'une capture à l'autre fait rejeter la série.
+
+La série se joue en **face à face** à dessein : en classique, seul le
+défenseur répond, et c'est la machine quand c'est nous qui attaquons. La
+question ne s'afficherait jamais à l'écran, et la première capture — celle qui
+doit dire ce qu'est le jeu — serait impossible à prendre.
+
+À la main, si besoin :
 
 ```bash
 xcrun simctl list devices          # trouver l'appareil

@@ -30,6 +30,7 @@ enum PartieRapide {
     static let dosage: Rules.Dosage = .melees
     static let cartes = false
     static let guerreTotale = false
+    static let objectifs = false
     static let mode: Rules.Mode = .classique
 
     /// Les règles, assemblées à partir de ce que l'écran des réglages propose.
@@ -38,12 +39,14 @@ enum PartieRapide {
                        dosage: Rules.Dosage = PartieRapide.dosage,
                        cartes: Bool = PartieRapide.cartes,
                        mode: Rules.Mode = PartieRapide.mode,
-                       guerreTotale: Bool = PartieRapide.guerreTotale) -> Rules {
+                       guerreTotale: Bool = PartieRapide.guerreTotale,
+                       objectifs: Bool = PartieRapide.objectifs) -> Rules {
         var r = Rules()
         r.answersPerBonusMan = erudition == 0 ? nil : erudition
         r.difficultyWeights = dosage.poids
         r.territoryCards = cartes
         r.mode = mode
+        r.objectifs = objectifs
         if guerreTotale { r.dominationOverride = 0 }
         return r
     }

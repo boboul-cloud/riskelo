@@ -27,6 +27,7 @@ struct SetupView: View {
     @State private var plateau: Boards = PartieRapide.plateau
     @State private var cartes = PartieRapide.cartes
     @State private var guerreTotale = PartieRapide.guerreTotale
+    @State private var objectifs = PartieRapide.objectifs
     @State private var mode: Rules.Mode = PartieRapide.mode
     /// Le son n'est pas une règle du jeu : il vaut pour l'application et se
     /// garde d'une partie à l'autre. D'où les préférences du système plutôt
@@ -194,6 +195,21 @@ struct SetupView: View {
                                 }
                             }
                             .tint(Palette.lost)
+
+                            Toggle(isOn: $objectifs) {
+                                VStack(alignment: .leading, spacing: 2) {
+                                    Text("Conquêtes personnelles")
+                                        .font(.subheadline.weight(.medium))
+                                        .foregroundStyle(Palette.ink)
+                                    Text("Chacun reçoit au départ un objectif secret — deux "
+                                         + "continents, tant de places tenues, un camp à faire "
+                                         + "tomber — et le remplir gagne la partie. Le seuil de "
+                                         + "territoires reste en jeu par-dessus. Le compte de la "
+                                         + "barre du haut ne dit alors plus qui va gagner.")
+                                        .font(.caption2).foregroundStyle(Palette.dim)
+                                }
+                            }
+                            .tint(Palette.camp(3))
                         }
 
                         reglage("Vous") {
@@ -398,7 +414,7 @@ struct SetupView: View {
 
     private var regles: Rules {
         PartieRapide.regles(erudition: erudition, dosage: dosage, cartes: cartes,
-                            mode: mode, guerreTotale: guerreTotale)
+                            mode: mode, guerreTotale: guerreTotale, objectifs: objectifs)
     }
 
     private var joueurs: [Player] {

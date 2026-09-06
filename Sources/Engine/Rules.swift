@@ -146,6 +146,20 @@ struct Rules: Equatable, Codable {
     /// des renforts, et le plateau se joue très bien sans elles.
     var territoryCards = false
 
+    /// Les conquêtes personnelles : chacun reçoit au départ un objectif que
+    /// lui seul connaît, et qui lui donne une seconde façon de gagner.
+    ///
+    /// Option, et éteinte par défaut : elle change la partie du tout au tout.
+    /// Le compte des territoires de la barre du haut cesse de dire qui est en
+    /// train de gagner, et l'on ne sait plus ce que l'autre cherche — ce qui
+    /// est tout l'intérêt, mais n'est pas la partie que quelqu'un attend s'il
+    /// ne l'a pas demandée.
+    ///
+    /// Le seuil de domination reste en jeu par-dessus : l'objectif est une
+    /// porte de plus, jamais la seule. Une partie dont tous les objectifs
+    /// seraient devenus impossibles finirait quand même.
+    var objectifs = false
+
     /// Un homme de plus toutes les tant de bonnes réponses dans un même thème.
     /// `nil` retire la règle.
     ///

@@ -71,7 +71,7 @@ extension GameState: Codable {
     private enum CodingKeys: String, CodingKey {
         case board, signature, rules, players, owner, armies, current, phase, assault
         case siege, knowledge, lastCategoryAgainst, bonusPaid, turn, journal, bank, rng
-        case deck, discard, hands, exchanges, conqueredThisTurn
+        case deck, discard, hands, exchanges, conqueredThisTurn, objectifs, elimines
     }
 
     /// Ce qui identifie le plateau : la liste de ses territoires, dans
@@ -115,6 +115,13 @@ extension GameState: Codable {
                   exchanges: try c.decodeIfPresent(Int.self, forKey: .exchanges) ?? 0,
                   conqueredThisTurn: try c.decodeIfPresent(Bool.self,
                                                            forKey: .conqueredThisTurn) ?? false,
+                  // Une sauvegarde d'avant les conquêtes personnelles n'en a
+                  // pas : la partie reprend sans, ce qui est exactement ce
+                  // qu'elle était.
+                  objectifs: try c.decodeIfPresent([PlayerID: Objectif].self,
+                                                   forKey: .objectifs) ?? [:],
+                  elimines: try c.decodeIfPresent([PlayerID: PlayerID].self,
+                                                  forKey: .elimines) ?? [:],
                   turn: try c.decode(Int.self, forKey: .turn),
                   journal: try c.decode([Entry].self, forKey: .journal))
     }
@@ -139,6 +146,8 @@ extension GameState: Codable {
         try c.encode(hands, forKey: .hands)
         try c.encode(exchanges, forKey: .exchanges)
         try c.encode(conqueredThisTurn, forKey: .conqueredThisTurn)
+        try c.encode(objectifs, forKey: .objectifs)
+        try c.encode(elimines, forKey: .elimines)
         try c.encode(turn, forKey: .turn)
         try c.encode(journal, forKey: .journal)
         try c.encode(bank, forKey: .bank)

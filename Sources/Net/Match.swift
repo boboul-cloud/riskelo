@@ -39,7 +39,9 @@ enum Message: Codable {
     /// 5 : le terrain d'un assaut peut être laissé au sort — la catégorie
     ///     devient facultative dans `Action`, et la banque emporte avec elle
     ///     ce que l'appareil a déjà vu.
-    static let dialecte = 5
+    /// 6 : les conquêtes personnelles voyagent avec la partie, et avec elles
+    ///     le compte de qui a fait tomber qui.
+    static let dialecte = 6
 
     /// La partie entière, envoyée par celui qui l'a ouverte — à chacun son
     /// rang, et le compte des coups déjà joués.

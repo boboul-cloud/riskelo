@@ -345,6 +345,17 @@ struct Chapitre: Identifiable, Equatable {
 
 enum Manuel {
 
+    /// Les conquêtes possibles d'un plateau, dites en toutes lettres.
+    ///
+    /// Engendrées et non recopiées. Le paquet se taille sur le plateau — deux
+    /// gros continents, trois petits, des parts de territoires — et une liste
+    /// écrite à la main mentirait au premier continent qui change de taille.
+    /// Les cartes d'élimination sont laissées de côté : elles se disent en une
+    /// phrase, et il y en a une par camp.
+    static func conquetes(_ plateau: Boards) -> [String] {
+        Objectif.paquet(pour: plateau.board, joueurs: 2).map { $0.texte(plateau.board) }
+    }
+
     /// La version, lue du paquet et non recopiée ici.
     ///
     /// Elle était écrite à la main, et elle est restée à « 1.0 » quand le
@@ -548,7 +559,7 @@ enum Manuel {
 
     private static let victoire = Chapitre(
         id: "victoire", titre: "Gagner la partie",
-        resume: "Le seuil de domination, la guerre totale, l'élimination.",
+        resume: "Le seuil de domination, les conquêtes personnelles, l'élimination.",
         icone: "flag.checkered", teinte: Palette.held,
         blocs: [
             .p("La victoire ne demande pas de tout prendre : il faut tenir sa part de "
@@ -564,6 +575,41 @@ enum Manuel {
             .p("L'option retire le seuil : il faut tous les territoires, sans exception. "
                + "Comptez environ deux fois plus de questions — 112 au lieu de 71 à deux "
                + "joueurs. C'est une partie de soirée entière, et c'est le but."),
+            .h("Les conquêtes personnelles"),
+            .p("L'option donne à chacun, au départ, un objectif que lui seul connaît. "
+               + "Le remplir gagne la partie sur-le-champ — le seuil de territoires "
+               + "reste en jeu par-dessus, c'est l'autre porte et elle est ouverte à "
+               + "tous."),
+            .puces([
+                "Tenir deux gros continents, ou trois petits — pris à la taille du "
+                + "plateau, car l'Anneau n'a pas d'Australie.",
+                "Tenir tant de territoires : la moitié du plateau environ, ou moins "
+                + "s'il faut deux ou trois hommes sur chacun.",
+                "Faire tomber un camp, et de votre main — à trois joueurs et plus.",
+            ]),
+            .p("Les voici toutes, plateau par plateau. Elles sont tirées sans remise : "
+               + "deux joueurs n'ont jamais la même."),
+            .h("Sur l'Anneau"),
+            .puces(Manuel.conquetes(.anneau)),
+            .h("Sur l'Europe"),
+            .puces(Manuel.conquetes(.europe)),
+            .h("Sur le Monde"),
+            .puces(Manuel.conquetes(.monde)),
+            .p("À trois joueurs et plus s'ajoute une carte par camp : « faire "
+               + "disparaître le camp de Rouge », de Vert, d'Ambre ou de Violet — et "
+               + "jamais le vôtre."),
+            .p("La cible que quelqu'un d'autre fait tomber avant vous ne compte pas : "
+               + "votre carte se retourne alors et devient une conquête de territoires, "
+               + "comme au Risk. Sans quoi vous passeriez la fin de la partie à ne plus "
+               + "pouvoir gagner."),
+            .p("Le bouton en cible, dans la barre du haut, montre la vôtre et où vous "
+               + "en êtes. Il ne montre jamais celle d'un autre : à plusieurs appareils, "
+               + "chacun ne voit que la sienne ; sur un appareil partagé, il montre "
+               + "celle de qui joue — on ne regarde pas la carte du voisin. Toutes se "
+               + "retournent à la fin, sur l'écran de victoire."),
+            .note("La machine reçoit une conquête comme vous, et peut gagner par elle. "
+                  + "Elle ne la poursuit pas pour autant : elle joue comme elle a "
+                  + "toujours joué, et c'est votre avantage."),
             .h("L'élimination"),
             .p("Un joueur qui perd son dernier territoire est éliminé ; son nom reste "
                + "barré dans la barre des camps. Si les cartes de territoire sont en "

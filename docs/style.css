@@ -87,6 +87,10 @@ h2 { font-size: 26px; margin: 0 0 14px; letter-spacing: -.3px; }
 h3 { font-size: 18px; margin: 30px 0 8px; }
 h4 { font-size: 15px; margin: 22px 0 6px; color: var(--dim);
      text-transform: uppercase; letter-spacing: .06em; }
+/* Un cran en dessous du h4 : il n'y a qu'un endroit qui en ait besoin, la
+   liste des conquêtes plateau par plateau, et il lui faut un titre qui ne
+   coupe pas la section en deux. */
+h5 { font-size: 14px; margin: 18px 0 4px; font-weight: 600; }
 p { margin: 0 0 14px; }
 ul, ol { margin: 0 0 14px; padding-left: 22px; }
 li { margin-bottom: 7px; }

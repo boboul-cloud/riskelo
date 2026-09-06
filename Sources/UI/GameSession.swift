@@ -221,6 +221,32 @@ final class GameSession {
     var journalOpen = false
     var dossierOpen = false
     var cartesOpen = false
+    var objectifOpen = false
+
+    /// L'objectif à montrer sur **cet** appareil, et à qui il appartient.
+    ///
+    /// En réseau, le vôtre et jamais un autre : chacun tient son appareil, et
+    /// l'état complet qu'il reçoit ne se lit qu'à travers cet écran-ci.
+    ///
+    /// Sur un seul appareil, celui de qui joue — c'est lui qui l'a en main, et
+    /// c'est la règle du Risk à plusieurs autour d'une table : on ne montre
+    /// pas sa carte. Pendant le tour de la machine, celui du premier humain,
+    /// pour qu'on puisse le relire en attendant son tour.
+    var objectifMontre: (joueur: PlayerID, carte: Objectif)? {
+        guard game.rules.objectifs else { return nil }
+        let qui: PlayerID
+        if enReseau {
+            qui = monRang
+        } else if !game.currentPlayer.isBot {
+            qui = game.currentPlayer.id
+        } else if let humain = game.players.first(where: { !$0.isBot }) {
+            qui = humain.id
+        } else {
+            return nil
+        }
+        guard let carte = game.objectif(de: qui) else { return nil }
+        return (qui, carte)
+    }
     /// Les cartes retenues dans la main, en attente d'échange.
     var cartesChoisies: Set<Int> = []
 

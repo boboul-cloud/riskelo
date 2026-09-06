@@ -100,6 +100,39 @@ d'ordinaire. Mesuré : l'équilibre est le même, mais la partie dure environ
 133 à trois. Avec les cartes en plus et trois joueurs, elle peut dépasser six
 cents questions. C'est une partie de soirée entière, et c'est le but.
 
+### Les conquêtes personnelles — option
+
+Chacun reçoit au départ une conquête que **lui seul connaît**, et la remplir
+gagne la partie sur-le-champ. Le seuil de territoires reste en jeu par-dessus :
+c'est l'autre porte, ouverte à tous, et c'est elle qui garantit qu'une partie
+finit même si toutes les conquêtes deviennent impossibles.
+
+Le paquet se **taille sur le plateau** : « deux gros continents » et « trois
+petits » n'ont de sens que relativement à lui, et les nombres du Risk sont des
+parts du monde — 24 territoires sur 42, c'est 57 % ; 18 avec deux hommes, 43 % ;
+12 avec trois, 29 %. Aucune carte ne demande plus de 60 % du plateau : une
+conquête doit rester un raccourci, jamais un détour.
+
+| Plateau | Tenir tant de places | … à deux hommes | … à trois hommes |
+|---|---|---|---|
+| L'Anneau — 28 territoires | 16 | 12 | 8 |
+| Europe — 38 territoires | 22 | 16 | 11 |
+| Monde — 42 territoires | 24 | 18 | 12 |
+
+S'y ajoutent les continents — sur le Monde, « l'Asie et l'Amérique du Nord »,
+« l'Europe, l'Afrique et l'Océanie », et ainsi de suite — et, à trois joueurs
+et plus, une carte par camp : **faire tomber tel camp, et de votre main**. Si
+un tiers vous prend votre proie, la carte se retourne et devient une conquête
+de territoires, comme au Risk : sans cela on passerait la fin de la partie à ne
+plus pouvoir gagner.
+
+La liste complète n'est écrite nulle part : le mode d'emploi de l'application
+l'**engendre** à partir du paquet, plateau par plateau. Une liste recopiée
+mentirait au premier continent qui change de taille.
+
+La machine reçoit une conquête comme vous et peut gagner par elle, mais elle ne
+la poursuit pas : elle joue comme elle a toujours joué.
+
 ### Le renfort d'érudition
 
 Un homme de plus toutes les **N bonnes réponses dans un même thème** — N se

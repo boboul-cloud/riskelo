@@ -103,6 +103,14 @@ struct GameState {
     private(set) var siege: [TerritoryID: Int] = [:]
     private(set) var turn = 1
     private(set) var journal: [Entry] = []
+    /// Ce que chacun cherche en secret, quand la règle est en jeu. L'état les
+    /// porte tous — il faut bien qu'ils voyagent avec la partie et survivent
+    /// à une reprise — et c'est l'écran qui n'en montre qu'un : le vôtre.
+    private(set) var objectifs: [PlayerID: Objectif] = [:]
+    /// Qui a fait tomber qui. Un camp éliminé par un tiers ne compte pas pour
+    /// celui à qui l'on avait demandé de le faire tomber : sa carte se
+    /// retourne alors, comme au Risk.
+    private(set) var elimines: [PlayerID: PlayerID] = [:]
 
     var bank: QuestionBank
     var rng: SeededRandom
@@ -159,6 +167,10 @@ struct GameState {
             g.deck = Deck.build(for: g.map)
             g.deck.shuffle(using: &g.rng)
         }
+        if rules.objectifs {
+            g.objectifs = Objectif.distribuer(pour: g.board, joueurs: players.count,
+                                              using: &g.rng)
+        }
         g.phase = .reinforcement(remaining: g.reinforcements(for: g.currentPlayer.id))
         g.note(.tour, "Tour \(g.turn) — à \(g.currentPlayer.name) de jouer.")
         return g
@@ -177,6 +189,7 @@ struct GameState {
          lastCategoryAgainst: [PlayerID: Category], bonusPaid: [PlayerID: Int],
          deck: [Card], discard: [Card], hands: [PlayerID: [Card]],
          exchanges: Int, conqueredThisTurn: Bool,
+         objectifs: [PlayerID: Objectif], elimines: [PlayerID: PlayerID],
          turn: Int, journal: [Entry]) {
         self.init(boardKind: board, rules: rules, players: players, bank: bank, rng: rng)
         self.owner = owner
@@ -193,6 +206,8 @@ struct GameState {
         self.hands = hands
         self.exchanges = exchanges
         self.conqueredThisTurn = conqueredThisTurn
+        self.objectifs = objectifs
+        self.elimines = elimines
         self.turn = turn
         self.journal = journal
     }
@@ -361,6 +376,15 @@ struct GameState {
         hands[player] = cartes
     }
 
+    /// Même porte, pour une conquête personnelle et ce qu'il en advient.
+    mutating func seize(objectif: Objectif, of joueur: PlayerID) {
+        objectifs[joueur] = objectif
+    }
+
+    mutating func seize(elimine victime: PlayerID, par bourreau: PlayerID) {
+        elimines[victime] = bourreau
+    }
+
     /// Même porte, pour ce qu'un joueur a montré savoir dans une catégorie.
     mutating func seize(_ category: Category, of player: PlayerID, asked: Int, correct: Int) {
         knowledge[player, default: [:]][category] = Score(asked: max(0, asked),
@@ -380,7 +404,26 @@ struct GameState {
             note(.renfort, "\(currentPlayer.name) a placé ses renforts.")
             phase = .attack
         }
+        // Un objectif qui demande tant de places à deux ou trois hommes se
+        // remplit en posant un renfort, et pas seulement en prenant une place.
+        verifierLObjectif()
         return true
+    }
+
+    /// La conquête personnelle se vérifie partout où elle peut s'accomplir :
+    /// une place prise, un homme posé, un déplacement de fin de tour. Le
+    /// seuil de domination, lui, ne dépend que du nombre de territoires et se
+    /// vérifie là où ils changent de main.
+    ///
+    /// Elle ne s'accomplit que pendant son propre tour — on ne gagne pas
+    /// pendant celui d'un autre, quand bien même il vous rendrait un
+    /// continent en se retirant.
+    private mutating func verifierLObjectif() {
+        guard rules.objectifs, !isOver, players.count > 1,
+              objectifAccompli(currentPlayer.id) else { return }
+        assault = nil
+        phase = .finished(winner: currentPlayer.id)
+        note(.fin, recitDeLObjectif(currentPlayer.id))
     }
 
     // MARK: - Assaut
@@ -605,20 +648,29 @@ struct GameState {
         if let loser, territories(of: loser).isEmpty,
            let i = players.firstIndex(where: { $0.id == loser }) {
             players[i].eliminated = true
+            elimines[loser] = currentPlayer.id
             note(.elimination, "\(players[i].name) est éliminé.")
             heriter(de: loser)
         }
 
         let survivors = players.filter { !$0.eliminated }
-        guard survivors.count > 1, !dominates(currentPlayer.id) else {
+        // La garnison ne s'arrête pas à mi-chemin quand la partie se gagne :
+        // on ne demande pas « combien d'hommes avancent » pour une place qui
+        // n'aura pas de lendemain.
+        let parLObjectif = objectifAccompli(currentPlayer.id)
+        guard survivors.count > 1, !dominates(currentPlayer.id), !parLObjectif else {
             // Tout est pris : la garnison suit, et la partie s'arrête.
             armies[to] = max(1, armies(from) - 1)
             armies[from] = 1
             assault = nil
             phase = .finished(winner: currentPlayer.id)
-            note(.fin, survivors.count > 1
-                 ? "\(currentPlayer.name) tient assez du monde pour que le reste ne compte plus."
-                 : "\(currentPlayer.name) tient le monde entier.")
+            if parLObjectif, survivors.count > 1, !dominates(currentPlayer.id) {
+                note(.fin, recitDeLObjectif(currentPlayer.id))
+            } else {
+                note(.fin, survivors.count > 1
+                     ? "\(currentPlayer.name) tient assez du monde pour que le reste ne compte plus."
+                     : "\(currentPlayer.name) tient le monde entier.")
+            }
             return
         }
 
@@ -638,6 +690,7 @@ struct GameState {
         assault = nil
         phase = .attack
         note(.conquete, "\(n) homme\(n > 1 ? "s avancent" : " avance") sur \(name(to)).")
+        verifierLObjectif()
         return true
     }
 
@@ -651,6 +704,9 @@ struct GameState {
         armies[from, default: 0] -= count
         armies[to, default: 0] += count
         note(.renfort, "\(count) homme\(count > 1 ? "s" : "") de \(name(from)) vers \(name(to)).")
+        // Avant de passer la main : un déplacement peut porter la dernière
+        // place à deux hommes, et c'est encore votre tour.
+        verifierLObjectif()
         endTurn()
         return true
     }

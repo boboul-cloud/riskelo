@@ -121,6 +121,10 @@ struct GameScreen: View {
                                     set: { session.cartesOpen = $0 })) {
             CartesSheet(session: session)
         }
+        .sheet(isPresented: Binding(get: { session.objectifOpen },
+                                    set: { session.objectifOpen = $0 })) {
+            ObjectifSheet(session: session)
+        }
         .sheet(isPresented: $manuelOuvert) {
             ManuelView(onClose: { manuelOuvert = false })
         }
@@ -159,6 +163,15 @@ private struct TopBar: View {
                 Text("\(g.territories(of: g.currentPlayer.id).count)/\(g.dominationThreshold)")
                     .font(.subheadline.weight(.semibold).monospacedDigit())
                     .foregroundStyle(Palette.ink)
+            }
+            // La conquête personnelle se consulte à tout moment : on l'oublie
+            // au bout de trois tours, et la relire ne coûte rien à personne
+            // puisqu'elle ne montre que la sienne.
+            if session.objectifMontre != nil {
+                Button { session.objectifOpen = true } label: {
+                    Image(systemName: "target")
+                }
+                .buttonStyle(.plain).foregroundStyle(Palette.dim)
             }
             if g.rules.territoryCards, session.aMoiDeJouer {
                 Button { session.cartesOpen = true } label: {
@@ -949,6 +962,32 @@ private struct VictoryOverlay: View {
                     .font(.title2.weight(.bold)).foregroundStyle(Palette.ink)
                 Text("\(session.game.territories(of: winner).count) territoires sur \(session.game.map.order.count), en \(session.game.turn) tours.")
                     .font(.subheadline).foregroundStyle(Palette.dim)
+                // Les cartes se retournent à la fin, comme au Risk : c'est là
+                // qu'on comprend ce que l'autre cherchait, et pourquoi il
+                // s'acharnait sur ce continent-là.
+                if session.game.rules.objectifs {
+                    VStack(spacing: 8) {
+                        Text("Ce que chacun cherchait")
+                            .font(.caption.weight(.semibold)).foregroundStyle(Palette.dim)
+                        ForEach(session.game.players) { joueur in
+                            if let carte = session.game.objectif(de: joueur.id) {
+                                HStack(alignment: .top, spacing: 8) {
+                                    Circle().fill(Palette.campVif(joueur.id))
+                                        .frame(width: 8, height: 8).padding(.top, 5)
+                                    Text("**\(joueur.name)** — \(session.game.texte(carte))")
+                                        .font(.caption)
+                                        .fixedSize(horizontal: false, vertical: true)
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                }
+                            }
+                        }
+                    }
+                    .foregroundStyle(Palette.ink.opacity(0.9))
+                    .padding(14)
+                    .frame(maxWidth: 420)
+                    .background(Color.white.opacity(0.05), in: RoundedRectangle(cornerRadius: 16))
+                    .padding(.horizontal, 18)
+                }
                 Button(action: onQuit) {
                     Text("Nouvelle partie").font(.headline)
                         .frame(maxWidth: 260).padding(.vertical, 13)
@@ -990,6 +1029,68 @@ private struct JournalSheet: View {
 /// joker remplaçant n'importe lequel — valent des hommes. Le barème monte à
 /// chaque échange de la partie : garder ses cartes ne les fait pas prendre de
 /// la valeur, cela laisse seulement la valeur monter pour l'adversaire.
+/// La conquête personnelle, celle de qui tient l'appareil.
+///
+/// Elle ne montre jamais celle d'un autre — c'est toute la règle. Sur un
+/// appareil partagé, elle montre celle de qui joue : à deux autour d'une
+/// table, on ne regarde pas la carte du voisin, et l'application ne fait pas
+/// mieux qu'un carton posé face cachée.
+private struct ObjectifSheet: View {
+    let session: GameSession
+
+    var body: some View {
+        let g = session.game
+        ScrollView {
+            if let (joueur, carte) = session.objectifMontre {
+                VStack(alignment: .leading, spacing: 18) {
+                    HStack(spacing: 8) {
+                        Circle().fill(Palette.campVif(joueur)).frame(width: 10, height: 10)
+                        Text("La conquête de \(g.playerName(joueur))")
+                            .font(.headline).foregroundStyle(Palette.ink)
+                    }
+
+                    VStack(alignment: .leading, spacing: 10) {
+                        Image(systemName: "target")
+                            .font(.system(size: 30)).foregroundStyle(Palette.campVif(joueur))
+                        Text(g.texte(carte))
+                            .font(.title3.weight(.semibold)).foregroundStyle(Palette.ink)
+                            .fixedSize(horizontal: false, vertical: true)
+                        Text(g.avancement(carte, pour: joueur))
+                            .font(.subheadline.monospacedDigit()).foregroundStyle(Palette.dim)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(16)
+                    .background(Palette.campVif(joueur).opacity(0.10),
+                                in: RoundedRectangle(cornerRadius: 18))
+                    .overlay(RoundedRectangle(cornerRadius: 18)
+                        .strokeBorder(Palette.campVif(joueur).opacity(0.6), lineWidth: 1.5))
+
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text("La remplir gagne la partie, sur-le-champ.")
+                        Text("Le seuil de \(g.dominationThreshold) territoires reste en jeu : "
+                             + "c'est l'autre porte, et elle est ouverte à tous.")
+                        Text(session.enReseau
+                             ? "Les autres appareils ne montrent que la leur."
+                             : "Sur un appareil partagé, cet écran montre celle de qui joue.")
+                    }
+                    .font(.caption).foregroundStyle(Palette.dim)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                    Button { session.objectifOpen = false } label: {
+                        Text("Fermer").font(.headline)
+                            .frame(maxWidth: .infinity).padding(.vertical, 13)
+                    }
+                    .buttonStyle(.bordered).tint(Palette.dim)
+                }
+                .padding(18)
+            }
+        }
+        .background(Palette.sea)
+        .preferredColorScheme(.dark)
+    }
+}
+
 private struct CartesSheet: View {
     let session: GameSession
 

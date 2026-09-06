@@ -184,7 +184,7 @@ struct SetupView: View {
                             }
                             .tint(Palette.held)
 
-                            Toggle(isOn: $guerreTotale) {
+                            Toggle(isOn: exclusif($guerreTotale, avec: $objectifs)) {
                                 VStack(alignment: .leading, spacing: 2) {
                                     Text("Guerre totale")
                                         .font(.subheadline.weight(.medium))
@@ -196,7 +196,7 @@ struct SetupView: View {
                             }
                             .tint(Palette.lost)
 
-                            Toggle(isOn: $objectifs) {
+                            Toggle(isOn: exclusif($objectifs, avec: $guerreTotale)) {
                                 VStack(alignment: .leading, spacing: 2) {
                                     Text("Conquêtes personnelles")
                                         .font(.subheadline.weight(.medium))
@@ -210,6 +210,13 @@ struct SetupView: View {
                                 }
                             }
                             .tint(Palette.camp(3))
+
+                            if guerreTotale || objectifs {
+                                Text("Ces deux-là ne vont pas ensemble : allumer l'une "
+                                     + "éteint l'autre. Prendre le monde entier, ou remplir "
+                                     + "sa conquête — il faut choisir la fin de la partie.")
+                                    .font(.caption2).foregroundStyle(Palette.dim.opacity(0.8))
+                            }
                         }
 
                         reglage("Vous") {
@@ -254,10 +261,9 @@ struct SetupView: View {
                         }
 
                         VStack(spacing: 4) {
-                            Text(guerreTotale
-                                 ? "Victoire à la conquête intégrale des \(plateau.board.map.order.count) territoires"
-                                 : "Victoire à \(seuil) territoires sur \(plateau.board.map.order.count)")
+                            Text(resumeDeLaVictoire)
                                 .font(.footnote).foregroundStyle(Palette.dim)
+                                .multilineTextAlignment(.center)
                             if compensation > 0 {
                                 Text("Celui qui ouvre part avec \(compensation) hommes de moins : "
                                      + "ici, la défense l'emporte, et ouvrir se paie.")
@@ -405,9 +411,41 @@ struct SetupView: View {
 
     private var libelleNiveau: String { PartieRapide.niveauDit(niveau) }
 
+    /// Deux règles qui ne peuvent pas tenir ensemble : allumer celle-ci
+    /// éteint l'autre.
+    ///
+    /// Guerre totale demande tout le plateau, la conquête personnelle se
+    /// gagne souvent en trois continents : côte à côte, la seconde emporte
+    /// toujours la partie avant la première, et la première ne veut plus
+    /// rien dire. Le réglage tranche donc à la place du joueur, au lieu de
+    /// lui laisser composer une partie dont une moitié serait morte.
+    private func exclusif(_ celle: Binding<Bool>, avec autre: Binding<Bool>) -> Binding<Bool> {
+        Binding(get: { celle.wrappedValue },
+                set: { allumee in
+                    celle.wrappedValue = allumee
+                    if allumee { autre.wrappedValue = false }
+                })
+    }
+
     private var seuil: Int {
         Rules().dominationThreshold(territories: plateau.board.map.order.count,
                                     playerCount: count)
+    }
+
+    /// Ce qu'il faut faire pour gagner, en une ligne, sous les réglages.
+    ///
+    /// Les conquêtes personnelles ouvrent une seconde porte : l'annonce du
+    /// seul seuil de territoires deviendrait fausse, puisqu'une partie peut
+    /// alors se gagner bien avant, et sans que personne l'ait vu venir.
+    private var resumeDeLaVictoire: String {
+        let total = plateau.board.map.order.count
+        if objectifs {
+            return "Victoire à sa conquête personnelle, "
+                 + "ou à \(seuil) territoires sur \(total)"
+        }
+        return guerreTotale
+            ? "Victoire à la conquête intégrale des \(total) territoires"
+            : "Victoire à \(seuil) territoires sur \(total)"
     }
 
     private var compensation: Int { Rules().compensation(playerCount: count) }

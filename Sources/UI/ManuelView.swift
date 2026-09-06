@@ -345,7 +345,17 @@ struct Chapitre: Identifiable, Equatable {
 
 enum Manuel {
 
-    static let version = "version 1.0"
+    /// La version, lue du paquet et non recopiée ici.
+    ///
+    /// Elle était écrite à la main, et elle est restée à « 1.0 » quand le
+    /// projet est passé à 1.1 : le mode d'emploi annonçait une version que
+    /// l'application n'était plus, et c'est le seul endroit où le joueur lise
+    /// un numéro. Une seule source — `project.yml`, qui écrit le plist — et
+    /// plus rien à tenir à jour.
+    static let version: String = {
+        let numero = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+        return "version \(numero ?? "—")"
+    }()
     static let site = "boboul-cloud.github.io/riskelo"
     static let contact = "bob.oulhen@gmail.com"
 

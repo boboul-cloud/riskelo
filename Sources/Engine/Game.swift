@@ -398,15 +398,19 @@ struct GameState {
 
     @discardableResult
     mutating func declareAssault(from: TerritoryID, to: TerritoryID,
-                                 questions: Int, category: Category) -> Bool {
+                                 questions: Int, category: Category?) -> Bool {
         guard canDeclare(from: from, to: to, questions: questions),
               let defender = owner[to] else { return false }
 
         var a = Assault(attacker: currentPlayer.id, defender: defender,
                         from: from, to: to, category: category, volley: questions)
         note(.duel, "\(currentPlayer.name) attaque \(name(to)) depuis \(name(from)) — "
-             + "\(questions) question\(questions > 1 ? "s" : "") \(category.apresDe).")
-        lastCategoryAgainst[defender] = category
+             + "\(questions) question\(questions > 1 ? "s" : "") "
+             + "\(category?.apresDe ?? "au hasard").")
+        // Le terrain laissé au sort ne compte pas comme un terrain choisi :
+        // la machine s'interdit de reprendre le même thème deux fois de
+        // suite, et « au hasard » ne l'engage à rien.
+        if let category { lastCategoryAgainst[defender] = category }
         if !drawQuestion(&a) { assault = nil; return false }
         assault = a
         return true

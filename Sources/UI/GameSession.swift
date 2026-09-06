@@ -202,7 +202,10 @@ final class GameSession {
 
     var selected: TerritoryID?
     var target: TerritoryID?
-    private(set) var draftCategory: Category = .geographie
+    /// Le terrain de l'assaut en préparation. Vide, c'est « au hasard » :
+    /// l'attaquant renonce à choisir, et la question se tire dans toute la
+    /// banque.
+    private(set) var draftCategory: Category? = .geographie
     var draftQuestions = 1
     /// Le joueur a-t-il déjà choisi un terrain lui-même ? Tant que non,
     /// l'application lui suggère la faiblesse de l'adversaire — une fois, pour
@@ -211,7 +214,7 @@ final class GameSession {
     /// catégorie martelée s'épuise.
     private var categoryChosen = false
 
-    func chooseCategory(_ c: Category) {
+    func chooseCategory(_ c: Category?) {
         draftCategory = c
         categoryChosen = true
     }
@@ -439,8 +442,39 @@ final class GameSession {
     /// l'arrière-plan : elle peut être arrêtée sans autre préavis.
     func saveNow() {
         saveWork?.cancel()
+        retenirLesQuestions()
         if game.isOver { GameStore.shared.discard() } else { GameStore.shared.save(game) }
     }
+
+    /// Ce que la partie a posé rejoint la mémoire de l'appareil, pour que la
+    /// suivante l'évite.
+    ///
+    /// Le compte se recalcule entier à chaque fois — il ne s'incrémente pas —
+    /// et l'enregistrer deux fois ne compte donc jamais deux fois. On ne
+    /// réécrit tout de même le fichier que lorsqu'une question de plus a été
+    /// posée : il y a une sauvegarde par coup, et la plupart n'en posent
+    /// aucune.
+    private func retenirLesQuestions() {
+        guard game.bank.alreadyServed != poseesEnregistrees else { return }
+        poseesEnregistrees = game.bank.alreadyServed
+        MemoireDesQuestions.shared.enregistrer(
+            game.bank.vuesAJour(depuis: memoireAuDepart, sauf: poseesALOuverture))
+    }
+
+    private var poseesEnregistrees: Set<String> = []
+
+    /// Ce que **cet** appareil savait en ouvrant la partie.
+    ///
+    /// La mémoire s'écrit à partir de là, et non à partir de celle qui voyage
+    /// avec la partie : celui qui rejoint joue avec la banque de l'hôte — il
+    /// le faut, sans quoi les deux écrans poseraient deux questions
+    /// différentes — mais il n'ajoute à la sienne que ce qui a été posé ici.
+    private let memoireAuDepart = MemoireDesQuestions.shared.charger()
+
+    /// Ce que la partie avait déjà posé quand on l'a ouverte. C'est compté
+    /// depuis longtemps dans la mémoire : une partie reprise trois fois ne
+    /// doit pas compter trois fois ses premières questions.
+    private var poseesALOuverture: Set<String> = []
 
     private func scheduleSave() {
         saveWork?.cancel()
@@ -453,8 +487,14 @@ final class GameSession {
 
     init(players: [Player], rules: Rules = Rules(), board: Boards = .anneau,
          seed: UInt64 = UInt64.random(in: .min ... .max)) {
-        game = GameState.start(board: board, players: players, rules: rules, seed: seed)
+        // La partie s'ouvre en sachant ce que l'appareil a déjà vu passer :
+        // c'est ce qui empêche la deuxième soirée de reposer les questions de
+        // la première.
+        game = GameState.start(board: board, players: players, rules: rules,
+                               bank: QuestionBank(vues: MemoireDesQuestions.shared.charger()),
+                               seed: seed)
         partieID = UUID()
+        poseesALOuverture = game.bank.alreadyServed
         GameStore.shared.saveID(partieID)
         saveNow()
         archiver("Ouverture")
@@ -474,6 +514,7 @@ final class GameSession {
         self.monRang = rang
         self.rangs = rangs
         self.compteur = compteur
+        poseesALOuverture = game.bank.alreadyServed
         link.onReceive = { [weak self] data, pair in self?.recu(data, de: pair) }
         annoncerOuverture()
         resume()
@@ -489,6 +530,7 @@ final class GameSession {
     init(resuming saved: GameState, partie: UUID? = nil) {
         game = saved
         partieID = partie ?? GameStore.shared.loadID() ?? UUID()
+        poseesALOuverture = game.bank.alreadyServed
         GameStore.shared.saveID(partieID)
         if partie != nil { archiver("Repris ici") }
         annoncerOuverture()

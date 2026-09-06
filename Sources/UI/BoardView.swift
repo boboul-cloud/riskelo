@@ -15,6 +15,10 @@ import SwiftUI
 struct BoardView: View {
 
     let session: GameSession
+    /// Où commence le panneau qui couvre le bas de l'écran, mesuré par
+    /// l'écran de jeu. Absent — rien ne couvre, ou la mesure n'est pas encore
+    /// venue — on s'en tient à l'estimation de la session.
+    var hautCouvert: CGFloat?
 
     /// Le plateau se déplace et se rapproche. C'est ce qui permet d'en avoir
     /// de plus grands que l'écran : une carte du monde ne tient pas sur un
@@ -25,6 +29,11 @@ struct BoardView: View {
     @State private var decalage: CGSize = .zero
     @GestureState private var pince: CGFloat = 1
     @GestureState private var glisse: CGSize = .zero
+    /// De combien le plateau a été remonté pour laisser la place au panneau.
+    /// Il redescend d'autant quand le panneau s'en va : sans cela la carte
+    /// restait perchée en haut, une bande vide sous elle, jusqu'au recadrage
+    /// suivant — et d'autant plus haut que le panneau était grand.
+    @State private var remonteAppliquee: CGFloat = 0
 
     private var echelle: CGFloat { min(4, max(0.9, zoom * pince)) }
     private var deplace: Bool { echelle != 1 || decalage != .zero }
@@ -34,6 +43,8 @@ struct BoardView: View {
             let layout = session.game.board.layout
             let side = min(geo.size.width, geo.size.height / layout.aspect)
             let radius = layout.cellRadius * side
+            let couvert = partCouverte(geo.frame(in: .named(Espace.ecran)))
+            let repere = Repere(couvert: couvert, stage: session.stage, cible: session.target)
             ZStack {
                 ForEach(session.game.map.order, id: \.self) { id in
                     tile(id, side: side, radius: radius,
@@ -55,7 +66,8 @@ struct BoardView: View {
                     .onEnded { valeur in
                         decalage.width += valeur.translation.width
                         decalage.height += valeur.translation.height
-                        borner(dans: geo.size, side: side, aspect: layout.aspect)
+                        borner(dans: geo.size, side: side, aspect: layout.aspect,
+                               couvert: couvert)
                     }
             )
             .simultaneousGesture(
@@ -63,7 +75,8 @@ struct BoardView: View {
                     .updating($pince) { valeur, etat, _ in etat = valeur.magnification }
                     .onEnded { valeur in
                         zoom = min(4, max(0.9, zoom * valeur.magnification))
-                        borner(dans: geo.size, side: side, aspect: layout.aspect)
+                        borner(dans: geo.size, side: side, aspect: layout.aspect,
+                               couvert: couvert)
                     }
             )
             // Il y avait ici un double-appui pour recentrer la carte. Il
@@ -81,24 +94,34 @@ struct BoardView: View {
                 ajuste = true
                 zoom = min(2.2, max(1, 54 / max(radius * 1.7, 1)))
             }
-            // Quand la machine annonce un assaut, la vue va le chercher :
-            // rapprochée, la carte n'en montre qu'un morceau, et le combat
-            // pouvait se dérouler entièrement hors de l'écran.
-            // À chaque étape du duel : la feuille qui monte prend le bas de
-            // l'écran, et le combat doit rester visible au-dessus d'elle.
-            .onChange(of: session.stage) { _, _ in
-                cadrerSurLAssaut(dans: geo.size, side: side, aspect: layout.aspect)
-            }
-            // Et dès qu'on désigne une cible : le panneau qui monte alors
-            // cache justement le bas du plateau, où les deux places se
-            // trouvaient peut-être.
-            .onChange(of: session.target) { _, _ in
-                cadrerSurLAssaut(dans: geo.size, side: side, aspect: layout.aspect)
+            // Trois choses appellent un recadrage, et toutes passent par ici.
+            // L'étape du duel, parce que la feuille qui monte prend le bas de
+            // l'écran et que le combat doit rester visible au-dessus d'elle.
+            // La cible qu'on désigne, parce que le panneau d'assaut cache
+            // justement le bas du plateau, où les deux places se trouvaient
+            // peut-être. Et la hauteur du panneau, parce que celui qui
+            // demande combien d'hommes avancent est plus haut que le bilan
+            // qu'il remplace.
+            //
+            // Toutes attendent un battement. Un panneau qui monte change de
+            // hauteur à chaque image : sans cette attente, le plateau se
+            // recadrait sur une couverture déjà périmée, et jugeait « déjà
+            // visible » un décalage encore en mouvement — les deux places
+            // finissaient à cheval sur le bord du panneau.
+            .task(id: repere) {
+                try? await Task.sleep(for: .milliseconds(260))
+                guard !Task.isCancelled else { return }
+                if couvert == 0 {
+                    redescendre(dans: geo.size, side: side, aspect: layout.aspect)
+                } else {
+                    cadrerSurLAssaut(dans: geo.size, side: side, aspect: layout.aspect,
+                                     couvert: couvert)
+                }
             }
             .overlay(alignment: .bottomTrailing) {
                 if deplace {
                     Button {
-                        withAnimation(.snappy) { zoom = 1; decalage = .zero }
+                        withAnimation(.snappy) { zoom = 1; decalage = .zero; remonteAppliquee = 0 }
                     } label: {
                         Image(systemName: "arrow.up.left.and.down.right.magnifyingglass")
                             .font(.system(size: 15, weight: .semibold))
@@ -114,11 +137,33 @@ struct BoardView: View {
         }
     }
 
+    /// Ce qui appelle un recadrage : la part couverte, l'étape du duel, la
+    /// cible visée. Réunies en une seule valeur, elles ne déclenchent qu'une
+    /// attente — et donc qu'un seul recadrage — quand elles changent ensemble,
+    /// ce qui est le cas ordinaire.
+    private struct Repere: Equatable {
+        let couvert: CGFloat
+        let stage: GameSession.Stage?
+        let cible: TerritoryID?
+    }
+
+    /// La part du plateau que le panneau mange — mesurée quand on la connaît,
+    /// estimée sinon.
+    ///
+    /// Arrondie au centième : un panneau qui respire d'un point ne doit pas
+    /// relancer le recadrage.
+    private func partCouverte(_ cadre: CGRect) -> CGFloat {
+        guard let hautCouvert, cadre.height > 0 else { return CGFloat(session.partCouverte) }
+        let part = (cadre.maxY - hautCouvert) / cadre.height
+        return min(0.9, max(0, (part * 100).rounded() / 100))
+    }
+
     /// Amène le milieu des deux places au centre de ce qui reste visible.
     ///
     /// Sans effet si elles s'y trouvent déjà : rien ne serait plus agaçant
     /// qu'une carte qui se met à glisser toute seule sans qu'on y gagne rien.
-    private func cadrerSurLAssaut(dans taille: CGSize, side: CGFloat, aspect: Double) {
+    private func cadrerSurLAssaut(dans taille: CGSize, side: CGFloat, aspect: Double,
+                                  couvert: CGFloat) {
         guard let (de, vers) = placesEnJeu,
               let depart = session.game.board.layout.centers[de],
               let arrivee = session.game.board.layout.centers[vers] else { return }
@@ -128,19 +173,34 @@ struct BoardView: View {
         // par-dessus, tombe de lui-même dans ce cas — c'est l'ancienne règle,
         // mais dite en termes de ce qu'on voit et non de ce qui existe.
         let rayon = CGFloat(session.game.board.layout.cellRadius) * side * echelle
-        if enVue(depart, dans: taille, side: side, aspect: aspect, marge: rayon),
-           enVue(arrivee, dans: taille, side: side, aspect: aspect, marge: rayon) { return }
+        if enVue(depart, dans: taille, side: side, aspect: aspect, marge: rayon,
+                 couvert: couvert),
+           enVue(arrivee, dans: taille, side: side, aspect: aspect, marge: rayon,
+                 couvert: couvert) { return }
 
         let milieu = CGPoint(x: (depart.x + arrivee.x) / 2 * side,
                              y: (depart.y + arrivee.y) / 2 * side)
         // La feuille du duel — ou le panneau de préparation — mange le bas :
         // le centre de ce qu'on voit remonte d'autant, et les deux places
         // doivent s'y poser.
-        let remonte = taille.height * CGFloat(session.partCouverte) / 2
+        let remonte = taille.height * couvert / 2
         withAnimation(.easeInOut(duration: 0.45)) {
             decalage = CGSize(width: -echelle * (milieu.x - side / 2),
                               height: -echelle * (milieu.y - side * CGFloat(aspect) / 2) - remonte)
-            borner(dans: taille, side: side, aspect: aspect)
+            borner(dans: taille, side: side, aspect: aspect, couvert: couvert)
+            remonteAppliquee = remonte
+        }
+    }
+
+    /// Le panneau s'en va : le plateau reprend la place qu'il lui avait
+    /// laissée. Rien d'autre ne bouge — ni le rapprochement, ni ce que le
+    /// joueur a promené sous son doigt entre-temps.
+    private func redescendre(dans taille: CGSize, side: CGFloat, aspect: Double) {
+        guard remonteAppliquee != 0 else { return }
+        withAnimation(.easeInOut(duration: 0.45)) {
+            decalage.height += remonteAppliquee
+            remonteAppliquee = 0
+            borner(dans: taille, side: side, aspect: aspect, couvert: 0)
         }
     }
 
@@ -157,25 +217,26 @@ struct BoardView: View {
     /// Une place est-elle là où on peut la voir : dans l'écran, et au-dessus
     /// du panneau qui en mange le bas ?
     private func enVue(_ p: Point, dans taille: CGSize, side: CGFloat, aspect: Double,
-                       marge: CGFloat) -> Bool {
+                       marge: CGFloat, couvert: CGFloat) -> Bool {
         let x = taille.width / 2 + decalage.width
             + echelle * (CGFloat(p.x) * side - side / 2)
         let y = taille.height / 2 + decalage.height
             + echelle * (CGFloat(p.y) * side - side * CGFloat(aspect) / 2)
-        let bas = taille.height * (1 - CGFloat(session.partCouverte))
+        let bas = taille.height * (1 - couvert)
         return x > marge && x < taille.width - marge
             && y > marge && y < bas - marge
     }
 
     /// Empêche le plateau de partir hors de l'écran : on garde toujours de
     /// quoi le rattraper.
-    private func borner(dans taille: CGSize, side: CGFloat, aspect: Double) {
+    private func borner(dans taille: CGSize, side: CGFloat, aspect: Double,
+                        couvert: CGFloat) {
         let large = side * echelle, haut = side * CGFloat(aspect) * echelle
-        let marge: CGFloat = 60 + taille.height * CGFloat(session.partCouverte) / 2
-        let maxX = max(0, (large - taille.width) / 2 + marge)
-        let maxY = max(0, (haut - taille.height) / 2 + marge)
+        let maxX = Cadrage.borneHorizontale(largeurVue: taille.width, largeurPlateau: large)
         decalage.width = min(maxX, max(-maxX, decalage.width))
-        decalage.height = min(maxY, max(-maxY, decalage.height))
+        let bornes = Cadrage.bornesVerticales(hauteurVue: taille.height,
+                                              hauteurPlateau: haut, couvert: couvert)
+        decalage.height = min(bornes.upperBound, max(bornes.lowerBound, decalage.height))
     }
 
     /// Les traversées, en pointillé. Sans elles, un joueur qui voit deux
@@ -360,5 +421,48 @@ struct BoardView: View {
         default:
             return false
         }
+    }
+}
+
+// MARK: - Les bornes du déplacement
+
+/// Jusqu'où le plateau peut se déplacer sous le doigt — ou sous le recadrage.
+///
+/// C'est de l'arithmétique, et elle est sortie de la vue parce qu'elle se
+/// vérifie : c'est elle, et non le recadrage, qui laissait les deux places
+/// sous le panneau. Le recadrage visait juste ; la borne l'arrêtait en
+/// chemin, sans rien dire.
+enum Cadrage {
+
+    /// Ce qu'on garde toujours de plateau à l'écran, en points. Une marge
+    /// franche : moins, et l'on ne saurait plus où rattraper la carte.
+    static let marge: CGFloat = 90
+
+    static func borneHorizontale(largeurVue: CGFloat, largeurPlateau: CGFloat) -> CGFloat {
+        max(0, (largeurPlateau - largeurVue) / 2 + marge)
+    }
+
+    /// Le décalage vertical admissible, dit en termes de **ce qu'on voit**.
+    ///
+    /// Il valait « la moitié de ce qui déborde, plus une marge » — une règle
+    /// qui ne connaît que l'écran. Or un panneau qui mange les trois quarts
+    /// du bas ne laisse qu'une bande étroite en haut, et amener deux places
+    /// du bas de la carte dans cette bande demande de remonter le plateau de
+    /// bien plus que la moitié de son débord. La borne s'y opposait : les
+    /// places restaient sous le panneau, ce que le recadrage avait justement
+    /// pour objet d'éviter.
+    ///
+    /// La règle est donc dite autrement, et sans mentionner l'écran : le
+    /// plateau peut monter tant qu'il en reste une marge sous le haut, et
+    /// descendre tant qu'il en reste une dans la bande libre. Elle n'est pas
+    /// symétrique, et elle n'a pas à l'être — c'est le bas qui est mangé.
+    static func bornesVerticales(hauteurVue: CGFloat, hauteurPlateau: CGFloat,
+                                 couvert: CGFloat) -> ClosedRange<CGFloat> {
+        let bande = hauteurVue * (1 - min(max(couvert, 0), 0.95))
+        // Le bas du plateau reste sous le haut de l'écran…
+        let leplusHaut = marge - (hauteurVue + hauteurPlateau) / 2
+        // …et son haut reste dans la bande qu'aucun panneau ne couvre.
+        let leplusBas = bande - marge - (hauteurVue - hauteurPlateau) / 2
+        return min(leplusHaut, leplusBas) ... max(leplusHaut, leplusBas)
     }
 }

@@ -115,6 +115,28 @@ struct GameTests {
         #expect(g.armies(cible) == avantDefenseur)
     }
 
+    /// Le terrain laissé au sort.
+    ///
+    /// L'attaquant peut renoncer à choisir : la question se tire alors dans
+    /// toute la banque. Deux conséquences qui se vérifient — le dossier de
+    /// l'adversaire se crédite du thème **de la question posée**, et non d'un
+    /// thème annoncé qui n'existe pas ; et la machine, qui s'interdit de
+    /// reprendre le même terrain deux fois de suite, n'a rien à retenir d'un
+    /// terrain que personne n'a choisi.
+    @Test func leTerrainPeutEtreLaisseAuSort() {
+        var g = partie()
+        g.debugSkipToAttack()
+        guard let (base, cible) = g.debugFirstAssault(minArmies: 3, targetArmies: 2) else { return }
+        let defenseur = g.owner[cible]!
+        let declare = g.declareAssault(from: base, to: cible, questions: 1, category: nil)
+        #expect(declare)
+        #expect(g.assault?.category == nil)
+        let posee = g.assault!.current!.question
+        g.answer(.chosen(posee.answer, elapsed: 2))
+        #expect(g.record(of: defenseur, in: posee.category).asked == 1)
+        #expect(g.lastCategoryAgainst[defenseur] == nil)
+    }
+
     @Test func laMauvaiseReponseCouteUnHommeAuDefenseur() {
         var g = partie()
         g.debugSkipToAttack()

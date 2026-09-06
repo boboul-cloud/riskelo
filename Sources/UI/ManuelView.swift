@@ -427,6 +427,18 @@ enum Manuel {
                + "choisie. Épuisée, elle recommence plutôt que de glisser vers un autre "
                + "sujet. C'est ce qui rend le choix du terrain fiable — et c'est là "
                + "qu'est votre adresse."),
+            .h("Ou le thème laissé au sort"),
+            .p("Sous les six camemberts, un septième choix : « au hasard ». La "
+               + "question se tire alors dans toute la banque, thème compris. Vous y "
+               + "renoncez à votre seul avantage — et en face à face, où vous répondez "
+               + "aussi, vous vous privez d'un terrain que vous vous choisissiez à "
+               + "vous-même autant qu'à l'autre."),
+            .h("Une question ne revient pas"),
+            .p("Dans une partie, un thème sert toutes ses questions avant d'en "
+               + "reposer une. D'une partie à l'autre aussi : l'appareil retient ce "
+               + "qui est déjà sorti, et à niveau égal une question jamais vue passe "
+               + "devant une question déjà vue. Le compte se lit dans les réglages, "
+               + "où il s'efface aussi."),
             .h("Le sablier, et l'usure du siège"),
             .p("Quinze secondes à la première question. Un joueur qui sait ne perdrait "
                + "jamais sa place : ce qui remplace la statistique du dé, c'est le "
@@ -503,8 +515,8 @@ enum Manuel {
             .p("Autant d'assauts que vous voulez, tant qu'il vous reste des piles d'au "
                + "moins deux hommes. Touchez le territoire de départ, puis un voisin "
                + "ennemi : le panneau d'assaut s'ouvre. Il montre le rapport de forces, "
-               + "les six thèmes avec ce que le défenseur y a montré savoir, et le "
-               + "choix d'une ou deux questions."),
+               + "les six thèmes avec ce que le défenseur y a montré savoir — ou le "
+               + "thème au hasard — et le choix d'une ou deux questions."),
             .p("Une place prise se garnit aussitôt : vous choisissez combien d'hommes "
                + "avancent, au moins autant que de questions posées."),
             .h("3 — Le déplacement"),

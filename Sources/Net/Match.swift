@@ -36,7 +36,10 @@ enum Message: Codable {
     ///
     /// 3 : le dialecte sort du message et passe dans l'enveloppe.
     /// 4 : chacun dit son nom en arrivant — `bonjour`.
-    static let dialecte = 4
+    /// 5 : le terrain d'un assaut peut être laissé au sort — la catégorie
+    ///     devient facultative dans `Action`, et la banque emporte avec elle
+    ///     ce que l'appareil a déjà vu.
+    static let dialecte = 5
 
     /// La partie entière, envoyée par celui qui l'a ouverte — à chacun son
     /// rang, et le compte des coups déjà joués.

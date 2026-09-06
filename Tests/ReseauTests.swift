@@ -80,6 +80,7 @@ struct ReseauTests {
         let coups: [Action] = [
             .place("A1"),
             .declareAssault(from: "A1", to: "A2", questions: 2, category: .sciences),
+            .declareAssault(from: "A1", to: "A2", questions: 1, category: nil),
             .answer(.chosen(2, elapsed: 4.25)),
             .answer(.timeout),
             .relancer,

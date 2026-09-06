@@ -13,6 +13,39 @@
 
 import SwiftUI
 
+/// L'espace de l'écran de jeu. Le plateau et les panneaux qui le couvrent s'y
+/// mesurent l'un l'autre.
+enum Espace { static let ecran = "ecran" }
+
+/// Où commence ce qui couvre le bas de l'écran : la feuille du duel, le
+/// panneau d'assaut, celui du déplacement.
+///
+/// La part couverte était estimée, en dixièmes de plateau — « le panneau
+/// d'assaut couvre les six dixièmes de la carte sur un iPhone ». Mesurée sur
+/// un grand téléphone, elle est fausse sur un petit : une feuille a une
+/// hauteur en points, pas en dixièmes d'écran. Sur un iPhone SE, celle qui
+/// demande combien d'hommes avancent couvre plus de huit dixièmes du plateau.
+/// Le recadrage amenait donc les deux places dans une bande qu'il croyait
+/// libre et qui ne l'était pas — on ne voyait plus où l'on se battait, au
+/// moment précis où il fallait en décider.
+struct HautCouvert: PreferenceKey {
+    static let defaultValue: CGFloat? = nil
+    static func reduce(value: inout CGFloat?, nextValue: () -> CGFloat?) {
+        guard let suivant = nextValue() else { return }
+        value = min(value ?? .infinity, suivant)
+    }
+}
+
+extension View {
+    /// Déclare que cette vue couvre le bas de l'écran, et dit où elle commence.
+    func couvreLeBas() -> some View {
+        background(GeometryReader { geo in
+            Color.clear.preference(key: HautCouvert.self,
+                                   value: geo.frame(in: .named(Espace.ecran)).minY)
+        })
+    }
+}
+
 struct GameScreen: View {
 
     let session: GameSession
@@ -21,6 +54,9 @@ struct GameScreen: View {
     /// on l'ouvre au milieu d'un tour pour vérifier une règle, on le referme,
     /// et le tour attend.
     @State private var manuelOuvert = false
+    /// Le haut du panneau qui couvre le bas, mesuré à chaque disposition. Le
+    /// plateau s'en sert pour savoir ce qui lui reste vraiment.
+    @State private var hautCouvert: CGFloat?
 
     var body: some View {
         ZStack {
@@ -32,7 +68,7 @@ struct GameScreen: View {
                 // consigne et le bouton. On lisait le compte des terres à
                 // l'endroit même où l'on cherchait le prochain geste.
                 StandingsBar(session: session)
-                BoardView(session: session)
+                BoardView(session: session, hautCouvert: hautCouvert)
                     .padding(.horizontal, 8)
                     .padding(.vertical, 6)
                     .overlay { AnnonceDePhase(session: session) }
@@ -54,6 +90,8 @@ struct GameScreen: View {
                     .transition(.opacity)
             }
         }
+        .coordinateSpace(name: Espace.ecran)
+        .onPreferenceChange(HautCouvert.self) { haut in hautCouvert = haut }
         // La barre du haut est posée en marge de sécurité, et non dans la
         // pile : dans la pile, la feuille du duel passait par-dessus elle. Or
         // cette feuille porte le geste « touchez pour continuer » sur toute sa
@@ -492,10 +530,11 @@ private struct BottomBar: View {
                 }
                 Text("\(g.name(a.from)) → \(g.name(a.to))")
                     .font(.headline).foregroundStyle(Palette.ink)
-                Label("\(a.volley) question\(a.volley > 1 ? "s" : "") \(a.category.apresDe)",
-                      systemImage: a.category.symbol)
+                Label("\(a.volley) question\(a.volley > 1 ? "s" : "") "
+                      + "\(a.category?.apresDe ?? "au hasard")",
+                      systemImage: a.category?.symbol ?? "dice")
                     .font(.caption2)
-                    .foregroundStyle(Palette.category(a.category))
+                    .foregroundStyle(a.category.map(Palette.category) ?? Palette.dim)
             }
             .frame(maxWidth: .infinity)
         }
@@ -720,6 +759,7 @@ private struct AssaultPanel: View {
                                 categorie(c, contre: defenseur)
                             }
                         }
+                        auHasard
                     }
 
                     VStack(alignment: .leading, spacing: 7) {
@@ -753,6 +793,7 @@ private struct AssaultPanel: View {
                     .strokeBorder(Palette.campVif(attaquant).opacity(0.7), lineWidth: 3))
                 .padding(10)
                 .frame(maxWidth: 560)
+                .couvreLeBas()
             }
         }
     }
@@ -783,6 +824,42 @@ private struct AssaultPanel: View {
                 + "deux hommes."
             : "Deux duels de suite, la même question à chaque fois pour vous deux. Le sablier "
                 + "se resserre au second, et il peut doubler la mise sur chacun."
+    }
+
+    /// Le septième terrain : celui qu'on ne choisit pas.
+    ///
+    /// Il tient toute la ligne sous les six camemberts, et non une case parmi
+    /// eux : ce n'est pas un thème de plus, c'est le refus d'en choisir un.
+    /// Sans couleur non plus — les six en ont une chacun, celui-ci n'en a
+    /// aucune, et c'est ce qu'il annonce.
+    ///
+    /// Il sert deux joueurs. Celui qui trouve fastidieux de peser six scores
+    /// à chaque assaut, et celui qui joue en face à face, où choisir le
+    /// terrain revient à se le choisir aussi à soi-même.
+    private var auHasard: some View {
+        let choisi = session.draftCategory == nil
+        return Button { session.chooseCategory(nil) } label: {
+            HStack(spacing: 7) {
+                Image(systemName: "dice").font(.system(size: 14))
+                Text("Au hasard").font(.caption2.weight(.semibold))
+                Spacer(minLength: 4)
+                Text("toutes catégories mêlées")
+                    .font(.system(size: 10)).lineLimit(1).minimumScaleFactor(0.7)
+                    .foregroundStyle(Palette.dim)
+            }
+            .frame(maxWidth: .infinity).padding(.horizontal, 10).padding(.vertical, 8)
+            .background(choisi ? Color.white.opacity(0.14) : Color.white.opacity(0.05),
+                        in: RoundedRectangle(cornerRadius: 10))
+            .overlay(RoundedRectangle(cornerRadius: 10)
+                .strokeBorder(choisi ? Palette.ink.opacity(0.75) : .clear, lineWidth: 1.5))
+            .foregroundStyle(choisi ? Palette.ink : Palette.ink.opacity(0.8))
+        }
+        .buttonStyle(.plain)
+        // Sans cela, la ligne se lit en deux morceaux — « Au hasard », puis
+        // « toutes catégories mêlées » — et c'est le premier morceau, non le
+        // bouton, qui reçoit l'appui : rien ne se passe.
+        .accessibilityElement(children: .combine)
+        .accessibilityAddTraits(choisi ? [.isButton, .isSelected] : .isButton)
     }
 
     private func categorie(_ c: Category, contre defenseur: PlayerID) -> some View {
@@ -848,6 +925,7 @@ private struct FortifyPanel: View {
                 .background(Palette.panel, in: RoundedRectangle(cornerRadius: 20))
                 .padding(10)
                 .frame(maxWidth: 460)
+                .couvreLeBas()
             }
             .onAppear { count = 1 }
         }

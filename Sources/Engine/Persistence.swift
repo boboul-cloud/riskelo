@@ -39,7 +39,7 @@ extension SeededRandom: Codable {
 }
 
 extension QuestionBank: Codable {
-    private enum CodingKeys: String, CodingKey { case served, places }
+    private enum CodingKeys: String, CodingKey { case served, places, vues }
 
     init(from decoder: Decoder) throws {
         let c = try decoder.container(keyedBy: CodingKeys.self)
@@ -48,12 +48,19 @@ extension QuestionBank: Codable {
         // Le sac des places voyage avec elle : une sauvegarde d'avant le sac
         // n'en a pas, et repart d'un sac plein — ce qui est sans conséquence.
         restore(places: try c.decodeIfPresent([Int].self, forKey: .places) ?? [])
+        // La mémoire longue voyage aussi, et c'est indispensable au second
+        // appareil : celui qui rejoint reçoit la partie entière et doit tirer
+        // exactement les mêmes questions que celui qui l'héberge. S'il
+        // repartait de sa propre mémoire, les deux écrans poseraient deux
+        // questions différentes à la même seconde.
+        restore(vues: try c.decodeIfPresent([String: Int].self, forKey: .vues) ?? [:])
     }
 
     func encode(to encoder: Encoder) throws {
         var c = encoder.container(keyedBy: CodingKeys.self)
         try c.encode(alreadyServed, forKey: .served)
         try c.encode(placesRestantes, forKey: .places)
+        try c.encode(dejaVues, forKey: .vues)
     }
 }
 
@@ -205,4 +212,58 @@ struct GameStore {
     func discard() {
         try? FileManager.default.removeItem(at: url)
     }
+}
+
+// MARK: - La mémoire des questions
+
+/// Ce que cet appareil a déjà vu passer, d'une partie sur l'autre.
+///
+/// Une partie ne le sait pas d'elle-même : elle s'ouvre avec une banque
+/// neuve, tire au sort dans le sac plein, et repose donc les questions de la
+/// veille. Celui qui joue seul enchaîne les parties, et c'est le seul à qui
+/// cela saute aux yeux — il reconnaît la question avant de l'avoir lue, et le
+/// duel ne décide plus rien.
+///
+/// Le compte est gardé ici, à côté de la partie et sous la même forme : un
+/// fichier, parce que c'est un registre de mille lignes qui grossit, et non
+/// un réglage. Il survit à la partie, aux archives et à la reprise ; il ne
+/// survit pas à la désinstallation, et c'est bien ainsi.
+struct MemoireDesQuestions {
+
+    static let shared = MemoireDesQuestions()
+
+    private let url: URL = {
+        let base = (try? FileManager.default.url(for: .applicationSupportDirectory,
+                                                 in: .userDomainMask,
+                                                 appropriateFor: nil, create: true))
+            ?? URL(fileURLWithPath: NSTemporaryDirectory())
+        let dossier = base.appendingPathComponent("Riskelo", isDirectory: true)
+        try? FileManager.default.createDirectory(at: dossier, withIntermediateDirectories: true)
+        return dossier.appendingPathComponent("questions-deja-posees.json")
+    }()
+
+    /// Combien de fois chaque question est déjà sortie.
+    func charger() -> [String: Int] {
+        guard let data = try? Data(contentsOf: url),
+              let compte = try? JSONDecoder().decode([String: Int].self, from: data)
+        else { return [:] }
+        return compte
+    }
+
+    /// L'écriture est atomique, comme celle de la partie : une coupure au
+    /// milieu laisserait un fichier illisible, donc une mémoire perdue.
+    func enregistrer(_ comptes: [String: Int]) {
+        guard let data = try? JSONEncoder().encode(comptes) else { return }
+        try? data.write(to: url, options: .atomic)
+    }
+
+    /// Tout oublier. Le joueur qui a fait le tour de la banque peut vouloir
+    /// la reprendre à neuf plutôt que de la voir se répéter au deuxième tour.
+    func oublier() {
+        try? FileManager.default.removeItem(at: url)
+    }
+
+    /// Combien de questions différentes sont déjà sorties. C'est le seul
+    /// chiffre qu'on montre au joueur.
+    func combienDeVues() -> Int { charger().count }
 }

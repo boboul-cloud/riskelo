@@ -103,8 +103,12 @@ struct AskedQuestion: Identifiable, Hashable, Codable {
     func isCorrect(_ index: Int) -> Bool { index == answer }
 }
 
-/// Le stock de questions, et la mémoire de ce qui a déjà été posé : dans une
-/// même partie, une question ne revient pas tant qu'il en reste d'autres.
+/// Le stock de questions, et deux mémoires de ce qui a déjà été posé.
+///
+/// Celle de la partie : une question ne revient pas tant qu'il en reste
+/// d'autres dans le thème. Et celle de l'appareil, qui passe d'une partie à
+/// la suivante : à niveau égal, la banque sert d'abord ce qui n'est jamais
+/// sorti.
 struct QuestionBank {
 
     /// Combien de propositions porte une question : quatre lignes.
@@ -112,6 +116,29 @@ struct QuestionBank {
 
     private(set) var questions: [Question]
     private var served: Set<String> = []
+
+    /// Ce que le joueur a déjà vu, d'une partie sur l'autre : combien de fois
+    /// chaque question est sortie.
+    ///
+    /// `served` ne vaut que pour la partie en cours ; la suivante repart d'un
+    /// sac plein, et les mêmes questions ressortent. Sur un millier de
+    /// questions cela ne devrait pas se voir — mais une partie en pose une
+    /// centaine, tirées au sort dans le sac entier, et deux parties de suite
+    /// en partagent donc une bonne dizaine. Celui qui joue seul enchaîne les
+    /// parties, et ne voit que ces retours-là.
+    ///
+    /// Le tirage prend d'abord parmi les moins vues — donc parmi celles
+    /// jamais sorties tant qu'il en reste. Ce n'est pas un poids mais une
+    /// priorité : la banque est un paquet de mille cartes qu'on distribue
+    /// sans remise et qu'on ne rebat qu'une fois vide. Un poids aurait laissé
+    /// revenir une question de la veille pendant que cent n'ont jamais servi,
+    /// et c'est exactement ce qu'on reproche au jeu.
+    ///
+    /// Le compte voyage avec la partie — donc jusqu'au second appareil, qui
+    /// doit tirer les mêmes questions que le premier. Il est arrêté à
+    /// l'ouverture : ce que la partie pose ensuite est dans `served`, et
+    /// s'ajoute au compte au moment de l'enregistrer.
+    private var vues: [String: Int] = [:]
 
     /// Le sac des places — sur quelle ligne tombe la bonne réponse.
     ///
@@ -130,8 +157,9 @@ struct QuestionBank {
     /// puisse voir, et jamais trois.
     private var places: [Int] = []
 
-    init(questions: [Question] = QuestionBank.francaises) {
+    init(questions: [Question] = QuestionBank.francaises, vues: [String: Int] = [:]) {
         self.questions = questions
+        restore(vues: vues)
     }
 
     var count: Int { questions.count }
@@ -142,6 +170,44 @@ struct QuestionBank {
 
     mutating func restore(served: Set<String>) {
         self.served = served.filter { id in questions.contains { $0.id == id } }
+    }
+
+    /// Ce que la mémoire longue sait en ouvrant la partie.
+    var dejaVues: [String: Int] { vues }
+
+    /// Le compte tel qu'il est **maintenant** : ce qui était su en ouvrant,
+    /// plus ce que la partie a posé depuis. C'est lui qu'on garde sur
+    /// l'appareil.
+    ///
+    /// Il se recalcule à chaque fois au lieu de s'incrémenter : on peut donc
+    /// l'enregistrer à chaque sauvegarde — il y en a une par coup — sans
+    /// jamais compter deux fois la même question.
+    var vuesAJour: [String: Int] { vuesAJour(depuis: vues, sauf: []) }
+
+    /// Le même compte, posé sur une autre base que la sienne, et sans
+    /// recompter ce qui l'était déjà.
+    ///
+    /// La base, parce que celui qui rejoint une partie en réseau reçoit la
+    /// banque de l'hôte, et donc sa mémoire : il joue avec — c'est ce qui
+    /// fait que les deux appareils tirent la même question — mais il n'a pas
+    /// à hériter des soirées de l'autre. Il n'ajoute à la sienne que ce qui a
+    /// été posé ici.
+    ///
+    /// L'exception, parce qu'une partie reprise retrouve ses questions de la
+    /// veille dans `served`, et qu'elles sont déjà comptées : sans cela, une
+    /// partie ouverte trois fois compterait trois fois ses premières
+    /// questions.
+    func vuesAJour(depuis base: [String: Int], sauf comptees: Set<String>) -> [String: Int] {
+        var compte = base
+        for id in served.subtracting(comptees) { compte[id, default: 0] += 1 }
+        return compte
+    }
+
+    /// Une mémoire qui parle d'une autre banque ne vaut rien : les questions
+    /// qu'elle nomme n'existent plus. On garde ce qui se retrouve.
+    mutating func restore(vues: [String: Int]) {
+        let connues = Set(questions.map(\.id))
+        self.vues = vues.filter { connues.contains($0.key) && $0.value > 0 }
     }
 
     /// Ce qui reste dans le sac des places : une partie reprise doit le
@@ -191,8 +257,13 @@ struct QuestionBank {
         }
         let libres = terrain.filter { !served.contains($0.id) }
         let auNiveau = libres.filter { difficulty == nil || $0.difficulty == difficulty }
-        guard let tiree = (auNiveau.isEmpty ? libres : auNiveau).randomElement(using: &rng)
-        else { return nil }
+        // Le niveau d'abord, la fraîcheur ensuite : le dosage des questions
+        // est une règle choisie à la mise en place, la mémoire n'est qu'un
+        // confort, et un confort ne défait pas une règle.
+        let possibles = auNiveau.isEmpty ? libres : auNiveau
+        let moindre = possibles.map { vues[$0.id] ?? 0 }.min() ?? 0
+        let neuves = possibles.filter { (vues[$0.id] ?? 0) == moindre }
+        guard let tiree = neuves.randomElement(using: &rng) else { return nil }
 
         served.insert(tiree.id)
         // La place d'abord, la question ensuite : deux accès à `rng` dans un

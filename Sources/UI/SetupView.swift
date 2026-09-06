@@ -35,6 +35,10 @@ struct SetupView: View {
     /// Le nom de celui qui tient l'appareil. Comme le son, il vaut pour
     /// l'application et non pour une partie.
     @AppStorage(Pseudo.cle) private var pseudo = ""
+    /// Combien de questions différentes cet appareil a déjà vues. Lu une
+    /// fois à l'ouverture de l'écran : le fichier ne bouge pas pendant qu'on
+    /// règle une partie, sauf si l'on demande à tout oublier.
+    @State private var vues = MemoireDesQuestions.shared.combienDeVues()
     var onStart: ([Player], Rules, Boards) -> Void
     var onNetwork: (Rules, Boards) -> Void = { _, _ in }
     /// Le mode d'emploi complet — il s'ouvre aussi depuis la partie.
@@ -140,6 +144,7 @@ struct SetupView: View {
                             .pickerStyle(.segmented)
                             Text(dosage.detail)
                                 .font(.caption2).foregroundStyle(Palette.dim)
+                            suiviDesQuestions
                         }
 
                         reglage("Renfort d'érudition") {
@@ -342,6 +347,34 @@ struct SetupView: View {
         if let url = URL(string: adresse) {
             SwiftUI.Link(titre, destination: url)
                 .foregroundStyle(Palette.dim)
+        }
+    }
+
+    /// Ce que l'appareil a déjà vu passer, et de quoi tout oublier.
+    ///
+    /// Rien ne se règle ici : une question jamais sortie passe avant une
+    /// question déjà vue, et c'est tout. Mais cela se voit — sans quoi le
+    /// joueur ne saurait ni pourquoi ses questions cessent de revenir, ni
+    /// quoi faire le jour où il aura fait le tour de la banque.
+    private var suiviDesQuestions: some View {
+        HStack(alignment: .top, spacing: 10) {
+            VStack(alignment: .leading, spacing: 2) {
+                Text("Déjà posées sur cet appareil : \(vues) sur \(QuestionBank.francaises.count)")
+                    .font(.caption.monospacedDigit()).foregroundStyle(Palette.ink)
+                Text("D'une partie à l'autre, une question jamais sortie passe avant "
+                     + "une question déjà vue.")
+                    .font(.caption2).foregroundStyle(Palette.dim)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            Spacer(minLength: 0)
+            if vues > 0 {
+                Button("Oublier") {
+                    MemoireDesQuestions.shared.oublier()
+                    vues = 0
+                }
+                .font(.caption.weight(.semibold))
+                .buttonStyle(.bordered).tint(Palette.dim)
+            }
         }
     }
 

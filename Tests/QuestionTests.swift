@@ -200,6 +200,116 @@ struct QuestionTests {
         #expect(apres?.category == .arts)
     }
 
+    // MARK: - La mémoire d'une partie sur l'autre
+
+    /// Ce qu'on n'a jamais vu passe devant.
+    ///
+    /// Chaque partie s'ouvrait avec une banque neuve : elle tirait dans le
+    /// sac plein, et reposait donc les questions de la veille. Celui qui joue
+    /// seul enchaîne les parties — il reconnaissait la question avant de
+    /// l'avoir lue, et le duel ne décidait plus rien.
+    @Test func lesQuestionsJamaisSortiesPassentDAbord() {
+        let toutes = QuestionBank().questions.filter { $0.category == .sciences }
+        let jamais = Set(toutes.prefix(3).map(\.id))
+        var vues: [String: Int] = [:]
+        for q in toutes where !jamais.contains(q.id) { vues[q.id] = 1 }
+
+        var bank = QuestionBank(vues: vues)
+        var rng = SeededRandom(seed: 13)
+        for rang in 0 ..< jamais.count {
+            let q = bank.draw(category: .sciences, difficulty: nil, using: &rng)
+            #expect(q != nil)
+            #expect(jamais.contains(q?.id ?? ""),
+                    "tirage \(rang) : une question déjà vue est passée devant une neuve")
+        }
+    }
+
+    /// Le dosage des questions est une règle choisie à la mise en place ; la
+    /// mémoire n'est qu'un confort, et un confort ne défait pas une règle.
+    /// Une partie « corsée » reste corsée, même s'il faut pour cela reposer
+    /// une question déjà vue.
+    @Test func leNiveauDemandePasseAvantLaFraicheur() {
+        let toutes = QuestionBank().questions.filter { $0.category == .arts }
+        var vues: [String: Int] = [:]
+        for q in toutes where q.difficulty == .difficile { vues[q.id] = 1 }
+        #expect(!vues.isEmpty, "il faut des questions corsées pour éprouver la règle")
+
+        var bank = QuestionBank(vues: vues)
+        var rng = SeededRandom(seed: 17)
+        for _ in 0 ..< 5 {
+            let q = bank.draw(category: .arts, difficulty: .difficile, using: &rng)
+            #expect(q?.difficulty == .difficile, "le niveau demandé a cédé à la fraîcheur")
+        }
+    }
+
+    /// Ce qu'une partie a posé, la suivante l'évite.
+    @Test func laMemoireSePasseDUnePartieALaSuivante() {
+        var premiere = QuestionBank()
+        var rng = SeededRandom(seed: 8)
+        var posees: Set<String> = []
+        for _ in 0 ..< 12 {
+            posees.insert(premiere.draw(category: .sports, difficulty: nil, using: &rng)!.id)
+        }
+        #expect(premiere.vuesAJour.count == 12)
+        #expect(premiere.vuesAJour.values.allSatisfy { $0 == 1 })
+
+        var seconde = QuestionBank(vues: premiere.vuesAJour)
+        for _ in 0 ..< (QuestionBank().count(in: .sports) - 12) {
+            let q = seconde.draw(category: .sports, difficulty: nil, using: &rng)!
+            #expect(!posees.contains(q.id), "la partie suivante repose une question de la première")
+        }
+    }
+
+    /// Le compte se recalcule entier au lieu de s'incrémenter : la partie
+    /// s'enregistre à chaque coup, et une même question ne doit pas se compter
+    /// autant de fois qu'il y a de sauvegardes.
+    @Test func laMemoireNeCompteJamaisDeuxFoisLaMemeQuestion() {
+        var bank = QuestionBank(vues: ["histoire-0": 2])
+        var rng = SeededRandom(seed: 2)
+        let posee = bank.draw(category: .histoire, difficulty: nil, using: &rng)!.id
+        #expect(bank.vuesAJour[posee] == 1)
+        #expect(bank.vuesAJour["histoire-0"] == (posee == "histoire-0" ? 3 : 2))
+        // Deux enregistrements de suite donnent le même compte.
+        #expect(bank.vuesAJour == QuestionBank(vues: bank.vuesAJour).dejaVues)
+    }
+
+    /// Celui qui rejoint une partie en réseau joue avec la mémoire de l'hôte —
+    /// il le faut, sans quoi les deux appareils poseraient deux questions
+    /// différentes — mais il n'hérite pas de ses soirées : sa propre mémoire
+    /// n'enregistre que ce qui a été posé dans cette partie-là.
+    @Test func celuiQuiRejointNHeritePasDesSoireesDeLHote() {
+        var recue = QuestionBank(vues: ["histoire-0": 4, "histoire-1": 4])
+        var rng = SeededRandom(seed: 6)
+        let posee = recue.draw(category: .histoire, difficulty: nil, using: &rng)!.id
+        #expect(recue.vuesAJour(depuis: ["arts-0": 1], sauf: []) == ["arts-0": 1, posee: 1])
+    }
+
+    /// Une partie reprise ne recompte pas ses questions de la veille.
+    ///
+    /// L'enregistrement se recalcule entier à chaque sauvegarde, et une
+    /// partie rouverte retrouve dans sa banque tout ce qu'elle avait déjà
+    /// posé : sans exception, une partie ouverte trois fois aurait compté
+    /// trois fois ses premières questions, et les aurait fait paraître plus
+    /// rebattues qu'elles ne le sont.
+    @Test func unePartieRepriseNeRecomptePasSesQuestions() {
+        var bank = QuestionBank()
+        var rng = SeededRandom(seed: 9)
+        let hier = bank.draw(category: .sciences, difficulty: nil, using: &rng)!.id
+        let memoire = bank.vuesAJour                  // ce que l'appareil a enregistré hier
+        let comptees = bank.alreadyServed             // ce que la reprise retrouve
+        let aujourdhui = bank.draw(category: .sciences, difficulty: nil, using: &rng)!.id
+        let apres = bank.vuesAJour(depuis: memoire, sauf: comptees)
+        #expect(apres[hier] == 1, "la question de la veille est comptée deux fois")
+        #expect(apres[aujourdhui] == 1)
+    }
+
+    /// Une mémoire qui parle d'une autre banque ne vaut rien : les questions
+    /// qu'elle nomme n'existent plus.
+    @Test func uneMemoireEtrangereEstEcartee() {
+        let bank = QuestionBank(vues: ["sports-0": 3, "inconnue-42": 9, "arts-1": 0])
+        #expect(bank.dejaVues == ["sports-0": 3])
+    }
+
     /// La banque doit tenir une soirée. Soixante questions pour une partie qui
     /// en pose soixante-dix : on revoyait les mêmes dès la première.
     /// La banque doit tenir une soirée, et plusieurs. Une partie pose de

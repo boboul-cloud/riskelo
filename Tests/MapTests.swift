@@ -9,6 +9,7 @@
 //  finir, et rien ne l'annoncerait.
 //
 
+import CoreGraphics
 import Testing
 @testable import Riskelo
 
@@ -175,5 +176,67 @@ struct MapTests {
     @Test func lesNomsSontUniques() {
         let noms = board.map.order.compactMap { board.map[$0]?.name }
         #expect(Set(noms).count == noms.count)
+    }
+}
+
+// MARK: - Le cadrage
+
+/// Jusqu'où le plateau peut se déplacer sous un panneau qui lui mange le bas.
+///
+/// Le recadrage visait juste et la borne l'arrêtait en chemin : les deux
+/// places d'un assaut restaient sous le panneau, sur un téléphone où celui-ci
+/// couvre les trois quarts de la carte. On ne voyait donc plus où l'on se
+/// battait au moment de décider combien d'hommes avancent — et une capture
+/// d'écran à la main était le seul moyen de s'en apercevoir. C'est de
+/// l'arithmétique : elle se vérifie ici.
+struct CadrageTests {
+
+    /// Les mesures d'un iPhone ordinaire au moment du choix : le plateau
+    /// dispose de 587 points de haut, la carte en occupe 400, et le panneau
+    /// couvre les trois quarts de ce qui reste.
+    let vue: CGFloat = 587, plateau: CGFloat = 400, couvert: CGFloat = 0.75
+
+    /// Une place du bas de la carte doit pouvoir remonter dans la bande
+    /// libre. C'est le cas qui a échoué deux fois de suite.
+    @Test func onPeutRemonterUnePlaceDuBasDansLaBandeLibre() {
+        let milieuDeLaBande = vue * (1 - couvert) / 2
+        // Une place aux quatre cinquièmes de la carte, vue du haut du plateau.
+        let place = (vue - plateau) / 2 + plateau * 0.8
+        let vise = milieuDeLaBande - place
+        let bornes = Cadrage.bornesVerticales(hauteurVue: vue, hauteurPlateau: plateau,
+                                              couvert: couvert)
+        #expect(bornes.contains(vise),
+                "le recadrage vise \(vise) et la borne l'arrête à \(bornes.lowerBound)")
+    }
+
+    /// On ne perd pas le plateau pour autant : monté au maximum, il en reste
+    /// une marge sous le haut de l'écran ; descendu au maximum, son haut
+    /// reste dans la bande que rien ne couvre.
+    @Test func lePlateauNeSortJamaisEntierement() {
+        for couvert in [CGFloat(0), 0.4, 0.75, 0.9] {
+            let bornes = Cadrage.bornesVerticales(hauteurVue: vue, hauteurPlateau: plateau,
+                                                  couvert: couvert)
+            let basDuPlateau = (vue + plateau) / 2 + bornes.lowerBound
+            #expect(basDuPlateau >= Cadrage.marge - 0.01,
+                    "couvert \(couvert) : il ne reste que \(basDuPlateau) points de plateau")
+            let hautDuPlateau = (vue - plateau) / 2 + bornes.upperBound
+            #expect(hautDuPlateau <= vue * (1 - couvert) - Cadrage.marge + 0.01,
+                    "couvert \(couvert) : le haut du plateau passe sous la bande libre")
+        }
+    }
+
+    /// Une carte plus grande que la vue se promène d'autant plus.
+    @Test func unGrandPlateauSePromeneDavantage() {
+        let petite = Cadrage.bornesVerticales(hauteurVue: vue, hauteurPlateau: 300, couvert: 0)
+        let grande = Cadrage.bornesVerticales(hauteurVue: vue, hauteurPlateau: 900, couvert: 0)
+        #expect(grande.lowerBound < petite.lowerBound)
+        #expect(grande.upperBound > petite.upperBound)
+    }
+
+    /// Et sans rien qui couvre, la carte se promène des deux côtés.
+    @Test func sansPanneauLeDeplacementResteDeDeuxCotes() {
+        let bornes = Cadrage.bornesVerticales(hauteurVue: vue, hauteurPlateau: plateau,
+                                              couvert: 0)
+        #expect(bornes.lowerBound < 0 && bornes.upperBound > 0)
     }
 }

@@ -121,7 +121,12 @@ struct Assault: Equatable, Codable {
     let to: TerritoryID
     /// La catégorie, choisie par l'attaquant. C'est là qu'est son adresse :
     /// il ne répond à rien, mais il choisit le terrain.
-    let category: Category
+    ///
+    /// Absente, c'est qu'il ne l'a pas choisie : la question se tire dans
+    /// toute la banque, thème compris. L'attaquant y renonce à son seul
+    /// avantage — en face à face, où il répond aussi, c'est un terrain qu'il
+    /// ne se choisit pas non plus à lui-même.
+    let category: Category?
     /// Le nombre de questions annoncées : un ou deux dés.
     let volley: Int
 

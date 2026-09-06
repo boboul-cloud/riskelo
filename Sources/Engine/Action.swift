@@ -19,7 +19,9 @@ import Foundation
 
 enum Action: Codable, Equatable {
     case place(TerritoryID)
-    case declareAssault(from: TerritoryID, to: TerritoryID, questions: Int, category: Category)
+    /// La catégorie absente, c'est « au hasard » : la question se tire dans
+    /// toute la banque.
+    case declareAssault(from: TerritoryID, to: TerritoryID, questions: Int, category: Category?)
     case answer(Answer)
     /// Le défenseur double l'enjeu, en face à face.
     case relancer

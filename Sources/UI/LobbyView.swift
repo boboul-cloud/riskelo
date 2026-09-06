@@ -358,7 +358,11 @@ struct LobbyView: View {
                                      ? noms[link.relies[rang - 1]] : nil
             return Player(id: rang, name: choisi.map { "\(camp) · \($0)" } ?? camp)
         }
-        let partie = GameState.start(board: plateau, players: camps, rules: regles)
+        // La mémoire de l'appareil qui héberge part avec la partie : les
+        // deux appareils tirent alors les mêmes questions, et celui qui
+        // rejoint n'a pas à connaître les soirées de l'autre.
+        let partie = GameState.start(board: plateau, players: camps, rules: regles,
+                                     bank: QuestionBank(vues: MemoireDesQuestions.shared.charger()))
 
         var rangs: [MCPeerID: PlayerID] = [:]
         for (i, pair) in link.relies.enumerated() {

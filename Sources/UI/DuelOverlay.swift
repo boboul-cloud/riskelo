@@ -36,6 +36,7 @@ struct DuelOverlay: View {
                             .frame(width: 34, height: 4).padding(.top, 7)
                     }
                     .frame(maxWidth: .infinity)
+                    .couvreLeBas()
             }
             // Aucun voile sur le plateau : c'est tout l'objet de la feuille.
             // On doit voir les hommes tomber pendant qu'on répond.
@@ -505,8 +506,9 @@ struct DuelOverlay: View {
                     Text("Touchez pour continuer")
                         .font(.caption2)
                         .foregroundStyle(Palette.dim.opacity(0.8))
-                } else if case let .occupation(from, _, minimum, maximum) = session.game.phase {
-                    OccupationPanel(session: session, from: from, minimum: minimum, maximum: maximum)
+                } else if case let .occupation(from, to, minimum, maximum) = session.game.phase {
+                    OccupationPanel(session: session, from: from, to: to,
+                                    minimum: minimum, maximum: maximum)
                 } else {
                     Button { withAnimation { session.closeAssault() } } label: {
                         Text("Continuer").font(.headline)
@@ -531,34 +533,182 @@ struct DuelOverlay: View {
 }
 
 /// Combien d'hommes avancent dans la place conquise.
+///
+/// Le nombre passe devant le bouton, et non l'inverse. Le choix tenait dans
+/// un `Stepper` — deux flèches grises de la taille d'un ongle — posé au-dessus
+/// d'un bouton plein largeur, plein de la couleur du camp : on voyait le
+/// bouton, on le touchait, et un seul homme avançait sur la place qu'on
+/// venait de prendre. Le joueur ne s'en apercevait qu'au tour suivant, en
+/// trouvant sa garnison restée derrière, et croyait que l'application avait
+/// tranché à sa place.
+///
+/// D'où trois changements qui vont tous dans le même sens. Le chiffre est
+/// gros et se règle par deux touches rondes de quarante-quatre points — le
+/// plancher de ce qui se touche sans rater, et ici on les touche plusieurs
+/// fois de suite. Trois raccourcis prennent les cas courants, car personne ne
+/// tape onze fois sur « plus ». Et le bouton **porte le nombre choisi** : le
+/// doigt pressé lit encore ce qu'il valide.
 struct OccupationPanel: View {
     let session: GameSession
     let from: TerritoryID
+    let to: TerritoryID
     let minimum: Int
     let maximum: Int
     @State private var count = 1
 
+    /// Le haut de la plage. Le moteur donne toujours un maximum au moins égal
+    /// au minimum, mais une plage qui s'inverse fait tomber l'écran : on ne
+    /// s'y fie pas.
+    private var haut: Int { max(minimum, maximum) }
+    private var camp: PlayerID { session.game.currentPlayer.id }
+    /// Ce qui reste à la place de départ. Les hommes n'ont pas encore bougé —
+    /// le moteur ne les déplace qu'à la validation.
+    private var reste: Int { max(1, session.game.armies(from) - count) }
+
     var body: some View {
-        VStack(spacing: 14) {
-            Text("Combien d'hommes avancent ?")
-                .font(.subheadline).foregroundStyle(Palette.dim)
-            Stepper(value: $count, in: minimum...max(minimum, maximum)) {
-                Text("\(count) sur \(maximum)")
-                    .font(.title3.weight(.semibold).monospacedDigit())
-                    .foregroundStyle(Palette.ink)
+        VStack(spacing: 12) {
+            if haut > minimum {
+                selecteur
+            } else {
+                // Rien à choisir : le dire, plutôt que de tendre un réglage
+                // qui ne bouge pas.
+                Text(minimum > 1
+                     ? "\(minimum) hommes avancent — c'est tout ce que la place de départ peut céder."
+                     : "Un homme avance — c'est tout ce que la place de départ peut céder.")
+                    .font(.footnote).foregroundStyle(Palette.dim)
+                    .multilineTextAlignment(.center)
             }
-            .frame(maxWidth: 260)
-            if minimum > 1 {
-                Text("Au moins \(minimum) : autant que de questions posées.")
-                    .font(.caption).foregroundStyle(Palette.dim)
-            }
+
             Button { withAnimation { session.occupy(count) } } label: {
-                Text("Occuper").font(.headline)
+                Text(count > 1 ? "Faire avancer \(count) hommes" : "Faire avancer 1 homme")
+                    .font(.headline)
+                    .contentTransition(.numericText())
                     .frame(maxWidth: .infinity).padding(.vertical, 13)
             }
             .buttonStyle(.borderedProminent)
-            .tint(Palette.camp(session.game.currentPlayer.id))
+            .tint(Palette.camp(camp))
         }
         .onAppear { count = minimum }
+    }
+
+    /// Le choix, dans son cadre. Le cadre n'est pas un ornement : il donne au
+    /// réglage le poids que le bouton lui prenait, et la couleur du camp en
+    /// liseré dit que c'est encore votre geste — le fond, lui, reste mat.
+    private var selecteur: some View {
+        VStack(spacing: 10) {
+            Text("Combien d'hommes avancent ?")
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(Palette.ink)
+
+            HStack(spacing: 16) {
+                pas(-1, "minus")
+                VStack(spacing: 0) {
+                    Text("\(count)")
+                        .font(.system(size: 44, weight: .bold, design: .rounded).monospacedDigit())
+                        .foregroundStyle(Palette.campVif(camp))
+                        .contentTransition(.numericText())
+                    Text("sur \(haut)")
+                        .font(.caption.monospacedDigit()).foregroundStyle(Palette.dim)
+                }
+                .frame(minWidth: 84)
+                pas(+1, "plus")
+            }
+
+            HStack(spacing: 8) {
+                raccourci("Le minimum", minimum)
+                if let moitie { raccourci("La moitié", moitie) }
+                raccourci("Tous", haut)
+            }
+
+            bilanDuMouvement
+            if minimum > 1 {
+                Text("Au moins \(minimum) : autant que de questions posées.")
+                    .font(.caption).foregroundStyle(Palette.dim)
+                    .multilineTextAlignment(.center)
+            }
+        }
+        .padding(.horizontal, 14).padding(.top, 12).padding(.bottom, 14)
+        .frame(maxWidth: .infinity)
+        .background(Palette.campVif(camp).opacity(0.10),
+                    in: RoundedRectangle(cornerRadius: 18))
+        .overlay(RoundedRectangle(cornerRadius: 18)
+            .strokeBorder(Palette.campVif(camp).opacity(0.65), lineWidth: 1.5))
+    }
+
+    /// Ce que le mouvement laisse de part et d'autre, à jour du chiffre
+    /// choisi.
+    ///
+    /// La feuille couvre le bas de la carte au moment même où l'on décide, et
+    /// l'on ne voyait donc plus **où** les hommes avancent — ni ce qu'il
+    /// resterait derrière. Les deux places sont nommées ici, avec la garnison
+    /// que chacune aura une fois le mouvement fait : c'est de cela qu'on
+    /// décide, et cela ne dépend d'aucun recadrage.
+    private var bilanDuMouvement: some View {
+        HStack(spacing: 12) {
+            place(session.game.name(from), reste, teinte: Palette.ink.opacity(0.85))
+            Image(systemName: "arrow.right")
+                .font(.footnote.weight(.semibold))
+                .foregroundStyle(Palette.dim)
+            place(session.game.name(to), count, teinte: Palette.campVif(camp))
+        }
+    }
+
+    private func place(_ nom: String, _ hommes: Int, teinte: Color) -> some View {
+        VStack(spacing: 1) {
+            Text(nom)
+                .font(.caption2).foregroundStyle(Palette.dim)
+                .lineLimit(1).minimumScaleFactor(0.7)
+            Text("\(hommes)")
+                .font(.headline.monospacedDigit()).foregroundStyle(teinte)
+                .contentTransition(.numericText())
+        }
+        .frame(maxWidth: 120)
+    }
+
+    /// Un cran de plus ou de moins. La touche s'éteint quand elle est au bout
+    /// de la plage, au lieu de disparaître : la paire reste symétrique, et le
+    /// doigt ne cherche pas où est passé le « moins ».
+    private func pas(_ delta: Int, _ icone: String) -> some View {
+        let cible = min(max(count + delta, minimum), haut)
+        let mort = cible == count
+        return Button {
+            withAnimation(.snappy(duration: 0.12)) { count = cible }
+        } label: {
+            Image(systemName: icone)
+                .font(.title3.weight(.bold))
+                .frame(width: 44, height: 44)
+                .background(Circle().fill(Color.white.opacity(mort ? 0.03 : 0.08)))
+                .overlay(Circle().strokeBorder(mort ? Palette.dim.opacity(0.3)
+                                                    : Palette.campVif(camp).opacity(0.8),
+                                               lineWidth: 1.5))
+                .foregroundStyle(mort ? Palette.dim.opacity(0.45) : Palette.campVif(camp))
+        }
+        .buttonStyle(.plain)
+        .disabled(mort)
+    }
+
+    /// Les cas courants, en un appui.
+    private func raccourci(_ titre: String, _ valeur: Int) -> some View {
+        let choisi = count == valeur
+        return Button {
+            withAnimation(.snappy(duration: 0.12)) { count = valeur }
+        } label: {
+            Text(titre)
+                .font(.caption.weight(.semibold)).lineLimit(1)
+                .padding(.horizontal, 12).padding(.vertical, 8)
+                .background(Capsule().fill(choisi ? Palette.campVif(camp).opacity(0.28)
+                                                  : Color.white.opacity(0.06)))
+                .overlay(Capsule().strokeBorder(choisi ? Palette.campVif(camp)
+                                                       : Palette.dim.opacity(0.45),
+                                                lineWidth: 1))
+                .foregroundStyle(choisi ? Palette.ink : Palette.dim)
+        }
+        .buttonStyle(.plain)
+    }
+
+    /// La moitié, et seulement quand elle dit autre chose que les deux bouts.
+    private var moitie: Int? {
+        let m = min(haut, max(minimum, (haut + 1) / 2))
+        return m > minimum && m < haut ? m : nil
     }
 }

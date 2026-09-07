@@ -21,10 +21,15 @@ import UIKit
 
 struct LobbyView: View {
 
+    /// Le plateau et les règles de la table. Ils arrivent de l'écran d'où
+    /// l'on vient — les réglages, ou l'accueil et sa partie rapide.
     let plateau: Boards
     let regles: Rules
     var onReady: (GameSession) -> Void
     var onCancel: () -> Void
+    /// Aller les changer. L'hôte décide de la partie pour tout le monde, et
+    /// c'est au moment d'ouvrir la table qu'on y pense — pas avant.
+    var onReglages: () -> Void = { }
 
     @State private var link = Link()
     /// Le nom que chaque appareil relié s'est donné. Vide tant qu'il n'a pas
@@ -72,6 +77,16 @@ struct LobbyView: View {
         .onDisappear { if !lancee { link.arreter() } }
     }
 
+    /// Ce qu'on s'apprête à ouvrir, en une ligne : le plateau, le mode, et
+    /// les options qui changent vraiment la partie.
+    private var laPartieQuOnOuvre: String {
+        var dits = [plateau.label, regles.mode.label]
+        if regles.territoryCards { dits.append("cartes") }
+        if regles.objectifs { dits.append("conquêtes personnelles") }
+        if regles.dominationOverride == 0 { dits.append("guerre totale") }
+        return dits.joined(separator: " · ")
+    }
+
     @ViewBuilder private var contenu: some View {
         switch link.state {
         case .aLArret:
@@ -99,6 +114,24 @@ struct LobbyView: View {
             bouton("Rejoindre une table", "magnifyingglass", Palette.camp(1)) {
                 preparer(); link.chercher()
             }
+
+            // La partie qu'on ouvrira, et de quoi la changer. Dite avant
+            // d'ouvrir, parce qu'après il est trop tard : c'est l'hôte qui la
+            // fixe, et les autres la reçoivent telle quelle.
+            VStack(spacing: 8) {
+                Text(laPartieQuOnOuvre)
+                    .font(.caption).foregroundStyle(Palette.dim)
+                    .multilineTextAlignment(.center)
+                Button(action: onReglages) {
+                    Label("Réglages de la partie", systemImage: "slider.horizontal.3")
+                        .font(.subheadline.weight(.medium))
+                        .frame(maxWidth: .infinity).padding(.vertical, 12)
+                }
+                .buttonStyle(.bordered).tint(Palette.dim)
+                Text("Celui qui ouvre la table choisit pour tout le monde.")
+                    .font(.caption2).foregroundStyle(Palette.dim.opacity(0.8))
+            }
+            .padding(.top, 4)
 
         case .ouvert:
             tableDeLHote

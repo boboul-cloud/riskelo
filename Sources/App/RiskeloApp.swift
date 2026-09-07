@@ -37,6 +37,10 @@ final class RootModel {
     var session: GameSession?
     /// La mise en place d'une partie à deux appareils, quand elle est ouverte.
     var salon: (regles: Rules, plateau: Boards)?
+    /// Les réglages de la table, ouverts depuis le salon. Ils vivent ici et
+    /// non dans le salon : celui-ci se refait avec les réglages qu'on vient
+    /// de choisir, et un écran qui se refait perd ce qu'il gardait.
+    var salonReglages = false
     var bibliotheque = false
     /// Le mode d'emploi, ouvert depuis l'accueil.
     var manuel = false
@@ -74,6 +78,21 @@ struct RootView: View {
                 }, onClose: { withAnimation { model.bibliotheque = false } })
             } else if model.manuel {
                 ManuelView(onClose: { withAnimation { model.manuel = false } })
+            } else if model.salonReglages, let salon = model.salon {
+                // Les mêmes réglages, en écran plein comme tout le reste de
+                // l'application — et réduits à ce qu'une table à plusieurs
+                // appareils peut décider. Valider revient au salon avec.
+                SetupView(pourLeReseau: true,
+                          depart: (salon.regles, salon.plateau),
+                          onStart: { _, _, _ in },
+                          onNetwork: { regles, plateau in
+                              withAnimation {
+                                  model.salon = (regles, plateau)
+                                  model.salonReglages = false
+                              }
+                          },
+                          onRetour: { withAnimation { model.salonReglages = false } })
+                    .transition(.opacity)
             } else if let salon = model.salon {
                 LobbyView(plateau: salon.plateau, regles: salon.regles,
                           onReady: { partie in
@@ -86,7 +105,8 @@ struct RootView: View {
                           // Renoncer à la table rend les réglages tels qu'on
                           // les avait laissés, et non l'accueil : on venait
                           // d'y choisir un plateau et un mode.
-                          onCancel: { withAnimation { model.salon = nil } })
+                          onCancel: { withAnimation { model.salon = nil; model.salonReglages = false } },
+                          onReglages: { withAnimation { model.salonReglages = true } })
             } else if model.reglages {
                 SetupView(onStart: { joueurs, regles, plateau in
                     withAnimation {

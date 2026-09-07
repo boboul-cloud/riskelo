@@ -40,6 +40,13 @@ struct SetupView: View {
     /// fois à l'ouverture de l'écran : le fichier ne bouge pas pendant qu'on
     /// règle une partie, sauf si l'on demande à tout oublier.
     @State private var vues = MemoireDesQuestions.shared.combienDeVues()
+    /// Les mêmes réglages, ouverts depuis le salon d'une table à plusieurs
+    /// appareils. Ce qui n'a pas de sens là-bas disparaît : le nombre de
+    /// joueurs, c'est le salon qui le demande — un appareil par joueur — et
+    /// une partie en réseau n'a pas de machine, donc ni stratégie ni culture
+    /// à lui donner. Le bouton du bas ne lance rien : il rend les réglages au
+    /// salon, qui ouvrira la table avec.
+    var pourLeReseau = false
     var onStart: ([Player], Rules, Boards) -> Void
     var onNetwork: (Rules, Boards) -> Void = { _, _ in }
     /// Le mode d'emploi complet — il s'ouvre aussi depuis la partie.
@@ -49,6 +56,41 @@ struct SetupView: View {
     /// Le retour à l'accueil. La reprise d'une partie en cours s'y trouve
     /// désormais : elle n'a rien à faire au milieu des curseurs.
     var onRetour: () -> Void = { }
+
+    /// Les réglages tels qu'ils sont déjà, quand on revient les changer.
+    ///
+    /// Sans cela, l'écran repartait des valeurs de la partie rapide : l'hôte
+    /// qui avait choisi le Monde en face à face, et qui rouvrait pour changer
+    /// une seule case, retrouvait l'Anneau en classique — et repartait avec,
+    /// sans le voir. Un écran de réglages doit montrer ce qui est, pas ce qui
+    /// était au premier lancement.
+    init(pourLeReseau: Bool = false,
+         depart: (regles: Rules, plateau: Boards)? = nil,
+         onStart: @escaping ([Player], Rules, Boards) -> Void,
+         onNetwork: @escaping (Rules, Boards) -> Void = { _, _ in },
+         onManuel: @escaping () -> Void = { },
+         onArchives: (() -> Void)? = nil,
+         onRetour: @escaping () -> Void = { }) {
+        self.pourLeReseau = pourLeReseau
+        self.onStart = onStart
+        self.onNetwork = onNetwork
+        self.onManuel = onManuel
+        self.onArchives = onArchives
+        self.onRetour = onRetour
+        guard let depart else { return }
+        let r = depart.regles
+        _plateau = State(initialValue: depart.plateau)
+        _mode = State(initialValue: r.mode)
+        _erudition = State(initialValue: r.answersPerBonusMan ?? 0)
+        _cartes = State(initialValue: r.territoryCards)
+        _guerreTotale = State(initialValue: r.dominationOverride == 0)
+        _objectifs = State(initialValue: r.objectifs)
+        // Le dosage ne se lit pas dans les règles : il s'y est fondu en poids
+        // de tirage. On le retrouve en comparant, faute de quoi il faudrait le
+        // garder deux fois — et deux copies finissent toujours par différer.
+        _dosage = State(initialValue: Rules.Dosage.allCases
+            .first { $0.poids == r.difficultyWeights } ?? PartieRapide.dosage)
+    }
 
     var body: some View {
         ZStack {
@@ -90,6 +132,7 @@ struct SetupView: View {
                                 .font(.caption2).foregroundStyle(Palette.dim)
                         }
 
+                        if !pourLeReseau {
                         reglage("Joueurs") {
                             Picker("", selection: $count) {
                                 ForEach(2...4, id: \.self) { Text("\($0)").tag($0) }
@@ -134,6 +177,8 @@ struct SetupView: View {
                                 Slider(value: $niveau, in: 0.35...0.90, step: 0.05)
                                     .tint(Palette.camp(1))
                             }
+                        }
+
                         }
 
                         reglage("Questions") {
@@ -272,6 +317,15 @@ struct SetupView: View {
                             }
                         }
 
+                        if pourLeReseau {
+                            Button { onNetwork(regles, plateau) } label: {
+                                Label("Ouvrir la table avec ces réglages",
+                                      systemImage: "checkmark.circle.fill")
+                                    .font(.headline)
+                                    .frame(maxWidth: .infinity).padding(.vertical, 14)
+                            }
+                            .buttonStyle(.borderedProminent).tint(Palette.camp(4))
+                        } else {
                         Button { onStart(joueurs, regles, plateau) } label: {
                             Text("Commencer").font(.headline)
                                 .frame(maxWidth: .infinity).padding(.vertical, 14)
@@ -294,6 +348,7 @@ struct SetupView: View {
                                 .frame(maxWidth: .infinity).padding(.vertical, 12)
                         }
                         .buttonStyle(.bordered).tint(Palette.dim)
+                        }
 
                         Button(action: onManuel) {
                             Label("Mode d'emploi", systemImage: "book")
@@ -326,7 +381,10 @@ struct SetupView: View {
     private var entete: some View {
         HStack {
             Button(action: onRetour) {
-                Label("Accueil", systemImage: "chevron.left")
+                // On revient là d'où l'on vient, et l'on ne le promet pas de
+                // travers : depuis le salon d'une table, ce n'est pas
+                // l'accueil qui attend derrière.
+                Label(pourLeReseau ? "La table" : "Accueil", systemImage: "chevron.left")
                     .font(.subheadline.weight(.medium))
             }
             .buttonStyle(.plain).foregroundStyle(Palette.dim)

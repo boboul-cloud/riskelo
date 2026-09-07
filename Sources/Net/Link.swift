@@ -165,7 +165,13 @@ final class Link {
         return Pair(id: id, nom: Link.nomDeLAppareil)
     }
 
-    nonisolated static var nomDeLAppareil: String {
+    /// Le nom que porte l'appareil.
+    ///
+    /// Il n'est plus `nonisolated`. Il l'était du temps de
+    /// MultipeerConnectivity, dont les rappels arrivaient sur leur propre fil
+    /// et devaient pouvoir le lire. Plus rien ne le lit désormais hors de
+    /// l'acteur principal — et `UIDevice.current` y est justement tenu.
+    static var nomDeLAppareil: String {
         #if os(iOS)
         String(UIDevice.current.name.prefix(30))
         #else

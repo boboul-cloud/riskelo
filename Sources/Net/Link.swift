@@ -95,6 +95,26 @@ final class Link {
     nonisolated static let cleAdresse = "a", clePort = "p"
     nonisolated static let hote = "h"
 
+    /// Ce que dit celui qui veut entrer et n'y arrive pas.
+    ///
+    /// Sur l'iPhone de Robert, iOS laisse l'application **écouter et
+    /// s'annoncer**, et lui refuse les connexions **sortantes** vers le réseau
+    /// local — l'interrupteur des réglages étant vert, et le journal disant
+    /// `localNetworkDenied` à chaque tentative. Mesuré : l'iPhone qui rejoint
+    /// n'aboutit jamais ; l'iPhone qui tient la table est rejoint en une
+    /// seconde. La panne est à sens unique, et aucun réglage ne la lève.
+    ///
+    /// Alors on retourne le sens. Celui qui rejoint s'annonce à son tour —
+    /// « je veux entrer à cette table-là » — et c'est l'hôte qui vient à lui.
+    /// Les deux chemins sont tentés en même temps ; le premier qui aboutit
+    /// gagne, l'autre se ferme tout seul (voir `nommer`). Il suffit donc que
+    /// **l'un des deux** appareils puisse composer un numéro, au lieu qu'il
+    /// faille que ce soit celui qui rejoint.
+    nonisolated static let invite = "v"
+    /// La table qu'il vise : seul son hôte doit le rappeler, et non toutes
+    /// les tables ouvertes du réseau.
+    nonisolated static let cleCible = "c"
+
     enum State: Equatable {
         case aLArret
         /// On tient une table et l'on attend qu'on vienne.
@@ -186,6 +206,15 @@ final class Link {
     private var adressesBrutes: [Pair: NWEndpoint] = [:]
     /// Le délai d'une connexion en cours.
     private var attente: Task<Void, Never>?
+    /// Ce que notre propre annonce dit : hôte, ou invité qui attend un rappel.
+    private var monRole = Link.hote
+    private var maCible: String?
+    /// La table dont on attend le rappel. Une connexion entrante ne peut venir
+    /// que d'elle : on ne se laisse pas prendre par une autre.
+    private var cibleAttendue: Pair?
+    /// Les invités déjà rappelés, pour ne pas les appeler deux fois par
+    /// seconde — la découverte se rafraîchit sans cesse.
+    private var appeles: Set<String> = []
 
     /// Les réglages du transport.
     ///
@@ -231,6 +260,18 @@ final class Link {
     /// Elle ne sert plus qu'à se reconnaître d'un bout à l'autre du fil, mais
     /// elle doit rester stable : deux appareils qui changeraient d'identité en
     /// cours de route se compteraient deux fois.
+    /// Le banc d'essai du rappel.
+    ///
+    /// La panne qui l'a rendu nécessaire ne se reproduit que sur un appareil
+    /// dont le système refuse les appels sortants vers le réseau local — on ne
+    /// l'a pas sous la main, et l'on ne peut pas la demander à iOS. Avec
+    /// `RISKELO_SANS_APPEL=1`, l'application fait comme si : elle s'annonce et
+    /// n'appelle personne. La liaison doit alors se faire quand même, par
+    /// l'autre sens. C'est la seule façon d'éprouver ce chemin sans attendre
+    /// qu'un joueur le rencontre.
+    nonisolated static let sansAppel =
+        ProcessInfo.processInfo.environment["RISKELO_SANS_APPEL"] == "1"
+
     static func identite() -> Pair {
         let reglages = UserDefaults.standard
         let cle = "riskelo.identite"
@@ -298,7 +339,12 @@ final class Link {
         arreter()
         jHeberge = true
         tableOuverte = true
+        monRole = Link.hote
+        maCible = nil
         demarrerEcoute()
+        // Et l'on cherche, en même temps : un invité dont le système refuse
+        // les appels sortants laisse son adresse, et c'est nous qui l'appelons.
+        demarrerRecherche()
     }
 
     /// Écouter, et s'annoncer. Refait tel quel si la table rouvre.
@@ -332,6 +378,15 @@ final class Link {
         arreter()
         jHeberge = false
         direCeQuOnVoit()
+        demarrerRecherche()
+        state = .cherche
+    }
+
+    /// Regarder ce qui s'annonce autour. Les deux rôles s'en servent : celui
+    /// qui rejoint y trouve les tables, celui qui héberge y trouve les invités
+    /// qui n'arrivent pas à venir.
+    private func demarrerRecherche() {
+        guard browser == nil else { return }
         // La même règle que pour l'écoute, et pour la même raison : chercher
         // en mode Wi-Fi direct rapporte des adresses taillées pour ce
         // chemin-là. Sur un réseau, c'est le réseau qu'il faut interroger.
@@ -346,7 +401,6 @@ final class Link {
         }
         browser = cherche
         cherche.start(queue: .main)
-        state = .cherche
     }
 
     /// Rejoindre une table : on ouvre une connexion, et c'est tout.
@@ -369,8 +423,19 @@ final class Link {
               + (direct ? "en Wi-Fi direct" : "sur le réseau") + " → \(ou)")
         state = .invite(pair.nom)
         if let brute = adressesBrutes[pair] { Link.temoin(vers: brute) }
-        let connexion = NWConnection(to: ou, using: Link.reglages(direct: direct))
-        ouvrirCanal(connexion, attendu: pair)
+        if !Link.sansAppel {
+            let connexion = NWConnection(to: ou, using: Link.reglages(direct: direct))
+            ouvrirCanal(connexion, attendu: pair)
+        } else {
+            print("Riskelo — appel sortant coupé pour l'essai : on attend le rappel")
+        }
+        // Et l'on s'annonce à son tour : « je veux entrer à cette table ». Si
+        // le système nous refuse l'appel sortant, l'hôte nous rappellera — et
+        // s'il aboutit d'abord, c'est cette annonce-ci qui n'aura servi à rien.
+        cibleAttendue = pair
+        monRole = Link.invite
+        maCible = pair.id
+        demarrerEcoute()
         // TCP peut mettre longtemps à renoncer, et l'écran serait resté sur
         // « connexion… » sans rien dire. On tranche nous-mêmes.
         attente?.cancel()
@@ -460,6 +525,10 @@ final class Link {
     func arreter() {
         attente?.cancel(); attente = nil
         tableOuverte = false
+        cibleAttendue = nil
+        appeles = []
+        monRole = Link.hote
+        maCible = nil
         cesserDAccueillir()
         canaux.values.forEach { $0.fermer() }
         canaux = [:]
@@ -478,9 +547,10 @@ final class Link {
     /// prête : l'annonce se refait alors, complète.
     private func annonce(port: NWEndpoint.Port?) -> NWListener.Service {
         var txt = NWTXTRecord()
-        txt[Link.cleRole] = Link.hote
+        txt[Link.cleRole] = monRole
         txt[Link.cleNom] = moi.nom
         txt[Link.cleId] = moi.id
+        if let maCible { txt[Link.cleCible] = maCible }
         if let port, let ou = Link.adresseLocale {
             txt[Link.cleAdresse] = ou
             txt[Link.clePort] = String(port.rawValue)
@@ -498,7 +568,8 @@ final class Link {
         case .ready:
             // Le port est connu : on redit qui l'on est, adresse comprise.
             if let ecoute = listener, let port = ecoute.port {
-                print("Riskelo — table prête sur \(Link.adresseLocale ?? "sans adresse"):\(port)")
+                print("Riskelo — " + (monRole == Link.hote ? "table prête" : "adresse laissée")
+                      + " sur \(Link.adresseLocale ?? "sans adresse"):\(port)")
                 ecoute.service = annonce(port: port)
             }
         case .failed(let erreur):
@@ -515,12 +586,15 @@ final class Link {
     private func browserAChange(_ etat: NWBrowser.State) {
         if case .failed(let erreur) = etat {
             print("Riskelo — recherche impossible : \(erreur)")
-            state = .refuse("")
+            // Chez l'hôte, cette recherche n'est qu'un secours : sa table
+            // tient sans elle, et l'échouer ne doit pas la fermer.
+            if !jHeberge { state = .refuse("") }
         }
     }
 
     /// Les tables vues autour de nous.
     private func tablesVues(_ trouvailles: Set<NWBrowser.Result>) {
+        if jHeberge { rappelerLesInvites(trouvailles); return }
         var vues: [Pair] = []
         var ou: [Pair: NWEndpoint] = [:]
         for t in trouvailles {
@@ -572,8 +646,47 @@ final class Link {
         trouves = vues
     }
 
-    /// Un invité se présente à notre table.
+    /// Rappeler ceux qui n'arrivent pas à venir.
+    ///
+    /// On ne rappelle que les invités qui **nous** visent, une seule fois, et
+    /// seulement tant qu'il reste une place. Un appel de plus vers quelqu'un
+    /// de déjà relié n'ajouterait qu'un fil que `nommer` refermerait aussitôt.
+    private func rappelerLesInvites(_ trouvailles: Set<NWBrowser.Result>) {
+        guard tableOuverte, relies.count < attendus else { return }
+        for t in trouvailles {
+            guard case let .bonjour(txt) = t.metadata,
+                  txt[Link.cleRole] == Link.invite,
+                  txt[Link.cleCible] == moi.id,
+                  let id = txt[Link.cleId], id != moi.id,
+                  !appeles.contains(id)
+            else { continue }
+            let pair = Pair(id: id, nom: txt[Link.cleNom] ?? "Appareil")
+            guard canaux[pair] == nil else { continue }
+            appeles.insert(id)
+            // Sans l'interface, comme pour les tables : c'est au système de
+            // choisir par où passer.
+            let ou: NWEndpoint
+            if case let .service(nom, type, domaine, _) = t.endpoint {
+                ou = .service(name: nom, type: type, domain: domaine, interface: nil)
+            } else {
+                ou = t.endpoint
+            }
+            print("Riskelo — \(pair.nom) n'arrive pas à venir : on l'appelle → \(ou)")
+            ouvrirCanal(NWConnection(to: ou, using: Link.reglages(direct: !surUnReseau)),
+                        attendu: pair)
+        }
+    }
+
+    /// Un invité se présente à notre table — ou, quand c'est nous qui
+    /// rejoignons, l'hôte qui répond à notre appel.
     private func accueillir(_ connexion: NWConnection) {
+        guard jHeberge else {
+            // Nous n'hébergeons pas : la seule connexion entrante légitime est
+            // celle de la table que nous avons touchée.
+            guard let attendue = cibleAttendue else { connexion.cancel(); return }
+            ouvrirCanal(connexion, attendu: attendue)
+            return
+        }
         guard relies.count < attendus else {
             // La table est pleine : refuser franchement plutôt que de laisser
             // une connexion ouverte que personne ne lira.
@@ -677,6 +790,8 @@ final class Link {
         guard canaux[pair] === canal else { return }
         canaux[pair] = nil
         relies.removeAll { $0 == pair }
+        // Il pourra être rappelé s'il se réannonce.
+        appeles.remove(pair.id)
         print("Riskelo — \(pair.nom) : liaison perdue")
         if case .relie = state { state = .perdu(pair.nom) }
         rouvrirLaTable()

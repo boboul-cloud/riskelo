@@ -195,6 +195,31 @@ struct LobbyView: View {
                 enAttente(de: nom)
             }
 
+        case .sansAutorisation:
+            // Ce n'est pas une catastrophe : c'est un interrupteur à basculer.
+            // La première version de cet écran l'annonçait en rouge, main
+            // levée et quatre paragraphes — de quoi inquiéter pour rien.
+            // Une phrase, un bouton, et l'on y va.
+            Image(systemName: "gearshape.fill")
+                .font(.system(size: 30)).foregroundStyle(Palette.dim)
+            Text("Une autorisation manque")
+                .font(.headline).foregroundStyle(Palette.ink)
+            Text("iOS demande votre accord avant qu'un jeu puisse voir les "
+                 + "autres appareils de la maison. Riskelo ne l'a pas encore.")
+                .font(.subheadline).foregroundStyle(Palette.dim)
+                .multilineTextAlignment(.center)
+            #if os(iOS)
+            bouton("Ouvrir les Réglages", "arrow.up.forward.app", Palette.camp(0)) {
+                if let ou = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(ou)
+                }
+            }
+            Text("Confidentialité et sécurité → Réseau local → Riskelo")
+                .font(.caption2).foregroundStyle(Palette.dim.opacity(0.8))
+            #endif
+            Button("Réessayer") { link.arreter() }
+                .buttonStyle(.bordered).tint(Palette.dim)
+
         case .perdu(let nom):
             Image(systemName: "wifi.slash")
                 .font(.system(size: 34)).foregroundStyle(Palette.lostVif)

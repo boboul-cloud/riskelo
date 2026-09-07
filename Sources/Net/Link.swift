@@ -72,6 +72,27 @@ final class Link {
     /// Bonjour, qui est petit. Seul l'hôte s'annonce désormais : celui qui
     /// rejoint n'a plus rien à faire savoir à personne, il se connecte.
     nonisolated static let cleRole = "r", cleNom = "n", cleId = "i"
+    /// Où joindre l'hôte, sans rien avoir à demander à personne.
+    ///
+    /// Laisser le système résoudre un service Bonjour paraissait naturel, et
+    /// c'était le chemin le plus court sur le papier. Sur l'iPhone de Robert,
+    /// il ne menait nulle part : la table se voyait, son adresse ne s'obtenait
+    /// jamais, et la connexion restait « en préparation » jusqu'au délai —
+    /// sans erreur, sans rien à quoi se raccrocher.
+    ///
+    /// Or le même iPhone atteignait le Mac en une seconde depuis Safari, et
+    /// le journal du serveur l'a confirmé de l'autre bout : ses paquets
+    /// arrivent, en IPv4 comme en IPv6. C'est la résolution du *service* qui
+    /// ne passe pas, rien d'autre. On annonce donc où l'on est, et l'invité
+    /// s'y rend sans avoir de question à poser.
+    ///
+    /// Une **adresse**, et non un nom d'hôte. J'ai essayé le nom, pris de
+    /// `ProcessInfo.hostName` : sur le Mac il rend « macbook-air-de-robert
+    /// .local », mais sur l'iPad il rend « customer.lndngbr1.isp.starlink.com »
+    /// — le nom que le fournisseur d'accès attribue à la connexion. Y coller
+    /// « .local » donnait une adresse qui ne désigne rien. Une adresse IP, au
+    /// moins, ne se devine pas : elle se lit.
+    nonisolated static let cleAdresse = "a", clePort = "p"
     nonisolated static let hote = "h"
 
     enum State: Equatable {
@@ -85,9 +106,17 @@ final class Link {
         case relie(String)
         case perdu(String)
         /// Le système a refusé d'ouvrir le réseau, ou la connexion n'a pas
-        /// abouti. Presque toujours l'autorisation « réseau local », qui se
-        /// refuse une fois et ne se redemande jamais.
+        /// abouti.
         case refuse(String)
+        /// Le système coupe l'accès au réseau local à cette application.
+        ///
+        /// Il le dit d'une seule façon, et de très loin : « Network is down »
+        /// sur une adresse pourtant valide et joignable. Rien à l'écran, rien
+        /// dans les réglages qui saute aux yeux — l'autorisation « réseau
+        /// local » se refuse une fois et ne se redemande jamais. Sans ce cas,
+        /// le joueur ne voyait que « n'a pas répondu » et cherchait du côté
+        /// de son Wi-Fi, où il n'y avait rien à trouver.
+        case sansAutorisation
     }
 
     private(set) var state: State = .aLArret
@@ -112,9 +141,39 @@ final class Link {
     /// Notre identité sur le fil.
     let moi = Link.identite()
 
+    /// Sommes-nous sur un réseau ?
+    ///
+    /// Toute la question du Wi-Fi direct tient là. Une écoute qui l'active
+    /// s'annonce sous un nom d'hôte en forme d'identifiant — mesuré ici :
+    /// « 49f8cb31-8eb0-….local » au lieu de « MacBook-Air-de-Robert.local »,
+    /// et c'est `includePeerToPeer` seul qui en décide. Or ce nom-là ne se
+    /// résout pas toujours par le réseau ordinaire : l'invité reste alors
+    /// bloqué en préparation, sans erreur, jusqu'à ce que le délai tranche.
+    /// Il trouve la table et n'atteint jamais son adresse.
+    ///
+    /// D'où la règle : **le direct ne sert que faute de réseau**. Dans un
+    /// train il est le seul chemin ; sur un réseau il ne fait que nuire.
+    @ObservationIgnored private let veilleur = NWPathMonitor()
+    private var surUnReseau = true
+
+    init() {
+        veilleur.pathUpdateHandler = { [weak self] chemin in
+            let dessus = chemin.status == .satisfied
+                && (chemin.usesInterfaceType(.wifi)
+                    || chemin.usesInterfaceType(.wiredEthernet))
+            MainActor.assumeIsolated { self?.surUnReseau = dessus }
+        }
+        veilleur.start(queue: .main)
+    }
+
+    deinit { veilleur.cancel() }
+
     private var listener: NWListener?
     private var browser: NWBrowser?
     private var jHeberge = false
+    /// La table est tenue — même quand on a cessé d'accueillir parce qu'elle
+    /// était pleine. Elle ne se referme pour de bon qu'au lancement.
+    private var tableOuverte = false
 
     /// Les canaux ouverts, par appareil.
     private var canaux: [Pair: Canal] = [:]
@@ -123,26 +182,46 @@ final class Link {
     private var anonymes: [Canal] = []
     /// Où joindre chaque table trouvée.
     private var adresses: [Pair: NWEndpoint] = [:]
+    /// La même, en adresse IP nue — pour le témoin seulement. Voir `temoin`.
+    private var adressesBrutes: [Pair: NWEndpoint] = [:]
     /// Le délai d'une connexion en cours.
     private var attente: Task<Void, Never>?
 
-    /// Les réglages du transport, les mêmes des deux côtés.
+    /// Les réglages du transport.
     ///
-    /// `includePeerToPeer` laisse le Wi-Fi direct disponible quand il marche —
-    /// c'est lui qui permet de jouer sans box du tout. La différence avec
+    /// `includePeerToPeer` laisse le Wi-Fi direct disponible — c'est lui qui
+    /// permet de jouer sans box du tout, dans un train. La différence avec
     /// MultipeerConnectivity tient en un mot : ici il est *permis*, là il
     /// était *exigé*.
-    private static func reglages() -> NWParameters {
+    ///
+    /// Mais permis ne suffit pas : quand les deux chemins existent, le système
+    /// peut choisir le Wi-Fi direct — et celui-ci est interdit sur les canaux
+    /// 5 GHz radar, où il échoue en silence. On ouvre donc la découverte aux
+    /// deux, et l'on tente la connexion **par le réseau d'abord**, le Wi-Fi
+    /// direct n'étant essayé qu'ensuite. Le cas courant passe par le chemin
+    /// sûr ; le train reste possible.
+    private static func reglages(direct: Bool = true) -> NWParameters {
         let p = NWParameters.tcp
-        p.includePeerToPeer = true
+        p.includePeerToPeer = direct
+        // On n'interdit aucune interface.
+        //
+        // J'avais interdit la cellulaire, en me disant qu'une partie se joue
+        // dans la même pièce et que ce chemin ne mène nulle part. C'était une
+        // intuition, posée sans preuve, et elle a coûté cher : le système
+        // répondait alors « Network is down » — il ne restait plus aucun
+        // chemin qu'il s'autorise à prendre. Interdire un chemin inutile
+        // revenait à les fermer tous. On laisse le système choisir : il sait
+        // très bien qu'un nom en « .local » ne s'atteint pas par la cellulaire.
         // Une partie ne supporte pas qu'un coup attende : sans cela, TCP
         // regroupe les petits envois et retarde les plus pressés.
         if let tcp = p.defaultProtocolStack.transportProtocol as? NWProtocolTCP.Options {
             tcp.noDelay = true
             // Une liaison morte doit se voir, sinon l'écran attend un joueur
             // qui est parti depuis longtemps.
+            // Une liaison morte doit se voir, mais sans précipitation :
+            // cinq secondes de silence, c'est un tour de jeu ordinaire.
             tcp.enableKeepalive = true
-            tcp.keepaliveIdle = 5
+            tcp.keepaliveIdle = 20
         }
         return p
     }
@@ -165,6 +244,39 @@ final class Link {
         return Pair(id: id, nom: Link.nomDeLAppareil)
     }
 
+    /// L'adresse de cette machine sur le réseau local, s'il y en a une.
+    ///
+    /// La première adresse IPv4 d'une interface « en… » — le Wi-Fi ou
+    /// l'Ethernet. Rien à deviner : on la lit dans le système.
+    ///
+    /// `nil` quand il n'y a pas de réseau. C'est exactement le cas où le
+    /// Wi-Fi direct prend le relais, et où l'invité doit repasser par la
+    /// résolution du service : là, aucune adresse fixe n'aurait de sens.
+    static var adresseLocale: String? {
+        var liste: UnsafeMutablePointer<ifaddrs>?
+        guard getifaddrs(&liste) == 0, let debut = liste else { return nil }
+        defer { freeifaddrs(liste) }
+        var courante: UnsafeMutablePointer<ifaddrs>? = debut
+        while let ptr = courante {
+            let carte = ptr.pointee
+            courante = carte.ifa_next
+            let nom = String(cString: carte.ifa_name)
+            let drapeaux = Int32(carte.ifa_flags)
+            guard let adresse = carte.ifa_addr,
+                  drapeaux & IFF_UP != 0,
+                  drapeaux & IFF_LOOPBACK == 0,
+                  adresse.pointee.sa_family == UInt8(AF_INET),
+                  nom.hasPrefix("en")
+            else { continue }
+            var tampon = [CChar](repeating: 0, count: Int(NI_MAXHOST))
+            guard getnameinfo(adresse, socklen_t(adresse.pointee.sa_len),
+                              &tampon, socklen_t(tampon.count),
+                              nil, 0, NI_NUMERICHOST) == 0 else { continue }
+            return String(cString: tampon)
+        }
+        return nil
+    }
+
     /// Le nom que porte l'appareil.
     ///
     /// Il n'est plus `nonisolated`. Il l'était du temps de
@@ -185,19 +297,21 @@ final class Link {
     func ouvrir() {
         arreter()
         jHeberge = true
+        tableOuverte = true
+        demarrerEcoute()
+    }
+
+    /// Écouter, et s'annoncer. Refait tel quel si la table rouvre.
+    private func demarrerEcoute() {
+        guard listener == nil else { return }
         do {
-            let ecoute = try NWListener(using: Link.reglages())
-            var txt = NWTXTRecord()
-            txt[Link.cleRole] = Link.hote
-            txt[Link.cleNom] = moi.nom
-            txt[Link.cleId] = moi.id
-            // Le nom d'instance Bonjour doit être unique sur le réseau ; celui
-            // de l'appareil ne l'est pas (tous les iPhone s'appellent
-            // « iPhone »). On y joint donc un fragment de notre identité.
-            let instance = "\(moi.nom) \(moi.id.prefix(4))"
-            ecoute.service = NWListener.Service(name: instance,
-                                                type: "_\(Link.service)._tcp",
-                                                txtRecord: txt)
+            // Le direct seulement s'il n'y a pas de réseau : voir
+            // `surUnReseau`. C'est ce choix qui décide du nom annoncé, et donc
+            // de la capacité de l'invité à nous atteindre.
+            let direct = !surUnReseau
+            print("Riskelo — table ouverte " + (direct ? "en Wi-Fi direct" : "sur le réseau"))
+            let ecoute = try NWListener(using: Link.reglages(direct: direct))
+            ecoute.service = annonce(port: nil)
             ecoute.stateUpdateHandler = { [weak self] etat in
                 MainActor.assumeIsolated { self?.listenerAChange(etat) }
             }
@@ -217,9 +331,13 @@ final class Link {
     func chercher() {
         arreter()
         jHeberge = false
+        direCeQuOnVoit()
+        // La même règle que pour l'écoute, et pour la même raison : chercher
+        // en mode Wi-Fi direct rapporte des adresses taillées pour ce
+        // chemin-là. Sur un réseau, c'est le réseau qu'il faut interroger.
         let cherche = NWBrowser(for: .bonjourWithTXTRecord(type: "_\(Link.service)._tcp",
                                                            domain: nil),
-                                using: Link.reglages())
+                                using: Link.reglages(direct: !surUnReseau))
         cherche.stateUpdateHandler = { [weak self] etat in
             MainActor.assumeIsolated { self?.browserAChange(etat) }
         }
@@ -235,11 +353,23 @@ final class Link {
     ///
     /// Il n'y a plus d'invitation à faire accepter, donc plus rien qui puisse
     /// rester sans réponse. Ou la connexion aboutit, ou elle échoue et le dit.
+    /// Rejoindre une table : on ouvre une connexion, et c'est tout.
+    ///
+    /// Un seul essai, par le même chemin que l'hôte a choisi — le réseau s'il
+    /// y en a un, le Wi-Fi direct sinon. Il y en avait deux : le réseau
+    /// d'abord, le direct six secondes plus tard. Cette seconde tentative
+    /// partait par-dessus la première au moment précis où celle-ci aboutissait,
+    /// et la fermait. L'hôte voyait sa liaison coupée net — « Connection reset
+    /// by peer » — juste après l'avoir acceptée. Une course que rien
+    /// n'obligeait à courir : les deux côtés appliquent déjà la même règle.
     func rejoindre(_ pair: Pair) {
         guard let ou = adresses[pair] else { return }
-        print("Riskelo — connexion vers \(pair.nom)")
+        let direct = !surUnReseau
+        print("Riskelo — connexion vers \(pair.nom) "
+              + (direct ? "en Wi-Fi direct" : "sur le réseau") + " → \(ou)")
         state = .invite(pair.nom)
-        let connexion = NWConnection(to: ou, using: Link.reglages())
+        if let brute = adressesBrutes[pair] { Link.temoin(vers: brute) }
+        let connexion = NWConnection(to: ou, using: Link.reglages(direct: direct))
         ouvrirCanal(connexion, attendu: pair)
         // TCP peut mettre longtemps à renoncer, et l'écran serait resté sur
         // « connexion… » sans rien dire. On tranche nous-mêmes.
@@ -252,23 +382,91 @@ final class Link {
         }
     }
 
-    /// Cesse d'accueillir : la table est complète.
+    /// Une connexion témoin, vers l'**adresse IP nue** de l'hôte.
+    ///
+    /// Elle ne sert qu'à vérifier une chose, à chaque tentative : qu'iOS
+    /// refuse bien ce chemin-là alors qu'il accorde le service déclaré. Si un
+    /// jour elle réussit, c'est que la règle a changé.
+    ///
+    /// Elle n'envoie rien et se ferme au bout de cinq secondes.
+    static func temoin(vers ou: NWEndpoint) {
+        let t = NWConnection(to: ou, using: .tcp)
+        t.stateUpdateHandler = { etat in
+            switch etat {
+            case .ready:
+                print("Riskelo — TÉMOIN (réglages d'Apple) : RELIÉ ✅")
+                t.cancel()
+            case .waiting(let e):
+                let c = t.currentPath
+                print("Riskelo — TÉMOIN en attente : \(e)"
+                      + " | raison : \(String(describing: c?.unsatisfiedReason))")
+            case .failed(let e):
+                print("Riskelo — TÉMOIN échoué : \(e)")
+            default:
+                break
+            }
+        }
+        t.start(queue: .main)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) { t.cancel() }
+    }
+
+    /// Ce que cet appareil voit du réseau, en toutes lettres.
+    ///
+    /// À comparer d'un appareil à l'autre : c'est le seul endroit où un
+    /// iPhone et un iPad peuvent différer alors qu'ils exécutent le même code.
+    private func direCeQuOnVoit() {
+        let c = veilleur.currentPath
+        print("""
+            Riskelo — état du réseau vu par \(moi.nom) :
+              statut       : \(String(describing: c.status))
+              raison       : \(String(describing: c.unsatisfiedReason))
+              wifi         : \(c.usesInterfaceType(.wifi))
+              ethernet     : \(c.usesInterfaceType(.wiredEthernet))
+              cellulaire   : \(c.usesInterfaceType(.cellular))
+              interfaces   : \(c.availableInterfaces.map { "\($0.name)(\($0.type))" }.joined(separator: ", "))
+              sur un réseau: \(surUnReseau)
+            """)
+    }
+
+    /// Cesse d'accueillir, sans renoncer à la table.
     ///
     /// Les connexions déjà ouvertes n'en souffrent pas — arrêter d'écouter ne
     /// coupe rien de ce qui est établi.
-    func fermerLaTable() {
+    private func cesserDAccueillir() {
         listener?.cancel(); listener = nil
         browser?.cancel(); browser = nil
     }
 
+    /// Ferme la table pour de bon : la partie commence, on n'attend plus
+    /// personne.
+    func fermerLaTable() {
+        tableOuverte = false
+        cesserDAccueillir()
+    }
+
+    /// Rouvrir, parce qu'une place s'est libérée avant le lancement.
+    ///
+    /// Sans cela, un invité qui se relie puis repart — il quitte le salon, ou
+    /// son application passe en arrière-plan — laissait l'hôte muré : il avait
+    /// cessé d'écouter en se croyant complet, et ne recommençait jamais. La
+    /// table restait pourtant annoncée, donc visible : on la voyait, on la
+    /// touchait, et rien n'aboutissait plus jamais.
+    private func rouvrirLaTable() {
+        guard jHeberge, tableOuverte, relies.count < attendus else { return }
+        print("Riskelo — une place s'est libérée, la table rouvre")
+        demarrerEcoute()
+    }
+
     func arreter() {
         attente?.cancel(); attente = nil
-        fermerLaTable()
+        tableOuverte = false
+        cesserDAccueillir()
         canaux.values.forEach { $0.fermer() }
         canaux = [:]
         anonymes.forEach { $0.fermer() }
         anonymes = []
         adresses = [:]
+        adressesBrutes = [:]
         trouves = []
         relies = []
         state = .aLArret
@@ -276,8 +474,33 @@ final class Link {
 
     // MARK: - Ce que le système nous dit
 
+    /// Ce que l'hôte dit de lui. Le port n'est connu qu'une fois l'écoute
+    /// prête : l'annonce se refait alors, complète.
+    private func annonce(port: NWEndpoint.Port?) -> NWListener.Service {
+        var txt = NWTXTRecord()
+        txt[Link.cleRole] = Link.hote
+        txt[Link.cleNom] = moi.nom
+        txt[Link.cleId] = moi.id
+        if let port, let ou = Link.adresseLocale {
+            txt[Link.cleAdresse] = ou
+            txt[Link.clePort] = String(port.rawValue)
+        }
+        // Le nom d'instance Bonjour doit être unique sur le réseau ; celui de
+        // l'appareil ne l'est pas (tous les iPhone s'appellent « iPhone »). On
+        // y joint donc un fragment de notre identité.
+        return NWListener.Service(name: "\(moi.nom) \(moi.id.prefix(4))",
+                                  type: "_\(Link.service)._tcp",
+                                  txtRecord: txt)
+    }
+
     private func listenerAChange(_ etat: NWListener.State) {
         switch etat {
+        case .ready:
+            // Le port est connu : on redit qui l'on est, adresse comprise.
+            if let ecoute = listener, let port = ecoute.port {
+                print("Riskelo — table prête sur \(Link.adresseLocale ?? "sans adresse"):\(port)")
+                ecoute.service = annonce(port: port)
+            }
         case .failed(let erreur):
             // Presque toujours l'autorisation « réseau local ».
             print("Riskelo — table impossible : \(erreur)")
@@ -308,8 +531,42 @@ final class Link {
             // Ne jamais se proposer à soi-même.
             guard id != moi.id else { continue }
             let pair = Pair(id: id, nom: txt[Link.cleNom] ?? "Appareil")
+            print("Riskelo — table vue : \(t.endpoint)"
+                  + " par [\(t.interfaces.map(\.name).joined(separator: ", "))]")
             if !vues.contains(pair) { vues.append(pair) }
-            ou[pair] = t.endpoint
+            print("Riskelo — table vue : \(t.endpoint)"
+                  + " par [\(t.interfaces.map(\.name).joined(separator: ", "))]")
+
+            // **Le service, et non l'adresse.**
+            //
+            // iOS n'accorde pas à une application « le réseau local » en bloc :
+            // il lui accorde les services qu'elle a déclarés dans
+            // `NSBonjourServices`. Une adresse IP nue ne figure dans aucune
+            // déclaration, et se fait refuser — `localNetworkDenied` — quand
+            // bien même l'interrupteur des Réglages est vert.
+            //
+            // J'étais passé à l'adresse pour contourner une résolution qui
+            // paraissait bloquée. Elle ne l'était pas : ce qui bloquait, c'était
+            // un nom d'hôte inventé, des adresses clouées à la mauvaise
+            // interface, et deux connexions qui se coupaient l'une l'autre —
+            // trois défauts corrigés depuis. En passant à l'adresse IP, j'avais
+            // troqué le chemin autorisé contre un chemin interdit.
+            //
+            // **Sans l'interface** : Bonjour trouve la même table une fois par
+            // interface, et l'adresse qu'il rend est clouée à celle par
+            // laquelle il l'a vue. Détachée, c'est au système de choisir.
+            if case let .service(nom, type, domaine, _) = t.endpoint {
+                ou[pair] = .service(name: nom, type: type, domain: domaine, interface: nil)
+            } else {
+                ou[pair] = t.endpoint
+            }
+            // L'adresse annoncée ne sert plus qu'au témoin, qui vérifie à
+            // chaque tentative que ce chemin-là reste bien le mauvais.
+            if let brute = txt[Link.cleAdresse], !brute.isEmpty,
+               let n = txt[Link.clePort], let numero = UInt16(n),
+               let port = NWEndpoint.Port(rawValue: numero) {
+                adressesBrutes[pair] = .hostPort(host: NWEndpoint.Host(brute), port: port)
+            }
         }
         adresses = ou
         trouves = vues
@@ -341,6 +598,11 @@ final class Link {
         canal.onPaquet = { [weak self, weak canal] data in
             guard let self, let canal else { return }
             self.recu(data, sur: canal, attendu: attendu)
+        }
+        canal.onInterdit = { [weak self] in
+            guard let self else { return }
+            self.attente?.cancel(); self.attente = nil
+            self.state = .sansAutorisation
         }
         canal.onFerme = { [weak self, weak canal] in
             guard let self, let canal else { return }
@@ -400,7 +662,7 @@ final class Link {
         print("Riskelo — \(pair.nom) : relié")
         // Qui rejoint a fini de chercher. Qui héberge accueille jusqu'à ce que
         // la table soit pleine, et s'arrête là.
-        if !jHeberge || relies.count >= attendus { fermerLaTable() }
+        if !jHeberge || relies.count >= attendus { cesserDAccueillir() }
         onConnected?(jHeberge, pair)
     }
 
@@ -417,6 +679,7 @@ final class Link {
         relies.removeAll { $0 == pair }
         print("Riskelo — \(pair.nom) : liaison perdue")
         if case .relie = state { state = .perdu(pair.nom) }
+        rouvrirLaTable()
     }
 
     // MARK: - Envoyer
@@ -439,6 +702,16 @@ final class Link {
     }
 }
 
+private extension NWError {
+    /// « Network is down » sur une adresse du réseau local ne veut pas dire
+    /// que le réseau est coupé — on vient de l'atteindre par ailleurs. Cela
+    /// veut dire que le système le ferme **à cette application**.
+    var estUnRefusDeReseauLocal: Bool {
+        if case let .posix(code) = self { return code == .ENETDOWN }
+        return false
+    }
+}
+
 // MARK: - Un canal, et ses paquets
 
 /// Une connexion TCP, et de quoi y faire passer des paquets entiers.
@@ -455,6 +728,8 @@ private final class Canal {
     var pair: Pair?
 
     var onPret: (() -> Void)?
+    /// Le système nous ferme le réseau local. Voir `State.sansAutorisation`.
+    var onInterdit: (() -> Void)?
     var onPaquet: ((Data) -> Void)?
     var onFerme: (() -> Void)?
 
@@ -477,6 +752,30 @@ private final class Canal {
                 case .ready:
                     self.onPret?()
                     self.lire()
+                case .preparing:
+                    print("Riskelo — canal en préparation")
+                case .waiting(let erreur):
+                    // L'état qui manquait au journal. Une connexion qui
+                    // n'aboutit pas ne « échoue » pas : elle *attend*, en
+                    // gardant sa raison pour elle.
+                    //
+                    // Et « Network is down » ne dit pas *laquelle* de ses
+                    // raisons. Le système en tient pourtant le compte exact —
+                    // autorisation refusée, Wi-Fi refusé, rien de disponible —
+                    // dans `NWPath.unsatisfiedReason`. C'est le seul endroit
+                    // où il nomme la cause, et c'est celui-là qu'il faut lire.
+                    let chemin = self.connexion.currentPath
+                    print("""
+                        Riskelo — canal en attente : \(erreur)
+                          état du chemin : \(String(describing: chemin?.status))
+                          raison         : \(String(describing: chemin?.unsatisfiedReason))
+                          interfaces     : \(chemin?.availableInterfaces.map(\.name).joined(separator: ", ") ?? "aucune")
+                          coûteux/limité : \(String(describing: chemin?.isExpensive)) / \(String(describing: chemin?.isConstrained))
+                        """)
+                    if chemin?.unsatisfiedReason == .localNetworkDenied
+                        || erreur.estUnRefusDeReseauLocal {
+                        self.onInterdit?()
+                    }
                 case .failed(let erreur):
                     print("Riskelo — canal rompu : \(erreur)")
                     self.fermer()

@@ -4,166 +4,168 @@
 //
 //  Le fil entre deux appareils.
 //
-//  MultipeerConnectivity, et non un serveur : il prend le Bluetooth et le
-//  Wi-Fi direct sans qu'on ait à choisir, ne demande ni compte ni réseau, et
-//  marche dans un train. C'est exactement l'usage — deux personnes dans la
-//  même pièce, un appareil chacune.
+//  Bonjour pour se trouver, TCP pour se parler — par le framework Network.
+//
+//  C'était MultipeerConnectivity, et cela paraissait le choix évident : il
+//  prend le Bluetooth et le Wi-Fi direct sans qu'on ait à choisir, ne demande
+//  ni compte ni réseau, et marche dans un train.
+//
+//  Il avait un défaut qu'aucun réglage ne corrige. Sa session de jeu n'accepte
+//  QUE le Wi-Fi direct — le journal du système le dit mot pour mot :
+//  « use awdl, prohibit fallback ». Or le Wi-Fi direct est interdit sur les
+//  canaux 5 GHz dits « radar » (52 à 140), que les box choisissent toutes
+//  seules et changent sans prévenir. Sur un tel canal, la découverte marche,
+//  l'invitation passe, et la partie ne démarre jamais : « Sendmsg failed with
+//  error No route to host », dix fois, puis l'abandon. Mesuré ici, sur le
+//  canal 104, entre un Mac et un iPhone qui se pinguaient parfaitement.
+//
+//  Un joueur n'a ni les journaux, ni la main sur sa box. Faire dépendre le jeu
+//  d'une condition qu'il ne peut ni voir ni corriger n'était pas tenable.
+//
+//  D'où ce fil-ci. La découverte reste Bonjour, exactement la même ; les
+//  données passent par une connexion TCP ordinaire. `includePeerToPeer` reste
+//  allumé, donc le Wi-Fi direct sert encore quand il est là — dans un train,
+//  sans aucune box. Mais il devient un bonus au lieu d'être une exigence.
+//
+//  Et toute la danse des invitations disparaît avec lui. Il n'y a plus
+//  d'invitation à accepter, plus de secours à envoyer six secondes plus tard,
+//  plus de rôles à rendre symétriques, plus de délai de quarante-six secondes
+//  au bout duquel on renonce : celui qui rejoint ouvre une connexion, et elle
+//  aboutit ou elle échoue. Une famille entière de pannes s'en va avec.
 //
 //  Ce fichier ne connaît rien au jeu : il transporte des paquets d'octets et
 //  dit qui est là. Ce qui circule dedans est l'affaire de `Match`.
 //
 
 import Foundation
-import MultipeerConnectivity
+import Network
+#if os(iOS)
+import UIKit
+#endif
+
+/// Un appareil au bout du fil.
+///
+/// Deux appareils sont le même si leur identité est la même. Le nom, lui, ne
+/// distingue rien : depuis iOS 16 tous les iPhone s'appellent « iPhone » pour
+/// qui n'a pas l'autorisation d'en demander plus.
+struct Pair: Hashable, Sendable {
+    /// Gardée d'un lancement sur l'autre. Voir `Link.identite()`.
+    let id: String
+    /// Ce qu'on montre à l'écran.
+    let nom: String
+
+    static func == (a: Pair, b: Pair) -> Bool { a.id == b.id }
+    func hash(into hacheur: inout Hasher) { hacheur.combine(id) }
+}
 
 @Observable
 @MainActor
-final class Link: NSObject {
+final class Link {
 
     /// Le nom du service. Quinze caractères au plus, minuscules et tirets :
     /// c'est une contrainte de Bonjour, pas un goût.
-    ///
-    /// `nonisolated`, comme tout le vocabulaire qui suit : la classe est
-    /// posée sur l'acteur principal — c'est ce que veut son état — mais une
-    /// chaîne de caractères figée à la compilation n'est pas de l'état, et il
-    /// n'y a rien à y protéger. Or elle se lit précisément là où l'acteur
-    /// n'est pas : les rappels de MultipeerConnectivity arrivent sur son
-    /// propre fil, et les tests s'exécutent hors acteur. Sans ce mot, le
-    /// compilateur avertit à chaque lecture — et Swift 6 en fera une erreur.
     nonisolated static let service = "riskelo-jeu"
 
-    /// Ce que chaque appareil dit de lui dans son annonce.
+    /// Ce que l'hôte dit de lui dans son annonce.
     ///
     /// Les clés sont courtes parce que tout ceci voyage dans un enregistrement
-    /// Bonjour, qui est petit — et parce qu'un nom d'appareil peut déjà en
-    /// prendre trente caractères.
-    ///
-    /// La liaison n'allait que dans un sens : l'hôte annonçait, l'invité
-    /// cherchait et invitait. Quand ce sens-là ne passe pas, tout est bloqué —
-    /// alors que l'autre peut être grand ouvert. C'est arrivé, et sur du vrai
-    /// matériel : un iPad hébergeait, l'iPhone le voyait parfaitement et ne
-    /// parvenait jamais à résoudre son adresse ; les rôles inversés, la partie
-    /// démarrait en onze secondes.
-    nonisolated static let cleRole = "r", cleCible = "c"
-    nonisolated static let hote = "h", invite = "i"
+    /// Bonjour, qui est petit. Seul l'hôte s'annonce désormais : celui qui
+    /// rejoint n'a plus rien à faire savoir à personne, il se connecte.
+    nonisolated static let cleRole = "r", cleNom = "n", cleId = "i"
+    nonisolated static let hote = "h"
 
     enum State: Equatable {
         case aLArret
-        /// On se montre et l'on attend qu'on vienne.
+        /// On tient une table et l'on attend qu'on vienne.
         case ouvert
-        /// On cherche qui se montre.
+        /// On cherche qui en tient une.
         case cherche
-        /// L'invitation est partie, on attend qu'on décroche.
-        ///
-        /// Cet état manquait, et son absence était une panne à elle seule :
-        /// toucher le nom d'un appareil ne changeait rien à l'écran. La liste
-        /// restait la liste, et l'on croyait que l'appui n'avait pas été pris.
+        /// La connexion est partie, on attend qu'elle aboutisse.
         case invite(String)
         case relie(String)
         case perdu(String)
-        /// Le système a refusé, ou personne n'a décroché. Presque toujours
-        /// l'autorisation « réseau local », qui se refuse une fois et ne se
-        /// redemande jamais.
+        /// Le système a refusé d'ouvrir le réseau, ou la connexion n'a pas
+        /// abouti. Presque toujours l'autorisation « réseau local », qui se
+        /// refuse une fois et ne se redemande jamais.
         case refuse(String)
     }
 
     private(set) var state: State = .aLArret
-    /// Les parties trouvées autour, pour le joueur qui cherche.
-    private(set) var trouves: [MCPeerID] = []
+    /// Les tables trouvées autour, pour le joueur qui cherche.
+    private(set) var trouves: [Pair] = []
+    /// Les appareils reliés, dans l'ordre où ils sont arrivés : c'est cet
+    /// ordre qui décide des rangs.
+    private(set) var relies: [Pair] = []
 
     var jeSuisLHote: Bool { jHeberge }
 
     /// Ce qui arrive d'un autre appareil, et de qui.
-    var onReceive: ((Data, MCPeerID) -> Void)?
+    var onReceive: ((Data, Pair) -> Void)?
     /// Appelé à chaque appareil relié, avec `true` si c'est nous qui avons
     /// ouvert la partie. À quatre, il est appelé trois fois.
-    var onConnected: ((Bool, MCPeerID) -> Void)?
-
-    /// Les appareils reliés, dans l'ordre où ils sont arrivés : c'est cet
-    /// ordre qui décide des rangs.
-    private(set) var relies: [MCPeerID] = []
+    var onConnected: ((Bool, Pair) -> Void)?
 
     /// Combien d'appareils l'hôte attend en tout, lui non compris.
-    ///
-    /// Il cesse d'annoncer dès que la table est pleine. À deux appareils,
-    /// c'est le comportement d'origine : le second arrive, l'annonce s'arrête.
-    /// Le passage à quatre l'a fait continuer — il fallait bien pouvoir en
-    /// accueillir trois — et l'annonceur restait donc en marche **pendant que
-    /// la session se négociait**. Sur du vrai matériel, une annonce qui
-    /// continue par-dessus une négociation en cours la brouille : le pair
-    /// passe « en cours » puis retombe « non relié », sans erreur.
+    /// Il cesse d'annoncer dès que la table est pleine.
     var attendus = 1
 
-    private let moi = Link.identite()
-    private var session: MCSession?
+    /// Notre identité sur le fil.
+    let moi = Link.identite()
 
-    /// La même session, lisible depuis n'importe quel fil.
-    ///
-    /// `invitationHandler` doit être appelé **dans le rappel lui-même**. Ce
-    /// n'était pas le cas : la réponse passait par un saut vers le fil
-    /// principal, et une invitation à laquelle on répond en différé peut être
-    /// tenue pour sans réponse. Celui qui invitait voyait « n'a pas répondu »
-    /// alors que la table était grande ouverte en face — la panne la plus
-    /// longue à trouver de tout ce jeu, parce que tout le reste marchait.
-    ///
-    /// `MCSession` supporte d'être lue depuis plusieurs fils. L'accès à la
-    /// **référence**, lui, passe par un verrou : elle est écrite sur le fil
-    /// principal et lue ailleurs, et sans verrou rien ne garantit que le
-    /// rappel voie la session qu'on vient de poser.
-    ///
-    /// Hors observation : le macro `@Observable` transforme les propriétés
-    /// suivies en propriétés calculées, et une propriété calculée ne peut pas
-    /// être `nonisolated`. Celle-ci ne sert qu'aux rappels du système, qui
-    /// n'ont rien à observer.
-    @ObservationIgnored nonisolated(unsafe) private var _sessionPartagee: MCSession?
-    @ObservationIgnored private let verrou = NSLock()
-
-    nonisolated private var sessionPartagee: MCSession? {
-        get { verrou.lock(); defer { verrou.unlock() }; return _sessionPartagee }
-        set { verrou.lock(); defer { verrou.unlock() }; _sessionPartagee = newValue }
-    }
-    private var advertiser: MCNearbyServiceAdvertiser?
-    private var browser: MCNearbyServiceBrowser?
+    private var listener: NWListener?
+    private var browser: NWBrowser?
     private var jHeberge = false
-    /// Le délai d'une invitation en cours.
-    private var attente: Task<Void, Never>?
-    /// Les secours en attente, un par invité qui nous appelle. Voir
-    /// `secourir`.
-    private var secours: [MCPeerID: Task<Void, Never>] = [:]
 
-    /// L'identité de cet appareil sur le fil, **gardée d'un lancement sur
-    /// l'autre**.
+    /// Les canaux ouverts, par appareil.
+    private var canaux: [Pair: Canal] = [:]
+    /// Les canaux qui n'ont pas encore dit qui ils sont. Un invité qui arrive
+    /// est d'abord un inconnu : c'est son salut qui le nomme.
+    private var anonymes: [Canal] = []
+    /// Où joindre chaque table trouvée.
+    private var adresses: [Pair: NWEndpoint] = [:]
+    /// Le délai d'une connexion en cours.
+    private var attente: Task<Void, Never>?
+
+    /// Les réglages du transport, les mêmes des deux côtés.
     ///
-    /// Elle était refaite à chaque démarrage. C'est précisément ce qu'Apple
-    /// demande de ne pas faire : un `MCPeerID` doit être archivé et réutilisé.
-    /// Le système garde trace des appareils qu'il a vus, et un appareil qui se
-    /// présente sous une identité neuve à chaque lancement finit par en
-    /// accumuler des dizaines pour un seul et même téléphone. La liaison
-    /// marche la première fois, puis échoue — sans erreur, sans message, et
-    /// sans rien qui change entre les deux essais. C'est la signature exacte
-    /// de « ça a fonctionné après l'installation ».
-    ///
-    /// On la refait dans un seul cas : si le nom de l'appareil a changé.
-    static func identite() -> MCPeerID {
-        let nom = nomDeLAppareil
-        let cle = "riskelo.pair", cleDuNom = "riskelo.pair.nom"
-        let reglages = UserDefaults.standard
-        if reglages.string(forKey: cleDuNom) == nom,
-           let data = reglages.data(forKey: cle),
-           let gardee = try? NSKeyedUnarchiver.unarchivedObject(ofClass: MCPeerID.self,
-                                                               from: data) {
-            return gardee
+    /// `includePeerToPeer` laisse le Wi-Fi direct disponible quand il marche —
+    /// c'est lui qui permet de jouer sans box du tout. La différence avec
+    /// MultipeerConnectivity tient en un mot : ici il est *permis*, là il
+    /// était *exigé*.
+    private static func reglages() -> NWParameters {
+        let p = NWParameters.tcp
+        p.includePeerToPeer = true
+        // Une partie ne supporte pas qu'un coup attende : sans cela, TCP
+        // regroupe les petits envois et retarde les plus pressés.
+        if let tcp = p.defaultProtocolStack.transportProtocol as? NWProtocolTCP.Options {
+            tcp.noDelay = true
+            // Une liaison morte doit se voir, sinon l'écran attend un joueur
+            // qui est parti depuis longtemps.
+            tcp.enableKeepalive = true
+            tcp.keepaliveIdle = 5
         }
-        let neuve = MCPeerID(displayName: nom)
-        if let data = try? NSKeyedArchiver.archivedData(withRootObject: neuve,
-                                                       requiringSecureCoding: true) {
-            reglages.set(data, forKey: cle)
-            reglages.set(nom, forKey: cleDuNom)
-        }
-        return neuve
+        return p
     }
 
-    private static var nomDeLAppareil: String {
+    /// L'identité de cet appareil, **gardée d'un lancement sur l'autre**.
+    ///
+    /// Elle ne sert plus qu'à se reconnaître d'un bout à l'autre du fil, mais
+    /// elle doit rester stable : deux appareils qui changeraient d'identité en
+    /// cours de route se compteraient deux fois.
+    static func identite() -> Pair {
+        let reglages = UserDefaults.standard
+        let cle = "riskelo.identite"
+        let id: String
+        if let gardee = reglages.string(forKey: cle), !gardee.isEmpty {
+            id = gardee
+        } else {
+            id = UUID().uuidString
+            reglages.set(id, forKey: cle)
+        }
+        return Pair(id: id, nom: Link.nomDeLAppareil)
+    }
+
+    nonisolated static var nomDeLAppareil: String {
         #if os(iOS)
         String(UIDevice.current.name.prefix(30))
         #else
@@ -173,294 +175,374 @@ final class Link: NSObject {
 
     // MARK: - Ouvrir, chercher, raccrocher
 
-    // Il y avait ici une reprise automatique au retour au premier plan, qui
-    // relançait `startAdvertisingPeer()` sur un annonceur déjà en marche.
-    // Retirée : je ne l'avais mise que sur une intuition, sans avoir vu la
-    // panne qu'elle prétendait corriger, et elle pouvait en créer une —
-    // `didBecomeActive` part à chaque retour dans l'application, y compris au
-    // lancement et au retour des Réglages, et relancer un annonceur peut lui
-    // faire perdre l'invitation qu'il était en train de recevoir. Garder
-    // l'écran allumé pendant le salon couvre le cas qu'elle visait.
-
+    /// Tenir une table : on écoute, et l'on s'annonce.
     func ouvrir() {
         arreter()
         jHeberge = true
-        demarrerSession()
-        annoncer([Link.cleRole: Link.hote])
-        // L'hôte cherche, lui aussi. Non pour trouver une table — il en tient
-        // une — mais pour entendre les invités qui l'appellent quand leur
-        // invitation ne passe pas. Voir `secourir`.
-        chercherAutour()
-        state = .ouvert
+        do {
+            let ecoute = try NWListener(using: Link.reglages())
+            var txt = NWTXTRecord()
+            txt[Link.cleRole] = Link.hote
+            txt[Link.cleNom] = moi.nom
+            txt[Link.cleId] = moi.id
+            // Le nom d'instance Bonjour doit être unique sur le réseau ; celui
+            // de l'appareil ne l'est pas (tous les iPhone s'appellent
+            // « iPhone »). On y joint donc un fragment de notre identité.
+            let instance = "\(moi.nom) \(moi.id.prefix(4))"
+            ecoute.service = NWListener.Service(name: instance,
+                                                type: "_\(Link.service)._tcp",
+                                                txtRecord: txt)
+            ecoute.stateUpdateHandler = { [weak self] etat in
+                MainActor.assumeIsolated { self?.listenerAChange(etat) }
+            }
+            ecoute.newConnectionHandler = { [weak self] connexion in
+                MainActor.assumeIsolated { self?.accueillir(connexion) }
+            }
+            listener = ecoute
+            ecoute.start(queue: .main)
+            state = .ouvert
+        } catch {
+            print("Riskelo — table impossible : \(error)")
+            state = .refuse("")
+        }
     }
 
+    /// Chercher une table.
     func chercher() {
         arreter()
         jHeberge = false
-        demarrerSession()
-        chercherAutour()
+        let cherche = NWBrowser(for: .bonjourWithTXTRecord(type: "_\(Link.service)._tcp",
+                                                           domain: nil),
+                                using: Link.reglages())
+        cherche.stateUpdateHandler = { [weak self] etat in
+            MainActor.assumeIsolated { self?.browserAChange(etat) }
+        }
+        cherche.browseResultsChangedHandler = { [weak self] trouvailles, _ in
+            MainActor.assumeIsolated { self?.tablesVues(trouvailles) }
+        }
+        browser = cherche
+        cherche.start(queue: .main)
         state = .cherche
     }
 
-    private func annoncer(_ info: [String: String]) {
-        guard advertiser == nil else { return }
-        advertiser = MCNearbyServiceAdvertiser(peer: moi, discoveryInfo: info,
-                                               serviceType: Link.service)
-        advertiser?.delegate = self
-        advertiser?.startAdvertisingPeer()
-    }
-
-    private func chercherAutour() {
-        guard browser == nil else { return }
-        browser = MCNearbyServiceBrowser(peer: moi, serviceType: Link.service)
-        browser?.delegate = self
-        browser?.startBrowsingForPeers()
-    }
-
-    func rejoindre(_ pair: MCPeerID, essai: Int = 1) {
-        guard let session else { return }
-        print("Riskelo — invitation envoyée à \(pair.displayName) (essai \(essai))")
-        state = .invite(pair.displayName)
-        // On s'annonce en nommant la table visée. Si notre invitation
-        // n'aboutit pas, l'hôte pourra nous inviter à son tour — et lui seul :
-        // aucune autre table ne verra son propre nom là-dedans.
-        annoncer([Link.cleRole: Link.invite, Link.cleCible: pair.displayName])
-        browser?.invitePeer(pair, to: session, withContext: nil, timeout: 20)
-        // L'invitation expire sans que le système prévienne qui que ce soit :
-        // l'écran serait resté sur « connexion… » pour toujours. On retente
-        // une fois — une poignée de main manquée n'a rien d'exceptionnel — et
-        // l'on conclut ensuite plutôt que d'attendre indéfiniment.
+    /// Rejoindre une table : on ouvre une connexion, et c'est tout.
+    ///
+    /// Il n'y a plus d'invitation à faire accepter, donc plus rien qui puisse
+    /// rester sans réponse. Ou la connexion aboutit, ou elle échoue et le dit.
+    func rejoindre(_ pair: Pair) {
+        guard let ou = adresses[pair] else { return }
+        print("Riskelo — connexion vers \(pair.nom)")
+        state = .invite(pair.nom)
+        let connexion = NWConnection(to: ou, using: Link.reglages())
+        ouvrirCanal(connexion, attendu: pair)
+        // TCP peut mettre longtemps à renoncer, et l'écran serait resté sur
+        // « connexion… » sans rien dire. On tranche nous-mêmes.
         attente?.cancel()
         attente = Task { [weak self] in
-            // Plus long que l'invitation elle-même : relancer par-dessus une
-            // invitation encore vivante en enverrait deux à la fois, et
-            // l'annonceur d'en face en verrait deux du même appareil.
-            try? await Task.sleep(for: .seconds(23))
+            try? await Task.sleep(for: .seconds(15))
             guard let self, !Task.isCancelled, case .invite = self.state else { return }
-            if essai < 2 {
-                self.rejoindre(pair, essai: essai + 1)
-            } else {
-                self.state = .refuse(pair.displayName)
-            }
+            print("Riskelo — \(pair.nom) n'a pas répondu")
+            self.state = .refuse(pair.nom)
         }
     }
 
     /// Cesse d'accueillir : la table est complète.
+    ///
+    /// Les connexions déjà ouvertes n'en souffrent pas — arrêter d'écouter ne
+    /// coupe rien de ce qui est établi.
     func fermerLaTable() {
-        advertiser?.stopAdvertisingPeer(); advertiser = nil
-        browser?.stopBrowsingForPeers(); browser = nil
+        listener?.cancel(); listener = nil
+        browser?.cancel(); browser = nil
     }
 
     func arreter() {
         attente?.cancel(); attente = nil
-        secours.values.forEach { $0.cancel() }; secours = [:]
         fermerLaTable()
-        session?.disconnect(); session = nil
-        sessionPartagee = nil
+        canaux.values.forEach { $0.fermer() }
+        canaux = [:]
+        anonymes.forEach { $0.fermer() }
+        anonymes = []
+        adresses = [:]
         trouves = []
         relies = []
         state = .aLArret
     }
 
-    private func demarrerSession() {
-        // `.optional` et non `.required`.
-        //
-        // C'est le seul réglage de tout ce fichier qui puisse faire échouer
-        // une liaison sans rien dire : deux appareils qui ne s'entendent pas
-        // sur le chiffrement passent en « non relié » sans erreur, sans
-        // message, et sans que rien distingue ce cas d'un appareil absent.
-        // Apple emploie `.optional` dans ses propres exemples, et la liaison
-        // reste chiffrée dès que les deux côtés le peuvent — ce qui est le cas
-        // de tout appareil récent. On ne perd donc rien, et l'on retire une
-        // cause d'échec muette.
-        let s = MCSession(peer: moi, securityIdentity: nil, encryptionPreference: .optional)
-        s.delegate = self
-        session = s
-        sessionPartagee = s
+    // MARK: - Ce que le système nous dit
+
+    private func listenerAChange(_ etat: NWListener.State) {
+        switch etat {
+        case .failed(let erreur):
+            // Presque toujours l'autorisation « réseau local ».
+            print("Riskelo — table impossible : \(erreur)")
+            state = .refuse("")
+        case .cancelled:
+            break
+        default:
+            break
+        }
+    }
+
+    private func browserAChange(_ etat: NWBrowser.State) {
+        if case .failed(let erreur) = etat {
+            print("Riskelo — recherche impossible : \(erreur)")
+            state = .refuse("")
+        }
+    }
+
+    /// Les tables vues autour de nous.
+    private func tablesVues(_ trouvailles: Set<NWBrowser.Result>) {
+        var vues: [Pair] = []
+        var ou: [Pair: NWEndpoint] = [:]
+        for t in trouvailles {
+            guard case let .bonjour(txt) = t.metadata,
+                  txt[Link.cleRole] == Link.hote,
+                  let id = txt[Link.cleId], !id.isEmpty
+            else { continue }
+            // Ne jamais se proposer à soi-même.
+            guard id != moi.id else { continue }
+            let pair = Pair(id: id, nom: txt[Link.cleNom] ?? "Appareil")
+            if !vues.contains(pair) { vues.append(pair) }
+            ou[pair] = t.endpoint
+        }
+        adresses = ou
+        trouves = vues
+    }
+
+    /// Un invité se présente à notre table.
+    private func accueillir(_ connexion: NWConnection) {
+        guard relies.count < attendus else {
+            // La table est pleine : refuser franchement plutôt que de laisser
+            // une connexion ouverte que personne ne lira.
+            connexion.cancel()
+            return
+        }
+        ouvrirCanal(connexion, attendu: nil)
+    }
+
+    // MARK: - Les canaux
+
+    private func ouvrirCanal(_ connexion: NWConnection, attendu: Pair?) {
+        let canal = Canal(connexion: connexion)
+        anonymes.append(canal)
+        canal.onPret = { [weak self, weak canal] in
+            guard let self, let canal else { return }
+            // Chacun dit qui il est dès que le fil est ouvert. Sans cela,
+            // celui qui accepte une connexion ne saurait jamais qui vient
+            // d'arriver : une adresse n'est pas une identité.
+            canal.envoyer(self.salut())
+        }
+        canal.onPaquet = { [weak self, weak canal] data in
+            guard let self, let canal else { return }
+            self.recu(data, sur: canal, attendu: attendu)
+        }
+        canal.onFerme = { [weak self, weak canal] in
+            guard let self, let canal else { return }
+            self.canalFerme(canal)
+        }
+        canal.demarrer()
+    }
+
+    /// Notre carte de visite : l'identité et le nom, rien d'autre.
+    ///
+    /// Elle voyage dans son propre paquet, devant tout le reste, et ne change
+    /// jamais de forme — c'est le seul contrat que toutes les versions à venir
+    /// doivent tenir sur ce fil-ci. Le dialecte du jeu, lui, est l'affaire de
+    /// `Match`, et il se négocie après.
+    private func salut() -> Data {
+        let carte = ["id": moi.id, "nom": moi.nom]
+        return (try? JSONSerialization.data(withJSONObject: carte)) ?? Data()
+    }
+
+    private func recu(_ data: Data, sur canal: Canal, attendu: Pair?) {
+        // Tant qu'il ne s'est pas nommé, tout ce qui arrive est son salut.
+        if canal.pair == nil {
+            guard let carte = try? JSONSerialization.jsonObject(with: data) as? [String: String],
+                  let id = carte["id"], !id.isEmpty
+            else {
+                print("Riskelo — un appareil s'est présenté sans se nommer")
+                canal.fermer()
+                return
+            }
+            let pair = Pair(id: id, nom: carte["nom"] ?? "Appareil")
+            // Si l'on visait quelqu'un, c'est bien lui qu'on doit trouver.
+            if let attendu, attendu != pair {
+                print("Riskelo — attendu \(attendu.nom), reçu \(pair.nom)")
+                canal.fermer()
+                return
+            }
+            nommer(canal, pair)
+            return
+        }
+        guard let pair = canal.pair else { return }
+        onReceive?(data, pair)
+    }
+
+    /// Un canal vient de dire qui il est : la liaison est faite.
+    private func nommer(_ canal: Canal, _ pair: Pair) {
+        anonymes.removeAll { $0 === canal }
+        // Deux fils vers le même appareil : garder le premier.
+        if canaux[pair] != nil {
+            canal.fermer()
+            return
+        }
+        canal.pair = pair
+        canaux[pair] = canal
+        if !relies.contains(pair) { relies.append(pair) }
+        attente?.cancel(); attente = nil
+        state = .relie(pair.nom)
+        print("Riskelo — \(pair.nom) : relié")
+        // Qui rejoint a fini de chercher. Qui héberge accueille jusqu'à ce que
+        // la table soit pleine, et s'arrête là.
+        if !jHeberge || relies.count >= attendus { fermerLaTable() }
+        onConnected?(jHeberge, pair)
+    }
+
+    private func canalFerme(_ canal: Canal) {
+        anonymes.removeAll { $0 === canal }
+        guard let pair = canal.pair else {
+            // Il n'a jamais dit son nom : c'est une connexion qui n'a pas
+            // abouti. Seul le délai conclut, pour ne pas tuer une liaison qui
+            // allait se faire.
+            return
+        }
+        guard canaux[pair] === canal else { return }
+        canaux[pair] = nil
+        relies.removeAll { $0 == pair }
+        print("Riskelo — \(pair.nom) : liaison perdue")
+        if case .relie = state { state = .perdu(pair.nom) }
     }
 
     // MARK: - Envoyer
 
-    /// En mode fiable : un coup perdu désynchroniserait les parties, et il n'y
-    /// a pas assez de trafic pour que l'ordre coûte quoi que ce soit.
+    /// À tous. Un coup perdu désynchroniserait les parties : TCP garantit
+    /// l'ordre et la livraison, il n'y a rien à ajouter.
     func envoyer(_ data: Data) {
-        guard let session, !session.connectedPeers.isEmpty else { return }
-        try? session.send(data, toPeers: session.connectedPeers, with: .reliable)
+        canaux.values.forEach { $0.envoyer(data) }
     }
 
     /// À un seul appareil : chacun doit apprendre son rang, et lui seul.
-    func envoyer(_ data: Data, a pair: MCPeerID) {
-        guard let session, session.connectedPeers.contains(pair) else { return }
-        try? session.send(data, toPeers: [pair], with: .reliable)
+    func envoyer(_ data: Data, a pair: Pair) {
+        canaux[pair]?.envoyer(data)
     }
 
     /// À tous sauf un : c'est ainsi que l'hôte relaie le coup d'un joueur aux
     /// autres, sans le lui renvoyer.
-    func envoyer(_ data: Data, saufA pair: MCPeerID) {
-        guard let session else { return }
-        let cibles = session.connectedPeers.filter { $0 != pair }
-        guard !cibles.isEmpty else { return }
-        try? session.send(data, toPeers: cibles, with: .reliable)
+    func envoyer(_ data: Data, saufA pair: Pair) {
+        for (qui, canal) in canaux where qui != pair { canal.envoyer(data) }
     }
 }
 
-// MARK: - Les rappels du système
+// MARK: - Un canal, et ses paquets
 
-extension Link: MCSessionDelegate {
+/// Une connexion TCP, et de quoi y faire passer des paquets entiers.
+///
+/// TCP est un flot d'octets : il ne connaît pas les messages. Deux envois
+/// peuvent arriver collés, un seul peut arriver coupé en deux. Chaque paquet
+/// part donc précédé de sa longueur sur quatre octets, et l'on ne remonte un
+/// paquet que lorsqu'il est là tout entier. Sans cela, un message sur deux
+/// serait illisible — et la panne ressemblerait à un désaccord de version.
+@MainActor
+private final class Canal {
 
-    nonisolated func session(_ session: MCSession, peer peerID: MCPeerID,
-                             didChange state: MCSessionState) {
-        let nom = peerID.displayName
-        // Tracé dans la console de Xcode. C'est la seule fenêtre qui reste
-        // quand la liaison échoue sur un appareil qu'on n'a pas sous la main :
-        // la suite des états dit à quel moment exact elle renonce.
-        let quoi = switch state {
-        case .notConnected: "non relié"
-        case .connecting:   "en cours"
-        case .connected:    "relié"
-        @unknown default:   "inconnu"
-        }
-        print("Riskelo — \(nom) : \(quoi)")
-        Task { @MainActor in
-            switch state {
-            case .connected:
-                self.attente?.cancel(); self.attente = nil
-                self.secours[peerID]?.cancel(); self.secours[peerID] = nil
-                if !self.relies.contains(peerID) { self.relies.append(peerID) }
-                self.state = .relie(nom)
-                // Qui rejoint a fini de chercher. Qui héberge accueille
-                // jusqu'à ce que la table soit pleine — et **s'arrête là**,
-                // au lieu de s'annoncer jusqu'au lancement.
-                if !self.jHeberge || self.relies.count >= self.attendus {
-                    self.fermerLaTable()
+    let connexion: NWConnection
+    var pair: Pair?
+
+    var onPret: (() -> Void)?
+    var onPaquet: ((Data) -> Void)?
+    var onFerme: (() -> Void)?
+
+    /// Ce qui est arrivé mais pas encore complet.
+    private var tampon = Data()
+    private var ferme = false
+
+    /// Au-delà, ce n'est plus un paquet du jeu : la partie entière tient très
+    /// largement dans cette taille, et une longueur aberrante ne peut venir
+    /// que d'un flot désaligné.
+    private static let tailleMax = 8 * 1024 * 1024
+
+    init(connexion: NWConnection) { self.connexion = connexion }
+
+    func demarrer() {
+        connexion.stateUpdateHandler = { [weak self] etat in
+            MainActor.assumeIsolated {
+                guard let self else { return }
+                switch etat {
+                case .ready:
+                    self.onPret?()
+                    self.lire()
+                case .failed(let erreur):
+                    print("Riskelo — canal rompu : \(erreur)")
+                    self.fermer()
+                case .cancelled:
+                    self.prevenirDeLaFermeture()
+                default:
+                    break
                 }
-                self.onConnected?(self.jHeberge, peerID)
-            case .notConnected:
-                self.relies.removeAll { $0 == peerID }
-                if case .relie = self.state { self.state = .perdu(nom) }
-                // Et surtout : on ne conclut **pas** pendant une invitation.
-                //
-                // J'avais mis ici un passage direct à l'échec, en croyant que
-                // « non relié » voulait dire « refusé ». C'est faux :
-                // MultipeerConnectivity annonce cet état au fil de la
-                // négociation, pour un pair qui n'a encore jamais été relié et
-                // qui va l'être une seconde plus tard. Conclure ici tuait des
-                // liaisons qui allaient aboutir. Seul le délai conclut.
-            default:
-                break
+            }
+        }
+        connexion.start(queue: .main)
+    }
+
+    func envoyer(_ data: Data) {
+        guard !ferme else { return }
+        var longueur = UInt32(data.count).bigEndian
+        var paquet = Data(bytes: &longueur, count: 4)
+        paquet.append(data)
+        connexion.send(content: paquet, completion: .contentProcessed { erreur in
+            if let erreur {
+                print("Riskelo — paquet non envoyé : \(erreur)")
+            }
+        })
+    }
+
+    func fermer() {
+        guard !ferme else { return }
+        ferme = true
+        connexion.cancel()
+        onFerme?()
+    }
+
+    private func prevenirDeLaFermeture() {
+        guard !ferme else { return }
+        ferme = true
+        onFerme?()
+    }
+
+    private func lire() {
+        connexion.receive(minimumIncompleteLength: 1, maximumLength: 64 * 1024) {
+            [weak self] morceau, _, fini, erreur in
+            MainActor.assumeIsolated {
+                guard let self else { return }
+                if let morceau, !morceau.isEmpty {
+                    self.tampon.append(morceau)
+                    self.decouper()
+                }
+                if let erreur {
+                    print("Riskelo — lecture interrompue : \(erreur)")
+                    self.fermer()
+                    return
+                }
+                if fini { self.fermer(); return }
+                guard !self.ferme else { return }
+                self.lire()
             }
         }
     }
 
-    nonisolated func session(_ session: MCSession, didReceive data: Data,
-                             fromPeer peerID: MCPeerID) {
-        Task { @MainActor in self.onReceive?(data, peerID) }
-    }
-
-    nonisolated func session(_ s: MCSession, didReceive stream: InputStream,
-                             withName: String, fromPeer: MCPeerID) {}
-    nonisolated func session(_ s: MCSession, didStartReceivingResourceWithName: String,
-                             fromPeer: MCPeerID, with: Progress) {}
-    nonisolated func session(_ s: MCSession, didFinishReceivingResourceWithName: String,
-                             fromPeer: MCPeerID, at: URL?, withError: Error?) {}
-}
-
-extension Link: MCNearbyServiceAdvertiserDelegate {
-
-    /// Le système n'a pas voulu ouvrir la table. Sans ce rappel, il ne se
-    /// passait rien et rien ne le disait.
-    nonisolated func advertiser(_ a: MCNearbyServiceAdvertiser,
-                                didNotStartAdvertisingPeer error: Error) {
-        Task { @MainActor in
-            print("Riskelo — table impossible : \(error)")
-            self.state = .refuse("")
-        }
-    }
-
-    nonisolated func advertiser(_ a: MCNearbyServiceAdvertiser,
-                                didReceiveInvitationFromPeer peerID: MCPeerID,
-                                withContext: Data?,
-                                invitationHandler: @escaping (Bool, MCSession?) -> Void) {
-        print("Riskelo — invitation reçue de \(peerID.displayName)")
-        // Tout de suite, et sur le fil du rappel : voir `sessionPartagee`.
-        // Celui qui ouvre accepte le premier qui se présente — à deux, il n'y
-        // a rien à arbitrer.
-        if let ouverte = sessionPartagee {
-            invitationHandler(true, ouverte)
-            return
-        }
-        // Si la référence manque, on ne refuse **pas** : on répond par
-        // l'ancien chemin, en différé. Répondre tard vaut mieux que dire non —
-        // un refus ferme la porte, un retard la laisse ouverte.
-        Task { @MainActor in invitationHandler(true, self.session) }
-    }
-}
-
-extension Link: MCNearbyServiceBrowserDelegate {
-
-    nonisolated func browser(_ b: MCNearbyServiceBrowser,
-                             didNotStartBrowsingForPeers error: Error) {
-        Task { @MainActor in
-            print("Riskelo — recherche impossible : \(error)")
-            self.state = .refuse("")
-        }
-    }
-
-    nonisolated func browser(_ b: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID,
-                             withDiscoveryInfo info: [String: String]?) {
-        let role = info?[Link.cleRole], cible = info?[Link.cleCible]
-        Task { @MainActor in
-            switch role {
-            case Link.invite:
-                // Un invité qui appelle. Il ne nous regarde que s'il **nous**
-                // nomme : sans cette condition, une table happerait les
-                // invités des tables voisines.
-                guard self.jHeberge, cible == self.moi.displayName else { return }
-                self.secourir(peerID)
-
-            default:
-                // Une table. Elle n'intéresse que celui qui en cherche une.
-                // Le cas sans rôle tombe ici aussi : seules les tables
-                // s'annonçaient, autrefois.
-                guard !self.jHeberge else { return }
-                if !self.trouves.contains(peerID) { self.trouves.append(peerID) }
+    /// Remonte tous les paquets entiers présents dans le tampon.
+    private func decouper() {
+        while tampon.count >= 4 {
+            let longueur = tampon.prefix(4).reduce(0) { Int($0) << 8 | Int($1) }
+            guard longueur > 0, longueur <= Canal.tailleMax else {
+                print("Riskelo — longueur de paquet aberrante (\(longueur))")
+                fermer()
+                return
             }
-        }
-    }
-
-    nonisolated func browser(_ b: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
-        Task { @MainActor in
-            self.trouves.removeAll { $0 == peerID }
-            // Il ne nous appelle plus : le secours n'a plus d'objet.
-            self.secours[peerID]?.cancel()
-            self.secours[peerID] = nil
-        }
-    }
-
-    /// Inviter un invité qui nous appelle, quand sa propre invitation
-    /// n'aboutit pas.
-    ///
-    /// On attend d'abord. Le chemin normal — c'est l'invité qui invite —
-    /// marche dans la grande majorité des cas, et deux invitations croisées
-    /// valent mieux d'être évitées. Six secondes quand celle d'en face en dure
-    /// vingt : s'il est encore là à s'annoncer, c'est que rien n'a abouti, et
-    /// il reste largement le temps d'essayer l'autre sens avant que l'écran
-    /// ne conclue à l'échec.
-    private func secourir(_ pair: MCPeerID) {
-        guard secours[pair] == nil, !relies.contains(pair) else { return }
-        secours[pair] = Task { [weak self] in
-            try? await Task.sleep(for: .seconds(6))
-            guard let self, !Task.isCancelled else { return }
-            self.secours[pair] = nil
-            guard let session = self.session, let browser = self.browser,
-                  !self.relies.contains(pair), self.relies.count < self.attendus
-            else { return }
-            print("Riskelo — secours : invitation envoyée à \(pair.displayName)")
-            browser.invitePeer(pair, to: session, withContext: nil, timeout: 20)
+            guard tampon.count >= 4 + longueur else { return }
+            let corps = tampon.subdata(in: 4 ..< (4 + longueur))
+            tampon.removeSubrange(0 ..< (4 + longueur))
+            onPaquet?(corps)
         }
     }
 }
-
-#if os(iOS)
-import UIKit
-#endif

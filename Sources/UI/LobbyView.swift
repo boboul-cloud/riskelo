@@ -14,7 +14,6 @@
 //  rang à chacun, dans l'ordre d'arrivée.
 //
 
-import MultipeerConnectivity
 import SwiftUI
 #if os(iOS)
 import UIKit
@@ -30,7 +29,7 @@ struct LobbyView: View {
     @State private var link = Link()
     /// Le nom que chaque appareil relié s'est donné. Vide tant qu'il n'a pas
     /// dit bonjour — ou qu'il n'a pas de nom, ce qui revient au même ici.
-    @State private var noms: [MCPeerID: String] = [:]
+    @State private var noms: [Pair: String] = [:]
     @State private var joueurs = 2
     @State private var lancee = false
     /// La partie est arrivée, mais dans une langue qu'on ne parle pas.
@@ -113,10 +112,10 @@ struct LobbyView: View {
                     Text("Aucune table en vue.")
                         .font(.headline).foregroundStyle(Palette.lostVif)
                     VStack(alignment: .leading, spacing: 6) {
-                        cause("Le **Wi-Fi doit rester actif**. Coupez-le depuis le "
-                              + "centre de contrôle si besoin — jamais depuis les "
-                              + "Réglages, qui éteignent la radio et suppriment "
-                              + "toute découverte.")
+                        cause("Les deux appareils doivent être sur **le même "
+                              + "réseau Wi-Fi**. C'est de loin la cause la plus "
+                              + "fréquente : l'un sur la box, l'autre sur le réseau "
+                              + "invité, et ils ne se voient pas.")
                         cause("Sur l'autre appareil : « Ouvrir la table », et laissez "
                               + "son écran allumé.")
                         cause("Réglages → Confidentialité et sécurité → Réseau local : "
@@ -133,7 +132,7 @@ struct LobbyView: View {
                 VStack(spacing: 8) {
                     ForEach(link.trouves, id: \.self) { pair in
                         Button { link.rejoindre(pair) } label: {
-                            Label(pair.displayName, systemImage: "iphone")
+                            Label(pair.nom, systemImage: "iphone")
                                 .font(.headline)
                                 .frame(maxWidth: .infinity).padding(.vertical, 13)
                         }
@@ -153,9 +152,15 @@ struct LobbyView: View {
         case .refuse(let nom):
             // La panne la plus fréquente, et la plus muette : l'autorisation
             // « réseau local » se refuse une fois et ne se redemande jamais.
-            // Le système ne dit rien, l'invitation expire sans bruit, et l'on
+            // Le système ne dit rien, la connexion expire sans bruit, et l'on
             // reste sur la liste des appareils à se demander si l'appui a été
             // pris. Il faut donc nommer la cause et dire où la corriger.
+            //
+            // Les conseils ont changé avec le transport. Ils disaient d'abord
+            // « coupez le Wi-Fi », parce que la partie exigeait alors le Wi-Fi
+            // direct et que la box ne faisait qu'y nuire. C'est l'inverse
+            // maintenant : la box est le chemin normal, et la couper n'est
+            // plus qu'un recours quand elle sépare ses propres appareils.
             Image(systemName: "wifi.exclamationmark")
                 .font(.system(size: 34)).foregroundStyle(Palette.lostVif)
             Text("La liaison n'a pas pu s'établir")
@@ -165,16 +170,17 @@ struct LobbyView: View {
                  : "\(nom) n'a pas répondu.")
                 .font(.subheadline).foregroundStyle(Palette.ink)
             VStack(alignment: .leading, spacing: 7) {
-                cause("**Coupez le Wi-Fi depuis le centre de contrôle** (le bouton, "
-                      + "pas les Réglages) sur les deux appareils. Ils se relient "
-                      + "alors directement, sans passer par la box — et beaucoup de "
-                      + "box interdisent à deux appareils de se parler entre eux.")
+                cause("Les deux appareils doivent être sur **le même réseau "
+                      + "Wi-Fi** — ou tous les deux sans réseau du tout, auquel cas "
+                      + "ils se relient directement.")
                 cause("Riskelo doit être **à l'écran** sur l'autre appareil. En "
                       + "arrière-plan, ou l'écran verrouillé, il cesse de répondre.")
                 cause("Réglages → Confidentialité et sécurité → Réseau local : "
                       + "Riskelo activé, sur les deux.")
-                cause("Un VPN ou le relais privé iCloud coupe la liaison directe : "
-                      + "désactivez-les le temps de la partie.")
+                cause("Certaines box interdisent à deux appareils de se parler entre "
+                      + "eux. Dans ce cas seulement, **coupez le Wi-Fi depuis le "
+                      + "centre de contrôle** (le bouton, pas les Réglages) des deux "
+                      + "côtés : ils se relieront sans passer par elle.")
             }
             .font(.caption).foregroundStyle(Palette.dim)
             bouton("Réessayer", "arrow.clockwise", Palette.camp(0)) { link.arreter() }
@@ -264,7 +270,7 @@ struct LobbyView: View {
             VStack(spacing: 6) {
                 ligne(Pseudo.actuel ?? "Vous", camp: 0)
                 ForEach(Array(link.relies.enumerated()), id: \.element) { i, pair in
-                    ligne(noms[pair] ?? pair.displayName, camp: i + 1)
+                    ligne(noms[pair] ?? pair.nom, camp: i + 1)
                 }
             }
             Text("Sur les autres appareils : « Rejoindre une table ».\n"
@@ -364,7 +370,7 @@ struct LobbyView: View {
         let partie = GameState.start(board: plateau, players: camps, rules: regles,
                                      bank: QuestionBank(vues: MemoireDesQuestions.shared.charger()))
 
-        var rangs: [MCPeerID: PlayerID] = [:]
+        var rangs: [Pair: PlayerID] = [:]
         for (i, pair) in link.relies.enumerated() {
             let rang = i + 1
             rangs[pair] = rang

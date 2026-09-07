@@ -12,7 +12,6 @@
 //
 
 import Foundation
-import MultipeerConnectivity
 import Observation
 import SwiftUI
 
@@ -346,7 +345,7 @@ final class GameSession {
     /// déjà vu se reconnaît, un coup manquant se voit.
     private var compteur = 0
     /// Le rang de chaque appareil relié, pour savoir à qui renvoyer quoi.
-    private var rangs: [MCPeerID: PlayerID] = [:]
+    private var rangs: [Pair: PlayerID] = [:]
 
     var enReseau: Bool { link != nil }
 
@@ -381,7 +380,7 @@ final class GameSession {
     }
 
     /// Ce qui arrive d'un autre appareil.
-    private func recu(_ data: Data, de pair: MCPeerID) {
+    private func recu(_ data: Data, de pair: Pair) {
         // Un paquet qu'on ne sait pas lire en cours de partie ne peut plus
         // être un désaccord de version — la poignée de main l'aurait dit — et
         // il n'y a donc rien de mieux à faire que de l'ignorer. `Message.lire`
@@ -532,7 +531,7 @@ final class GameSession {
     /// et l'envoie ; celui qui rejoint la reçoit avant d'afficher quoi que ce
     /// soit.
     init(link: Link, heberge: Bool, game partie: GameState, monRang rang: PlayerID,
-         rangs: [MCPeerID: PlayerID] = [:], compteur: Int = 0) {
+         rangs: [Pair: PlayerID] = [:], compteur: Int = 0) {
         game = partie
         partieID = UUID()
         self.link = link

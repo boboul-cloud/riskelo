@@ -17,7 +17,6 @@
 //
 
 import Foundation
-import MultipeerConnectivity
 import Testing
 @testable import Riskelo
 
@@ -57,14 +56,14 @@ struct DeclarationsTests {
 @MainActor
 struct IdentiteTests {
 
-    /// Elle doit survivre au lancement suivant. Un `MCPeerID` refait à chaque
+    /// Elle doit survivre au lancement suivant. Une identité refaite à chaque
     /// démarrage laisse le système avec des identités périmées pour le même
     /// appareil : la liaison marche une fois, puis plus jamais.
     @Test func lIdentiteNeChangePasDUnAppelALAutre() {
         let a = Link.identite()
         let b = Link.identite()
         #expect(a == b, "deux appels doivent rendre la même identité")
-        #expect(a.displayName == b.displayName)
-        #expect(!a.displayName.isEmpty)
+        #expect(a.nom == b.nom)
+        #expect(!a.nom.isEmpty)
     }
 }

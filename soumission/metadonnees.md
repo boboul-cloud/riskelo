@@ -1,4 +1,4 @@
-# Métadonnées App Store — Riskelo 1.0
+# Métadonnées App Store — Riskelo 1.1
 
 Langue principale : **français (France)**. Tout est prêt à coller ; les
 longueurs maximales d'Apple sont indiquées, et respectées.
@@ -69,15 +69,18 @@ DE DEUX À QUATRE JOUEURS
 • À plusieurs sur un même appareil, qui se passe de main en main.
 • À plusieurs appareils, un par joueur : sans compte, sans configuration, sans serveur. Le Bluetooth et le Wi-Fi direct suffisent, et cela fonctionne dans un train.
 
+Chacun peut donner son nom : le camp se lit « Bleu · Marie », et le nom fait le voyage d'un appareil à l'autre.
+
 LES RÈGLES DE LA BOÎTE, EN OPTION
 
 • Cartes de territoire, avec le barème qui monte à chaque échange.
 • Guerre totale : tous les territoires, sans exception — une partie de soirée entière.
+• Conquêtes personnelles : chacun reçoit au départ un objectif que lui seul connaît — deux continents, tant de places tenues, un camp à faire tomber. Le remplir gagne la partie, et le compte des territoires ne dit plus qui va gagner.
 • Renfort d'érudition : un homme de plus toutes les N bonnes réponses dans un même thème.
 
 DEUX MILLE QUATRE CENTS QUESTIONS
 
-Six thèmes — Géographie, Histoire, Sciences & Nature, Arts & Lettres, Sports & Loisirs, Écrans & Musique — quatre cents questions chacun, trois niveaux de difficulté. Le dosage se choisit à la mise en place : faciles pour jouer avec des enfants, mêlées comme dans une boîte de jeu, corsées pour ceux qui trouvent le reste trop facile. Le tirage ne sort jamais du thème demandé : quand vous choisissez le terrain, il est tenu.
+Six thèmes — Géographie, Histoire, Sciences & Nature, Arts & Lettres, Sports & Loisirs, Écrans & Musique — quatre cents questions chacun, trois niveaux de difficulté. Le dosage se choisit à la mise en place : faciles pour jouer avec des enfants, mêlées comme dans une boîte de jeu, corsées pour ceux qui trouvent le reste trop facile. Le tirage ne sort jamais du thème demandé : quand vous choisissez le terrain, il est tenu. Un septième choix laisse le thème au sort, pour qui veut y renoncer. Et une question ne revient pas : l'appareil retient ce qui est déjà sorti, et fait passer devant celles que vous n'avez jamais vues.
 
 LA PARTIE SE GARDE
 
@@ -92,8 +95,41 @@ iPhone, iPad et Mac — une seule application, en français.
 
 ## Nouveautés de cette version — 4 000 caractères max
 
+Tant que Riskelo n'a jamais été publié, App Store Connect ne pose pas la
+question : une première version n'a pas de nouveautés.
+
 ```
 Première version de Riskelo.
+```
+
+À partir de la deuxième version, c'est ce texte qui se colle — ce qui a changé
+depuis la 1.0, et rien d'autre :
+
+```
+UN ACCUEIL
+Le jeu s'ouvre sur une partie prête, et non plus sur ses réglages. Reprendre la partie en cours est le premier bouton.
+
+CONQUÊTES PERSONNELLES
+Une option nouvelle : chacun reçoit au départ un objectif que lui seul connaît — tenir deux gros continents, tant de territoires, ou faire tomber un camp de sa propre main. Le remplir gagne la partie sur-le-champ. Le seuil de territoires reste en jeu par-dessus, mais le compte de la barre du haut ne dit plus qui va gagner.
+
+LES QUESTIONS
+• Deux fois plus de questions : quatre cents par thème, deux mille quatre cents en tout.
+• Une question ne revient plus d'une partie sur l'autre. L'appareil retient ce qui est déjà sorti, et une question jamais vue passe devant. Le compte se lit dans les réglages, où il s'efface aussi.
+• Le thème peut être laissé au sort : un septième choix sous les six thèmes, pour qui veut renoncer à choisir son terrain.
+• La bonne réponse ne s'installe plus sur la même ligne. Les quatre places se tirent comme quatre cartes d'un paquet : jamais trois fois de suite au même endroit.
+
+VOTRE NOM, ET LE SON
+• Un nom facultatif s'ajoute à votre camp : « Bleu · Marie · moi ». En réseau il fait le voyage, et les autres vous voient ainsi.
+• Des sons, écrits plutôt qu'enregistrés : une note à chaque homme posé, une autre à l'issue de chaque échange — montante quand il tourne pour vous. Un interrupteur les coupe.
+
+CE QUI SE VOIT MIEUX
+• Le plateau se recadre sous les panneaux : on voit enfin les deux places au moment de décider de l'assaut.
+• Combien d'hommes avancent après une conquête : le chiffre passe devant, avec trois raccourcis, et le bouton porte le nombre choisi.
+• La bande des camps tient sur une ligne, et va chercher celui qui a la main.
+• Un continent tenu garde sa couleur : celle qu'il a sur la carte.
+• La dernière question d'une partie va au bout — la bonne réponse, la place qui tombe, puis le vainqueur.
+• Le rouge sur le noir se lit : les couleurs qui écrivent sont plus claires d'un cran et demi.
+• Le mode d'emploi affiche le vrai numéro de version, celui du paquet.
 ```
 
 ## Catégories

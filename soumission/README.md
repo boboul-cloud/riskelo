@@ -1,4 +1,4 @@
-# Soumission à l'App Store — Riskelo 1.0
+# Soumission à l'App Store — Riskelo 1.1
 
 Tout ce qu'App Store Connect demande, préparé et vérifiable.
 
@@ -44,8 +44,9 @@ dossier `docs/` de ce dépôt :
 - [x] Identifiant : `com.oulhen.riskelo`
 - [x] Équipe de signature : `38DQ8FW23J`, signature automatique — posée dans
       `project.yml`, donc conservée à chaque `xcodegen generate`
-- [x] Version affichée `1.0`, build `1` (`MARKETING_VERSION`,
-      `CURRENT_PROJECT_VERSION`)
+- [x] Version affichée `1.1`, build `3` (`MARKETING_VERSION`,
+      `CURRENT_PROJECT_VERSION`, dans `project.yml` — le plist les reprend par
+      référence, et le mode d'emploi les lit dans le paquet)
 - [x] `ITSAppUsesNonExemptEncryption = false` — la déclaration de chiffrement
       est répondue une fois pour toutes dans l'Info.plist
 - [x] `NSLocalNetworkUsageDescription` et `NSBonjourServices` renseignés — sans
@@ -71,7 +72,9 @@ dossier `docs/` de ce dépôt :
 ### Les fiches App Store Connect
 
 - [ ] Métadonnées collées depuis [metadonnees.md](metadonnees.md)
-- [ ] Captures d'écran déposées — voir [captures-decran.md](captures-decran.md)
+- [x] Captures d'écran prises — 18 fichiers dans `captures/`, engendrées par
+      `outils/captures.py` ; voir [captures-decran.md](captures-decran.md)
+- [ ] Captures d'écran déposées dans App Store Connect
 - [ ] Questionnaire de confidentialité rempli — voir
       [confidentialite-app-store.md](confidentialite-app-store.md)
 - [ ] Classification par âge : répondre « Aucun » partout → **4+**

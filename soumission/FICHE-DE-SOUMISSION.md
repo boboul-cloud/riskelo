@@ -1,4 +1,4 @@
-# Fiche de soumission — Riskelo 1.0
+# Fiche de soumission — Riskelo 1.1
 
 Tout ce que demande App Store Connect, dans l'ordre où il le demande. Chaque
 bloc encadré se colle tel quel. Ce qui reste à décider est marqué **à décider**.
@@ -16,8 +16,9 @@ sont écrits. Dans l'ordre :
 2. **Créer la fiche du jeu** sur `appstoreconnect.apple.com`. C'est le moment
    où le nom « Riskelo » est réservé à vous. Les valeurs à saisir sont en
    section 1, les adresses du site en section 2.
-3. **Photographier cinq écrans du jeu** — la liste des cinq et la commande qui
-   les prend à la bonne taille sont en section 7.
+3. **Les captures d'écran sont déjà prises** — dix-huit, six par taille
+   d'appareil, dans `soumission/captures/`. Une commande les refait toutes si
+   l'écran change : section 7.
 4. **Envoyer l'application** depuis votre Mac — deux commandes et un bouton,
    en section 8.
 5. **Recopier les textes** de la section 4 dans les cases du site, répondre
@@ -44,8 +45,8 @@ l'iPhone**.
 | SKU (interne, invisible du public, jamais réutilisable) | `riskelo-2026` |
 | Identifiant Apple de l'app | attribué par App Store Connect à la création |
 | Langue principale | Français (France) |
-| Version | `1.0` |
-| Build | `1` |
+| Version | `1.1` |
+| Build | `3` |
 | Plateformes | iOS et macOS (une seule cible, deux plateformes dans la fiche) |
 | Version minimale | iOS 17.0 · macOS 14.0 |
 | Appareils | iPhone et iPad (`TARGETED_DEVICE_FAMILY = 1,2`) et Mac |
@@ -58,6 +59,11 @@ l'iPhone**.
 | Prix | **à décider** — gratuit, ou payant sans achat intégré |
 | Territoires | tous |
 | Publication | **à décider** — automatique à l'approbation, ou manuelle |
+
+Les deux numéros se lisent dans `project.yml` (`MARKETING_VERSION` et
+`CURRENT_PROJECT_VERSION`), seule source : le mode d'emploi de l'application y
+prend celui qu'il affiche. Rien n'oblige une première soumission à porter
+`1.0` — `1.1` part très bien.
 
 ## 2. Les adresses
 
@@ -153,15 +159,18 @@ DE DEUX À QUATRE JOUEURS
 • À plusieurs sur un même appareil, qui se passe de main en main.
 • À plusieurs appareils, un par joueur : sans compte, sans configuration, sans serveur. Le Bluetooth et le Wi-Fi direct suffisent, et cela fonctionne dans un train.
 
+Chacun peut donner son nom : le camp se lit « Bleu · Marie », et le nom fait le voyage d'un appareil à l'autre.
+
 LES RÈGLES DE LA BOÎTE, EN OPTION
 
 • Cartes de territoire, avec le barème qui monte à chaque échange.
 • Guerre totale : tous les territoires, sans exception — une partie de soirée entière.
+• Conquêtes personnelles : chacun reçoit au départ un objectif que lui seul connaît — deux continents, tant de places tenues, un camp à faire tomber. Le remplir gagne la partie, et le compte des territoires ne dit plus qui va gagner.
 • Renfort d'érudition : un homme de plus toutes les N bonnes réponses dans un même thème.
 
 DEUX MILLE QUATRE CENTS QUESTIONS
 
-Six thèmes — Géographie, Histoire, Sciences & Nature, Arts & Lettres, Sports & Loisirs, Écrans & Musique — quatre cents questions chacun, trois niveaux de difficulté. Le dosage se choisit à la mise en place : faciles pour jouer avec des enfants, mêlées comme dans une boîte de jeu, corsées pour ceux qui trouvent le reste trop facile. Le tirage ne sort jamais du thème demandé : quand vous choisissez le terrain, il est tenu.
+Six thèmes — Géographie, Histoire, Sciences & Nature, Arts & Lettres, Sports & Loisirs, Écrans & Musique — quatre cents questions chacun, trois niveaux de difficulté. Le dosage se choisit à la mise en place : faciles pour jouer avec des enfants, mêlées comme dans une boîte de jeu, corsées pour ceux qui trouvent le reste trop facile. Le tirage ne sort jamais du thème demandé : quand vous choisissez le terrain, il est tenu. Un septième choix laisse le thème au sort, pour qui veut y renoncer. Et une question ne revient pas : l'appareil retient ce qui est déjà sorti, et fait passer devant celles que vous n'avez jamais vues.
 
 LA PARTIE SE GARDE
 
@@ -176,8 +185,42 @@ iPhone, iPad et Mac — une seule application, en français.
 
 ### Nouveautés de cette version — 4 000 caractères max
 
+**Si Riskelo n'a jamais été publié** — c'est le cas aujourd'hui — App Store
+Connect ne pose pas cette question : une première version n'a pas de
+nouveautés, et tout est déjà dit dans la description. La case reste alors :
+
 ```
 Première version de Riskelo.
+```
+
+**À partir de la deuxième version**, c'est ce texte qui se colle. Il dit ce
+qui a changé depuis la 1.0, et rien d'autre — c'est ce qu'un joueur y cherche :
+
+```
+UN ACCUEIL
+Le jeu s'ouvre sur une partie prête, et non plus sur ses réglages. Reprendre la partie en cours est le premier bouton.
+
+CONQUÊTES PERSONNELLES
+Une option nouvelle : chacun reçoit au départ un objectif que lui seul connaît — tenir deux gros continents, tant de territoires, ou faire tomber un camp de sa propre main. Le remplir gagne la partie sur-le-champ. Le seuil de territoires reste en jeu par-dessus, mais le compte de la barre du haut ne dit plus qui va gagner.
+
+LES QUESTIONS
+• Deux fois plus de questions : quatre cents par thème, deux mille quatre cents en tout.
+• Une question ne revient plus d'une partie sur l'autre. L'appareil retient ce qui est déjà sorti, et une question jamais vue passe devant. Le compte se lit dans les réglages, où il s'efface aussi.
+• Le thème peut être laissé au sort : un septième choix sous les six thèmes, pour qui veut renoncer à choisir son terrain.
+• La bonne réponse ne s'installe plus sur la même ligne. Les quatre places se tirent comme quatre cartes d'un paquet : jamais trois fois de suite au même endroit.
+
+VOTRE NOM, ET LE SON
+• Un nom facultatif s'ajoute à votre camp : « Bleu · Marie · moi ». En réseau il fait le voyage, et les autres vous voient ainsi.
+• Des sons, écrits plutôt qu'enregistrés : une note à chaque homme posé, une autre à l'issue de chaque échange — montante quand il tourne pour vous. Un interrupteur les coupe.
+
+CE QUI SE VOIT MIEUX
+• Le plateau se recadre sous les panneaux : on voit enfin les deux places au moment de décider de l'assaut.
+• Combien d'hommes avancent après une conquête : le chiffre passe devant, avec trois raccourcis, et le bouton porte le nombre choisi.
+• La bande des camps tient sur une ligne, et va chercher celui qui a la main.
+• Un continent tenu garde sa couleur : celle qu'il a sur la carte.
+• La dernière question d'une partie va au bout — la bonne réponse, la place qui tombe, puis le vainqueur.
+• Le rouge sur le noir se lit : les couleurs qui écrivent sont plus claires d'un cran et demi.
+• Le mode d'emploi affiche le vrai numéro de version, celui du paquet.
 ```
 
 ### Droits d'auteur
@@ -301,17 +344,20 @@ Robert Oulhen — bob.oulhen@gmail.com
 
 ## 7. Les captures d'écran
 
-| Plateforme | Taille exigée | Résolution (portrait) | Appareil |
+**Elles sont prises, et rangées.** Dix-huit fichiers, six par taille, dans
+`soumission/captures/` — il n'y a plus qu'à les déposer :
+
+| Dossier | Taille | Résolution | Exigée ? |
 |---|---|---|---|
-| iPhone | 6,9 pouces | 1290 × 2796 ou 1320 × 2868 | iPhone 17 Pro Max |
-| iPad | 13 pouces | 2064 × 2752 | iPad Pro 13" (M4) |
-| Mac | — | 2880 × 1800 (16:10) | fenêtre de l'app |
+| `captures/iphone-6.9/` | iPhone 6,9 pouces | 1320 × 2868 | oui |
+| `captures/iphone-6.5/` | iPhone 6,5 pouces | 1242 × 2688 | non — fournie quand même |
+| `captures/ipad-13/` | iPad 13 pouces | 2064 × 2752 | oui, si l'iPad est proposé |
+| — | Mac | 2880 × 1800 (16:10) | seulement si le Mac part aussi |
 
 Une capture d'iPhone 6,9" suffit pour toutes les autres tailles d'iPhone.
-Minimum une par taille, maximum dix ; trois à cinq bien choisies valent mieux
-que dix répétitives.
+Minimum une par taille, maximum dix.
 
-**Les cinq écrans, dans cet ordre** — le premier est celui qu'on voit dans les
+**Les six écrans, dans cet ordre** — le premier est celui qu'on voit dans les
 résultats de recherche :
 
 1. **Un duel en cours** — la question par-dessus le plateau, le sablier entamé.
@@ -322,13 +368,26 @@ résultats de recherche :
 4. **La feuille du verdict en face à face** — les deux réponses, leurs temps,
    la couronne.
 5. **L'écran de mise en place** — tout ce qui se règle, d'un coup d'œil.
+6. **L'accueil** — il ne dit pas ce qu'est le jeu, d'où la dernière place, mais
+   il montre l'icône et le seul bouton dont on ait besoin pour commencer.
+
+Pour les refaire — après un changement d'écran, ou à la prochaine version —
+`outils/captures.py` joue la partie tout seul sur les trois appareils, prend
+les six écrans, règle la barre d'état à 9:41 et range le tout aux noms
+ci-dessus :
 
 ```bash
-xcrun simctl boot "iPhone 17 Pro Max" && open -a Simulator
-# jouer jusqu'à l'écran voulu, puis :
-xcrun simctl io booted screenshot ~/Desktop/riskelo-01-duel.png
+xcodebuild -project Riskelo.xcodeproj -scheme Riskelo \
+    -destination 'platform=iOS Simulator,name=iPhone 17 Pro Max' \
+    -derivedDataPath build/dd build
+cp -R build/dd/Build/Products/Debug-iphonesimulator/Riskelo.app build/
+python3 outils/captures.py
+```
 
-# sur le Mac, sans l'ombre portée qu'Apple refuse :
+Celles du Mac restent à prendre à la main, et seulement si la version Mac part
+aussi — `⌘⇧4` puis la barre d'espace ajoute une ombre portée qu'Apple refuse :
+
+```bash
 screencapture -o -w ~/Desktop/riskelo-mac-01.png
 ```
 
@@ -439,6 +498,7 @@ une question de calendrier, plus d'un obstacle technique.
 - [ ] Archive envoyée, build traitée et visible dans la fiche
 - [ ] Essai TestFlight sur un appareil réel
 - [ ] Textes de la section 4 collés
+- [x] Captures prises — 18 fichiers dans `soumission/captures/`
 - [ ] Captures déposées (iPhone 6,9" et iPad 13" au minimum)
 - [ ] Questionnaires de la section 5 remplis
 - [ ] Notes de la section 6 collées

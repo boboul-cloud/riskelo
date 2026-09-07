@@ -150,6 +150,9 @@ struct AccueilView: View {
 
     /// La partie par défaut, sans passer par les réglages.
     var onPartieRapide: () -> Void
+    /// La table à plusieurs appareils, elle aussi sans passer par les
+    /// réglages : c'est une façon de jouer, pas un réglage de partie.
+    var onReseau: () -> Void
     var onReglages: () -> Void
     /// Proposé seulement s'il y a une partie en attente : un bouton qui ne
     /// mène nulle part vaut mieux absent.
@@ -236,6 +239,18 @@ struct AccueilView: View {
 
     @ViewBuilder private var boutons: some View {
         VStack(spacing: 12) {
+            // En premier, parce qu'on y vient exprès : quand deux personnes
+            // sont là avec leurs appareils, c'est la seule chose qu'on
+            // cherche à faire. Elle était sous « Réglages de la partie », où
+            // l'on ne va pas pour jouer à deux.
+            Button(action: onReseau) {
+                Label("Jouer à plusieurs appareils",
+                      systemImage: "iphone.gen3.radiowaves.left.and.right")
+                    .font(.headline)
+                    .frame(maxWidth: .infinity).padding(.vertical, 13)
+            }
+            .buttonStyle(.borderedProminent).tint(Palette.camp(4))
+
             if let onResume {
                 Button(action: onResume) {
                     Label("Reprendre la partie en cours", systemImage: "arrow.uturn.backward")
@@ -320,6 +335,6 @@ struct AccueilView: View {
 }
 
 #Preview("Accueil") {
-    AccueilView(onPartieRapide: {}, onReglages: {}, onResume: {},
+    AccueilView(onPartieRapide: {}, onReseau: {}, onReglages: {}, onResume: {},
                 onManuel: {}, onArchives: {}, anime: true)
 }

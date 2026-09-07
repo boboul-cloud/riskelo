@@ -110,11 +110,20 @@ struct RootView: View {
                                                         board: PartieRapide.plateau)
                         }
                     },
+                    // La table s'ouvre sur les réglages de la partie rapide.
+                    // Qui veut un autre plateau ou un autre mode passe par
+                    // « Réglages », où le même bouton attend : ce n'est pas
+                    // deux chemins, c'est le même à deux endroits.
+                    onReseau: {
+                        depuisAccueil {
+                            model.salon = (PartieRapide.regles(), PartieRapide.plateau)
+                        }
+                    },
                     onReglages: { depuisAccueil { model.reglages = true } },
                     // L'application reprenait la partie enregistrée d'elle-même
                     // au lancement. Elle ne le fait plus : un accueil qu'on ne
-                    // voit jamais n'est pas un accueil. La reprise est le
-                    // premier bouton, et le seul en vert.
+                    // voit jamais n'est pas un accueil. La reprise vient juste
+                    // après la table, et reste le seul bouton vert.
                     onResume: GameStore.shared.hasSavedGame ? {
                         if let sauvee = GameStore.shared.load() {
                             depuisAccueil { model.session = GameSession(resuming: sauvee) }

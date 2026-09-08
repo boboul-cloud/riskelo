@@ -104,6 +104,11 @@ enum Palette {
     /// Le rouge de l'alerte, pour les mêmes usages menus que `campsVifs` :
     /// un filet ou un signe sur le panneau, jamais une surface pleine.
     static let lostVif = Color(red: 0.99, green: 0.53, blue: 0.47)
+    /// Le rose de l'accueil. Il ne désigne ni un camp ni un état du plateau :
+    /// c'est la couleur d'une porte — celle des réglages — et elle se tient
+    /// donc à l'écart des cinq couleurs qui veulent dire « à qui est cette
+    /// case ». Assez claire pour se lire en lettres sur le fond de nuit.
+    static let rose = Color(red: 1.00, green: 0.52, blue: 0.75)
 }
 
 /// Une traversée, droite ou en arc.

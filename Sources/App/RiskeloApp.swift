@@ -91,6 +91,10 @@ struct RootView: View {
                                   model.salonReglages = false
                               }
                           },
+                          // Le manuel passe par-dessus sans rien défaire : le
+                          // salon et ses réglages restent ouverts derrière, et
+                          // l'on retombe dessus en refermant.
+                          onManuel: { withAnimation { model.manuel = true } },
                           onRetour: { withAnimation { model.salonReglages = false } })
                     .transition(.opacity)
             } else if let salon = model.salon {

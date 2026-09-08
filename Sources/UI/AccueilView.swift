@@ -279,7 +279,7 @@ struct AccueilView: View {
                     .font(.subheadline.weight(.medium))
                     .frame(maxWidth: .infinity).padding(.vertical, 13)
             }
-            .buttonStyle(.bordered).tint(Palette.dim)
+            .buttonStyle(.bordered).tint(Palette.rose)
 
             // Deux portes de service, en retrait : elles ne servent pas à
             // jouer, mais les enterrer sous « Réglages » aurait été mentir sur

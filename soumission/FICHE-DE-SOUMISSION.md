@@ -1,4 +1,4 @@
-# Fiche de soumission — Riskelo 1.1
+# Fiche de soumission — Riskelo 1.2
 
 Tout ce que demande App Store Connect, dans l'ordre où il le demande. Chaque
 bloc encadré se colle tel quel. Ce qui reste à décider est marqué **à décider**.
@@ -45,8 +45,8 @@ l'iPhone**.
 | SKU (interne, invisible du public, jamais réutilisable) | `riskelo-2026` |
 | Identifiant Apple de l'app | attribué par App Store Connect à la création |
 | Langue principale | Français (France) |
-| Version | `1.1` |
-| Build | `3` |
+| Version | `1.2` |
+| Build | `5` |
 | Plateformes | iOS et macOS (une seule cible, deux plateformes dans la fiche) |
 | Version minimale | iOS 17.0 · macOS 14.0 |
 | Appareils | iPhone et iPad (`TARGETED_DEVICE_FAMILY = 1,2`) et Mac |
@@ -62,8 +62,9 @@ l'iPhone**.
 
 Les deux numéros se lisent dans `project.yml` (`MARKETING_VERSION` et
 `CURRENT_PROJECT_VERSION`), seule source : le mode d'emploi de l'application y
-prend celui qu'il affiche. Rien n'oblige une première soumission à porter
-`1.0` — `1.1` part très bien.
+prend celui qu'il affiche. Le build monte à chaque envoi — le `4` est parti,
+celui-ci est le `5` — et la version monte quand ce qui part mérite un nom :
+la table à plusieurs appareils et la règle des conquêtes valent une `1.2`.
 
 ## 2. Les adresses
 
@@ -185,16 +186,35 @@ iPhone, iPad et Mac — une seule application, en français.
 
 ### Nouveautés de cette version — 4 000 caractères max
 
-**Si Riskelo n'a jamais été publié** — c'est le cas aujourd'hui — App Store
-Connect ne pose pas cette question : une première version n'a pas de
-nouveautés, et tout est déjà dit dans la description. La case reste alors :
+C'est ce texte qui se colle, et il dit ce qui a changé depuis la `1.1` — rien
+d'autre : c'est ce qu'un joueur y cherche.
+
+```
+LA TABLE À PLUSIEURS APPAREILS
+• Elle s'ouvre depuis l'accueil, et en premier. Jouer à plusieurs n'est pas un réglage de partie : ce n'était pas sa place sous « Réglages ».
+• Le salon dit ce qu'il va ouvrir — « Monde · Face à face », et les options qui changent vraiment la partie — et porte un bouton pour aller le changer. C'est l'hôte qui fixe la partie pour tout le monde, et c'est en ouvrant la table qu'on y pense.
+• Le mode d'emploi s'ouvre depuis la table, et l'on retombe sur ses réglages en le refermant, sans perdre le plateau qu'on venait de choisir.
+• La liaison va droit au but : l'hôte dit où il est dans son annonce même, et l'invité s'y rend sans avoir de question à poser.
+• Et si l'appareil qui rejoint n'arrive pas à appeler, il laisse son numéro et l'hôte rappelle. Il suffit désormais que l'un des deux y parvienne, quel que soit celui des deux.
+
+LES CONQUÊTES PERSONNELLES DÉCIDENT LA PARTIE
+• L'option allumée, remplir sa conquête devient la seule façon de gagner : le seuil de territoires se retire. Il passait devant cinq fois sur six, et la carte ne servait à rien.
+• Celle qu'on ne peut plus remplir — le camp qu'on vous demandait d'abattre est tombé sous d'autres coups — se retourne en « tenir quatre places sur cinq du plateau ». La fiche de conquête le dit d'avance, avant que cela vous tombe dessus.
+• L'écran de fin dit par quelle porte la partie s'est gagnée, marque les conquêtes remplies et donne l'avancement de chacun. On y voyait sa carte non remplie s'afficher sous son nom sans un mot d'explication.
+
+UN DÉTAIL
+• Le bouton des réglages, sur l'accueil, passe au rose : il ne désigne ni un camp ni un état du plateau, c'est la couleur d'une porte.
+```
+
+Si Riskelo n'a toujours pas été publié quand cette version part, App Store
+Connect ne pose pas la question : une première version n'a pas de nouveautés,
+et tout est déjà dit dans la description. La case reste alors :
 
 ```
 Première version de Riskelo.
 ```
 
-**À partir de la deuxième version**, c'est ce texte qui se colle. Il dit ce
-qui a changé depuis la 1.0, et rien d'autre — c'est ce qu'un joueur y cherche :
+<details><summary>Ce qui avait été écrit pour la 1.1, depuis la 1.0</summary>
 
 ```
 UN ACCUEIL
@@ -222,6 +242,8 @@ CE QUI SE VOIT MIEUX
 • Le rouge sur le noir se lit : les couleurs qui écrivent sont plus claires d'un cran et demi.
 • Le mode d'emploi affiche le vrai numéro de version, celui du paquet.
 ```
+
+</details>
 
 ### Droits d'auteur
 

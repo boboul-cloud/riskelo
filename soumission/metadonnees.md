@@ -1,4 +1,4 @@
-# Métadonnées App Store — Riskelo 1.1
+# Métadonnées App Store — Riskelo 1.2
 
 Langue principale : **français (France)**. Tout est prêt à coller ; les
 longueurs maximales d'Apple sont indiquées, et respectées.
@@ -95,6 +95,25 @@ iPhone, iPad et Mac — une seule application, en français.
 
 ## Nouveautés de cette version — 4 000 caractères max
 
+Ce qui a changé depuis la `1.1`, et rien d'autre :
+
+```
+LA TABLE À PLUSIEURS APPAREILS
+• Elle s'ouvre depuis l'accueil, et en premier. Jouer à plusieurs n'est pas un réglage de partie : ce n'était pas sa place sous « Réglages ».
+• Le salon dit ce qu'il va ouvrir — « Monde · Face à face », et les options qui changent vraiment la partie — et porte un bouton pour aller le changer. C'est l'hôte qui fixe la partie pour tout le monde, et c'est en ouvrant la table qu'on y pense.
+• Le mode d'emploi s'ouvre depuis la table, et l'on retombe sur ses réglages en le refermant, sans perdre le plateau qu'on venait de choisir.
+• La liaison va droit au but : l'hôte dit où il est dans son annonce même, et l'invité s'y rend sans avoir de question à poser.
+• Et si l'appareil qui rejoint n'arrive pas à appeler, il laisse son numéro et l'hôte rappelle. Il suffit désormais que l'un des deux y parvienne, quel que soit celui des deux.
+
+LES CONQUÊTES PERSONNELLES DÉCIDENT LA PARTIE
+• L'option allumée, remplir sa conquête devient la seule façon de gagner : le seuil de territoires se retire. Il passait devant cinq fois sur six, et la carte ne servait à rien.
+• Celle qu'on ne peut plus remplir — le camp qu'on vous demandait d'abattre est tombé sous d'autres coups — se retourne en « tenir quatre places sur cinq du plateau ». La fiche de conquête le dit d'avance, avant que cela vous tombe dessus.
+• L'écran de fin dit par quelle porte la partie s'est gagnée, marque les conquêtes remplies et donne l'avancement de chacun. On y voyait sa carte non remplie s'afficher sous son nom sans un mot d'explication.
+
+UN DÉTAIL
+• Le bouton des réglages, sur l'accueil, passe au rose : il ne désigne ni un camp ni un état du plateau, c'est la couleur d'une porte.
+```
+
 Tant que Riskelo n'a jamais été publié, App Store Connect ne pose pas la
 question : une première version n'a pas de nouveautés.
 
@@ -102,8 +121,7 @@ question : une première version n'a pas de nouveautés.
 Première version de Riskelo.
 ```
 
-À partir de la deuxième version, c'est ce texte qui se colle — ce qui a changé
-depuis la 1.0, et rien d'autre :
+<details><summary>Ce qui avait été écrit pour la 1.1, depuis la 1.0</summary>
 
 ```
 UN ACCUEIL
@@ -131,6 +149,8 @@ CE QUI SE VOIT MIEUX
 • Le rouge sur le noir se lit : les couleurs qui écrivent sont plus claires d'un cran et demi.
 • Le mode d'emploi affiche le vrai numéro de version, celui du paquet.
 ```
+
+</details>
 
 ## Catégories
 

@@ -14,7 +14,7 @@ settings:
     # Le premier ne bouge qu'à une vraie version ; le second monte à chaque
     # dépôt sur App Store Connect, qui refuse deux fois le même.
     MARKETING_VERSION: "1.1"
-    CURRENT_PROJECT_VERSION: "3"
+    CURRENT_PROJECT_VERSION: "4"
     # Posée ici et non dans Xcode : « xcodegen generate » réécrit le projet,
     # et une équipe renseignée à la main disparaîtrait à la régénération.
     DEVELOPMENT_TEAM: 38DQ8FW23J

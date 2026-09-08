@@ -21,9 +21,15 @@
 //  Les plateaux d'ici n'ont pas tous quarante-deux places, et ce sont donc les
 //  parts qui se transposent.
 //
-//  Le seuil de domination reste en jeu par-dessus : une conquête personnelle
-//  est une porte de plus, jamais la seule. Sans quoi une partie dont les
-//  objectifs deviennent tous impossibles ne finirait pas.
+//  La conquête est la seule façon de gagner quand la règle est allumée. Le
+//  seuil de domination se retirait mal de la partie : il la décidait cinq
+//  fois sur six à deux joueurs, et toutes les fois à quatre. Il ne reste donc
+//  que le plateau entier, c'est-à-dire qu'il ne reste plus personne.
+//
+//  Une carte ne peut pas pour autant devenir impossible : « faites tomber tel
+//  camp » que quelqu'un d'autre fait tomber avant vous se retourne en un
+//  repli — quatre places sur cinq du plateau. C'est le seul endroit où un
+//  seuil subsiste, et il ne vaut que pour celui dont la carte est morte.
 //
 
 import Foundation
@@ -57,10 +63,19 @@ enum Objectif: Equatable, Hashable, Codable {
     /// raccourci.
     private static let partMaximale = 0.60
 
+    /// Ce que porte le repli : quatre places sur cinq du plateau.
+    ///
+    /// Le seuil de domination s'étant retiré, une carte qui se retourne ne
+    /// peut pas se retourner en quelque chose de facile — la malchance
+    /// deviendrait un raccourci, et celui dont on a tué la proie gagnerait
+    /// plus vite que ceux qui doivent tenir des continents entiers. C'est
+    /// donc le repli qui porte désormais le seuil, et pour lui seul.
+    static let partDuRepli = 0.80
+
     /// Le repli : ce que devient une carte « faites tomber tel camp » quand
     /// ce camp n'est plus à prendre.
     static func repli(_ board: Board) -> Objectif {
-        .territoires(nombre: nombre(0.57, of: board), hommes: 1)
+        .territoires(nombre: nombre(partDuRepli, of: board), hommes: 1)
     }
 
     private static func nombre(_ part: Double, of board: Board) -> Int {
@@ -158,6 +173,13 @@ extension GameState {
         return carte
     }
 
+    /// La carte s'est-elle retournée ? Le joueur lit alors un repli qu'il
+    /// n'a pas tiré, et il faut lui dire d'où il sort.
+    func conqueteRetournee(de joueur: PlayerID) -> Bool {
+        guard let tiree = objectifs[joueur] else { return false }
+        return objectif(de: joueur) != tiree
+    }
+
     /// L'objectif est-il rempli ?
     func objectifAccompli(_ joueur: PlayerID) -> Bool {
         guard rules.objectifs, let carte = objectif(de: joueur) else { return false }
@@ -208,6 +230,35 @@ extension GameState {
         }
     }
 
+    // MARK: - Par quelle porte la partie s'est gagnée
+
+    /// La phase ne retient que le vainqueur, jamais la raison. Elle se relit
+    /// donc sur le plateau final — et il faut l'annoncer : celui qui gagne au
+    /// seuil voyait jusqu'ici sa conquête affichée sous son nom, sans un mot
+    /// pour dire qu'elle n'avait pas compté, et croyait la règle en panne.
+    enum Porte { case conquete, seuil, plateauEntier }
+
+    /// Le plateau entier se lit sur les territoires et non sur les camps
+    /// éliminés : les deux disent la même chose en partie, et le compte des
+    /// places reste vrai d'une situation posée à la main.
+    func porteDeLaVictoire(_ joueur: PlayerID) -> Porte {
+        if territories(of: joueur).count == map.order.count { return .plateauEntier }
+        return objectifAccompli(joueur) ? .conquete : .seuil
+    }
+
+    /// Ce qui a fini la partie, en une ligne, pour l'écran de victoire.
+    func porteDite(_ joueur: PlayerID) -> String {
+        switch porteDeLaVictoire(joueur) {
+        case .plateauEntier:
+            return "Le plateau entier, sans un territoire laissé."
+        case .conquete:
+            guard let carte = objectif(de: joueur) else { return "Sa conquête personnelle." }
+            return "Sa conquête personnelle — \(texte(carte))"
+        case .seuil:
+            return "Le seuil de \(dominationThreshold) territoires sur \(map.order.count)."
+        }
+    }
+
     /// Ce qu'on écrit au journal quand la partie se gagne ainsi.
     func recitDeLObjectif(_ joueur: PlayerID) -> String {
         guard let carte = objectif(de: joueur) else { return "" }
@@ -247,6 +298,14 @@ extension Objectif {
         case .eliminer(let cible):
             return "Faire disparaître le camp de \(nomDuCamp(cible)) — de votre main."
         }
+    }
+
+    /// Combien de places la carte demande, quand elle en demande. La fiche
+    /// annonce le repli en clair plutôt que « 80 % » : un joueur compte des
+    /// territoires, il ne compte pas des pourcentages.
+    var nombreDemande: Int? {
+        if case let .territoires(nombre, _) = self { return nombre }
+        return nil
     }
 
     /// « A », « A et B », « A, B et C » — la liste française, qui n'a pas de

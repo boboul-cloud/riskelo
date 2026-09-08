@@ -664,7 +664,13 @@ struct GameState {
             armies[from] = 1
             assault = nil
             phase = .finished(winner: currentPlayer.id)
-            if parLObjectif, survivors.count > 1, !dominates(currentPlayer.id) {
+            // La conquête passe avant le seuil quand la même place ouvre les
+            // deux portes : c'est elle qu'on jouait, et le seuil se serait
+            // franchi de toute façon. Le cas ne se présente plus depuis que
+            // le seuil se retire devant les conquêtes — la condition reste
+            // pour que le jour où un seuil reviendrait, il n'enterre pas la
+            // carte au moment précis où elle paye.
+            if parLObjectif, survivors.count > 1 {
                 note(.fin, recitDeLObjectif(currentPlayer.id))
             } else {
                 note(.fin, survivors.count > 1

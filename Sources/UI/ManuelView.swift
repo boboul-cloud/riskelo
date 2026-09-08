@@ -356,6 +356,15 @@ enum Manuel {
         Objectif.paquet(pour: plateau.board, joueurs: 2).map { $0.texte(plateau.board) }
     }
 
+    /// Ce que coûte le repli, plateau par plateau — lu du moteur. Trois
+    /// nombres écrits à la main mentiraient le jour où la part change, et
+    /// c'est le mode d'emploi qui aurait tort.
+    static var replis: String {
+        Objectif.liste(Boards.allCases.map { plateau in
+            "\(Objectif.repli(plateau.board).nombreDemande ?? 0) sur \(plateau.label)"
+        })
+    }
+
     /// La version, lue du paquet et non recopiée ici.
     ///
     /// Elle était écrite à la main, et elle est restée à « 1.0 » quand le
@@ -570,16 +579,18 @@ enum Manuel {
                       ["Europe — 38 territoires", "26", "20", "17"],
                       ["Monde — 42 territoires", "28", "21", "18"]]),
             .p("La barre du haut porte ce compte en permanence : vos territoires sur le "
-               + "seuil à franchir."),
+               + "seuil à franchir. Les conquêtes personnelles, plus bas, retirent ce "
+               + "seuil : la barre montre alors le plateau entier."),
             .h("La guerre totale"),
             .p("L'option retire le seuil : il faut tous les territoires, sans exception. "
                + "Comptez environ deux fois plus de questions — 112 au lieu de 71 à deux "
                + "joueurs. C'est une partie de soirée entière, et c'est le but."),
             .h("Les conquêtes personnelles"),
             .p("L'option donne à chacun, au départ, un objectif que lui seul connaît. "
-               + "Le remplir gagne la partie sur-le-champ — le seuil de territoires "
-               + "reste en jeu par-dessus, c'est l'autre porte et elle est ouverte à "
-               + "tous."),
+               + "Le remplir gagne la partie sur-le-champ, et c'est la seule façon de "
+               + "la gagner : le seuil du tableau ci-dessus se retire. Le compte de la "
+               + "barre du haut ne dit alors plus rien de qui va gagner — celui qui "
+               + "paraît en retard tient peut-être ses deux continents."),
             .puces([
                 "Tenir deux gros continents, ou trois petits — pris à la taille du "
                 + "plateau, car l'Anneau n'a pas d'Australie.",
@@ -602,6 +613,11 @@ enum Manuel {
                + "votre carte se retourne alors et devient une conquête de territoires, "
                + "comme au Risk. Sans quoi vous passeriez la fin de la partie à ne plus "
                + "pouvoir gagner."),
+            .p("Ce repli demande quatre places sur cinq du plateau — \(Manuel.replis). "
+               + "C'est le seul seuil qui subsiste dans une partie à conquêtes, et il "
+               + "ne vaut que pour celui dont la carte est morte : à moins cher, la "
+               + "malchance deviendrait un raccourci, et l'on gagnerait plus vite pour "
+               + "avoir perdu sa proie que pour avoir tenu ses continents."),
             .p("Le bouton en cible, dans la barre du haut, montre la vôtre et où vous "
                + "en êtes. Il ne montre jamais celle d'un autre : à plusieurs appareils, "
                + "chacun ne voit que la sienne ; sur un appareil partagé, il montre "
@@ -729,7 +745,8 @@ enum Manuel {
                  + "« Rouge · Marie · moi » : la couleur, le nom que vous vous êtes "
                  + "donné dans les réglages, et « moi » pour dire que c'est le vôtre."),
                 ("Tour, et le compte", "Le numéro du tour de table, et vos territoires "
-                 + "sur le seuil de victoire."),
+                 + "sur le seuil de victoire — sur le plateau entier quand les conquêtes "
+                 + "personnelles sont en jeu, puisqu'il n'y a alors plus de seuil."),
                 ("Le paquet de cartes", "Votre main, quand la règle est en jeu. La "
                  + "pastille passe au rouge quand l'échange devient obligatoire."),
                 ("Le signet", "Marque l'instant présent dans la bibliothèque."),

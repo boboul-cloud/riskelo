@@ -249,8 +249,9 @@ struct SetupView: View {
                                     Text("Chacun reçoit au départ un objectif secret — deux "
                                          + "continents, tant de places tenues, un camp à faire "
                                          + "tomber — et le remplir gagne la partie. Le seuil de "
-                                         + "territoires reste en jeu par-dessus. Le compte de la "
-                                         + "barre du haut ne dit alors plus qui va gagner.")
+                                         + "territoires se retire : la carte décide, ou personne. "
+                                         + "Le compte de la barre du haut ne dit alors plus rien "
+                                         + "de qui va gagner.")
                                         .font(.caption2).foregroundStyle(Palette.dim)
                                 }
                             }
@@ -477,6 +478,10 @@ struct SetupView: View {
     /// toujours la partie avant la première, et la première ne veut plus
     /// rien dire. Le réglage tranche donc à la place du joueur, au lieu de
     /// lui laisser composer une partie dont une moitié serait morte.
+    ///
+    /// Elles se ressemblent davantage depuis que la conquête retire le seuil
+    /// — les deux se jouent sans compte à franchir — mais elles ne finissent
+    /// pas de la même façon : l'une demande le plateau, l'autre une carte.
     private func exclusif(_ celle: Binding<Bool>, avec autre: Binding<Bool>) -> Binding<Bool> {
         Binding(get: { celle.wrappedValue },
                 set: { allumee in
@@ -492,14 +497,13 @@ struct SetupView: View {
 
     /// Ce qu'il faut faire pour gagner, en une ligne, sous les réglages.
     ///
-    /// Les conquêtes personnelles ouvrent une seconde porte : l'annonce du
-    /// seul seuil de territoires deviendrait fausse, puisqu'une partie peut
-    /// alors se gagner bien avant, et sans que personne l'ait vu venir.
+    /// Les conquêtes personnelles retirent le seuil : annoncer un nombre de
+    /// territoires serait faux, et c'était le malentendu — on gagnait au
+    /// compte en croyant jouer sa carte.
     private var resumeDeLaVictoire: String {
         let total = plateau.board.map.order.count
         if objectifs {
-            return "Victoire à sa conquête personnelle, "
-                 + "ou à \(seuil) territoires sur \(total)"
+            return "Victoire à sa conquête personnelle, et à rien d'autre"
         }
         return guerreTotale
             ? "Victoire à la conquête intégrale des \(total) territoires"

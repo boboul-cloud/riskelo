@@ -155,9 +155,12 @@ struct Rules: Equatable, Codable {
     /// est tout l'intérêt, mais n'est pas la partie que quelqu'un attend s'il
     /// ne l'a pas demandée.
     ///
-    /// Le seuil de domination reste en jeu par-dessus : l'objectif est une
-    /// porte de plus, jamais la seule. Une partie dont tous les objectifs
-    /// seraient devenus impossibles finirait quand même.
+    /// La règle allumée, la conquête devient la seule façon de gagner : le
+    /// seuil de domination se retire, et ne reste que le plateau entier —
+    /// c'est-à-dire qu'il ne reste plus personne. Une carte qui deviendrait
+    /// impossible ne laisse pas son joueur sans issue pour autant : elle se
+    /// retourne en un repli, et c'est lui qui porte le seuil (voir
+    /// `Objectif.repli`).
     var objectifs = false
 
     /// Un homme de plus toutes les tant de bonnes réponses dans un même thème.
@@ -216,6 +219,14 @@ struct Rules: Equatable, Codable {
     /// c'est lui qui fixe la durée : quel que soit le nombre de joueurs, il
     /// faut une douzaine de tours pour le franchir.
     func dominationThreshold(territories: Int, playerCount: Int) -> Int {
+        // Les conquêtes personnelles prennent la partie à leur compte. Le
+        // seuil cessait d'être une porte de plus pour devenir la porte : à
+        // deux sur le Monde, il décidait cinq parties sur six, et à quatre il
+        // les décidait toutes — la carte ne servait à rien, et le joueur qui
+        // gagnait au compte voyait sa conquête non remplie s'afficher sous
+        // son nom. Il ne reste donc plus ici que pour dire « il n'y avait
+        // plus personne en face ».
+        if objectifs { return territories }
         if let dominationOverride {
             return dominationOverride <= 0 ? territories
                 : Int((Double(territories) * dominationOverride).rounded(.up))

@@ -200,4 +200,112 @@ struct ObjectifsTests {
             #expect(!g.avancement(carte, pour: 0).isEmpty)
         }
     }
+
+    // MARK: - Le seuil se retire
+
+    /// La règle voulue : la conquête décide, ou personne. Le seuil ne doit
+    /// plus pouvoir gagner une partie à conquêtes — il la gagnait cinq fois
+    /// sur six à deux joueurs, et toutes les fois à quatre.
+    @Test(arguments: Boards.allCases)
+    func leSeuilSeRetireDevantLesConquetes(_ plateau: Boards) {
+        let total = plateau.board.map.order.count
+        for camps in 2 ... 4 {
+            var r = Rules(); r.objectifs = true
+            #expect(r.dominationThreshold(territories: total, playerCount: camps) == total,
+                    "\(plateau.label) à \(camps) : le seuil passe encore devant la conquête")
+            #expect(Rules().dominationThreshold(territories: total, playerCount: camps) < total,
+                    "sans la règle, le seuil doit rester ce qu'il était")
+        }
+    }
+
+    /// Tout le plateau moins une place ne gagne pas : il n'y a plus de compte
+    /// à franchir, et c'est tout le propos.
+    @Test func tenirPresqueToutNeGagnePas() {
+        var g = partie()
+        vider(&g, pour: 0)
+        g.seize(g.map.order.last!, by: 1, armies: 1)
+        g.seize(objectif: .continents([g.map[g.map.order.last!]!.continent]), of: 0)
+        #expect(!g.dominates(0), "27 places sur 28 ne sont pas une victoire")
+        #expect(!g.objectifAccompli(0))
+    }
+
+    /// Le repli porte le seuil, et pour lui seul. Moins cher, la malchance
+    /// deviendrait un raccourci : celui dont on a tué la proie gagnerait plus
+    /// vite que ceux qui doivent tenir des continents entiers.
+    @Test(arguments: Boards.allCases)
+    func leRepliDemandeQuatrePlacesSurCinq(_ plateau: Boards) {
+        let total = plateau.board.map.order.count
+        guard case let .territoires(nombre, hommes) = Objectif.repli(plateau.board) else {
+            Issue.record("le repli doit être une conquête de territoires"); return
+        }
+        #expect(hommes == 1)
+        #expect(nombre == Int((Double(total) * 0.80).rounded()),
+                "\(plateau.label) : \(nombre) places au lieu de quatre sur cinq")
+        for carte in Objectif.paquet(pour: plateau.board, joueurs: 4) {
+            if case let .territoires(demande, exigence) = carte, exigence == 1 {
+                #expect(demande < nombre,
+                        "\(plateau.label) : le repli doit coûter plus cher que la carte ordinaire, sinon la carte morte est une aubaine")
+            }
+        }
+    }
+
+    // MARK: - Par quelle porte on a gagné
+
+    /// L'écran de victoire doit le dire. Gagner au seuil avec sa conquête
+    /// affichée juste en dessous, non remplie et sans un mot d'explication,
+    /// se lit comme une règle en panne.
+    @Test func lecranDeVictoireDitParQuellePorte() {
+        var g = partie()
+        vider(&g, pour: 0)
+        #expect(g.porteDeLaVictoire(0) == .plateauEntier)
+
+        // Une place laissée à l'autre camp, et la conquête remplie.
+        g.seize(g.map.order.last!, by: 1, armies: 1)
+        g.seize(objectif: .territoires(nombre: 2, hommes: 1), of: 0)
+        #expect(g.porteDeLaVictoire(0) == .conquete)
+        #expect(g.porteDite(0).contains(g.texte(g.objectif(de: 0)!)))
+
+        // Sans la règle, c'est le seuil qui gagne, et il se nomme.
+        var ordinaire = GameState.start(players: [Player(id: 0, name: "A"), Player(id: 1, name: "B")],
+                                        rules: Rules(), seed: 42)
+        for id in ordinaire.map.order.dropLast() { ordinaire.seize(id, by: 0, armies: 1) }
+        ordinaire.seize(ordinaire.map.order.last!, by: 1, armies: 1)
+        #expect(ordinaire.porteDeLaVictoire(0) == .seuil)
+        #expect(ordinaire.porteDite(0).contains("\(ordinaire.dominationThreshold) territoires"))
+    }
+
+    /// Ce que le journal retient quand la carte paye : la phrase de la
+    /// conquête, et non un compte de territoires. C'est elle qu'on relit pour
+    /// comprendre pourquoi la partie s'est arrêtée là.
+    @Test func leJournalRaconteLaConqueteQuandElleGagne() {
+        var g = partie()
+        let vises = g.map.continentsInOrder.sorted { $0.territories.count > $1.territories.count }
+            .prefix(2).map(\.id)
+        g.seize(objectif: .continents(Array(vises)), of: 0)
+        vider(&g, pour: 0)
+
+        // Une place du premier continent reste à l'autre camp, plus quelques
+        // terres ailleurs pour qu'il survive à sa chute.
+        let manquante = g.map.continents[vises[0]]!.territories[0]
+        let ailleurs = g.map.order.filter { id in
+            !vises.contains { g.map.continents[$0]!.territories.contains(id) }
+        }.prefix(4)
+        for id in ailleurs { g.seize(id, by: 1, armies: 1) }
+        g.seize(manquante, by: 1, armies: 1)
+
+        let base = g.map.neighbors(of: manquante).first { g.owner[$0] == 0 }!
+        g.seize(base, by: 0, armies: 6)
+        g.debugSkipToAttack()
+        #expect(!g.dominates(0), "le seuil ne doit plus pouvoir gagner cette partie")
+        #expect(!g.objectifAccompli(0))
+
+        // C'est le défenseur qui répond : sa mauvaise réponse lui coûte la place.
+        g.declareAssault(from: base, to: manquante, questions: 1, category: .histoire)
+        let mauvaise = (g.assault!.current!.question.answer + 1) % 4
+        g.answer(.chosen(mauvaise, elapsed: 2))
+        #expect(g.isOver, "la conquête remplie doit arrêter la partie sur-le-champ")
+        #expect(g.porteDeLaVictoire(0) == .conquete)
+        #expect(g.journal.last?.text == g.recitDeLObjectif(0),
+                "le journal n'a pas raconté la conquête : \(g.journal.last?.text ?? "rien")")
+    }
 }

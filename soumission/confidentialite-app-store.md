@@ -12,7 +12,7 @@ C'est exact et vérifiable :
 - aucun kit tiers (pas de régie publicitaire, pas d'outil d'analyse, pas de
   service d'authentification) — le projet n'a **aucune dépendance externe** ;
 - aucune requête réseau vers un serveur : les seules communications sont
-  locales, d'appareil à appareil, par `MultipeerConnectivity` ;
+  locales, d'appareil à appareil, par le framework `Network` (Bonjour et TCP) ;
 - aucun identifiant publicitaire, aucun `IDFA`, aucun `identifierForVendor`
   transmis ;
 - les fichiers de partie restent dans le conteneur de l'application et
@@ -50,7 +50,7 @@ position, ni photos, ni contacts, ni micro, ni notifications.
 ## Le point à ne pas oublier
 
 Le nom de l'appareil (« iPhone de Camille ») est visible des appareils proches
-pendant la recherche d'une table, parce que `MultipeerConnectivity` s'en sert
+pendant la recherche d'une table, parce que l'annonce Bonjour s'en sert
 comme étiquette. Ce n'est pas une collecte — rien n'est enregistré ni transmis
 à l'éditeur — mais c'est dit explicitement dans la politique de
 confidentialité, section 4. Si un relecteur pose la question, la réponse y est

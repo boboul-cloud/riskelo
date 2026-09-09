@@ -96,11 +96,12 @@
 
 <section>
   <h2>4. Le jeu à plusieurs appareils</h2>
-  <p>La partie à plusieurs appareils utilise la technologie
-    <em>MultipeerConnectivity</em> d'Apple : les appareils communiquent
-    <strong>directement</strong> entre eux, par Bluetooth ou par Wi-Fi direct,
-    <strong>sans passer par aucun serveur</strong> et sans que rien ne transite
-    par Internet.</p>
+  <p>La partie à plusieurs appareils utilise le framework
+    <em>Network</em> d'Apple : les appareils se trouvent par Bonjour et se
+    parlent en TCP, <strong>directement</strong> entre eux — par le réseau
+    Wi-Fi local, ou d'appareil à appareil en Wi-Fi lorsqu'il n'y a pas de
+    réseau. <strong>Sans passer par aucun serveur</strong>, et sans que rien
+    ne transite par Internet.</p>
   <p>Deux points de transparence :</p>
   <ul>
     <li><strong>Le nom de votre appareil est visible</strong> par les appareils

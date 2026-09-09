@@ -13,9 +13,21 @@ décidée par une question de culture générale à choix multiple, au lieu d'un
 lancer de dés.
 
 AUCUN COMPTE N'EST NÉCESSAIRE
-L'application n'a ni inscription, ni connexion, ni achat intégré, ni publicité.
-Tout le contenu est accessible dès le lancement. Il n'y a donc pas
+L'application n'a ni inscription, ni connexion, ni publicité. Il n'y a donc pas
 d'identifiants de démonstration à fournir.
+
+ACHATS INTÉGRÉS
+Quatre packs de questions scolaires, non consommables, achetés une fois et
+gardés. Deux cents questions chacun. Le jeu est entier sans eux : les six thèmes de culture générale et
+leurs 2 400 questions sont accessibles dès le lancement, sans rien acheter.
+
+Pour les voir : écran d'accueil, bouton « Packs de questions ». La page porte
+aussi le bouton « Restaurer mes achats ».
+
+Les fichiers de questions des packs sont inclus dans l'application pour tout le
+monde ; ce qui s'achète est le droit de les choisir. C'est ce qui permet à un
+joueur qui rejoint une partie de jouer les packs de celui qui l'héberge sans
+les avoir achetés — c'est voulu, et non un défaut de contrôle.
 
 POUR ESSAYER EN UNE MINUTE
 1. Touchez « Partie rapide » sur l'écran d'accueil.
@@ -28,10 +40,11 @@ l'écran d'accueil, ou le point d'interrogation de la barre du haut pendant une
 partie.
 
 FONCTION QUI DEMANDE DEUX APPAREILS
-« Jouer à plusieurs appareils » utilise MultipeerConnectivity (Bluetooth /
-Wi-Fi direct) pour relier de deux à quatre appareils proches. Aucun serveur
-n'est utilisé et aucune donnée n'est conservée : seuls les coups de la partie
-circulent, directement d'un appareil à l'autre.
+« Jouer à plusieurs appareils » relie de deux à quatre appareils proches par
+le framework Network d'Apple : Bonjour pour se trouver, TCP pour se parler.
+Les appareils passent par le réseau Wi-Fi local, ou directement d'un appareil
+à l'autre en Wi-Fi lorsqu'il n'y a pas de réseau. Aucun serveur n'est utilisé
+et aucune donnée n'est conservée : seuls les coups de la partie circulent.
 
 Cette fonction demande donc deux appareils physiques dans la même pièce, avec
 le Wi-Fi allumé des deux côtés, et l'autorisation « réseau local » accordée.
@@ -46,7 +59,8 @@ autre — ni position, ni photos, ni contacts, ni micro, ni notifications.
 CONFIDENTIALITÉ
 Aucune donnée n'est collectée ni transmise. L'application n'intègre aucun kit
 tiers et n'effectue aucune requête vers un serveur. Elle fonctionne
-entièrement hors ligne : les 2 400 questions sont incluses dans le bundle.
+entièrement hors ligne : les 3 200 questions sont incluses dans le bundle.
+Les achats intégrés passent par StoreKit et ne transmettent rien d'autre.
 
 CONTENU
 Les questions, les plateaux, les dessins et l'icône sont des créations

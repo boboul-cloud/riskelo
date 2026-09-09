@@ -105,12 +105,17 @@ LA FIN DE PARTIE S'ENTEND
 • Le son tombe avec le nom du vainqueur sur le plateau, avant que l'écran de victoire ne s'ouvre, et l'interrupteur des sons le coupe comme les autres.
 ```
 
-Tant que Riskelo n'a jamais été publié, App Store Connect ne pose pas la
-question : une première version n'a pas de nouveautés.
+Riskelo est publié : c'est bien ce texte-là qui se colle désormais, et non le
+mot d'une première version. Le repli au-dessous garde la trace de ce qui a
+déjà été annoncé, App Store Connect ne conservant que le dernier.
+
+<details><summary>Ce qui servait tant que l'application était inédite</summary>
 
 ```
 Première version de Riskelo.
 ```
+
+</details>
 
 <details><summary>Ce qui avait été écrit pour la 1.2, depuis la 1.1</summary>
 

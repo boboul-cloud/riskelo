@@ -55,7 +55,7 @@ l'iPhone**.
 | Catégorie secondaire | Jeux ▸ **Culture générale** |
 | Classification par âge | **4+** |
 | Game Center | non |
-| Achats intégrés | aucun |
+| Achats intégrés | quatre packs, non consommables — section 4 bis |
 | Prix | **à décider** — gratuit, ou payant sans achat intégré |
 | Territoires | tous |
 | Publication | **à décider** — automatique à l'approbation, ou manuelle |
@@ -254,6 +254,81 @@ CE QUI SE VOIT MIEUX
 
 ---
 
+## 4 bis. Les achats intégrés
+
+> **À ne faire qu'au moment de soumettre les packs.** Un article créé dans App
+> Store Connect ne se supprime jamais, et son identifiant ne se réutilise pas.
+> Une version soumise avec la page des packs mais sans articles joints
+> montrerait « indisponible » à tout le monde.
+
+Quatre packs de questions, **non consommables** : achetés une fois, gardés pour
+toujours. Deux cents questions chacun — la taille qui donne deux soirées sans
+redite, mesurée et non estimée ; le tableau est dans le README. Le jeu de base
+— les six thèmes de culture générale, 2 400 questions — reste entier sans eux.
+
+Ce qui s'achète n'est pas le contenu : les fichiers sont dans l'application,
+sur tous les appareils. C'est le droit de **choisir** un pack. C'est ce qui
+permet à celui qui rejoint une table de jouer les packs de l'hôte sans les
+avoir achetés — et c'est voulu.
+
+### Les trois articles à créer
+
+Type : **Non-Consumable** pour les trois. Les identifiants sont ceux que le
+code demande : une lettre de travers et l'article n'est jamais trouvé.
+
+| Identifiant | Nom de référence | Nom affiché |
+|---|---|---|
+| `com.oulhen.riskelo.pack.histoire4e` | Pack Histoire 4e | Histoire — 4e |
+| `com.oulhen.riskelo.pack.geographie4e` | Pack Géographie 4e | Géographie — 4e |
+| `com.oulhen.riskelo.pack.histoire3e` | Pack Histoire 3e | Histoire — 3e |
+| `com.oulhen.riskelo.pack.geographie3e` | Pack Géographie 3e | Géographie — 3e |
+
+Les descriptions, à coller telles quelles :
+
+```
+Le programme d'histoire de quatrième : révolutions, industrie, colonies. 200 questions.
+```
+
+```
+Le programme de géographie de quatrième : villes, migrations, mondialisation. 200 questions.
+```
+
+```
+Le programme d'histoire de troisième : guerres totales, monde depuis 1945. 200 questions.
+```
+
+```
+Le programme de géographie de troisième : la France, ses territoires, l'Europe. 200 questions.
+```
+
+### Ce qui reste à décider
+
+**Le prix.** Le fichier d'essai porte 2,99 € : c'est une valeur inventée pour
+pouvoir cliquer, pas une proposition.
+
+**Le partage familial.** Un pack scolaire acheté une fois et joué par les deux
+enfants de la maison est plus juste qu'un pack acheté deux fois — et Apple le
+propose article par article. Le fichier d'essai l'a activé.
+
+### La première fois, ils partent avec la version
+
+Apple relit les achats intégrés en même temps que l'application. Il faut donc
+les **joindre à la version** dans la fiche avant de soumettre : créés mais non
+joints, ils restent « en attente d'envoi » et la page des packs dira
+« indisponible » à tout le monde.
+
+### Pour les essayer sans rien envoyer
+
+`Resources/Riskelo.storekit` est un App Store de bureau, attaché au schéma. On
+lance depuis Xcode, on achète pour rien, et le menu **Debug ▸ StoreKit**
+permet d'annuler un achat ou de simuler un remboursement. Rien de tout cela ne
+remonte chez Apple.
+
+Ce fichier ne part pas dans le paquet : il est dans le projet sans phase de
+construction, pour qu'on puisse en changer les prix sans le livrer.
+
+---
+
 ## 5. Les questionnaires
 
 ### Confidentialité de l'app
@@ -272,7 +347,7 @@ envoyées ne comptent pas comme collectées.
 |---|---|
 | Utilisez-vous l'identifiant publicitaire (IDFA) ? | Non |
 | Suivi (App Tracking Transparency) ? | Non |
-| Achats intégrés ? | Non |
+| Achats intégrés ? | Oui — quatre packs non consommables |
 | Publicité dans l'app ? | Non |
 | Contenu de tiers soumis à droits ? | Non — code, questions, plateaux et icône sont l'œuvre de l'éditeur |
 | Chiffrement / conformité export | `ITSAppUsesNonExemptEncryption = false`, déjà dans l'Info.plist : plus rien à répondre à chaque envoi |
@@ -298,7 +373,7 @@ contacts, ni micro, ni notifications.
 ### Le point que personne ne déclare, et qu'il vaut mieux avoir écrit
 
 Le nom de l'appareil (« iPhone de Camille ») est visible des appareils proches
-pendant la recherche d'une table : `MultipeerConnectivity` s'en sert comme
+pendant la recherche d'une table : l'annonce Bonjour s'en sert comme
 étiquette. Ce n'est pas une collecte — rien n'est enregistré ni transmis à
 l'éditeur — et c'est dit explicitement à la section 4 de la politique de
 confidentialité. Si un relecteur pose la question, la réponse y est déjà.
@@ -330,10 +405,11 @@ l'écran d'accueil, ou le point d'interrogation de la barre du haut pendant une
 partie.
 
 FONCTION QUI DEMANDE DEUX APPAREILS
-« Jouer à plusieurs appareils » utilise MultipeerConnectivity (Bluetooth /
-Wi-Fi direct) pour relier de deux à quatre appareils proches. Aucun serveur
-n'est utilisé et aucune donnée n'est conservée : seuls les coups de la partie
-circulent, directement d'un appareil à l'autre.
+« Jouer à plusieurs appareils » relie de deux à quatre appareils proches par
+le framework Network d'Apple : Bonjour pour se trouver, TCP pour se parler.
+Les appareils passent par le réseau Wi-Fi local, ou directement d'un appareil
+à l'autre en Wi-Fi lorsqu'il n'y a pas de réseau. Aucun serveur n'est utilisé
+et aucune donnée n'est conservée : seuls les coups de la partie circulent.
 
 Cette fonction demande donc deux appareils physiques dans la même pièce, avec
 le Wi-Fi allumé des deux côtés, et l'autorisation « réseau local » accordée.
@@ -526,6 +602,8 @@ une question de calendrier, plus d'un obstacle technique.
 - [ ] Questionnaires de la section 5 remplis
 - [ ] Notes de la section 6 collées
 - [ ] Prix et disponibilité choisis
+- [ ] Les quatre achats intégrés créés (section 4 bis) et **joints à la version**
+- [ ] Achats essayés avec un compte sandbox sur un appareil réel
 - [ ] Soumis à la revue
 
 Compter de deux à quarante-huit heures. Répondre vite à toute question du

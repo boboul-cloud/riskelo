@@ -2,9 +2,9 @@
 
 **© 2026 Robert Oulhen. Tous droits réservés.**
 
-Le code source, les règles, les plateaux, l'icône et la banque de mille deux
-cents questions de Riskelo sont l'œuvre de Robert Oulhen et sont protégés par
-le droit d'auteur.
+Le code source, les règles, les plateaux, l'icône, les sons et la banque de
+questions de Riskelo — les thèmes livrés comme les packs vendus à part — sont
+l'œuvre de Robert Oulhen et sont protégés par le droit d'auteur.
 
 Ce dépôt est public pour que le site, le mode d'emploi et les textes légaux de
 l'application soient consultables et hébergeables — **il n'est pas un logiciel

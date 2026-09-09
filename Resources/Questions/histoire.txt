@@ -7,6 +7,17 @@
 # Un leurre doit être faux mais crédible — un leurre absurde ne fait pas
 # une question, il fait une question à trois propositions.
 
+# Ce que ce thème déclare — nom lisible, élision, icône, couleur, et sa
+# place dans la grille. Ces lignes ne sont pas des commentaires : sans
+# elles le thème n'a pas de nom.
+
+! id     | histoire
+! nom    | Histoire
+! de     | d'Histoire
+! icone  | building.columns
+! teinte | 0.85 0.66 0.22
+! rang   | 1
+
 F | En quelle année la Bastille a-t-elle été prise ? | 1789 | 1793 | 1776 | 1815
 F | En quelle année le mur de Berlin est-il tombé ? | 1989 | 1991 | 1985 | 1979
 F | Qui fut le premier empereur des Français ? | Napoléon Bonaparte | Charlemagne | Louis XIV | Napoléon III

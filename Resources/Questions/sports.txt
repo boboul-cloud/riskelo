@@ -7,6 +7,17 @@
 # Un leurre doit être faux mais crédible — un leurre absurde ne fait pas
 # une question, il fait une question à trois propositions.
 
+# Ce que ce thème déclare — nom lisible, élision, icône, couleur, et sa
+# place dans la grille. Ces lignes ne sont pas des commentaires : sans
+# elles le thème n'a pas de nom.
+
+! id     | sports
+! nom    | Sports & Loisirs
+! de     | de Sports & Loisirs
+! icone  | figure.run
+! teinte | 0.88 0.52 0.24
+! rang   | 4
+
 F | Combien de joueurs une équipe de football aligne-t-elle sur le terrain ? | 11 | 10 | 12 | 9
 F | Tous les combien d'années se tiennent les Jeux olympiques d'été ? | 4 ans | 2 ans | 3 ans | 5 ans
 F | Quel sport se pratique à Roland-Garros ? | Le tennis | Le golf | L'athlétisme | Le cyclisme

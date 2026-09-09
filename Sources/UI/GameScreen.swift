@@ -768,7 +768,7 @@ private struct AssaultPanel: View {
                             .font(.system(size: 10)).foregroundStyle(Palette.dim.opacity(0.8))
                         LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 7),
                                                  count: 3), spacing: 7) {
-                            ForEach(Category.allCases) { c in
+                            ForEach(session.game.themesEnJeu) { c in
                                 categorie(c, contre: defenseur)
                             }
                         }
@@ -1204,7 +1204,7 @@ private struct DossierSheet: View {
                                 Text("éliminé").font(.caption).foregroundStyle(Palette.dim)
                             }
                         }
-                        ForEach(Category.allCases) { c in
+                        ForEach(session.game.themesEnJeu) { c in
                             let s = session.game.record(of: j.id, in: c)
                             HStack {
                                 Label(c.label, systemImage: c.symbol)

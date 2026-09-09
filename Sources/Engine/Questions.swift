@@ -14,44 +14,6 @@
 
 import Foundation
 
-enum Category: String, CaseIterable, Identifiable, Hashable, Codable {
-    case geographie, histoire, sciences, arts, sports, spectacle
-    var id: String { rawValue }
-
-    var label: String {
-        switch self {
-        case .geographie: "Géographie"
-        case .histoire:   "Histoire"
-        case .sciences:   "Sciences & Nature"
-        case .arts:       "Arts & Lettres"
-        case .sports:     "Sports & Loisirs"
-        case .spectacle:  "Écrans & Musique"
-        }
-    }
-
-    /// Le nom précédé de « de », élidé quand il le faut : « de Géographie »
-    /// mais « d'Histoire ». Le français élide devant une voyelle, et devant
-    /// l'h muet d'« histoire ».
-    var apresDe: String {
-        switch self {
-        case .histoire, .arts, .spectacle: "d'\(label)"
-        default: "de \(label)"
-        }
-    }
-
-    /// Le nom du camembert, pour l'œil : la vue y accroche sa couleur.
-    var symbol: String {
-        switch self {
-        case .geographie: "globe.europe.africa"
-        case .histoire:   "building.columns"
-        case .sciences:   "leaf"
-        case .arts:       "book"
-        case .sports:     "figure.run"
-        case .spectacle:  "music.note.tv"
-        }
-    }
-}
-
 enum Difficulty: Int, CaseIterable, Comparable, Hashable, Codable {
     case facile = 1, moyen = 2, difficile = 3
     static func < (a: Difficulty, b: Difficulty) -> Bool { a.rawValue < b.rawValue }
@@ -246,10 +208,21 @@ struct QuestionBank {
     /// question hors sujet est un mensonge.
     ///
     /// La difficulté, elle, reste indicative : c'est un vœu, pas un contrat.
+    /// `parmi` est la liste des thèmes que la partie autorise. Le filtre
+    /// s'applique même quand un thème est demandé nommément : un coup venu du
+    /// réseau ne doit pas pouvoir faire sortir une question d'un thème que la
+    /// table a écarté.
+    ///
+    /// « Au hasard » veut dire au hasard **de ce qui est en jeu** — sans quoi
+    /// écarter un thème n'aurait écarté que son bouton.
     mutating func draw<G: RandomNumberGenerator>(category: Category?,
+                                                 parmi themes: [Category] = Themes.tous,
                                                  difficulty: Difficulty?,
                                                  using rng: inout G) -> AskedQuestion? {
-        let terrain = questions.filter { category == nil || $0.category == category }
+        let permis = Set(themes.map(\.id))
+        let terrain = questions.filter {
+            (category == nil || $0.category == category) && permis.contains($0.category.id)
+        }
         guard !terrain.isEmpty else { return nil }
 
         if terrain.allSatisfy({ served.contains($0.id) }) {
@@ -262,7 +235,18 @@ struct QuestionBank {
         // confort, et un confort ne défait pas une règle.
         let possibles = auNiveau.isEmpty ? libres : auNiveau
         let moindre = possibles.map { vues[$0.id] ?? 0 }.min() ?? 0
+        // Trié par identifiant, et non laissé dans l'ordre du fichier.
+        //
+        // `randomElement` tire un rang, pas une question : deux appareils qui
+        // rangent leurs questions dans un ordre différent tirent le même rang
+        // et posent deux questions différentes. L'ordre venait des fichiers,
+        // c'est-à-dire de ce que le système avait rendu en premier — rien qui
+        // soit promis d'être le même sur un iPhone et sur un iPad.
+        //
+        // L'identifiant, lui, se calcule sur l'énoncé. Le tri est donc le même
+        // partout, et le restera quand un thème s'ajoutera.
         let neuves = possibles.filter { (vues[$0.id] ?? 0) == moindre }
+            .sorted { $0.id < $1.id }
         guard let tiree = neuves.randomElement(using: &rng) else { return nil }
 
         served.insert(tiree.id)

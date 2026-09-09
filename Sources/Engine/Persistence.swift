@@ -256,7 +256,46 @@ struct MemoireDesQuestions {
         guard let data = try? Data(contentsOf: url),
               let compte = try? JSONDecoder().decode([String: Int].self, from: data)
         else { return [:] }
-        return compte
+        let traduit = MemoireDesQuestions.traduire(compte)
+        // On réécrit une fois, et l'on n'y revient plus : sans cela, la
+        // traduction se referait à chaque ouverture de partie.
+        if traduit != compte { enregistrer(traduit) }
+        return traduit
+    }
+
+    /// La mémoire d'avant les identifiants stables, remise à jour.
+    ///
+    /// Jusqu'à la 1.3, une question était nommée par son **rang** dans son
+    /// fichier — « histoire-12 ». Elle l'est désormais par son énoncé. Une
+    /// mémoire ancienne nomme donc des questions qui n'existent plus, et le
+    /// jeu l'écarterait proprement : celui qui joue depuis des mois reverrait
+    /// d'un coup ses premières questions, sans comprendre pourquoi.
+    ///
+    /// Le rang reste lisible : c'est la place dans le fichier, et les six
+    /// thèmes d'origine n'ont pas bougé d'une ligne — on leur a seulement
+    /// ajouté un en-tête, qui ne compte pas. La traduction est donc exacte.
+    ///
+    /// Un rang qui ne retrouve pas sa question est laissé de côté : il vaut
+    /// mieux perdre une ligne qu'en inventer une.
+    static func traduire(_ ancienne: [String: Int]) -> [String: Int] {
+        // Les nouveaux identifiants portent deux points ; les anciens, jamais.
+        guard ancienne.keys.contains(where: { !$0.contains(":") }) else { return ancienne }
+
+        var parTheme: [String: [Question]] = [:]
+        for fichier in QuestionBank.tousLesThemes {
+            parTheme[fichier.theme.id] = fichier.questions
+        }
+        var neuve: [String: Int] = [:]
+        for (cle, compte) in ancienne {
+            if cle.contains(":") { neuve[cle] = compte; continue }
+            guard let tiret = cle.lastIndex(of: "-"),
+                  let rang = Int(cle[cle.index(after: tiret)...]),
+                  let questions = parTheme[String(cle[..<tiret])],
+                  questions.indices.contains(rang)
+            else { continue }
+            neuve[questions[rang].id, default: 0] += compte
+        }
+        return neuve
     }
 
     /// L'écriture est atomique, comme celle de la partie : une coupure au

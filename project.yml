@@ -31,6 +31,11 @@ targets:
       # Les questions sont des ressources et non du code : mille lignes de
       # texte n'ont rien à faire dans un fichier Swift.
       - path: Resources/Questions
+      # Le faux App Store, visible dans Xcode pour qu'on puisse en changer les
+      # prix — mais hors de toute phase de construction : il ne part pas dans
+      # le paquet, et n'a rien à y faire.
+      - path: Resources/Riskelo.storekit
+        buildPhase: none
     info:
       path: Resources/Info.plist
       properties:
@@ -111,5 +116,17 @@ schemes:
       targets:
         Riskelo: all
         RiskeloTests: [test]
+    # L'App Store de bureau, attaché au schéma : on essaie les achats sans rien
+    # créer chez Apple, et rien n'est facturé.
+    #
+    # Le chemin est compté depuis « Riskelo.xcodeproj/xcshareddata », et non
+    # depuis le dossier des schémas : deux niveaux au-dessus, et l'on est à la
+    # racine du projet. XcodeGen ajoute ces deux niveaux lui-même, il ne faut
+    # donc rien mettre devant.
+    #
+    # Un « ../ » de trop et Xcode cherche le fichier sur le Bureau, un cran
+    # au-dessus du projet — c'est ce qu'il disait mot pour mot.
+    run:
+      storeKitConfiguration: Resources/Riskelo.storekit
     test:
       targets: [RiskeloTests]

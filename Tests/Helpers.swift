@@ -36,3 +36,25 @@ extension GameState {
         return (base, cible)
     }
 }
+
+/// Les thèmes livrés, nommés pour les tests.
+///
+/// Le code de production ne nomme plus aucun thème — c'était tout l'objet du
+/// passage de l'enum au catalogue lu dans le dossier. Les tests, eux, éprouvent
+/// la banque réelle : ils ont besoin de désigner celui-ci plutôt que celui-là,
+/// et un test qui écrirait « Category("histoire") » vingt fois se relirait mal.
+///
+/// Ces noms vivent donc ici, dans la cible de test, et nulle part ailleurs. Si
+/// l'un d'eux disparaissait du dossier des questions, les tests le diraient —
+/// c'est exactement ce qu'on leur demande.
+/// Le nom est qualifié : « Category » seul est ambigu dans la cible de test,
+/// et le reste des tests le qualifiait déjà.
+extension Riskelo.Category {
+    static let geographie = Riskelo.Category("geographie")
+    static let histoire   = Riskelo.Category("histoire")
+    static let sciences   = Riskelo.Category("sciences")
+    static let arts       = Riskelo.Category("arts")
+    static let sports     = Riskelo.Category("sports")
+    static let spectacle  = Riskelo.Category("spectacle")
+    static let histoire4e = Riskelo.Category("histoire-4e")
+}

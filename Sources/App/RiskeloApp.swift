@@ -47,6 +47,9 @@ final class RootModel {
     /// Les réglages, ouverts depuis l'accueil. Ils étaient l'accueil ; ils
     /// n'en sont plus qu'une porte.
     var reglages = false
+    /// Les packs, ouverts depuis l'accueil. Ils ne sont pas sous les réglages :
+    /// un pack se possède, il ne se règle pas.
+    var packs = false
     /// L'ouverture — les deux camps qui se rejoignent — ne se joue qu'une
     /// fois par lancement.
     var ouvertureJouee = false
@@ -78,6 +81,8 @@ struct RootView: View {
                 }, onClose: { withAnimation { model.bibliotheque = false } })
             } else if model.manuel {
                 ManuelView(onClose: { withAnimation { model.manuel = false } })
+            } else if model.packs {
+                PacksView(onClose: { withAnimation { model.packs = false } })
             } else if model.salonReglages, let salon = model.salon {
                 // Les mêmes réglages, en écran plein comme tout le reste de
                 // l'application — et réduits à ce qu'une table à plusieurs
@@ -144,6 +149,7 @@ struct RootView: View {
                         }
                     },
                     onReglages: { depuisAccueil { model.reglages = true } },
+                    onPacks: { depuisAccueil { model.packs = true } },
                     // L'application reprenait la partie enregistrée d'elle-même
                     // au lancement. Elle ne le fait plus : un accueil qu'on ne
                     // voit jamais n'est pas un accueil. La reprise vient juste

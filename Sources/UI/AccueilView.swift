@@ -32,6 +32,24 @@ enum PartieRapide {
     static let guerreTotale = false
     static let objectifs = false
     static let mode: Rules.Mode = .classique
+    /// Les thèmes en jeu : ce que la page des packs a retenu, et non une
+    /// valeur d'usine. C'est ce qui manquait — « Partie rapide », la reprise
+    /// et la table en réseau partaient toutes d'ici, et ignoraient donc ce
+    /// qu'on avait coché ailleurs.
+    static var themes: Set<String> { Packs.enJeu }
+
+    /// Ce qui se joue en ce moment, en une ligne : sans elle, « Packs » ne dit
+    /// pas si l'on en a un, ni lequel tourne.
+    static var packsEnUnePhrase: String {
+        let enJeu = Themes.tous.filter { Packs.enJeu.contains($0.id) }
+        let packs = enJeu.filter { $0.produit != nil }
+        let base = enJeu.contains { $0.produit == nil }
+        if packs.isEmpty {
+            return "Culture générale seule"
+        }
+        let noms = packs.map(\.label).joined(separator: " · ")
+        return base ? "Culture générale · " + noms : noms
+    }
 
     /// Les règles, assemblées à partir de ce que l'écran des réglages propose.
     /// Appelée sans rien, elle rend la partie par défaut.
@@ -40,13 +58,15 @@ enum PartieRapide {
                        cartes: Bool = PartieRapide.cartes,
                        mode: Rules.Mode = PartieRapide.mode,
                        guerreTotale: Bool = PartieRapide.guerreTotale,
-                       objectifs: Bool = PartieRapide.objectifs) -> Rules {
+                       objectifs: Bool = PartieRapide.objectifs,
+                       themes: Set<String> = PartieRapide.themes) -> Rules {
         var r = Rules()
         r.answersPerBonusMan = erudition == 0 ? nil : erudition
         r.difficultyWeights = dosage.poids
         r.territoryCards = cartes
         r.mode = mode
         r.objectifs = objectifs
+        r.themes = themes.isEmpty ? nil : themes
         if guerreTotale { r.dominationOverride = 0 }
         return r
     }
@@ -154,6 +174,10 @@ struct AccueilView: View {
     /// réglages : c'est une façon de jouer, pas un réglage de partie.
     var onReseau: () -> Void
     var onReglages: () -> Void
+    /// La page des packs. Elle n'est pas sous « Réglages » : un pack n'est pas
+    /// un réglage de partie, c'est quelque chose qu'on possède et qui vaut
+    /// pour toutes les parties.
+    var onPacks: () -> Void = { }
     /// Proposé seulement s'il y a une partie en attente : un bouton qui ne
     /// mène nulle part vaut mieux absent.
     var onResume: (() -> Void)?
@@ -280,6 +304,21 @@ struct AccueilView: View {
                     .frame(maxWidth: .infinity).padding(.vertical, 13)
             }
             .buttonStyle(.bordered).tint(Palette.rose)
+
+            // Sous les réglages, parce qu'on n'y va pas à chaque partie — mais
+            // sur l'accueil, parce qu'on y va exprès, et qu'un pack acheté doit
+            // se retrouver sans chercher.
+            VStack(spacing: 6) {
+                Button(action: onPacks) {
+                    Label("Packs de questions", systemImage: "square.stack.3d.up.fill")
+                        .font(.subheadline.weight(.medium))
+                        .frame(maxWidth: .infinity).padding(.vertical, 13)
+                }
+                .buttonStyle(.bordered).tint(Palette.camp(3))
+                Text(PartieRapide.packsEnUnePhrase)
+                    .font(.caption2).foregroundStyle(Palette.dim)
+                    .multilineTextAlignment(.center)
+            }
 
             // Deux portes de service, en retrait : elles ne servent pas à
             // jouer, mais les enterrer sous « Réglages » aurait été mentir sur

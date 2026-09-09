@@ -98,6 +98,20 @@ struct Rules: Equatable, Codable {
     /// Poids de tirage des trois niveaux de difficulté.
     var difficultyWeights: [Difficulty: Int] = Dosage.melees.poids
 
+    /// Les thèmes en jeu, par leur identifiant.
+    ///
+    /// C'est une règle de la partie et non un réglage de l'appareil : elle
+    /// voyage donc avec elle, et celui qui rejoint joue les thèmes de l'hôte.
+    /// Deux appareils qui ne s'accorderaient pas là-dessus ne poseraient pas
+    /// les mêmes questions.
+    ///
+    /// Absente ou vide, elle veut dire **tous** — et non aucun. Deux raisons :
+    /// une partie enregistrée avant ce réglage n'en a pas et doit reprendre
+    /// telle qu'elle était, et un thème ajouté plus tard entre de lui-même
+    /// dans les parties de qui n'a rien choisi. Une liste de tous les thèmes
+    /// cochés serait une liste qui vieillit.
+    var themes: Set<String>?
+
     /// Le dosage des questions, tel qu'on le choisit à la mise en place. C'est
     /// un réglage de jeu — on choisit à quel point la partie est corsée, comme
     /// on choisit la culture de la machine.

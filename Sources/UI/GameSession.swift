@@ -204,7 +204,11 @@ final class GameSession {
     /// Le terrain de l'assaut en préparation. Vide, c'est « au hasard » :
     /// l'attaquant renonce à choisir, et la question se tire dans toute la
     /// banque.
-    private(set) var draftCategory: Category? = .geographie
+    /// Le thème proposé d'entrée : le premier de la grille. Il était nommé —
+    /// « la géographie » — et un thème nommé dans le code est un thème qu'on
+    /// ne peut plus retirer de son dossier sans casser la compilation. Il est
+    /// ramené dans ce que la table autorise dès qu'une cible est désignée.
+    private(set) var draftCategory: Category? = Themes.tous.first
     var draftQuestions = 1
     /// Le joueur a-t-il déjà choisi un terrain lui-même ? Tant que non,
     /// l'application lui suggère la faiblesse de l'adversaire — une fois, pour
@@ -681,6 +685,13 @@ final class GameSession {
                 draftQuestions = min(draftQuestions, game.maxQuestions(from: base))
                 if !categoryChosen {
                     draftCategory = game.weakness(of: game.owner[id] ?? -1) ?? draftCategory
+                }
+                // Le thème proposé doit être un thème de la table. Sans ce
+                // rappel, une partie qui écarte le premier thème de la grille
+                // ouvrirait sur un bouton que la grille ne montre pas : rien
+                // ne paraîtrait choisi, et le joueur ne saurait pas pourquoi.
+                if let c = draftCategory, !game.themesEnJeu.contains(c) {
+                    draftCategory = game.themesEnJeu.first
                 }
             }
 

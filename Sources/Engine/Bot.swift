@@ -155,7 +155,11 @@ enum Bot {
     /// garde ses forces d'un bout à l'autre de la partie.
     static func aptitude(_ joueur: PlayerID, _ categorie: Category) -> Double {
         let relief = [0.16, 0.09, 0.0, -0.09, -0.16, 0.0]
-        let rang = Category.allCases.firstIndex(of: categorie) ?? 0
+        // Le rang venait de la place du thème dans l'enum. Un thème ajouté
+        // décalait le relief de tous ceux d'après : la machine changeait de
+        // forces parce qu'on avait déposé un fichier. Il se tire désormais du
+        // nom du thème, qui ne bouge pas quand ses voisins bougent.
+        let rang = Int(QuestionBank.empreinte(categorie.id) % UInt64(relief.count))
         return relief[(rang + joueur * 2) % relief.count]
     }
 
@@ -415,10 +419,14 @@ enum Bot {
                                                    using rng: inout G) -> Category {
         let style = g.currentPlayer.style
         // Sans flair, elle ne regarde même pas le dossier.
-        guard style.flair > 0 else { return Category.allCases.randomElement(using: &rng)! }
+        // Un catalogue vide ne peut pas arriver — le jeu n'aurait aucune question
+        // — mais il ne doit pas pour autant faire tomber l'application.
+        guard style.flair > 0 else {
+            return g.themesEnJeu.randomElement(using: &rng) ?? Category("")
+        }
 
         let precedente = style == .forte ? g.lastCategoryAgainst[player] : nil
-        let poids: [(Category, Double)] = Category.allCases.map { c in
+        let poids: [(Category, Double)] = g.themesEnJeu.map { c in
             let score = g.record(of: player, in: c)
             // Sans échantillon, on prête à l'adversaire une réussite moyenne :
             // ni redoutable ni offert, donc digne d'être sondé.

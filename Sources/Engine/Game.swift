@@ -284,7 +284,7 @@ struct GameState {
     /// Le total gagné depuis le début, tous thèmes confondus.
     func eruditionEarned(_ player: PlayerID) -> Int {
         guard let seuil = rules.answersPerBonusMan, seuil > 0 else { return 0 }
-        return Category.allCases.reduce(0) { $0 + record(of: player, in: $1).correct / seuil }
+        return themesEnJeu.reduce(0) { $0 + record(of: player, in: $1).correct / seuil }
     }
 
     /// Ce qui lui revient et ne lui a pas encore été versé.
@@ -344,7 +344,23 @@ struct GameState {
             .filter { $0.value.asked >= 2 && $0.value.rate < 0.5 }
             .min { $0.value.rate < $1.value.rate ? true
                  : $0.value.rate > $1.value.rate ? false
-                 : $0.key.rawValue < $1.key.rawValue }?.key
+                 : $0.key.id < $1.key.id }?.key
+    }
+
+    /// Les thèmes que cette partie utilise, dans l'ordre de la grille.
+    ///
+    /// Rien de dit veut dire le jeu de base — les thèmes que tout le monde
+    /// possède — et non tous les thèmes connus de l'appareil : les packs se
+    /// choisissent, ils ne s'invitent pas. C'est aussi ce qui fait qu'une
+    /// partie enregistrée avant les packs reprend telle qu'elle était.
+    ///
+    /// Un repli plutôt qu'une liste vide : des règles qui ne nommeraient que
+    /// des thèmes absents de cet appareil rendraient la partie injouable, et
+    /// une partie sans question ne se distingue pas d'une panne.
+    var themesEnJeu: [Category] {
+        guard let choisis = rules.themes, !choisis.isEmpty else { return Themes.base }
+        let retenus = Themes.tous.filter { choisis.contains($0.id) }
+        return retenus.isEmpty ? Themes.base : retenus
     }
 
     func record(of player: PlayerID, in category: Category) -> Score {
@@ -461,7 +477,8 @@ struct GameState {
 
     private mutating func drawQuestion(_ a: inout Assault) -> Bool {
         let level = rules.drawDifficulty(using: &rng)
-        guard let asked = bank.draw(category: a.category, difficulty: level, using: &rng) else {
+        guard let asked = bank.draw(category: a.category, parmi: themesEnJeu,
+                                    difficulty: level, using: &rng) else {
             return false
         }
         let pressure = siege[a.to] ?? 0

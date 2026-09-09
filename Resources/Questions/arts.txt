@@ -7,6 +7,17 @@
 # Un leurre doit être faux mais crédible — un leurre absurde ne fait pas
 # une question, il fait une question à trois propositions.
 
+# Ce que ce thème déclare — nom lisible, élision, icône, couleur, et sa
+# place dans la grille. Ces lignes ne sont pas des commentaires : sans
+# elles le thème n'a pas de nom.
+
+! id     | arts
+! nom    | Arts & Lettres
+! de     | d'Arts & Lettres
+! icone  | book
+! teinte | 0.62 0.45 0.34
+! rang   | 3
+
 F | Qui a peint La Joconde ? | Léonard de Vinci | Michel-Ange | Raphaël | Botticelli
 F | Qui a écrit Les Misérables ? | Victor Hugo | Émile Zola | Balzac | Alexandre Dumas
 F | Qui a écrit Roméo et Juliette ? | William Shakespeare | Molière | Christopher Marlowe | Racine

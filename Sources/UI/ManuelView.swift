@@ -438,7 +438,7 @@ enum Manuel {
     private static let duel = Chapitre(
         id: "duel", titre: "Le duel",
         resume: "La question tient lieu de dé — qui la pose, qui y répond, en combien de temps.",
-        icone: "questionmark.circle.fill", teinte: Palette.category(.geographie),
+        icone: "questionmark.circle.fill", teinte: Palette.bleu,
         blocs: [
             .p("L'attaquant choisit deux choses : le thème de la question, et le "
                + "nombre de questions — une ou deux. Ce sont ses dés. Le défenseur, "
@@ -642,7 +642,7 @@ enum Manuel {
     private static let miseEnPlace = Chapitre(
         id: "reglages", titre: "La mise en place",
         resume: "Tous les réglages du bouton « Réglages », un par un.",
-        icone: "slider.horizontal.3", teinte: Palette.category(.sciences),
+        icone: "slider.horizontal.3", teinte: Palette.vert,
         blocs: [
             .h("Mode de jeu"),
             .termes([
@@ -735,7 +735,7 @@ enum Manuel {
     private static let ecran = Chapitre(
         id: "ecran", titre: "L'écran de jeu",
         resume: "Ce que porte chaque barre, et ce qui répond au doigt.",
-        icone: "rectangle.3.group.fill", teinte: Palette.category(.arts),
+        icone: "rectangle.3.group.fill", teinte: Palette.bois,
         blocs: [
             .h("La barre du haut"),
             .termes([
@@ -808,7 +808,7 @@ enum Manuel {
     private static let cartes = Chapitre(
         id: "cartes", titre: "Les cartes de territoire",
         resume: "L'option qui change l'économie des renforts.",
-        icone: "rectangle.stack.fill", teinte: Palette.category(.histoire),
+        icone: "rectangle.stack.fill", teinte: Palette.or,
         blocs: [
             .p("Comme dans la boîte : une carte par territoire, plus deux jokers. Chaque "
                + "carte porte un symbole — infanterie, cavalerie, artillerie."),
@@ -843,7 +843,7 @@ enum Manuel {
     private static let dossier = Chapitre(
         id: "dossier", titre: "Le dossier et le journal",
         resume: "Ce que chacun a montré savoir, et tout ce qui s'est passé.",
-        icone: "person.text.rectangle.fill", teinte: Palette.category(.spectacle),
+        icone: "person.text.rectangle.fill", teinte: Palette.mauve,
         blocs: [
             .h("Le dossier"),
             .p("Il se remplit tout seul, question après question : pour chaque joueur et "
@@ -962,7 +962,7 @@ enum Manuel {
     private static let banque = Chapitre(
         id: "questions", titre: "Les questions",
         resume: "Six thèmes, deux mille quatre cents questions, trois niveaux.",
-        icone: "text.book.closed.fill", teinte: Palette.category(.sports),
+        icone: "text.book.closed.fill", teinte: Palette.orange,
         blocs: [
             .p("Deux mille quatre cents questions à choix multiple, quatre cents par thème, "
                + "toutes en français. Elles sont dans l'application : aucune connexion "

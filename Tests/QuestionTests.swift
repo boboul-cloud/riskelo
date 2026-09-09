@@ -16,33 +16,251 @@ struct QuestionTests {
     /// Le fichier remplace le compilateur : ce qu'il ne relit plus, ce test
     /// le relit. Et mieux — le compilateur n'a jamais su dire qu'un leurre
     /// était égal à la bonne réponse.
-    @Test(arguments: Category.allCases)
+    @Test(arguments: Themes.tous)
     func chaqueFichierSeLit(_ c: Category) {
-        let lues = QuestionBank.charger(c)
+        let lues = QuestionBank.questions(in: c)
         #expect(!lues.isEmpty, "\(c.label) : fichier absent ou vide")
         #expect(lues.allSatisfy { $0.category == c })
     }
 
+    /// Le dossier fait la liste : un fichier déposé est un thème de plus, et
+    /// aucun code ne les énumère. Encore faut-il que le catalogue les trouve.
+    @Test func leDossierFaitLaListeDesThemes() {
+        #expect(Themes.tous.count >= 7, "un thème manque à l'appel")
+        for c in Themes.tous {
+            let t = Themes.connu(c)
+            #expect(t != nil, "\(c.id) : thème sans carte d'identité")
+            #expect(t?.nom.isEmpty == false, "\(c.id) : thème sans nom")
+        }
+        // L'ordre affiché ne doit pas dépendre de l'ordre où le système a
+        // rendu les fichiers : deux appareils montreraient deux grilles.
+        let rangs = Themes.tous.compactMap { Themes.connu($0)?.rang }
+        #expect(rangs == rangs.sorted(), "la grille n'est pas dans l'ordre déclaré")
+    }
+
+    /// Un thème écarté à la mise en place ne sort jamais — ni par son bouton,
+    /// ni par « au hasard ».
+    ///
+    /// C'est le seul contrôle qui compte pour ce réglage : écarter un thème
+    /// sans filtrer le tirage n'aurait écarté que son bouton, et le joueur
+    /// aurait vu revenir en « au hasard » exactement ce qu'il venait de
+    /// retirer.
+    @Test func unThemeEcarteNeSortJamais() {
+        var r = Rules()
+        r.themes = ["sports", "arts"]
+        var g = GameState.start(board: .anneau,
+                                players: [Player(id: 0, name: "A", kind: .humain),
+                                          Player(id: 1, name: "B", kind: .humain)],
+                                rules: r, seed: 3)
+        #expect(g.themesEnJeu.map(\.id).sorted() == ["arts", "sports"])
+
+        var rng = SeededRandom(seed: 3)
+        for _ in 0 ..< 200 {
+            let q = g.bank.draw(category: nil, parmi: g.themesEnJeu,
+                                difficulty: nil, using: &rng)
+            #expect(q != nil)
+            #expect(["sports", "arts"].contains(q!.question.category.id),
+                    "« au hasard » a sorti un thème écarté")
+        }
+        // Et le thème nommé lui-même est refusé : un coup venu du réseau ne
+        // doit pas pouvoir forcer un thème que la table a retiré.
+        let force = g.bank.draw(category: .histoire, parmi: g.themesEnJeu,
+                                difficulty: nil, using: &rng)
+        #expect(force == nil, "un thème écarté est sorti quand on l'a nommé")
+    }
+
+    /// Rien de choisi veut dire le jeu de base — ni tout, ni rien.
+    ///
+    /// Ni rien, parce qu'une partie sans question ne se distingue pas d'une
+    /// panne. Ni tout, parce que les packs se choisissent : ils ne doivent pas
+    /// s'inviter dans la partie de qui ne les a pas demandés — et une partie
+    /// enregistrée avant les packs doit reprendre telle qu'elle était.
+    @Test func aucunThemeChoisiVeutDireLeJeuDeBase() {
+        let g = GameState.start(board: .anneau,
+                                players: [Player(id: 0, name: "A", kind: .humain),
+                                          Player(id: 1, name: "B", kind: .humain)],
+                                rules: Rules(), seed: 1)
+        #expect(g.themesEnJeu.map(\.id).sorted() == Themes.base.map(\.id).sorted())
+        #expect(g.themesEnJeu.allSatisfy { $0.produit == nil }, "un pack s'est invité")
+
+        // Et des règles qui ne nomment que des thèmes absents ne laissent pas
+        // une partie sans question.
+        var r = Rules()
+        r.themes = ["un-theme-qui-nexiste-pas"]
+        let h = GameState.start(board: .anneau,
+                                players: [Player(id: 0, name: "A", kind: .humain),
+                                          Player(id: 1, name: "B", kind: .humain)],
+                                rules: r, seed: 1)
+        #expect(h.themesEnJeu.count == Themes.base.count)
+    }
+
+    /// Un pack se déclare vendu, et le catalogue le range du bon côté.
+    @Test func unPackSeDistingueDuJeuDeBase() {
+        #expect(Themes.base.count == 6, "le jeu de base a six thèmes")
+        #expect(Themes.packs.count == 4, "quatre packs sont livrés")
+        // Un pack se vend : il doit tenir plusieurs soirées. Mesuré sur vingt
+        // séries de cinq parties, deux cents questions donnent deux soirées
+        // propres et une troisième acceptable ; en dessous de cent cinquante,
+        // la deuxième soirée est déjà une redite.
+        for pack in Themes.packs {
+            #expect(QuestionBank.questions(in: pack).count >= 200,
+                    "\(pack.id) : trop maigre pour être vendu")
+        }
+        #expect(Themes.base.allSatisfy { $0.produit == nil })
+        for pack in Themes.packs {
+            let t = Themes.connu(pack)
+            #expect(t?.produit?.hasPrefix("com.oulhen.riskelo.pack.") == true,
+                    "\(pack.id) : article mal nommé")
+            #expect(t?.detail.isEmpty == false, "\(pack.id) : rien à montrer en boutique")
+        }
+        // Les articles sont distincts : deux packs sur le même article se
+        // déverrouilleraient l'un l'autre.
+        let articles = Themes.packs.compactMap(\.produit)
+        #expect(Set(articles).count == articles.count)
+    }
+
+    /// Le choix des packs vaut pour **toutes** les façons de lancer une
+    /// partie, et non pour la seule qui passe par l'écran des réglages.
+    ///
+    /// C'est le défaut qu'a signalé l'usage, et il valait la peine : le choix
+    /// vivait dans « Réglages de la partie », dont le bouton de départ est le
+    /// seul des cinq à lire ce qu'on y coche. Partie rapide, reprise et table
+    /// en réseau partaient toutes de `PartieRapide.regles()`, c'est-à-dire des
+    /// valeurs d'usine. On décochait un thème, et il revenait.
+    @Test func leChoixDesPacksVautPourLaPartieRapide() {
+        let choisisAvant = Packs.choisis
+        let baseAvant = Packs.avecBase
+        defer { Packs.choisis = choisisAvant; Packs.avecBase = baseAvant }
+
+        // Un pack seul, sans la culture générale.
+        Packs.avecBase = false
+        Packs.choisis = ["histoire-4e"]
+        let seul = GameState.start(board: .anneau,
+                                   players: [Player(id: 0, name: "A", kind: .humain),
+                                             Player(id: 1, name: "B", kind: .humain)],
+                                   rules: PartieRapide.regles(), seed: 1)
+        #expect(seul.themesEnJeu.map(\.id) == ["histoire-4e"],
+                "la partie rapide ignore le choix des packs")
+
+        // Deux packs mêlés, toujours sans la culture générale.
+        Packs.choisis = ["histoire-4e", "histoire-3e"]
+        let melange = GameState.start(board: .anneau,
+                                      players: [Player(id: 0, name: "A", kind: .humain),
+                                                Player(id: 1, name: "B", kind: .humain)],
+                                      rules: PartieRapide.regles(), seed: 1)
+        #expect(melange.themesEnJeu.map(\.id).sorted() == ["histoire-3e", "histoire-4e"])
+
+        // Et la culture générale par-dessus.
+        Packs.avecBase = true
+        let avec = GameState.start(board: .anneau,
+                                   players: [Player(id: 0, name: "A", kind: .humain),
+                                             Player(id: 1, name: "B", kind: .humain)],
+                                   rules: PartieRapide.regles(), seed: 1)
+        #expect(avec.themesEnJeu.count == Themes.base.count + 2)
+    }
+
+    /// Tout décocher n'est pas permis : le jeu de base revient.
+    @Test func onNeJoueJamaisSansAucunTheme() {
+        let choisisAvant = Packs.choisis
+        let baseAvant = Packs.avecBase
+        defer { Packs.choisis = choisisAvant; Packs.avecBase = baseAvant }
+
+        Packs.avecBase = false
+        Packs.choisis = []
+        #expect(Packs.enJeu == Set(Themes.base.map(\.id)))
+    }
+
+    /// La mémoire d'un joueur qui jouait déjà ne se perd pas au changement
+    /// d'identifiants.
+    ///
+    /// L'application est publiée : quelqu'un a derrière lui des mois de
+    /// parties, et son fichier nomme les questions par leur rang. Sans
+    /// traduction, tout serait écarté et il reverrait d'un coup ses premières
+    /// questions — un défaut que personne ne saurait nommer, et que personne
+    /// ne signalerait donc.
+    @Test func laMemoireDAvantLesIdentifiantsStablesSeRetrouve() {
+        let histoire = QuestionBank.questions(in: .histoire)
+        let sports = QuestionBank.questions(in: .sports)
+        let ancienne = ["histoire-0": 3, "histoire-12": 1, "sports-7": 2,
+                        // Un thème disparu, et un rang au-delà du fichier :
+                        // on préfère perdre une ligne qu'en inventer une.
+                        "cuisine-4": 9, "histoire-99999": 5]
+        let neuve = MemoireDesQuestions.traduire(ancienne)
+
+        #expect(neuve[histoire[0].id] == 3)
+        #expect(neuve[histoire[12].id] == 1)
+        #expect(neuve[sports[7].id] == 2)
+        #expect(neuve.count == 3, "une ligne a été inventée ou perdue")
+        #expect(neuve.keys.allSatisfy { $0.contains(":") })
+
+        // Traduite deux fois, elle ne bouge plus.
+        #expect(MemoireDesQuestions.traduire(neuve) == neuve)
+    }
+
     /// Une ligne mal formée doit être vue, pas devinée.
     @Test func uneLigneMalFormeeNePasseraPas() {
-        let bonnes = QuestionBank.lire("""
+        let entete = "! id | essai\n! nom | Essai\n"
+        let lu = QuestionBank.lire(entete + """
             # un commentaire
 
             F | Combien font deux et deux ? | Quatre | Trois | Cinq | Six
-            """, categorie: .sciences)
-        #expect(bonnes.count == 1)
-        #expect(bonnes.first?.decoys.count == 3)
-        #expect(bonnes.first?.difficulty == .facile)
-        #expect(QuestionBank.lire("", categorie: .sciences).isEmpty)
-        #expect(QuestionBank.lire("# rien que des commentaires", categorie: .sciences).isEmpty)
+            """, nomDeFichier: "essai")
+        #expect(lu?.questions.count == 1)
+        #expect(lu?.questions.first?.decoys.count == 3)
+        #expect(lu?.questions.first?.difficulty == .facile)
+        #expect(QuestionBank.lire(entete, nomDeFichier: "essai")?.questions.isEmpty == true)
+        #expect(QuestionBank.lire(entete + "# rien que des commentaires",
+                                  nomDeFichier: "essai")?.questions.isEmpty == true)
+    }
+
+    /// Un thème se déclare, et ce qu'il déclare arrive jusqu'à l'écran.
+    @Test func unThemeSeDeclareDansSonFichier() {
+        let lu = QuestionBank.lire("""
+            ! id     | essai
+            ! nom    | Essai
+            ! de     | d'Essai
+            ! icone  | flask
+            ! teinte | 0.10 0.20 0.30
+            ! rang   | 4
+
+            F | Combien font deux et deux ? | Quatre | Trois | Cinq | Six
+            """, nomDeFichier: "autre-nom")
+        let t = lu?.theme
+        #expect(t?.id == "essai", "l'identifiant déclaré passe avant le nom du fichier")
+        #expect(t?.nom == "Essai")
+        #expect(t?.de == "d'Essai")
+        #expect(t?.icone == "flask")
+        #expect(t?.teinte == Theme.Teinte(r: 0.10, v: 0.20, b: 0.30))
+        #expect(t?.rang == 4)
+    }
+
+    /// L'identifiant d'une question tient à son énoncé, et non à sa place.
+    ///
+    /// C'est ce qui permet de corriger un fichier vendu sans effacer la
+    /// mémoire de ceux qui l'ont acheté : insérer une question en tête
+    /// décalait tous les identifiants suivants, et le jeu croyait alors avoir
+    /// déjà posé des questions qu'il n'avait jamais vues.
+    @Test func lIdentifiantSurvitAUneQuestionInseree() {
+        let entete = "! id | essai\n! nom | Essai\n"
+        let avant = QuestionBank.lire(entete + """
+            F | Combien font deux et deux ? | Quatre | Trois | Cinq | Six
+            """, nomDeFichier: "essai")
+        let apres = QuestionBank.lire(entete + """
+            F | Combien font trois et trois ? | Six | Cinq | Sept | Huit
+            F | Combien font deux et deux ? | Quatre | Trois | Cinq | Six
+            """, nomDeFichier: "essai")
+        #expect(avant?.questions.first?.id == apres?.questions.last?.id)
+        // Et il ne dépend d'aucun hachage salé au démarrage.
+        #expect(QuestionBank.identifiant(theme: "essai", enonce: "Deux et deux ?")
+                == QuestionBank.identifiant(theme: "essai", enonce: "Deux et deux ?"))
     }
 
     /// Deux fois la même question dans un thème, c'est une question de moins
     /// et un joueur qui croit à un bogue. À la main, sur un millier de lignes,
     /// cela arrive.
-    @Test(arguments: Category.allCases)
+    @Test(arguments: Themes.tous)
     func aucunEnonceNiReponseNEstRepeteDansUnTheme(_ c: Category) {
-        let lues = QuestionBank.charger(c)
+        let lues = QuestionBank.questions(in: c)
         let enonces = lues.map { $0.prompt.lowercased() }
         #expect(Set(enonces).count == enonces.count,
                 "\(c.label) : énoncé en double")
@@ -55,9 +273,9 @@ struct QuestionTests {
     /// la main, j'ai laissé trois fois mes propres hésitations dans le texte —
     /// « Quel jeu se joue avec des dominos... plutôt : combien de faces a un
     /// dé ? ». Rien ne plante, et le joueur lit une phrase absurde.
-    @Test(arguments: Category.allCases)
+    @Test(arguments: Themes.tous)
     func chaqueEnonceEstUneSeuleQuestion(_ c: Category) {
-        for q in QuestionBank.charger(c) {
+        for q in QuestionBank.questions(in: c) {
             #expect(q.prompt.filter { $0 == "?" }.count == 1,
                     "un seul point d'interrogation attendu : \(q.prompt)")
             #expect(q.prompt.hasSuffix("?"), "l'énoncé doit finir par « ? » : \(q.prompt)")
@@ -68,9 +286,9 @@ struct QuestionTests {
 
     /// Une question qui ne tient pas dans la feuille se fait tronquer, et la
     /// réponse devient une devinette.
-    @Test(arguments: Category.allCases)
+    @Test(arguments: Themes.tous)
     func rienNEstTropLong(_ c: Category) {
-        for q in QuestionBank.charger(c) {
+        for q in QuestionBank.questions(in: c) {
             #expect(q.prompt.count <= 110, "trop long : \(q.prompt)")
             for p in [q.correct] + q.decoys {
                 #expect(p.count <= 46, "proposition trop longue : \(p)")
@@ -96,7 +314,7 @@ struct QuestionTests {
 
     /// Chaque catégorie doit tenir un assaut long sans se répéter.
     @Test func chaqueCategorieEstFournie() {
-        for c in Category.allCases {
+        for c in Themes.tous {
             #expect(QuestionBank().count(in: c) >= 8, "\(c.label) est trop maigre")
         }
     }
@@ -264,11 +482,14 @@ struct QuestionTests {
     /// s'enregistre à chaque coup, et une même question ne doit pas se compter
     /// autant de fois qu'il y a de sauvegardes.
     @Test func laMemoireNeCompteJamaisDeuxFoisLaMemeQuestion() {
-        var bank = QuestionBank(vues: ["histoire-0": 2])
+        // Une question réelle de la banque : les identifiants se calculent sur
+        // l'énoncé, ils ne s'écrivent plus à la main.
+        let ancienne = QuestionBank.questions(in: .histoire)[0].id
+        var bank = QuestionBank(vues: [ancienne: 2])
         var rng = SeededRandom(seed: 2)
         let posee = bank.draw(category: .histoire, difficulty: nil, using: &rng)!.id
         #expect(bank.vuesAJour[posee] == 1)
-        #expect(bank.vuesAJour["histoire-0"] == (posee == "histoire-0" ? 3 : 2))
+        #expect(bank.vuesAJour[ancienne] == (posee == ancienne ? 3 : 2))
         // Deux enregistrements de suite donnent le même compte.
         #expect(bank.vuesAJour == QuestionBank(vues: bank.vuesAJour).dejaVues)
     }
@@ -278,10 +499,12 @@ struct QuestionTests {
     /// différentes — mais il n'hérite pas de ses soirées : sa propre mémoire
     /// n'enregistre que ce qui a été posé dans cette partie-là.
     @Test func celuiQuiRejointNHeritePasDesSoireesDeLHote() {
-        var recue = QuestionBank(vues: ["histoire-0": 4, "histoire-1": 4])
+        let deLHote = QuestionBank.questions(in: .histoire).prefix(2).map(\.id)
+        let laMienne = QuestionBank.questions(in: .arts)[0].id
+        var recue = QuestionBank(vues: Dictionary(uniqueKeysWithValues: deLHote.map { ($0, 4) }))
         var rng = SeededRandom(seed: 6)
         let posee = recue.draw(category: .histoire, difficulty: nil, using: &rng)!.id
-        #expect(recue.vuesAJour(depuis: ["arts-0": 1], sauf: []) == ["arts-0": 1, posee: 1])
+        #expect(recue.vuesAJour(depuis: [laMienne: 1], sauf: []) == [laMienne: 1, posee: 1])
     }
 
     /// Une partie reprise ne recompte pas ses questions de la veille.
@@ -306,8 +529,10 @@ struct QuestionTests {
     /// Une mémoire qui parle d'une autre banque ne vaut rien : les questions
     /// qu'elle nomme n'existent plus.
     @Test func uneMemoireEtrangereEstEcartee() {
-        let bank = QuestionBank(vues: ["sports-0": 3, "inconnue-42": 9, "arts-1": 0])
-        #expect(bank.dejaVues == ["sports-0": 3])
+        let connue = QuestionBank.questions(in: .sports)[0].id
+        let aZero = QuestionBank.questions(in: .arts)[1].id
+        let bank = QuestionBank(vues: [connue: 3, "inconnue-42": 9, aZero: 0])
+        #expect(bank.dejaVues == [connue: 3])
     }
 
     /// La banque doit tenir une soirée. Soixante questions pour une partie qui
@@ -316,7 +541,7 @@ struct QuestionTests {
     /// cinquante à cent soixante questions, et un thème peut en brûler
     /// vingt-cinq dans une seule.
     @Test func laBanqueTientPlusieursSoirees() {
-        for c in Category.allCases {
+        for c in Themes.tous {
             #expect(QuestionBank().count(in: c) >= 30, "\(c.label) s'épuiserait trop vite")
         }
     }

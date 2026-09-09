@@ -7,6 +7,17 @@
 # Un leurre doit être faux mais crédible — un leurre absurde ne fait pas
 # une question, il fait une question à trois propositions.
 
+# Ce que ce thème déclare — nom lisible, élision, icône, couleur, et sa
+# place dans la grille. Ces lignes ne sont pas des commentaires : sans
+# elles le thème n'a pas de nom.
+
+! id     | sciences
+! nom    | Sciences & Nature
+! de     | de Sciences & Nature
+! icone  | leaf
+! teinte | 0.34 0.65 0.42
+! rang   | 2
+
 F | Quel est le symbole chimique de l'or ? | Au | Ag | Or | Fe
 F | Quelle planète est la plus proche du Soleil ? | Mercure | Vénus | Mars | La Terre
 F | Combien d'os compte le squelette d'un adulte ? | 206 | 180 | 256 | 312

@@ -75,7 +75,7 @@ struct Simulation {
             print("   \(c.name) — \(c.territories.count) territoires, bonus \(c.bonus), \(portes.count) portes")
         }
         print("BANQUE — \(QuestionBank().count) questions : "
-              + Category.allCases.map { "\($0.label.prefix(4)) \(QuestionBank().count(in: $0))" }
+              + Themes.tous.map { "\($0.label.prefix(4)) \(QuestionBank().count(in: $0))" }
                 .joined(separator: ", "))
 
         // MARK: - Le duel

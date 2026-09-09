@@ -7,6 +7,17 @@
 # Un leurre doit être faux mais crédible — un leurre absurde ne fait pas
 # une question, il fait une question à trois propositions.
 
+# Ce que ce thème déclare — nom lisible, élision, icône, couleur, et sa
+# place dans la grille. Ces lignes ne sont pas des commentaires : sans
+# elles le thème n'a pas de nom.
+
+! id     | spectacle
+! nom    | Écrans & Musique
+! de     | d'Écrans & Musique
+! icone  | music.note.tv
+! teinte | 0.75 0.40 0.62
+! rang   | 5
+
 F | Quel détective habite au 221B Baker Street ? | Sherlock Holmes | Hercule Poirot | Arsène Lupin | Philip Marlowe
 F | Quel groupe britannique réunissait John, Paul, George et Ringo ? | Les Beatles | Les Rolling Stones | Les Who | Pink Floyd
 F | Quel personnage de J. K. Rowling porte une cicatrice en éclair ? | Harry Potter | Ron Weasley | Drago Malefoy | Neville Londubat

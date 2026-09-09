@@ -83,17 +83,26 @@ enum Palette {
         continents[((rang % continents.count) + continents.count) % continents.count]
     }
 
-    /// Les six camemberts.
+    /// Les camemberts. La teinte est déclarée par le thème, dans son fichier
+    /// de questions : c'est la seule façon qu'un thème ajouté ne soit pas gris.
     static func category(_ c: Category) -> Color {
-        switch c {
-        case .geographie: Color(red: 0.26, green: 0.55, blue: 0.80)
-        case .histoire:   Color(red: 0.85, green: 0.66, blue: 0.22)
-        case .sciences:   Color(red: 0.34, green: 0.65, blue: 0.42)
-        case .arts:       Color(red: 0.62, green: 0.45, blue: 0.34)
-        case .sports:     Color(red: 0.88, green: 0.52, blue: 0.24)
-        case .spectacle:  Color(red: 0.75, green: 0.40, blue: 0.62)
-        }
+        let t = c.teinte
+        return Color(red: t.r, green: t.v, blue: t.b)
     }
+
+    /// Les teintes des chapitres du mode d'emploi.
+    ///
+    /// Elles étaient empruntées aux thèmes de questions — « la couleur de la
+    /// géographie » pour le chapitre des règles. Un thème qui change de
+    /// couleur n'a rien à voir avec le mode d'emploi, et depuis que les thèmes
+    /// se déclarent dans leurs fichiers, un thème retiré laissait un chapitre
+    /// gris. Ce sont désormais six couleurs de la maison, et rien d'autre.
+    static let bleu   = Color(red: 0.26, green: 0.55, blue: 0.80)
+    static let vert   = Color(red: 0.34, green: 0.65, blue: 0.42)
+    static let bois   = Color(red: 0.62, green: 0.45, blue: 0.34)
+    static let or     = Color(red: 0.85, green: 0.66, blue: 0.22)
+    static let mauve  = Color(red: 0.75, green: 0.40, blue: 0.62)
+    static let orange = Color(red: 0.88, green: 0.52, blue: 0.24)
 
     static let sea = Color(red: 0.09, green: 0.12, blue: 0.16)
     static let ink = Color(red: 0.93, green: 0.94, blue: 0.95)

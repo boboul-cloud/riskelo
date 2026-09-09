@@ -722,7 +722,7 @@ struct GameTests {
         #expect(g.map.order.allSatisfy {
             reprise.owner[$0] == g.owner[$0] && reprise.armies($0) == g.armies($0)
         })
-        #expect(Riskelo.Category.allCases.allSatisfy {
+        #expect(Themes.tous.allSatisfy {
             reprise.record(of: 1, in: $0) == g.record(of: 1, in: $0)
         })
 

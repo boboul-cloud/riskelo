@@ -473,12 +473,45 @@ swiftc -O -parse-as-library -o /tmp/ecoute Sources/UI/Sons.swift outils/ecoute.s
 
 ## La banque de questions
 
-Deux mille quatre cents questions, **quatre cents par thème**, dans
-`Resources/Questions/` — un fichier par thème, une ligne par question :
+Deux mille cinq cents questions dans `Resources/Questions/` — **un fichier par
+thème**, une ligne par question :
 
 ```
 M | Quel fleuve traverse Le Caire ? | Le Nil | L'Euphrate | Le Jourdain | Le Niger
 ```
+
+**Un fichier déposé est un thème de plus.** Les thèmes ne sont énumérés nulle
+part dans le code : le dossier est lu au démarrage, et chaque fichier se
+présente en tête, avec des lignes qui ouvrent par `!` — des déclarations, et
+non des commentaires, car un commentaire se perd sans conséquence quand une
+déclaration manquante doit se voir :
+
+```
+! id     | histoire
+! nom    | Histoire
+! de     | d'Histoire        ← l'élision, qu'aucun calcul ne devine
+! icone  | building.columns
+! teinte | 0.85 0.66 0.22
+! rang   | 1                 ← sa place dans la grille
+```
+
+C'était un enum à six cas, et le nom, l'icône et la couleur de chacun vivaient
+dans trois `switch` répartis dans le code. Un enum ne grandit pas après la
+compilation : ajouter un thème demandait de rouvrir quatre fichiers. Le gain
+tient sans rien vendre — le nom d'un thème se corrige là où sont ses questions
+— et c'est ce qui rendra possible, le jour venu, un thème vendu à part.
+
+**L'identifiant d'une question se calcule sur son énoncé**, et non sur sa place
+dans le fichier. Il était le rang : insérer une question en tête décalait les
+mille suivantes, et la mémoire de ce qui a déjà été posé se mettait à parler
+d'autres questions que celles qu'elle nommait. Rien ne plantait — les questions
+revenaient simplement plus tôt qu'elles n'auraient dû.
+
+Le tirage trie sur cet identifiant avant de tirer. `randomElement` choisit un
+rang et non une question : deux appareils qui rangent leurs questions dans un
+ordre différent tiraient le même rang et posaient deux questions différentes.
+L'ordre venait des fichiers, c'est-à-dire de ce que le système avait rendu en
+premier — rien qui soit promis d'être le même sur un iPhone et sur un iPad.
 
 Elles étaient écrites en dur, et c'était juste tant qu'elles tenaient en
 quelques dizaines : le compilateur en était le meilleur relecteur. Passé le
@@ -503,6 +536,27 @@ humaine laisse passer sur mille lignes et qu'un test attrape à tous les coups.
 Une partie pose de cinquante à cent soixante questions, et un thème peut en
 brûler vingt-cinq dans une seule. Quatre cents par thème, c'est la banque qui
 tient des mois sans se répéter.
+
+Dix thèmes aujourd'hui : les six de culture générale à quatre cents questions,
+et quatre packs scolaires à deux cents — Histoire et Géographie, quatrième et
+troisième. Les packs n'ont demandé aucune ligne de code : quatre fichiers
+déposés dans le dossier.
+
+**Deux cents, et non cent : c'est mesuré.** Vingt séries de cinq soirées
+d'affilée sur un seul thème, part de questions déjà vues :
+
+| Questions dans le thème | 1re | 2e | 3e | 4e | 5e |
+|---|---|---|---|---|---|
+| 53 | 0 % | 81 % | 100 % | 100 % | 100 % |
+| 117 | 0 % | 35 % | 76 % | 98 % | 100 % |
+| 200 | 0 % | 2 à 15 % | 23 à 45 % | 45 à 66 % | 69 à 83 % |
+| 400 | 0 % | 0 % | 7 % | 28 % | 40 % |
+
+Une partie pose environ soixante questions. Un thème de cinquante joué seul est
+donc épuisé à la deuxième soirée — quatre questions sur cinq déjà vues. À deux
+cents, on a deux soirées propres et une troisième acceptable ; à quatre cents,
+quatre soirées. C'est ce tableau qui a fixé la taille des packs, et non
+l'inverse.
 
 ---
 

@@ -7,6 +7,17 @@
 # Un leurre doit être faux mais crédible — un leurre absurde ne fait pas
 # une question, il fait une question à trois propositions.
 
+# Ce que ce thème déclare — nom lisible, élision, icône, couleur, et sa
+# place dans la grille. Ces lignes ne sont pas des commentaires : sans
+# elles le thème n'a pas de nom.
+
+! id     | geographie
+! nom    | Géographie
+! de     | de Géographie
+! icone  | globe.europe.africa
+! teinte | 0.26 0.55 0.80
+! rang   | 0
+
 F | Quelle est la capitale de l'Australie ? | Canberra | Sydney | Melbourne | Perth
 F | Quel est le plus long fleuve d'Europe ? | La Volga | Le Danube | Le Rhin | La Loire
 F | Sur quel continent se trouve le désert du Kalahari ? | L'Afrique | L'Asie | L'Amérique du Sud | L'Océanie

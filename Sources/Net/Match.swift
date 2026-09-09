@@ -41,7 +41,12 @@ enum Message: Codable {
     ///     ce que l'appareil a déjà vu.
     /// 6 : les conquêtes personnelles voyagent avec la partie, et avec elles
     ///     le compte de qui a fait tomber qui.
-    static let dialecte = 6
+    /// 7 : les thèmes ne sont plus une liste figée dans le code. Un appareil
+    ///     resté en 1.3 refuse alors la partie au lieu de l'attendre : son
+    ///     enum ne connaît pas « histoire-4e », et c'est l'état entier qui
+    ///     devenait illisible — la panne muette que cette enveloppe existe
+    ///     précisément pour éviter.
+    static let dialecte = 7
 
     /// La partie entière, envoyée par celui qui l'a ouverte — à chacun son
     /// rang, et le compte des coups déjà joués.

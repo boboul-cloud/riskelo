@@ -537,9 +537,10 @@ Une partie pose de cinquante à cent soixante questions, et un thème peut en
 brûler vingt-cinq dans une seule. Quatre cents par thème, c'est la banque qui
 tient des mois sans se répéter.
 
-Dix thèmes aujourd'hui : les six de culture générale à quatre cents questions,
-et quatre packs scolaires à deux cents — Histoire et Géographie, quatrième et
-troisième. Les packs n'ont demandé aucune ligne de code : quatre fichiers
+Quatorze thèmes aujourd'hui : les six de culture générale à quatre cents
+questions, et huit packs scolaires à deux cents — Histoire et Géographie pour
+les quatre années du collège, de la sixième à la troisième. Quatre mille
+questions en tout. Les packs n'ont demandé aucune ligne de code : huit fichiers
 déposés dans le dossier.
 
 **Deux cents, et non cent : c'est mesuré.** Vingt séries de cinq soirées

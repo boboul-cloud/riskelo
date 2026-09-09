@@ -97,7 +97,7 @@ struct QuestionTests {
     /// Un pack se déclare vendu, et le catalogue le range du bon côté.
     @Test func unPackSeDistingueDuJeuDeBase() {
         #expect(Themes.base.count == 6, "le jeu de base a six thèmes")
-        #expect(Themes.packs.count == 4, "quatre packs sont livrés")
+        #expect(Themes.packs.count == 8, "huit packs sont livrés")
         // Un pack se vend : il doit tenir plusieurs soirées. Mesuré sur vingt
         // séries de cinq parties, deux cents questions donnent deux soirées
         // propres et une troisième acceptable ; en dessous de cent cinquante,

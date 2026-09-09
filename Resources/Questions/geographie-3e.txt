@@ -18,7 +18,7 @@
 ! detail  | Le programme de troisième : la France, ses territoires, l'Europe.
 ! icone   | map
 ! teinte  | 0.30 0.56 0.46
-! rang    | 9
+! rang   | 13
 ! produit | com.oulhen.riskelo.pack.geographie3e
 
 

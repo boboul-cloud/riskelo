@@ -55,7 +55,7 @@ l'iPhone**.
 | Catégorie secondaire | Jeux ▸ **Culture générale** |
 | Classification par âge | **4+** |
 | Game Center | non |
-| Achats intégrés | quatre packs, non consommables — section 4 bis |
+| Achats intégrés | huit packs, non consommables — section 4 bis |
 | Prix | **à décider** — gratuit, ou payant sans achat intégré |
 | Territoires | tous |
 | Publication | **à décider** — automatique à l'approbation, ou manuelle |
@@ -261,8 +261,8 @@ CE QUI SE VOIT MIEUX
 > Une version soumise avec la page des packs mais sans articles joints
 > montrerait « indisponible » à tout le monde.
 
-Quatre packs de questions, **non consommables** : achetés une fois, gardés pour
-toujours. Deux cents questions chacun — la taille qui donne deux soirées sans
+Huit packs de questions, **non consommables** : achetés une fois, gardés pour
+toujours. Histoire et Géographie pour les quatre années du collège. Deux cents questions chacun — la taille qui donne deux soirées sans
 redite, mesurée et non estimée ; le tableau est dans le README. Le jeu de base
 — les six thèmes de culture générale, 2 400 questions — reste entier sans eux.
 
@@ -278,6 +278,10 @@ code demande : une lettre de travers et l'article n'est jamais trouvé.
 
 | Identifiant | Nom de référence | Nom affiché |
 |---|---|---|
+| `com.oulhen.riskelo.pack.histoire6e` | Pack Histoire 6e | Histoire — 6e |
+| `com.oulhen.riskelo.pack.geographie6e` | Pack Géographie 6e | Géographie — 6e |
+| `com.oulhen.riskelo.pack.histoire5e` | Pack Histoire 5e | Histoire — 5e |
+| `com.oulhen.riskelo.pack.geographie5e` | Pack Géographie 5e | Géographie — 5e |
 | `com.oulhen.riskelo.pack.histoire4e` | Pack Histoire 4e | Histoire — 4e |
 | `com.oulhen.riskelo.pack.geographie4e` | Pack Géographie 4e | Géographie — 4e |
 | `com.oulhen.riskelo.pack.histoire3e` | Pack Histoire 3e | Histoire — 3e |
@@ -299,6 +303,22 @@ Le programme d'histoire de troisième : guerres totales, monde depuis 1945. 200 
 
 ```
 Le programme de géographie de troisième : la France, ses territoires, l'Europe. 200 questions.
+```
+
+```
+Le programme d'histoire de sixième : préhistoire, Égypte, Grèce, Rome. 200 questions.
+```
+
+```
+Le programme de géographie de sixième : habiter le monde, villes et littoraux. 200 questions.
+```
+
+```
+Le programme d'histoire de cinquième : Moyen Âge, islam, Renaissance. 200 questions.
+```
+
+```
+Le programme de géographie de cinquième : population, ressources, risques. 200 questions.
 ```
 
 ### Ce qui reste à décider
@@ -347,7 +367,7 @@ envoyées ne comptent pas comme collectées.
 |---|---|
 | Utilisez-vous l'identifiant publicitaire (IDFA) ? | Non |
 | Suivi (App Tracking Transparency) ? | Non |
-| Achats intégrés ? | Oui — quatre packs non consommables |
+| Achats intégrés ? | Oui — huit packs non consommables |
 | Publicité dans l'app ? | Non |
 | Contenu de tiers soumis à droits ? | Non — code, questions, plateaux et icône sont l'œuvre de l'éditeur |
 | Chiffrement / conformité export | `ITSAppUsesNonExemptEncryption = false`, déjà dans l'Info.plist : plus rien à répondre à chaque envoi |
@@ -602,7 +622,7 @@ une question de calendrier, plus d'un obstacle technique.
 - [ ] Questionnaires de la section 5 remplis
 - [ ] Notes de la section 6 collées
 - [ ] Prix et disponibilité choisis
-- [ ] Les quatre achats intégrés créés (section 4 bis) et **joints à la version**
+- [ ] Les huit achats intégrés créés (section 4 bis) et **joints à la version**
 - [ ] Achats essayés avec un compte sandbox sur un appareil réel
 - [ ] Soumis à la revue
 

@@ -17,8 +17,9 @@ L'application n'a ni inscription, ni connexion, ni publicité. Il n'y a donc pas
 d'identifiants de démonstration à fournir.
 
 ACHATS INTÉGRÉS
-Quatre packs de questions scolaires, non consommables, achetés une fois et
-gardés. Deux cents questions chacun. Le jeu est entier sans eux : les six thèmes de culture générale et
+Huit packs de questions scolaires, non consommables, achetés une fois et
+gardés. Deux cents questions chacun : Histoire et Géographie pour les quatre
+années du collège. Le jeu est entier sans eux : les six thèmes de culture générale et
 leurs 2 400 questions sont accessibles dès le lancement, sans rien acheter.
 
 Pour les voir : écran d'accueil, bouton « Packs de questions ». La page porte
@@ -59,7 +60,7 @@ autre — ni position, ni photos, ni contacts, ni micro, ni notifications.
 CONFIDENTIALITÉ
 Aucune donnée n'est collectée ni transmise. L'application n'intègre aucun kit
 tiers et n'effectue aucune requête vers un serveur. Elle fonctionne
-entièrement hors ligne : les 3 200 questions sont incluses dans le bundle.
+entièrement hors ligne : les 4 000 questions sont incluses dans le bundle.
 Les achats intégrés passent par StoreKit et ne transmettent rien d'autre.
 
 CONTENU

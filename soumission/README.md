@@ -1,4 +1,4 @@
-# Soumission à l'App Store — Riskelo 1.2
+# Soumission à l'App Store — Riskelo 1.3
 
 Tout ce qu'App Store Connect demande, préparé et vérifiable.
 
@@ -44,7 +44,7 @@ dossier `docs/` de ce dépôt :
 - [x] Identifiant : `com.oulhen.riskelo`
 - [x] Équipe de signature : `38DQ8FW23J`, signature automatique — posée dans
       `project.yml`, donc conservée à chaque `xcodegen generate`
-- [x] Version affichée `1.2`, build `5` (`MARKETING_VERSION`,
+- [x] Version affichée `1.3`, build `6` (`MARKETING_VERSION`,
       `CURRENT_PROJECT_VERSION`, dans `project.yml` — le plist les reprend par
       référence, et le mode d'emploi les lit dans le paquet)
 - [x] `ITSAppUsesNonExemptEncryption = false` — la déclaration de chiffrement

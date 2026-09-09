@@ -1,4 +1,4 @@
-# Métadonnées App Store — Riskelo 1.2
+# Métadonnées App Store — Riskelo 1.3
 
 Langue principale : **français (France)**. Tout est prêt à coller ; les
 longueurs maximales d'Apple sont indiquées, et respectées.
@@ -95,7 +95,24 @@ iPhone, iPad et Mac — une seule application, en français.
 
 ## Nouveautés de cette version — 4 000 caractères max
 
-Ce qui a changé depuis la `1.1`, et rien d'autre :
+Ce qui a changé depuis la `1.2`, et rien d'autre :
+
+```
+LA FIN DE PARTIE S'ENTEND
+• La victoire sonne. Une fanfare à deux trompettes — l'appel, la charge, et l'accord qui reste — écrite comme les autres sons du jeu, en notes et non en enregistrement. Elle ne tombe qu'une fois par partie : c'est ce qui lui vaut son aplomb.
+• La défaite a son propre son, plus bas et plus court. On perd une partie, on en rouvre une : il ne gronde pas.
+• Chacun entend le sien. En réseau, les deux écrans sonnent l'inverse l'un de l'autre ; seul contre la machine, l'appareil sait qui vous êtes. À deux joueurs sur le même téléphone, c'est la fanfare pour tout le monde — la partie a été gagnée par quelqu'un qui est dans la pièce.
+• Le son tombe avec le nom du vainqueur sur le plateau, avant que l'écran de victoire ne s'ouvre, et l'interrupteur des sons le coupe comme les autres.
+```
+
+Tant que Riskelo n'a jamais été publié, App Store Connect ne pose pas la
+question : une première version n'a pas de nouveautés.
+
+```
+Première version de Riskelo.
+```
+
+<details><summary>Ce qui avait été écrit pour la 1.2, depuis la 1.1</summary>
 
 ```
 LA TABLE À PLUSIEURS APPAREILS
@@ -114,12 +131,7 @@ UN DÉTAIL
 • Le bouton des réglages, sur l'accueil, passe au rose : il ne désigne ni un camp ni un état du plateau, c'est la couleur d'une porte.
 ```
 
-Tant que Riskelo n'a jamais été publié, App Store Connect ne pose pas la
-question : une première version n'a pas de nouveautés.
-
-```
-Première version de Riskelo.
-```
+</details>
 
 <details><summary>Ce qui avait été écrit pour la 1.1, depuis la 1.0</summary>
 

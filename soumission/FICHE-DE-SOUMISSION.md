@@ -1,4 +1,4 @@
-# Fiche de soumission — Riskelo 1.2
+# Fiche de soumission — Riskelo 1.3
 
 Tout ce que demande App Store Connect, dans l'ordre où il le demande. Chaque
 bloc encadré se colle tel quel. Ce qui reste à décider est marqué **à décider**.
@@ -45,8 +45,8 @@ l'iPhone**.
 | SKU (interne, invisible du public, jamais réutilisable) | `riskelo-2026` |
 | Identifiant Apple de l'app | attribué par App Store Connect à la création |
 | Langue principale | Français (France) |
-| Version | `1.2` |
-| Build | `5` |
+| Version | `1.3` |
+| Build | `6` |
 | Plateformes | iOS et macOS (une seule cible, deux plateformes dans la fiche) |
 | Version minimale | iOS 17.0 · macOS 14.0 |
 | Appareils | iPhone et iPad (`TARGETED_DEVICE_FAMILY = 1,2`) et Mac |
@@ -62,9 +62,10 @@ l'iPhone**.
 
 Les deux numéros se lisent dans `project.yml` (`MARKETING_VERSION` et
 `CURRENT_PROJECT_VERSION`), seule source : le mode d'emploi de l'application y
-prend celui qu'il affiche. Le build monte à chaque envoi — le `4` est parti,
-celui-ci est le `5` — et la version monte quand ce qui part mérite un nom :
-la table à plusieurs appareils et la règle des conquêtes valent une `1.2`.
+prend celui qu'il affiche. Le build monte à chaque envoi — le `5` est parti,
+celui-ci est le `6` — et la version monte quand ce qui part mérite un nom :
+la fin de partie qui sonne vaut une `1.3`, parce qu'elle s'entend dès la
+première partie jouée.
 
 ## 2. Les adresses
 

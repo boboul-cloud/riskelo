@@ -4,9 +4,10 @@
 //
 //  Les sons, écrits plutôt qu'enregistrés.
 //
-//  Trois signaux, pas un de plus : l'échange gagné, l'échange perdu, et
-//  l'ouverture de l'application. Un jeu qui commente chaque appui devient
-//  vite un jeu qu'on joue en silence.
+//  Peu de signaux, et chacun pour un moment qu'on ne peut pas manquer :
+//  l'homme posé, l'échange gagné, l'échange perdu, l'ouverture de
+//  l'application, et la fin de la partie — d'un côté ou de l'autre. Un jeu
+//  qui commente chaque appui devient vite un jeu qu'on joue en silence.
 //
 //  Ils sont calculés au premier besoin, échantillon par échantillon, comme
 //  l'icône est dessinée en code. La raison est la même : aucun fichier à
@@ -17,6 +18,11 @@
 //  Le timbre n'est pas une sinusoïde nue — cela sonne comme un test auditif.
 //  Deux harmoniques par-dessus la fondamentale, une attaque brève et une
 //  extinction douce : de quoi évoquer une pièce de bois qu'on pose.
+//
+//  Chaque note règle son propre éclat par-dessus, c'est-à-dire ce que pèsent
+//  ces harmoniques. Le bois pour tout le jeu, le cuivre pour la seule fanfare
+//  de la victoire : une trompette et un maillet ne diffèrent pas par leurs
+//  notes, ils diffèrent par là.
 //
 
 import AVFoundation
@@ -45,6 +51,11 @@ final class Sons {
         case perdu
         /// L'ouverture : les deux camps qui se rejoignent, puis l'accord.
         case ouverture
+        /// La partie est gagnée : l'ouverture menée jusqu'au bout, et l'accord
+        /// qui reste.
+        case victoire
+        /// Elle est perdue : le même geste retourné, qui descend et s'éteint.
+        case defaite
     }
 
     private let moteur = AVAudioEngine()
@@ -72,6 +83,13 @@ final class Sons {
         if !voix.isPlaying { voix.play() }
     }
 
+    /// Le son tel qu'il sera joué, rendu hors de l'application.
+    ///
+    /// Ouvert pour « outils/sons.swift », qui écrit les fichiers qu'on écoute
+    /// avant de trancher. Sans cela l'outil recopierait les partitions, et
+    /// l'on choisirait au casque un son que l'application ne joue pas.
+    func rendu(_ signal: Signal) -> AVAudioPCMBuffer? { tampon(signal) }
+
     private func demarrer() {
         guard !moteur.isRunning, !enPanne else { return }
         #if os(iOS)
@@ -95,6 +113,12 @@ final class Sons {
         let debut: Double
         let duree: Double
         let force: Double
+        /// Le cuivre : ce que pèsent les harmoniques au-dessus de la
+        /// fondamentale. À 1, le timbre de bois de tout le jeu. Au-delà, la
+        /// note brille et se met à sonner comme une trompette — c'est ce qui
+        /// sépare une pièce qu'on pose d'une fanfare, bien plus que la
+        /// hauteur des notes.
+        var eclat: Double = 1
     }
 
     private func partition(_ signal: Signal) -> [Note] {
@@ -143,6 +167,90 @@ final class Sons {
                 notes.append(Note(hauteur: hauteur, debut: 0.55, duree: 1.50, force: 0.17))
             }
             return notes
+        case .victoire:
+            // La fin, pour qui l'emporte. Une sonnerie, et non un arpège : ce
+            // qui fait le militaire n'est pas la hauteur des notes, ce sont
+            // trois choses — le rythme pointé, le cuivre, et deux trompettes
+            // au lieu d'une.
+            //
+            // Elle ne sonne qu'une fois par partie : c'est ce qui lui vaut ses
+            // trois secondes et son aplomb, là où l'échange gagné, qui tombe
+            // dix fois par tour, doit se faire oublier.
+            var notes: [Note] = []
+
+            /// Les deux trompettes, sur la même figure.
+            ///
+            /// La seconde suit la première à la tierce en dessous, et se tient
+            /// plus bas en volume : deux voix égales ne font pas deux
+            /// trompettes, elles font une trompette épaisse.
+            ///
+            /// La note d'en dessous est écrite à chaque fois plutôt que
+            /// calculée. Sous le do, la tierce serait le la — et le la fait
+            /// entendre un mineur au beau milieu d'une fanfare : on y met la
+            /// quarte. Une règle qui souffre deux exceptions sur cinq n'est
+            /// plus une règle, c'est une table.
+            func trompettes(_ haute: Double, _ basse: Double,
+                            _ debut: Double, _ duree: Double, _ force: Double) {
+                notes.append(Note(hauteur: haute, debut: debut, duree: duree,
+                                  force: force, eclat: 2.4))
+                notes.append(Note(hauteur: basse, debut: debut, duree: duree,
+                                  force: force * 0.66, eclat: 2.2))
+            }
+
+            // L'appel. Rythme pointé — une longue, une brève, et l'on
+            // recommence : c'est la figure de toutes les sonneries militaires,
+            // et ce qui la sépare d'une gamme jouée à temps égaux. Deux fois
+            // la même cellule, puis la tenue : l'appel est reconnaissable
+            // parce qu'il se répète, jamais parce qu'il avance.
+            trompettes(392.00, 329.63, 0.000, 0.175, 0.52)   // sol · mi
+            trompettes(392.00, 329.63, 0.195, 0.055, 0.52)
+            trompettes(523.25, 392.00, 0.260, 0.175, 0.55)   // do · sol
+            trompettes(523.25, 392.00, 0.455, 0.055, 0.55)
+            trompettes(659.25, 523.25, 0.520, 0.240, 0.58)   // mi · do, tenue
+
+            // La charge. La même cellule pointée, montée d'un cran à chaque
+            // fois, jusqu'à l'octave du dessus. Les notes du clairon et pas
+            // d'autres — do, mi, sol, do : celles qu'un cuivre sans piston
+            // sait donner, ce qui est la raison même de leur son.
+            trompettes(523.25, 392.00, 0.780, 0.175, 0.55)
+            trompettes(659.25, 523.25, 0.975, 0.055, 0.55)
+            trompettes(783.99, 659.25, 1.040, 0.175, 0.58)
+            trompettes(783.99, 659.25, 1.235, 0.055, 0.58)
+            trompettes(1046.50, 783.99, 1.300, 0.420, 0.60)  // le sommet
+
+            // L'accord, large sur deux octaves, et tenu. Il se pose pendant
+            // que le sommet sonne encore, sans quoi la sonnerie retomberait
+            // dans un trou avant de se refermer.
+            //
+            // Chaque voix y est faible : cinq notes ensemble s'additionnent,
+            // et c'est la somme qui sature, jamais la note prise à part. Elles
+            // brillent moins que l'appel — un accord tenu trop cuivré cesse
+            // d'être un accord, il devient un klaxon.
+            for hauteur in [261.63, 329.63, 392.00, 523.25, 783.99] {
+                notes.append(Note(hauteur: hauteur, debut: 1.62, duree: 1.55,
+                                  force: 0.20, eclat: 1.5))
+            }
+            return notes
+        case .defaite:
+            // Le même moment, de l'autre côté. Il descend au lieu de monter et
+            // s'éteint au lieu de tenir — mais il ne gronde pas : on perd une
+            // partie, on en rouvre une.
+            //
+            // Rien ne descend sous ce sol grave. Un haut-parleur de téléphone
+            // ne rend presque plus rien en dessous, et une défaite qu'on
+            // n'entend pas est une défaite sans son.
+            var notes: [Note] = []
+            let descente = [293.66, 233.08, 196.00]   // ré, si bémol, sol
+            for (i, hauteur) in descente.enumerated() {
+                notes.append(Note(hauteur: hauteur, debut: Double(i) * 0.16,
+                                  duree: 0.42, force: 0.30))
+            }
+            // Plus bas que la montée de la victoire, et plus court : le son
+            // qui console ne s'impose pas autant que celui qui félicite.
+            for hauteur in [196.00, 233.08, 293.66] {
+                notes.append(Note(hauteur: hauteur, debut: 0.55, duree: 1.60, force: 0.14))
+            }
+            return notes
         }
     }
 
@@ -168,7 +276,15 @@ final class Sons {
                 guard i < Int(images) else { break }
                 let t = Double(k) / taux
                 let phase = 2 * Double.pi * note.hauteur * t
-                let onde = (sin(phase) + 0.30 * sin(2 * phase) + 0.12 * sin(3 * phase)) / 1.42
+                // Les harmoniques pèsent l'éclat de la note, et la somme est
+                // ramenée à 1 : sans quoi une note brillante serait aussi une
+                // note plus forte, et l'on croirait régler le timbre en
+                // réglant le volume.
+                let h2 = 0.30 * note.eclat
+                let h3 = 0.12 * note.eclat
+                let h4 = 0.05 * max(0, note.eclat - 1)
+                let onde = (sin(phase) + h2 * sin(2 * phase) + h3 * sin(3 * phase)
+                            + h4 * sin(4 * phase)) / (1 + h2 + h3 + h4)
                 canal[i] += Float(note.force * enveloppe(t, duree: note.duree) * onde)
             }
         }

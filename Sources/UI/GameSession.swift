@@ -963,12 +963,19 @@ final class GameSession {
     }
 
     /// La fin, dans son ordre : la feuille du duel s'est refermée, le plateau
-    /// montre la dernière place prise, on nomme le vainqueur, puis seulement
-    /// l'écran de victoire se pose.
+    /// montre la dernière place prise, on nomme le vainqueur — et c'est là que
+    /// le son tombe, avec le nom — puis seulement l'écran de victoire se pose.
+    ///
+    /// Le son est posé ici et non sur l'écran de victoire : sur l'écran, la
+    /// musique et l'ouverture de la feuille se marcheraient dessus. Ici il a le
+    /// plateau pour lui, et le dernier verdict du duel a fini de sonner depuis
+    /// plusieurs secondes — `Tempo.bilan` en vaut cinq et demie, et un son en
+    /// interrompt un autre.
     private func annoncerLaVictoire() async {
         guard case let .finished(gagnant) = game.phase else { return }
         if !victoireAnnoncee {
             victoireAnnoncee = true
+            Sons.shared.jouer(sonDeFin(gagnant))
             montrer(Annonce(titre: "\(game.playerName(gagnant)) l'emporte !",
                             sous: nil, camp: gagnant))
             // Une attente qui se laisse interrompre : la boucle est relancée
@@ -977,5 +984,22 @@ final class GameSession {
             try? await Task.sleep(for: .milliseconds(1_700))
         }
         victoireMontree = true
+    }
+
+    /// Le son de la fin, selon qui la vit.
+    ///
+    /// Deux sons ne valent que si l'appareil sait pour qui il sonne. En réseau
+    /// il le sait : mon rang est le mien, et l'autre écran sonnera l'inverse.
+    /// Seul contre la machine aussi — il n'y a qu'un humain, et c'est celui
+    /// qui regarde.
+    ///
+    /// Mais à deux humains sur un même téléphone, « mon camp » est celui qui
+    /// l'a ouvert et non celui qui vient de gagner : on sonnerait la défaite au
+    /// vainqueur une fois sur deux. Là, la fanfare pour tout le monde — la
+    /// partie a été gagnée par quelqu'un qui est dans la pièce.
+    private func sonDeFin(_ gagnant: PlayerID) -> Sons.Signal {
+        let humains = game.players.filter { !$0.isBot }.count
+        guard enReseau || humains == 1 else { return .victoire }
+        return gagnant == monCamp ? .victoire : .defaite
     }
 }

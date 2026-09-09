@@ -447,6 +447,30 @@ swiftc -O -parse-as-library -o /tmp/icone outils/icone.swift && /tmp/icone
 
 ---
 
+## Les sons
+
+Six signaux, **écrits plutôt qu'enregistrés** : l'homme posé, l'échange gagné,
+l'échange perdu, l'ouverture, et la fin de la partie — d'un côté ou de
+l'autre. Aucun fichier à porter, aucune licence à vérifier, et l'on règle une
+note en changeant un chiffre. Trois quarts de seconde de son tiennent en vingt
+lignes de partition.
+
+La fin sonne deux fois différemment, mais seulement là où l'appareil sait pour
+qui il sonne : en réseau, et seul contre la machine. À deux humains sur un même
+téléphone, « mon camp » est celui qui l'a ouvert et non celui qui vient de
+gagner — la fanfare pour tout le monde plutôt que la défaite au vainqueur une
+fois sur deux.
+
+Une partition se relit, elle ne s'entend pas. L'outil rend les six tels que
+l'application les joue, et mesure la crête de chaque mélange : plusieurs notes
+ensemble s'additionnent, et au-delà de 1 le son se coupe au lieu de sonner.
+
+```bash
+swiftc -O -parse-as-library -o /tmp/ecoute Sources/UI/Sons.swift outils/ecoute.swift && /tmp/ecoute
+```
+
+---
+
 ## La banque de questions
 
 Deux mille quatre cents questions, **quatre cents par thème**, dans

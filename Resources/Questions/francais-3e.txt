@@ -19,7 +19,7 @@
 ! detail  | Le programme de troisième : phrase complexe, argumenter, écrire.
 ! icone   | text.justify
 ! teinte  | 0.46 0.40 0.64
-! rang   | 17
+! rang   | 20
 ! produit | com.oulhen.riskelo.pack.francais3e
 
 

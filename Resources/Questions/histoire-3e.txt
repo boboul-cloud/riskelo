@@ -18,7 +18,7 @@
 ! detail  | Le programme de troisième : guerres totales, monde depuis 1945.
 ! icone   | book.closed
 ! teinte  | 0.70 0.35 0.30
-! rang   | 15
+! rang   | 18
 ! produit | com.oulhen.riskelo.pack.histoire3e
 
 

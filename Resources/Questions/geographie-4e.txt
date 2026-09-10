@@ -19,7 +19,7 @@
 ! detail  | Le programme de quatrième : villes, migrations, mondialisation.
 ! icone   | globe.americas
 ! teinte  | 0.20 0.62 0.66
-! rang   | 13
+! rang   | 15
 ! produit | com.oulhen.riskelo.pack.geographie4e
 
 

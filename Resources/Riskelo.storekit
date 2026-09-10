@@ -191,6 +191,66 @@
       "productID": "com.oulhen.riskelo.pack.francais3e",
       "referenceName": "Pack Français 3e",
       "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "2.99",
+      "familyShareable": true,
+      "internalID": "A1000013",
+      "localizations": [
+        {
+          "description": "Le programme de SVT de sixième : le vivant, les milieux, la Terre. 200 questions.",
+          "displayName": "SVT — 6e",
+          "locale": "fr_FR"
+        }
+      ],
+      "productID": "com.oulhen.riskelo.pack.svt6e",
+      "referenceName": "Pack SVT 6e",
+      "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "2.99",
+      "familyShareable": true,
+      "internalID": "A1000014",
+      "localizations": [
+        {
+          "description": "Le programme de SVT de cinquième : nutrition, respiration, paysages. 200 questions.",
+          "displayName": "SVT — 5e",
+          "locale": "fr_FR"
+        }
+      ],
+      "productID": "com.oulhen.riskelo.pack.svt5e",
+      "referenceName": "Pack SVT 5e",
+      "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "2.99",
+      "familyShareable": true,
+      "internalID": "A1000015",
+      "localizations": [
+        {
+          "description": "Le programme de SVT de quatrième : reproduction, volcans, séismes. 200 questions.",
+          "displayName": "SVT — 4e",
+          "locale": "fr_FR"
+        }
+      ],
+      "productID": "com.oulhen.riskelo.pack.svt4e",
+      "referenceName": "Pack SVT 4e",
+      "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "2.99",
+      "familyShareable": true,
+      "internalID": "A1000016",
+      "localizations": [
+        {
+          "description": "Le programme de SVT de troisième : génétique, immunité, cerveau. 200 questions.",
+          "displayName": "SVT — 3e",
+          "locale": "fr_FR"
+        }
+      ],
+      "productID": "com.oulhen.riskelo.pack.svt3e",
+      "referenceName": "Pack SVT 3e",
+      "type": "NonConsumable"
     }
   ],
   "settings": {

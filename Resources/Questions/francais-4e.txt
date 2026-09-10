@@ -19,7 +19,7 @@
 ! detail  | Le programme de quatrième : subordonnées, modes, difficultés.
 ! icone   | text.alignleft
 ! teinte  | 0.50 0.56 0.32
-! rang   | 14
+! rang   | 16
 ! produit | com.oulhen.riskelo.pack.francais4e
 
 

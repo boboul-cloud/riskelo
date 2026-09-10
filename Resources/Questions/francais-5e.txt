@@ -19,7 +19,7 @@
 ! detail  | Le programme de cinquième : compléments, participe passé, style.
 ! icone   | text.quote
 ! teinte  | 0.72 0.52 0.32
-! rang   | 11
+! rang   | 12
 ! produit | com.oulhen.riskelo.pack.francais5e
 
 

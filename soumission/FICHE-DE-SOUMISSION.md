@@ -55,7 +55,7 @@ l'iPhone**.
 | Catégorie secondaire | Jeux ▸ **Culture générale** |
 | Classification par âge | **4+** |
 | Game Center | non |
-| Achats intégrés | huit packs, non consommables — section 4 bis |
+| Achats intégrés | douze packs, non consommables — section 4 bis |
 | Prix | **à décider** — gratuit, ou payant sans achat intégré |
 | Territoires | tous |
 | Publication | **à décider** — automatique à l'approbation, ou manuelle |
@@ -261,8 +261,8 @@ CE QUI SE VOIT MIEUX
 > Une version soumise avec la page des packs mais sans articles joints
 > montrerait « indisponible » à tout le monde.
 
-Huit packs de questions, **non consommables** : achetés une fois, gardés pour
-toujours. Histoire et Géographie pour les quatre années du collège. Deux cents questions chacun — la taille qui donne deux soirées sans
+Douze packs de questions, **non consommables** : achetés une fois, gardés pour
+toujours. Histoire, Géographie et Français pour les quatre années du collège. Deux cents questions chacun — la taille qui donne deux soirées sans
 redite, mesurée et non estimée ; le tableau est dans le README. Le jeu de base
 — les six thèmes de culture générale, 2 400 questions — reste entier sans eux.
 
@@ -285,6 +285,10 @@ code demande : une lettre de travers et l'article n'est jamais trouvé.
 | `com.oulhen.riskelo.pack.histoire4e` | Pack Histoire 4e | Histoire — 4e |
 | `com.oulhen.riskelo.pack.geographie4e` | Pack Géographie 4e | Géographie — 4e |
 | `com.oulhen.riskelo.pack.histoire3e` | Pack Histoire 3e | Histoire — 3e |
+| `com.oulhen.riskelo.pack.francais6e` | Pack Français 6e | Français — 6e |
+| `com.oulhen.riskelo.pack.francais5e` | Pack Français 5e | Français — 5e |
+| `com.oulhen.riskelo.pack.francais4e` | Pack Français 4e | Français — 4e |
+| `com.oulhen.riskelo.pack.francais3e` | Pack Français 3e | Français — 3e |
 | `com.oulhen.riskelo.pack.geographie3e` | Pack Géographie 3e | Géographie — 3e |
 
 Les descriptions, à coller telles quelles :
@@ -319,6 +323,22 @@ Le programme d'histoire de cinquième : Moyen Âge, islam, Renaissance. 200 ques
 
 ```
 Le programme de géographie de cinquième : population, ressources, risques. 200 questions.
+```
+
+```
+Le programme de français de sixième : nature des mots, temps, accords. 200 questions.
+```
+
+```
+Le programme de français de cinquième : compléments, participe passé, style. 200 questions.
+```
+
+```
+Le programme de français de quatrième : subordonnées, modes, difficultés. 200 questions.
+```
+
+```
+Le programme de français de troisième : phrase complexe, argumenter, écrire. 200 questions.
 ```
 
 ### Ce qui reste à décider
@@ -367,7 +387,7 @@ envoyées ne comptent pas comme collectées.
 |---|---|
 | Utilisez-vous l'identifiant publicitaire (IDFA) ? | Non |
 | Suivi (App Tracking Transparency) ? | Non |
-| Achats intégrés ? | Oui — huit packs non consommables |
+| Achats intégrés ? | Oui — douze packs non consommables |
 | Publicité dans l'app ? | Non |
 | Contenu de tiers soumis à droits ? | Non — code, questions, plateaux et icône sont l'œuvre de l'éditeur |
 | Chiffrement / conformité export | `ITSAppUsesNonExemptEncryption = false`, déjà dans l'Info.plist : plus rien à répondre à chaque envoi |
@@ -622,7 +642,7 @@ une question de calendrier, plus d'un obstacle technique.
 - [ ] Questionnaires de la section 5 remplis
 - [ ] Notes de la section 6 collées
 - [ ] Prix et disponibilité choisis
-- [ ] Les huit achats intégrés créés (section 4 bis) et **joints à la version**
+- [ ] Les douze achats intégrés créés (section 4 bis) et **joints à la version**
 - [ ] Achats essayés avec un compte sandbox sur un appareil réel
 - [ ] Soumis à la revue
 

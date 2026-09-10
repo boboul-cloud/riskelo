@@ -131,6 +131,66 @@
       "productID": "com.oulhen.riskelo.pack.geographie5e",
       "referenceName": "Pack Géographie 5e",
       "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "2.99",
+      "familyShareable": true,
+      "internalID": "A1000009",
+      "localizations": [
+        {
+          "description": "Le programme de français de sixième : nature des mots, temps, accords. 200 questions.",
+          "displayName": "Français — 6e",
+          "locale": "fr_FR"
+        }
+      ],
+      "productID": "com.oulhen.riskelo.pack.francais6e",
+      "referenceName": "Pack Français 6e",
+      "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "2.99",
+      "familyShareable": true,
+      "internalID": "A1000010",
+      "localizations": [
+        {
+          "description": "Le programme de français de cinquième : compléments, participe passé, style. 200 questions.",
+          "displayName": "Français — 5e",
+          "locale": "fr_FR"
+        }
+      ],
+      "productID": "com.oulhen.riskelo.pack.francais5e",
+      "referenceName": "Pack Français 5e",
+      "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "2.99",
+      "familyShareable": true,
+      "internalID": "A1000011",
+      "localizations": [
+        {
+          "description": "Le programme de français de quatrième : subordonnées, modes, difficultés. 200 questions.",
+          "displayName": "Français — 4e",
+          "locale": "fr_FR"
+        }
+      ],
+      "productID": "com.oulhen.riskelo.pack.francais4e",
+      "referenceName": "Pack Français 4e",
+      "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "2.99",
+      "familyShareable": true,
+      "internalID": "A1000012",
+      "localizations": [
+        {
+          "description": "Le programme de français de troisième : phrase complexe, argumenter, écrire. 200 questions.",
+          "displayName": "Français — 3e",
+          "locale": "fr_FR"
+        }
+      ],
+      "productID": "com.oulhen.riskelo.pack.francais3e",
+      "referenceName": "Pack Français 3e",
+      "type": "NonConsumable"
     }
   ],
   "settings": {

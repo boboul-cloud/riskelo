@@ -15,6 +15,21 @@
     {
       "displayPrice": "2.99",
       "familyShareable": true,
+      "internalID": "A1000017",
+      "localizations": [
+        {
+          "description": "Les groupes et les voix des années 1970 et 1980, en France et ailleurs. 400 questions.",
+          "displayName": "Rock 70-80",
+          "locale": "fr_FR"
+        }
+      ],
+      "productID": "com.oulhen.riskelo.pack.rock7080",
+      "referenceName": "Pack Rock 70-80",
+      "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "2.99",
+      "familyShareable": true,
       "internalID": "A1000001",
       "localizations": [
         {

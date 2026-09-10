@@ -19,7 +19,7 @@
 ! detail  | Le programme de sixième : nature des mots, temps, accords.
 ! icone   | character.book.closed
 ! teinte  | 0.80 0.46 0.46
-! rang   | 8
+! rang   | 9
 ! produit | com.oulhen.riskelo.pack.francais6e
 
 

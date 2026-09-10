@@ -18,7 +18,7 @@
 ! detail  | Le programme de sixième : le vivant, les milieux, la Terre.
 ! icone   | ladybug
 ! teinte  | 0.40 0.66 0.36
-! rang   | 9
+! rang   | 10
 ! produit | com.oulhen.riskelo.pack.svt6e
 
 

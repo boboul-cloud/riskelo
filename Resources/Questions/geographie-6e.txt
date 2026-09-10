@@ -18,7 +18,7 @@
 ! detail  | Le programme de sixième : habiter le monde, villes et littoraux.
 ! icone   | globe.asia.australia
 ! teinte  | 0.35 0.60 0.76
-! rang   | 7
+! rang   | 8
 ! produit | com.oulhen.riskelo.pack.geographie6e
 
 

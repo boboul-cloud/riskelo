@@ -28,7 +28,7 @@
 ! detail | Le programme de quatrième : révolutions, industrie, colonies.
 ! icone  | graduationcap
 ! teinte | 0.45 0.44 0.78
-! rang   | 14
+! rang   | 15
 ! produit | com.oulhen.riskelo.pack.histoire4e
 
 

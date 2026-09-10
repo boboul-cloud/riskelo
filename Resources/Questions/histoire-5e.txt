@@ -18,7 +18,7 @@
 ! detail  | Le programme de cinquième : Moyen Âge, islam, Renaissance.
 ! icone   | crown
 ! teinte  | 0.56 0.32 0.58
-! rang   | 10
+! rang   | 11
 ! produit | com.oulhen.riskelo.pack.histoire5e
 
 

@@ -537,12 +537,16 @@ Une partie pose de cinquante à cent soixante questions, et un thème peut en
 brûler vingt-cinq dans une seule. Quatre cents par thème, c'est la banque qui
 tient des mois sans se répéter.
 
-Vingt-deux thèmes aujourd'hui : les six de culture générale à quatre cents
-questions, et seize packs scolaires à deux cents — Histoire, Géographie,
-Français et SVT pour les quatre années du collège, de la sixième à la
-troisième. Cinq mille six cents questions en tout. Les packs n'ont demandé
-aucune ligne de code : seize fichiers déposés dans le dossier, rangés par
-niveau parce qu'un parent achète pour une année et non pour une matière.
+Vingt-trois thèmes aujourd'hui, six mille questions. Les six de culture
+générale à quatre cents ; « Rock 70-80 », quatre cents questions sur les
+groupes et les voix des années 1970 et 1980, ici et ailleurs ; et seize packs
+scolaires à deux cents — Histoire, Géographie, Français et SVT pour les quatre
+années du collège.
+
+Les packs n'ont demandé aucune ligne de code : dix-sept fichiers déposés dans
+le dossier. Le rock vient en tête, parce qu'il parle à ceux qui ont déjà
+l'application ; les packs scolaires suivent, rangés par niveau, parce qu'un
+parent achète pour une année et non pour une matière.
 
 **Deux cents, et non cent : c'est mesuré.** Vingt séries de cinq soirées
 d'affilée sur un seul thème, part de questions déjà vues :

@@ -18,7 +18,7 @@
 ! detail  | Le programme de sixième : préhistoire, Égypte, Grèce, Rome.
 ! icone   | pyramid
 ! teinte  | 0.78 0.62 0.38
-! rang   | 6
+! rang   | 7
 ! produit | com.oulhen.riskelo.pack.histoire6e
 
 

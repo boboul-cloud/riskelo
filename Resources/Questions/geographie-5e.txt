@@ -18,7 +18,7 @@
 ! detail  | Le programme de cinquième : population, ressources, risques.
 ! icone   | drop
 ! teinte  | 0.24 0.56 0.54
-! rang   | 11
+! rang   | 12
 ! produit | com.oulhen.riskelo.pack.geographie5e
 
 

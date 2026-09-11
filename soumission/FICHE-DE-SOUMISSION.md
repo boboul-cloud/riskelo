@@ -56,7 +56,7 @@ l'iPhone**.
 | Classification par âge | **4+** |
 | Game Center | non |
 | Achats intégrés | dix-sept packs, non consommables — section 4 bis |
-| Prix | **à décider** — gratuit, ou payant sans achat intégré |
+| Prix | **à décider** — celui de l'application, et le palier des dix-sept packs |
 | Territoires | tous |
 | Publication | **à décider** — automatique à l'approbation, ou manuelle |
 
@@ -180,7 +180,11 @@ Elle se retrouve où vous l'avez laissée. Et la bibliothèque enregistre chaque
 
 CE QUE RISKELO NE FAIT PAS
 
-Aucune publicité. Aucun achat intégré. Aucun compte. Aucun traceur, aucune mesure d'audience. Aucune connexion à Internet n'est nécessaire : les deux mille quatre cents questions sont dans l'application, et vos parties ne quittent jamais votre appareil.
+Aucune publicité. Aucun abonnement. Aucun compte. Aucun traceur, aucune mesure d'audience. Aucune connexion à Internet n'est nécessaire : les questions sont dans l'application, et vos parties ne quittent jamais votre appareil.
+
+DIX-SEPT PACKS, EN OPTION
+
+Seize packs scolaires — Histoire, Géographie, Français et SVT, pour les quatre années du collège — et « Rock 70-80 ». Achetés une fois, gardés pour toujours. Le jeu est entier sans eux, et celui qui rejoint une partie joue les packs de l'hôte sans les avoir achetés.
 
 iPhone, iPad et Mac — une seule application, en français.
 ```
@@ -457,12 +461,26 @@ décidée par une question de culture générale à choix multiple, au lieu d'un
 lancer de dés.
 
 AUCUN COMPTE N'EST NÉCESSAIRE
-L'application n'a ni inscription, ni connexion, ni achat intégré, ni publicité.
-Tout le contenu est accessible dès le lancement. Il n'y a donc pas
+L'application n'a ni inscription, ni connexion, ni publicité. Il n'y a donc pas
 d'identifiants de démonstration à fournir.
 
+ACHATS INTÉGRÉS
+Dix-sept packs de questions, non consommables, achetés une fois et gardés.
+Seize packs scolaires de deux cents questions — Histoire, Géographie, Français
+et SVT pour les quatre années du collège — et un pack musical de quatre cents
+questions sur les années 1970 et 1980. Le jeu est entier sans eux : les six thèmes de culture générale et
+leurs 2 400 questions sont accessibles dès le lancement, sans rien acheter.
+
+Pour les voir : écran d'accueil, bouton « Packs de questions ». La page porte
+aussi le bouton « Restaurer mes achats ».
+
+Les fichiers de questions des packs sont inclus dans l'application pour tout le
+monde ; ce qui s'achète est le droit de les choisir. C'est ce qui permet à un
+joueur qui rejoint une partie de jouer les packs de celui qui l'héberge sans
+les avoir achetés — c'est voulu, et non un défaut de contrôle.
+
 POUR ESSAYER EN UNE MINUTE
-1. Touchez « Commencer » (les réglages par défaut conviennent).
+1. Touchez « Partie rapide » sur l'écran d'accueil.
 2. Touchez vos territoires pour poser vos renforts, puis « À l'attaque ».
 3. Touchez un de vos territoires d'au moins deux hommes, puis un voisin ennemi.
 4. Choisissez un thème et « Lancer l'assaut » : une question apparaît.
@@ -491,7 +509,8 @@ autre — ni position, ni photos, ni contacts, ni micro, ni notifications.
 CONFIDENTIALITÉ
 Aucune donnée n'est collectée ni transmise. L'application n'intègre aucun kit
 tiers et n'effectue aucune requête vers un serveur. Elle fonctionne
-entièrement hors ligne : les 2 400 questions sont incluses dans le bundle.
+entièrement hors ligne : les 6 000 questions sont incluses dans le bundle.
+Les achats intégrés passent par StoreKit et ne transmettent rien d'autre.
 
 CONTENU
 Les questions, les plateaux, les dessins et l'icône sont des créations
@@ -682,7 +701,7 @@ relecteur : un fil qui traîne repart en bas de la file.
 
 | Point | Pourquoi c'est à vous |
 |---|---|
-| Le prix | Gratuit fait des joueurs, payant fait un revenu. Le jeu n'a ni publicité ni achat intégré : c'est l'un ou l'autre. |
+| Le prix | Deux décisions, pas une : le prix de l'application — gratuite fait des joueurs, payante fait un revenu — et le palier des dix-sept packs, qui sont la seule autre recette du jeu. |
 | Le numéro de téléphone de la revue | Apple l'exige ; il n'est jamais rendu public. |
 | Publication automatique ou manuelle | Manuelle si vous voulez choisir le jour. |
 | macOS maintenant ou plus tard | Plus aucun obstacle : le bac à sable est posé et la liaison Mac ↔ iPhone est vérifiée avec. Pure question de calendrier. |

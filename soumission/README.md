@@ -8,7 +8,7 @@ adresses, tous les textes à coller, les réponses aux questionnaires, les
 captures, les commandes d'envoi et l'ordre des opérations, dans l'ordre où
 App Store Connect les demande.
 
-Les quatre fichiers ci-dessous en sont le détail, pour qui veut le pourquoi
+Les cinq fichiers ci-dessous en sont le détail, pour qui veut le pourquoi
 plutôt que le quoi.
 
 | Fichier | Ce qu'il contient |
@@ -16,6 +16,7 @@ plutôt que le quoi.
 | [metadonnees.md](metadonnees.md) | Nom, sous-titre, mots-clés, description, nouveautés, catégories, URL |
 | [confidentialite-app-store.md](confidentialite-app-store.md) | Les réponses au questionnaire « Confidentialité des données » |
 | [captures-decran.md](captures-decran.md) | Les tailles exigées, les écrans à photographier, la marche à suivre |
+| [packs-app-store.md](packs-app-store.md) | Les dix-sept achats intégrés, un bloc à recopier par pack |
 | [notes-pour-la-revue.md](notes-pour-la-revue.md) | Ce qu'il faut dire au relecteur d'Apple pour qu'il ne bloque pas |
 
 Les URL publiques attendues par Apple sont servies par GitHub Pages depuis le

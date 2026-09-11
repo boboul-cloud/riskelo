@@ -88,7 +88,11 @@ Elle se retrouve où vous l'avez laissée. Et la bibliothèque enregistre chaque
 
 CE QUE RISKELO NE FAIT PAS
 
-Aucune publicité. Aucun achat intégré. Aucun compte. Aucun traceur, aucune mesure d'audience. Aucune connexion à Internet n'est nécessaire : les deux mille quatre cents questions sont dans l'application, et vos parties ne quittent jamais votre appareil.
+Aucune publicité. Aucun abonnement. Aucun compte. Aucun traceur, aucune mesure d'audience. Aucune connexion à Internet n'est nécessaire : les questions sont dans l'application, et vos parties ne quittent jamais votre appareil.
+
+DIX-SEPT PACKS, EN OPTION
+
+Seize packs scolaires — Histoire, Géographie, Français et SVT, pour les quatre années du collège — et « Rock 70-80 ». Achetés une fois, gardés pour toujours. Le jeu est entier sans eux, et celui qui rejoint une partie joue les packs de l'hôte sans les avoir achetés.
 
 iPhone, iPad et Mac — une seule application, en français.
 ```
@@ -211,7 +215,8 @@ aucune représentation de violence.
 
 - Territoires : tous. L'application est en français ; c'est sa seule langue, et
   cela ne l'empêche pas d'être proposée partout.
-- Prix : à décider avant l'envoi (gratuit, ou payant sans achat intégré).
+- Prix : à décider avant l'envoi — celui de l'application, et le palier des
+  dix-sept packs (voir [packs-app-store.md](packs-app-store.md)).
 
 ---
 

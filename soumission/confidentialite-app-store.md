@@ -27,7 +27,7 @@ ne comptent pas comme collectées : c'est le cas ici.
 | Question | Réponse |
 |---|---|
 | Utilisez-vous l'identifiant publicitaire (IDFA) ? | Non |
-| L'app contient-elle des achats intégrés ? | Non |
+| L'app contient-elle des achats intégrés ? | **Oui** — dix-sept packs de questions, non consommables |
 | L'app contient-elle de la publicité ? | Non |
 | L'app utilise-t-elle le suivi (App Tracking Transparency) ? | Non |
 | Contenu de tiers soumis à droits ? | Non — code, questions, plateaux et icône sont l'œuvre de l'éditeur |

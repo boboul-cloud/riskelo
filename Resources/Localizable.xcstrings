@@ -2687,6 +2687,22 @@
         }
       }
     },
+    "Faire disparaître le camp de %@ — de votre main.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wipe out %@'s side — by your own hand."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Faire disparaître le camp de %@ — de votre main."
+          }
+        }
+      }
+    },
     "Fermer": {
       "localizations": {
         "en": {
@@ -5445,6 +5461,54 @@
           "stringUnit": {
             "state": "translated",
             "value": "Temps écoulé : %@ perd %@."
+          }
+        }
+      }
+    },
+    "Tenir %lld territoires avec au moins %@ hommes sur chacun.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hold %lld territories with at least %@ troops on each."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tenir %lld territoires avec au moins %@ hommes sur chacun."
+          }
+        }
+      }
+    },
+    "Tenir %lld territoires.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hold %lld territories."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tenir %lld territoires."
+          }
+        }
+      }
+    },
+    "Tenir en entier %@.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hold all of %@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tenir en entier %@."
           }
         }
       }

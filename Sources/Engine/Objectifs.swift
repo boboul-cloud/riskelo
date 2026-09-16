@@ -291,13 +291,15 @@ extension Objectif {
         switch self {
         case .continents(let ids):
             let noms = ids.compactMap { board.map.continents[$0]?.name }
-            return "Tenir en entier " + Objectif.liste(noms) + "."
+            return dit("Tenir en entier \(Objectif.liste(noms)).")
         case let .territoires(nombre, hommes):
-            guard hommes > 1 else { return "Tenir \(nombre) territoires." }
-            return "Tenir \(nombre) territoires avec au moins "
-                + "\(Objectif.enLettres(hommes)) hommes sur chacun."
+            guard hommes > 1 else { return dit("Tenir \(nombre) territoires.") }
+            return dit("""
+                       Tenir \(nombre) territoires avec au moins \
+                       \(Objectif.enLettres(hommes)) hommes sur chacun.
+                       """)
         case .eliminer(let cible):
-            return "Faire disparaître le camp de \(nomDuCamp(cible)) — de votre main."
+            return dit("Faire disparaître le camp de \(nomDuCamp(cible)) — de votre main.")
         }
     }
 

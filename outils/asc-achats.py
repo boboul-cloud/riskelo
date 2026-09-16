@@ -253,6 +253,68 @@ def les_prix(cfg, liste, deja, montant, applique):
         print("  %-40s %s € posé" % (p["id"], montant))
 
 
+# --- Les pays --------------------------------------------------------------
+#
+# Un article complet chez Apple n'est pas seulement nommé, décrit et tarifé :
+# il doit aussi dire **où** il se vend. Sans cette liste, il reste
+# « métadonnées manquantes » et ne peut pas être soumis — sans que rien ne dise
+# lequel des cinq champs manque.
+
+def territoires(cfg):
+    """Tous les pays de l'App Store, une fois pour toutes."""
+    out, url = [], "/v1/territories?limit=200"
+    while url:
+        rep = appel(cfg, "GET", url)
+        out += [d["id"] for d in rep["data"]]
+        url = rep.get("links", {}).get("next")
+    return out
+
+
+def disponible(cfg, iap_id):
+    rep = appel(cfg, "GET", "/v2/inAppPurchases/%s/inAppPurchaseAvailability" % iap_id, doux=True)
+    return bool((rep or {}).get("data"))
+
+
+def ouvrir_les_pays(cfg, iap_id, pays):
+    appel(cfg, "POST", "/v1/inAppPurchaseAvailabilities", {"data": {
+        "type": "inAppPurchaseAvailabilities",
+        "attributes": {"availableInNewTerritories": True},
+        "relationships": {
+            "inAppPurchase": {"data": {"type": "inAppPurchases", "id": iap_id}},
+            "availableTerritories": {"data": [{"type": "territories", "id": t} for t in pays]}}}})
+
+
+def les_pays(cfg, liste, deja, applique):
+    pays = territoires(cfg)
+    print("%d pays dans l'App Store.\n" % len(pays))
+    a_faire = []
+    for p in liste:
+        iap = deja.get(p["id"])
+        if not iap:
+            print("  %-40s pas encore créé" % p["id"]); continue
+        if disponible(cfg, iap):
+            print("  %-40s déjà ouvert" % p["id"]); continue
+        a_faire.append((p, iap))
+        print("  %-40s à ouvrir" % p["id"])
+    if not a_faire:
+        print("\nRien à faire : les articles se vendent déjà partout.")
+        return
+    if not applique:
+        print("\nÀ blanc. %d articles seraient ouverts à tous les pays." % len(a_faire))
+        return
+    if "--oui" not in sys.argv:
+        try:
+            reponse = input("\n%d articles, %d pays. Taper oui pour écrire : "
+                            % (len(a_faire), len(pays)))
+        except EOFError:
+            reponse = ""
+        if reponse.strip().lower() not in ("oui", "o", "yes"):
+            raise SystemExit("Rien n'a été envoyé.")
+    for p, iap in a_faire:
+        ouvrir_les_pays(cfg, iap, pays)
+        print("  %-40s ouvert" % p["id"])
+
+
 def existants(cfg):
     out, url = {}, "/v1/apps/%s/inAppPurchasesV2?limit=200" % cfg["app_id"]
     while url:
@@ -395,7 +457,8 @@ def etat_dans_la_fiche(cfg, liste, deja):
 
 def main():
     applique = "--apply" in sys.argv
-    compare = applique or "--check" in sys.argv or "--prix" in sys.argv
+    compare = applique or "--check" in sys.argv or "--prix" in sys.argv \
+        or "--pays" in sys.argv
 
     liste, refs, mots = packs(), fiche(), notes()
     maux = controles(liste, refs, mots, captures_requises=applique)
@@ -407,6 +470,10 @@ def main():
 
     cfg = config() if compare else None
     deja = existants(cfg) if compare else {}
+
+    if "--pays" in sys.argv:
+        les_pays(cfg, liste, deja, applique)
+        return
 
     if "--prix" in sys.argv:
         montant = sys.argv[sys.argv.index("--prix") + 1]

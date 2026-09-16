@@ -392,7 +392,22 @@ enum Manuel {
         return chapitres[i + 1]
     }
 
-    static let chapitres: [Chapitre] = [
+    /// Les chapitres, dans la langue en cours.
+    ///
+    /// Deux textes, pas une traduction : l'anglais a été écrit pour son
+    /// lecteur, avec ses exemples et ses tournures. Le français reste le
+    /// fichier d'origine, intact — il est lu par des joueurs depuis la 1.0, et
+    /// une refonte de forme n'avait aucune raison de le réécrire.
+    static var chapitres: [Chapitre] { chapitres(Themes.langue) }
+
+    /// La même chose, sans lire de réglage : les tests comparent les deux
+    /// manuels sans avoir à déplacer une préférence globale sous les pieds
+    /// des autres tests.
+    static func chapitres(_ langue: Langue) -> [Chapitre] {
+        langue == .en ? ManuelEN.chapitres : chapitresFR
+    }
+
+    static let chapitresFR: [Chapitre] = [
         premierePartie, duel, faceAFace, tour, victoire, miseEnPlace, ecran,
         cartes, dossier, memoire, reseau, banque, conseils, mentions,
     ]

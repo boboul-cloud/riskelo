@@ -546,3 +546,41 @@ struct QuestionTests {
         }
     }
 }
+
+// MARK: - Le mode d'emploi, dans les deux langues
+
+struct ManuelTests {
+
+    /// Les deux manuels sont deux textes, pas une traduction — mais ils
+    /// décrivent le même jeu, donc ils ont les mêmes chapitres.
+    ///
+    /// C'est l'invariant qui compte : un chapitre ajouté d'un côté et oublié
+    /// de l'autre laisserait la moitié des joueurs sans la page qui explique
+    /// une règle. Le compilateur ne peut pas le voir ; ce test, si.
+    @Test func lesDeuxManuelsCouvrentLesMemesChapitres() {
+        let fr = Manuel.chapitres(.fr).map(\.id)
+        let en = Manuel.chapitres(.en).map(\.id)
+        #expect(fr == en, "les chapitres ne se correspondent plus : \(fr) contre \(en)")
+        #expect(fr.count == 14)
+    }
+
+    /// Chaque chapitre dit quelque chose, dans les deux langues.
+    @Test func aucunChapitreNEstVide() {
+        for langue in Langue.allCases {
+            for c in Manuel.chapitres(langue) {
+                #expect(!c.titre.isEmpty, "\(langue) — \(c.id) sans titre")
+                #expect(!c.resume.isEmpty, "\(langue) — \(c.id) sans résumé")
+                #expect(!c.blocs.isEmpty, "\(langue) — \(c.id) sans contenu")
+            }
+        }
+    }
+
+    /// Les deux textes sont bien deux textes. Sans cela, un manuel anglais
+    /// resté français passerait tous les autres contrôles.
+    @Test func lesTitresDifferentDUneLangueALAutre() {
+        let fr = Manuel.chapitres(.fr).map(\.titre)
+        let en = Manuel.chapitres(.en).map(\.titre)
+        #expect(Set(fr).isDisjoint(with: Set(en)),
+                "un titre est identique dans les deux manuels")
+    }
+}

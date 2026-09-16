@@ -166,6 +166,22 @@
         }
       }
     },
+    "%lld camps sur %@, contre une machine %@.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld sides on %@, against a %@ machine."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$lld camps sur %2$@, contre une machine %3$@."
+          }
+        }
+      }
+    },
     "%lld homme%@ sur %lld": {
       "localizations": {
         "en": {
@@ -321,12 +337,162 @@
         }
       }
     },
+    "Afrique": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Africa"
+          }
+        }
+      }
+    },
+    "Afrique de l'Est": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "East Africa"
+          }
+        }
+      }
+    },
+    "Afrique du Nord": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "North Africa"
+          }
+        }
+      }
+    },
+    "Afrique du Sud": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "South Africa"
+          }
+        }
+      }
+    },
+    "Albanie": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Albania"
+          }
+        }
+      }
+    },
+    "Alizé": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tradewind"
+          }
+        }
+      }
+    },
+    "Allemagne": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Germany"
+          }
+        }
+      }
+    },
+    "Ambre": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Amber"
+          }
+        }
+      }
+    },
+    "Amérique centrale": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Central America"
+          }
+        }
+      }
+    },
+    "Amérique du Nord": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "North America"
+          }
+        }
+      }
+    },
+    "Amérique du Sud": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "South America"
+          }
+        }
+      }
+    },
+    "Angleterre": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "England"
+          }
+        }
+      }
+    },
     "Annuler": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Cancel"
+          }
+        }
+      }
+    },
+    "Argentine": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Argentina"
+          }
+        }
+      }
+    },
+    "Armorique": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thornmere"
+          }
+        }
+      }
+    },
+    "Asie": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Asia"
           }
         }
       }
@@ -391,6 +557,36 @@
         }
       }
     },
+    "Australie occidentale": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Western Australia"
+          }
+        }
+      }
+    },
+    "Australie orientale": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eastern Australia"
+          }
+        }
+      }
+    },
+    "Autriche": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Austria"
+          }
+        }
+      }
+    },
     "Avez-vous fini d'attaquer ?": {
       "localizations": {
         "en": {
@@ -401,12 +597,102 @@
         }
       }
     },
+    "Baie d'Or": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gold Bay"
+          }
+        }
+      }
+    },
+    "Baléares": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Balearics"
+          }
+        }
+      }
+    },
+    "Belgique": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Belgium"
+          }
+        }
+      }
+    },
     "Bien": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "OK"
+          }
+        }
+      }
+    },
+    "Biélorussie": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Belarus"
+          }
+        }
+      }
+    },
+    "Bleu": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blue"
+          }
+        }
+      }
+    },
+    "Bocage": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hedgerow"
+          }
+        }
+      }
+    },
+    "Boréa": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Borea"
+          }
+        }
+      }
+    },
+    "Brésil": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brazil"
+          }
+        }
+      }
+    },
+    "Bulgarie": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bulgaria"
           }
         }
       }
@@ -427,6 +713,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "HOW MANY PLAYERS"
+          }
+        }
+      }
+    },
+    "Cap Blanc": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Whitecape"
           }
         }
       }
@@ -527,6 +823,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Find players"
+          }
+        }
+      }
+    },
+    "Chine": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "China"
           }
         }
       }
@@ -661,12 +967,92 @@
         }
       }
     },
+    "Corail": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Coral"
+          }
+        }
+      }
+    },
+    "Corse": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Corsica"
+          }
+        }
+      }
+    },
+    "Croatie": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Croatia"
+          }
+        }
+      }
+    },
+    "Crète": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crete"
+          }
+        }
+      }
+    },
+    "Cultivée": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Well-read"
+          }
+        }
+      }
+    },
     "Culture générale": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "General knowledge"
+          }
+        }
+      }
+    },
+    "Culture générale seule": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "General knowledge only"
+          }
+        }
+      }
+    },
+    "Culture générale · ": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "General knowledge · "
+          }
+        }
+      }
+    },
+    "Danemark": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Denmark"
           }
         }
       }
@@ -681,12 +1067,32 @@
         }
       }
     },
+    "De l'Atlantique à la mer Noire. 38 territoires.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "From the Atlantic to the Black Sea. 38 territories."
+          }
+        }
+      }
+    },
     "Deux questions": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Two questions"
+          }
+        }
+      }
+    },
+    "Distraite": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Distracted"
           }
         }
       }
@@ -783,6 +1189,76 @@
         }
       }
     },
+    "Espagne": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spain"
+          }
+        }
+      }
+    },
+    "Est des États-Unis": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eastern United States"
+          }
+        }
+      }
+    },
+    "Europe centrale": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Central Europe"
+          }
+        }
+      }
+    },
+    "Europe de l'Est": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eastern Europe"
+          }
+        }
+      }
+    },
+    "Europe de l'Ouest": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Western Europe"
+          }
+        }
+      }
+    },
+    "Europe du Nord": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Northern Europe"
+          }
+        }
+      }
+    },
+    "Europe du Sud": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Southern Europe"
+          }
+        }
+      }
+    },
     "Faire avancer %lld hommes": {
       "localizations": {
         "en": {
@@ -823,12 +1299,62 @@
         }
       }
     },
+    "Finlande": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finland"
+          }
+        }
+      }
+    },
     "Game Center n'a pas pu": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Game Center could not"
+          }
+        }
+      }
+    },
+    "Grande-Bretagne": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Great Britain"
+          }
+        }
+      }
+    },
+    "Grise-Lande": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Greymoor"
+          }
+        }
+      }
+    },
+    "Groenland": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Greenland"
+          }
+        }
+      }
+    },
+    "Grèce": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Greece"
           }
         }
       }
@@ -843,12 +1369,122 @@
         }
       }
     },
+    "Havreterre": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Havenhold"
+          }
+        }
+      }
+    },
+    "Hongrie": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hungary"
+          }
+        }
+      }
+    },
+    "Honnête": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fair"
+          }
+        }
+      }
+    },
+    "Iakoutie": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yakutsk"
+          }
+        }
+      }
+    },
     "Il a été enregistré sur un plateau qui a changé de dessin depuis.": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "It was saved on a board whose drawing has changed since."
+          }
+        }
+      }
+    },
+    "Inde": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "India"
+          }
+        }
+      }
+    },
+    "Indonésie": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Indonesia"
+          }
+        }
+      }
+    },
+    "Irkoutsk": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Irkutsk"
+          }
+        }
+      }
+    },
+    "Islande": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Iceland"
+          }
+        }
+      }
+    },
+    "Italie": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Italy"
+          }
+        }
+      }
+    },
+    "Italie du Nord": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Northern Italy"
+          }
+        }
+      }
+    },
+    "Japon": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Japan"
           }
         }
       }
@@ -889,6 +1525,36 @@
           "stringUnit": {
             "state": "translated",
             "value": "Up to four players, one device each."
+          }
+        }
+      }
+    },
+    "Kamtchatka": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kamchatka"
+          }
+        }
+      }
+    },
+    "Khanat": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Khanate"
+          }
+        }
+      }
+    },
+    "L'Anneau": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The Ring"
           }
         }
       }
@@ -973,12 +1639,32 @@
         }
       }
     },
+    "Lagune": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lagoon"
+          }
+        }
+      }
+    },
     "Lancer l'assaut": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Launch the assault"
+          }
+        }
+      }
+    },
+    "Landes Hautes": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "High Moors"
           }
         }
       }
@@ -1023,6 +1709,16 @@
         }
       }
     },
+    "Les Marches": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The Marches"
+          }
+        }
+      }
+    },
     "Les autres appareils ne montrent que la leur.": {
       "localizations": {
         "en": {
@@ -1039,6 +1735,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "The two devices are not running the same version of Riskelo."
+          }
+        }
+      }
+    },
+    "Les six continents, 42 territoires — comme la boîte.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The six continents, 42 territories — like the box."
           }
         }
       }
@@ -1083,12 +1789,92 @@
         }
       }
     },
+    "Moldavie": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moldova"
+          }
+        }
+      }
+    },
+    "Monde": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "World"
+          }
+        }
+      }
+    },
+    "Mongolie": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mongolia"
+          }
+        }
+      }
+    },
+    "Mont Rouge": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Redmount"
+          }
+        }
+      }
+    },
+    "Moyen-Orient": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Middle East"
+          }
+        }
+      }
+    },
+    "Méditerranée": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mediterranean"
+          }
+        }
+      }
+    },
+    "Méridia": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meridia"
+          }
+        }
+      }
+    },
     "Non, je continue d'attaquer": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "No, I'm still attacking"
+          }
+        }
+      }
+    },
+    "Norvège": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Norway"
           }
         }
       }
@@ -1103,12 +1889,42 @@
         }
       }
     },
+    "Nouvelle-Guinée": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New Guinea"
+          }
+        }
+      }
+    },
     "OU REJOINDRE AVEC UN CODE": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "OR JOIN WITH A CODE"
+          }
+        }
+      }
+    },
+    "Océanie": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Australia"
+          }
+        }
+      }
+    },
+    "Oliveraie": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Olivegrove"
           }
         }
       }
@@ -1153,12 +1969,32 @@
         }
       }
     },
+    "Ouest des États-Unis": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Western United States"
+          }
+        }
+      }
+    },
     "Oui, au déplacement": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Yes, on to the move"
+          }
+        }
+      }
+    },
+    "Oural": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ural"
           }
         }
       }
@@ -1213,6 +2049,16 @@
         }
       }
     },
+    "Palmeraie": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Palmgrove"
+          }
+        }
+      }
+    },
     "Par Game Center": {
       "localizations": {
         "en": {
@@ -1253,6 +2099,76 @@
         }
       }
     },
+    "Pays baltes": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Baltic States"
+          }
+        }
+      }
+    },
+    "Pays-Bas": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Netherlands"
+          }
+        }
+      }
+    },
+    "Pierregrise": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Greystone"
+          }
+        }
+      }
+    },
+    "Pologne": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Poland"
+          }
+        }
+      }
+    },
+    "Ponant": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Westmark"
+          }
+        }
+      }
+    },
+    "Pérou": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Peru"
+          }
+        }
+      }
+    },
+    "Québec": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quebec"
+          }
+        }
+      }
+    },
     "Recherche des tables ouvertes…": {
       "localizations": {
         "en": {
@@ -1269,6 +2185,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Looking…"
+          }
+        }
+      }
+    },
+    "Redoutable": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Formidable"
           }
         }
       }
@@ -1389,6 +2315,46 @@
         }
       }
     },
+    "Rouge": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Red"
+          }
+        }
+      }
+    },
+    "Roumanie": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Romania"
+          }
+        }
+      }
+    },
+    "Russie": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Russia"
+          }
+        }
+      }
+    },
+    "Récif": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reef"
+          }
+        }
+      }
+    },
     "Réessayer": {
       "localizations": {
         "en": {
@@ -1429,6 +2395,26 @@
         }
       }
     },
+    "Sablier": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hourglass"
+          }
+        }
+      }
+    },
+    "Saline": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saltings"
+          }
+        }
+      }
+    },
     "Sans nom": {
       "localizations": {
         "en": {
@@ -1439,12 +2425,92 @@
         }
       }
     },
+    "Sardaigne": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sardinia"
+          }
+        }
+      }
+    },
+    "Scandinavie": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scandinavia"
+          }
+        }
+      }
+    },
+    "Serbie": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Serbia"
+          }
+        }
+      }
+    },
+    "Sibérie": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Siberia"
+          }
+        }
+      }
+    },
+    "Sicile": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sicily"
+          }
+        }
+      }
+    },
     "Site": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Website"
+          }
+        }
+      }
+    },
+    "Skerrie": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skerry"
+          }
+        }
+      }
+    },
+    "Slovaquie": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Slovakia"
+          }
+        }
+      }
+    },
+    "Slovénie": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Slovenia"
           }
         }
       }
@@ -1469,12 +2535,62 @@
         }
       }
     },
+    "Steppe Haute": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "High Steppe"
+          }
+        }
+      }
+    },
+    "Suisse": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Switzerland"
+          }
+        }
+      }
+    },
     "Sur un appareil partagé, cet écran montre celle de qui joue.": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "On a shared device, this screen shows the one whose turn it is."
+          }
+        }
+      }
+    },
+    "Suède": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sweden"
+          }
+        }
+      }
+    },
+    "Tchéquie": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Czechia"
+          }
+        }
+      }
+    },
+    "Territoires du Nord-Ouest": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Northwest Territory"
           }
         }
       }
@@ -1519,6 +2635,16 @@
         }
       }
     },
+    "Turquie": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turkey"
+          }
+        }
+      }
+    },
     "Un appareil par joueur.": {
       "localizations": {
         "en": {
@@ -1545,6 +2671,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "One more man"
+          }
+        }
+      }
+    },
+    "Un monde inventé, cinq terres en cercle. 28 territoires.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "An invented world, five lands in a circle. 28 territories."
           }
         }
       }
@@ -1589,12 +2725,52 @@
         }
       }
     },
+    "Val-Clair": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brightvale"
+          }
+        }
+      }
+    },
     "Versions différentes": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Different versions"
+          }
+        }
+      }
+    },
+    "Vert": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Green"
+          }
+        }
+      }
+    },
+    "Vieux-Port": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oldport"
+          }
+        }
+      }
+    },
+    "Violet": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Purple"
           }
         }
       }
@@ -1645,6 +2821,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "You are in the game"
+          }
+        }
+      }
+    },
+    "Zéphyrie": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zephyria"
           }
         }
       }
@@ -1751,6 +2937,36 @@
           "stringUnit": {
             "state": "translated",
             "value": "Trade for %lld troops"
+          }
+        }
+      }
+    },
+    "Écosse": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scotland"
+          }
+        }
+      }
+    },
+    "Égypte": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Egypt"
+          }
+        }
+      }
+    },
+    "Îles Britanniques": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "British Isles"
           }
         }
       }

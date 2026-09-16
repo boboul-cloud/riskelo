@@ -45,10 +45,10 @@ enum PartieRapide {
         let packs = enJeu.filter { $0.produit != nil }
         let base = enJeu.contains { $0.produit == nil }
         if packs.isEmpty {
-            return "Culture générale seule"
+            return String(localized: "Culture générale seule")
         }
         let noms = packs.map(\.label).joined(separator: " · ")
-        return base ? "Culture générale · " + noms : noms
+        return base ? String(localized: "Culture générale · ") + noms : noms
     }
 
     /// Les règles, assemblées à partir de ce que l'écran des réglages propose.
@@ -85,10 +85,10 @@ enum PartieRapide {
     /// qui annonce la partie rapide, et aux réglages, qui la font varier.
     static func niveauDit(_ n: Double) -> String {
         switch n {
-        case ..<0.45: "Distraite"
-        case ..<0.60: "Honnête"
-        case ..<0.75: "Cultivée"
-        default:      "Redoutable"
+        case ..<0.45: String(localized: "Distraite")
+        case ..<0.60: String(localized: "Honnête")
+        case ..<0.75: String(localized: "Cultivée")
+        default:      String(localized: "Redoutable")
         }
     }
 
@@ -99,8 +99,11 @@ enum PartieRapide {
         // « sur L'Anneau » au milieu d'une phrase sonne comme un titre : le
         // nom du plateau y perd sa majuscule, mais pas son article.
         let ou = plateau.label.prefix(1).lowercased() + plateau.label.dropFirst()
-        return "\(camps) camps sur \(ou), contre une machine "
-            + niveauDit(niveau).lowercased() + "."
+        let force = niveauDit(niveau).lowercased()
+        // La phrase entière est la clé, et non ses morceaux : une langue met
+        // le niveau avant la machine, une autre après, et recoller des bouts
+        // traduits séparément donne une phrase qui n'est d'aucune langue.
+        return String(localized: "\(camps) camps sur \(ou), contre une machine \(force).")
     }
 }
 

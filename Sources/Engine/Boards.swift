@@ -20,12 +20,23 @@
 
 import Foundation
 
+/// Le nom d'une chose de la carte, dans la langue de l'interface.
+///
+/// Les plateaux sont écrits en français dans les données — c'est la langue
+/// d'origine du jeu — et le catalogue en porte l'anglais. La traduction se
+/// fait ici, au moment de lire, et non dans les données : un territoire est
+/// une case du plateau avant d'être un mot, et sa définition n'a pas à
+/// exister en double.
+func nomTraduit(_ brut: String) -> String {
+    String(localized: String.LocalizationValue(brut))
+}
+
 enum Boards: String, CaseIterable, Identifiable, Codable {
 
     /// Le nom d'un camp. Il tient ici plutôt que dans une vue : deux appareils
     /// doivent nommer les mêmes joueurs de la même façon.
     static func nomDeCamp(_ rang: PlayerID) -> String {
-        let noms = ["Bleu", "Rouge", "Vert", "Ambre", "Violet"]
+        let noms = ["Bleu", "Rouge", "Vert", "Ambre", "Violet"].map(nomTraduit)
         return noms[((rang % noms.count) + noms.count) % noms.count]
     }
 
@@ -35,17 +46,17 @@ enum Boards: String, CaseIterable, Identifiable, Codable {
 
     var label: String {
         switch self {
-        case .anneau: "L'Anneau"
-        case .europe: "Europe"
-        case .monde:  "Monde"
+        case .anneau: nomTraduit("L'Anneau")
+        case .europe: nomTraduit("Europe")
+        case .monde:  nomTraduit("Monde")
         }
     }
 
     var detail: String {
         switch self {
-        case .anneau: "Un monde inventé, cinq terres en cercle. 28 territoires."
-        case .europe: "De l'Atlantique à la mer Noire. 38 territoires."
-        case .monde:  "Les six continents, 42 territoires — comme la boîte."
+        case .anneau: nomTraduit("Un monde inventé, cinq terres en cercle. 28 territoires.")
+        case .europe: nomTraduit("De l'Atlantique à la mer Noire. 38 territoires.")
+        case .monde:  nomTraduit("Les six continents, 42 territoires — comme la boîte.")
         }
     }
 

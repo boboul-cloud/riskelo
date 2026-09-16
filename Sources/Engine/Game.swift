@@ -772,7 +772,7 @@ struct GameState {
 
     // MARK: - Journal
 
-    func name(_ id: TerritoryID) -> String { map[id]?.name ?? id }
+    func name(_ id: TerritoryID) -> String { nomTraduit(map[id]?.name ?? id) }
 
     private mutating func note(_ kind: Entry.Kind, _ text: String) {
         journal.append(Entry(turn: turn, player: players.indices.contains(current) ? currentPlayer.id : nil,

@@ -734,7 +734,15 @@ construisent.
 ### Essayé, et la liaison tient
 
 **28 août 2026 — vérifié sur un vrai Mac et un vrai iPhone : la partie à deux
-appareils fonctionne avec le bac à sable actif.** C'était le seul point du
+appareils fonctionne avec le bac à sable actif.**
+
+**16 septembre 2026 — revérifié après la fusion des deux langues, dans les deux
+modes.** Le dialecte réseau est passé de 7 à 8 et les identifiants de trois
+thèmes ont changé : il fallait s'assurer que deux appareils se trouvent encore
+et jouent bien la même partie. Essayé au loin par le code à six lettres, et en
+local par Bonjour. Dans les deux cas, l'iPhone français ouvre la table, le Mac
+anglais la rejoint, et les deux jouent les questions françaises — la langue de
+celui qui ouvre, comme annoncé sur l'écran des packs. C'était le seul point du
 dossier qu'aucune commande ne pouvait établir, et il est levé : la version Mac
 peut partir en même temps que celle de l'iPhone.
 

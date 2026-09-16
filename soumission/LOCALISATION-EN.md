@@ -130,6 +130,17 @@ famille `pack.us.` : c'est elle qui les distingue, et un test la vérifie.
 
 Les dix-sept articles français ne bougent pas.
 
+## La liaison à deux appareils, revérifiée
+
+Le dialecte réseau est passé de 7 à 8 et trois identifiants de thèmes ont
+changé côté anglais : deux appareils qui se seraient crus compatibles auraient
+tiré des questions différentes.
+
+**16 septembre 2026 — essayé sur un vrai iPhone et un vrai Mac, dans les deux
+modes.** Au loin par le code à six lettres, et en local par Bonjour. L'iPhone
+français ouvre, le Mac anglais rejoint, les deux jouent les questions
+françaises. C'est la règle : la table joue la langue de celui qui l'ouvre.
+
 ## Les captures d'écran
 
 Une série par langue. Celles de l'anglais restent à prendre — l'app se lance

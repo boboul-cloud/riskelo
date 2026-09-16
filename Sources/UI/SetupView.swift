@@ -210,11 +210,15 @@ struct SetupView: View {
                                    in: 0...10, step: 1)
                                 .tint(Palette.held)
                             Text(mode == .classique
-                                 ? "Seul le défenseur répond : ce renfort revient à qui tient sa "
-                                   + "place en sachant. Mesuré, il creuse un peu l'écart entre deux "
-                                   + "cultures inégales — nettement en dessous de quatre."
-                                 : "Les deux répondent : le renfort revient à qui sait, qu'il "
-                                   + "attaque ou qu'il défende.")
+                                 ? """
+                                   Seul le défenseur répond : ce renfort revient à qui tient sa \
+                                   place en sachant. Mesuré, il creuse un peu l'écart entre deux \
+                                   cultures inégales — nettement en dessous de quatre.
+                                   """
+                                 : """
+                                   Les deux répondent : le renfort revient à qui sait, qu'il \
+                                   attaque ou qu'il défende.
+                                   """)
                                 .font(.caption2).foregroundStyle(Palette.dim)
                         }
 

@@ -344,22 +344,32 @@ struct LoinView: View {
     private func remede(_ panne: Relais.Panne) -> String {
         switch panne {
         case .codeInconnu:
-            return "Un code vit le temps d'une partie. Vérifiez les six lettres, "
-                 + "ou demandez-en un nouveau à celui qui a ouvert."
+            return """
+                   Un code vit le temps d'une partie. Vérifiez les six lettres, \
+                   ou demandez-en un nouveau à celui qui a ouvert.
+                   """
         case .salonPlein:
-            return "Quatre joueurs au plus, un appareil chacun. Il faudra attendre "
-                 + "la partie suivante."
+            return """
+                   Quatre joueurs au plus, un appareil chacun. Il faudra attendre \
+                   la partie suivante.
+                   """
         case .dejaCommencee:
-            return "On ne se glisse pas dans une partie en cours. Demandez qu'on "
-                 + "en rouvre une."
+            return """
+                   On ne se glisse pas dans une partie en cours. Demandez qu'on \
+                   en rouvre une.
+                   """
         case .sansReponse:
-            return "Vérifiez votre connexion — Wi-Fi ou données mobiles. "
-                 + "Si tout va bien de votre côté, c'est le serveur des parties "
-                 + "qui ne répond pas : la même pièce, elle, ne dépend de personne."
+            return """
+                   Vérifiez votre connexion — Wi-Fi ou données mobiles. \
+                   Si tout va bien de votre côté, c'est le serveur des parties \
+                   qui ne répond pas : la même pièce, elle, ne dépend de personne.
+                   """
         case let .serveur(dit):
             let quoi = dit == "dialecte"
-                ? "Les deux appareils n'ont pas la même version de Riskelo. "
-                + "Mettez-les à jour tous les deux."
+                ? """
+                  Les deux appareils n'ont pas la même version de Riskelo. \
+                  Mettez-les à jour tous les deux.
+                  """
                 : "Le serveur a répondu « \(dit) »."
             return quoi
         }

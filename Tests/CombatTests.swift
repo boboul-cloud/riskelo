@@ -15,6 +15,13 @@ import Testing
 
 struct CombatTests {
 
+    /// La langue des questions n'est pas un réglage de test, mais l'app la
+    /// garde d'une fois sur l'autre — et ces essais tirent des thèmes
+    /// français. Lancés après un passage de l'app en anglais, ils ne
+    /// trouvaient plus « histoire » et tombaient sur un dépliage de nil, ce
+    /// qui donnait l'air d'une régression là où il n'y avait qu'un réglage.
+    init() { Themes.langue = .fr }
+
     private func duel(_ allowance: TimeInterval = 15, siege: Int = 0) -> Duel {
         var rng = SeededRandom(seed: 1)
         let posee = QuestionBank.francaises[0].asked(using: &rng)

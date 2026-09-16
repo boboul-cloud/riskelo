@@ -549,8 +549,13 @@ private struct BottomBar: View {
                 }
                 Text("\(g.name(a.from)) → \(g.name(a.to))")
                     .font(.headline).foregroundStyle(Palette.ink)
-                Label("\(a.volley) question\(a.volley > 1 ? "s" : "") "
-                      + "\(a.category?.apresDe ?? "au hasard")",
+                // Deux phrases plutôt qu'une avec un trou : le thème se
+                // raccorde par « de » en français et par « on » en anglais,
+                // et « au hasard » ne se raccorde à rien. Une seule phrase à
+                // trou aurait donné « 2 questions on at random ».
+                Label(a.category.map { c in
+                          "\(a.volley) question\(a.volley > 1 ? "s" : "") \(c.dansLaPhrase)"
+                      } ?? "\(a.volley) question\(a.volley > 1 ? "s" : "") au hasard",
                       systemImage: a.category?.symbol ?? "dice")
                     .font(.caption2)
                     .foregroundStyle(a.category.map(Palette.category) ?? Palette.dim)
@@ -766,11 +771,15 @@ private struct AssaultPanel: View {
                              : "Vous choisissez le terrain — mais vous y répondez aussi")
                             .font(.caption.weight(.medium)).foregroundStyle(Palette.dim)
                         Text(g.rules.mode == .classique
-                             ? "Le score est le sien : vert, il y répond bien ; rouge, il y "
-                               + "trébuche. La lunette marque son point faible."
-                             : "Le score est le sien : vert, il y répond bien ; rouge, il y "
-                               + "trébuche. Attention — un thème où il trébuche ne vous sert "
-                               + "que si vous, vous tenez debout.")
+                             ? """
+                               Le score est le sien : vert, il y répond bien ; rouge, il y \
+                               trébuche. La lunette marque son point faible.
+                               """
+                             : """
+                               Le score est le sien : vert, il y répond bien ; rouge, il y \
+                               trébuche. Attention — un thème où il trébuche ne vous sert \
+                               que si vous, vous tenez debout.
+                               """)
                             .font(.system(size: 10)).foregroundStyle(Palette.dim.opacity(0.8))
                         LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 7),
                                                  count: 3), spacing: 7) {
@@ -835,14 +844,20 @@ private struct AssaultPanel: View {
         if g.rules.mode == .classique {
             return une
                 ? "Un duel : au plus un homme perdu de chaque côté."
-                : "Deux duels de suite. Le sablier se resserre au second — mais deux bonnes "
-                    + "réponses vous coûtent deux hommes."
+                : """
+                  Deux duels de suite. Le sablier se resserre au second — mais deux bonnes \
+                  réponses vous coûtent deux hommes.
+                  """
         }
         return une
-            ? "Un duel, la même question pour vous deux. S'il double la mise, il vaudra "
-                + "deux hommes."
-            : "Deux duels de suite, la même question à chaque fois pour vous deux. Le sablier "
-                + "se resserre au second, et il peut doubler la mise sur chacun."
+            ? """
+              Un duel, la même question pour vous deux. S'il double la mise, il vaudra \
+              deux hommes.
+              """
+            : """
+              Deux duels de suite, la même question à chaque fois pour vous deux. Le sablier \
+              se resserre au second, et il peut doubler la mise sur chacun.
+              """
     }
 
     /// Le septième terrain : celui qu'on ne choisit pas.
@@ -1152,8 +1167,10 @@ private struct CartesSheet: View {
                     Text("Vos cartes").font(.headline).foregroundStyle(Palette.ink)
                     Text(main.isEmpty
                          ? "Une carte se gagne en prenant au moins une place dans le tour."
-                         : "Trois symboles identiques, ou trois différents. "
-                           + "Le prochain échange vaut \(g.prochainEchange) hommes.")
+                         : """
+                           Trois symboles identiques, ou trois différents. \
+                           Le prochain échange vaut \(g.prochainEchange) hommes.
+                           """)
                         .font(.caption).foregroundStyle(Palette.dim)
                     if g.doitEchanger(g.currentPlayer.id) {
                         Text("Cinq cartes en main : l'échange est obligatoire.")

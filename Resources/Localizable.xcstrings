@@ -38,6 +38,16 @@
         }
       }
     },
+    "%@ a répondu juste : %@ tient, l'assaillant laisse %@.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ answered correctly: %@ holds, the attacker leaves %@."
+          }
+        }
+      }
+    },
     "%@ a répondu. À vous la même question.": {
       "localizations": {
         "en": {
@@ -94,6 +104,16 @@
         }
       }
     },
+    "%@ n'a pas répondu à temps : %@ perd %@.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ did not answer in time: %@ loses %@."
+          }
+        }
+      }
+    },
     "%@ n'a pas répondu.": {
       "localizations": {
         "en": {
@@ -110,6 +130,36 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ is answering…"
+          }
+        }
+      }
+    },
+    "%@ s'est trompé : %@ perd %@.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ got it wrong: %@ loses %@."
+          }
+        }
+      }
+    },
+    "%@ savait, %@ non : %@ perd %@.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ knew, %@ did not: %@ loses %@."
+          }
+        }
+      }
+    },
+    "%@ savait, %@ non : %@ tient, l'assaillant laisse %@.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ knew, %@ did not: %@ holds, the attacker leaves %@."
           }
         }
       }
@@ -250,6 +300,26 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld humans"
+          }
+        }
+      }
+    },
+    "%lld question%@ %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld question%@ on %@"
+          }
+        }
+      }
+    },
+    "%lld question%@ au hasard": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld question%@ at random"
           }
         }
       }
@@ -837,6 +907,16 @@
         }
       }
     },
+    "Certaines box interdisent à deux appareils de se parler entre eux. Dans ce cas seulement, **coupez le Wi-Fi depuis le centre de contrôle** (le bouton, pas les Réglages) des deux côtés : ils se relieront sans passer par elle.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Some routers forbid two devices from talking to each other. In that case only, **turn Wi-Fi off from Control Center** (the button, not Settings) on both sides: they will link up without going through it."
+          }
+        }
+      }
+    },
     "Ces deux-là ne vont pas ensemble : allumer l'une éteint l'autre. Prendre le monde entier, ou remplir sa conquête — il faut choisir la fin de la partie.": {
       "localizations": {
         "en": {
@@ -1183,6 +1263,26 @@
           "stringUnit": {
             "state": "translated",
             "value": "From the Atlantic to the Black Sea. 38 territories."
+          }
+        }
+      }
+    },
+    "Deux duels de suite, la même question à chaque fois pour vous deux. Le sablier se resserre au second, et il peut doubler la mise sur chacun.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Two duels in a row, the same question each time for both of you. The clock tightens on the second, and they can double the stake on each."
+          }
+        }
+      }
+    },
+    "Deux duels de suite. Le sablier se resserre au second — mais deux bonnes réponses vous coûtent deux hommes.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Two duels in a row. The clock tightens on the second — but two correct answers cost you two troops."
           }
         }
       }
@@ -1721,6 +1821,16 @@
         }
       }
     },
+    "L'assaillant": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The attacker"
+          }
+        }
+      }
+    },
     "L'autre appareil a envoyé une partie que celui-ci ne sait pas lire. Installez la même version de Riskelo des deux côtés.": {
       "localizations": {
         "en": {
@@ -1797,6 +1907,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "The game will resume on its own. %lld s to go."
+          }
+        }
+      }
+    },
+    "La place": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The place"
           }
         }
       }
@@ -1891,6 +2011,36 @@
         }
       }
     },
+    "Le défenseur": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The defender"
+          }
+        }
+      }
+    },
+    "Le score est le sien : vert, il y répond bien ; rouge, il y trébuche. Attention — un thème où il trébuche ne vous sert que si vous, vous tenez debout.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The score is theirs: green, they answer it well; red, they stumble on it. Careful — a theme they stumble on only helps you if you stay on your feet."
+          }
+        }
+      }
+    },
+    "Le score est le sien : vert, il y répond bien ; rouge, il y trébuche. La lunette marque son point faible.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The score is theirs: green, they answer it well; red, they stumble on it. The scope marks their weak spot."
+          }
+        }
+      }
+    },
     "Le système a refusé d'ouvrir le réseau local.": {
       "localizations": {
         "en": {
@@ -1921,6 +2071,16 @@
         }
       }
     },
+    "Les appareils se trouvent tout seuls. Ni compte, ni code, ni serveur — cela marche même dans un train.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The devices find each other on their own. No account, no code, no server — it works even on a train."
+          }
+        }
+      }
+    },
     "Les autres appareils ne montrent que la leur.": {
       "localizations": {
         "en": {
@@ -1931,12 +2091,72 @@
         }
       }
     },
+    "Les deux appareils doivent être sur **le même réseau Wi-Fi** — ou tous les deux sans réseau du tout, auquel cas ils se relient directement.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Both devices have to be on **the same Wi-Fi network** — or both with no network at all, in which case they link up directly."
+          }
+        }
+      }
+    },
+    "Les deux appareils doivent être sur **le même réseau Wi-Fi**. C'est de loin la cause la plus fréquente : l'un sur la box, l'autre sur le réseau invité, et ils ne se voient pas.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Both devices have to be on **the same Wi-Fi network**. This is by far the commonest cause: one on the router, the other on the guest network, and they cannot see each other."
+          }
+        }
+      }
+    },
     "Les deux appareils n'ont pas la même version de Riskelo.": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "The two devices are not running the same version of Riskelo."
+          }
+        }
+      }
+    },
+    "Les deux appareils n'ont pas la même version de Riskelo. Mettez-les à jour tous les deux.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The two devices do not have the same version of Riskelo. Update them both."
+          }
+        }
+      }
+    },
+    "Les deux répondent : le renfort revient à qui sait, qu'il attaque ou qu'il défende.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Both answer: the reinforcement goes to whoever knows, attacking or defending."
+          }
+        }
+      }
+    },
+    "Les deux savaient. %@ a été le plus vif : %@ perd %@.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Both knew. %@ was quicker: %@ loses %@."
+          }
+        }
+      }
+    },
+    "Les deux savaient. %@ a été le plus vif : %@ tient, l'assaillant laisse %@.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Both knew. %@ was quicker: %@ holds, the attacker leaves %@."
           }
         }
       }
@@ -2171,6 +2391,16 @@
         }
       }
     },
+    "On ne se glisse pas dans une partie en cours. Demandez qu'on en rouvre une.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You cannot slip into a game in progress. Ask for a new one to be opened."
+          }
+        }
+      }
+    },
     "On prépare le salon…": {
       "localizations": {
         "en": {
@@ -2361,6 +2591,16 @@
         }
       }
     },
+    "Personne ne savait. Comme sur une égalité de dés, %@ tient et l'assaillant laisse %@.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nobody knew. As on a tie of dice, %@ holds and the attacker leaves %@."
+          }
+        }
+      }
+    },
     "Pierregrise": {
       "localizations": {
         "en": {
@@ -2397,6 +2637,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Peru"
+          }
+        }
+      }
+    },
+    "Quatre joueurs au plus, un appareil chacun. Il faudra attendre la partie suivante.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Four players at most, one device each. You will have to wait for the next game."
           }
         }
       }
@@ -2567,6 +2817,16 @@
         }
       }
     },
+    "Riskelo doit être **à l'écran** sur l'autre appareil. En arrière-plan, ou l'écran verrouillé, il cesse de répondre.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Riskelo has to be **on screen** on the other device. In the background, or with the screen locked, it stops answering."
+          }
+        }
+      }
+    },
     "Rouge": {
       "localizations": {
         "en": {
@@ -2633,6 +2893,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Game settings"
+          }
+        }
+      }
+    },
+    "Réglages → Confidentialité et sécurité → Réseau local : Riskelo activé, sur les deux.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settings → Privacy & Security → Local Network: Riskelo turned on, on both."
           }
         }
       }
@@ -2707,6 +2977,16 @@
         }
       }
     },
+    "Seul le défenseur répond : ce renfort revient à qui tient sa place en sachant. Mesuré, il creuse un peu l'écart entre deux cultures inégales — nettement en dessous de quatre.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Only the defender answers: this reinforcement goes to whoever holds their place by knowing. Measured, it widens the gap a little between two unequal levels of knowledge — markedly so below four."
+          }
+        }
+      }
+    },
     "Si un appareil demande l'autorisation d'utiliser le réseau local, acceptez-la : sans elle, la liaison ne peut pas s'établir.": {
       "localizations": {
         "en": {
@@ -2753,6 +3033,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Website"
+          }
+        }
+      }
+    },
+    "Six lettres à envoyer par WhatsApp ou par SMS. Chacun chez soi, et rien à créer.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Six letters to send by WhatsApp or text message. Each at home, and nothing to create."
           }
         }
       }
@@ -2823,6 +3113,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Switzerland"
+          }
+        }
+      }
+    },
+    "Sur l'autre appareil : « Ouvrir la table », et laissez son écran allumé.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On the other device: “Open the table”, and leave its screen awake."
           }
         }
       }
@@ -2917,6 +3217,16 @@
         }
       }
     },
+    "Trois symboles identiques, ou trois différents. Le prochain échange vaut %lld hommes.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Three identical symbols, or three different ones. The next trade is worth %lld troops."
+          }
+        }
+      }
+    },
     "Turquie": {
       "localizations": {
         "en": {
@@ -2933,6 +3243,26 @@
           "stringUnit": {
             "state": "translated",
             "value": "One device per player."
+          }
+        }
+      }
+    },
+    "Un code vit le temps d'une partie. Vérifiez les six lettres, ou demandez-en un nouveau à celui qui a ouvert.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A code lives for one game. Check the six letters, or ask whoever opened it for a new one."
+          }
+        }
+      }
+    },
+    "Un duel, la même question pour vous deux. S'il double la mise, il vaudra deux hommes.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One duel, the same question for both of you. If they double the stake, it will be worth two troops."
           }
         }
       }
@@ -3127,12 +3457,42 @@
         }
       }
     },
+    "Vos amis Game Center, ou un adversaire au hasard. Demande un compte Apple, et ne se reprend pas après une coupure.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your Game Center friends, or an opponent at random. Needs an Apple account, and cannot be resumed after a drop."
+          }
+        }
+      }
+    },
     "Vos cartes": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Your cards"
+          }
+        }
+      }
+    },
+    "Votre réponse est prise. %@ répond maintenant à la même question : le plus sûr l'emporte, et si vous savez tous les deux, le plus rapide.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your answer is taken. %@ is now answering the same question: the surer wins, and if you both know, the faster."
+          }
+        }
+      }
+    },
+    "Vous avez répondu juste : %@ tient, l'assaillant laisse %@.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You answered correctly: %@ holds, the attacker leaves %@."
           }
         }
       }
@@ -3147,12 +3507,32 @@
         }
       }
     },
+    "Vous n'avez pas répondu à temps : %@ perd %@.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You did not answer in time: %@ loses %@."
+          }
+        }
+      }
+    },
     "Vous posez la question — choisissez le terrain": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "You ask the question — pick the ground"
+          }
+        }
+      }
+    },
+    "Vous recevrez la même question juste après : en face à face, l'attaquant répond aussi. Le plus sûr l'emporte, et si vous savez tous les deux, le plus rapide.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You will get the same question right after: in a showdown the attacker answers too. The surer wins, and if you both know, the faster."
           }
         }
       }
@@ -3167,12 +3547,32 @@
         }
       }
     },
+    "Vous vous êtes trompé : %@ perd %@.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You got it wrong: %@ loses %@."
+          }
+        }
+      }
+    },
     "Vous êtes dans la partie": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "You are in the game"
+          }
+        }
+      }
+    },
+    "Vérifiez votre connexion — Wi-Fi ou données mobiles. Si tout va bien de votre côté, c'est le serveur des parties qui ne répond pas : la même pièce, elle, ne dépend de personne.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Check your connection — Wi-Fi or cellular. If all is well on your side, it is the game server that is not answering: the same room depends on nobody."
           }
         }
       }
@@ -3193,6 +3593,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Zephyria"
+          }
+        }
+      }
+    },
+    "deux hommes": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "two troops"
           }
         }
       }
@@ -3243,6 +3653,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "every %lld correct answers"
+          }
+        }
+      }
+    },
+    "un homme": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "a troop"
           }
         }
       }

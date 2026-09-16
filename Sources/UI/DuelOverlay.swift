@@ -138,12 +138,16 @@ struct DuelOverlay: View {
                                 in: Capsule())
                     .foregroundStyle(Palette.category(duel.question.category))
                 Text(session.assault?.defenderAnswer != nil
-                     ? "Votre réponse est prise. \(repondeur.name) répond maintenant à "
-                       + "la même question : le plus sûr l'emporte, et si vous savez "
-                       + "tous les deux, le plus rapide."
-                     : "Vous recevrez la même question juste après : en face à face, "
-                       + "l'attaquant répond aussi. Le plus sûr l'emporte, et si vous "
-                       + "savez tous les deux, le plus rapide.")
+                     ? """
+                       Votre réponse est prise. \(repondeur.name) répond maintenant à \
+                       la même question : le plus sûr l'emporte, et si vous savez \
+                       tous les deux, le plus rapide.
+                       """
+                     : """
+                       Vous recevrez la même question juste après : en face à face, \
+                       l'attaquant répond aussi. Le plus sûr l'emporte, et si vous \
+                       savez tous les deux, le plus rapide.
+                       """)
                     .font(.footnote).foregroundStyle(Palette.dim)
                     .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)
@@ -378,38 +382,67 @@ struct DuelOverlay: View {
     /// perdre un homme se prend alors pour une erreur de l'application. Nommer
     /// celui qui répond lève tout le doute, et la place nommée dit où l'homme
     /// tombe.
-    private func verdictTexte(_ r: DuelReport) -> String {
-        let nom = session.assault.flatMap { session.player($0.defender)?.name } ?? "Le défenseur"
-        let att = session.assault.flatMap { session.player($0.attacker)?.name } ?? "L'assaillant"
-        let lieu = session.assault.map { session.game.name($0.to) } ?? "La place"
-        let cout = r.mise > 1 ? "deux hommes" : "un homme"
+    private func verdictTexte(_ r: DuelReport) -> LocalizedStringKey {
+        // Un libellé, et non une chaîne assemblée : la phrase était composée
+        // morceau par morceau — « Vous avez répondu juste » + « : la place
+        // tient… » — et une phrase composée à l'exécution n'entre dans aucun
+        // catalogue de langues. Elle restait donc française à chaque question,
+        // sur l'écran qu'on lit le plus souvent. Chaque cas écrit maintenant
+        // sa phrase entière ; c'est aussi la seule forme qu'un traducteur
+        // puisse relire.
+        let nom = session.assault.flatMap { session.player($0.defender)?.name }
+            ?? String(localized: "Le défenseur")
+        let att = session.assault.flatMap { session.player($0.attacker)?.name }
+            ?? String(localized: "L'assaillant")
+        let lieu = session.assault.map { session.game.name($0.to) }
+            ?? String(localized: "La place")
+        let cout = r.mise > 1 ? String(localized: "deux hommes")
+                              : String(localized: "un homme")
 
         switch r.verdict {
         case .reponse:
             let vous = session.aMoiDeRepondre
             if r.correct {
-                return (vous ? "Vous avez répondu juste" : "\(nom) a répondu juste")
-                    + " : \(lieu) tient, l'assaillant laisse \(cout)."
+                return vous
+                    ? """
+                      Vous avez répondu juste : \(lieu) tient, l'assaillant \
+                      laisse \(cout).
+                      """
+                    : """
+                      \(nom) a répondu juste : \(lieu) tient, l'assaillant \
+                      laisse \(cout).
+                      """
             }
-            let faute = r.answer == .timeout
-                ? (vous ? "Vous n'avez pas répondu à temps" : "\(nom) n'a pas répondu à temps")
-                : (vous ? "Vous vous êtes trompé" : "\(nom) s'est trompé")
-            return faute + " : \(lieu) perd \(cout)."
+            if r.answer == .timeout {
+                return vous
+                    ? "Vous n'avez pas répondu à temps : \(lieu) perd \(cout)."
+                    : "\(nom) n'a pas répondu à temps : \(lieu) perd \(cout)."
+            }
+            return vous
+                ? "Vous vous êtes trompé : \(lieu) perd \(cout)."
+                : "\(nom) s'est trompé : \(lieu) perd \(cout)."
 
         case .seul:
             return r.correct
-                ? "\(nom) savait, \(att) non : \(lieu) tient, l'assaillant laisse \(cout)."
+                ? """
+                  \(nom) savait, \(att) non : \(lieu) tient, l'assaillant \
+                  laisse \(cout).
+                  """
                 : "\(att) savait, \(nom) non : \(lieu) perd \(cout)."
 
         case .vitesse:
             return r.outcome == .defenderHolds
-                ? "Les deux savaient. \(nom) a été le plus vif : \(lieu) tient, "
-                    + "l'assaillant laisse \(cout)."
+                ? """
+                  Les deux savaient. \(nom) a été le plus vif : \(lieu) tient, \
+                  l'assaillant laisse \(cout).
+                  """
                 : "Les deux savaient. \(att) a été le plus vif : \(lieu) perd \(cout)."
 
         case .egalite:
-            return "Personne ne savait. Comme sur une égalité de dés, \(lieu) tient "
-                + "et l'assaillant laisse \(cout)."
+            return """
+                   Personne ne savait. Comme sur une égalité de dés, \(lieu) tient \
+                   et l'assaillant laisse \(cout).
+                   """
         }
     }
 

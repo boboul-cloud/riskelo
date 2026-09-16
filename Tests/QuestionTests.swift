@@ -13,6 +13,13 @@ import Testing
 
 struct QuestionTests {
 
+    /// La langue des questions n'est pas un réglage de test, mais l'app la
+    /// garde d'une fois sur l'autre — et ces essais tirent des thèmes
+    /// français. Lancés après un passage de l'app en anglais, ils ne
+    /// trouvaient plus « histoire » et tombaient sur un dépliage de nil, ce
+    /// qui donnait l'air d'une régression là où il n'y avait qu'un réglage.
+    init() { Themes.langue = .fr }
+
     /// Le fichier remplace le compilateur : ce qu'il ne relit plus, ce test
     /// le relit. Et mieux — le compilateur n'a jamais su dire qu'un leurre
     /// était égal à la bonne réponse.

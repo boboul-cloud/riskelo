@@ -32,9 +32,21 @@ La dernière commande affiche l'adresse du serveur, de cette forme :
 https://riskelo-salon.VOTRE-SOUS-DOMAINE.workers.dev
 ```
 
-**Notez-la.** Le sous-domaine est celui de votre compte Cloudflare, et il ne
-peut pas être deviné — c'est pourquoi l'adresse écrite dans le code est un
-exemple qu'il faut remplacer.
+**C'est fait.** Déployé le 16 septembre 2026 sur le compte
+`bob.oulhen@gmail.com`, à l'adresse :
+
+```
+https://riskelo-salon.riskelo-salon.workers.dev
+```
+
+Elle est déjà inscrite aux trois endroits ci-dessous. Ce qui suit ne sert donc
+qu'à redéployer ailleurs — un autre compte, un autre nom.
+
+> **Ne renommez pas le sous-domaine.** Il se lit `riskelo-salon.riskelo-salon`
+> — le nom du service, puis celui du compte, qui a pris le même par défaut.
+> Cela ressemble à une faute de frappe et n'en est pas une. Le changer casse
+> d'un coup tous les liens d'invitation déjà partagés, les deux fichiers de
+> droits et le code Swift.
 
 ### 3. Dire au jeu où il est
 

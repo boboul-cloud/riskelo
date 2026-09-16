@@ -54,7 +54,7 @@ final class Relais: Fil {
     /// d'environnement pour l'essayer sur sa machine sans toucher au code :
     /// `RISKELO_SALON=localhost:8787` fait passer la partie par le serveur
     /// de développement, en clair et sans certificat.
-    nonisolated static let serveurParDefaut = "riskelo-salon.boboul.workers.dev"
+    nonisolated static let serveurParDefaut = "riskelo-salon.riskelo-salon.workers.dev"
 
     /// Une variable et non une constante calculée : les essais de bout en
     /// bout la pointent sur le serveur de développement, et c'est la seule

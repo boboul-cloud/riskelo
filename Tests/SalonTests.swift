@@ -32,22 +32,44 @@ import Testing
 @MainActor
 struct SalonTests {
 
-    private static let devant = "localhost:8787"
+    /// Le serveur que cet essai va éprouver.
+    ///
+    /// Le local d'abord, quand `npm run dev` tourne : c'est le plus rapide, et
+    /// c'est celui qu'on est en train de modifier. À défaut, **le serveur
+    /// déployé** — l'essai éprouve alors ce que les joueurs utilisent
+    /// vraiment, ce qui vaut infiniment mieux que de ne rien éprouver.
+    ///
+    /// Passer par une variable d'environnement paraissait plus propre. Elle
+    /// n'arrive pas : `xcodebuild` ne transmet pas l'environnement du shell au
+    /// processus qui porte les essais, et la suite disait « sauté » en croyant
+    /// viser le serveur déployé. C'est la panne exacte que ce fichier existe
+    /// pour éviter — croire qu'on vérifie quelque chose.
+    private static var devant: String?
 
-    /// Le serveur de développement est-il devant ?
-    private func serveurDebout() async -> Bool {
-        var demande = URLRequest(url: URL(string: "http://\(SalonTests.devant)/sante")!)
-        demande.timeoutInterval = 2
-        guard let (data, _) = try? await URLSession.shared.data(for: demande) else {
-            return false
+    private static func enClair(_ hote: String) -> Bool {
+        hote.hasPrefix("localhost") || hote.hasPrefix("127.0.0.1")
+    }
+
+    /// Le premier des deux qui répond, ou `nil` s'il n'y a ni l'un ni l'autre
+    /// — machine hors ligne, serveur arrêté.
+    private func trouverLeServeur() async -> String? {
+        for hote in ["localhost:8787", Relais.serveurParDefaut] {
+            let schema = SalonTests.enClair(hote) ? "http" : "https"
+            guard let url = URL(string: "\(schema)://\(hote)/sante") else { continue }
+            var demande = URLRequest(url: url)
+            demande.timeoutInterval = 6
+            guard let (data, _) = try? await URLSession.shared.data(for: demande),
+                  String(data: data, encoding: .utf8) == "ok"
+            else { continue }
+            return hote
         }
-        return String(data: data, encoding: .utf8) == "ok"
+        return nil
     }
 
     /// Attendre qu'une chose devienne vraie, et rendre la main dès qu'elle
     /// l'est. Un délai fixe passerait sur une machine au repos et échouerait
     /// sur une machine occupée — l'essai accuserait alors l'innocent.
-    private func jusqua(_ limite: TimeInterval = 8,
+    private func jusqua(_ limite: TimeInterval = 10,
                         _ vrai: () -> Bool) async -> Bool {
         let fin = Date().addingTimeInterval(limite)
         while Date() < fin {
@@ -58,15 +80,16 @@ struct SalonTests {
     }
 
     @Test func leSalonDeBoutEnBout() async throws {
-        guard await serveurDebout() else {
-            print("Riskelo — essai du salon sauté : aucun serveur sur \(SalonTests.devant). "
-                  + "Lancez « cd serveur && npm run dev » pour l'exécuter vraiment.")
+        guard let ou = await trouverLeServeur() else {
+            print("Riskelo — essai du salon sauté : ni serveur local sur "
+                  + "localhost:8787, ni \(Relais.serveurParDefaut) joignable. "
+                  + "Lancez « cd serveur && npm run dev », ou rebranchez le réseau.")
             return
         }
-        print("Riskelo — essai du salon : serveur trouvé, on y va.")
+        print("Riskelo — essai du salon : on éprouve \(ou).")
 
         let avant = Relais.serveur
-        Relais.serveur = SalonTests.devant
+        Relais.serveur = ou
         defer { Relais.serveur = avant }
 
         // Deux identités distinctes : dans un même processus, l'appareil n'en

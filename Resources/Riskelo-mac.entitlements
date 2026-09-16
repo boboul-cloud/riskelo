@@ -23,7 +23,7 @@
 	<true/>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>applinks:riskelo-salon.boboul.workers.dev</string>
+		<string>applinks:riskelo-salon.riskelo-salon.workers.dev</string>
 	</array>
 </dict>
 </plist>

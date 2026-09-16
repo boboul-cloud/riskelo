@@ -21,7 +21,16 @@
 //  délai n'est plus qu'une limite de patience.
 //
 
-const BASE = "ws://localhost:8787/salon";
+// Par défaut le serveur de développement ; `RISKELO_SALON` vise ailleurs —
+// c'est ainsi qu'on éprouve le serveur **déployé**, et non seulement sa copie
+// locale. Un salon d'essai vit deux minutes et s'efface : le faire sur le vrai
+// serveur ne coûte rien et ne dérange personne.
+//
+//     RISKELO_SALON=riskelo-salon.riskelo-salon.workers.dev npm test
+const HOTE = process.env.RISKELO_SALON ?? "localhost:8787";
+const CHIFFRE = !HOTE.startsWith("localhost") && !HOTE.startsWith("127.0.0.1");
+const BASE = `${CHIFFRE ? "wss" : "ws"}://${HOTE}/salon`;
+const WEB = `${CHIFFRE ? "https" : "http"}://${HOTE}`;
 let rate = 0;
 
 function verifier(quoi, vrai) {
@@ -144,10 +153,10 @@ verifier("l'hôte est prévenu de son retour — c'est ce qui déclenche le renv
   !!(await attendre(hote, (m) => m.t === "arrivee" && m.id === "BBB")));
 
 // --- 9. La page qu'on reçoit par WhatsApp ----------------------------------
-const page = await fetch(`http://localhost:8787/p/${code}`).then((r) => r.text());
+const page = await fetch(`${WEB}/p/${code}`).then((r) => r.text());
 verifier("la page d'invitation porte le code", page.includes(code));
 verifier("elle sait ouvrir le jeu", page.includes(`riskelo://p/${code}`));
-const aasa = await fetch("http://localhost:8787/.well-known/apple-app-site-association")
+const aasa = await fetch(`${WEB}/.well-known/apple-app-site-association`)
   .then((r) => r.json());
 verifier("le fichier d'Apple désigne la bonne application",
   aasa?.applinks?.details?.[0]?.appIDs?.[0] === "38DQ8FW23J.com.oulhen.riskelo");

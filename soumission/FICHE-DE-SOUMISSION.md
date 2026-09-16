@@ -100,7 +100,7 @@ pour les mêmes raisons : voir `soumission/confidentialite-app-store.md`, qui a
 | Identifiant Apple de l'app | attribué par App Store Connect à la création |
 | Langue principale | Français (France) |
 | Version | `1.3` |
-| Build | `6` |
+| Build | `7` |
 | Plateformes | iOS et macOS (une seule cible, deux plateformes dans la fiche) |
 | Version minimale | iOS 17.0 · macOS 14.0 |
 | Appareils | iPhone et iPad (`TARGETED_DEVICE_FAMILY = 1,2`) et Mac |
@@ -117,7 +117,7 @@ pour les mêmes raisons : voir `soumission/confidentialite-app-store.md`, qui a
 Les deux numéros se lisent dans `project.yml` (`MARKETING_VERSION` et
 `CURRENT_PROJECT_VERSION`), seule source : le mode d'emploi de l'application y
 prend celui qu'il affiche. Le build monte à chaque envoi — le `5` est parti,
-celui-ci est le `6` — et la version monte quand ce qui part mérite un nom :
+celui-ci est le `7` — et la version monte quand ce qui part mérite un nom :
 la fin de partie qui sonne vaut une `1.3`, parce qu'elle s'entend dès la
 première partie jouée.
 

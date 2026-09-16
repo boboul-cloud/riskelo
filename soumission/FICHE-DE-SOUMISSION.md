@@ -7,9 +7,16 @@ bloc encadré se colle tel quel. Ce qui reste à décider est marqué **à déci
 
 ## En clair : ce qu'il vous reste à faire
 
-Ce document est une **liste de cases à recopier** dans le site d'Apple. Il n'y
-a plus rien à programmer : le jeu est fini, le site est en ligne, les textes
-sont écrits. Dans l'ordre :
+Ce document est une **liste de cases à recopier** dans le site d'Apple. Le jeu
+est fini, le site est en ligne, les textes sont écrits.
+
+> **Une chose est à faire avant tout le reste, et elle n'est pas chez Apple.**
+> Le jeu « au loin » a besoin d'un serveur déployé, et de deux interrupteurs
+> levés sur l'identifiant de l'application. Tant que ce n'est pas fait,
+> « Jouer au loin » ne marche pas, et la construction peut même échouer. Tout
+> est en **section 0**, juste en dessous, et cela prend un quart d'heure.
+
+Ensuite, dans l'ordre :
 
 1. **S'inscrire chez Apple** — 99 $ par an, sur `developer.apple.com`. Rien ne
    part sans cela, et la signature du contrat prend parfois un jour.
@@ -32,6 +39,53 @@ atteinte — laissez-la.
 Deux choses seulement demandent une décision de votre part, et elles sont
 rassemblées en section 11 : **le prix**, et **si le Mac part en même temps que
 l'iPhone**.
+
+---
+
+## 0. Avant tout le reste : le jeu au loin
+
+Trois façons de jouer à plusieurs coexistent désormais. **Deux ne demandent
+rien** — la même pièce marchait déjà, Game Center est chez Apple. La troisième,
+le code à six lettres, a besoin d'un point de rendez-vous sur Internet.
+
+### a. Déployer le serveur des salons
+
+Un quart d'heure, une fois, et gratuit. La marche à suivre est dans
+`serveur/README.md` — compte Cloudflare, `npx wrangler deploy`, puis
+**recopier l'adresse obtenue à trois endroits** :
+
+- `Sources/Net/Relais.swift`, la constante `serveurParDefaut` ;
+- `Resources/Riskelo-ios.entitlements`, la ligne `applinks:` ;
+- `Resources/Riskelo-mac.entitlements`, la même ligne.
+
+Puis `xcodegen generate`. Si les trois ne concordent pas, le jeu cherche un
+serveur qui n'existe pas, et il l'annonce par « Rien n'a répondu ».
+
+### b. Deux interrupteurs chez Apple
+
+Sur l'identifiant `com.oulhen.riskelo`, dans *Certificates, Identifiers &
+Profiles ▸ Identifiers* :
+
+- **Game Center** ;
+- **Associated Domains**.
+
+Xcode les lève tout seul en signature automatique. Quand il n'y arrive pas, la
+construction échoue sur un message de provisionnement **qui ne parle ni de
+Game Center ni des domaines** — et l'on cherche longtemps du mauvais côté.
+C'est la seule raison pour laquelle ce paragraphe existe.
+
+### c. Le lien vers l'App Store dans la page d'invitation
+
+`serveur/src/index.js`, constante `APP_STORE` : un numéro d'exemple y attend
+la vraie adresse. C'est ce que voit celui qui reçoit une invitation sans avoir
+le jeu. À faire **après** que la fiche existe chez Apple, donc après la
+section 1, puis `npx wrangler deploy` à nouveau.
+
+### d. Ce qui change dans les questionnaires
+
+La réponse « aucune donnée collectée » tient toujours, mais elle ne tient plus
+pour les mêmes raisons : voir `soumission/confidentialite-app-store.md`, qui a
+été relu pour cela. Game Center passe de « non utilisé » à « utilisé ».
 
 ---
 

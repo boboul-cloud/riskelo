@@ -1,0 +1,34 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "riskelo-salon",
+  "main": "src/index.js",
+  "compatibility_date": "2025-09-01",
+
+  // Un salon par code. Cloudflare place l'objet près du premier arrivé et
+  // tous les autres lui parlent : c'est exactement la forme du problème —
+  // quatre appareils, un point de rendez-vous, rien de partagé entre deux
+  // parties différentes.
+  "durable_objects": {
+    "bindings": [{ "name": "SALONS", "class_name": "Salon" }]
+  },
+
+  // « sqlite » et non « kv » : c'est le seul adossement disponible sur le
+  // forfait gratuit, et il suffit très largement — un salon garde trois
+  // valeurs et les oublie deux minutes plus tard.
+  "exports": {
+    "Salon": { "type": "durable-object", "storage": "sqlite" }
+  },
+
+  // Éteint, et pour une raison qui n'est pas technique.
+  //
+  // Allumée, elle conserve les journaux des requêtes pendant quelques jours —
+  // et une requête porte dans son adresse l'identifiant tiré au sort de
+  // l'appareil. Ce serait un identifiant gardé hors de l'appareil au-delà du
+  // temps nécessaire, c'est-à-dire exactement ce qu'Apple appelle « collecter
+  // une donnée ». Pour trois jours de journaux, la politique de
+  // confidentialité changerait de camp.
+  //
+  // On ne perd rien pour déboguer : « npm run tail » donne les journaux en
+  // direct, et il ne conserve rien.
+  "observability": { "enabled": false }
+}

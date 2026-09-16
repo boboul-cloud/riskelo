@@ -341,7 +341,13 @@ final class GameSession {
 
     // MARK: - Le second appareil
 
-    private(set) var link: Link?
+    /// Le fil, quel qu'il soit : la même pièce, le loin, ou Game Center.
+    /// La partie n'a aucune raison de savoir lequel — voir `Fil`.
+    private(set) var fil: (any Fil)?
+    /// L'état de la liaison, pour l'écran. Une coupure au loin n'est pas une
+    /// partie finie : on l'annonce, on attend, et le plus souvent elle
+    /// revient d'elle-même.
+    private(set) var liaison: Liaison = .tenue
     /// Lequel des joueurs est celui qui tient cet appareil.
     private(set) var monRang: PlayerID = 0
     private var jHeberge = false
@@ -351,11 +357,21 @@ final class GameSession {
     /// Le rang de chaque appareil relié, pour savoir à qui renvoyer quoi.
     private var rangs: [Pair: PlayerID] = [:]
 
-    var enReseau: Bool { link != nil }
+    var enReseau: Bool { fil != nil }
+
+    /// Le fil tient-il ? Hors réseau, il n'y a pas de fil à tenir.
+    ///
+    /// Sans ce garde, un coup joué pendant que la liaison est tombée est
+    /// appliqué ici et n'arrive nulle part : l'appareil se met à jouer seul
+    /// une partie que personne d'autre ne connaît. Il se remet d'aplomb au
+    /// retour — celui qui héberge renvoie la partie, et elle fait foi — mais
+    /// le joueur aurait vu son coup s'effacer sous ses yeux, ce qui est la
+    /// chose la plus inquiétante qu'un jeu puisse faire.
+    private var filTenu: Bool { !enReseau || liaison == .tenue }
 
     /// À moi d'agir ? Hors réseau, cela veut dire « pas à la machine ».
     var aMoiDeJouer: Bool {
-        guard !game.isOver else { return false }
+        guard !game.isOver, filTenu else { return false }
         guard enReseau else { return !game.currentPlayer.isBot }
         return game.currentPlayer.id == monRang
     }
@@ -363,7 +379,7 @@ final class GameSession {
     /// À moi de répondre ? En classique c'est toujours le défenseur ; en
     /// face à face, le défenseur puis l'attaquant.
     var aMoiDeRepondre: Bool {
-        guard game.assault != nil else { return false }
+        guard game.assault != nil, filTenu else { return false }
         guard enReseau else { return repondeurEstHumain }
         return repondeur == monRang
     }
@@ -374,10 +390,10 @@ final class GameSession {
     @discardableResult
     private func jouer(_ action: Action) -> DuelReport? {
         let rapport = game.apply(action)
-        if let link {
+        if let fil {
             compteur += 1
             if let data = Message.coup(action, numero: compteur, empreinte: game.digest).data {
-                link.envoyer(data)
+                fil.envoyer(data)
             }
         }
         return rapport
@@ -423,7 +439,7 @@ final class GameSession {
             }
             // L'hôte fait suivre aux autres : rien ne garantit que deux
             // invités se voient directement.
-            if jHeberge, let link { link.envoyer(data, saufA: pair) }
+            if jHeberge, let fil { fil.envoyer(data, saufA: pair) }
 
             pump?.cancel()
             pump = Task { @MainActor [weak self] in
@@ -431,16 +447,16 @@ final class GameSession {
             }
 
         case .perdu:
-            guard jHeberge, let link, let rang = rangs[pair],
+            guard jHeberge, let fil, let rang = rangs[pair],
                   let data = Message.partie(game, votreRang: rang, numero: compteur).data
             else { return }
-            link.envoyer(data, a: pair)
+            fil.envoyer(data, a: pair)
         }
     }
 
     private func redemanderLaPartie() {
         guard let data = Message.perdu.data else { return }
-        link?.envoyer(data)
+        fil?.envoyer(data)
     }
 
     /// Ce que l'écran doit montrer d'un coup joué en face.
@@ -534,19 +550,45 @@ final class GameSession {
     /// Ouvre une partie sur deux appareils. Celui qui héberge crée la partie
     /// et l'envoie ; celui qui rejoint la reçoit avant d'afficher quoi que ce
     /// soit.
-    init(link: Link, heberge: Bool, game partie: GameState, monRang rang: PlayerID,
+    init(fil: any Fil, heberge: Bool, game partie: GameState, monRang rang: PlayerID,
          rangs: [Pair: PlayerID] = [:], compteur: Int = 0) {
         game = partie
         partieID = UUID()
-        self.link = link
+        self.fil = fil
         self.jHeberge = heberge
         self.monRang = rang
         self.rangs = rangs
         self.compteur = compteur
         poseesALOuverture = game.bank.alreadyServed
-        link.onReceive = { [weak self] data, pair in self?.recu(data, de: pair) }
+        fil.onReceive = { [weak self] data, pair in self?.recu(data, de: pair) }
+        // Les trois rappels du salon sont repris ici : celui-ci a disparu
+        // avec son écran, et ses fermetures tenaient encore le fil.
+        fil.onConnected = { [weak self] _, pair in self?.revenu(pair) }
+        fil.onLiaison = { [weak self] etat in self?.liaison = etat }
         annoncerOuverture()
         resume()
+    }
+
+    /// Un appareil se rebranche en cours de partie.
+    ///
+    /// C'est tout le mécanisme de la reprise, et il n'a demandé aucun message
+    /// nouveau. Celui qui tient la partie la renvoie à qui revient ; celui
+    /// qui revient la redemande, au cas où celui d'en face n'aurait pas vu
+    /// qu'il était parti. Les deux messages existaient déjà — l'un pour la
+    /// poignée de main, l'autre pour les divergences.
+    ///
+    /// Renvoyer l'état est sans danger même quand rien n'était perdu : celui
+    /// qui reçoit se range sur la partie de l'hôte, qui fait foi.
+    private func revenu(_ pair: Pair) {
+        liaison = .tenue
+        if jHeberge {
+            guard let fil, let rang = rangs[pair],
+                  let data = Message.partie(game, votreRang: rang, numero: compteur).data
+            else { return }
+            fil.envoyer(data, a: pair)
+        } else {
+            redemanderLaPartie()
+        }
     }
 
     /// Reprend une partie enregistrée. Un duel en attente d'un humain

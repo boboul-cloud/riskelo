@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- Game Center : le fil d'Apple, l'un des trois. Voir Sources/Net/Arene.swift.
+
+	     Cette clé demande qu'un interrupteur soit levé chez Apple, sur
+	     l'identifiant de l'application. Xcode le fait tout seul en signature
+	     automatique — mais s'il n'y arrive pas, la construction échoue sur
+	     un message de provisionnement qui ne parle pas de Game Center. Voir
+	     soumission/FICHE-DE-SOUMISSION.md. -->
+	<key>com.apple.developer.game-center</key>
+	<true/>
+
+	<!-- Le lien d'invitation reçu par WhatsApp, et le fait qu'il ouvre le jeu
+	     plutôt que le navigateur.
+
+	     Le domaine doit être EXACTEMENT celui qui sert le fichier
+	     « apple-app-site-association » — c'est-à-dire celui du serveur des
+	     salons. Si vous déployez ailleurs, cette ligne et
+	     `Relais.serveurParDefaut` changent ensemble, ou les liens cessent de
+	     marcher sans rien dire.
+
+	     Sans cette clé, rien n'est cassé pour autant : la page d'invitation
+	     porte un bouton « Ouvrir dans Riskelo » qui passe par « riskelo:// »,
+	     et le code écrit en gros se tape à la main. -->
+	<key>com.apple.developer.associated-domains</key>
+	<array>
+		<string>applinks:riskelo-salon.boboul.workers.dev</string>
+	</array>
+</dict>
+</plist>

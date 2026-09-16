@@ -19,11 +19,23 @@ struct RiskeloApp: App {
     var body: some Scene {
         WindowGroup {
             RootView(model: racine)
+                // Le lien d'invitation, touché dans WhatsApp, dans un SMS ou
+                // dans un mail. Les deux formes y passent : l'adresse du
+                // site, qui ouvre le jeu quand le système a fait le
+                // rapprochement, et « riskelo:// », qui marche même quand il
+                // ne l'a pas fait.
+                //
+                // Posé sur la vue et non sur la scène : `onOpenURL` est un
+                // modificateur de vue, et le compilateur ne dit pas
+                // « mettez-le plus bas » — il dit qu'une scène n'a pas ce
+                // membre, ce qui laisse chercher ailleurs.
+                .onOpenURL { lien in racine.ouvrirLeLien(lien) }
         }
         .onChange(of: scenePhase) { _, nouvelle in
             // L'application peut être arrêtée sans autre préavis que celui-ci.
             if nouvelle != .active { racine.session?.saveNow() }
         }
+
         #if os(macOS)
         .defaultSize(width: 980, height: 760)
         #endif
@@ -37,6 +49,8 @@ final class RootModel {
     var session: GameSession?
     /// La mise en place d'une partie à deux appareils, quand elle est ouverte.
     var salon: (regles: Rules, plateau: Boards)?
+    /// Le code arrivé par un lien, le temps que le salon s'ouvre dessus.
+    var codeRecu: String?
     /// Les réglages de la table, ouverts depuis le salon. Ils vivent ici et
     /// non dans le salon : celui-ci se refait avec les réglages qu'on vient
     /// de choisir, et un écran qui se refait perd ce qu'il gardait.
@@ -53,6 +67,39 @@ final class RootModel {
     /// L'ouverture — les deux camps qui se rejoignent — ne se joue qu'une
     /// fois par lancement.
     var ouvertureJouee = false
+
+    /// Un lien d'invitation vient d'être touché.
+    ///
+    /// Deux formes, et il faut lire les deux. `riskelo://p/MARENO` porte le
+    /// « p » dans son hôte ; `https://…/p/MARENO` le porte dans son chemin.
+    /// Plutôt que deux analyses, on met bout à bout ce qu'il y a des deux
+    /// côtés et l'on cherche le « p ».
+    ///
+    /// Un code mal formé ne fait **rien** — pas d'écran d'erreur. Un lien
+    /// tronqué par une messagerie est une chose qui arrive, et ouvrir un jeu
+    /// sur un reproche pour un lien que le joueur n'a pas écrit serait de
+    /// mauvaise foi.
+    func ouvrirLeLien(_ lien: URL) {
+        var morceaux = lien.path.split(separator: "/").map(String.init)
+        if let hote = lien.host, lien.scheme?.hasPrefix("http") != true {
+            morceaux.insert(hote, at: 0)
+        }
+        guard let ou = morceaux.firstIndex(where: { $0.lowercased() == "p" }),
+              morceaux.indices.contains(ou + 1)
+        else { return }
+        let code = Relais.normaliser(morceaux[ou + 1])
+        guard Relais.estUnCode(code) else { return }
+
+        // La partie en cours n'est pas jetée : elle est rangée, et le bouton
+        // vert de l'accueil la rendra telle quelle.
+        session?.saveNow()
+        session = nil
+        bibliotheque = false; manuel = false; packs = false
+        reglages = false; salonReglages = false
+        ouvertureJouee = true
+        codeRecu = code
+        salon = (PartieRapide.regles(), PartieRapide.plateau)
+    }
 }
 
 struct RootView: View {
@@ -103,19 +150,27 @@ struct RootView: View {
                           onRetour: { withAnimation { model.salonReglages = false } })
                     .transition(.opacity)
             } else if let salon = model.salon {
-                LobbyView(plateau: salon.plateau, regles: salon.regles,
-                          onReady: { partie in
-                              withAnimation {
-                                  model.salon = nil
-                                  model.reglages = false
-                                  model.session = partie
-                              }
-                          },
-                          // Renoncer à la table rend les réglages tels qu'on
-                          // les avait laissés, et non l'accueil : on venait
-                          // d'y choisir un plateau et un mode.
-                          onCancel: { withAnimation { model.salon = nil; model.salonReglages = false } },
-                          onReglages: { withAnimation { model.salonReglages = true } })
+                PlusieursView(plateau: salon.plateau, regles: salon.regles,
+                              codeRecu: model.codeRecu,
+                              onReady: { partie in
+                                  withAnimation {
+                                      model.salon = nil
+                                      model.codeRecu = nil
+                                      model.reglages = false
+                                      model.session = partie
+                                  }
+                              },
+                              // Renoncer à la table rend les réglages tels qu'on
+                              // les avait laissés, et non l'accueil : on venait
+                              // d'y choisir un plateau et un mode.
+                              onCancel: {
+                                  withAnimation {
+                                      model.salon = nil
+                                      model.codeRecu = nil
+                                      model.salonReglages = false
+                                  }
+                              },
+                              onReglages: { withAnimation { model.salonReglages = true } })
             } else if model.reglages {
                 SetupView(onStart: { joueurs, regles, plateau in
                     withAnimation {

@@ -60,7 +60,7 @@ struct Pair: Hashable, Sendable {
 
 @Observable
 @MainActor
-final class Link {
+final class Link: Fil {
 
     /// Le nom du service. Quinze caractères au plus, minuscules et tirets :
     /// c'est une contrainte de Bonjour, pas un goût.
@@ -153,6 +153,14 @@ final class Link {
     /// Appelé à chaque appareil relié, avec `true` si c'est nous qui avons
     /// ouvert la partie. À quatre, il est appelé trois fois.
     var onConnected: ((Bool, Pair) -> Void)?
+
+    /// L'état de la liaison, une fois la partie lancée.
+    ///
+    /// Dans la même pièce, une liaison qui tombe est un appareil qu'on a
+    /// éteint ou qui est sorti de portée : il n'y a rien à attendre, et l'on
+    /// annonce directement la perte. C'est le fil du loin qui a besoin d'un
+    /// état intermédiaire, et non celui-ci.
+    var onLiaison: ((Liaison) -> Void)?
 
     /// Combien d'appareils l'hôte attend en tout, lui non compris.
     /// Il cesse d'annoncer dès que la table est pleine.
@@ -794,6 +802,7 @@ final class Link {
         appeles.remove(pair.id)
         print("Riskelo — \(pair.nom) : liaison perdue")
         if case .relie = state { state = .perdu(pair.nom) }
+        onLiaison?(.perdue(pair.nom))
         rouvrirLaTable()
     }
 

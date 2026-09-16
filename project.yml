@@ -69,6 +69,16 @@ targets:
         NSBonjourServices:
           - _riskelo-jeu._tcp
           - _riskelo-jeu._udp
+        # Le lien d'invitation, quand le système n'a pas fait le
+        # rapprochement entre le site et l'application — ou quand
+        # l'application vient d'être installée et que le rapprochement n'a
+        # pas encore eu lieu. La page d'invitation porte un bouton qui passe
+        # par là, et il marche toujours.
+        CFBundleURLTypes:
+          - CFBundleURLName: com.oulhen.riskelo.invitation
+            CFBundleTypeRole: Viewer
+            CFBundleURLSchemes:
+              - riskelo
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.oulhen.riskelo
@@ -85,6 +95,11 @@ targets:
         # liaison entre appareils se tairait. Voir
         # soumission/FICHE-DE-SOUMISSION.md, section 9.
         CODE_SIGN_ENTITLEMENTS[sdk=macosx*]: Resources/Riskelo-mac.entitlements
+        # Sur iPhone et iPad, deux clés seulement : Game Center, et le domaine
+        # d'où viennent les liens d'invitation. Le bac à sable n'y a pas cours
+        # — le système le pose d'office.
+        CODE_SIGN_ENTITLEMENTS[sdk=iphoneos*]: Resources/Riskelo-ios.entitlements
+        CODE_SIGN_ENTITLEMENTS[sdk=iphonesimulator*]: Resources/Riskelo-ios.entitlements
 
   RiskeloTests:
     type: bundle.unit-test

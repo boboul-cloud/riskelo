@@ -372,72 +372,25 @@ struct LobbyView: View {
 
     /// Qui rejoint attend la partie avant d'afficher quoi que ce soit — sans
     /// cela il verrait une partie factice le temps d'un battement.
+    ///
+    /// Les rappels eux-mêmes sont posés par `MiseEnPlace` : ils sont
+    /// exactement les mêmes pour les trois fils, et les recopier ici serait
+    /// la meilleure façon qu'un jour l'un des trois cesse de dire son nom.
     private func preparer() {
-        // Chacun dit son nom en arrivant, sans attendre qu'on le lui demande :
-        // à quatre appareils, une demande par appareil serait quatre fois
-        // l'occasion de se perdre.
-        link.onConnected = { _, pair in
-            if let data = Message.bonjour(nom: Pseudo.actuel ?? "").data {
-                link.envoyer(data, a: pair)
-            }
-        }
-        link.onReceive = { data, pair in
-            switch Message.lire(data) {
-            case let .message(.bonjour(nom)):
-                noms[pair] = nom.isEmpty ? nil : nom
-
-            case let .message(.partie(etat, rang, numero)):
+        MiseEnPlace.preparer(
+            link,
+            nomVu: { pair, nom in noms[pair] = nom },
+            partieRecue: { etat, rang, numero in
                 lancee = true
-                onReady(GameSession(link: link, heberge: false, game: etat,
+                onReady(GameSession(fil: link, heberge: false, game: etat,
                                     monRang: rang, compteur: numero))
-
-            case .message:
-                // Un coup, avant même d'avoir la partie : il n'y a rien à en
-                // faire, et surtout ce n'est pas un désaccord. Tout ce qui
-                // n'était pas la partie était compté comme tel, et un paquet
-                // arrivé une fraction de seconde trop tôt affichait donc
-                // « Versions différentes » à deux appareils parfaitement
-                // d'accord.
-                break
-
-            case .autreDialecte, .illisible:
-                desaccord = true
-            }
-        }
+            },
+            desaccord: { desaccord = true })
     }
 
-    /// L'hôte crée la partie et donne son rang à chacun, dans l'ordre
-    /// d'arrivée. Chaque appareil reçoit le sien, et lui seul.
     private func lancer() {
-        link.fermerLaTable()
-        // Chaque camp porte le nom de qui le tient, quand il s'en est donné
-        // un : « Rouge · Marie ». Le nom part avec l'état, et les quatre
-        // appareils voient donc les mêmes joueurs — c'est le seul endroit où
-        // cette composition se fait, et le seul moment où l'hôte les connaît
-        // tous.
-        let camps = (0..<joueurs).map { rang -> Player in
-            let camp = Boards.nomDeCamp(rang)
-            let choisi = rang == 0 ? Pseudo.actuel
-                                   : link.relies.indices.contains(rang - 1)
-                                     ? noms[link.relies[rang - 1]] : nil
-            return Player(id: rang, name: choisi.map { "\(camp) · \($0)" } ?? camp)
-        }
-        // La mémoire de l'appareil qui héberge part avec la partie : les
-        // deux appareils tirent alors les mêmes questions, et celui qui
-        // rejoint n'a pas à connaître les soirées de l'autre.
-        let partie = GameState.start(board: plateau, players: camps, rules: regles,
-                                     bank: QuestionBank(vues: MemoireDesQuestions.shared.charger()))
-
-        var rangs: [Pair: PlayerID] = [:]
-        for (i, pair) in link.relies.enumerated() {
-            let rang = i + 1
-            rangs[pair] = rang
-            if let data = Message.partie(partie, votreRang: rang, numero: 0).data {
-                link.envoyer(data, a: pair)
-            }
-        }
         lancee = true
-        onReady(GameSession(link: link, heberge: true, game: partie,
-                            monRang: 0, rangs: rangs, compteur: 0))
+        onReady(MiseEnPlace.lancer(link, joueurs: joueurs, plateau: plateau,
+                                   regles: regles, noms: noms))
     }
 }

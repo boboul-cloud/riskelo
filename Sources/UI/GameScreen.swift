@@ -99,7 +99,13 @@ struct GameScreen: View {
         // tour de la machine. En marge, la barre reste au-dessus de tout et
         // répond toujours.
         .safeAreaInset(edge: .top, spacing: 0) {
-            TopBar(session: session, onQuit: onQuit, onManuel: { manuelOuvert = true })
+            VStack(spacing: 0) {
+                TopBar(session: session, onQuit: onQuit, onManuel: { manuelOuvert = true })
+                // Sous la barre et non par-dessus : une coupure ne doit pas
+                // cacher le bouton qui permet de partir.
+                BandeauDeLiaison(session: session)
+            }
+            .animation(.easeOut(duration: 0.25), value: session.liaison)
         }
         // Resserré : ce ne sont pas des latences, mais elles s'ajoutaient au
         // retard du double-appui et le jeu paraissait mou. Le panneau d'assaut

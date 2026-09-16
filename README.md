@@ -926,9 +926,22 @@ L'instant est donc classé par tour **et** par camp.
 ## Jouer à plusieurs appareils
 
 Jusqu'à quatre, un appareil par joueur. Un joueur ouvre la table, les autres
-la rejoignent. Rien à saisir, aucun compte,
-aucun réseau à configurer : **MultipeerConnectivity** prend le Bluetooth et le
-Wi-Fi direct sans qu'on ait à choisir, et fonctionne dans un train.
+la rejoignent.
+
+Il y a **trois façons de relier les appareils**, et elles ne se valent pas :
+chacune a une portée et chacune a un prix. Le jeu, lui, ne sait pas laquelle
+est en service — c'est tout l'objet du protocole `Fil`, qui tient en six
+fonctions parce que c'est tout ce que `GameSession` a jamais demandé.
+
+| | Portée | Ce qu'elle demande | Reprise après coupure |
+|---|---|---|---|
+| **La même pièce** (`Link`) | quelques mètres | rien du tout | non — un appareil hors de portée est éteint |
+| **Le loin** (`Relais`) | le monde | un serveur, six lettres | oui, deux minutes |
+| **Game Center** (`Arene`) | le monde | un compte Apple | non — Apple ne la propose pas |
+
+La même pièce reste le chemin par défaut, et l'ordre des trois à l'écran n'est
+pas neutre : elle ne dépend de personne, ni serveur ni compte, et c'est la
+seule dont on soit sûr qu'elle marchera encore dans dix ans.
 
 **On échange les coups, pas l'état.** C'est la décision qui commande tout le
 reste, et elle n'est possible que parce que le moteur est reproductible :
@@ -964,6 +977,112 @@ l'empreinte seule ne voyait pas.
 
 Pas de machine dans une partie en réseau : un adversaire artificiel devrait
 être joué par tous les appareils à la fois, ce qui n'apporterait rien.
+
+---
+
+## Jouer au loin
+
+### Six lettres plutôt qu'un compte
+
+Riskelo n'a jamais demandé à personne de créer un compte, et ce n'est pas le
+loin qui va l'y obliger. Celui qui ouvre reçoit six lettres, il les envoie
+comme il envoie tout le reste — WhatsApp, SMS, Messages — et l'autre les tape.
+
+Le code se **dicte** autant qu'il se colle : consonne, voyelle, consonne,
+voyelle, consonne, voyelle. « MARENO » se répète au téléphone à une grand-mère
+qui ne trouve pas le lien ; « X7KQ2V » se fait répéter trois fois et se tape de
+travers. Six cent quatorze mille codes possibles, ce qui suffit très largement
+pour des salons qui vivent le temps d'une partie.
+
+Le zéro et la lettre O, le un et le I ne se distinguent pas à l'écrit : ils
+sont **redressés** plutôt que refusés. Renvoyer « ce code n'existe pas » à
+quelqu'un qui a tapé exactement ce qu'il voyait est la pire réponse possible.
+
+Et le lien, quand il passe, dispense de taper quoi que ce soit : la page ouvre
+le jeu sur le bon salon. C'est le chemin ordinaire ; le code écrit en gros est
+ce qui reste quand le chemin ordinaire échoue — et il échoue, chez quelqu'un,
+un jour.
+
+### Un serveur aussi bête qu'on a pu le faire
+
+Il ne sait pas ce qu'est un territoire, ne compte les points de personne, ne
+voit jamais une question ni une réponse. Il a des salons désignés par un code,
+et il recopie des paquets dont il ignore le contenu — les mêmes `Message`,
+exactement, que sur le fil de la même pièce.
+
+C'est ce qui le rend anodin en cas de panne. Un serveur qui tiendrait la partie
+la perdrait en tombant ; celui-ci, en tombant, interrompt une liaison — et les
+appareils la rétablissent d'eux-mêmes, avec l'état que chacun garde de son côté.
+
+C'est aussi ce qui le laisse tenir en trois cents lignes de JavaScript, sur le
+forfait gratuit de Cloudflare. Le salon **s'endort** entre deux coups : un
+joueur qui réfléchit quinze secondes ne coûte rien, puisque c'est le temps de
+calcul qui se facture. Voir `serveur/README.md`.
+
+**Il ne reçoit aucun nom de joueur.** Le pseudo passait dans l'adresse de
+connexion, ce qui était commode — le salon affichait « Marie » avant même que
+son appareil ait dit bonjour. Mais un paramètre d'adresse finit dans les
+journaux du serveur, et un prénom n'y a rien à faire : il voyage désormais
+dans un paquet que le serveur recopie sans savoir le lire. Le seul coût est un
+dixième de seconde où la liste dit « Joueur ».
+
+### La coupure est la règle, pas l'accident
+
+Dans la même pièce, une liaison qui tombe est un appareil qu'on a éteint : il
+n'y a rien à attendre. Au loin, c'est un tunnel, un ascenseur, un appel qui
+arrive — et l'appareil revient trente secondes plus tard. Une partie qui
+s'arrêterait là-dessus ne finirait jamais.
+
+La bonne surprise est que la reprise **n'a demandé aucun message nouveau**.
+Celui qui revient dit « je ne suis plus à la même partie que vous » —
+`Message.perdu`, qui existait déjà pour les divergences — et celui qui la tient
+la renvoie entière, comme au premier jour. Il suffisait que le salon garde la
+place au chaud deux minutes, et que le fil rappelle tout seul en espaçant ses
+essais.
+
+Un garde est venu avec : **on ne joue pas dans le vide**. Sans lui, un coup
+joué pendant que la liaison est tombée est appliqué ici et n'arrive nulle part.
+L'appareil se remet d'aplomb au retour — l'hôte renvoie la partie, qui fait foi
+— mais le joueur aurait vu son coup s'effacer sous ses yeux, ce qui est la
+chose la plus inquiétante qu'un jeu puisse faire.
+
+### Game Center, et ce qu'il ne dit pas
+
+Apple fait gratuitement ce que le serveur fait pour zéro à cinq euros, et il
+ajoute ce qu'aucun code ne donnera jamais : une liste d'amis, et quelqu'un à
+qui jouer quand on n'a personne sous la main.
+
+Il demande deux choses en échange, et l'écran les dit **avant** qu'on s'y
+engage, parce qu'elles se découvrent autrement au pire moment — quand deux
+personnes sont déjà installées pour jouer. Un compte, d'abord. Et pas de
+reprise : une partie en temps réel chez Apple ne se reconnecte pas.
+
+Il n'y a pas d'hôte chez Apple non plus : quatre appareils se retrouvent dans
+une partie, et aucun n'est arrivé le premier. On le désigne donc sans rien se
+demander — **le plus petit identifiant** des quatre. Chaque appareil trie la
+même liste et trouve le même premier, sans qu'un seul paquet ait à circuler.
+Un vote aurait demandé un message, donc un désaccord possible, donc une panne
+de plus.
+
+### Ce que les essais tiennent
+
+Le jeu au loin est l'endroit où une panne ne dit rien du tout. Une partie qui
+diverge reste cohérente **de chaque côté** : les deux écrans sont justes, les
+deux joueurs sont sûrs d'eux, et ce sont deux parties différentes.
+
+- `serveur/essai.mjs` — vingt-deux vérifications de bout en bout sur le
+  serveur, dont la coupure et le retour. Aucune attente n'y est un délai fixe :
+  la première version dormait trois cents millisecondes après chaque envoi et
+  passait, jusqu'à ce que la machine soit occupée ailleurs — onze
+  vérifications sur vingt et une se sont mises à échouer d'un coup, sur un
+  serveur qui n'avait pas changé d'une ligne.
+- `Tests/LoinTests.swift` — le code, la mise en place commune aux trois fils,
+  et la reprise, sur un `FilFactice` qu'on coupe d'un booléen.
+- `Tests/SalonTests.swift` — l'application contre le **vrai** serveur. C'est la
+  couture la plus risquée et la seule qu'un essai en mémoire ne peut pas
+  tenir : le nom des clés. Il a trouvé ce qu'il cherchait dès le premier
+  passage — l'hôte n'annonçait jamais son code, l'écran marchant par un autre
+  chemin que l'état.
 
 ---
 
@@ -1332,5 +1451,3 @@ xcodebuild -scheme Riskelo -destination 'platform=iOS Simulator,name=iPhone 17 P
   élucidée.
 - **La vraie carte du monde**, à la place des hexagones. Seule la partie
   « dessin » est à refaire — les règles ne connaissent que le voisinage.
-- **Le partage à distance**, pour que le jeu à plusieurs ne demande plus d'être
-  dans la même pièce.

@@ -268,8 +268,11 @@ struct AccueilView: View {
             // cherche à faire. Elle était sous « Réglages de la partie », où
             // l'on ne va pas pour jouer à deux.
             Button(action: onReseau) {
-                Label("Jouer à plusieurs appareils",
-                      systemImage: "iphone.gen3.radiowaves.left.and.right")
+                // « à plusieurs » et non « à plusieurs appareils » : le
+                // bouton ouvre désormais trois chemins, dont deux ne
+                // demandent pas d'être dans la même pièce.
+                Label("Jouer à plusieurs",
+                      systemImage: "person.2.fill")
                     .font(.headline)
                     .frame(maxWidth: .infinity).padding(.vertical, 13)
             }

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Riskelo — politique de confidentialité</title>
-<meta name="description" content="Riskelo ne collecte aucune donnée personnelle : pas de compte, pas de traceur, pas de publicité, aucun serveur.">
+<meta name="description" content="Riskelo ne collecte aucune donnée personnelle : pas de compte, pas de traceur, pas de publicité. Le jeu au loin passe par un relais qui ne conserve rien.">
 <link rel="icon" href="icone.png">
 <link rel="stylesheet" href="style.css">
 </head>
@@ -31,10 +31,12 @@
     Version&nbsp;1.0 · Dernière mise à jour : 28 août 2026</small></p>
 
   <div class="note">
-    <p><strong>En une phrase :</strong> Riskelo ne collecte, ne transmet et ne
+    <p><strong>En une phrase :</strong> Riskelo ne collecte, ne conserve et ne
       revend aucune donnée personnelle. Il n'y a ni compte, ni inscription, ni
-      traceur, ni publicité, ni serveur. Tout ce que produit le jeu reste sur
-      votre appareil.</p>
+      traceur, ni publicité. Tout ce que produit le jeu reste sur votre
+      appareil — sauf, si vous choisissez de jouer au loin, les coups de la
+      partie, qui traversent un relais sans y être conservés et sans qu'aucun
+      nom ne lui parvienne. Voir la section 4.</p>
   </div>
 </section>
 
@@ -60,10 +62,15 @@
   </ul>
   <p>L'application n'intègre <strong>aucun kit de développement tiers</strong> :
     pas de régie publicitaire, pas d'outil d'analyse, pas de réseau social, pas
-    de service d'authentification. Elle n'effectue aucune requête vers un
-    serveur, et <strong>fonctionne entièrement hors ligne</strong>.</p>
+    de service d'authentification.</p>
+  <p>Elle <strong>fonctionne entièrement hors ligne</strong>, à une exception
+    près que vous choisissez vous-même : le jeu « au loin », décrit à la
+    section 4. Tant que vous ne l'ouvrez pas, l'application n'effectue aucune
+    requête vers aucun serveur.</p>
   <p>Au sens des « étiquettes de confidentialité » de l'App Store, Riskelo est
-    déclaré <em>Données non collectées</em>.</p>
+    déclaré <em>Données non collectées</em> : rien n'est conservé sous une
+    forme lisible au-delà du temps nécessaire à faire passer un coup d'un
+    appareil à l'autre.</p>
 </section>
 
 <section>
@@ -96,13 +103,16 @@
 
 <section>
   <h2>4. Le jeu à plusieurs appareils</h2>
-  <p>La partie à plusieurs appareils utilise le framework
-    <em>Network</em> d'Apple : les appareils se trouvent par Bonjour et se
-    parlent en TCP, <strong>directement</strong> entre eux — par le réseau
-    Wi-Fi local, ou d'appareil à appareil en Wi-Fi lorsqu'il n'y a pas de
-    réseau. <strong>Sans passer par aucun serveur</strong>, et sans que rien
-    ne transite par Internet.</p>
-  <p>Deux points de transparence :</p>
+  <p>Il y a trois façons de relier des appareils, et vous choisissez la vôtre
+    à chaque partie. Elles n'ont pas les mêmes conséquences, et c'est pourquoi
+    elles sont décrites séparément.</p>
+
+  <h3>Dans la même pièce</h3>
+  <p>Les appareils se trouvent par Bonjour et se parlent en TCP,
+    <strong>directement</strong> entre eux — par le réseau Wi-Fi local, ou
+    d'appareil à appareil lorsqu'il n'y a pas de réseau.
+    <strong>Sans passer par aucun serveur</strong>, et sans que rien ne
+    transite par Internet.</p>
   <ul>
     <li><strong>Le nom de votre appareil est visible</strong> par les appareils
       proches ayant ouvert le même écran, pendant la recherche d'une table.
@@ -111,13 +121,46 @@
       jeu vous reconnaissent dans la liste. Vous pouvez le modifier dans
       Réglages ▸ Général ▸ Informations ▸ Nom.</li>
     <li><strong>Seuls les coups de la partie circulent</strong> — quelques
-      dizaines d'octets décrivant un renfort, un assaut ou une réponse. Rien
-      n'est conservé après la partie, ni sur votre appareil ni sur celui des
-      autres joueurs.</li>
+      dizaines d'octets décrivant un renfort, un assaut ou une réponse.</li>
   </ul>
   <p>L'autorisation « réseau local » que le système vous demande sert
-    exclusivement à cela. La refuser n'empêche pas de jouer seul ou à plusieurs
-    sur un même appareil.</p>
+    exclusivement à cela. La refuser n'empêche pas de jouer seul, ni à
+    plusieurs sur un même appareil.</p>
+
+  <h3>Au loin, avec un code</h3>
+  <p>Deux appareils qui ne sont pas dans la même pièce ne peuvent pas se
+    trouver seuls : il faut un point de rendez-vous. Riskelo en tient un, chez
+    l'hébergeur <strong>Cloudflare</strong>. Il fait une seule chose —
+    recopier d'un appareil à l'autre des paquets dont il ignore le contenu.</p>
+  <p>Ce qui lui parvient :</p>
+  <ul>
+    <li><strong>un identifiant tiré au sort</strong> à l'installation du jeu,
+      propre à cet appareil. Il ne désigne personne, n'est relié à aucun
+      compte, et ne sert qu'à vous rendre votre place si la liaison tombe ;</li>
+    <li><strong>les coups de la partie</strong>, sous une forme qu'il ne
+      cherche pas à lire et qu'il se contente de faire suivre.</li>
+  </ul>
+  <p>Ce qui ne lui parvient <strong>jamais</strong> : votre nom, votre pseudo,
+    le nom de votre appareil, votre adresse électronique, aucun identifiant
+    Apple. Le prénom que vous vous donnez voyage à l'intérieur des paquets, et
+    va d'un joueur à l'autre sans que le relais le voie.</p>
+  <p>Le salon est effacé <strong>deux minutes</strong> après le départ du
+    dernier joueur, et le code redevient libre. Rien n'est conservé ensuite :
+    ni les parties, ni les coups, ni qui a joué avec qui.</p>
+  <p>Le lien d'invitation que vous partagez ne contient que le code du salon.
+    L'application ou le service par lequel vous l'envoyez — messagerie, SMS,
+    courrier — applique ses propres règles, sur lesquelles Riskelo n'a
+    évidemment pas la main.</p>
+
+  <h3>Par Game Center</h3>
+  <p>Game Center est le service de jeu d'<strong>Apple</strong>, et la partie y
+    passe de bout en bout : c'est Apple qui vous met en présence et qui
+    transporte les coups. Riskelo n'y reçoit que le pseudonyme Game Center des
+    joueurs de la partie, tel qu'Apple l'affiche, et ne le conserve pas.</p>
+  <p>Ce que Game Center collecte pour son propre compte relève de la
+    <a href="https://www.apple.com/fr/legal/privacy/">politique de
+    confidentialité d'Apple</a>. Ce chemin est facultatif : les deux autres ne
+    demandent aucun compte.</p>
 </section>
 
 <section>

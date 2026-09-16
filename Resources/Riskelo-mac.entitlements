@@ -16,5 +16,14 @@
 	<true/>
 	<key>com.apple.security.network.server</key>
 	<true/>
+	<!-- Les deux mêmes clés que sur iPhone : le fil d'Apple, et le lien
+	     d'invitation qui ouvre le jeu. Voir Riskelo-ios.entitlements, où
+	     elles sont commentées. -->
+	<key>com.apple.developer.game-center</key>
+	<true/>
+	<key>com.apple.developer.associated-domains</key>
+	<array>
+		<string>applinks:riskelo-salon.boboul.workers.dev</string>
+	</array>
 </dict>
 </plist>

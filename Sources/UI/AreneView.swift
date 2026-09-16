@@ -100,10 +100,12 @@ struct AreneView: View {
                 .font(.system(size: 32)).foregroundStyle(Palette.lostVif)
             Text("Pas connecté à Game Center")
                 .font(.headline).foregroundStyle(Palette.lostVif)
-            Text("Game Center est le service de jeu d'Apple, et il demande un "
-                 + "compte. Vous pouvez vous y connecter dans les Réglages — ou "
-                 + "revenir en arrière et **jouer au loin avec un code**, qui ne "
-                 + "demande rien à personne.")
+            Text("""
+                 Game Center est le service de jeu d'Apple, et il demande un \
+                 compte. Vous pouvez vous y connecter dans les Réglages — ou \
+                 revenir en arrière et **jouer au loin avec un code**, qui ne \
+                 demande rien à personne.
+                 """)
                 .font(.footnote).foregroundStyle(Palette.dim)
                 .multilineTextAlignment(.center)
             #if os(iOS)
@@ -126,8 +128,10 @@ struct AreneView: View {
                 }
             }
 
-            Text("Vos amis Game Center, ou quelqu'un au hasard. "
-                 + "Apple s'occupe de vous mettre en présence.")
+            Text("""
+                 Vos amis Game Center, ou quelqu'un au hasard. \
+                 Apple s'occupe de vous mettre en présence.
+                 """)
                 .font(.footnote).foregroundStyle(Palette.dim)
                 .multilineTextAlignment(.center)
 
@@ -146,8 +150,10 @@ struct AreneView: View {
             }
 
             // Ce qu'Apple ne dira pas, et qu'il vaut mieux savoir avant.
-            Text("Une partie Game Center ne se reprend pas : si quelqu'un perd "
-                 + "le réseau, elle s'arrête. Le code, lui, laisse revenir.")
+            Text("""
+                 Une partie Game Center ne se reprend pas : si quelqu'un perd \
+                 le réseau, elle s'arrête. Le code, lui, laisse revenir.
+                 """)
                 .font(.caption2).foregroundStyle(Palette.dim.opacity(0.85))
                 .multilineTextAlignment(.center)
 

@@ -84,9 +84,11 @@ struct ManuelView: View {
                     Text("Riskelo")
                         .font(.system(size: 30, weight: .bold, design: .rounded))
                         .foregroundStyle(Palette.ink)
-                    Text("Un jeu de conquête où le lancer de dés est remplacé par une "
-                         + "question de culture générale. Tout ce que fait l'application "
-                         + "est écrit ici.")
+                    Text("""
+                         Un jeu de conquête où le lancer de dés est remplacé par une \
+                         question de culture générale. Tout ce que fait l'application \
+                         est écrit ici.
+                         """)
                         .font(.footnote).foregroundStyle(Palette.dim)
                         .fixedSize(horizontal: false, vertical: true)
                 }

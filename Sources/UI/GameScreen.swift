@@ -991,8 +991,12 @@ private struct VictoryOverlay: View {
                                 HStack(alignment: .top, spacing: 8) {
                                     Circle().fill(Palette.campVif(joueur.id))
                                         .frame(width: 8, height: 8).padding(.top, 5)
-                                    Text("**\(joueur.name)** — \(session.game.texte(carte))"
-                                         + (remplie ? " *Remplie.*" : ""))
+                                    // Deux libellés assemblés en Text, et non
+                                    // deux chaînes assemblées en une : une
+                                    // phrase faite de « + » n'entre pas dans le
+                                    // catalogue de langues.
+                                    (Text("**\(joueur.name)** — \(session.game.texte(carte))")
+                                     + (remplie ? Text(" *Remplie.*") : Text("")))
                                         .font(.caption)
                                         .fixedSize(horizontal: false, vertical: true)
                                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -1096,18 +1100,24 @@ private struct ObjectifSheet: View {
                     // arrive à une carte morte : c'est le seul endroit où le
                     // joueur peut l'apprendre avant que ça lui tombe dessus.
                     VStack(alignment: .leading, spacing: 6) {
-                        Text("La remplir gagne la partie, sur-le-champ. Il n'y a pas d'autre "
-                             + "porte : aucun nombre de territoires ne gagne la partie.")
+                        Text("""
+                             La remplir gagne la partie, sur-le-champ. Il n'y a pas d'autre \
+                             porte : aucun nombre de territoires ne gagne la partie.
+                             """)
                         if case .eliminer = carte {
-                            Text("Si un autre fait tomber ce camp avant vous, votre carte se "
-                                 + "retourne et devient « tenir "
-                                 + "\(Objectif.repli(g.board).nombreDemande ?? 0) territoires » — "
-                                 + "quatre places sur cinq du plateau.")
+                            Text("""
+                                 Si un autre fait tomber ce camp avant vous, votre carte se \
+                                 retourne et devient « tenir \
+                                 \(Objectif.repli(g.board).nombreDemande ?? 0) territoires » — \
+                                 quatre places sur cinq du plateau.
+                                 """)
                         } else if g.conqueteRetournee(de: joueur) {
-                            Text("Ce n'est pas la carte que vous aviez tirée : le camp qu'on "
-                                 + "vous demandait d'abattre est tombé sous d'autres coups. "
-                                 + "Elle s'est retournée en ce repli, pour que vous puissiez "
-                                 + "encore gagner.")
+                            Text("""
+                                 Ce n'est pas la carte que vous aviez tirée : le camp qu'on \
+                                 vous demandait d'abattre est tombé sous d'autres coups. \
+                                 Elle s'est retournée en ce repli, pour que vous puissiez \
+                                 encore gagner.
+                                 """)
                         }
                         Text(session.enReseau
                              ? "Les autres appareils ne montrent que la leur."

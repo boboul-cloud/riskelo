@@ -160,8 +160,10 @@ struct ArchivesView: View {
     private func moments(de p: PartieArchivee) -> some View {
         ScrollView {
             VStack(spacing: 8) {
-                Text("Choisir un instant reprend la partie à partir de là, sans "
-                     + "effacer celle-ci : la suite que vous jouerez sera rangée à part.")
+                Text("""
+                     Choisir un instant reprend la partie à partir de là, sans \
+                     effacer celle-ci : la suite que vous jouerez sera rangée à part.
+                     """)
                     .font(.caption).foregroundStyle(Palette.dim)
                     .multilineTextAlignment(.center)
                     .padding(.bottom, 6)

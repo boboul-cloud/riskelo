@@ -145,10 +145,16 @@ struct PacksView: View {
     }
 
     private var presentation: some View {
-        Text("Un pack est un jeu de questions qui s'ajoute au vôtre. Cochez ceux "
-             + "que vous voulez jouer — un seul, ou plusieurs mêlés. Le choix vaut "
-             + "pour toutes vos parties, et c'est celui qui ouvre la table qui "
-             + "décide pour tout le monde.")
+        // Une seule chaîne, coupée par des « \ » et non par des « + » : une
+        // phrase assemblée à coups de plus n'est plus un libellé aux yeux du
+        // compilateur, elle n'entre jamais dans le catalogue de langues, et
+        // elle reste en français sur un appareil anglais.
+        Text("""
+             Un pack est un jeu de questions qui s'ajoute au vôtre. Cochez ceux \
+             que vous voulez jouer — un seul, ou plusieurs mêlés. Le choix vaut \
+             pour toutes vos parties, et c'est celui qui ouvre la table qui \
+             décide pour tout le monde.
+             """)
             .font(.caption).foregroundStyle(Palette.dim)
     }
 
@@ -255,16 +261,20 @@ struct PacksView: View {
             Button("Restaurer mes achats") { Task { await boutique.restaurer() } }
                 .buttonStyle(.bordered).tint(Palette.dim)
                 .font(.subheadline)
-            Text("Un pack acheté vous suit sur vos appareils. Celui qui rejoint votre "
-                 + "table joue vos packs sans avoir à les acheter.")
+            Text("""
+                 Un pack acheté vous suit sur vos appareils. Celui qui rejoint votre \
+                 table joue vos packs sans avoir à les acheter.
+                 """)
                 .font(.caption2).foregroundStyle(Palette.dim)
         }
     }
 
     private var resume: some View {
         let enJeu = Themes.tous.filter { Packs.enJeu.contains($0.id) }
-        return Text("\(enJeu.count) thème\(enJeu.count > 1 ? "s" : "") en jeu — "
-                    + "\(compte(enJeu)) questions.")
+        return Text("""
+                    \(enJeu.count) thème\(enJeu.count > 1 ? "s" : "") en jeu — \
+                    \(compte(enJeu)) questions.
+                    """)
             .font(.caption.weight(.medium)).foregroundStyle(Palette.ink)
             .frame(maxWidth: .infinity, alignment: .leading)
     }

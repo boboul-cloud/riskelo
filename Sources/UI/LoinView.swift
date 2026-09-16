@@ -113,8 +113,10 @@ struct LoinView: View {
                 .font(.system(size: 34)).foregroundStyle(Palette.camp(3))
             Text("La liaison est tombée").font(.headline).foregroundStyle(Palette.ink)
             ProgressView().tint(Palette.dim)
-            Text("On y retourne. Si c'est un tunnel ou un ascenseur, cela se "
-                 + "rétablit tout seul — gardez l'écran allumé.")
+            Text("""
+                 On y retourne. Si c'est un tunnel ou un ascenseur, cela se \
+                 rétablit tout seul — gardez l'écran allumé.
+                 """)
                 .font(.caption).foregroundStyle(Palette.dim)
                 .multilineTextAlignment(.center)
         }
@@ -123,8 +125,10 @@ struct LoinView: View {
     // MARK: - Ouvrir, ou rejoindre
 
     @ViewBuilder private var ouvrirOuRejoindre: some View {
-        Text("Chacun chez soi, sur son propre réseau. Un code à six lettres "
-             + "suffit — ni compte, ni inscription.")
+        Text("""
+             Chacun chez soi, sur son propre réseau. Un code à six lettres \
+             suffit — ni compte, ni inscription.
+             """)
             .font(.footnote).foregroundStyle(Palette.dim)
             .multilineTextAlignment(.center)
 
@@ -230,8 +234,10 @@ struct LoinView: View {
             }
             .buttonStyle(.bordered).tint(copie ? Palette.held : Palette.dim)
 
-            Text("WhatsApp, SMS, Messages — le lien ouvre le jeu directement. "
-                 + "Le code écrit au-dessus marche aussi, s'il faut le dicter.")
+            Text("""
+                 WhatsApp, SMS, Messages — le lien ouvre le jeu directement. \
+                 Le code écrit au-dessus marche aussi, s'il faut le dicter.
+                 """)
                 .font(.caption2).foregroundStyle(Palette.dim.opacity(0.85))
                 .multilineTextAlignment(.center)
         }
@@ -263,8 +269,10 @@ struct LoinView: View {
             Image(systemName: "exclamationmark.triangle.fill")
                 .font(.system(size: 34)).foregroundStyle(Palette.lostVif)
             Text("Versions différentes").font(.headline).foregroundStyle(Palette.lostVif)
-            Text("L'autre appareil a envoyé une partie que celui-ci ne sait pas "
-                 + "lire. Installez la même version de Riskelo des deux côtés.")
+            Text("""
+                 L'autre appareil a envoyé une partie que celui-ci ne sait pas \
+                 lire. Installez la même version de Riskelo des deux côtés.
+                 """)
                 .font(.footnote).foregroundStyle(Palette.dim)
                 .multilineTextAlignment(.center)
         } else {
@@ -277,8 +285,10 @@ struct LoinView: View {
             }
             if silence {
                 Text("Rien n'est venu.").font(.subheadline).foregroundStyle(Palette.lostVif)
-                Text("La liaison est bonne : c'est le lancement qui n'arrive pas. "
-                     + "Celui qui a ouvert la partie doit toucher « Commencer ».")
+                Text("""
+                     La liaison est bonne : c'est le lancement qui n'arrive pas. \
+                     Celui qui a ouvert la partie doit toucher « Commencer ».
+                     """)
                     .font(.caption).foregroundStyle(Palette.dim)
                     .multilineTextAlignment(.center)
             } else {

@@ -74,8 +74,10 @@ struct DuelOverlay: View {
                 VStack(spacing: 8) {
                     Text("\(attaquant.name) attaque \(session.game.name(a.to))")
                         .font(.title3.weight(.semibold))
-                    Text("Question \(duel.question.category.apresDe)"
-                         + " — \(duel.question.difficulty.label.lowercased())")
+                    Text("""
+                         Question \(duel.question.category.dansLaPhrase) — \
+                         \(duel.question.difficulty.label.lowercased())
+                         """)
                         .foregroundStyle(Palette.dim)
                     if croise, a.defenderAnswer != nil {
                         // On dit qu'il a répondu, jamais ce qu'il a répondu.

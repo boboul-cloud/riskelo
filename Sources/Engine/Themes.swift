@@ -60,6 +60,14 @@ struct Category: Hashable, Identifiable, Codable {
     /// le thème déclare donc lui-même.
     var apresDe: String { Themes.connu(self)?.de ?? "de \(label)" }
 
+    /// Le thème tel qu'une phrase de l'interface le nomme.
+    ///
+    /// L'élision est une affaire française : « d'Histoire », « de Géographie ».
+    /// Une interface anglaise dit le nom seul — sans quoi un joueur américain
+    /// lisait « Question de Geography », l'élision française collée à un thème
+    /// anglais.
+    var dansLaPhrase: String { Themes.langue == .fr ? apresDe : label }
+
     /// Le nom du camembert, pour l'œil : la vue y accroche sa couleur.
     var symbol: String { Themes.connu(self)?.icone ?? "questionmark.circle" }
 

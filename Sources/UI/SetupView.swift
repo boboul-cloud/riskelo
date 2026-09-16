@@ -343,8 +343,8 @@ struct SetupView: View {
                         }
 
                         Button { onNetwork(regles, plateau) } label: {
-                            Label("Jouer à plusieurs appareils",
-                                  systemImage: "iphone.gen3.radiowaves.left.and.right")
+                            Label("Jouer à plusieurs",
+                                  systemImage: "person.2.fill")
                                 .font(.subheadline.weight(.medium))
                                 .frame(maxWidth: .infinity).padding(.vertical, 12)
                         }

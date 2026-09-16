@@ -23,9 +23,9 @@ Ensuite, dans l'ordre :
 2. **Créer la fiche du jeu** sur `appstoreconnect.apple.com`. C'est le moment
    où le nom « Riskelo » est réservé à vous. Les valeurs à saisir sont en
    section 1, les adresses du site en section 2.
-3. **Les captures d'écran sont déjà prises** — dix-huit, six par taille
-   d'appareil, dans `soumission/captures/`. Une commande les refait toutes si
-   l'écran change : section 7.
+3. **Refaire les captures d'écran** — celles qui sont rangées datent du
+   9 septembre et montrent un accueil qui n'existe plus. Une commande les
+   refait toutes : section 7.
 4. **Envoyer l'application** depuis votre Mac — deux commandes et un bouton,
    en section 8.
 5. **Recopier les textes** de la section 4 dans les cases du site, répondre
@@ -184,7 +184,7 @@ le nom d'autrui.
 ### Texte promotionnel — 170 caractères max, modifiable sans nouvelle version
 
 ```
-Deux mille quatre cents questions, trois plateaux, deux modes de duel. Aucune publicité, aucun compte, aucune connexion : tout le jeu est dans l'application.
+Deux mille quatre cents questions, trois plateaux, deux modes de duel. Seul, à plusieurs sur un appareil, ou au loin avec un code. Aucune publicité, aucun compte.
 ```
 
 ### Description — 4 000 caractères max
@@ -213,7 +213,7 @@ DE DEUX À QUATRE JOUEURS
 
 • Seul contre la machine, dont la culture se règle de 35 à 90 % de bonnes réponses et la manœuvre en trois niveaux — savoir et bien jouer sont deux choses différentes.
 • À plusieurs sur un même appareil, qui se passe de main en main.
-• À plusieurs appareils, un par joueur : sans compte, sans configuration, sans serveur. Le Bluetooth et le Wi-Fi direct suffisent, et cela fonctionne dans un train.
+• À plusieurs appareils, un par joueur : dans la même pièce, sans rien à configurer — ou au loin, chacun chez soi, avec un code de six lettres envoyé par message. Sans compte, dans les deux cas.
 
 Chacun peut donner son nom : le camp se lit « Bleu · Marie », et le nom fait le voyage d'un appareil à l'autre.
 
@@ -234,7 +234,7 @@ Elle se retrouve où vous l'avez laissée. Et la bibliothèque enregistre chaque
 
 CE QUE RISKELO NE FAIT PAS
 
-Aucune publicité. Aucun abonnement. Aucun compte. Aucun traceur, aucune mesure d'audience. Aucune connexion à Internet n'est nécessaire : les questions sont dans l'application, et vos parties ne quittent jamais votre appareil.
+Aucune publicité. Aucun abonnement. Aucun compte. Aucun traceur, aucune mesure d'audience. Les questions sont dans l'application : jouer ne demande aucune connexion. Seule la partie au loin passe par un relais, qui n'apprend rien de vous et ne garde rien.
 
 DIX-SEPT PACKS, EN OPTION
 
@@ -249,6 +249,12 @@ C'est ce texte qui se colle, et il dit ce qui a changé depuis la `1.1` — rien
 d'autre : c'est ce qu'un joueur y cherche.
 
 ```
+JOUER AU LOIN
+• Une partie à plusieurs ne demande plus d'être dans la même pièce. Celui qui ouvre reçoit un code de six lettres et l'envoie par WhatsApp, par SMS, par ce qu'il veut ; l'autre touche le lien, et le jeu s'ouvre sur la bonne partie. Le code se dicte aussi bien qu'il se colle — il alterne consonnes et voyelles exprès.
+• Toujours aucun compte à créer, aucune inscription, rien à retenir : le code vit le temps de la partie et s'efface avec elle.
+• Un tunnel, un ascenseur, un appel qui arrive : la partie reprend d'elle-même dès que la liaison revient, et elle attend deux minutes. Elle s'arrêtait là-dessus.
+• Game Center en plus, pour ceux qui y sont déjà : vos amis, ou un adversaire au hasard.
+
 LA TABLE À PLUSIEURS APPAREILS
 • Elle s'ouvre depuis l'accueil, et en premier. Jouer à plusieurs n'est pas un réglage de partie : ce n'était pas sa place sous « Réglages ».
 • Le salon dit ce qu'il va ouvrir — « Monde · Face à face », et les options qui changent vraiment la partie — et porte un bouton pour aller le changer. C'est l'hôte qui fixe la partie pour tout le monde, et c'est en ouvrant la table qu'on y pense.
@@ -485,15 +491,17 @@ Répondre **Aucun / Jamais** à toutes les questions : pas de violence figurée
 d'argent, pas d'alcool ni de tabac, pas de contenu généré par les
 utilisateurs, pas d'accès web libre. Résultat attendu : **4+**.
 
-### La seule autorisation demandée
+### Les deux autorisations demandées
 
 | Autorisation | Quand | Texte affiché |
 |---|---|---|
-| Réseau local | À la première ouverture de « Jouer à plusieurs appareils » | « Riskelo s'en sert pour trouver l'autre appareil et jouer la partie à deux. » |
+| Réseau local | À la première ouverture de « Jouer à plusieurs » ▸ *Dans la même pièce* | « Riskelo s'en sert pour trouver l'autre appareil et jouer la partie à deux. » |
+| Game Center | À la première ouverture de « Jouer à plusieurs » ▸ *Par Game Center* | Posée par le système, son texte n'est pas le nôtre |
 
-Refusée, l'app reste entièrement jouable : seul le jeu à plusieurs appareils
-est indisponible. Aucune autre autorisation — ni position, ni photos, ni
-contacts, ni micro, ni notifications.
+Refusées, l'app reste entièrement jouable : seul le chemin concerné est
+indisponible, et **« Au loin, avec un code » n'en demande aucune des deux** —
+c'est une connexion Internet ordinaire. Aucune autre autorisation — ni
+position, ni photos, ni contacts, ni micro, ni notifications.
 
 ### Le point que personne ne déclare, et qu'il vaut mieux avoir écrit
 
@@ -543,28 +551,51 @@ Le mode d'emploi complet est dans l'application : bouton « Mode d'emploi » sur
 l'écran d'accueil, ou le point d'interrogation de la barre du haut pendant une
 partie.
 
-FONCTION QUI DEMANDE DEUX APPAREILS
-« Jouer à plusieurs appareils » relie de deux à quatre appareils proches par
-le framework Network d'Apple : Bonjour pour se trouver, TCP pour se parler.
-Les appareils passent par le réseau Wi-Fi local, ou directement d'un appareil
-à l'autre en Wi-Fi lorsqu'il n'y a pas de réseau. Aucun serveur n'est utilisé
-et aucune donnée n'est conservée : seuls les coups de la partie circulent.
+FONCTIONS QUI DEMANDENT DEUX APPAREILS
+« Jouer à plusieurs » relie de deux à quatre appareils, un par joueur, et
+propose trois chemins. Tous trois sont facultatifs : le jeu est entier sans
+eux, seul contre l'ordinateur ou à plusieurs joueurs sur un même appareil.
 
-Cette fonction demande donc deux appareils physiques dans la même pièce, avec
-le Wi-Fi allumé des deux côtés, et l'autorisation « réseau local » accordée.
-Elle est facultative : refuser cette autorisation laisse le reste du jeu
-entièrement fonctionnel (solo contre l'ordinateur, ou à plusieurs joueurs sur
-un même appareil).
+1. DANS LA MÊME PIÈCE — framework Network d'Apple : Bonjour pour se trouver,
+TCP pour se parler. Les appareils passent par le réseau Wi-Fi local, ou
+directement de l'un à l'autre lorsqu'il n'y a pas de réseau. Aucun serveur.
+Demande deux appareils physiques proches et l'autorisation « réseau local ».
+
+2. AU LOIN, AVEC UN CODE — c'est le chemin le plus simple à essayer, et nous
+le signalons parce qu'il lève la difficulté habituelle : les deux appareils
+n'ont pas besoin d'être proches, ni sur le même réseau. Une connexion Internet
+de chaque côté suffit, et un appareil physique avec un simulateur convient.
+
+  a. Appareil A : accueil ▸ « Jouer à plusieurs » ▸ « Au loin, avec un code »
+     ▸ « Ouvrir une partie ». Un code de six lettres s'affiche.
+  b. Appareil B : le même chemin, puis « Rejoindre » et ces six lettres.
+  c. Appareil A : « Commencer ».
+
+Les coups transitent par un relais que nous hébergeons (Cloudflare Workers).
+Ce relais recopie des paquets sans les lire : il ne tient pas la partie, ne
+voit aucune question ni aucune réponse, et ne reçoit aucun nom de joueur — pas
+même dans l'adresse de connexion. Il connaît un identifiant tiré au sort à
+l'installation, qu'il garde deux minutes après la fin pour permettre de
+reprendre une partie coupée, puis efface. Aucun journal n'est conservé.
+
+3. PAR GAME CENTER — chemin facultatif, pour les joueurs qui y sont déjà.
+Aucune donnée ne nous en revient : Riskelo n'y voit que le pseudonyme Game
+Center des joueurs de la partie en cours, et ne le conserve pas.
 
 AUTORISATIONS
-Une seule, facultative : le réseau local, pour la fonction ci-dessus. Aucune
-autre — ni position, ni photos, ni contacts, ni micro, ni notifications.
+Deux, toutes deux facultatives et demandées seulement si le joueur ouvre la
+fonction concernée : le réseau local (chemin 1) et Game Center (chemin 3).
+Aucune autre — ni position, ni photos, ni contacts, ni micro, ni
+notifications.
 
 CONFIDENTIALITÉ
-Aucune donnée n'est collectée ni transmise. L'application n'intègre aucun kit
-tiers et n'effectue aucune requête vers un serveur. Elle fonctionne
-entièrement hors ligne : les 6 000 questions sont incluses dans le bundle.
-Les achats intégrés passent par StoreKit et ne transmettent rien d'autre.
+Aucune donnée personnelle n'est collectée. L'application n'intègre aucun kit
+tiers — ni régie publicitaire, ni outil d'analyse, ni service
+d'authentification. Le jeu fonctionne hors ligne : les questions sont incluses
+dans le paquet, et rien ne sort de l'appareil tant que le joueur n'ouvre pas
+lui-même « Au loin » ou « Game Center ». Ce qui sort alors est décrit
+ci-dessus, et n'est conservé nulle part au-delà de la partie. Les achats
+intégrés passent par StoreKit et ne transmettent rien d'autre.
 
 CONTENU
 Les questions, les plateaux, les dessins et l'icône sont des créations
@@ -583,8 +614,16 @@ Robert Oulhen — bob.oulhen@gmail.com
 
 ## 7. Les captures d'écran
 
-**Elles sont prises, et rangées.** Dix-huit fichiers, six par taille, dans
-`soumission/captures/` — il n'y a plus qu'à les déposer :
+> **À refaire avant le dépôt — 16 septembre 2026.** Les dix-huit fichiers
+> datent du 9 septembre, et l'accueil a changé deux fois depuis : les packs
+> s'y sont ajoutés, puis « Jouer à plusieurs » est monté en tête. La sixième
+> capture montre donc un écran d'accueil qui n'existe plus — trois boutons au
+> lieu de cinq. Apple rejette une capture qui ne correspond pas à l'app.
+>
+> Une commande les refait toutes (voir plus bas). L'outil, lui, n'a pas besoin
+> d'être retouché : il ne s'appuie sur aucun libellé qui ait changé.
+
+Dix-huit fichiers, six par taille, dans `soumission/captures/` :
 
 | Dossier | Taille | Résolution | Exigée ? |
 |---|---|---|---|
@@ -705,13 +744,20 @@ qu'une autorisation retirée par inadvertance ne se voit qu'à l'essai :
 1. Wi-Fi allumé des deux côtés, les deux machines dans la même pièce.
 2. Sur le Mac : ouvrir le projet et lancer le jeu (`⌘R`).
 3. Sur l'iPhone : le brancher, le choisir comme destination, lancer (`⌘R`).
-4. Sur l'une des deux : **Jouer à plusieurs appareils** ▸ *Ouvrir la table*.
-5. Sur l'autre : **Jouer à plusieurs appareils** ▸ *Rejoindre une table*, puis
-   toucher le nom qui apparaît.
+4. Sur l'une des deux : **Jouer à plusieurs** ▸ *Dans la même pièce* ▸
+   *Ouvrir la table*.
+5. Sur l'autre : le même chemin, puis *Rejoindre une table*, et toucher le nom
+   qui apparaît.
 6. Si le Mac demande l'autorisation d'utiliser le réseau local, **accepter**.
 7. Si rien ne vient au bout d'une minute : **inverser les rôles** — que celui
    qui cherchait ouvre la table. C'est le remède habituel, et il ne veut pas
    dire que le bac à sable est en cause.
+
+**Le second essai, depuis la 1.3 :** refaire les étapes 4 et 5 par
+*Au loin, avec un code*. Il éprouve une autre clé du bac à sable — les
+connexions sortantes vers Internet, et non le réseau local — et il ne demande
+pas que les deux machines soient dans la même pièce. **Non encore vérifié sur
+un vrai Mac** : le serveur des salons n'est pas déployé.
 
 **Ce qu'on cherche à savoir :** le Mac voit-il encore l'iPhone, et l'iPhone
 voit-il encore le Mac ? Au 28 août 2026, oui.

@@ -725,8 +725,8 @@ enum Manuel {
                  + "reprise d'une partie en cours, elle, est sur l'accueil."),
                 ("Parties enregistrées", "La bibliothèque des instants — voir le chapitre "
                  + "« Reprendre, marquer, revenir »."),
-                ("Jouer à plusieurs appareils", "Un appareil par joueur, jusqu'à quatre, "
-                 + "dans la même pièce."),
+                ("Jouer à plusieurs", "Un appareil par joueur, jusqu'à quatre : dans la "
+                 + "même pièce, au loin avec un code, ou par Game Center."),
             ]),
         ])
 
@@ -907,53 +907,78 @@ enum Manuel {
     // MARK: 11
 
     private static let reseau = Chapitre(
-        id: "reseau", titre: "Jouer à plusieurs appareils",
-        resume: "Jusqu'à quatre appareils, sans compte ni configuration.",
-        icone: "iphone.gen3.radiowaves.left.and.right", teinte: Palette.camp(0),
+        id: "reseau", titre: "Jouer à plusieurs",
+        resume: "Jusqu'à quatre appareils : dans la même pièce, ou au loin.",
+        icone: "person.2.fill", teinte: Palette.camp(0),
         blocs: [
-            .p("Un appareil par joueur, jusqu'à quatre. Rien à saisir, aucun compte, "
-               + "aucun réseau à configurer : les appareils se trouvent par Bluetooth ou "
-               + "par Wi-Fi direct, et cela fonctionne dans un train."),
-            .h("Ouvrir et rejoindre"),
+            .p("Un appareil par joueur, jusqu'à quatre. Touchez « Jouer à plusieurs » "
+               + "sur l'accueil, et choisissez comment relier les appareils."),
+            .p("Dans les trois cas, celui qui ouvre choisit le plateau et les règles, et "
+               + "les envoie avec la partie : les autres n'ont rien à régler. C'est lui "
+               + "aussi qui donne son rang à chacun, dans l'ordre d'arrivée. Sur chaque "
+               + "appareil, seul le joueur dont c'est le tour peut agir — et seul le "
+               + "défenseur peut répondre, où qu'il soit."),
+            .note("Pas de machine dans une partie à plusieurs appareils : un adversaire "
+                  + "artificiel devrait être joué par tous les appareils à la fois."),
+
+            .h("Dans la même pièce"),
+            .p("Rien à saisir, aucun compte, aucun réseau à configurer : les appareils "
+               + "se trouvent tout seuls, et cela fonctionne dans un train."),
             .puces([
-                "Un joueur touche « Jouer à plusieurs appareils », choisit le nombre de "
-                + "joueurs, puis « Ouvrir la table ».",
+                "Un joueur choisit le nombre de joueurs, puis « Ouvrir la table ».",
                 "Les autres touchent « Rejoindre une table » et choisissent son nom dans "
                 + "la liste.",
-                "Celui qui ouvre choisit le plateau et les règles, et les envoie avec la "
-                + "partie : les autres n'ont rien à régler. C'est lui aussi qui donne "
-                + "son rang à chacun, dans l'ordre d'arrivée.",
-                "Quand tout le monde est là, il lance la partie.",
-            ]),
-            .p("Sur chaque appareil, seul le joueur dont c'est le tour peut agir — et "
-               + "seul le défenseur peut répondre, où qu'il soit."),
-            .note("Pas de machine dans une partie en réseau : un adversaire artificiel "
-                  + "devrait être joué par tous les appareils à la fois."),
-            .h("Ce qu'il faut, et rien de plus"),
-            .puces([
-                "Les appareils dans la même pièce.",
                 "Le Wi-Fi allumé des deux côtés, même sans réseau auquel se connecter — "
                 + "c'est lui qui porte la liaison directe.",
                 "L'autorisation « réseau local », que le système demande une fois. "
                 + "Refusée, les appareils ne se voient jamais : elle se rétablit dans "
                 + "Réglages ▸ Riskelo.",
-                "La même version de Riskelo des deux côtés.",
             ]),
+
+            .h("Au loin, avec un code"),
+            .p("Chacun chez soi, sur son propre réseau. Toujours aucun compte à créer."),
+            .puces([
+                "Un joueur touche « Ouvrir une partie ». Un code de six lettres "
+                + "apparaît — par exemple MARENO.",
+                "Il touche « Envoyer l'invitation » et choisit WhatsApp, un SMS, "
+                + "Messages, un courrier. L'autre reçoit un lien.",
+                "L'autre touche le lien : Riskelo s'ouvre sur la bonne partie. Si rien "
+                + "ne s'ouvre, il tape les six lettres à la main.",
+            ]),
+            .p("Le code se dicte aussi bien qu'il se colle : il alterne consonnes et "
+               + "voyelles exprès, pour se répéter au téléphone. La casse et les espaces "
+               + "n'ont pas d'importance, et le chiffre zéro vaut la lettre O."),
+            .note("Une coupure ne perd pas la partie. Un tunnel, un ascenseur, un appel "
+                  + "qui arrive : un bandeau apparaît, et la partie reprend d'elle-même "
+                  + "dès que la liaison revient. Elle attend deux minutes — gardez "
+                  + "l'écran allumé."),
+
+            .h("Par Game Center"),
+            .p("Le service de jeu d'Apple : vos amis Game Center, ou un adversaire au "
+               + "hasard. Il demande d'y être connecté, et une partie qui s'y coupe ne "
+               + "reprend pas, contrairement au code. C'est pourquoi il vient en "
+               + "dernier."),
+
             .h("Quand cela ne marche pas"),
             .termes([
                 ("Aucune table en vue", "Vérifiez que l'autre appareil a bien ouvert la "
                  + "table, que le Wi-Fi est allumé des deux côtés, et que les appareils "
                  + "sont proches."),
-                ("La liaison n'a pas pu s'établir", "L'invitation a expiré au bout de "
-                 + "vingt secondes. Recommencez — et si une autorisation réseau est "
-                 + "demandée, acceptez-la tout de suite."),
-                ("Relié, mais rien ne vient", "La liaison est bonne : c'est le lancement "
-                 + "qui n'arrive pas. C'est à celui qui a ouvert la table de lancer la "
-                 + "partie."),
-                ("Versions différentes", "Un appareil a envoyé une partie que l'autre ne "
-                 + "sait pas lire. Mettez les deux à jour."),
                 ("Rien ne se passe malgré tout", "Inversez les rôles : que celui qui "
                  + "cherchait ouvre la table. Une liaison peut ne passer que dans un sens."),
+                ("Ce code ne mène à rien", "Un code vit le temps d'une partie, et "
+                 + "s'efface deux minutes après le départ du dernier joueur. Vérifiez "
+                 + "les six lettres, ou demandez-en un nouveau."),
+                ("La partie a déjà commencé", "On ne se glisse pas dans une partie en "
+                 + "cours. Mais celui qui en était et qui a été coupé, lui, est "
+                 + "toujours attendu."),
+                ("Rien n'a répondu", "Vérifiez votre connexion. Si tout va bien de votre "
+                 + "côté, c'est le serveur des parties qui ne répond pas : « dans la "
+                 + "même pièce » ne dépend de personne et reste disponible."),
+                ("Relié, mais rien ne vient", "La liaison est bonne : c'est le lancement "
+                 + "qui n'arrive pas. C'est à celui qui a ouvert la partie de la lancer."),
+                ("Versions différentes", "Un appareil a envoyé une partie que l'autre ne "
+                 + "sait pas lire. Mettez les deux à jour."),
             ]),
         ])
 

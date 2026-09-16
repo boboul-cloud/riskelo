@@ -56,7 +56,9 @@ struct LobbyView: View {
                 Spacer()
                 Image(systemName: "iphone.gen3.radiowaves.left.and.right")
                     .font(.system(size: 42)).foregroundStyle(Palette.camp(0))
-                Text("Jouer à plusieurs appareils")
+                // « Dans la même pièce » : cet écran n'est plus le seul
+                // chemin, et son titre doit dire lequel des trois il est.
+                Text("Dans la même pièce")
                     .font(.title3.weight(.semibold)).foregroundStyle(Palette.ink)
 
                 contenu

@@ -38,7 +38,7 @@ droit sur le nom d'autrui.
 ## Texte promotionnel — 170 caractères max, modifiable sans nouvelle version
 
 ```
-Deux mille quatre cents questions, trois plateaux, deux modes de duel. Aucune publicité, aucun compte, aucune connexion : tout le jeu est dans l'application.
+Deux mille quatre cents questions, trois plateaux, deux modes de duel. Seul, à plusieurs sur un appareil, ou au loin avec un code. Aucune publicité, aucun compte.
 ```
 
 ## Description — 4 000 caractères max
@@ -67,7 +67,7 @@ DE DEUX À QUATRE JOUEURS
 
 • Seul contre la machine, dont la culture se règle de 35 à 90 % de bonnes réponses et la manœuvre en trois niveaux — savoir et bien jouer sont deux choses différentes.
 • À plusieurs sur un même appareil, qui se passe de main en main.
-• À plusieurs appareils, un par joueur : sans compte, sans configuration, sans serveur. Le Bluetooth et le Wi-Fi direct suffisent, et cela fonctionne dans un train.
+• À plusieurs appareils, un par joueur : dans la même pièce, sans rien à configurer — ou au loin, chacun chez soi, avec un code de six lettres envoyé par message. Sans compte, dans les deux cas.
 
 Chacun peut donner son nom : le camp se lit « Bleu · Marie », et le nom fait le voyage d'un appareil à l'autre.
 
@@ -88,7 +88,7 @@ Elle se retrouve où vous l'avez laissée. Et la bibliothèque enregistre chaque
 
 CE QUE RISKELO NE FAIT PAS
 
-Aucune publicité. Aucun abonnement. Aucun compte. Aucun traceur, aucune mesure d'audience. Aucune connexion à Internet n'est nécessaire : les questions sont dans l'application, et vos parties ne quittent jamais votre appareil.
+Aucune publicité. Aucun abonnement. Aucun compte. Aucun traceur, aucune mesure d'audience. Les questions sont dans l'application : jouer ne demande aucune connexion. Seule la partie au loin passe par un relais, qui n'apprend rien de vous et ne garde rien.
 
 DIX-SEPT PACKS, EN OPTION
 
@@ -99,79 +99,15 @@ iPhone, iPad et Mac — une seule application, en français.
 
 ## Nouveautés de cette version — 4 000 caractères max
 
-Ce qui a changé depuis la `1.2`, et rien d'autre :
+Ce texte-ci avait divergé sans que personne s'en aperçoive : il annonçait
+encore les sons de fin de partie de la 1.2 pendant que la fiche annonçait la
+1.3. C'est la **fiche** qu'on ouvre le jour du dépôt, et c'est d'elle que ce
+texte se colle.
 
-```
-LA FIN DE PARTIE S'ENTEND
-• La victoire sonne. Une fanfare à deux trompettes — l'appel, la charge, et l'accord qui reste — écrite comme les autres sons du jeu, en notes et non en enregistrement. Elle ne tombe qu'une fois par partie : c'est ce qui lui vaut son aplomb.
-• La défaite a son propre son, plus bas et plus court. On perd une partie, on en rouvre une : il ne gronde pas.
-• Chacun entend le sien. En réseau, les deux écrans sonnent l'inverse l'un de l'autre ; seul contre la machine, l'appareil sait qui vous êtes. À deux joueurs sur le même téléphone, c'est la fanfare pour tout le monde — la partie a été gagnée par quelqu'un qui est dans la pièce.
-• Le son tombe avec le nom du vainqueur sur le plateau, avant que l'écran de victoire ne s'ouvre, et l'interrupteur des sons le coupe comme les autres.
-```
+→ **`FICHE-DE-SOUMISSION.md`, section 4, « Nouveautés de cette version ».**
 
-Riskelo est publié : c'est bien ce texte-là qui se colle désormais, et non le
-mot d'une première version. Le repli au-dessous garde la trace de ce qui a
-déjà été annoncé, App Store Connect ne conservant que le dernier.
-
-<details><summary>Ce qui servait tant que l'application était inédite</summary>
-
-```
-Première version de Riskelo.
-```
-
-</details>
-
-<details><summary>Ce qui avait été écrit pour la 1.2, depuis la 1.1</summary>
-
-```
-LA TABLE À PLUSIEURS APPAREILS
-• Elle s'ouvre depuis l'accueil, et en premier. Jouer à plusieurs n'est pas un réglage de partie : ce n'était pas sa place sous « Réglages ».
-• Le salon dit ce qu'il va ouvrir — « Monde · Face à face », et les options qui changent vraiment la partie — et porte un bouton pour aller le changer. C'est l'hôte qui fixe la partie pour tout le monde, et c'est en ouvrant la table qu'on y pense.
-• Le mode d'emploi s'ouvre depuis la table, et l'on retombe sur ses réglages en le refermant, sans perdre le plateau qu'on venait de choisir.
-• La liaison va droit au but : l'hôte dit où il est dans son annonce même, et l'invité s'y rend sans avoir de question à poser.
-• Et si l'appareil qui rejoint n'arrive pas à appeler, il laisse son numéro et l'hôte rappelle. Il suffit désormais que l'un des deux y parvienne, quel que soit celui des deux.
-
-LES CONQUÊTES PERSONNELLES DÉCIDENT LA PARTIE
-• L'option allumée, remplir sa conquête devient la seule façon de gagner : le seuil de territoires se retire. Il passait devant cinq fois sur six, et la carte ne servait à rien.
-• Celle qu'on ne peut plus remplir — le camp qu'on vous demandait d'abattre est tombé sous d'autres coups — se retourne en « tenir quatre places sur cinq du plateau ». La fiche de conquête le dit d'avance, avant que cela vous tombe dessus.
-• L'écran de fin dit par quelle porte la partie s'est gagnée, marque les conquêtes remplies et donne l'avancement de chacun. On y voyait sa carte non remplie s'afficher sous son nom sans un mot d'explication.
-
-UN DÉTAIL
-• Le bouton des réglages, sur l'accueil, passe au rose : il ne désigne ni un camp ni un état du plateau, c'est la couleur d'une porte.
-```
-
-</details>
-
-<details><summary>Ce qui avait été écrit pour la 1.1, depuis la 1.0</summary>
-
-```
-UN ACCUEIL
-Le jeu s'ouvre sur une partie prête, et non plus sur ses réglages. Reprendre la partie en cours est le premier bouton.
-
-CONQUÊTES PERSONNELLES
-Une option nouvelle : chacun reçoit au départ un objectif que lui seul connaît — tenir deux gros continents, tant de territoires, ou faire tomber un camp de sa propre main. Le remplir gagne la partie sur-le-champ. Le seuil de territoires reste en jeu par-dessus, mais le compte de la barre du haut ne dit plus qui va gagner.
-
-LES QUESTIONS
-• Deux fois plus de questions : quatre cents par thème, deux mille quatre cents en tout.
-• Une question ne revient plus d'une partie sur l'autre. L'appareil retient ce qui est déjà sorti, et une question jamais vue passe devant. Le compte se lit dans les réglages, où il s'efface aussi.
-• Le thème peut être laissé au sort : un septième choix sous les six thèmes, pour qui veut renoncer à choisir son terrain.
-• La bonne réponse ne s'installe plus sur la même ligne. Les quatre places se tirent comme quatre cartes d'un paquet : jamais trois fois de suite au même endroit.
-
-VOTRE NOM, ET LE SON
-• Un nom facultatif s'ajoute à votre camp : « Bleu · Marie · moi ». En réseau il fait le voyage, et les autres vous voient ainsi.
-• Des sons, écrits plutôt qu'enregistrés : une note à chaque homme posé, une autre à l'issue de chaque échange — montante quand il tourne pour vous. Un interrupteur les coupe.
-
-CE QUI SE VOIT MIEUX
-• Le plateau se recadre sous les panneaux : on voit enfin les deux places au moment de décider de l'assaut.
-• Combien d'hommes avancent après une conquête : le chiffre passe devant, avec trois raccourcis, et le bouton porte le nombre choisi.
-• La bande des camps tient sur une ligne, et va chercher celui qui a la main.
-• Un continent tenu garde sa couleur : celle qu'il a sur la carte.
-• La dernière question d'une partie va au bout — la bonne réponse, la place qui tombe, puis le vainqueur.
-• Le rouge sur le noir se lit : les couleurs qui écrivent sont plus claires d'un cran et demi.
-• Le mode d'emploi affiche le vrai numéro de version, celui du paquet.
-```
-
-</details>
+Rien n'est recopié ici : deux copies d'un même texte finissent toujours par
+dire deux choses différentes, et c'est la mauvaise qu'on colle.
 
 ## Catégories
 

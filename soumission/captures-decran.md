@@ -19,6 +19,15 @@ même, parce qu'il ne coûte qu'un appareil de plus dans la même commande et
 qu'un dossier complet ne se refait pas la veille d'un dépôt. Le paysage est accepté, à condition de ne pas
 mélanger les orientations dans une même série.
 
+> **À refaire avant le dépôt — 16 septembre 2026.** Les dix-huit fichiers
+> datent du 9 septembre, et l'accueil a changé deux fois depuis : les packs
+> s'y sont ajoutés, puis « Jouer à plusieurs » est monté en tête. La sixième
+> capture montre donc un écran d'accueil qui n'existe plus — trois boutons au
+> lieu de cinq. Apple rejette une capture qui ne correspond pas à l'app.
+>
+> Une commande les refait toutes (voir plus bas). L'outil, lui, n'a pas besoin
+> d'être retouché : il ne s'appuie sur aucun libellé qui ait changé.
+
 ## Les cinq écrans à photographier
 
 Dans cet ordre — le premier est celui que l'on voit dans les résultats de
@@ -37,8 +46,10 @@ recherche, et c'est lui qui doit dire ce qu'est le jeu :
    règle.
 
 Une sixième, prise elle aussi : l'accueil. Elle ne dit pas ce qu'est le jeu —
-c'est pourquoi elle vient en dernier — mais elle montre l'icône, et le seul
-bouton dont un joueur a besoin pour commencer.
+c'est pourquoi elle vient en dernier — mais elle montre l'icône, et par quoi
+l'on commence. C'est aussi celle qui se périme le plus vite : chaque bouton
+ajouté à l'accueil la démode, et elle est la seule des six à le faire sans
+qu'on y pense.
 
 ## Comment les prendre
 

@@ -481,9 +481,12 @@ struct SetupView: View {
         }
     }
 
-    private func reglage<C: View>(_ titre: String, @ViewBuilder _ contenu: () -> C) -> some View {
+    // Le titre est un libellé, non une chaîne : en String, il ne passait par
+    // aucune traduction, et les onze en-têtes de cette page restaient français.
+    private func reglage<C: View>(_ titre: String.LocalizationValue,
+                                  @ViewBuilder _ contenu: () -> C) -> some View {
         VStack(alignment: .leading, spacing: 9) {
-            Text(titre.uppercased()).font(.caption.weight(.semibold))
+            Text(dit(titre).uppercased()).font(.caption.weight(.semibold))
                 .foregroundStyle(Palette.dim).kerning(0.6)
             contenu()
         }

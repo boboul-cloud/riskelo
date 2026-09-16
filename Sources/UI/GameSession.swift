@@ -129,21 +129,23 @@ final class GameSession {
         if nouveauTour {
             // Un instant par tour, posé sans qu'on le demande : c'est après
             // coup qu'on sait lequel comptait.
-            archiver("Tour \(game.turn) — \(game.currentPlayer.name)")
+            archiver(dit("Tour \(game.turn) — \(game.currentPlayer.name)"))
             let nom = game.currentPlayer.name
             let aMoi = !enReseau || game.currentPlayer.id == monRang
-            montrer(Annonce(titre: aMoi ? "\(nom), c'est à vous !" : "Au tour de \(nom)",
-                            sous: "Renforts", camp: game.currentPlayer.id))
+            montrer(Annonce(titre: aMoi ? dit("\(nom), c'est à vous !")
+                                        : dit("Au tour de \(nom)"),
+                            sous: dit("Renforts"), camp: game.currentPlayer.id))
             return
         }
         switch (avant.phase, game.phase) {
         case (.reinforcement, .attack):
-            montrer(Annonce(titre: "À l'attaque !", sous: nil, camp: game.currentPlayer.id))
+            montrer(Annonce(titre: dit("À l'attaque !"), sous: nil, camp: game.currentPlayer.id))
         case (.attack, .fortify), (.occupation, .fortify):
-            montrer(Annonce(titre: "Déplacement", sous: "Un seul, puis le tour passe",
+            montrer(Annonce(titre: dit("Déplacement"),
+                            sous: dit("Un seul, puis le tour passe"),
                             camp: game.currentPlayer.id))
         case (_, .occupation):
-            montrer(Annonce(titre: "Place prise !", sous: nil, camp: game.currentPlayer.id))
+            montrer(Annonce(titre: dit("Place prise !"), sous: nil, camp: game.currentPlayer.id))
         default:
             break
         }
@@ -156,8 +158,8 @@ final class GameSession {
         guard !game.isOver else { return }
         let nom = game.currentPlayer.name
         let aMoi = !enReseau || game.currentPlayer.id == monRang
-        montrer(Annonce(titre: aMoi ? "\(nom), c'est à vous !" : "Au tour de \(nom)",
-                        sous: "Renforts", camp: game.currentPlayer.id))
+        montrer(Annonce(titre: aMoi ? dit("\(nom), c'est à vous !") : dit("Au tour de \(nom)"),
+                        sous: dit("Renforts"), camp: game.currentPlayer.id))
     }
 
     private func montrer(_ a: Annonce) {

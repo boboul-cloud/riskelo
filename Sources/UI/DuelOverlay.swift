@@ -505,12 +505,12 @@ struct DuelOverlay: View {
                     in: RoundedRectangle(cornerRadius: 8))
     }
 
-    private func de(_ face: Int, legende: String) -> some View {
+    private func de(_ face: Int, legende: String.LocalizationValue) -> some View {
         VStack(spacing: 3) {
             Image(systemName: "die.face.\(min(6, max(1, face)))")
                 .font(.system(size: 34))
                 .foregroundStyle(Palette.ink)
-            Text(legende).font(.caption2).foregroundStyle(Palette.dim)
+            Text(dit(legende)).font(.caption2).foregroundStyle(Palette.dim)
         }
     }
 
@@ -556,9 +556,9 @@ struct DuelOverlay: View {
         }
     }
 
-    private func bilan(_ titre: String, _ pertes: Int, _ camp: PlayerID) -> some View {
+    private func bilan(_ titre: String.LocalizationValue, _ pertes: Int, _ camp: PlayerID) -> some View {
         VStack(spacing: 5) {
-            Text(titre).font(.caption).foregroundStyle(Palette.dim)
+            Text(dit(titre)).font(.caption).foregroundStyle(Palette.dim)
             Text("−\(pertes)")
                 .font(.title2.weight(.bold).monospacedDigit())
                 .foregroundStyle(pertes > 0 ? Palette.lostVif : Palette.dim)
@@ -723,12 +723,12 @@ struct OccupationPanel: View {
     }
 
     /// Les cas courants, en un appui.
-    private func raccourci(_ titre: String, _ valeur: Int) -> some View {
+    private func raccourci(_ titre: String.LocalizationValue, _ valeur: Int) -> some View {
         let choisi = count == valeur
         return Button {
             withAnimation(.snappy(duration: 0.12)) { count = valeur }
         } label: {
-            Text(titre)
+            Text(dit(titre))
                 .font(.caption.weight(.semibold)).lineLimit(1)
                 .padding(.horizontal, 12).padding(.vertical, 8)
                 .background(Capsule().fill(choisi ? Palette.campVif(camp).opacity(0.28)

@@ -635,6 +635,22 @@
         }
       }
     },
+    "%@, c'est à vous !": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, it is your turn!"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, c'est à vous !"
+          }
+        }
+      }
+    },
     "%lld": {
       "localizations": {
         "en": {
@@ -1365,6 +1381,22 @@
         }
       }
     },
+    "Assaillant": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Attacker"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Assaillant"
+          }
+        }
+      }
+    },
     "Attaque": {
       "localizations": {
         "en": {
@@ -1441,6 +1473,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Au moins %lld : autant que de questions posées."
+          }
+        }
+      }
+    },
+    "Au tour de %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@'s turn"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Au tour de %@"
           }
         }
       }
@@ -2421,6 +2469,22 @@
         }
       }
     },
+    "Culture de la machine": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Machine knowledge"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Culture de la machine"
+          }
+        }
+      }
+    },
     "Culture générale": {
       "localizations": {
         "en": {
@@ -2673,6 +2737,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Doubler l'enjeu"
+          }
+        }
+      }
+    },
+    "Défenseur": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Defender"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Défenseur"
           }
         }
       }
@@ -3593,6 +3673,22 @@
         }
       }
     },
+    "Joueurs": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Players"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Joueurs"
+          }
+        }
+      }
+    },
     "Jusqu'à quatre joueurs, un appareil chacun.": {
       "localizations": {
         "en": {
@@ -3829,6 +3925,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "La liaison n'a pas pu s'établir"
+          }
+        }
+      }
+    },
+    "La moitié": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Half"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La moitié"
           }
         }
       }
@@ -4085,6 +4197,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Le défenseur"
+          }
+        }
+      }
+    },
+    "Le minimum": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The minimum"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le minimum"
           }
         }
       }
@@ -4549,6 +4677,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mode d'emploi"
+          }
+        }
+      }
+    },
+    "Mode de jeu": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Game mode"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mode de jeu"
           }
         }
       }
@@ -5257,6 +5401,38 @@
         }
       }
     },
+    "Place prise !": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Place taken!"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Place prise !"
+          }
+        }
+      }
+    },
+    "Plateau": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Board"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plateau"
+          }
+        }
+      }
+    },
     "Pologne": {
       "localizations": {
         "en": {
@@ -5349,6 +5525,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Question %@ — %@"
+          }
+        }
+      }
+    },
+    "Questions": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Questions"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Questions"
           }
         }
       }
@@ -5461,6 +5653,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Relié à %@"
+          }
+        }
+      }
+    },
+    "Renfort d'érudition": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scholar's reinforcement"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Renfort d'érudition"
           }
         }
       }
@@ -5685,6 +5893,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Russie"
+          }
+        }
+      }
+    },
+    "Règles du jeu": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rules of the game"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Règles du jeu"
           }
         }
       }
@@ -6089,6 +6313,22 @@
         }
       }
     },
+    "Son": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sound"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Son"
+          }
+        }
+      }
+    },
     "Sons du jeu": {
       "localizations": {
         "en": {
@@ -6121,6 +6361,22 @@
         }
       }
     },
+    "Stratégie de la machine": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Machine strategy"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stratégie de la machine"
+          }
+        }
+      }
+    },
     "Suisse": {
       "localizations": {
         "en": {
@@ -6133,6 +6389,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Suisse"
+          }
+        }
+      }
+    },
+    "Sur cet appareil": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On this device"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sur cet appareil"
           }
         }
       }
@@ -6361,6 +6633,22 @@
         }
       }
     },
+    "Tour %lld — %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turn %lld — %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tour %lld — %@"
+          }
+        }
+      }
+    },
     "Tour %lld — à %@ de jouer.": {
       "localizations": {
         "en": {
@@ -6373,6 +6661,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tour %lld — à %@ de jouer."
+          }
+        }
+      }
+    },
+    "Tous": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tous"
           }
         }
       }
@@ -6629,6 +6933,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Un seul déplacement, puis le tour passe. Ou terminez directement."
+          }
+        }
+      }
+    },
+    "Un seul, puis le tour passe": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One only, then the turn passes"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un seul, puis le tour passe"
           }
         }
       }
@@ -6938,6 +7258,22 @@
         }
       }
     },
+    "Vous": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vous"
+          }
+        }
+      }
+    },
     "Vous avez répondu juste : %@ tient, l'assaillant laisse %@.": {
       "localizations": {
         "en": {
@@ -7114,6 +7450,22 @@
         }
       }
     },
+    "assaut": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "assault"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "assaut"
+          }
+        }
+      }
+    },
     "cartes": {
       "localizations": {
         "en": {
@@ -7174,6 +7526,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "deux hommes"
+          }
+        }
+      }
+    },
+    "défense": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "defense"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "défense"
           }
         }
       }
@@ -7430,6 +7798,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "À l'attaque"
+          }
+        }
+      }
+    },
+    "À l'attaque !": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Attack!"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "À l'attaque !"
           }
         }
       }

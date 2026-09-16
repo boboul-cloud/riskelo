@@ -611,3 +611,45 @@ struct ArticlesTests {
         }
     }
 }
+
+// MARK: - La table mixte
+
+struct TableMixteTests {
+
+    /// Les thèmes nommés par l'hôte sont retenus, de quelque banque qu'ils
+    /// viennent.
+    ///
+    /// C'est ce qui rend possible une table entre un appareil français et un
+    /// américain : les deux banques sont sur tous les appareils, l'hôte
+    /// décide, et l'invité doit savoir lire ce qu'on lui envoie. Filtré par la
+    /// langue locale, l'invité serait retombé sur ses propres thèmes et aurait
+    /// tiré d'autres questions que l'hôte, sans que rien ne le dise.
+    @Test func lesThemesDeLHoteSontRetenusQuelleQueSoitLeurLangue() {
+        var r = Rules()
+        r.themes = ["histoire", "history"]
+        let g = GameState.start(board: .anneau,
+                                players: [Player(id: 0, name: "A", kind: .humain),
+                                          Player(id: 1, name: "B", kind: .humain)],
+                                rules: r, seed: 3)
+        #expect(g.themesEnJeu.map(\.id).sorted() == ["histoire", "history"],
+                "un thème de l'autre banque a été écarté : \(g.themesEnJeu.map(\.id))")
+    }
+
+    /// Et le tirage sort bien des deux, sans jamais quitter ce qui est en jeu.
+    @Test func leTirageSertLesDeuxBanques() {
+        var r = Rules()
+        r.themes = ["histoire", "history"]
+        var g = GameState.start(board: .anneau,
+                                players: [Player(id: 0, name: "A", kind: .humain),
+                                          Player(id: 1, name: "B", kind: .humain)],
+                                rules: r, seed: 5)
+        var rng = SeededRandom(seed: 5)
+        var vus: Set<String> = []
+        for _ in 0 ..< 120 {
+            guard let q = g.bank.draw(category: nil, parmi: g.themesEnJeu,
+                                      difficulty: nil, using: &rng) else { break }
+            vus.insert(q.question.category.id)
+        }
+        #expect(vus == ["histoire", "history"], "banques servies : \(vus.sorted())")
+    }
+}

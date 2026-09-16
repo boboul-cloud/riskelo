@@ -1,3027 +1,3039 @@
 {
-  "sourceLanguage": "fr",
-  "strings": {
-    "": {},
-    "%@ %lld": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ %lld"
+  "sourceLanguage" : "fr",
+  "strings" : {
+    "" : {
+
+    },
+    "—" : {
+
+    },
+    "?" : {
+
+    },
+    "·" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "·"
+          }
+        }
+      }
+    },
+    "· %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "· %@"
+          }
+        }
+      }
+    },
+    "· %lld/%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "· %lld/%lld"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "new",
-            "value": "%1$@ %2$lld"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "· %1$lld/%2$lld"
           }
         }
       }
     },
-    "%@ a répondu. À vous la même question.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ has answered. The same question is yours."
-          }
-        }
-      }
-    },
-    "%@ attaque": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ attacks"
-          }
-        }
-      }
-    },
-    "%@ attaque %@": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ attacks %@"
+    "%@ %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ %lld"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "new",
-            "value": "%1$@ attaque %2$@"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ %2$lld"
           }
         }
       }
     },
-    "%@ est prise.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ falls."
-          }
-        }
-      }
-    },
-    "%@ l'emporte": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ wins it"
-          }
-        }
-      }
-    },
-    "%@ n'a pas répondu.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ did not answer."
-          }
-        }
-      }
-    },
-    "%@ répond…": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ is answering…"
-          }
-        }
-      }
-    },
-    "%@ tient bon.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ holds."
-          }
-        }
-      }
-    },
-    "%@ vous invite": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ invites you"
-          }
-        }
-      }
-    },
-    "%@ → %@": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ → %@"
+    "%@ → %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ → %@"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "new",
-            "value": "%1$@ → %2$@"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ → %2$@"
           }
         }
       }
     },
-    "%@%@ n'est plus là": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@%@ is gone"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "new",
-            "value": "%1$@%2$@ n'est plus là"
+    "%@ a répondu. À vous la même question." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ has answered. The same question is yours."
           }
         }
       }
     },
-    "%lld": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
+    "%@ attaque" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ attacks"
           }
         }
       }
     },
-    "%lld %% de bonnes réponses": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld%% correct answers"
-          }
-        }
-      }
-    },
-    "%lld camps sur %@, contre une machine %@.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld sides on %@, against a %@ machine."
+    "%@ attaque %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ attacks %@"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "new",
-            "value": "%1$lld camps sur %2$@, contre une machine %3$@."
+        "fr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ attaque %2$@"
           }
         }
       }
     },
-    "%lld homme%@ sur %lld": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld man%@ of %lld"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "new",
-            "value": "%1$lld homme%2$@ sur %3$lld"
+    "%@ est prise." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ falls."
           }
         }
       }
     },
-    "%lld hommes avancent — c'est tout ce que la place de départ peut céder.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld men advance — all the starting place can spare."
+    "%@ l'emporte" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ wins it"
           }
         }
       }
     },
-    "%lld hommes contre %lld": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld men against %lld"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "new",
-            "value": "%1$lld hommes contre %2$lld"
+    "%@ n'a pas répondu." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ did not answer."
           }
         }
       }
     },
-    "%lld humains": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld humans"
+    "%@ répond…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ is answering…"
           }
         }
       }
     },
-    "%lld questions": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld questions"
+    "%@ tient bon." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ holds."
           }
         }
       }
     },
-    "%lld secondes": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld seconds"
+    "%@ vous invite" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ invites you"
           }
         }
       }
     },
-    "%lld territoires sur %lld, en %lld tours.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld territories of %lld, in %lld turns."
+    "%@%@ n'est plus là" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@%@ is gone"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "new",
-            "value": "%1$lld territoires sur %2$lld, en %3$lld tours."
+        "fr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@%2$@ n'est plus là"
           }
         }
       }
     },
-    "%lld/%lld": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld/%lld"
+    "%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld"
+          }
+        }
+      }
+    },
+    "%lld %% de bonnes réponses" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld%% correct answers"
+          }
+        }
+      }
+    },
+    "%lld camps sur %@, contre une machine %@." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld sides on %@, against a %@ machine."
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "new",
-            "value": "%1$lld/%2$lld"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld camps sur %2$@, contre une machine %3$@."
           }
         }
       }
     },
-    "%lldᵉ question sur cette place ce tour-ci — le temps se resserre": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Question %lld on this place this turn — the clock tightens"
-          }
-        }
-      }
-    },
-    "+%lld": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "+%lld"
-          }
-        }
-      }
-    },
-    "1 humain": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1 human"
-          }
-        }
-      }
-    },
-    "?": {},
-    "Accepter": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Accept"
-          }
-        }
-      }
-    },
-    "Accueil": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Home"
-          }
-        }
-      }
-    },
-    "Afrique": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Africa"
-          }
-        }
-      }
-    },
-    "Afrique de l'Est": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "East Africa"
-          }
-        }
-      }
-    },
-    "Afrique du Nord": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "North Africa"
-          }
-        }
-      }
-    },
-    "Afrique du Sud": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "South Africa"
-          }
-        }
-      }
-    },
-    "Albanie": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Albania"
-          }
-        }
-      }
-    },
-    "Alizé": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tradewind"
-          }
-        }
-      }
-    },
-    "Allemagne": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Germany"
-          }
-        }
-      }
-    },
-    "Ambre": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Amber"
-          }
-        }
-      }
-    },
-    "Amérique centrale": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Central America"
-          }
-        }
-      }
-    },
-    "Amérique du Nord": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "North America"
-          }
-        }
-      }
-    },
-    "Amérique du Sud": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "South America"
-          }
-        }
-      }
-    },
-    "Angleterre": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "England"
-          }
-        }
-      }
-    },
-    "Annuler": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cancel"
-          }
-        }
-      }
-    },
-    "Argentine": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Argentina"
-          }
-        }
-      }
-    },
-    "Armorique": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Thornmere"
-          }
-        }
-      }
-    },
-    "Asie": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Asia"
-          }
-        }
-      }
-    },
-    "Au déplacement": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Move"
-          }
-        }
-      }
-    },
-    "Au hasard": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "At random"
-          }
-        }
-      }
-    },
-    "Au loin, avec un code": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Remotely, with a code"
-          }
-        }
-      }
-    },
-    "Au moins %lld : autant que de questions posées.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "At least %lld: as many as there were questions."
-          }
-        }
-      }
-    },
-    "Aucune partie rangée pour l'instant.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No games shelved yet."
-          }
-        }
-      }
-    },
-    "Aucune table en vue.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No table in sight."
-          }
-        }
-      }
-    },
-    "Australie occidentale": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Western Australia"
-          }
-        }
-      }
-    },
-    "Australie orientale": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Eastern Australia"
-          }
-        }
-      }
-    },
-    "Autriche": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Austria"
-          }
-        }
-      }
-    },
-    "Avez-vous fini d'attaquer ?": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Done attacking?"
-          }
-        }
-      }
-    },
-    "Baie d'Or": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gold Bay"
-          }
-        }
-      }
-    },
-    "Baléares": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Balearics"
-          }
-        }
-      }
-    },
-    "Belgique": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Belgium"
-          }
-        }
-      }
-    },
-    "Bien": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "OK"
-          }
-        }
-      }
-    },
-    "Biélorussie": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Belarus"
-          }
-        }
-      }
-    },
-    "Bleu": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Blue"
-          }
-        }
-      }
-    },
-    "Bocage": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hedgerow"
-          }
-        }
-      }
-    },
-    "Boréa": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Borea"
-          }
-        }
-      }
-    },
-    "Brésil": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Brazil"
-          }
-        }
-      }
-    },
-    "Bulgarie": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bulgaria"
-          }
-        }
-      }
-    },
-    "CODE": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "CODE"
-          }
-        }
-      }
-    },
-    "COMBIEN DE JOUEURS": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "HOW MANY PLAYERS"
-          }
-        }
-      }
-    },
-    "Cap Blanc": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Whitecape"
-          }
-        }
-      }
-    },
-    "Cartes de territoire": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Territory cards"
-          }
-        }
-      }
-    },
-    "Ce que chacun a montré savoir": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "What each player has shown they know"
-          }
-        }
-      }
-    },
-    "Ce que chacun cherchait": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "What each player was after"
-          }
-        }
-      }
-    },
-    "Celui qui ouvre la partie choisit pour tout le monde.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Whoever opens the game chooses for everyone."
-          }
-        }
-      }
-    },
-    "Celui qui ouvre la table choisit pour tout le monde.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Whoever opens the table chooses for everyone."
-          }
-        }
-      }
-    },
-    "Cet instant ne se relit plus": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "This moment can no longer be replayed"
-          }
-        }
-      }
-    },
-    "Chacun son tour : l'appareil se passe avant chaque question.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Taking turns: the device is passed before each question."
-          }
-        }
-      }
-    },
-    "Chapitre suivant": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Next chapter"
-          }
-        }
-      }
-    },
-    "Chaque tour joué dépose un instant ici, tout seul.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Every turn played drops a moment here, on its own."
-          }
-        }
-      }
-    },
-    "Chercher des joueurs": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Find players"
-          }
-        }
-      }
-    },
-    "Chine": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "China"
-          }
-        }
-      }
-    },
-    "Cinq cartes en main : l'échange est obligatoire.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Five cards in hand: the trade is compulsory."
-          }
-        }
-      }
-    },
-    "Code copié": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Code copied"
-          }
-        }
-      }
-    },
-    "Combien d'hommes avancent ?": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "How many troops advance?"
-          }
-        }
-      }
-    },
-    "Combien de questions — vos dés": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "How many questions — your dice"
-          }
-        }
-      }
-    },
-    "Commencer": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Start"
-          }
-        }
-      }
-    },
-    "Conditions": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Terms"
-          }
-        }
-      }
-    },
-    "Confidentialité": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Privacy"
-          }
-        }
-      }
-    },
-    "Confidentialité et sécurité → Réseau local → Riskelo": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Privacy & Security → Local Network → Riskelo US"
-          }
-        }
-      }
-    },
-    "Connexion à %@…": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Connecting to %@…"
-          }
-        }
-      }
-    },
-    "Connexion à Game Center…": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Signing in to Game Center…"
-          }
-        }
-      }
-    },
-    "Conquêtes personnelles": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Personal conquests"
-          }
-        }
-      }
-    },
-    "Continuer": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Continue"
-          }
-        }
-      }
-    },
-    "Copier le code": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Copy the code"
-          }
-        }
-      }
-    },
-    "Corail": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Coral"
-          }
-        }
-      }
-    },
-    "Corse": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Corsica"
-          }
-        }
-      }
-    },
-    "Croatie": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Croatia"
-          }
-        }
-      }
-    },
-    "Crète": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Crete"
-          }
-        }
-      }
-    },
-    "Cultivée": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Well-read"
-          }
-        }
-      }
-    },
-    "Culture générale": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "General knowledge"
-          }
-        }
-      }
-    },
-    "Culture générale seule": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "General knowledge only"
-          }
-        }
-      }
-    },
-    "Culture générale · ": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "General knowledge · "
-          }
-        }
-      }
-    },
-    "Danemark": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Denmark"
-          }
-        }
-      }
-    },
-    "Dans la même pièce": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Play across devices"
-          }
-        }
-      }
-    },
-    "De l'Atlantique à la mer Noire. 38 territoires.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "From the Atlantic to the Black Sea. 38 territories."
-          }
-        }
-      }
-    },
-    "Deux questions": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Two questions"
-          }
-        }
-      }
-    },
-    "Distraite": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Distracted"
-          }
-        }
-      }
-    },
-    "Doubler l'enjeu": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Double the stake"
-          }
-        }
-      }
-    },
-    "Déjà posées sur cet appareil : %lld sur %lld": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Already asked on this device: %lld of %lld"
+    "%lld homme%@ sur %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld man%@ of %lld"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "new",
-            "value": "Déjà posées sur cet appareil : %1$lld sur %2$lld"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld homme%2$@ sur %3$lld"
           }
         }
       }
     },
-    "Déplacer et finir le tour": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Move and end the turn"
+    "%lld hommes avancent — c'est tout ce que la place de départ peut céder." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld men advance — all the starting place can spare."
           }
         }
       }
     },
-    "En attente de %lld joueur%@…": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Waiting for %lld player%@…"
+    "%lld hommes contre %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld men against %lld"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "new",
-            "value": "En attente de %1$lld joueur%2$@…"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld hommes contre %2$lld"
           }
         }
       }
     },
-    "En attente du lancement…": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Waiting for the launch…"
+    "%lld humains" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld humans"
           }
         }
       }
     },
-    "Encore un instant…": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "One moment…"
+    "%lld questions" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld questions"
           }
         }
       }
     },
-    "Enjeu doublé : deux hommes": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Stake doubled: two troops"
+    "%lld secondes" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld seconds"
           }
         }
       }
     },
-    "Envoyer l'invitation": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Send the invitation"
-          }
-        }
-      }
-    },
-    "Espagne": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Spain"
-          }
-        }
-      }
-    },
-    "Est des États-Unis": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Eastern United States"
-          }
-        }
-      }
-    },
-    "Europe centrale": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Central Europe"
-          }
-        }
-      }
-    },
-    "Europe de l'Est": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Eastern Europe"
-          }
-        }
-      }
-    },
-    "Europe de l'Ouest": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Western Europe"
-          }
-        }
-      }
-    },
-    "Europe du Nord": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Northern Europe"
-          }
-        }
-      }
-    },
-    "Europe du Sud": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Southern Europe"
-          }
-        }
-      }
-    },
-    "Faire avancer %lld hommes": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Advance %lld men"
-          }
-        }
-      }
-    },
-    "Faire avancer 1 homme": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Advance 1 man"
-          }
-        }
-      }
-    },
-    "Fermer": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Close"
-          }
-        }
-      }
-    },
-    "Fin du tour": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "End turn"
-          }
-        }
-      }
-    },
-    "Finlande": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Finland"
-          }
-        }
-      }
-    },
-    "Game Center n'a pas pu": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Game Center could not"
-          }
-        }
-      }
-    },
-    "Grande-Bretagne": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Great Britain"
-          }
-        }
-      }
-    },
-    "Grise-Lande": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Greymoor"
-          }
-        }
-      }
-    },
-    "Groenland": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Greenland"
-          }
-        }
-      }
-    },
-    "Grèce": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Greece"
-          }
-        }
-      }
-    },
-    "Guerre totale": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Total war"
-          }
-        }
-      }
-    },
-    "Havreterre": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Havenhold"
-          }
-        }
-      }
-    },
-    "Hongrie": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hungary"
-          }
-        }
-      }
-    },
-    "Honnête": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fair"
-          }
-        }
-      }
-    },
-    "Iakoutie": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Yakutsk"
-          }
-        }
-      }
-    },
-    "Il a été enregistré sur un plateau qui a changé de dessin depuis.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "It was saved on a board whose drawing has changed since."
-          }
-        }
-      }
-    },
-    "Inde": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "India"
-          }
-        }
-      }
-    },
-    "Indonésie": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Indonesia"
-          }
-        }
-      }
-    },
-    "Irkoutsk": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Irkutsk"
-          }
-        }
-      }
-    },
-    "Islande": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Iceland"
-          }
-        }
-      }
-    },
-    "Italie": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Italy"
-          }
-        }
-      }
-    },
-    "Italie du Nord": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Northern Italy"
-          }
-        }
-      }
-    },
-    "Japon": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Japan"
-          }
-        }
-      }
-    },
-    "Je suis prêt": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "I'm ready"
-          }
-        }
-      }
-    },
-    "Jouer au loin": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Play remotely"
-          }
-        }
-      }
-    },
-    "Jouer à plusieurs": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Play across devices"
-          }
-        }
-      }
-    },
-    "Jusqu'à quatre joueurs, un appareil chacun.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Up to four players, one device each."
-          }
-        }
-      }
-    },
-    "Kamtchatka": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kamchatka"
-          }
-        }
-      }
-    },
-    "Khanat": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Khanate"
-          }
-        }
-      }
-    },
-    "L'Anneau": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The Ring"
-          }
-        }
-      }
-    },
-    "L'adversaire réfléchit…": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Your opponent is thinking…"
-          }
-        }
-      }
-    },
-    "L'adversaire répond…": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Your opponent is answering…"
-          }
-        }
-      }
-    },
-    "La conquête de %@": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@'s conquest"
-          }
-        }
-      }
-    },
-    "La liaison est tombée": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The link dropped"
-          }
-        }
-      }
-    },
-    "La liaison n'a pas pu s'établir": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The link could not be established"
-          }
-        }
-      }
-    },
-    "La partie est rangée : vous la retrouverez à l'accueil.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The game is put away: you will find it on the home screen."
-          }
-        }
-      }
-    },
-    "La partie reprendra toute seule. Encore %lld s.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The game will resume on its own. %lld s to go."
-          }
-        }
-      }
-    },
-    "La table": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The table"
-          }
-        }
-      }
-    },
-    "Lagune": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Lagoon"
-          }
-        }
-      }
-    },
-    "Lancer l'assaut": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Launch the assault"
-          }
-        }
-      }
-    },
-    "Landes Hautes": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "High Moors"
-          }
-        }
-      }
-    },
-    "Langue": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Language"
-          }
-        }
-      }
-    },
-    "Le dé est remplacé par une question.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The die is replaced by a question."
-          }
-        }
-      }
-    },
-    "Le dé est remplacé par une question.\nL'attaquant choisit le terrain, le défenseur répond.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The die is replaced by a question.\nThe attacker picks the ground, the defender answers."
-          }
-        }
-      }
-    },
-    "Le dé est remplacé par une question.\nLes deux la reçoivent : le plus sûr, ou le plus vif, l'emporte.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The die is replaced by a question.\nBoth receive it: the surer, or the quicker, wins."
-          }
-        }
-      }
-    },
-    "Le système a refusé d'ouvrir le réseau local.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The system refused to open the local network."
-          }
-        }
-      }
-    },
-    "Les Marches": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The Marches"
-          }
-        }
-      }
-    },
-    "Les autres appareils ne montrent que la leur.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The other devices show only their own."
-          }
-        }
-      }
-    },
-    "Les deux appareils n'ont pas la même version de Riskelo.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The two devices are not running the same version of Riskelo."
-          }
-        }
-      }
-    },
-    "Les questions, les menus et le mode d'emploi suivent ensemble.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Questions, menus and the manual all follow."
-          }
-        }
-      }
-    },
-    "Les six continents, 42 territoires — comme la boîte.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The six continents, 42 territories — like the box."
-          }
-        }
-      }
-    },
-    "Les six thèmes du jeu — %lld questions.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The six subjects that ship with the game — %lld questions."
-          }
-        }
-      }
-    },
-    "Liaison perdue avec %@.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Link lost with %@."
-          }
-        }
-      }
-    },
-    "Liaison perdue — on y retourne": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Link lost — trying again"
-          }
-        }
-      }
-    },
-    "Mode d'emploi": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "How to play"
-          }
-        }
-      }
-    },
-    "Moldavie": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Moldova"
-          }
-        }
-      }
-    },
-    "Monde": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "World"
-          }
-        }
-      }
-    },
-    "Mongolie": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mongolia"
-          }
-        }
-      }
-    },
-    "Mont Rouge": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Redmount"
-          }
-        }
-      }
-    },
-    "Moyen-Orient": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Middle East"
-          }
-        }
-      }
-    },
-    "Méditerranée": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mediterranean"
-          }
-        }
-      }
-    },
-    "Méridia": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Meridia"
-          }
-        }
-      }
-    },
-    "Non, je continue d'attaquer": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No, I'm still attacking"
-          }
-        }
-      }
-    },
-    "Norvège": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Norway"
-          }
-        }
-      }
-    },
-    "Nouvelle partie": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "New game"
-          }
-        }
-      }
-    },
-    "Nouvelle-Guinée": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "New Guinea"
-          }
-        }
-      }
-    },
-    "OU REJOINDRE AVEC UN CODE": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "OR JOIN WITH A CODE"
-          }
-        }
-      }
-    },
-    "Océanie": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Australia"
-          }
-        }
-      }
-    },
-    "Oliveraie": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Olivegrove"
-          }
-        }
-      }
-    },
-    "On distribue les camps…": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dealing the sides…"
-          }
-        }
-      }
-    },
-    "On entre dans la partie %@…": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Joining game %@…"
-          }
-        }
-      }
-    },
-    "On prépare le salon…": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Setting up the table…"
-          }
-        }
-      }
-    },
-    "Oublier": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Forget"
-          }
-        }
-      }
-    },
-    "Ouest des États-Unis": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Western United States"
-          }
-        }
-      }
-    },
-    "Oui, au déplacement": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Yes, on to the move"
-          }
-        }
-      }
-    },
-    "Oural": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ural"
-          }
-        }
-      }
-    },
-    "Ouvrir la table avec ces réglages": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Open the table with these settings"
-          }
-        }
-      }
-    },
-    "Ouvrir les Réglages": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Open Settings"
-          }
-        }
-      }
-    },
-    "Ouvrir une partie": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Open a game"
-          }
-        }
-      }
-    },
-    "Packs": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Packs"
-          }
-        }
-      }
-    },
-    "Packs de questions": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Question packs"
-          }
-        }
-      }
-    },
-    "Palmeraie": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Palmgrove"
-          }
-        }
-      }
-    },
-    "Par Game Center": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Through Game Center"
-          }
-        }
-      }
-    },
-    "Partie rapide": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Quick game"
-          }
-        }
-      }
-    },
-    "Parties enregistrées": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Saved games"
-          }
-        }
-      }
-    },
-    "Pas connecté à Game Center": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Not signed in to Game Center"
-          }
-        }
-      }
-    },
-    "Pays baltes": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Baltic States"
-          }
-        }
-      }
-    },
-    "Pays-Bas": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Netherlands"
-          }
-        }
-      }
-    },
-    "Pierregrise": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Greystone"
-          }
-        }
-      }
-    },
-    "Pologne": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Poland"
-          }
-        }
-      }
-    },
-    "Ponant": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Westmark"
-          }
-        }
-      }
-    },
-    "Pérou": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Peru"
-          }
-        }
-      }
-    },
-    "Québec": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Quebec"
-          }
-        }
-      }
-    },
-    "Recherche des tables ouvertes…": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Looking for open tables…"
-          }
-        }
-      }
-    },
-    "Recherche…": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Looking…"
-          }
-        }
-      }
-    },
-    "Redoutable": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Formidable"
-          }
-        }
-      }
-    },
-    "Rejoignez-moi : le code est %@.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Join me: the code is %@."
-          }
-        }
-      }
-    },
-    "Rejoindre": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Join"
-          }
-        }
-      }
-    },
-    "Relié à %@": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Linked to %@"
-          }
-        }
-      }
-    },
-    "Reprendre la partie en cours": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Resume game"
-          }
-        }
-      }
-    },
-    "Restaurer mes achats": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Restore my purchases"
-          }
-        }
-      }
-    },
-    "Retiré": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Withdrawn"
-          }
-        }
-      }
-    },
-    "Revenir à un instant": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Go back to a moment"
-          }
-        }
-      }
-    },
-    "Rien n'est venu de %@.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nothing came from %@."
-          }
-        }
-      }
-    },
-    "Rien n'est venu.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nothing came."
-          }
-        }
-      }
-    },
-    "Riskelo": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Riskelo"
-          }
-        }
-      }
-    },
-    "Riskelo %@ — %@": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Riskelo US %@ — %@"
+    "%lld territoires sur %lld, en %lld tours." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld territories of %lld, in %lld turns."
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "new",
-            "value": "Riskelo %1$@ — %2$@"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld territoires sur %2$lld, en %3$lld tours."
           }
         }
       }
     },
-    "Rouge": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Red"
-          }
-        }
-      }
-    },
-    "Roumanie": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Romania"
-          }
-        }
-      }
-    },
-    "Russie": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Russia"
-          }
-        }
-      }
-    },
-    "Récif": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Reef"
-          }
-        }
-      }
-    },
-    "Réessayer": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Try again"
-          }
-        }
-      }
-    },
-    "Réglages": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Settings"
-          }
-        }
-      }
-    },
-    "Réglages de la partie": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Game settings"
-          }
-        }
-      }
-    },
-    "Réponse prise. %@ répond…": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Answer locked in. %@ is answering…"
-          }
-        }
-      }
-    },
-    "Sablier": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hourglass"
-          }
-        }
-      }
-    },
-    "Saline": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Saltings"
-          }
-        }
-      }
-    },
-    "Sans nom": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No name"
-          }
-        }
-      }
-    },
-    "Sardaigne": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sardinia"
-          }
-        }
-      }
-    },
-    "Scandinavie": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Scandinavia"
-          }
-        }
-      }
-    },
-    "Serbie": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Serbia"
-          }
-        }
-      }
-    },
-    "Sibérie": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Siberia"
-          }
-        }
-      }
-    },
-    "Sicile": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sicily"
-          }
-        }
-      }
-    },
-    "Site": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Website"
-          }
-        }
-      }
-    },
-    "Skerrie": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Skerry"
-          }
-        }
-      }
-    },
-    "Slovaquie": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Slovakia"
-          }
-        }
-      }
-    },
-    "Slovénie": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Slovenia"
-          }
-        }
-      }
-    },
-    "Sommaire": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Contents"
-          }
-        }
-      }
-    },
-    "Sons du jeu": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Game sounds"
-          }
-        }
-      }
-    },
-    "Steppe Haute": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "High Steppe"
-          }
-        }
-      }
-    },
-    "Suisse": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Switzerland"
-          }
-        }
-      }
-    },
-    "Sur un appareil partagé, cet écran montre celle de qui joue.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "On a shared device, this screen shows the one whose turn it is."
-          }
-        }
-      }
-    },
-    "Suède": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sweden"
-          }
-        }
-      }
-    },
-    "Tchéquie": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Czechia"
-          }
-        }
-      }
-    },
-    "Territoires du Nord-Ouest": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Northwest Territory"
-          }
-        }
-      }
-    },
-    "Touchez pour continuer": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tap to continue"
-          }
-        }
-      }
-    },
-    "Tour %lld": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Turn %lld"
-          }
-        }
-      }
-    },
-    "Tout le monde est là.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Everyone is here."
-          }
-        }
-      }
-    },
-    "Toutes les parties": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "All games"
-          }
-        }
-      }
-    },
-    "Turquie": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Turkey"
-          }
-        }
-      }
-    },
-    "Un appareil par joueur.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "One device per player."
-          }
-        }
-      }
-    },
-    "Un homme avance — c'est tout ce que la place de départ peut céder.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "One man advances — all the starting place can spare."
-          }
-        }
-      }
-    },
-    "Un homme de plus": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "One more man"
-          }
-        }
-      }
-    },
-    "Un monde inventé, cinq terres en cercle. 28 territoires.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "An invented world, five lands in a circle. 28 territories."
-          }
-        }
-      }
-    },
-    "Une autorisation manque": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A permission is missing"
-          }
-        }
-      }
-    },
-    "Une partie de Riskelo": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A game of Riskelo"
-          }
-        }
-      }
-    },
-    "Une question": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "One question"
-          }
-        }
-      }
-    },
-    "VOTRE CODE": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "YOUR CODE"
-          }
-        }
-      }
-    },
-    "Val-Clair": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Brightvale"
-          }
-        }
-      }
-    },
-    "Versions différentes": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Different versions"
-          }
-        }
-      }
-    },
-    "Vert": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Green"
-          }
-        }
-      }
-    },
-    "Vieux-Port": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Oldport"
-          }
-        }
-      }
-    },
-    "Violet": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Purple"
-          }
-        }
-      }
-    },
-    "Vos cartes": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Your cards"
-          }
-        }
-      }
-    },
-    "Vous choisissez le terrain — mais vous y répondez aussi": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "You pick the ground — but you answer too"
-          }
-        }
-      }
-    },
-    "Vous posez la question — choisissez le terrain": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "You ask the question — pick the ground"
-          }
-        }
-      }
-    },
-    "Vous répondez tous les deux à la même question.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "You both answer the same question."
-          }
-        }
-      }
-    },
-    "Vous êtes dans la partie": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "You are in the game"
-          }
-        }
-      }
-    },
-    "Zéphyrie": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zephyria"
-          }
-        }
-      }
-    },
-    "indisponible": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "unavailable"
-          }
-        }
-      }
-    },
-    "sur %lld": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "of %lld"
-          }
-        }
-      }
-    },
-    "toutes catégories mêlées": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "all categories mixed"
-          }
-        }
-      }
-    },
-    "toutes les %lld bonnes réponses": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "every %lld correct answers"
-          }
-        }
-      }
-    },
-    "·": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "·"
-          }
-        }
-      }
-    },
-    "· %@": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "· %@"
-          }
-        }
-      }
-    },
-    "· %lld/%lld": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "· %lld/%lld"
+    "%lld/%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld/%lld"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "new",
-            "value": "· %1$lld/%2$lld"
+        "fr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld/%2$lld"
           }
         }
       }
     },
-    "À %@ de répondre.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ to answer."
+    "%lldᵉ question sur cette place ce tour-ci — le temps se resserre" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Question %lld on this place this turn — the clock tightens"
           }
         }
       }
     },
-    "À l'attaque": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Attack"
+    "•" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "•"
           }
         }
       }
     },
-    "Échanger contre %lld hommes": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Trade for %lld troops"
+    "+%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "+%lld"
           }
         }
       }
     },
-    "Écosse": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Scotland"
+    "−%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "−%lld"
           }
         }
       }
     },
-    "Égypte": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Egypt"
+    "1 humain" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 human"
           }
         }
       }
     },
-    "Îles Britanniques": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "British Isles"
+    "À %@ de répondre." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ to answer."
           }
         }
       }
     },
-    "éliminé": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "eliminated"
+    "À l'attaque" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Attack"
           }
         }
       }
     },
-    "—": {},
-    "•": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "•"
+    "Accepter" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Accept"
           }
         }
       }
     },
-    "−%lld": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "−%lld"
+    "Accueil" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Home"
+          }
+        }
+      }
+    },
+    "Afrique" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Africa"
+          }
+        }
+      }
+    },
+    "Afrique de l'Est" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "East Africa"
+          }
+        }
+      }
+    },
+    "Afrique du Nord" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "North Africa"
+          }
+        }
+      }
+    },
+    "Afrique du Sud" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "South Africa"
+          }
+        }
+      }
+    },
+    "Albanie" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Albania"
+          }
+        }
+      }
+    },
+    "Alizé" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tradewind"
+          }
+        }
+      }
+    },
+    "Allemagne" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Germany"
+          }
+        }
+      }
+    },
+    "Ambre" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Amber"
+          }
+        }
+      }
+    },
+    "Amérique centrale" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Central America"
+          }
+        }
+      }
+    },
+    "Amérique du Nord" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "North America"
+          }
+        }
+      }
+    },
+    "Amérique du Sud" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "South America"
+          }
+        }
+      }
+    },
+    "Angleterre" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "England"
+          }
+        }
+      }
+    },
+    "Annuler" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        }
+      }
+    },
+    "Argentine" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Argentina"
+          }
+        }
+      }
+    },
+    "Armorique" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thornmere"
+          }
+        }
+      }
+    },
+    "Asie" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Asia"
+          }
+        }
+      }
+    },
+    "Au déplacement" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Move"
+          }
+        }
+      }
+    },
+    "Au hasard" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "At random"
+          }
+        }
+      }
+    },
+    "Au loin, avec un code" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remotely, with a code"
+          }
+        }
+      }
+    },
+    "Au moins %lld : autant que de questions posées." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "At least %lld: as many as there were questions."
+          }
+        }
+      }
+    },
+    "Aucune partie rangée pour l'instant." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No games shelved yet."
+          }
+        }
+      }
+    },
+    "Aucune table en vue." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No table in sight."
+          }
+        }
+      }
+    },
+    "Australie occidentale" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Western Australia"
+          }
+        }
+      }
+    },
+    "Australie orientale" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eastern Australia"
+          }
+        }
+      }
+    },
+    "Autriche" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Austria"
+          }
+        }
+      }
+    },
+    "Avez-vous fini d'attaquer ?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done attacking?"
+          }
+        }
+      }
+    },
+    "Baie d'Or" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gold Bay"
+          }
+        }
+      }
+    },
+    "Baléares" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Balearics"
+          }
+        }
+      }
+    },
+    "Belgique" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Belgium"
+          }
+        }
+      }
+    },
+    "Biélorussie" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Belarus"
+          }
+        }
+      }
+    },
+    "Bien" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        }
+      }
+    },
+    "Bleu" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Blue"
+          }
+        }
+      }
+    },
+    "Bocage" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hedgerow"
+          }
+        }
+      }
+    },
+    "Boréa" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Borea"
+          }
+        }
+      }
+    },
+    "Brésil" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Brazil"
+          }
+        }
+      }
+    },
+    "Bulgarie" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bulgaria"
+          }
+        }
+      }
+    },
+    "Cap Blanc" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Whitecape"
+          }
+        }
+      }
+    },
+    "Cartes de territoire" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Territory cards"
+          }
+        }
+      }
+    },
+    "Ce que chacun a montré savoir" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What each player has shown they know"
+          }
+        }
+      }
+    },
+    "Ce que chacun cherchait" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What each player was after"
+          }
+        }
+      }
+    },
+    "Celui qui ouvre la partie choisit pour tout le monde." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Whoever opens the game chooses for everyone."
+          }
+        }
+      }
+    },
+    "Celui qui ouvre la table choisit pour tout le monde." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Whoever opens the table chooses for everyone."
+          }
+        }
+      }
+    },
+    "Cet instant ne se relit plus" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This moment can no longer be replayed"
+          }
+        }
+      }
+    },
+    "Chacun son tour : l'appareil se passe avant chaque question." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Taking turns: the device is passed before each question."
+          }
+        }
+      }
+    },
+    "Chapitre suivant" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Next chapter"
+          }
+        }
+      }
+    },
+    "Chaque tour joué dépose un instant ici, tout seul." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Every turn played drops a moment here, on its own."
+          }
+        }
+      }
+    },
+    "Chercher des joueurs" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Find players"
+          }
+        }
+      }
+    },
+    "Chine" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "China"
+          }
+        }
+      }
+    },
+    "Cinq cartes en main : l'échange est obligatoire." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Five cards in hand: the trade is compulsory."
+          }
+        }
+      }
+    },
+    "CODE" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CODE"
+          }
+        }
+      }
+    },
+    "Code copié" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Code copied"
+          }
+        }
+      }
+    },
+    "Combien d'hommes avancent ?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How many troops advance?"
+          }
+        }
+      }
+    },
+    "COMBIEN DE JOUEURS" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "HOW MANY PLAYERS"
+          }
+        }
+      }
+    },
+    "Combien de questions — vos dés" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How many questions — your dice"
+          }
+        }
+      }
+    },
+    "Commencer" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start"
+          }
+        }
+      }
+    },
+    "Conditions" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terms"
+          }
+        }
+      }
+    },
+    "Confidentialité" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacy"
+          }
+        }
+      }
+    },
+    "Confidentialité et sécurité → Réseau local → Riskelo" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacy & Security → Local Network → Riskelo US"
+          }
+        }
+      }
+    },
+    "Connexion à %@…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connecting to %@…"
+          }
+        }
+      }
+    },
+    "Connexion à Game Center…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Signing in to Game Center…"
+          }
+        }
+      }
+    },
+    "Conquêtes personnelles" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Personal conquests"
+          }
+        }
+      }
+    },
+    "Continuer" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue"
+          }
+        }
+      }
+    },
+    "Copier le code" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copy the code"
+          }
+        }
+      }
+    },
+    "Corail" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Coral"
+          }
+        }
+      }
+    },
+    "Corse" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Corsica"
+          }
+        }
+      }
+    },
+    "Crète" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Crete"
+          }
+        }
+      }
+    },
+    "Croatie" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Croatia"
+          }
+        }
+      }
+    },
+    "Cultivée" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Well-read"
+          }
+        }
+      }
+    },
+    "Culture générale" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "General knowledge"
+          }
+        }
+      }
+    },
+    "Culture générale · " : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "General knowledge · "
+          }
+        }
+      }
+    },
+    "Culture générale seule" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "General knowledge only"
+          }
+        }
+      }
+    },
+    "Danemark" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Denmark"
+          }
+        }
+      }
+    },
+    "Dans la même pièce" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Play across devices"
+          }
+        }
+      }
+    },
+    "De l'Atlantique à la mer Noire. 38 territoires." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "From the Atlantic to the Black Sea. 38 territories."
+          }
+        }
+      }
+    },
+    "Déjà posées sur cet appareil : %lld sur %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Already asked on this device: %lld of %lld"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Déjà posées sur cet appareil : %1$lld sur %2$lld"
+          }
+        }
+      }
+    },
+    "Déplacer et finir le tour" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Move and end the turn"
+          }
+        }
+      }
+    },
+    "Deux questions" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Two questions"
+          }
+        }
+      }
+    },
+    "Distraite" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Distracted"
+          }
+        }
+      }
+    },
+    "Doubler l'enjeu" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Double the stake"
+          }
+        }
+      }
+    },
+    "Échanger contre %lld hommes" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trade for %lld troops"
+          }
+        }
+      }
+    },
+    "Écosse" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scotland"
+          }
+        }
+      }
+    },
+    "Égypte" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Egypt"
+          }
+        }
+      }
+    },
+    "éliminé" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "eliminated"
+          }
+        }
+      }
+    },
+    "En attente de %lld joueur%@…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Waiting for %lld player%@…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "En attente de %1$lld joueur%2$@…"
+          }
+        }
+      }
+    },
+    "En attente du lancement…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Waiting for the launch…"
+          }
+        }
+      }
+    },
+    "Encore un instant…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "One moment…"
+          }
+        }
+      }
+    },
+    "English" : {
+
+    },
+    "Enjeu doublé : deux hommes" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stake doubled: two troops"
+          }
+        }
+      }
+    },
+    "Envoyer l'invitation" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Send the invitation"
+          }
+        }
+      }
+    },
+    "Espagne" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spain"
+          }
+        }
+      }
+    },
+    "Est des États-Unis" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eastern United States"
+          }
+        }
+      }
+    },
+    "Europe centrale" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Central Europe"
+          }
+        }
+      }
+    },
+    "Europe de l'Est" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eastern Europe"
+          }
+        }
+      }
+    },
+    "Europe de l'Ouest" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Western Europe"
+          }
+        }
+      }
+    },
+    "Europe du Nord" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Northern Europe"
+          }
+        }
+      }
+    },
+    "Europe du Sud" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Southern Europe"
+          }
+        }
+      }
+    },
+    "Faire avancer %lld hommes" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Advance %lld men"
+          }
+        }
+      }
+    },
+    "Faire avancer 1 homme" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Advance 1 man"
+          }
+        }
+      }
+    },
+    "Fermer" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Close"
+          }
+        }
+      }
+    },
+    "Fin du tour" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "End turn"
+          }
+        }
+      }
+    },
+    "Finlande" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finland"
+          }
+        }
+      }
+    },
+    "Français" : {
+
+    },
+    "Game Center n'a pas pu" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Game Center could not"
+          }
+        }
+      }
+    },
+    "Grande-Bretagne" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Great Britain"
+          }
+        }
+      }
+    },
+    "Grèce" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Greece"
+          }
+        }
+      }
+    },
+    "Grise-Lande" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Greymoor"
+          }
+        }
+      }
+    },
+    "Groenland" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Greenland"
+          }
+        }
+      }
+    },
+    "Guerre totale" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total war"
+          }
+        }
+      }
+    },
+    "Havreterre" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Havenhold"
+          }
+        }
+      }
+    },
+    "Hongrie" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hungary"
+          }
+        }
+      }
+    },
+    "Honnête" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fair"
+          }
+        }
+      }
+    },
+    "Iakoutie" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yakutsk"
+          }
+        }
+      }
+    },
+    "Il a été enregistré sur un plateau qui a changé de dessin depuis." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "It was saved on a board whose drawing has changed since."
+          }
+        }
+      }
+    },
+    "Îles Britanniques" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "British Isles"
+          }
+        }
+      }
+    },
+    "Inde" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "India"
+          }
+        }
+      }
+    },
+    "indisponible" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "unavailable"
+          }
+        }
+      }
+    },
+    "Indonésie" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Indonesia"
+          }
+        }
+      }
+    },
+    "Irkoutsk" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Irkutsk"
+          }
+        }
+      }
+    },
+    "Islande" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iceland"
+          }
+        }
+      }
+    },
+    "Italie" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Italy"
+          }
+        }
+      }
+    },
+    "Italie du Nord" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Northern Italy"
+          }
+        }
+      }
+    },
+    "Japon" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Japan"
+          }
+        }
+      }
+    },
+    "Je suis prêt" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I'm ready"
+          }
+        }
+      }
+    },
+    "Jouer à plusieurs" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Play across devices"
+          }
+        }
+      }
+    },
+    "Jouer au loin" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Play remotely"
+          }
+        }
+      }
+    },
+    "Jusqu'à quatre joueurs, un appareil chacun." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Up to four players, one device each."
+          }
+        }
+      }
+    },
+    "Kamtchatka" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kamchatka"
+          }
+        }
+      }
+    },
+    "Khanat" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Khanate"
+          }
+        }
+      }
+    },
+    "L'adversaire réfléchit…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your opponent is thinking…"
+          }
+        }
+      }
+    },
+    "L'adversaire répond…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your opponent is answering…"
+          }
+        }
+      }
+    },
+    "L'Anneau" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The Ring"
+          }
+        }
+      }
+    },
+    "La conquête de %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@'s conquest"
+          }
+        }
+      }
+    },
+    "La liaison est tombée" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The link dropped"
+          }
+        }
+      }
+    },
+    "La liaison n'a pas pu s'établir" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The link could not be established"
+          }
+        }
+      }
+    },
+    "La partie est rangée : vous la retrouverez à l'accueil." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The game is put away: you will find it on the home screen."
+          }
+        }
+      }
+    },
+    "La partie reprendra toute seule. Encore %lld s." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The game will resume on its own. %lld s to go."
+          }
+        }
+      }
+    },
+    "La table" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The table"
+          }
+        }
+      }
+    },
+    "Lagune" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lagoon"
+          }
+        }
+      }
+    },
+    "Lancer l'assaut" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Launch the assault"
+          }
+        }
+      }
+    },
+    "Landes Hautes" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "High Moors"
+          }
+        }
+      }
+    },
+    "Langue" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Language"
+          }
+        }
+      }
+    },
+    "Le dé est remplacé par une question." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The die is replaced by a question."
+          }
+        }
+      }
+    },
+    "Le dé est remplacé par une question.\nL'attaquant choisit le terrain, le défenseur répond." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The die is replaced by a question.\nThe attacker picks the ground, the defender answers."
+          }
+        }
+      }
+    },
+    "Le dé est remplacé par une question.\nLes deux la reçoivent : le plus sûr, ou le plus vif, l'emporte." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The die is replaced by a question.\nBoth receive it: the surer, or the quicker, wins."
+          }
+        }
+      }
+    },
+    "Le système a refusé d'ouvrir le réseau local." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The system refused to open the local network."
+          }
+        }
+      }
+    },
+    "Les autres appareils ne montrent que la leur." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The other devices show only their own."
+          }
+        }
+      }
+    },
+    "Les deux appareils n'ont pas la même version de Riskelo." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The two devices are not running the same version of Riskelo."
+          }
+        }
+      }
+    },
+    "Les Marches" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The Marches"
+          }
+        }
+      }
+    },
+    "Les questions, les menus et le mode d'emploi suivent ensemble." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Questions, menus and the manual all follow."
+          }
+        }
+      }
+    },
+    "Les six continents, 42 territoires — comme la boîte." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The six continents, 42 territories — like the box."
+          }
+        }
+      }
+    },
+    "Les six thèmes du jeu — %lld questions." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The six subjects that ship with the game — %lld questions."
+          }
+        }
+      }
+    },
+    "Liaison perdue — on y retourne" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Link lost — trying again"
+          }
+        }
+      }
+    },
+    "Liaison perdue avec %@." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Link lost with %@."
+          }
+        }
+      }
+    },
+    "Méditerranée" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mediterranean"
+          }
+        }
+      }
+    },
+    "Méridia" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meridia"
+          }
+        }
+      }
+    },
+    "Mode d'emploi" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How to play"
+          }
+        }
+      }
+    },
+    "Moldavie" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Moldova"
+          }
+        }
+      }
+    },
+    "Monde" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "World"
+          }
+        }
+      }
+    },
+    "Mongolie" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mongolia"
+          }
+        }
+      }
+    },
+    "Mont Rouge" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Redmount"
+          }
+        }
+      }
+    },
+    "Moyen-Orient" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Middle East"
+          }
+        }
+      }
+    },
+    "Non, je continue d'attaquer" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No, I'm still attacking"
+          }
+        }
+      }
+    },
+    "Norvège" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Norway"
+          }
+        }
+      }
+    },
+    "Nouvelle partie" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New game"
+          }
+        }
+      }
+    },
+    "Nouvelle-Guinée" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New Guinea"
+          }
+        }
+      }
+    },
+    "Océanie" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Australia"
+          }
+        }
+      }
+    },
+    "Oliveraie" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Olivegrove"
+          }
+        }
+      }
+    },
+    "On distribue les camps…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dealing the sides…"
+          }
+        }
+      }
+    },
+    "On entre dans la partie %@…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Joining game %@…"
+          }
+        }
+      }
+    },
+    "On prépare le salon…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Setting up the table…"
+          }
+        }
+      }
+    },
+    "OU REJOINDRE AVEC UN CODE" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OR JOIN WITH A CODE"
+          }
+        }
+      }
+    },
+    "Oublier" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Forget"
+          }
+        }
+      }
+    },
+    "Ouest des États-Unis" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Western United States"
+          }
+        }
+      }
+    },
+    "Oui, au déplacement" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yes, on to the move"
+          }
+        }
+      }
+    },
+    "Oural" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ural"
+          }
+        }
+      }
+    },
+    "Ouvrir la table avec ces réglages" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open the table with these settings"
+          }
+        }
+      }
+    },
+    "Ouvrir les Réglages" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open Settings"
+          }
+        }
+      }
+    },
+    "Ouvrir une partie" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open a game"
+          }
+        }
+      }
+    },
+    "Packs" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Packs"
+          }
+        }
+      }
+    },
+    "Packs de questions" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Question packs"
+          }
+        }
+      }
+    },
+    "Palmeraie" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Palmgrove"
+          }
+        }
+      }
+    },
+    "Par Game Center" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Through Game Center"
+          }
+        }
+      }
+    },
+    "Partie rapide" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quick game"
+          }
+        }
+      }
+    },
+    "Parties enregistrées" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saved games"
+          }
+        }
+      }
+    },
+    "Pas connecté à Game Center" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not signed in to Game Center"
+          }
+        }
+      }
+    },
+    "Pays baltes" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Baltic States"
+          }
+        }
+      }
+    },
+    "Pays-Bas" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Netherlands"
+          }
+        }
+      }
+    },
+    "Pérou" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Peru"
+          }
+        }
+      }
+    },
+    "Pierregrise" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Greystone"
+          }
+        }
+      }
+    },
+    "Pologne" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Poland"
+          }
+        }
+      }
+    },
+    "Ponant" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Westmark"
+          }
+        }
+      }
+    },
+    "Québec" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quebec"
+          }
+        }
+      }
+    },
+    "Recherche des tables ouvertes…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Looking for open tables…"
+          }
+        }
+      }
+    },
+    "Recherche…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Looking…"
+          }
+        }
+      }
+    },
+    "Récif" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reef"
+          }
+        }
+      }
+    },
+    "Redoutable" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Formidable"
+          }
+        }
+      }
+    },
+    "Réessayer" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Try again"
+          }
+        }
+      }
+    },
+    "Réglages" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings"
+          }
+        }
+      }
+    },
+    "Réglages de la partie" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Game settings"
+          }
+        }
+      }
+    },
+    "Rejoignez-moi : le code est %@." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Join me: the code is %@."
+          }
+        }
+      }
+    },
+    "Rejoindre" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Join"
+          }
+        }
+      }
+    },
+    "Relié à %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Linked to %@"
+          }
+        }
+      }
+    },
+    "Réponse prise. %@ répond…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Answer locked in. %@ is answering…"
+          }
+        }
+      }
+    },
+    "Reprendre la partie en cours" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resume game"
+          }
+        }
+      }
+    },
+    "Restaurer mes achats" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restore my purchases"
+          }
+        }
+      }
+    },
+    "Retiré" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Withdrawn"
+          }
+        }
+      }
+    },
+    "Revenir à un instant" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Go back to a moment"
+          }
+        }
+      }
+    },
+    "Rien n'est venu de %@." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nothing came from %@."
+          }
+        }
+      }
+    },
+    "Rien n'est venu." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nothing came."
+          }
+        }
+      }
+    },
+    "Riskelo" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Riskelo"
+          }
+        }
+      }
+    },
+    "Riskelo %@ — %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Riskelo US %@ — %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Riskelo %1$@ — %2$@"
+          }
+        }
+      }
+    },
+    "Rouge" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Red"
+          }
+        }
+      }
+    },
+    "Roumanie" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Romania"
+          }
+        }
+      }
+    },
+    "Russie" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Russia"
+          }
+        }
+      }
+    },
+    "Sablier" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hourglass"
+          }
+        }
+      }
+    },
+    "Saline" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saltings"
+          }
+        }
+      }
+    },
+    "Sans nom" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No name"
+          }
+        }
+      }
+    },
+    "Sardaigne" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sardinia"
+          }
+        }
+      }
+    },
+    "Scandinavie" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scandinavia"
+          }
+        }
+      }
+    },
+    "Serbie" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Serbia"
+          }
+        }
+      }
+    },
+    "Sibérie" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Siberia"
+          }
+        }
+      }
+    },
+    "Sicile" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sicily"
+          }
+        }
+      }
+    },
+    "Site" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Website"
+          }
+        }
+      }
+    },
+    "Skerrie" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skerry"
+          }
+        }
+      }
+    },
+    "Slovaquie" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Slovakia"
+          }
+        }
+      }
+    },
+    "Slovénie" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Slovenia"
+          }
+        }
+      }
+    },
+    "Sommaire" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contents"
+          }
+        }
+      }
+    },
+    "Sons du jeu" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Game sounds"
+          }
+        }
+      }
+    },
+    "Steppe Haute" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "High Steppe"
+          }
+        }
+      }
+    },
+    "Suède" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sweden"
+          }
+        }
+      }
+    },
+    "Suisse" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Switzerland"
+          }
+        }
+      }
+    },
+    "sur %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "of %lld"
+          }
+        }
+      }
+    },
+    "Sur un appareil partagé, cet écran montre celle de qui joue." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "On a shared device, this screen shows the one whose turn it is."
+          }
+        }
+      }
+    },
+    "Tchéquie" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Czechia"
+          }
+        }
+      }
+    },
+    "Territoires du Nord-Ouest" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Northwest Territory"
+          }
+        }
+      }
+    },
+    "Touchez pour continuer" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tap to continue"
+          }
+        }
+      }
+    },
+    "Tour %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turn %lld"
+          }
+        }
+      }
+    },
+    "Tout le monde est là." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Everyone is here."
+          }
+        }
+      }
+    },
+    "toutes catégories mêlées" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "all categories mixed"
+          }
+        }
+      }
+    },
+    "toutes les %lld bonnes réponses" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "every %lld correct answers"
+          }
+        }
+      }
+    },
+    "Toutes les parties" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All games"
+          }
+        }
+      }
+    },
+    "Turquie" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turkey"
+          }
+        }
+      }
+    },
+    "Un appareil par joueur." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "One device per player."
+          }
+        }
+      }
+    },
+    "Un homme avance — c'est tout ce que la place de départ peut céder." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "One man advances — all the starting place can spare."
+          }
+        }
+      }
+    },
+    "Un homme de plus" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "One more man"
+          }
+        }
+      }
+    },
+    "Un monde inventé, cinq terres en cercle. 28 territoires." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "An invented world, five lands in a circle. 28 territories."
+          }
+        }
+      }
+    },
+    "Une autorisation manque" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A permission is missing"
+          }
+        }
+      }
+    },
+    "Une partie de Riskelo" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A game of Riskelo"
+          }
+        }
+      }
+    },
+    "Une question" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "One question"
+          }
+        }
+      }
+    },
+    "Val-Clair" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Brightvale"
+          }
+        }
+      }
+    },
+    "Versions différentes" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Different versions"
+          }
+        }
+      }
+    },
+    "Vert" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Green"
+          }
+        }
+      }
+    },
+    "Vieux-Port" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oldport"
+          }
+        }
+      }
+    },
+    "Violet" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Purple"
+          }
+        }
+      }
+    },
+    "Vos cartes" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your cards"
+          }
+        }
+      }
+    },
+    "VOTRE CODE" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "YOUR CODE"
+          }
+        }
+      }
+    },
+    "Vous choisissez le terrain — mais vous y répondez aussi" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You pick the ground — but you answer too"
+          }
+        }
+      }
+    },
+    "Vous êtes dans la partie" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You are in the game"
+          }
+        }
+      }
+    },
+    "Vous posez la question — choisissez le terrain" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You ask the question — pick the ground"
+          }
+        }
+      }
+    },
+    "Vous répondez tous les deux à la même question." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You both answer the same question."
+          }
+        }
+      }
+    },
+    "Zéphyrie" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zephyria"
           }
         }
       }
     }
   },
-  "version": "1.0"
+  "version" : "1.0"
 }

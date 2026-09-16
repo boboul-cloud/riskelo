@@ -359,7 +359,13 @@ struct GameState {
     /// une partie sans question ne se distingue pas d'une panne.
     var themesEnJeu: [Category] {
         guard let choisis = rules.themes, !choisis.isEmpty else { return Themes.base }
-        let retenus = Themes.tous.filter { choisis.contains($0.id) }
+        // Toutes langues, et non la seule de cet appareil : quand l'hôte
+        // nomme ses thèmes, l'invité doit les retenir même s'ils viennent de
+        // l'autre banque. Filtré par la langue locale, un appareil anglais
+        // n'aurait reconnu aucun thème français, serait retombé sur ses six
+        // thèmes de base, et les deux tables auraient tiré des questions
+        // différentes — sans que rien ne s'affiche.
+        let retenus = Themes.toutesLangues.filter { choisis.contains($0.id) }
         return retenus.isEmpty ? Themes.base : retenus
     }
 

@@ -45,20 +45,20 @@ enum Bot {
 
         var label: String {
             switch self {
-            case .facile:  "Facile"
-            case .moyenne: "Moyenne"
-            case .forte:   "Forte"
+            case .facile:  dit("Facile")
+            case .moyenne: dit("Moyenne")
+            case .forte:   dit("Forte")
             }
         }
 
         var detail: String {
             switch self {
             case .facile:
-                "Elle avance au hasard et sème des garnisons d'un homme."
+                dit("Elle avance au hasard et sème des garnisons d'un homme.")
             case .moyenne:
-                "Elle tient ce qu'elle prend et cherche vos points faibles."
+                dit("Elle tient ce qu'elle prend et cherche vos points faibles.")
             case .forte:
-                "Elle concentre, vise un continent, et sait où vous frapper."
+                dit("Elle concentre, vise un continent, et sait où vous frapper.")
             }
         }
 

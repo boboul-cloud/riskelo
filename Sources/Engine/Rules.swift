@@ -63,17 +63,17 @@ struct Rules: Equatable, Codable {
 
         var label: String {
             switch self {
-            case .classique: "Classique"
-            case .faceAFace: "Face à face"
+            case .classique: dit("Classique")
+            case .faceAFace: dit("Face à face")
             }
         }
 
         var detail: String {
             switch self {
             case .classique:
-                "L'attaquant choisit le thème, le défenseur seul répond."
+                dit("L'attaquant choisit le thème, le défenseur seul répond.")
             case .faceAFace:
-                "Les deux répondent à la même question. Le défenseur peut doubler l'enjeu."
+                dit("Les deux répondent à la même question. Le défenseur peut doubler l'enjeu.")
             }
         }
     }
@@ -121,17 +121,17 @@ struct Rules: Equatable, Codable {
 
         var label: String {
             switch self {
-            case .faciles: "Faciles"
-            case .melees:  "Mêlées"
-            case .corsees: "Corsées"
+            case .faciles: dit("Faciles")
+            case .melees:  dit("Mêlées")
+            case .corsees: dit("Corsées")
             }
         }
 
         var detail: String {
             switch self {
-            case .faciles: "De quoi jouer avec des enfants."
-            case .melees:  "Les trois niveaux, comme dans une boîte de jeu."
-            case .corsees: "Pour ceux qui trouvent le reste trop facile."
+            case .faciles: dit("De quoi jouer avec des enfants.")
+            case .melees:  dit("Les trois niveaux, comme dans une boîte de jeu.")
+            case .corsees: dit("Pour ceux qui trouvent le reste trop facile.")
             }
         }
 

@@ -328,11 +328,11 @@ struct LoinView: View {
 
     private func titre(_ panne: Relais.Panne) -> String {
         switch panne {
-        case .codeInconnu:    return "Ce code ne mène à rien"
-        case .salonPlein:     return "La partie est complète"
-        case .dejaCommencee:  return "La partie a déjà commencé"
-        case .sansReponse:    return "Rien n'a répondu"
-        case .serveur:        return "Le serveur a refusé"
+        case .codeInconnu:    return dit("Ce code ne mène à rien")
+        case .salonPlein:     return dit("La partie est complète")
+        case .dejaCommencee:  return dit("La partie a déjà commencé")
+        case .sansReponse:    return dit("Rien n'a répondu")
+        case .serveur:        return dit("Le serveur a refusé")
         }
     }
 
@@ -379,9 +379,9 @@ struct LoinView: View {
 
     private var laPartieQuOnOuvre: String {
         var dits = [plateau.label, regles.mode.label]
-        if regles.territoryCards { dits.append("cartes") }
-        if regles.objectifs { dits.append("conquêtes personnelles") }
-        if regles.dominationOverride == 0 { dits.append("guerre totale") }
+        if regles.territoryCards { dits.append(dit("cartes")) }
+        if regles.objectifs { dits.append(dit("conquêtes personnelles")) }
+        if regles.dominationOverride == 0 { dits.append(dit("guerre totale")) }
         return dits.joined(separator: " · ")
     }
 

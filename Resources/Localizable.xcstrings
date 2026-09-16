@@ -267,6 +267,38 @@
         }
       }
     },
+    "%@ joue…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ is playing…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ joue…"
+          }
+        }
+      }
+    },
+    "%@ l'a emporté · %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ won · %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ l'a emporté · %@"
+          }
+        }
+      }
+    },
     "%@ l'emporte": {
       "localizations": {
         "en": {
@@ -795,6 +827,22 @@
         }
       }
     },
+    "%lld instant%@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld moment%@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld instant%@"
+          }
+        }
+      }
+    },
     "%lld question%@ %@": {
       "localizations": {
         "en": {
@@ -855,6 +903,38 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld secondes"
+          }
+        }
+      }
+    },
+    "%lld sur %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld of %lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld sur %lld"
+          }
+        }
+      }
+    },
+    "%lld sur %lld — %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld of %lld — %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld sur %lld — %@"
           }
         }
       }
@@ -1253,6 +1333,22 @@
         }
       }
     },
+    "Artillerie": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Artillery"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Artillerie"
+          }
+        }
+      }
+    },
     "Asie": {
       "localizations": {
         "en": {
@@ -1265,6 +1361,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Asie"
+          }
+        }
+      }
+    },
+    "Attaque": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Attack"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Attaque"
           }
         }
       }
@@ -1653,6 +1765,38 @@
         }
       }
     },
+    "Cavalerie": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cavalry"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cavalerie"
+          }
+        }
+      }
+    },
+    "Ce code ne mène à rien": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "That code leads nowhere"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce code ne mène à rien"
+          }
+        }
+      }
+    },
     "Ce n'est pas la carte que vous aviez tirée : le camp qu'on vous demandait d'abattre est tombé sous d'autres coups. Elle s'est retournée en ce repli, pour que vous puissiez encore gagner.": {
       "localizations": {
         "en": {
@@ -1925,6 +2069,38 @@
         }
       }
     },
+    "Choisissez combien d'hommes avancent.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose how many troops advance."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisissez combien d'hommes avancent."
+          }
+        }
+      }
+    },
+    "Cinq cartes en main : il faut en échanger trois avant de poser.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Five cards in hand: three have to be traded before laying down."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cinq cartes en main : il faut en échanger trois avant de poser."
+          }
+        }
+      }
+    },
     "Cinq cartes en main : l'échange est obligatoire.": {
       "localizations": {
         "en": {
@@ -1937,6 +2113,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cinq cartes en main : l'échange est obligatoire."
+          }
+        }
+      }
+    },
+    "Classique": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Classic"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Classique"
           }
         }
       }
@@ -2165,6 +2357,22 @@
         }
       }
     },
+    "Corsées": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tough"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Corsées"
+          }
+        }
+      }
+    },
     "Croatie": {
       "localizations": {
         "en": {
@@ -2325,6 +2533,54 @@
         }
       }
     },
+    "De quoi jouer avec des enfants.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enough to play with children."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De quoi jouer avec des enfants."
+          }
+        }
+      }
+    },
+    "Depuis %@ — touchez un de vos territoires reliés.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "From %@ — tap one of your linked territories."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Depuis %@ — touchez un de vos territoires reliés."
+          }
+        }
+      }
+    },
+    "Depuis %@ — touchez un voisin ennemi à attaquer.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "From %@ — tap an enemy neighbor to attack."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Depuis %@ — touchez un voisin ennemi à attaquer."
+          }
+        }
+      }
+    },
     "Deux duels de suite, la même question à chaque fois pour vous deux. Le sablier se resserre au second, et il peut doubler la mise sur chacun.": {
       "localizations": {
         "en": {
@@ -2369,6 +2625,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Deux questions"
+          }
+        }
+      }
+    },
+    "Difficile": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hard"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Difficile"
           }
         }
       }
@@ -2421,6 +2693,22 @@
         }
       }
     },
+    "Déplacement": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Move"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Déplacement"
+          }
+        }
+      }
+    },
     "Déplacer et finir le tour": {
       "localizations": {
         "en": {
@@ -2433,6 +2721,54 @@
           "stringUnit": {
             "state": "translated",
             "value": "Déplacer et finir le tour"
+          }
+        }
+      }
+    },
+    "Elle avance au hasard et sème des garnisons d'un homme.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "It advances at random and scatters one-troop garrisons."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elle avance au hasard et sème des garnisons d'un homme."
+          }
+        }
+      }
+    },
+    "Elle concentre, vise un continent, et sait où vous frapper.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "It concentrates, aims at a continent, and knows where to strike you."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elle concentre, vise un continent, et sait où vous frapper."
+          }
+        }
+      }
+    },
+    "Elle tient ce qu'elle prend et cherche vos points faibles.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "It holds what it takes and looks for your weak spots."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elle tient ce qu'elle prend et cherche vos points faibles."
           }
         }
       }
@@ -2639,6 +2975,54 @@
         }
       }
     },
+    "Face à face": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Showdown"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Face à face"
+          }
+        }
+      }
+    },
+    "Facile": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Easy"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Facile"
+          }
+        }
+      }
+    },
+    "Faciles": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Easy"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Faciles"
+          }
+        }
+      }
+    },
     "Facultatif. Votre camp se lira « Bleu · %@ · moi » — la couleur, votre nom, et « moi » pour dire que c'est le vôtre. En réseau, il fait le voyage : les autres vous verront ainsi, et vous les verrez de même.": {
       "localizations": {
         "en": {
@@ -2747,6 +3131,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Finlande"
+          }
+        }
+      }
+    },
+    "Forte": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Strong"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Forte"
           }
         }
       }
@@ -2969,6 +3369,38 @@
         }
       }
     },
+    "Il lui reste %lld territoire": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "They have %lld territory left"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il lui reste %lld territoire"
+          }
+        }
+      }
+    },
+    "Il lui reste %lld territoires": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "They have %lld territories left"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il lui reste %lld territoires"
+          }
+        }
+      }
+    },
     "Inde": {
       "localizations": {
         "en": {
@@ -2997,6 +3429,38 @@
           "stringUnit": {
             "state": "translated",
             "value": "Indonésie"
+          }
+        }
+      }
+    },
+    "Infanterie": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Infantry"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Infanterie"
+          }
+        }
+      }
+    },
+    "Interrompue au tour %lld · %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Broken off on turn %lld · %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Interrompue au tour %lld · %@"
           }
         }
       }
@@ -3257,6 +3721,22 @@
         }
       }
     },
+    "L'attaquant choisit le thème, le défenseur seul répond.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The attacker picks the theme, the defender alone answers."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'attaquant choisit le thème, le défenseur seul répond."
+          }
+        }
+      }
+    },
     "L'autre appareil a envoyé une partie que celui-ci ne sait pas lire. Installez la même version de Riskelo des deux côtés.": {
       "localizations": {
         "en": {
@@ -3349,6 +3829,38 @@
           "stringUnit": {
             "state": "translated",
             "value": "La liaison n'a pas pu s'établir"
+          }
+        }
+      }
+    },
+    "La partie a déjà commencé": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The game has already started"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La partie a déjà commencé"
+          }
+        }
+      }
+    },
+    "La partie est complète": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The game is full"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La partie est complète"
           }
         }
       }
@@ -3497,6 +4009,22 @@
         }
       }
     },
+    "Le camp est tombé": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "That side has fallen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le camp est tombé"
+          }
+        }
+      }
+    },
     "Le dé est remplacé par une question.": {
       "localizations": {
         "en": {
@@ -3561,6 +4089,22 @@
         }
       }
     },
+    "Le plateau entier, sans un territoire laissé.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The whole board, without a territory left."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le plateau entier, sans un territoire laissé."
+          }
+        }
+      }
+    },
     "Le score est le sien : vert, il y répond bien ; rouge, il y trébuche. Attention — un thème où il trébuche ne vous sert que si vous, vous tenez debout.": {
       "localizations": {
         "en": {
@@ -3589,6 +4133,38 @@
           "stringUnit": {
             "state": "translated",
             "value": "Le score est le sien : vert, il y répond bien ; rouge, il y trébuche. La lunette marque son point faible."
+          }
+        }
+      }
+    },
+    "Le serveur a refusé": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The server refused"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le serveur a refusé"
+          }
+        }
+      }
+    },
+    "Le seuil de %lld territoires sur %lld.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The threshold of %lld territories out of %lld."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le seuil de %lld territoires sur %lld."
           }
         }
       }
@@ -3753,6 +4329,22 @@
         }
       }
     },
+    "Les deux répondent à la même question. Le défenseur peut doubler l'enjeu.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Both answer the same question. The defender can double the stake."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les deux répondent à la même question. Le défenseur peut doubler l'enjeu."
+          }
+        }
+      }
+    },
     "Les deux savaient : l'assaillant a été le plus vif, %@ perd %@.": {
       "localizations": {
         "en": {
@@ -3877,6 +4469,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Les six thèmes du jeu — %lld questions."
+          }
+        }
+      }
+    },
+    "Les trois niveaux, comme dans une boîte de jeu.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All three levels, as in a boxed game."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les trois niveaux, comme dans une boîte de jeu."
           }
         }
       }
@@ -4009,6 +4617,22 @@
         }
       }
     },
+    "Moyen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Medium"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moyen"
+          }
+        }
+      }
+    },
     "Moyen-Orient": {
       "localizations": {
         "en": {
@@ -4021,6 +4645,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Moyen-Orient"
+          }
+        }
+      }
+    },
+    "Moyenne": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Medium"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moyenne"
           }
         }
       }
@@ -4053,6 +4693,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Méridia"
+          }
+        }
+      }
+    },
+    "Mêlées": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mixed"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mêlées"
           }
         }
       }
@@ -4197,6 +4853,38 @@
           "stringUnit": {
             "state": "translated",
             "value": "On entre dans la partie %@…"
+          }
+        }
+      }
+    },
+    "On ne revient pas à l'attaque une fois le déplacement commencé.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "There is no going back to attacking once the move has started."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On ne revient pas à l'attaque une fois le déplacement commencé."
+          }
+        }
+      }
+    },
+    "On ne revient pas à l'attaque une fois le déplacement commencé. Et sans une seule conquête ce tour, vous ne piochez pas de carte.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "There is no going back to attacking once the move has started. And without a single conquest this turn, you draw no card."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On ne revient pas à l'attaque une fois le déplacement commencé. Et sans une seule conquête ce tour, vous ne piochez pas de carte."
           }
         }
       }
@@ -4601,6 +5289,22 @@
         }
       }
     },
+    "Pour ceux qui trouvent le reste trop facile.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "For anyone who finds the rest too easy."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pour ceux qui trouvent le reste trop facile."
+          }
+        }
+      }
+    },
     "Pérou": {
       "localizations": {
         "en": {
@@ -4761,6 +5465,22 @@
         }
       }
     },
+    "Renforts": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reinforce"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Renforts"
+          }
+        }
+      }
+    },
     "Reprendre la partie en cours": {
       "localizations": {
         "en": {
@@ -4821,6 +5541,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Revenir à un instant"
+          }
+        }
+      }
+    },
+    "Rien n'a répondu": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nothing answered"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rien n'a répondu"
           }
         }
       }
@@ -5045,6 +5781,38 @@
           "stringUnit": {
             "state": "translated",
             "value": "Réponse prise. %@ répond…"
+          }
+        }
+      }
+    },
+    "Sa conquête personnelle — %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Their personal conquest — %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sa conquête personnelle — %@"
+          }
+        }
+      }
+    },
+    "Sa conquête personnelle.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Their personal conquest."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sa conquête personnelle."
           }
         }
       }
@@ -5545,6 +6313,38 @@
         }
       }
     },
+    "Touchez un de vos territoires d'au moins deux hommes pour partir de là.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tap one of your territories with at least two troops to set out from it."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Touchez un de vos territoires d'au moins deux hommes pour partir de là."
+          }
+        }
+      }
+    },
+    "Touchez vos territoires pour y poser vos %lld renforts.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tap your territories to lay down your %lld reinforcements."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Touchez vos territoires pour y poser vos %lld renforts."
+          }
+        }
+      }
+    },
     "Tour %lld": {
       "localizations": {
         "en": {
@@ -5573,6 +6373,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tour %lld — à %@ de jouer."
+          }
+        }
+      }
+    },
+    "Tous les renforts sont posés.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All the reinforcements are laid down."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tous les renforts sont posés."
           }
         }
       }
@@ -5669,6 +6485,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Un code vit le temps d'une partie. Vérifiez les six lettres, ou demandez-en un nouveau à celui qui a ouvert."
+          }
+        }
+      }
+    },
+    "Un duel : au plus un homme perdu de chaque côté.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One duel: at most one troop lost on either side."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un duel : au plus un homme perdu de chaque côté."
           }
         }
       }
@@ -5785,6 +6617,22 @@
         }
       }
     },
+    "Un seul déplacement, puis le tour passe. Ou terminez directement.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One move only, then the turn passes. Or end it right away."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un seul déplacement, puis le tour passe. Ou terminez directement."
+          }
+        }
+      }
+    },
     "Une autorisation manque": {
       "localizations": {
         "en": {
@@ -5817,6 +6665,7 @@
         }
       }
     },
+    "Une carte se gagne en prenant au moins une place dans le tour.": {},
     "Une note brève à chaque homme posé, une autre à l'issue de chaque échange — montante quand il tourne pour vous, descendante sinon — et l'ouverture au lancement. Vaut pour toutes les parties, et non pour celle-ci seule.": {
       "localizations": {
         "en": {
@@ -5941,6 +6790,54 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vert"
+          }
+        }
+      }
+    },
+    "Victoire à %lld territoires sur %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Victory at %lld territories out of %lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Victoire à %lld territoires sur %lld"
+          }
+        }
+      }
+    },
+    "Victoire à la conquête intégrale des %lld territoires": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Victory by taking all %lld territories"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Victoire à la conquête intégrale des %lld territoires"
+          }
+        }
+      }
+    },
+    "Victoire à sa conquête personnelle, et à rien d'autre": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Victory by personal conquest, and by nothing else"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Victoire à sa conquête personnelle, et à rien d'autre"
           }
         }
       }
@@ -6217,6 +7114,38 @@
         }
       }
     },
+    "cartes": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "cards"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "cartes"
+          }
+        }
+      }
+    },
+    "conquêtes personnelles": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "personal conquests"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "conquêtes personnelles"
+          }
+        }
+      }
+    },
     "deux": {
       "localizations": {
         "en": {
@@ -6245,6 +7174,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "deux hommes"
+          }
+        }
+      }
+    },
+    "guerre totale": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "total war"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "guerre totale"
           }
         }
       }
@@ -6437,6 +7382,22 @@
           "stringUnit": {
             "state": "new",
             "value": "· %1$lld/%2$lld"
+          }
+        }
+      }
+    },
+    "À %@ de jouer, sur l'autre appareil…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ to play, on the other device…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "À %@ de jouer, sur l'autre appareil…"
           }
         }
       }

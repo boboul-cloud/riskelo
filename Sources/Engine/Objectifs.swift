@@ -220,13 +220,17 @@ extension GameState {
                 let a_moi = c.territories.filter { owner[$0] == joueur }.count
                 return "\(c.name) \(a_moi)/\(c.territories.count)"
             }
-            return "\(tenus) sur \(ids.count) — " + detail.joined(separator: " · ")
+            return dit("\(tenus) sur \(ids.count) — \(detail.joined(separator: " · "))")
         case let .territoires(nombre, hommes):
-            return "\(territoires(de: joueur, dAuMoins: hommes)) sur \(nombre)"
+            return dit("\(territoires(de: joueur, dAuMoins: hommes)) sur \(nombre)")
         case .eliminer(let cible):
             let reste = territories(of: cible).count
-            return reste == 0 ? "Le camp est tombé"
-                              : "Il lui reste \(reste) territoire\(reste > 1 ? "s" : "")"
+            // Deux phrases : le pluriel anglais de « territory » n'est pas un
+            // « s » ajouté, et un morceau de pluriel glissé dans un trou
+            // donnerait « territors ».
+            if reste == 0 { return dit("Le camp est tombé") }
+            return reste > 1 ? dit("Il lui reste \(reste) territoires")
+                             : dit("Il lui reste \(reste) territoire")
         }
     }
 
@@ -250,12 +254,15 @@ extension GameState {
     func porteDite(_ joueur: PlayerID) -> String {
         switch porteDeLaVictoire(joueur) {
         case .plateauEntier:
-            return "Le plateau entier, sans un territoire laissé."
+            return dit("Le plateau entier, sans un territoire laissé.")
         case .conquete:
-            guard let carte = objectif(de: joueur) else { return "Sa conquête personnelle." }
-            return "Sa conquête personnelle — \(texte(carte))"
+            guard let carte = objectif(de: joueur) else { return dit("Sa conquête personnelle.") }
+            return dit("Sa conquête personnelle — \(texte(carte))")
         case .seuil:
-            return "Le seuil de \(dominationThreshold) territoires sur \(map.order.count)."
+            return dit("""
+                       Le seuil de \(dominationThreshold) territoires sur \
+                       \(map.order.count).
+                       """)
         }
     }
 

@@ -83,9 +83,9 @@ struct LobbyView: View {
     /// les options qui changent vraiment la partie.
     private var laPartieQuOnOuvre: String {
         var dits = [plateau.label, regles.mode.label]
-        if regles.territoryCards { dits.append("cartes") }
-        if regles.objectifs { dits.append("conquêtes personnelles") }
-        if regles.dominationOverride == 0 { dits.append("guerre totale") }
+        if regles.territoryCards { dits.append(dit("cartes")) }
+        if regles.objectifs { dits.append(dit("conquêtes personnelles")) }
+        if regles.dominationOverride == 0 { dits.append(dit("guerre totale")) }
         return dits.joined(separator: " · ")
     }
 

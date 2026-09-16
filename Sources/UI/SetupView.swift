@@ -525,11 +525,11 @@ struct SetupView: View {
     private var resumeDeLaVictoire: String {
         let total = plateau.board.map.order.count
         if objectifs {
-            return "Victoire à sa conquête personnelle, et à rien d'autre"
+            return dit("Victoire à sa conquête personnelle, et à rien d'autre")
         }
         return guerreTotale
-            ? "Victoire à la conquête intégrale des \(total) territoires"
-            : "Victoire à \(seuil) territoires sur \(total)"
+            ? dit("Victoire à la conquête intégrale des \(total) territoires")
+            : dit("Victoire à \(seuil) territoires sur \(total)")
     }
 
     private var compensation: Int { Rules().compensation(playerCount: count) }

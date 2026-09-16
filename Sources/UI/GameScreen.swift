@@ -476,9 +476,13 @@ private struct BottomBar: View {
     /// c'est précisément le regret qu'on veut éviter au joueur pressé.
     private var avertissementDeplacement: String {
         let g = session.game
-        let base = "On ne revient pas à l'attaque une fois le déplacement commencé."
-        guard g.rules.territoryCards, !g.conqueredThisTurn else { return base }
-        return base + " Et sans une seule conquête ce tour, vous ne piochez pas de carte."
+        guard g.rules.territoryCards, !g.conqueredThisTurn else {
+            return dit("On ne revient pas à l'attaque une fois le déplacement commencé.")
+        }
+        return dit("""
+                   On ne revient pas à l'attaque une fois le déplacement commencé. \
+                   Et sans une seule conquête ce tour, vous ne piochez pas de carte.
+                   """)
     }
 
     /// La consigne a la forme du bouton — même capsule, même largeur — mais
@@ -591,28 +595,29 @@ private struct BottomBar: View {
     private var consigne: String {
         let g = session.game
         if !session.aMoiDeJouer && !g.isOver {
-            return session.enReseau ? "À \(g.currentPlayer.name) de jouer, sur l'autre appareil…"
-                                    : "\(g.currentPlayer.name) joue…"
+            return session.enReseau
+                ? dit("À \(g.currentPlayer.name) de jouer, sur l'autre appareil…")
+                : dit("\(g.currentPlayer.name) joue…")
         }
         switch g.phase {
         case .reinforcement(let n):
             if g.doitEchanger(g.currentPlayer.id) {
-                return "Cinq cartes en main : il faut en échanger trois avant de poser."
+                return dit("Cinq cartes en main : il faut en échanger trois avant de poser.")
             }
-            return n > 0 ? "Touchez vos territoires pour y poser vos \(n) renforts."
-                         : "Tous les renforts sont posés."
+            return n > 0 ? dit("Touchez vos territoires pour y poser vos \(n) renforts.")
+                         : dit("Tous les renforts sont posés.")
         case .attack:
             if let base = session.selected {
-                return "Depuis \(g.name(base)) — touchez un voisin ennemi à attaquer."
+                return dit("Depuis \(g.name(base)) — touchez un voisin ennemi à attaquer.")
             }
-            return "Touchez un de vos territoires d'au moins deux hommes pour partir de là."
+            return dit("Touchez un de vos territoires d'au moins deux hommes pour partir de là.")
         case .occupation:
-            return "Choisissez combien d'hommes avancent."
+            return dit("Choisissez combien d'hommes avancent.")
         case .fortify:
             if let base = session.selected {
-                return "Depuis \(g.name(base)) — touchez un de vos territoires reliés."
+                return dit("Depuis \(g.name(base)) — touchez un de vos territoires reliés.")
             }
-            return "Un seul déplacement, puis le tour passe. Ou terminez directement."
+            return dit("Un seul déplacement, puis le tour passe. Ou terminez directement.")
         case .finished:
             return ""
         }
@@ -642,9 +647,9 @@ private struct FilDuTour: View {
 
         var label: String {
             switch self {
-            case .renforts:    "Renforts"
-            case .attaque:     "Attaque"
-            case .deplacement: "Déplacement"
+            case .renforts:    dit("Renforts")
+            case .attaque:     dit("Attaque")
+            case .deplacement: dit("Déplacement")
             }
         }
     }
@@ -843,21 +848,21 @@ private struct AssaultPanel: View {
         let une = session.draftQuestions == 1
         if g.rules.mode == .classique {
             return une
-                ? "Un duel : au plus un homme perdu de chaque côté."
-                : """
-                  Deux duels de suite. Le sablier se resserre au second — mais deux bonnes \
-                  réponses vous coûtent deux hommes.
-                  """
+                ? dit("Un duel : au plus un homme perdu de chaque côté.")
+                : dit("""
+                      Deux duels de suite. Le sablier se resserre au second — mais deux bonnes \
+                      réponses vous coûtent deux hommes.
+                      """)
         }
         return une
-            ? """
-              Un duel, la même question pour vous deux. S'il double la mise, il vaudra \
-              deux hommes.
-              """
-            : """
-              Deux duels de suite, la même question à chaque fois pour vous deux. Le sablier \
-              se resserre au second, et il peut doubler la mise sur chacun.
-              """
+            ? dit("""
+                  Un duel, la même question pour vous deux. S'il double la mise, il vaudra \
+                  deux hommes.
+                  """)
+            : dit("""
+                  Deux duels de suite, la même question à chaque fois pour vous deux. Le sablier \
+                  se resserre au second, et il peut doubler la mise sur chacun.
+                  """)
     }
 
     /// Le septième terrain : celui qu'on ne choisit pas.

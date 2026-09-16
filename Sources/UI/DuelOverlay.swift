@@ -391,13 +391,13 @@ struct DuelOverlay: View {
         // sa phrase entière ; c'est aussi la seule forme qu'un traducteur
         // puisse relire.
         let nom = session.assault.flatMap { session.player($0.defender)?.name }
-            ?? String(localized: "Le défenseur")
+            ?? dit("Le défenseur")
         let att = session.assault.flatMap { session.player($0.attacker)?.name }
-            ?? String(localized: "L'assaillant")
+            ?? dit("L'assaillant")
         let lieu = session.assault.map { session.game.name($0.to) }
-            ?? String(localized: "La place")
-        let cout = r.mise > 1 ? String(localized: "deux hommes")
-                              : String(localized: "un homme")
+            ?? dit("La place")
+        let cout = r.mise > 1 ? dit("deux hommes")
+                              : dit("un homme")
 
         switch r.verdict {
         case .reponse:

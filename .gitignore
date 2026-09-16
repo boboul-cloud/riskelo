@@ -18,6 +18,13 @@ xcuserdata/
 *.dSYM.zip
 *.dSYM
 
+# La clé de l'API App Store Connect ouvre le compte développeur en écriture :
+# elle ne va pas dans le dépôt, et le fichier de configuration nomme son
+# emplacement plus l'identifiant de l'app. Voir outils/asc-achats.py.
+outils/asc-config.json
+*.p8
+AuthKey_*.p8
+
 # Le serveur des salons. « npm install » les refait, et « wrangler dev » aussi :
 # deux cent vingt méga-octets qui n'ont rien à faire dans l'historique d'un jeu.
 serveur/node_modules/

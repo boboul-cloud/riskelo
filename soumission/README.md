@@ -16,7 +16,7 @@ plutôt que le quoi.
 | [metadonnees.md](metadonnees.md) | Nom, sous-titre, mots-clés, description, nouveautés, catégories, URL |
 | [confidentialite-app-store.md](confidentialite-app-store.md) | Les réponses au questionnaire « Confidentialité des données » |
 | [captures-decran.md](captures-decran.md) | Les tailles exigées, les écrans à photographier, la marche à suivre |
-| [packs-app-store.md](packs-app-store.md) | Les dix-sept achats intégrés, un bloc à recopier par pack |
+| [packs-app-store.md](packs-app-store.md) | Les trente-quatre achats intégrés — dix-sept par langue, un bloc à recopier par pack |
 | [notes-pour-la-revue.md](notes-pour-la-revue.md) | Ce qu'il faut dire au relecteur d'Apple pour qu'il ne bloque pas |
 
 Les URL publiques attendues par Apple sont servies par GitHub Pages depuis le

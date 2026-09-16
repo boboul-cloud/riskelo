@@ -109,8 +109,8 @@ pour les mêmes raisons : voir `soumission/confidentialite-app-store.md`, qui a
 | Catégorie secondaire | Jeux ▸ **Culture générale** |
 | Classification par âge | **4+** |
 | Game Center | non |
-| Achats intégrés | dix-sept packs, non consommables — section 4 bis |
-| Prix | **à décider** — celui de l'application, et le palier des dix-sept packs |
+| Achats intégrés | trente-quatre packs, non consommables — dix-sept par langue, section 4 bis |
+| Prix | **à décider** — celui de l'application, et le palier des trente-quatre packs |
 | Territoires | tous |
 | Publication | **à décider** — automatique à l'approbation, ou manuelle |
 
@@ -129,6 +129,12 @@ première partie jouée.
 | **URL d'assistance** (obligatoire) | `https://boboul-cloud.github.io/riskelo/assistance.html` |
 | **URL de la politique de confidentialité** (obligatoire) | `https://boboul-cloud.github.io/riskelo/confidentialite.html` |
 | CLUF personnalisé (facultatif) | `https://boboul-cloud.github.io/riskelo/conditions.html` |
+
+Ces quatre adresses sont celles de la fiche **française**. La fiche anglaise a
+les siennes, dans `/en/` — voir [LOCALISATION-EN.md](LOCALISATION-EN.md). Les
+deux versions d'une même page se répondent par un bouton dans la barre du
+haut : un lecteur arrivé du mauvais côté n'est jamais coincé.
+
 | Dépôt du code et du site | `https://github.com/boboul-cloud/riskelo` |
 
 Les trois premières sont publiques et vérifiées. Si l'une répond autre chose
@@ -325,22 +331,34 @@ CE QUI SE VOIT MIEUX
 > Une version soumise avec la page des packs mais sans articles joints
 > montrerait « indisponible » à tout le monde.
 
-Dix-sept packs de questions, **non consommables** : achetés une fois, gardés
-pour toujours. Seize packs scolaires — Histoire, Géographie, Français et SVT
+**Trente-quatre packs de questions, non consommables** : achetés une fois,
+gardés pour toujours. Dix-sept par langue, depuis que l'anglais est une langue
+de Riskelo et non une seconde application.
+
+Côté français : seize packs scolaires — Histoire, Géographie, Français et SVT
 pour les quatre années du collège, deux cents questions chacun — et « Rock
-70-80 », quatre cents questions sur la musique des années 1970 et 1980. Deux cents questions chacun — la taille qui donne deux soirées sans
-redite, mesurée et non estimée ; le tableau est dans le README. Le jeu de base
-— les six thèmes de culture générale, 2 400 questions — reste entier sans eux.
+70-80 », quatre cents questions sur la musique des années 1970 et 1980. Deux
+cents questions chacun — la taille qui donne deux soirées sans redite, mesurée
+et non estimée ; le tableau est dans le README. Côté anglais : seize packs du
+programme américain, de la sixième à la troisième année de collège, et le même
+Rock 70-80 écrit pour un lecteur américain.
+
+Le jeu de base — les six thèmes de culture générale, 2 400 questions dans
+chaque langue — reste entier sans eux. La page des packs ne montre que la
+langue en cours : un Français n'y voit pas les seize packs américains.
 
 Ce qui s'achète n'est pas le contenu : les fichiers sont dans l'application,
 sur tous les appareils. C'est le droit de **choisir** un pack. C'est ce qui
 permet à celui qui rejoint une table de jouer les packs de l'hôte sans les
 avoir achetés — et c'est voulu.
 
-### Les trois articles à créer
+### Les dix-sept articles français
 
-Type : **Non-Consumable** pour les trois. Les identifiants sont ceux que le
-code demande : une lettre de travers et l'article n'est jamais trouvé.
+Type : **Non-Consumable** pour les dix-sept. Les identifiants sont ceux que le
+code demande : une lettre de travers et l'article n'est jamais trouvé. Les
+dix-sept anglais portent la famille `com.oulhen.riskelo.pack.us.…` et sont
+listés, comme ceux-ci, dans
+[packs-app-store.md](packs-app-store.md) — un bloc à recopier par article.
 
 | Identifiant | Nom de référence | Nom affiché |
 |---|---|---|
@@ -362,7 +380,10 @@ code demande : une lettre de travers et l'article n'est jamais trouvé.
 | `com.oulhen.riskelo.pack.svt3e` | Pack SVT 3e | SVT — 3e |
 | `com.oulhen.riskelo.pack.geographie3e` | Pack Géographie 3e | Géographie — 3e |
 
-Les descriptions, à coller telles quelles :
+Les descriptions longues, **à lire et non à coller** : le formulaire d'App
+Store Connect s'arrête à 45 signes, et celles-ci en font près du double. Les
+versions courtes, comptées, sont dans
+[packs-app-store.md](packs-app-store.md).
 
 ```
 Les groupes et les voix des années 1970 et 1980, en France et ailleurs. 400 questions.
@@ -478,7 +499,7 @@ envoyées ne comptent pas comme collectées.
 |---|---|
 | Utilisez-vous l'identifiant publicitaire (IDFA) ? | Non |
 | Suivi (App Tracking Transparency) ? | Non |
-| Achats intégrés ? | Oui — dix-sept packs non consommables |
+| Achats intégrés ? | Oui — trente-quatre packs non consommables |
 | Publicité dans l'app ? | Non |
 | Contenu de tiers soumis à droits ? | Non — code, questions, plateaux et icône sont l'œuvre de l'éditeur |
 | Chiffrement / conformité export | `ITSAppUsesNonExemptEncryption = false`, déjà dans l'Info.plist : plus rien à répondre à chaque envoi |
@@ -796,7 +817,7 @@ une question de calendrier, plus d'un obstacle technique.
 - [ ] Questionnaires de la section 5 remplis
 - [ ] Notes de la section 6 collées
 - [ ] Prix et disponibilité choisis
-- [ ] Les dix-sept achats intégrés créés (section 4 bis) et **joints à la version**
+- [ ] Les trente-quatre achats intégrés créés (section 4 bis) et **joints à la version**
 - [ ] Achats essayés avec un compte sandbox sur un appareil réel
 - [ ] Soumis à la revue
 
@@ -809,7 +830,7 @@ relecteur : un fil qui traîne repart en bas de la file.
 
 | Point | Pourquoi c'est à vous |
 |---|---|
-| Le prix | Deux décisions, pas une : le prix de l'application — gratuite fait des joueurs, payante fait un revenu — et le palier des dix-sept packs, qui sont la seule autre recette du jeu. |
+| Le prix | Deux décisions, pas une : le prix de l'application — gratuite fait des joueurs, payante fait un revenu — et le palier des trente-quatre packs, qui sont la seule autre recette du jeu. |
 | Le numéro de téléphone de la revue | Apple l'exige ; il n'est jamais rendu public. |
 | Publication automatique ou manuelle | Manuelle si vous voulez choisir le jour. |
 | macOS maintenant ou plus tard | Plus aucun obstacle : le bac à sable est posé et la liaison Mac ↔ iPhone est vérifiée avec. Pure question de calendrier. |

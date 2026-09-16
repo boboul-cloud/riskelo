@@ -13,6 +13,31 @@ ne change pas.
 Ajouter la langue **Anglais (États-Unis)**. Le nom reste `Riskelo` dans les
 deux langues : c'est le nom de l'app, pas une phrase.
 
+### Les adresses de la fiche anglaise
+
+App Store Connect demande ces adresses **par langue**. Le site en a maintenant
+une version anglaise, sous `/en/`, et chaque page renvoie à son équivalent
+français par un bouton dans la barre du haut.
+
+| Champ App Store Connect | Adresse |
+|---|---|
+| URL marketing | `https://boboul-cloud.github.io/riskelo/en/` |
+| **URL d'assistance** (obligatoire) | `https://boboul-cloud.github.io/riskelo/en/support.html` |
+| **URL de la politique de confidentialité** (obligatoire) | `https://boboul-cloud.github.io/riskelo/en/privacy.html` |
+| CLUF personnalisé (facultatif) | `https://boboul-cloud.github.io/riskelo/en/terms.html` |
+
+Les trois premières sont obligatoires et se vérifient avant d'envoyer :
+
+```bash
+for p in en/ en/support.html en/privacy.html en/terms.html; do
+  curl -s -o /dev/null -w "$p %{http_code}\n" https://boboul-cloud.github.io/riskelo/$p
+done
+```
+
+Le mode d'emploi du site reste français : sa version anglaise est dans
+l'application, au bouton *How to play*, et la fiche anglaise d'assistance y
+renvoie plutôt que de promettre une page qui n'existe pas.
+
 ### Sous-titre — 30 signes max
 
 ```
@@ -108,25 +133,31 @@ History, Geography, English and Science. The French packs are unchanged.
 Non consommables, partage familial activé, comme les français. Ils portent la
 famille `pack.us.` : c'est elle qui les distingue, et un test la vérifie.
 
-| Nom de référence | Identifiant de produit | Nom affiché (35) | Description (55) |
+Les formulaires se recopient depuis [packs-app-store.md](packs-app-store.md),
+un bloc par article, les trente-quatre à la suite. Le tableau ci-dessous en
+est le résumé. **Le nom d'affichage s'arrête à 30 signes et la description à
+45** : ce tableau a d'abord été écrit pour 55, et ses descriptions ont été
+raccourcies pour entrer dans la case.
+
+| Nom de référence | Identifiant de produit | Nom affiché (30) | Description (45) |
 |---|---|---|---|
-| Rock 70 80 Pack | `com.oulhen.riskelo.pack.us.rock7080` | Rock 70-80 | `Bands and voices of the 1970s and 80s. 400 questions.` |
-| History Grade 6 Pack | `com.oulhen.riskelo.pack.us.history6` | History — Grade 6 | `Mesopotamia, Egypt, Greece and Rome. 200 questions.` |
-| Geography Grade 6 Pack | `com.oulhen.riskelo.pack.us.geography6` | Geography — Grade 6 | `Map skills, landforms, Africa, Asia. 200 questions.` |
-| English Grade 6 Pack | `com.oulhen.riskelo.pack.us.english6` | English — Grade 6 | `Grammar, punctuation, roots and myths. 200 questions.` |
-| Science Grade 6 Pack | `com.oulhen.riskelo.pack.us.science6` | Science — Grade 6 | `Earth science: rocks, weather, space. 200 questions.` |
-| History Grade 7 Pack | `com.oulhen.riskelo.pack.us.history7` | History — Grade 7 | `The medieval and early modern world. 200 questions.` |
-| Geography Grade 7 Pack | `com.oulhen.riskelo.pack.us.geography7` | Geography — Grade 7 | `Europe, the Americas, the Pacific. 200 questions.` |
-| English Grade 7 Pack | `com.oulhen.riskelo.pack.us.english7` | English — Grade 7 | `Poetry, fiction, drama and novels. 200 questions.` |
-| Science Grade 7 Pack | `com.oulhen.riskelo.pack.us.science7` | Science — Grade 7 | `Life science: cells, plants, animals. 200 questions.` |
-| History Grade 8 Pack | `com.oulhen.riskelo.pack.us.history8` | History — Grade 8 | `Colonial America to Reconstruction. 200 questions.` |
-| Geography Grade 8 Pack | `com.oulhen.riskelo.pack.us.geography8` | Geography — Grade 8 | `The fifty states and their geography. 200 questions.` |
-| English Grade 8 Pack | `com.oulhen.riskelo.pack.us.english8` | English — Grade 8 | `American literature, Poe to Morrison. 200 questions.` |
-| Science Grade 8 Pack | `com.oulhen.riskelo.pack.us.science8` | Science — Grade 8 | `Atoms, reactions, forces and waves. 200 questions.` |
-| History Grade 9 Pack | `com.oulhen.riskelo.pack.us.history9` | History — Grade 9 | `The modern world, 1750 to today. 200 questions.` |
-| Geography Grade 9 Pack | `com.oulhen.riskelo.pack.us.geography9` | Geography — Grade 9 | `Population, cities and world trade. 200 questions.` |
-| English Grade 9 Pack | `com.oulhen.riskelo.pack.us.english9` | English — Grade 9 | `Shakespeare and world literature. 200 questions.` |
-| Science Grade 9 Pack | `com.oulhen.riskelo.pack.us.science9` | Science — Grade 9 | `Biology: DNA, genetics and evolution. 200 questions.` |
+| Rock 70 80 Pack | `com.oulhen.riskelo.pack.us.rock7080` | Rock 70-80 | `Rock of the 1970s and 1980s. 400 questions.` |
+| History Grade 6 Pack | `com.oulhen.riskelo.pack.us.history6` | History — Grade 6 | `Ancient Egypt, Greece, Rome. 200 questions.` |
+| Geography Grade 6 Pack | `com.oulhen.riskelo.pack.us.geography6` | Geography — Grade 6 | `Map skills, Africa and Asia. 200 questions.` |
+| English Grade 6 Pack | `com.oulhen.riskelo.pack.us.english6` | English — Grade 6 | `Grammar, word roots, myths. 200 questions.` |
+| Science Grade 6 Pack | `com.oulhen.riskelo.pack.us.science6` | Science — Grade 6 | `Rocks, weather, space. 200 questions.` |
+| History Grade 7 Pack | `com.oulhen.riskelo.pack.us.history7` | History — Grade 7 | `Middle Ages to Columbus. 200 questions.` |
+| Geography Grade 7 Pack | `com.oulhen.riskelo.pack.us.geography7` | Geography — Grade 7 | `Europe, Americas, Pacific. 200 questions.` |
+| English Grade 7 Pack | `com.oulhen.riskelo.pack.us.english7` | English — Grade 7 | `Poetry, fiction, drama. 200 questions.` |
+| Science Grade 7 Pack | `com.oulhen.riskelo.pack.us.science7` | Science — Grade 7 | `Cells, plants, animals. 200 questions.` |
+| History Grade 8 Pack | `com.oulhen.riskelo.pack.us.history8` | History — Grade 8 | `Colonies to Reconstruction. 200 questions.` |
+| Geography Grade 8 Pack | `com.oulhen.riskelo.pack.us.geography8` | Geography — Grade 8 | `States, capitals, cities. 200 questions.` |
+| English Grade 8 Pack | `com.oulhen.riskelo.pack.us.english8` | English — Grade 8 | `Literature, Poe to Morrison. 200 questions.` |
+| Science Grade 8 Pack | `com.oulhen.riskelo.pack.us.science8` | Science — Grade 8 | `Atoms, forces, energy, waves. 200 questions.` |
+| History Grade 9 Pack | `com.oulhen.riskelo.pack.us.history9` | History — Grade 9 | `The modern world since 1750. 200 questions.` |
+| Geography Grade 9 Pack | `com.oulhen.riskelo.pack.us.geography9` | Geography — Grade 9 | `Population, cities, trade. 200 questions.` |
+| English Grade 9 Pack | `com.oulhen.riskelo.pack.us.english9` | English — Grade 9 | `Shakespeare and the classics. 200 questions.` |
+| Science Grade 9 Pack | `com.oulhen.riskelo.pack.us.science9` | Science — Grade 9 | `DNA, genetics, evolution. 200 questions.` |
 
 Les dix-sept articles français ne bougent pas.
 

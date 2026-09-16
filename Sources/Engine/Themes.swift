@@ -87,7 +87,13 @@ enum Langue: String, Codable, CaseIterable {
     /// français est servi en anglais : c'est la seule autre banque, et un
     /// joueur allemand préfère des questions qu'il peut lire.
     static var deLAppareil: Langue {
-        (Locale.preferredLanguages.first ?? "fr").hasPrefix("fr") ? .fr : .en
+        // Ce qu'iOS a **réellement** choisi pour l'interface, et non ce que
+        // l'appareil préfère dans l'absolu. Les deux diffèrent dès que la
+        // langue du téléphone n'est ni le français ni l'anglais : un appareil
+        // allemand voyait son interface tomber sur la langue de repli du
+        // paquet et ses questions sur l'anglais. Un joueur ne doit jamais lire
+        // un bouton dans une langue et sa question dans une autre.
+        (Bundle.main.preferredLocalizations.first ?? "fr").hasPrefix("fr") ? .fr : .en
     }
 }
 

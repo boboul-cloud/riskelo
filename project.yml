@@ -1,14 +1,14 @@
 name: Riskelo
 options:
-  # Le français est la langue d'origine : les clés du catalogue sont ses
-  # phrases, et l'anglais en est la traduction. C'est aussi ce qui s'affiche
-  # sur un appareil dont la langue n'est ni l'une ni l'autre.
-  developmentLanguage: fr
   bundleIdPrefix: com.oulhen
   deploymentTarget:
     iOS: "17.0"
     macOS: "14.0"
   createIntermediateGroups: true
+  # Le français est la langue d'origine : les clés du catalogue sont ses
+  # phrases, et l'anglais en est la traduction. C'est aussi ce qui s'affiche
+  # sur un appareil dont la langue n'est ni l'une ni l'autre — et les
+  # questions suivent ce choix, pas celui du téléphone.
   developmentLanguage: fr
 
 settings:

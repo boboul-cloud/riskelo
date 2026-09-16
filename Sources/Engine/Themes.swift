@@ -97,6 +97,23 @@ enum Langue: String, Codable, CaseIterable {
     }
 }
 
+/// Une phrase de l'interface, dans la langue choisie **dans l'application**.
+///
+/// `String(localized:)` seul interroge la langue du système. Tant que le choix
+/// se faisait dans les Réglages d'iOS, cela suffisait ; du jour où l'app offre
+/// le sien, une phrase assemblée hors d'une vue resterait dans la langue du
+/// téléphone pendant que les boutons changeraient. D'où ce détour.
+func dit(_ cle: String.LocalizationValue) -> String {
+    // Par le paquet, et non par `locale:` — qui ne choisit que le format des
+    // nombres et des dates, jamais la table de traduction. L'erreur ne se voit
+    // pas à la compilation : la phrase sort simplement dans la langue du
+    // système, au milieu d'une interface qui a changé.
+    guard let chemin = Bundle.main.path(forResource: Themes.langue.rawValue,
+                                        ofType: "lproj"),
+          let paquet = Bundle(path: chemin) else { return String(localized: cle) }
+    return String(localized: cle, bundle: paquet)
+}
+
 // MARK: - Ce qu'un thème déclare
 
 /// La carte d'identité d'un thème, lue en tête de son fichier de questions.

@@ -16,9 +16,18 @@ struct RiskeloApp: App {
     @Environment(\.scenePhase) private var scenePhase
     @State private var racine = RootModel()
 
+    /// La langue choisie dans l'application, lue là où elle est écrite.
+    ///
+    /// C'est elle qui pose la locale de toute la hiérarchie de vues : SwiftUI
+    /// résout ses textes contre celle de l'environnement, donc il suffit de la
+    /// poser une fois, à la racine. Et comme c'est un @AppStorage, en changer
+    /// redessine l'app sans qu'on ait à prévenir personne.
+    @AppStorage("langue-des-questions") private var langue = Langue.deLAppareil.rawValue
+
     var body: some Scene {
         WindowGroup {
             RootView(model: racine)
+                .environment(\.locale, Locale(identifier: langue))
                 // Le lien d'invitation, touché dans WhatsApp, dans un SMS ou
                 // dans un mail. Les deux formes y passent : l'adresse du
                 // site, qui ouvre le jeu quand le système a fait le

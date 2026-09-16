@@ -28,7 +28,7 @@ import Foundation
 /// une case du plateau avant d'être un mot, et sa définition n'a pas à
 /// exister en double.
 func nomTraduit(_ brut: String) -> String {
-    String(localized: String.LocalizationValue(brut))
+    dit(String.LocalizationValue(brut))
 }
 
 enum Boards: String, CaseIterable, Identifiable, Codable {

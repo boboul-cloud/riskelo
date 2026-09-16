@@ -78,12 +78,36 @@ struct PacksView: View {
     @State private var choisis = Packs.choisis
     @State private var avecBase = Packs.avecBase
 
+    /// La langue des questions, et de tout le reste avec elles.
+    ///
+    /// Elle est ici plutôt que dans les réglages de la partie : une partie se
+    /// règle au coup par coup, une langue se choisit une fois. Et c'est sur
+    /// cet écran qu'on vient voir ce qu'il y a à jouer — le moment où la
+    /// question se pose.
+    ///
+    /// iOS offre déjà le même choix dans ses Réglages, app par app. Personne
+    /// ne l'y cherche.
+    @AppStorage("langue-des-questions") private var langue = Langue.deLAppareil.rawValue
+
+    @ViewBuilder private var choixDeLangue: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Picker("Langue", selection: $langue) {
+                Text("Français").tag(Langue.fr.rawValue)
+                Text("English").tag(Langue.en.rawValue)
+            }
+            .pickerStyle(.segmented)
+            Text("Les questions, les menus et le mode d'emploi suivent ensemble.")
+                .font(.caption2).foregroundStyle(Palette.dim)
+        }
+    }
+
     var body: some View {
         VStack(spacing: 0) {
             entete
             ScrollView {
                 VStack(alignment: .leading, spacing: 18) {
                     presentation
+                    choixDeLangue
                     jeuDeBase
                     ForEach(Themes.packs) { pack in ligne(pack) }
                     restauration

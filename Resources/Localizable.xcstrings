@@ -1,13 +1,28 @@
 {
   "sourceLanguage": "fr",
   "strings": {
-    "": {},
+    "": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": ""
+          }
+        }
+      }
+    },
     " *Remplie.*": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": " *Filled.*"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": " *Remplie.*"
           }
         }
       }
@@ -35,6 +50,44 @@
             "state": "translated",
             "value": "%@ sent a game this device cannot read. Install the same version of Riskelo on both, then start again."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ a envoyé une partie que cet appareil ne sait pas lire. Installez la même version de Riskelo sur les deux, puis recommencez."
+          }
+        }
+      }
+    },
+    "%@ a fait tomber %@ — c'était sa conquête.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ brought down %@ — that was their conquest."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ a fait tomber %@ — c'était sa conquête."
+          }
+        }
+      }
+    },
+    "%@ a placé ses renforts.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ has placed their reinforcements."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ a placé ses renforts."
+          }
         }
       }
     },
@@ -44,6 +97,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ answered correctly: %@ holds, the attacker leaves %@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ a répondu juste : %@ tient, l'assaillant laisse %@."
           }
         }
       }
@@ -55,6 +114,12 @@
             "state": "translated",
             "value": "%@ has answered. The same question is yours."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ a répondu. À vous la même question."
+          }
         }
       }
     },
@@ -64,6 +129,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ attacks"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ attaque"
           }
         }
       }
@@ -84,12 +155,114 @@
         }
       }
     },
+    "%@ attaque %@ depuis %@ — %lld question%@ %@.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ attacks %@ from %@ — %lld question%@ on %@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ attaque %@ depuis %@ — %lld question%@ %@."
+          }
+        }
+      }
+    },
+    "%@ attaque %@ depuis %@ — %lld question%@ au hasard.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ attacks %@ from %@ — %lld question%@ at random."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ attaque %@ depuis %@ — %lld question%@ au hasard."
+          }
+        }
+      }
+    },
     "%@ est prise.": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "%@ falls."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ est prise."
+          }
+        }
+      }
+    },
+    "%@ est éliminé.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ is eliminated."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ est éliminé."
+          }
+        }
+      }
+    },
+    "%@ et %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ and %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ et %@"
+          }
+        }
+      }
+    },
+    "%@ gagne une carte.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ earns a card."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ gagne une carte."
+          }
+        }
+      }
+    },
+    "%@ hérite de %lld carte%@ du vaincu.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ inherits %lld card%@ from the loser."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ hérite de %lld carte%@ du vaincu."
           }
         }
       }
@@ -101,6 +274,12 @@
             "state": "translated",
             "value": "%@ wins it"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ l'emporte"
+          }
         }
       }
     },
@@ -110,6 +289,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ did not answer in time: %@ loses %@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ n'a pas répondu à temps : %@ perd %@."
           }
         }
       }
@@ -121,6 +306,28 @@
             "state": "translated",
             "value": "%@ did not answer."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ n'a pas répondu."
+          }
+        }
+      }
+    },
+    "%@ relance : l'échange vaudra deux hommes.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ raises: the exchange will be worth two troops."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ relance : l'échange vaudra deux hommes."
+          }
         }
       }
     },
@@ -130,6 +337,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ is answering…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ répond…"
           }
         }
       }
@@ -141,6 +354,12 @@
             "state": "translated",
             "value": "%@ got it wrong: %@ loses %@."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ s'est trompé : %@ perd %@."
+          }
         }
       }
     },
@@ -150,6 +369,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ knew, %@ did not: %@ loses %@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ savait, %@ non : %@ perd %@."
           }
         }
       }
@@ -161,6 +386,108 @@
             "state": "translated",
             "value": "%@ knew, %@ did not: %@ holds, the attacker leaves %@."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ savait, %@ non : %@ tient, l'assaillant laisse %@."
+          }
+        }
+      }
+    },
+    "%@ tenait %@ — c'était sa conquête.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ held %@ — that was their conquest."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ tenait %@ — c'était sa conquête."
+          }
+        }
+      }
+    },
+    "%@ tient %lld places à %@ hommes — c'était sa conquête.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ holds %lld places at %@ troops — that was their conquest."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ tient %lld places à %@ hommes — c'était sa conquête."
+          }
+        }
+      }
+    },
+    "%@ tient %lld territoires — c'était sa conquête.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ holds %lld territories — that was their conquest."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ tient %lld territoires — c'était sa conquête."
+          }
+        }
+      }
+    },
+    "%@ tient : bonne réponse, l'assaillant laisse %@.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ holds: correct answer, the attacker leaves %@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ tient : bonne réponse, l'assaillant laisse %@."
+          }
+        }
+      }
+    },
+    "%@ tient : le défenseur savait, l'assaillant non — %@ de moins pour lui.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ holds: the defender knew, the attacker did not — %@ fewer for them."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ tient : le défenseur savait, l'assaillant non — %@ de moins pour lui."
+          }
+        }
+      }
+    },
+    "%@ tient assez du monde pour que le reste ne compte plus.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ holds enough of the world for the rest to stop counting."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ tient assez du monde pour que le reste ne compte plus."
+          }
         }
       }
     },
@@ -171,6 +498,44 @@
             "state": "translated",
             "value": "%@ holds."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ tient bon."
+          }
+        }
+      }
+    },
+    "%@ tient le monde entier.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ holds the whole world."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ tient le monde entier."
+          }
+        }
+      }
+    },
+    "%@ tombe. %@ s'en empare.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ falls. %@ takes it."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ tombe. %@ s'en empare."
+          }
         }
       }
     },
@@ -180,6 +545,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ invites you"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ vous invite"
+          }
+        }
+      }
+    },
+    "%@ échange trois cartes : %lld hommes.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ trades three cards: %lld troops."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ échange trois cartes : %lld hommes."
           }
         }
       }
@@ -223,6 +610,12 @@
             "state": "translated",
             "value": "%lld"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld"
+          }
         }
       }
     },
@@ -232,6 +625,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld%% correct answers"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld %% de bonnes réponses"
           }
         }
       }
@@ -252,6 +651,70 @@
         }
       }
     },
+    "%lld homme avance sur %@.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld troop advances into %@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld homme avance sur %@."
+          }
+        }
+      }
+    },
+    "%lld homme%@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld troop%@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld homme%@"
+          }
+        }
+      }
+    },
+    "%lld homme%@ de %@ vers %@.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld troop%@ from %@ to %@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld homme%@ de %@ vers %@."
+          }
+        }
+      }
+    },
+    "%lld homme%@ de plus pour %@ : ses bonnes réponses.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld troop%@ more for %@: their correct answers."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld homme%@ de plus pour %@ : ses bonnes réponses."
+          }
+        }
+      }
+    },
     "%lld homme%@ sur %lld": {
       "localizations": {
         "en": {
@@ -268,12 +731,34 @@
         }
       }
     },
+    "%lld hommes avancent sur %@.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld troops advance into %@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld hommes avancent sur %@."
+          }
+        }
+      }
+    },
     "%lld hommes avancent — c'est tout ce que la place de départ peut céder.": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "%lld men advance — all the starting place can spare."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld hommes avancent — c'est tout ce que la place de départ peut céder."
           }
         }
       }
@@ -301,6 +786,12 @@
             "state": "translated",
             "value": "%lld humans"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld humains"
+          }
         }
       }
     },
@@ -310,6 +801,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld question%@ on %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld question%@ %@"
           }
         }
       }
@@ -321,12 +818,24 @@
             "state": "translated",
             "value": "%lld question%@ at random"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld question%@ au hasard"
+          }
         }
       }
     },
     "%lld questions": {
       "localizations": {
         "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld questions"
+          }
+        },
+        "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "%lld questions"
@@ -340,6 +849,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld seconds"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld secondes"
           }
         }
       }
@@ -367,6 +882,12 @@
             "state": "translated",
             "value": "%lld theme%@ in play — %lld questions."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld thème%@ en jeu — %lld questions."
+          }
         }
       }
     },
@@ -393,12 +914,24 @@
             "state": "translated",
             "value": "Question %lld on this place this turn — the clock tightens"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lldᵉ question sur cette place ce tour-ci — le temps se resserre"
+          }
         }
       }
     },
     "**%@** — %@": {
       "localizations": {
         "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "**%@** — %@"
+          }
+        },
+        "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "**%@** — %@"
@@ -413,6 +946,12 @@
             "state": "translated",
             "value": "+%lld"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "+%lld"
+          }
         }
       }
     },
@@ -423,16 +962,37 @@
             "state": "translated",
             "value": "1 human"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 humain"
+          }
         }
       }
     },
-    "?": {},
+    "?": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "?"
+          }
+        }
+      }
+    },
     "Accepter": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Accept"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accepter"
           }
         }
       }
@@ -444,6 +1004,12 @@
             "state": "translated",
             "value": "Home"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accueil"
+          }
         }
       }
     },
@@ -453,6 +1019,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Africa"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Afrique"
           }
         }
       }
@@ -464,6 +1036,12 @@
             "state": "translated",
             "value": "East Africa"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Afrique de l'Est"
+          }
         }
       }
     },
@@ -473,6 +1051,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "North Africa"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Afrique du Nord"
           }
         }
       }
@@ -484,6 +1068,12 @@
             "state": "translated",
             "value": "South Africa"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Afrique du Sud"
+          }
         }
       }
     },
@@ -493,6 +1083,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Albania"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Albanie"
           }
         }
       }
@@ -504,6 +1100,12 @@
             "state": "translated",
             "value": "Tradewind"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alizé"
+          }
         }
       }
     },
@@ -513,6 +1115,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Germany"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allemagne"
           }
         }
       }
@@ -524,6 +1132,12 @@
             "state": "translated",
             "value": "Amber"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ambre"
+          }
         }
       }
     },
@@ -533,6 +1147,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Central America"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Amérique centrale"
           }
         }
       }
@@ -544,6 +1164,12 @@
             "state": "translated",
             "value": "North America"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Amérique du Nord"
+          }
         }
       }
     },
@@ -553,6 +1179,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "South America"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Amérique du Sud"
           }
         }
       }
@@ -564,6 +1196,12 @@
             "state": "translated",
             "value": "England"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Angleterre"
+          }
         }
       }
     },
@@ -573,6 +1211,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cancel"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annuler"
           }
         }
       }
@@ -584,6 +1228,12 @@
             "state": "translated",
             "value": "Argentina"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Argentine"
+          }
         }
       }
     },
@@ -593,6 +1243,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Thornmere"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Armorique"
           }
         }
       }
@@ -604,6 +1260,12 @@
             "state": "translated",
             "value": "Asia"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Asie"
+          }
         }
       }
     },
@@ -613,6 +1275,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Move"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Au déplacement"
           }
         }
       }
@@ -624,6 +1292,12 @@
             "state": "translated",
             "value": "At random"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Au hasard"
+          }
         }
       }
     },
@@ -633,6 +1307,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Remotely, with a code"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Au loin, avec un code"
           }
         }
       }
@@ -644,6 +1324,12 @@
             "state": "translated",
             "value": "At least %lld: as many as there were questions."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Au moins %lld : autant que de questions posées."
+          }
         }
       }
     },
@@ -653,6 +1339,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "No games shelved yet."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucune partie rangée pour l'instant."
           }
         }
       }
@@ -664,6 +1356,12 @@
             "state": "translated",
             "value": "No table in sight."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucune table en vue."
+          }
         }
       }
     },
@@ -673,6 +1371,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Western Australia"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Australie occidentale"
           }
         }
       }
@@ -684,6 +1388,12 @@
             "state": "translated",
             "value": "Eastern Australia"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Australie orientale"
+          }
         }
       }
     },
@@ -693,6 +1403,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Austria"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autriche"
           }
         }
       }
@@ -704,6 +1420,12 @@
             "state": "translated",
             "value": "Done attacking?"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avez-vous fini d'attaquer ?"
+          }
         }
       }
     },
@@ -713,6 +1435,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Gold Bay"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Baie d'Or"
           }
         }
       }
@@ -724,6 +1452,12 @@
             "state": "translated",
             "value": "Balearics"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Baléares"
+          }
         }
       }
     },
@@ -733,6 +1467,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Belgium"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Belgique"
           }
         }
       }
@@ -744,6 +1484,12 @@
             "state": "translated",
             "value": "OK"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bien"
+          }
         }
       }
     },
@@ -753,6 +1499,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Belarus"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Biélorussie"
           }
         }
       }
@@ -764,6 +1516,12 @@
             "state": "translated",
             "value": "Blue"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bleu"
+          }
         }
       }
     },
@@ -773,6 +1531,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Hedgerow"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bocage"
           }
         }
       }
@@ -784,6 +1548,12 @@
             "state": "translated",
             "value": "Borea"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Boréa"
+          }
         }
       }
     },
@@ -793,6 +1563,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Brazil"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brésil"
           }
         }
       }
@@ -804,12 +1580,24 @@
             "state": "translated",
             "value": "Bulgaria"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bulgarie"
+          }
         }
       }
     },
     "CODE": {
       "localizations": {
         "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CODE"
+          }
+        },
+        "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "CODE"
@@ -824,6 +1612,12 @@
             "state": "translated",
             "value": "HOW MANY PLAYERS"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "COMBIEN DE JOUEURS"
+          }
         }
       }
     },
@@ -833,6 +1627,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Whitecape"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cap Blanc"
           }
         }
       }
@@ -844,6 +1644,12 @@
             "state": "translated",
             "value": "Territory cards"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cartes de territoire"
+          }
         }
       }
     },
@@ -853,6 +1659,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "This is not the card you drew: the side you were asked to bring down fell to somebody else's blows. It turned over into this fallback, so you can still win."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce n'est pas la carte que vous aviez tirée : le camp qu'on vous demandait d'abattre est tombé sous d'autres coups. Elle s'est retournée en ce repli, pour que vous puissiez encore gagner."
           }
         }
       }
@@ -864,6 +1676,12 @@
             "state": "translated",
             "value": "What each player has shown they know"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce que chacun a montré savoir"
+          }
         }
       }
     },
@@ -873,6 +1691,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "What each player was after"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce que chacun cherchait"
           }
         }
       }
@@ -884,6 +1708,12 @@
             "state": "translated",
             "value": "Whoever opens the game chooses for everyone."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Celui qui ouvre la partie choisit pour tout le monde."
+          }
         }
       }
     },
@@ -893,6 +1723,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Whoever opens the table chooses for everyone."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Celui qui ouvre la table choisit pour tout le monde."
           }
         }
       }
@@ -904,6 +1740,12 @@
             "state": "translated",
             "value": "Whoever opens starts %lld troops down: here the defense wins, and opening costs."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Celui qui ouvre part avec %lld hommes de moins : ici, la défense l'emporte, et ouvrir se paie."
+          }
         }
       }
     },
@@ -913,6 +1755,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Some routers forbid two devices from talking to each other. In that case only, **turn Wi-Fi off from Control Center** (the button, not Settings) on both sides: they will link up without going through it."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Certaines box interdisent à deux appareils de se parler entre eux. Dans ce cas seulement, **coupez le Wi-Fi depuis le centre de contrôle** (le bouton, pas les Réglages) des deux côtés : ils se relieront sans passer par elle."
           }
         }
       }
@@ -924,6 +1772,12 @@
             "state": "translated",
             "value": "These two do not go together: turning one on turns the other off. Take the whole world, or fill your conquest — you have to choose how the game ends."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ces deux-là ne vont pas ensemble : allumer l'une éteint l'autre. Prendre le monde entier, ou remplir sa conquête — il faut choisir la fin de la partie."
+          }
         }
       }
     },
@@ -933,6 +1787,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "This moment can no longer be replayed"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cet instant ne se relit plus"
           }
         }
       }
@@ -944,6 +1804,12 @@
             "state": "translated",
             "value": "Each at home, on their own network. A six-letter code is enough — no account, no sign-up."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chacun chez soi, sur son propre réseau. Un code à six lettres suffit — ni compte, ni inscription."
+          }
         }
       }
     },
@@ -953,6 +1819,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Everyone is dealt a secret objective at the start — two continents, so many places held, a side to bring down — and filling it wins the game. The territory threshold withdraws: the card decides, or nobody. The count in the top bar then says nothing at all about who is going to win."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chacun reçoit au départ un objectif secret — deux continents, tant de places tenues, un camp à faire tomber — et le remplir gagne la partie. Le seuil de territoires se retire : la carte décide, ou personne. Le compte de la barre du haut ne dit alors plus rien de qui va gagner."
           }
         }
       }
@@ -964,6 +1836,12 @@
             "state": "translated",
             "value": "Taking turns: the device is passed before each question."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chacun son tour : l'appareil se passe avant chaque question."
+          }
         }
       }
     },
@@ -973,6 +1851,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Next chapter"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chapitre suivant"
           }
         }
       }
@@ -984,6 +1868,12 @@
             "state": "translated",
             "value": "Every turn played drops a moment here, on its own."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chaque tour joué dépose un instant ici, tout seul."
+          }
         }
       }
     },
@@ -993,6 +1883,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Find players"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chercher des joueurs"
           }
         }
       }
@@ -1004,6 +1900,12 @@
             "state": "translated",
             "value": "China"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chine"
+          }
         }
       }
     },
@@ -1013,6 +1915,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Choosing a moment resumes the game from there without erasing this one: what you play next is shelved separately."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisir un instant reprend la partie à partir de là, sans effacer celle-ci : la suite que vous jouerez sera rangée à part."
           }
         }
       }
@@ -1024,6 +1932,12 @@
             "state": "translated",
             "value": "Five cards in hand: the trade is compulsory."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cinq cartes en main : l'échange est obligatoire."
+          }
         }
       }
     },
@@ -1033,6 +1947,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Code copied"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Code copié"
           }
         }
       }
@@ -1044,6 +1964,12 @@
             "state": "translated",
             "value": "How many troops advance?"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Combien d'hommes avancent ?"
+          }
         }
       }
     },
@@ -1053,6 +1979,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "How many questions — your dice"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Combien de questions — vos dés"
           }
         }
       }
@@ -1064,6 +1996,12 @@
             "state": "translated",
             "value": "Start"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Commencer"
+          }
         }
       }
     },
@@ -1073,6 +2011,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Terms"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conditions"
           }
         }
       }
@@ -1084,6 +2028,12 @@
             "state": "translated",
             "value": "Privacy"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Confidentialité"
+          }
         }
       }
     },
@@ -1093,6 +2043,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Privacy & Security → Local Network → Riskelo US"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Confidentialité et sécurité → Réseau local → Riskelo"
           }
         }
       }
@@ -1104,6 +2060,12 @@
             "state": "translated",
             "value": "Connecting to %@…"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Connexion à %@…"
+          }
         }
       }
     },
@@ -1113,6 +2075,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Signing in to Game Center…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Connexion à Game Center…"
           }
         }
       }
@@ -1124,6 +2092,12 @@
             "state": "translated",
             "value": "Personal conquests"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conquêtes personnelles"
+          }
         }
       }
     },
@@ -1133,6 +2107,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Continue"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Continuer"
           }
         }
       }
@@ -1144,6 +2124,12 @@
             "state": "translated",
             "value": "Copy the code"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copier le code"
+          }
         }
       }
     },
@@ -1153,6 +2139,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Coral"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Corail"
           }
         }
       }
@@ -1164,6 +2156,12 @@
             "state": "translated",
             "value": "Corsica"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Corse"
+          }
         }
       }
     },
@@ -1173,6 +2171,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Croatia"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Croatie"
           }
         }
       }
@@ -1184,6 +2188,12 @@
             "state": "translated",
             "value": "Crete"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crète"
+          }
         }
       }
     },
@@ -1193,6 +2203,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Well-read"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cultivée"
           }
         }
       }
@@ -1204,6 +2220,12 @@
             "state": "translated",
             "value": "General knowledge"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Culture générale"
+          }
         }
       }
     },
@@ -1213,6 +2235,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "General knowledge only"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Culture générale seule"
           }
         }
       }
@@ -1224,6 +2252,12 @@
             "state": "translated",
             "value": "General knowledge · "
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Culture générale · "
+          }
         }
       }
     },
@@ -1233,6 +2267,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "From one game to the next, a question never asked comes before a question already seen."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "D'une partie à l'autre, une question jamais sortie passe avant une question déjà vue."
           }
         }
       }
@@ -1244,6 +2284,12 @@
             "state": "translated",
             "value": "Denmark"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Danemark"
+          }
         }
       }
     },
@@ -1253,6 +2299,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Play across devices"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dans la même pièce"
           }
         }
       }
@@ -1264,6 +2316,12 @@
             "state": "translated",
             "value": "From the Atlantic to the Black Sea. 38 territories."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De l'Atlantique à la mer Noire. 38 territoires."
+          }
         }
       }
     },
@@ -1273,6 +2331,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Two duels in a row, the same question each time for both of you. The clock tightens on the second, and they can double the stake on each."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deux duels de suite, la même question à chaque fois pour vous deux. Le sablier se resserre au second, et il peut doubler la mise sur chacun."
           }
         }
       }
@@ -1284,6 +2348,12 @@
             "state": "translated",
             "value": "Two duels in a row. The clock tightens on the second — but two correct answers cost you two troops."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deux duels de suite. Le sablier se resserre au second — mais deux bonnes réponses vous coûtent deux hommes."
+          }
         }
       }
     },
@@ -1293,6 +2363,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Two questions"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deux questions"
           }
         }
       }
@@ -1304,6 +2380,12 @@
             "state": "translated",
             "value": "Distracted"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Distraite"
+          }
         }
       }
     },
@@ -1313,6 +2395,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Double the stake"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Doubler l'enjeu"
           }
         }
       }
@@ -1340,6 +2428,12 @@
             "state": "translated",
             "value": "Move and end the turn"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Déplacer et finir le tour"
+          }
         }
       }
     },
@@ -1366,6 +2460,12 @@
             "state": "translated",
             "value": "Waiting for the launch…"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En attente du lancement…"
+          }
         }
       }
     },
@@ -1376,16 +2476,37 @@
             "state": "translated",
             "value": "One moment…"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Encore un instant…"
+          }
         }
       }
     },
-    "English": {},
+    "English": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "English"
+          }
+        }
+      }
+    },
     "Enjeu doublé : deux hommes": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Stake doubled: two troops"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enjeu doublé : deux hommes"
           }
         }
       }
@@ -1397,6 +2518,12 @@
             "state": "translated",
             "value": "Send the invitation"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Envoyer l'invitation"
+          }
         }
       }
     },
@@ -1406,6 +2533,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Spain"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Espagne"
           }
         }
       }
@@ -1417,6 +2550,12 @@
             "state": "translated",
             "value": "Eastern United States"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Est des États-Unis"
+          }
         }
       }
     },
@@ -1426,6 +2565,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Central Europe"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Europe centrale"
           }
         }
       }
@@ -1437,6 +2582,12 @@
             "state": "translated",
             "value": "Eastern Europe"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Europe de l'Est"
+          }
         }
       }
     },
@@ -1446,6 +2597,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Western Europe"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Europe de l'Ouest"
           }
         }
       }
@@ -1457,6 +2614,12 @@
             "state": "translated",
             "value": "Northern Europe"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Europe du Nord"
+          }
         }
       }
     },
@@ -1466,6 +2629,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Southern Europe"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Europe du Sud"
           }
         }
       }
@@ -1477,6 +2646,12 @@
             "state": "translated",
             "value": "Optional. Your side will read “Blue · %@ · me” — the color, your name, and “me” to say it is yours. Over the network it travels: the others will see you that way, and you will see them the same."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Facultatif. Votre camp se lira « Bleu · %@ · moi » — la couleur, votre nom, et « moi » pour dire que c'est le vôtre. En réseau, il fait le voyage : les autres vous verront ainsi, et vous les verrez de même."
+          }
         }
       }
     },
@@ -1486,6 +2661,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Advance %lld men"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Faire avancer %lld hommes"
           }
         }
       }
@@ -1497,6 +2678,12 @@
             "state": "translated",
             "value": "Advance 1 man"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Faire avancer 1 homme"
+          }
         }
       }
     },
@@ -1506,6 +2693,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Close"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fermer"
           }
         }
       }
@@ -1517,6 +2710,12 @@
             "state": "translated",
             "value": "End turn"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fin du tour"
+          }
         }
       }
     },
@@ -1527,16 +2726,37 @@
             "state": "translated",
             "value": "Finland"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finlande"
+          }
         }
       }
     },
-    "Français": {},
+    "Français": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Français"
+          }
+        }
+      }
+    },
     "Game Center est le service de jeu d'Apple, et il demande un compte. Vous pouvez vous y connecter dans les Réglages — ou revenir en arrière et **jouer au loin avec un code**, qui ne demande rien à personne.": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Game Center is Apple's gaming service, and it asks for an account. You can sign in from Settings — or go back and **play far away with a code**, which asks nothing of anyone."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Game Center est le service de jeu d'Apple, et il demande un compte. Vous pouvez vous y connecter dans les Réglages — ou revenir en arrière et **jouer au loin avec un code**, qui ne demande rien à personne."
           }
         }
       }
@@ -1548,6 +2768,12 @@
             "state": "translated",
             "value": "Game Center could not"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Game Center n'a pas pu"
+          }
         }
       }
     },
@@ -1557,6 +2783,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Great Britain"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grande-Bretagne"
           }
         }
       }
@@ -1568,6 +2800,12 @@
             "state": "translated",
             "value": "Greymoor"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grise-Lande"
+          }
         }
       }
     },
@@ -1577,6 +2815,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Greenland"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Groenland"
           }
         }
       }
@@ -1588,6 +2832,12 @@
             "state": "translated",
             "value": "Greece"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grèce"
+          }
         }
       }
     },
@@ -1597,6 +2847,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Total war"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Guerre totale"
           }
         }
       }
@@ -1608,6 +2864,12 @@
             "state": "translated",
             "value": "Havenhold"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Havreterre"
+          }
         }
       }
     },
@@ -1617,6 +2879,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Hungary"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hongrie"
           }
         }
       }
@@ -1628,6 +2896,12 @@
             "state": "translated",
             "value": "Fair"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Honnête"
+          }
         }
       }
     },
@@ -1637,6 +2911,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Yakutsk"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Iakoutie"
           }
         }
       }
@@ -1648,6 +2928,12 @@
             "state": "translated",
             "value": "It was saved on a board whose drawing has changed since."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il a été enregistré sur un plateau qui a changé de dessin depuis."
+          }
         }
       }
     },
@@ -1657,6 +2943,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Every territory, no exceptions. Expect about twice as many questions."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il faut tous les territoires, sans exception. Compter environ deux fois plus de questions."
           }
         }
       }
@@ -1668,6 +2960,12 @@
             "state": "translated",
             "value": "India"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inde"
+          }
         }
       }
     },
@@ -1677,6 +2975,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Indonesia"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Indonésie"
           }
         }
       }
@@ -1688,6 +2992,12 @@
             "state": "translated",
             "value": "Irkutsk"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Irkoutsk"
+          }
         }
       }
     },
@@ -1697,6 +3007,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Iceland"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Islande"
           }
         }
       }
@@ -1708,6 +3024,12 @@
             "state": "translated",
             "value": "Italy"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Italie"
+          }
         }
       }
     },
@@ -1717,6 +3039,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Northern Italy"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Italie du Nord"
           }
         }
       }
@@ -1728,6 +3056,12 @@
             "state": "translated",
             "value": "Japan"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Japon"
+          }
         }
       }
     },
@@ -1737,6 +3071,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "I'm ready"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Je suis prêt"
           }
         }
       }
@@ -1748,6 +3088,12 @@
             "state": "translated",
             "value": "Play remotely"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jouer au loin"
+          }
         }
       }
     },
@@ -1757,6 +3103,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Play across devices"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jouer à plusieurs"
           }
         }
       }
@@ -1768,6 +3120,12 @@
             "state": "translated",
             "value": "Up to four players, one device each."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jusqu'à quatre joueurs, un appareil chacun."
+          }
         }
       }
     },
@@ -1777,6 +3135,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kamchatka"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kamtchatka"
           }
         }
       }
@@ -1788,6 +3152,12 @@
             "state": "translated",
             "value": "Khanate"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Khanat"
+          }
         }
       }
     },
@@ -1797,6 +3167,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "The Ring"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'Anneau"
           }
         }
       }
@@ -1808,6 +3184,12 @@
             "state": "translated",
             "value": "Your opponent is thinking…"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'adversaire réfléchit…"
+          }
         }
       }
     },
@@ -1817,6 +3199,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Your opponent is answering…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'adversaire répond…"
           }
         }
       }
@@ -1828,6 +3216,28 @@
             "state": "translated",
             "value": "The attacker"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'assaillant"
+          }
+        }
+      }
+    },
+    "L'assaillant savait, la place non : %@ perd %@.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The attacker knew, the place did not: %@ loses %@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'assaillant savait, la place non : %@ perd %@."
+          }
         }
       }
     },
@@ -1837,6 +3247,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "The other device sent a game this one cannot read. Install the same version of Riskelo on both sides."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'autre appareil a envoyé une partie que celui-ci ne sait pas lire. Installez la même version de Riskelo des deux côtés."
           }
         }
       }
@@ -1848,6 +3264,12 @@
             "state": "translated",
             "value": "%@'s conquest"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La conquête de %@"
+          }
         }
       }
     },
@@ -1857,6 +3279,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "The link is good: it is the launch that is not arriving. Whoever opened the game has to tap “Start”."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La liaison est bonne : c'est le lancement qui n'arrive pas. Celui qui a ouvert la partie doit toucher « Commencer »."
           }
         }
       }
@@ -1868,6 +3296,12 @@
             "state": "translated",
             "value": "The link is good: it is the launch that is not arriving. Check that %@ really tapped “Start”, and that both devices have the same version of Riskelo."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La liaison est bonne : c'est le lancement qui n'arrive pas. Vérifiez que %@ a bien touché « Commencer », et que les deux appareils ont la même version de Riskelo."
+          }
         }
       }
     },
@@ -1877,6 +3311,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "The link dropped"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La liaison est tombée"
           }
         }
       }
@@ -1888,6 +3328,12 @@
             "state": "translated",
             "value": "The link could not be established"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La liaison n'a pas pu s'établir"
+          }
         }
       }
     },
@@ -1897,6 +3343,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "The game is put away: you will find it on the home screen."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La partie est rangée : vous la retrouverez à l'accueil."
           }
         }
       }
@@ -1908,6 +3360,12 @@
             "state": "translated",
             "value": "The game will resume on its own. %lld s to go."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La partie reprendra toute seule. Encore %lld s."
+          }
         }
       }
     },
@@ -1917,6 +3375,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "The place"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La place"
           }
         }
       }
@@ -1928,6 +3392,12 @@
             "state": "translated",
             "value": "Filling it wins the game, on the spot. There is no other gate: no number of territories wins the game."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La remplir gagne la partie, sur-le-champ. Il n'y a pas d'autre porte : aucun nombre de territoires ne gagne la partie."
+          }
         }
       }
     },
@@ -1937,6 +3407,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "The table"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La table"
           }
         }
       }
@@ -1948,6 +3424,12 @@
             "state": "translated",
             "value": "Lagoon"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lagune"
+          }
         }
       }
     },
@@ -1957,6 +3439,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Launch the assault"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lancer l'assaut"
           }
         }
       }
@@ -1968,6 +3456,12 @@
             "state": "translated",
             "value": "High Moors"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Landes Hautes"
+          }
         }
       }
     },
@@ -1977,6 +3471,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Language"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Langue"
           }
         }
       }
@@ -1988,6 +3488,12 @@
             "state": "translated",
             "value": "The die is replaced by a question."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le dé est remplacé par une question."
+          }
         }
       }
     },
@@ -1997,6 +3503,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "The die is replaced by a question.\nThe attacker picks the ground, the defender answers."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le dé est remplacé par une question.\nL'attaquant choisit le terrain, le défenseur répond."
           }
         }
       }
@@ -2008,6 +3520,12 @@
             "state": "translated",
             "value": "The die is replaced by a question.\nBoth receive it: the surer, or the quicker, wins."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le dé est remplacé par une question.\nLes deux la reçoivent : le plus sûr, ou le plus vif, l'emporte."
+          }
         }
       }
     },
@@ -2017,6 +3535,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "The defender"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le défenseur"
           }
         }
       }
@@ -2028,6 +3552,12 @@
             "state": "translated",
             "value": "The score is theirs: green, they answer it well; red, they stumble on it. Careful — a theme they stumble on only helps you if you stay on your feet."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le score est le sien : vert, il y répond bien ; rouge, il y trébuche. Attention — un thème où il trébuche ne vous sert que si vous, vous tenez debout."
+          }
         }
       }
     },
@@ -2037,6 +3567,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "The score is theirs: green, they answer it well; red, they stumble on it. The scope marks their weak spot."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le score est le sien : vert, il y répond bien ; rouge, il y trébuche. La lunette marque son point faible."
           }
         }
       }
@@ -2048,6 +3584,12 @@
             "state": "translated",
             "value": "The system refused to open the local network."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le système a refusé d'ouvrir le réseau local."
+          }
         }
       }
     },
@@ -2057,6 +3599,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "The Marches"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les Marches"
           }
         }
       }
@@ -2068,6 +3616,12 @@
             "state": "translated",
             "value": "The devices have to be close by. No account, no network: Bluetooth or Wi-Fi is enough."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les appareils doivent être proches. Ni compte ni réseau : le Bluetooth ou le Wi-Fi suffisent."
+          }
         }
       }
     },
@@ -2077,6 +3631,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "The devices find each other on their own. No account, no code, no server — it works even on a train."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les appareils se trouvent tout seuls. Ni compte, ni code, ni serveur — cela marche même dans un train."
           }
         }
       }
@@ -2088,6 +3648,12 @@
             "state": "translated",
             "value": "The other devices show only their own."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les autres appareils ne montrent que la leur."
+          }
         }
       }
     },
@@ -2097,6 +3663,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Both devices have to be on **the same Wi-Fi network** — or both with no network at all, in which case they link up directly."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les deux appareils doivent être sur **le même réseau Wi-Fi** — ou tous les deux sans réseau du tout, auquel cas ils se relient directement."
           }
         }
       }
@@ -2108,6 +3680,12 @@
             "state": "translated",
             "value": "Both devices have to be on **the same Wi-Fi network**. This is by far the commonest cause: one on the router, the other on the guest network, and they cannot see each other."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les deux appareils doivent être sur **le même réseau Wi-Fi**. C'est de loin la cause la plus fréquente : l'un sur la box, l'autre sur le réseau invité, et ils ne se voient pas."
+          }
         }
       }
     },
@@ -2117,6 +3695,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "The two devices are not running the same version of Riskelo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les deux appareils n'ont pas la même version de Riskelo."
           }
         }
       }
@@ -2128,6 +3712,12 @@
             "state": "translated",
             "value": "The two devices do not have the same version of Riskelo. Update them both."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les deux appareils n'ont pas la même version de Riskelo. Mettez-les à jour tous les deux."
+          }
         }
       }
     },
@@ -2137,6 +3727,44 @@
           "stringUnit": {
             "state": "translated",
             "value": "Both answer: the reinforcement goes to whoever knows, attacking or defending."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les deux répondent : le renfort revient à qui sait, qu'il attaque ou qu'il défende."
+          }
+        }
+      }
+    },
+    "Les deux savaient : l'assaillant a été le plus vif, %@ perd %@.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Both knew: the attacker was quicker, %@ loses %@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les deux savaient : l'assaillant a été le plus vif, %@ perd %@."
+          }
+        }
+      }
+    },
+    "Les deux savaient : le défenseur a été le plus vif, %@ tient et coûte %@.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Both knew: the defender was quicker, %@ holds and costs %@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les deux savaient : le défenseur a été le plus vif, %@ tient et coûte %@."
           }
         }
       }
@@ -2148,6 +3776,12 @@
             "state": "translated",
             "value": "Both knew. %@ was quicker: %@ loses %@."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les deux savaient. %@ a été le plus vif : %@ perd %@."
+          }
         }
       }
     },
@@ -2157,6 +3791,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Both knew. %@ was quicker: %@ holds, the attacker leaves %@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les deux savaient. %@ a été le plus vif : %@ tient, l'assaillant laisse %@."
           }
         }
       }
@@ -2168,6 +3808,12 @@
             "state": "translated",
             "value": "Both know: the clock settles it. Neither of them: the place holds, as on a tie of dice."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les deux savent : le sablier tranche. Aucun des deux : la place tient, comme sur une égalité de dés."
+          }
         }
       }
     },
@@ -2177,6 +3823,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Questions, menus and the manual all follow."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les questions, les menus et le mode d'emploi suivent ensemble."
           }
         }
       }
@@ -2188,6 +3840,12 @@
             "state": "translated",
             "value": "The six continents, 42 territories — like the box."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les six continents, 42 territoires — comme la boîte."
+          }
         }
       }
     },
@@ -2197,6 +3855,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "The six subjects that ship with the game — %lld questions."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les six thèmes du jeu — %lld questions."
           }
         }
       }
@@ -2208,6 +3872,12 @@
             "state": "translated",
             "value": "Link lost with %@."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Liaison perdue avec %@."
+          }
         }
       }
     },
@@ -2217,6 +3887,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Link lost — trying again"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Liaison perdue — on y retourne"
+          }
+        }
+      }
+    },
+    "Mauvaise réponse : %@ perd %@.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wrong answer: %@ loses %@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mauvaise réponse : %@ perd %@."
           }
         }
       }
@@ -2228,6 +3920,12 @@
             "state": "translated",
             "value": "How to play"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mode d'emploi"
+          }
         }
       }
     },
@@ -2237,6 +3935,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Moldova"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moldavie"
           }
         }
       }
@@ -2248,6 +3952,12 @@
             "state": "translated",
             "value": "World"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monde"
+          }
         }
       }
     },
@@ -2257,6 +3967,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mongolia"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mongolie"
           }
         }
       }
@@ -2268,6 +3984,12 @@
             "state": "translated",
             "value": "Redmount"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mont Rouge"
+          }
         }
       }
     },
@@ -2277,6 +3999,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Middle East"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moyen-Orient"
           }
         }
       }
@@ -2288,6 +4016,12 @@
             "state": "translated",
             "value": "Mediterranean"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Méditerranée"
+          }
         }
       }
     },
@@ -2297,6 +4031,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Meridia"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Méridia"
           }
         }
       }
@@ -2308,6 +4048,12 @@
             "state": "translated",
             "value": "No, I'm still attacking"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non, je continue d'attaquer"
+          }
         }
       }
     },
@@ -2317,6 +4063,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Norway"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Norvège"
           }
         }
       }
@@ -2328,6 +4080,12 @@
             "state": "translated",
             "value": "New game"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nouvelle partie"
+          }
         }
       }
     },
@@ -2337,6 +4095,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "New Guinea"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nouvelle-Guinée"
           }
         }
       }
@@ -2348,6 +4112,12 @@
             "state": "translated",
             "value": "OR JOIN WITH A CODE"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OU REJOINDRE AVEC UN CODE"
+          }
         }
       }
     },
@@ -2357,6 +4127,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Australia"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Océanie"
           }
         }
       }
@@ -2368,6 +4144,12 @@
             "state": "translated",
             "value": "Olivegrove"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oliveraie"
+          }
         }
       }
     },
@@ -2377,6 +4159,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dealing the sides…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On distribue les camps…"
           }
         }
       }
@@ -2388,6 +4176,12 @@
             "state": "translated",
             "value": "Joining game %@…"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On entre dans la partie %@…"
+          }
         }
       }
     },
@@ -2397,6 +4191,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "You cannot slip into a game in progress. Ask for a new one to be opened."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On ne se glisse pas dans une partie en cours. Demandez qu'on en rouvre une."
           }
         }
       }
@@ -2408,6 +4208,12 @@
             "state": "translated",
             "value": "Setting up the table…"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On prépare le salon…"
+          }
         }
       }
     },
@@ -2417,6 +4223,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Trying again. If it is a tunnel or a lift, it comes back on its own — keep the screen on."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On y retourne. Si c'est un tunnel ou un ascenseur, cela se rétablit tout seul — gardez l'écran allumé."
           }
         }
       }
@@ -2428,6 +4240,12 @@
             "state": "translated",
             "value": "Forget"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oublier"
+          }
         }
       }
     },
@@ -2437,6 +4255,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Western United States"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouest des États-Unis"
           }
         }
       }
@@ -2448,6 +4272,12 @@
             "state": "translated",
             "value": "Yes, on to the move"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oui, au déplacement"
+          }
         }
       }
     },
@@ -2457,6 +4287,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ural"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oural"
           }
         }
       }
@@ -2468,6 +4304,12 @@
             "state": "translated",
             "value": "Open the table with these settings"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir la table avec ces réglages"
+          }
         }
       }
     },
@@ -2477,6 +4319,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Open Settings"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir les Réglages"
           }
         }
       }
@@ -2488,12 +4336,24 @@
             "state": "translated",
             "value": "Open a game"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir une partie"
+          }
         }
       }
     },
     "Packs": {
       "localizations": {
         "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Packs"
+          }
+        },
+        "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Packs"
@@ -2508,6 +4368,12 @@
             "state": "translated",
             "value": "Question packs"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Packs de questions"
+          }
         }
       }
     },
@@ -2517,6 +4383,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Palmgrove"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Palmeraie"
           }
         }
       }
@@ -2528,6 +4400,12 @@
             "state": "translated",
             "value": "Through Game Center"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Par Game Center"
+          }
         }
       }
     },
@@ -2537,6 +4415,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Quick game"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Partie rapide"
           }
         }
       }
@@ -2548,6 +4432,12 @@
             "state": "translated",
             "value": "Saved games"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parties enregistrées"
+          }
         }
       }
     },
@@ -2557,6 +4447,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Not signed in to Game Center"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pas connecté à Game Center"
           }
         }
       }
@@ -2568,6 +4464,12 @@
             "state": "translated",
             "value": "Baltic States"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pays baltes"
+          }
         }
       }
     },
@@ -2577,6 +4479,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Netherlands"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pays-Bas"
           }
         }
       }
@@ -2588,6 +4496,28 @@
             "state": "translated",
             "value": "Nobody has turned up. Wi-Fi has to be on at both ends — it is what carries the link, even with no network in common — and Riskelo allowed on the local network."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Personne ne s'est présenté. Le Wi-Fi doit être allumé des deux côtés — c'est lui qui porte la liaison, même sans réseau commun — et Riskelo autorisé au réseau local."
+          }
+        }
+      }
+    },
+    "Personne ne savait : %@ tient, et l'assaillant laisse %@.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nobody knew: %@ holds, and the attacker leaves %@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Personne ne savait : %@ tient, et l'assaillant laisse %@."
+          }
         }
       }
     },
@@ -2597,6 +4527,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nobody knew. As on a tie of dice, %@ holds and the attacker leaves %@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Personne ne savait. Comme sur une égalité de dés, %@ tient et l'assaillant laisse %@."
           }
         }
       }
@@ -2608,6 +4544,12 @@
             "state": "translated",
             "value": "Greystone"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pierregrise"
+          }
         }
       }
     },
@@ -2617,6 +4559,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Poland"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pologne"
           }
         }
       }
@@ -2628,6 +4576,12 @@
             "state": "translated",
             "value": "Westmark"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ponant"
+          }
         }
       }
     },
@@ -2637,6 +4591,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Peru"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pérou"
           }
         }
       }
@@ -2648,6 +4608,12 @@
             "state": "translated",
             "value": "Four players at most, one device each. You will have to wait for the next game."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quatre joueurs au plus, un appareil chacun. Il faudra attendre la partie suivante."
+          }
         }
       }
     },
@@ -2657,6 +4623,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ question — %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Question %@ — %@"
           }
         }
       }
@@ -2668,6 +4640,12 @@
             "state": "translated",
             "value": "Quebec"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Québec"
+          }
         }
       }
     },
@@ -2677,6 +4655,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Looking for open tables…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recherche des tables ouvertes…"
           }
         }
       }
@@ -2688,6 +4672,12 @@
             "state": "translated",
             "value": "Looking…"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recherche…"
+          }
         }
       }
     },
@@ -2697,6 +4687,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Formidable"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Redoutable"
           }
         }
       }
@@ -2708,6 +4704,12 @@
             "state": "translated",
             "value": "Join me: the code is %@."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rejoignez-moi : le code est %@."
+          }
         }
       }
     },
@@ -2717,6 +4719,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Join"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rejoindre"
           }
         }
       }
@@ -2728,6 +4736,12 @@
             "state": "translated",
             "value": "Linked to %@"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Relié à %@"
+          }
         }
       }
     },
@@ -2737,6 +4751,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Resume game"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reprendre la partie en cours"
           }
         }
       }
@@ -2748,6 +4768,12 @@
             "state": "translated",
             "value": "Restore my purchases"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restaurer mes achats"
+          }
         }
       }
     },
@@ -2757,6 +4783,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Withdrawn"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retiré"
           }
         }
       }
@@ -2768,6 +4800,12 @@
             "state": "translated",
             "value": "Go back to a moment"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Revenir à un instant"
+          }
         }
       }
     },
@@ -2777,6 +4815,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nothing came from %@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rien n'est venu de %@."
           }
         }
       }
@@ -2788,12 +4832,24 @@
             "state": "translated",
             "value": "Nothing came."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rien n'est venu."
+          }
         }
       }
     },
     "Riskelo": {
       "localizations": {
         "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Riskelo"
+          }
+        },
+        "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Riskelo"
@@ -2824,6 +4880,12 @@
             "state": "translated",
             "value": "Riskelo has to be **on screen** on the other device. In the background, or with the screen locked, it stops answering."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Riskelo doit être **à l'écran** sur l'autre appareil. En arrière-plan, ou l'écran verrouillé, il cesse de répondre."
+          }
         }
       }
     },
@@ -2833,6 +4895,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Red"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rouge"
           }
         }
       }
@@ -2844,6 +4912,12 @@
             "state": "translated",
             "value": "Romania"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Roumanie"
+          }
         }
       }
     },
@@ -2853,6 +4927,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Russia"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Russie"
           }
         }
       }
@@ -2864,6 +4944,12 @@
             "state": "translated",
             "value": "Reef"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Récif"
+          }
         }
       }
     },
@@ -2873,6 +4959,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Try again"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réessayer"
           }
         }
       }
@@ -2884,6 +4976,12 @@
             "state": "translated",
             "value": "Settings"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réglages"
+          }
         }
       }
     },
@@ -2893,6 +4991,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Game settings"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réglages de la partie"
           }
         }
       }
@@ -2904,6 +5008,12 @@
             "state": "translated",
             "value": "Settings → Privacy & Security → Local Network: Riskelo turned on, on both."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réglages → Confidentialité et sécurité → Réseau local : Riskelo activé, sur les deux."
+          }
         }
       }
     },
@@ -2913,6 +5023,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Answer locked in. %@ is answering…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réponse prise. %@ répond…"
           }
         }
       }
@@ -2924,6 +5040,12 @@
             "state": "translated",
             "value": "Hourglass"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sablier"
+          }
         }
       }
     },
@@ -2933,6 +5055,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Saltings"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saline"
           }
         }
       }
@@ -2944,6 +5072,12 @@
             "state": "translated",
             "value": "No name"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sans nom"
+          }
         }
       }
     },
@@ -2953,6 +5087,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sardinia"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sardaigne"
           }
         }
       }
@@ -2964,6 +5104,12 @@
             "state": "translated",
             "value": "Scandinavia"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scandinavie"
+          }
         }
       }
     },
@@ -2973,6 +5119,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Serbia"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Serbie"
           }
         }
       }
@@ -2984,6 +5136,12 @@
             "state": "translated",
             "value": "Only the defender answers: this reinforcement goes to whoever holds their place by knowing. Measured, it widens the gap a little between two unequal levels of knowledge — markedly so below four."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seul le défenseur répond : ce renfort revient à qui tient sa place en sachant. Mesuré, il creuse un peu l'écart entre deux cultures inégales — nettement en dessous de quatre."
+          }
         }
       }
     },
@@ -2993,6 +5151,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "If a device asks for permission to use the local network, accept it: without it the link cannot be established."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Si un appareil demande l'autorisation d'utiliser le réseau local, acceptez-la : sans elle, la liaison ne peut pas s'établir."
           }
         }
       }
@@ -3004,6 +5168,12 @@
             "state": "translated",
             "value": "If somebody else brings that side down before you, your card turns over and becomes “hold %lld territories” — four places out of five on the board."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Si un autre fait tomber ce camp avant vous, votre carte se retourne et devient « tenir %lld territoires » — quatre places sur cinq du plateau."
+          }
         }
       }
     },
@@ -3013,6 +5183,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Siberia"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sibérie"
           }
         }
       }
@@ -3024,6 +5200,12 @@
             "state": "translated",
             "value": "Sicily"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sicile"
+          }
         }
       }
     },
@@ -3033,6 +5215,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Website"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Site"
           }
         }
       }
@@ -3044,6 +5232,12 @@
             "state": "translated",
             "value": "Six letters to send by WhatsApp or text message. Each at home, and nothing to create."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Six lettres à envoyer par WhatsApp ou par SMS. Chacun chez soi, et rien à créer."
+          }
         }
       }
     },
@@ -3053,6 +5247,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Skerry"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skerrie"
           }
         }
       }
@@ -3064,6 +5264,12 @@
             "state": "translated",
             "value": "Slovakia"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Slovaquie"
+          }
         }
       }
     },
@@ -3073,6 +5279,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Slovenia"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Slovénie"
           }
         }
       }
@@ -3084,6 +5296,12 @@
             "state": "translated",
             "value": "Contents"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sommaire"
+          }
         }
       }
     },
@@ -3093,6 +5311,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Game sounds"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sons du jeu"
           }
         }
       }
@@ -3104,6 +5328,12 @@
             "state": "translated",
             "value": "High Steppe"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Steppe Haute"
+          }
         }
       }
     },
@@ -3113,6 +5343,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Switzerland"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suisse"
           }
         }
       }
@@ -3124,6 +5360,12 @@
             "state": "translated",
             "value": "On the other device: “Open the table”, and leave its screen awake."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sur l'autre appareil : « Ouvrir la table », et laissez son écran allumé."
+          }
         }
       }
     },
@@ -3133,6 +5375,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "On the other devices: “Join a table”.\nLeave this screen on until the launch."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sur les autres appareils : « Rejoindre une table ».\nLaissez cet écran allumé jusqu'au lancement."
           }
         }
       }
@@ -3144,6 +5392,12 @@
             "state": "translated",
             "value": "On a shared device, this screen shows the one whose turn it is."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sur un appareil partagé, cet écran montre celle de qui joue."
+          }
         }
       }
     },
@@ -3153,6 +5407,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sweden"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suède"
           }
         }
       }
@@ -3164,6 +5424,28 @@
             "state": "translated",
             "value": "Czechia"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tchéquie"
+          }
+        }
+      }
+    },
+    "Temps écoulé : %@ perd %@.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time is up: %@ loses %@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Temps écoulé : %@ perd %@."
+          }
         }
       }
     },
@@ -3173,6 +5455,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Northwest Territory"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Territoires du Nord-Ouest"
           }
         }
       }
@@ -3184,6 +5472,12 @@
             "state": "translated",
             "value": "Tap to continue"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Touchez pour continuer"
+          }
         }
       }
     },
@@ -3193,6 +5487,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Turn %lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tour %lld"
+          }
+        }
+      }
+    },
+    "Tour %lld — à %@ de jouer.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turn %lld — %@ to play."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tour %lld — à %@ de jouer."
           }
         }
       }
@@ -3204,6 +5520,12 @@
             "state": "translated",
             "value": "Everyone is here."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tout le monde est là."
+          }
         }
       }
     },
@@ -3213,6 +5535,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "All games"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toutes les parties"
           }
         }
       }
@@ -3224,6 +5552,12 @@
             "state": "translated",
             "value": "Three identical symbols, or three different ones. The next trade is worth %lld troops."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trois symboles identiques, ou trois différents. Le prochain échange vaut %lld hommes."
+          }
         }
       }
     },
@@ -3233,6 +5567,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Turkey"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turquie"
           }
         }
       }
@@ -3244,6 +5584,12 @@
             "state": "translated",
             "value": "One device per player."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un appareil par joueur."
+          }
         }
       }
     },
@@ -3253,6 +5599,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "A code lives for one game. Check the six letters, or ask whoever opened it for a new one."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un code vit le temps d'une partie. Vérifiez les six lettres, ou demandez-en un nouveau à celui qui a ouvert."
           }
         }
       }
@@ -3264,6 +5616,12 @@
             "state": "translated",
             "value": "One duel, the same question for both of you. If they double the stake, it will be worth two troops."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un duel, la même question pour vous deux. S'il double la mise, il vaudra deux hommes."
+          }
         }
       }
     },
@@ -3273,6 +5631,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "One man advances — all the starting place can spare."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un homme avance — c'est tout ce que la place de départ peut céder."
           }
         }
       }
@@ -3284,6 +5648,12 @@
             "state": "translated",
             "value": "One more man"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un homme de plus"
+          }
         }
       }
     },
@@ -3293,6 +5663,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "A conquest game where the roll of the dice is replaced by a trivia question. Everything the app does is written down here."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un jeu de conquête où le lancer de dés est remplacé par une question de culture générale. Tout ce que fait l'application est écrit ici."
           }
         }
       }
@@ -3304,6 +5680,12 @@
             "state": "translated",
             "value": "An invented world, five lands in a circle. 28 territories."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un monde inventé, cinq terres en cercle. 28 territoires."
+          }
         }
       }
     },
@@ -3313,6 +5695,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "A pack you buy follows you across your devices. Whoever joins your table plays your packs without having to buy them."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un pack acheté vous suit sur vos appareils. Celui qui rejoint votre table joue vos packs sans avoir à les acheter."
           }
         }
       }
@@ -3324,6 +5712,12 @@
             "state": "translated",
             "value": "A pack is a set of questions added to yours. Tick the ones you want to play — one, or several mixed together. The choice holds for all your games, and whoever opens the table decides for everyone."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un pack est un jeu de questions qui s'ajoute au vôtre. Cochez ceux que vous voulez jouer — un seul, ou plusieurs mêlés. Le choix vaut pour toutes vos parties, et c'est celui qui ouvre la table qui décide pour tout le monde."
+          }
         }
       }
     },
@@ -3333,6 +5727,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "A permission is missing"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une autorisation manque"
           }
         }
       }
@@ -3344,6 +5744,12 @@
             "state": "translated",
             "value": "One card per turn in which you take a place. Three matching are worth troops, and the scale climbs."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une carte par tour où l'on prend une place. Trois assorties valent des hommes, et le barème monte."
+          }
         }
       }
     },
@@ -3353,6 +5759,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "A short note for every troop laid down, another at the outcome of every exchange — rising when it goes your way, falling otherwise — and the opening at launch. Holds for every game, not for this one alone."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une note brève à chaque homme posé, une autre à l'issue de chaque échange — montante quand il tourne pour vous, descendante sinon — et l'ouverture au lancement. Vaut pour toutes les parties, et non pour celle-ci seule."
           }
         }
       }
@@ -3364,6 +5776,12 @@
             "state": "translated",
             "value": "A Game Center game cannot be resumed: if somebody loses the network, it stops. The code, on the other hand, lets you come back."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une partie Game Center ne se reprend pas : si quelqu'un perd le réseau, elle s'arrête. Le code, lui, laisse revenir."
+          }
         }
       }
     },
@@ -3373,6 +5791,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "A game of Riskelo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une partie de Riskelo"
           }
         }
       }
@@ -3384,6 +5808,12 @@
             "state": "translated",
             "value": "One question"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une question"
+          }
         }
       }
     },
@@ -3393,6 +5823,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "YOUR CODE"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "VOTRE CODE"
           }
         }
       }
@@ -3404,6 +5840,12 @@
             "state": "translated",
             "value": "Brightvale"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Val-Clair"
+          }
         }
       }
     },
@@ -3413,6 +5855,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Different versions"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versions différentes"
           }
         }
       }
@@ -3424,6 +5872,12 @@
             "state": "translated",
             "value": "Green"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vert"
+          }
         }
       }
     },
@@ -3433,6 +5887,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Oldport"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vieux-Port"
           }
         }
       }
@@ -3444,6 +5904,12 @@
             "state": "translated",
             "value": "Purple"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Violet"
+          }
         }
       }
     },
@@ -3453,6 +5919,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Your Game Center friends, or somebody at random. Apple takes care of bringing you together."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vos amis Game Center, ou quelqu'un au hasard. Apple s'occupe de vous mettre en présence."
           }
         }
       }
@@ -3464,6 +5936,12 @@
             "state": "translated",
             "value": "Your Game Center friends, or an opponent at random. Needs an Apple account, and cannot be resumed after a drop."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vos amis Game Center, ou un adversaire au hasard. Demande un compte Apple, et ne se reprend pas après une coupure."
+          }
         }
       }
     },
@@ -3473,6 +5951,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Your cards"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vos cartes"
           }
         }
       }
@@ -3484,6 +5968,12 @@
             "state": "translated",
             "value": "Your answer is taken. %@ is now answering the same question: the surer wins, and if you both know, the faster."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Votre réponse est prise. %@ répond maintenant à la même question : le plus sûr l'emporte, et si vous savez tous les deux, le plus rapide."
+          }
         }
       }
     },
@@ -3493,6 +5983,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "You answered correctly: %@ holds, the attacker leaves %@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vous avez répondu juste : %@ tient, l'assaillant laisse %@."
           }
         }
       }
@@ -3504,6 +6000,12 @@
             "state": "translated",
             "value": "You pick the ground — but you answer too"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vous choisissez le terrain — mais vous y répondez aussi"
+          }
         }
       }
     },
@@ -3513,6 +6015,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "You did not answer in time: %@ loses %@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vous n'avez pas répondu à temps : %@ perd %@."
           }
         }
       }
@@ -3524,6 +6032,12 @@
             "state": "translated",
             "value": "You ask the question — pick the ground"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vous posez la question — choisissez le terrain"
+          }
         }
       }
     },
@@ -3533,6 +6047,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "You will get the same question right after: in a showdown the attacker answers too. The surer wins, and if you both know, the faster."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vous recevrez la même question juste après : en face à face, l'attaquant répond aussi. Le plus sûr l'emporte, et si vous savez tous les deux, le plus rapide."
           }
         }
       }
@@ -3544,6 +6064,12 @@
             "state": "translated",
             "value": "You both answer the same question."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vous répondez tous les deux à la même question."
+          }
         }
       }
     },
@@ -3553,6 +6079,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "You got it wrong: %@ loses %@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vous vous êtes trompé : %@ perd %@."
           }
         }
       }
@@ -3564,6 +6096,12 @@
             "state": "translated",
             "value": "You are in the game"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vous êtes dans la partie"
+          }
         }
       }
     },
@@ -3573,6 +6111,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Check your connection — Wi-Fi or cellular. If all is well on your side, it is the game server that is not answering: the same room depends on nobody."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vérifiez votre connexion — Wi-Fi ou données mobiles. Si tout va bien de votre côté, c'est le serveur des parties qui ne répond pas : la même pièce, elle, ne dépend de personne."
           }
         }
       }
@@ -3584,6 +6128,12 @@
             "state": "translated",
             "value": "WhatsApp, SMS, Messages — the link opens the game directly. The code written above works too, if you have to read it out."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "WhatsApp, SMS, Messages — le lien ouvre le jeu directement. Le code écrit au-dessus marche aussi, s'il faut le dicter."
+          }
         }
       }
     },
@@ -3593,6 +6143,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Zephyria"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zéphyrie"
+          }
+        }
+      }
+    },
+    "deux": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "two"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "deux"
           }
         }
       }
@@ -3604,6 +6176,12 @@
             "state": "translated",
             "value": "two troops"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "deux hommes"
+          }
         }
       }
     },
@@ -3613,6 +6191,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "iOS asks for your consent before a game can see the other devices in the house. Riskelo does not have it yet."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iOS demande votre accord avant qu'un jeu puisse voir les autres appareils de la maison. Riskelo ne l'a pas encore."
           }
         }
       }
@@ -3624,6 +6208,28 @@
             "state": "translated",
             "value": "unavailable"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "indisponible"
+          }
+        }
+      }
+    },
+    "quatre": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "four"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "quatre"
+          }
         }
       }
     },
@@ -3633,6 +6239,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "of %lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "sur %lld"
           }
         }
       }
@@ -3644,6 +6256,12 @@
             "state": "translated",
             "value": "all categories mixed"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "toutes catégories mêlées"
+          }
         }
       }
     },
@@ -3653,6 +6271,44 @@
           "stringUnit": {
             "state": "translated",
             "value": "every %lld correct answers"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "toutes les %lld bonnes réponses"
+          }
+        }
+      }
+    },
+    "trois": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "three"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "trois"
+          }
+        }
+      }
+    },
+    "un": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "one"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "un"
           }
         }
       }
@@ -3664,6 +6320,12 @@
             "state": "translated",
             "value": "a troop"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "un homme"
+          }
         }
       }
     },
@@ -3674,12 +6336,24 @@
             "state": "translated",
             "value": "·"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "·"
+          }
         }
       }
     },
     "· %@": {
       "localizations": {
         "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "· %@"
+          }
+        },
+        "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "· %@"
@@ -3710,6 +6384,12 @@
             "state": "translated",
             "value": "%@ to answer."
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "À %@ de répondre."
+          }
         }
       }
     },
@@ -3719,6 +6399,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Attack"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "À l'attaque"
           }
         }
       }
@@ -3730,6 +6416,12 @@
             "state": "translated",
             "value": "Trade for %lld troops"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Échanger contre %lld hommes"
+          }
         }
       }
     },
@@ -3739,6 +6431,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Scotland"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Écosse"
           }
         }
       }
@@ -3750,6 +6448,12 @@
             "state": "translated",
             "value": "Egypt"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Égypte"
+          }
         }
       }
     },
@@ -3759,6 +6463,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "British Isles"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Îles Britanniques"
           }
         }
       }
@@ -3770,13 +6480,34 @@
             "state": "translated",
             "value": "eliminated"
           }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "éliminé"
+          }
         }
       }
     },
-    "—": {},
+    "—": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "—"
+          }
+        }
+      }
+    },
     "•": {
       "localizations": {
         "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "•"
+          }
+        },
+        "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "•"
@@ -3787,6 +6518,12 @@
     "−%lld": {
       "localizations": {
         "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "−%lld"
+          }
+        },
+        "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "−%lld"

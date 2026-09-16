@@ -172,7 +172,7 @@ struct GameState {
                                               using: &g.rng)
         }
         g.phase = .reinforcement(remaining: g.reinforcements(for: g.currentPlayer.id))
-        g.note(.tour, "Tour \(g.turn) — à \(g.currentPlayer.name) de jouer.")
+        g.note(.tour, dit("Tour \(g.turn) — à \(g.currentPlayer.name) de jouer."))
         return g
     }
 
@@ -247,7 +247,7 @@ struct GameState {
         hands[joueur] = main.filter { !ids.contains($0.id) }
         discard.append(contentsOf: trio)
         phase = .reinforcement(remaining: reste + valeur)
-        note(.renfort, "\(currentPlayer.name) échange trois cartes : \(valeur) hommes.")
+        note(.renfort, dit("\(currentPlayer.name) échange trois cartes : \(valeur) hommes."))
         return true
     }
 
@@ -260,7 +260,7 @@ struct GameState {
         }
         guard let carte = deck.popLast() else { return }
         hands[player, default: []].append(carte)
-        note(.renfort, "\(players.first { $0.id == player }?.name ?? "?") gagne une carte.")
+        note(.renfort, dit("\(players.first { $0.id == player }?.name ?? "?") gagne une carte."))
     }
 
     // MARK: - Lecture
@@ -297,8 +297,10 @@ struct GameState {
         let du = eruditionOwed(player)
         guard du > 0 else { return }
         bonusPaid[player] = eruditionEarned(player)
-        note(.renfort, "\(du) homme\(du > 1 ? "s" : "") de plus pour "
-             + "\(players.first { $0.id == player }?.name ?? "?") : ses bonnes réponses.")
+        note(.renfort, dit("""
+                           \(du) homme\(du > 1 ? "s" : "") de plus pour \
+                           \(players.first { $0.id == player }?.name ?? "?") : ses bonnes réponses.
+                           """))
     }
 
     /// D'où peut-on attaquer : ses propres terres, à plus d'un homme, qui
@@ -423,7 +425,7 @@ struct GameState {
         let left = remaining - count
         phase = .reinforcement(remaining: left)
         if left == 0 {
-            note(.renfort, "\(currentPlayer.name) a placé ses renforts.")
+            note(.renfort, dit("\(currentPlayer.name) a placé ses renforts."))
             phase = .attack
         }
         // Un objectif qui demande tant de places à deux ou trois hommes se
@@ -469,9 +471,17 @@ struct GameState {
 
         var a = Assault(attacker: currentPlayer.id, defender: defender,
                         from: from, to: to, category: category, volley: questions)
-        note(.duel, "\(currentPlayer.name) attaque \(name(to)) depuis \(name(from)) — "
-             + "\(questions) question\(questions > 1 ? "s" : "") "
-             + "\(category?.apresDe ?? "au hasard").")
+        // Deux phrases : le thème se raccorde par « de » en français et par
+        // « on » en anglais, et « au hasard » ne se raccorde à rien.
+        note(.duel, category.map { c in
+            dit("""
+                \(currentPlayer.name) attaque \(name(to)) depuis \(name(from)) — \
+                \(questions) question\(questions > 1 ? "s" : "") \(c.dansLaPhrase).
+                """)
+        } ?? dit("""
+                 \(currentPlayer.name) attaque \(name(to)) depuis \(name(from)) — \
+                 \(questions) question\(questions > 1 ? "s" : "") au hasard.
+                 """))
         // Le terrain laissé au sort ne compte pas comme un terrain choisi :
         // la machine s'interdit de reprendre le même thème deux fois de
         // suite, et « au hasard » ne l'engage à rien.
@@ -523,8 +533,10 @@ struct GameState {
     mutating func relancer() {
         guard peutRelancer else { return }
         assault?.mise = 2
-        note(.duel, "\(playerName(assault?.defender ?? -1)) relance : "
-             + "l'échange vaudra deux hommes.")
+        note(.duel, dit("""
+                        \(playerName(assault?.defender ?? -1)) relance : \
+                        l'échange vaudra deux hommes.
+                        """))
     }
 
     func playerName(_ id: PlayerID) -> String {
@@ -538,7 +550,7 @@ struct GameState {
         knowledge[joueur, default: [:]][categorie] = score
     }
 
-    private func hommes(_ n: Int) -> String { "\(n) homme\(n > 1 ? "s" : "")" }
+    private func hommes(_ n: Int) -> String { dit("\(n) homme\(n > 1 ? "s" : "")") }
 
     /// Une réponse arrive. C'est le seul coup qui fait couler du sang — sauf
     /// la première des deux en face à face, qui ne fait qu'attendre l'autre.
@@ -615,20 +627,29 @@ struct GameState {
         switch r.verdict {
         case .reponse:
             return tient
-                ? "\(place) tient : bonne réponse, l'assaillant laisse \(hommes(perte))."
+                ? dit("\(place) tient : bonne réponse, l'assaillant laisse \(hommes(perte)).")
                 : (r.answer == .timeout
-                   ? "Temps écoulé : \(place) perd \(hommes(perte))."
-                   : "Mauvaise réponse : \(place) perd \(hommes(perte)).")
+                   ? dit("Temps écoulé : \(place) perd \(hommes(perte)).")
+                   : dit("Mauvaise réponse : \(place) perd \(hommes(perte))."))
         case .seul:
             return tient
-                ? "\(place) tient : le défenseur savait, l'assaillant non — \(hommes(perte)) de moins pour lui."
-                : "L'assaillant savait, la place non : \(place) perd \(hommes(perte))."
+                ? dit("""
+                      \(place) tient : le défenseur savait, l'assaillant non — \
+                      \(hommes(perte)) de moins pour lui.
+                      """)
+                : dit("L'assaillant savait, la place non : \(place) perd \(hommes(perte)).")
         case .vitesse:
             return tient
-                ? "Les deux savaient : le défenseur a été le plus vif, \(place) tient et coûte \(hommes(perte))."
-                : "Les deux savaient : l'assaillant a été le plus vif, \(place) perd \(hommes(perte))."
+                ? dit("""
+                      Les deux savaient : le défenseur a été le plus vif, \(place) \
+                      tient et coûte \(hommes(perte)).
+                      """)
+                : dit("""
+                      Les deux savaient : l'assaillant a été le plus vif, \(place) \
+                      perd \(hommes(perte)).
+                      """)
         case .egalite:
-            return "Personne ne savait : \(place) tient, et l'assaillant laisse \(hommes(perte))."
+            return dit("Personne ne savait : \(place) tient, et l'assaillant laisse \(hommes(perte)).")
         }
     }
 
@@ -657,8 +678,10 @@ struct GameState {
         guard !butin.isEmpty else { return }
         hands[vaincu] = []
         hands[currentPlayer.id, default: []].append(contentsOf: butin)
-        note(.renfort, "\(currentPlayer.name) hérite de \(butin.count) carte"
-             + "\(butin.count > 1 ? "s" : "") du vaincu.")
+        note(.renfort, dit("""
+                           \(currentPlayer.name) hérite de \(butin.count) \
+                           carte\(butin.count > 1 ? "s" : "") du vaincu.
+                           """))
     }
 
     private mutating func conquer(from: TerritoryID, to: TerritoryID, volley: Int) {
@@ -666,13 +689,13 @@ struct GameState {
         owner[to] = currentPlayer.id
         armies[to] = 0
         conqueredThisTurn = true
-        note(.conquete, "\(name(to)) tombe. \(currentPlayer.name) s'en empare.")
+        note(.conquete, dit("\(name(to)) tombe. \(currentPlayer.name) s'en empare."))
 
         if let loser, territories(of: loser).isEmpty,
            let i = players.firstIndex(where: { $0.id == loser }) {
             players[i].eliminated = true
             elimines[loser] = currentPlayer.id
-            note(.elimination, "\(players[i].name) est éliminé.")
+            note(.elimination, dit("\(players[i].name) est éliminé."))
             heriter(de: loser)
         }
 
@@ -697,8 +720,11 @@ struct GameState {
                 note(.fin, recitDeLObjectif(currentPlayer.id))
             } else {
                 note(.fin, survivors.count > 1
-                     ? "\(currentPlayer.name) tient assez du monde pour que le reste ne compte plus."
-                     : "\(currentPlayer.name) tient le monde entier.")
+                     ? dit("""
+                           \(currentPlayer.name) tient assez du monde pour que le \
+                           reste ne compte plus.
+                           """)
+                     : dit("\(currentPlayer.name) tient le monde entier."))
             }
             return
         }
@@ -718,7 +744,12 @@ struct GameState {
         armies[to, default: 0] += n
         assault = nil
         phase = .attack
-        note(.conquete, "\(n) homme\(n > 1 ? "s avancent" : " avance") sur \(name(to)).")
+        // Le verbe suit le nombre, et il ne le suit pas de la même façon dans
+        // les deux langues : deux phrases plutôt qu'un morceau de verbe glissé
+        // dans un trou.
+        note(.conquete, n > 1
+             ? dit("\(n) hommes avancent sur \(name(to)).")
+             : dit("\(n) homme avance sur \(name(to)).")) 
         verifierLObjectif()
         return true
     }
@@ -732,7 +763,7 @@ struct GameState {
               count > 0, count <= armies(from) - 1 else { return false }
         armies[from, default: 0] -= count
         armies[to, default: 0] += count
-        note(.renfort, "\(count) homme\(count > 1 ? "s" : "") de \(name(from)) vers \(name(to)).")
+        note(.renfort, dit("\(count) homme\(count > 1 ? "s" : "") de \(name(from)) vers \(name(to))."))
         // Avant de passer la main : un déplacement peut porter la dernière
         // place à deux hommes, et c'est encore votre tour.
         verifierLObjectif()
@@ -773,7 +804,7 @@ struct GameState {
         let renforts = reinforcements(for: currentPlayer.id)
         settleErudition(currentPlayer.id)
         phase = .reinforcement(remaining: renforts)
-        note(.tour, "Tour \(turn) — à \(currentPlayer.name) de jouer.")
+        note(.tour, dit("Tour \(turn) — à \(currentPlayer.name) de jouer."))
     }
 
     // MARK: - Journal

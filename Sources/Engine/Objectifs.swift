@@ -265,15 +265,16 @@ extension GameState {
         switch carte {
         case .continents(let ids):
             let noms = ids.compactMap { map.continents[$0]?.name }
-            return "\(playerName(joueur)) tenait " + Objectif.liste(noms)
-                + " — c'était sa conquête."
+            return dit("\(playerName(joueur)) tenait \(Objectif.liste(noms)) — c'était sa conquête.")
         case let .territoires(nombre, hommes):
             return hommes > 1
-                ? "\(playerName(joueur)) tient \(nombre) places à "
-                    + "\(Objectif.enLettres(hommes)) hommes — c'était sa conquête."
-                : "\(playerName(joueur)) tient \(nombre) territoires — c'était sa conquête."
+                ? dit("""
+                      \(playerName(joueur)) tient \(nombre) places à \
+                      \(Objectif.enLettres(hommes)) hommes — c'était sa conquête.
+                      """)
+                : dit("\(playerName(joueur)) tient \(nombre) territoires — c'était sa conquête.")
         case .eliminer(let cible):
-            return "\(playerName(joueur)) a fait tomber \(playerName(cible)) — c'était sa conquête."
+            return dit("\(playerName(joueur)) a fait tomber \(playerName(cible)) — c'était sa conquête.")
         }
     }
 }
@@ -313,15 +314,17 @@ extension Objectif {
     static func liste(_ mots: [String]) -> String {
         guard let dernier = mots.last else { return "" }
         guard mots.count > 1 else { return dernier }
-        return mots.dropLast().joined(separator: ", ") + " et " + dernier
+        // « et » se dit « and » : le mot qui relie est de la langue, pas de la
+        // liste.
+        return dit("\(mots.dropLast().joined(separator: ", ")) et \(dernier)")
     }
 
     static func enLettres(_ n: Int) -> String {
         switch n {
-        case 1: "un"
-        case 2: "deux"
-        case 3: "trois"
-        case 4: "quatre"
+        case 1: dit("un")
+        case 2: dit("deux")
+        case 3: dit("trois")
+        case 4: dit("quatre")
         default: "\(n)"
         }
     }

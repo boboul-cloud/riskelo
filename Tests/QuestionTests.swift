@@ -660,3 +660,53 @@ struct TableMixteTests {
         #expect(vus == ["histoire", "history"], "banques servies : \(vus.sorted())")
     }
 }
+
+/// Le journal de la partie, dans la langue de l'app.
+///
+/// Il est écrit par le moteur, hors de toute vue, et il a longtemps été écrit
+/// en français quelle que soit la langue choisie : un joueur américain lisait
+/// « Tour 1 — à Blue de jouer » sous une interface entière en anglais. Ces
+/// essais tiennent la promesse dans les deux sens — et le français, qui n'a
+/// pas de table à lui, doit rendre la phrase telle qu'elle est écrite.
+@Suite(.serialized) struct JournalTests {
+
+    private func dansLaLangue<T>(_ langue: Langue, _ corps: () -> T) -> T {
+        let avant = Themes.langue
+        Themes.langue = langue
+        defer { Themes.langue = avant }
+        return corps()
+    }
+
+    private func partie() -> GameState {
+        GameState.start(players: [Player(id: 0, name: "Alex"), Player(id: 1, name: "Bo")],
+                        seed: 7)
+    }
+
+    @Test func leJournalSuitLaLangueChoisie() {
+        #expect(dansLaLangue(.fr) { partie().journal.first?.text } == "Tour 1 — à Alex de jouer.")
+        #expect(dansLaLangue(.en) { partie().journal.first?.text } == "Turn 1 — Alex to play.")
+    }
+
+    @Test func leRecitDuDuelSuitLaLangueChoisie() {
+        // Le thème doit être de la langue en cours : la banque ne tire que
+        // dans les thèmes en jeu, et « geographie » n'existe pas côté anglais.
+        for (langue, theme, attendu) in [(Langue.fr, "geographie", "homme"),
+                                         (Langue.en, "geography", "troop")] {
+            let recits: [String] = dansLaLangue(langue) {
+                var g = partie()
+                g.debugSkipToAttack()
+                guard let (base, cible) = g.debugFirstAssault(minArmies: 3, targetArmies: 2)
+                else { return [] }
+                g.declareAssault(from: base, to: cible, questions: 1,
+                                 category: Riskelo.Category(theme))
+                guard let posee = g.assault?.current else { return [] }
+                let mauvaise = (posee.question.answer + 1) % 4
+                g.answer(.chosen(mauvaise, elapsed: 3))
+                return g.journal.filter { $0.kind == .duel }.map(\.text)
+            }
+            #expect(!recits.isEmpty, "aucun récit de duel")
+            #expect(recits.contains { $0.contains(attendu) },
+                    "le récit ne parle pas la bonne langue : \(recits)")
+        }
+    }
+}

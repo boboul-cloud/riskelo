@@ -342,10 +342,13 @@ def main():
                 # Le mot se tape : cette commande est la seule du dépôt qui
                 # écrive quelque chose d'irréversible chez Apple.
                 try:
-                    reponse = input("\nTaper OUI pour écrire : ")
+                    reponse = input("\nTaper oui pour écrire : ")
                 except EOFError:
                     reponse = ""
-                if reponse.strip() != "OUI":
+                # Les majuscules ne sont pas la garantie : le mot l'est. Un
+                # « oui » refusé pour une touche Majuscule est un garde-fou qui
+                # se trompe de danger.
+                if reponse.strip().lower() not in ("oui", "o", "yes"):
                     raise SystemExit("Rien n'a été envoyé.")
     fr = sum(1 for p in liste if p["langue"] == "fr")
     print("%d packs déclarés — %d français, %d anglais%s\n"

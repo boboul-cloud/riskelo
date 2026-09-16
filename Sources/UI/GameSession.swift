@@ -680,7 +680,8 @@ final class GameSession {
         if nom == Boards.nomDeCamp(j.id), j.id == monCamp, let pseudo = Pseudo.actuel {
             nom += " · \(pseudo)"
         }
-        return avecMoi && j.id == monCamp ? nom + " · moi" : nom
+        // « moi » est un mot, pas un séparateur : il se traduit.
+        return avecMoi && j.id == monCamp ? dit("\(nom) · moi") : nom
     }
 
     var repondeur: PlayerID? { game.quiRepond ?? game.assault?.defender }

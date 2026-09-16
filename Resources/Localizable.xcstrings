@@ -587,6 +587,22 @@
         }
       }
     },
+    "%@ · moi": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · me"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · moi"
+          }
+        }
+      }
+    },
     "%@ échange trois cartes : %lld hommes.": {
       "localizations": {
         "en": {

@@ -46,7 +46,11 @@ enum Message: Codable {
     ///     enum ne connaît pas « histoire-4e », et c'est l'état entier qui
     ///     devenait illisible — la panne muette que cette enveloppe existe
     ///     précisément pour éviter.
-    static let dialecte = 7
+    /// 8 : la fusion des deux langues. Les identifiants de trois thèmes ont
+    /// changé côté anglais, et la banque a doublé. Une 1.3 et une version
+    /// fusionnée qui croiraient se comprendre tireraient des questions
+    /// différentes — pire qu'un refus de connexion, qui au moins se voit.
+    static let dialecte = 8
 
     /// La partie entière, envoyée par celui qui l'a ouverte — à chacun son
     /// rang, et le compte des coups déjà joués.

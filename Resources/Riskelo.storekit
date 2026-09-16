@@ -266,6 +266,261 @@
       "productID": "com.oulhen.riskelo.pack.svt3e",
       "referenceName": "Pack SVT 3e",
       "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "2.99",
+      "familyShareable": true,
+      "internalID": "A2000018",
+      "localizations": [
+        {
+          "description": "The bands, the voices and the roles, in America and beyond. 400 questions.",
+          "displayName": "Rock 70-80",
+          "locale": "en_US"
+        }
+      ],
+      "productID": "com.oulhen.riskelo.pack.us.rock7080",
+      "referenceName": "Rock 70 80 Pack",
+      "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "2.99",
+      "familyShareable": true,
+      "internalID": "A2000019",
+      "localizations": [
+        {
+          "description": "Ancient civilizations: Mesopotamia, Egypt, Greece and Rome. 200 questions.",
+          "displayName": "History — Grade 6",
+          "locale": "en_US"
+        }
+      ],
+      "productID": "com.oulhen.riskelo.pack.us.history6",
+      "referenceName": "History Grade 6 Pack",
+      "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "2.99",
+      "familyShareable": true,
+      "internalID": "A2000020",
+      "localizations": [
+        {
+          "description": "Map skills, landforms and climate, then Africa and Asia region by region. 200 questions.",
+          "displayName": "Geography — Grade 6",
+          "locale": "en_US"
+        }
+      ],
+      "productID": "com.oulhen.riskelo.pack.us.geography6",
+      "referenceName": "Geography Grade 6 Pack",
+      "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "2.99",
+      "familyShareable": true,
+      "internalID": "A2000021",
+      "localizations": [
+        {
+          "description": "Grammar, punctuation, word roots, reading skills and the first myths. 200 questions.",
+          "displayName": "English — Grade 6",
+          "locale": "en_US"
+        }
+      ],
+      "productID": "com.oulhen.riskelo.pack.us.english6",
+      "referenceName": "English Grade 6 Pack",
+      "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "2.99",
+      "familyShareable": true,
+      "internalID": "A2000022",
+      "localizations": [
+        {
+          "description": "Earth science: plates, rocks, water, weather, space and deep time. 200 questions.",
+          "displayName": "Science — Grade 6",
+          "locale": "en_US"
+        }
+      ],
+      "productID": "com.oulhen.riskelo.pack.us.science6",
+      "referenceName": "Science Grade 6 Pack",
+      "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "2.99",
+      "familyShareable": true,
+      "internalID": "A2000023",
+      "localizations": [
+        {
+          "description": "The medieval and early modern world, from Byzantium to Columbus. 200 questions.",
+          "displayName": "History — Grade 7",
+          "locale": "en_US"
+        }
+      ],
+      "productID": "com.oulhen.riskelo.pack.us.history7",
+      "referenceName": "History Grade 7 Pack",
+      "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "2.99",
+      "familyShareable": true,
+      "internalID": "A2000024",
+      "localizations": [
+        {
+          "description": "Europe, Russia, the Americas, the Pacific and the poles. 200 questions.",
+          "displayName": "Geography — Grade 7",
+          "locale": "en_US"
+        }
+      ],
+      "productID": "com.oulhen.riskelo.pack.us.geography7",
+      "referenceName": "Geography Grade 7 Pack",
+      "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "2.99",
+      "familyShareable": true,
+      "internalID": "A2000025",
+      "localizations": [
+        {
+          "description": "Poetry, fiction, drama, argument, writing craft and middle school novels. 200 questions.",
+          "displayName": "English — Grade 7",
+          "locale": "en_US"
+        }
+      ],
+      "productID": "com.oulhen.riskelo.pack.us.english7",
+      "referenceName": "English Grade 7 Pack",
+      "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "2.99",
+      "familyShareable": true,
+      "internalID": "A2000026",
+      "localizations": [
+        {
+          "description": "Life science: cells, classification, plants, animals, the body and ecology. 200 questions.",
+          "displayName": "Science — Grade 7",
+          "locale": "en_US"
+        }
+      ],
+      "productID": "com.oulhen.riskelo.pack.us.science7",
+      "referenceName": "Science Grade 7 Pack",
+      "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "2.99",
+      "familyShareable": true,
+      "internalID": "A2000027",
+      "localizations": [
+        {
+          "description": "United States history from the colonies to Reconstruction. 200 questions.",
+          "displayName": "History — Grade 8",
+          "locale": "en_US"
+        }
+      ],
+      "productID": "com.oulhen.riskelo.pack.us.history8",
+      "referenceName": "History Grade 8 Pack",
+      "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "2.99",
+      "familyShareable": true,
+      "internalID": "A2000028",
+      "localizations": [
+        {
+          "description": "The United States: states, capitals, landforms, weather and cities. 200 questions.",
+          "displayName": "Geography — Grade 8",
+          "locale": "en_US"
+        }
+      ],
+      "productID": "com.oulhen.riskelo.pack.us.geography8",
+      "referenceName": "Geography Grade 8 Pack",
+      "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "2.99",
+      "familyShareable": true,
+      "internalID": "A2000029",
+      "localizations": [
+        {
+          "description": "American literature from the Puritans to Toni Morrison. 200 questions.",
+          "displayName": "English — Grade 8",
+          "locale": "en_US"
+        }
+      ],
+      "productID": "com.oulhen.riskelo.pack.us.english8",
+      "referenceName": "English Grade 8 Pack",
+      "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "2.99",
+      "familyShareable": true,
+      "internalID": "A2000030",
+      "localizations": [
+        {
+          "description": "Physical science: matter, atoms, reactions, forces, energy and waves. 200 questions.",
+          "displayName": "Science — Grade 8",
+          "locale": "en_US"
+        }
+      ],
+      "productID": "com.oulhen.riskelo.pack.us.science8",
+      "referenceName": "Science Grade 8 Pack",
+      "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "2.99",
+      "familyShareable": true,
+      "internalID": "A2000031",
+      "localizations": [
+        {
+          "description": "The modern world, from the Enlightenment to the fall of the Wall. 200 questions.",
+          "displayName": "History — Grade 9",
+          "locale": "en_US"
+        }
+      ],
+      "productID": "com.oulhen.riskelo.pack.us.history9",
+      "referenceName": "History Grade 9 Pack",
+      "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "2.99",
+      "familyShareable": true,
+      "internalID": "A2000032",
+      "localizations": [
+        {
+          "description": "Human geography: population, cities, development, resources and trade. 200 questions.",
+          "displayName": "Geography — Grade 9",
+          "locale": "en_US"
+        }
+      ],
+      "productID": "com.oulhen.riskelo.pack.us.geography9",
+      "referenceName": "Geography Grade 9 Pack",
+      "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "2.99",
+      "familyShareable": true,
+      "internalID": "A2000033",
+      "localizations": [
+        {
+          "description": "Shakespeare, the classics, the British novel and world literature. 200 questions.",
+          "displayName": "English — Grade 9",
+          "locale": "en_US"
+        }
+      ],
+      "productID": "com.oulhen.riskelo.pack.us.english9",
+      "referenceName": "English Grade 9 Pack",
+      "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "2.99",
+      "familyShareable": true,
+      "internalID": "A2000034",
+      "localizations": [
+        {
+          "description": "Biology: biochemistry, the cell at work, DNA, genetics and evolution. 200 questions.",
+          "displayName": "Science — Grade 9",
+          "locale": "en_US"
+        }
+      ],
+      "productID": "com.oulhen.riskelo.pack.us.science9",
+      "referenceName": "Science Grade 9 Pack",
+      "type": "NonConsumable"
     }
   ],
   "settings": {
@@ -276,8 +531,8 @@
     "_failTransactionsEnabled": false,
     "_locale": "fr",
     "_renewalBillingIssuesEnabled": false,
-    "_storefront": "FRA",
     "_storeKitErrors": [],
+    "_storefront": "FRA",
     "_timeRate": 0
   },
   "subscriptionGroups": [],

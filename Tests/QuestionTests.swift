@@ -584,3 +584,30 @@ struct ManuelTests {
                 "un titre est identique dans les deux manuels")
     }
 }
+
+// MARK: - Les articles, les deux langues réunies
+
+struct ArticlesTests {
+
+    /// Trente-quatre packs, trente-quatre identifiants distincts.
+    ///
+    /// Deux familles cohabitent désormais sous un même bundle, et un
+    /// identifiant partagé par deux packs en ouvrirait un pour l'achat de
+    /// l'autre. Le compte par langue ne l'aurait pas vu : il faut les
+    /// regarder ensemble.
+    @Test func chaquePackAUnArticleAlui() {
+        let vendus = Themes.toutesLangues.compactMap { Themes.connu($0)?.produit }
+        #expect(vendus.count == 34, "trente-quatre packs attendus, \(vendus.count) trouvés")
+        #expect(Set(vendus).count == vendus.count, "deux packs partagent un article")
+        #expect(vendus.allSatisfy { $0.hasPrefix("com.oulhen.riskelo.pack.") })
+    }
+
+    /// Les packs anglais se reconnaissent à leur famille, et eux seuls.
+    @Test func lesDeuxFamillesNeSeMelangentPas() {
+        for c in Themes.toutesLangues {
+            guard let t = Themes.connu(c), let article = t.produit else { continue }
+            #expect(article.contains(".pack.us.") == (t.langue == .en),
+                    "\(c.id) : article \(article) pour la langue \(t.langue)")
+        }
+    }
+}

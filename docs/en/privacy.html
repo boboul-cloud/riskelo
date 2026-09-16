@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Riskelo — privacy policy</title>
+<meta name="description" content="Riskelo collects no personal data: no account, no tracker, no ads. What stays on your device, and what the relay for playing far away never receives.">
+<link rel="alternate" hreflang="fr" href="../confidentialite.html">
+<link rel="alternate" hreflang="en" href="privacy.html">
+<link rel="icon" href="../icone.png">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<header class="barre">
+  <div class="enveloppe">
+    <a class="marque" href="index.html"><img src="../icone.png" alt="">Riskelo</a>
+    <nav>
+      <a href="support.html">Support</a>
+      <a href="privacy.html" aria-current="page">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a class="langue" href="../confidentialite.html" hreflang="fr" lang="fr">Français</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<div class="enveloppe">
+
+<section>
+  <h1>Privacy policy</h1>
+  <p><small><strong>Riskelo</strong> app (iPhone, iPad, Mac) ·
+    Version&nbsp;1.0 · Last updated: 28 August 2026</small></p>
+
+  <div class="note">
+    <p><strong>In one sentence:</strong> Riskelo collects, keeps and sells no
+      personal data. There is no account, no sign-up, no tracker, no
+      advertising. Everything the game produces stays on your device — except,
+      if you choose to play far away, the moves of the game, which cross a
+      relay without being kept there and without any name reaching it. See
+      section 4.</p>
+  </div>
+</section>
+
+<section>
+  <h2>1. Who is responsible</h2>
+  <p>Riskelo is published by <strong>Robert Oulhen</strong>, an independent
+    developer, acting as data controller within the meaning of the General Data
+    Protection Regulation (GDPR).</p>
+  <p>Contact: <a href="mailto:bob.oulhen@gmail.com">bob.oulhen@gmail.com</a></p>
+</section>
+
+<section>
+  <h2>2. The data the app does not collect</h2>
+  <p>Riskelo <strong>collects none</strong> of the following:</p>
+  <ul>
+    <li>name, email address, phone number, account identifier;</li>
+    <li>location, address book, photos, calendar, microphone, camera;</li>
+    <li>advertising identifiers (IDFA), device identifiers used for
+      tracking;</li>
+    <li>usage statistics, analytics, telemetry, usage logs.</li>
+  </ul>
+  <p>The app contains <strong>no third-party SDK</strong>: no ad network, no
+    analytics tool, no social network, no authentication service.</p>
+  <p>It <strong>runs entirely offline</strong>, with one exception that you
+    choose yourself: playing “far away”, described in section 4. As long as you
+    do not open it, the app makes no request to any server.</p>
+  <p>Under the App Store's privacy labels, Riskelo is declared as
+    <em>Data Not Collected</em>: nothing is kept in readable form beyond the
+    time needed to pass a move from one device to another.</p>
+</section>
+
+<section>
+  <h2>3. The data kept on your device</h2>
+  <p>To work, the game writes files in its own storage space, on the device and
+    nowhere else:</p>
+  <table>
+    <tr><th>What is written</th><th>Why</th><th>Where</th></tr>
+    <tr>
+      <td>The game in progress</td>
+      <td>To find it where you left it</td>
+      <td>The app's <em>Application Support</em> folder</td>
+    </tr>
+    <tr>
+      <td>The library of past games and their moments</td>
+      <td>To go back to an earlier turn</td>
+      <td>The app's <em>Application Support</em> folder</td>
+    </tr>
+  </table>
+  <p>These files contain nothing but the state of the game: territories, men,
+    scores by subject, the log of moves, preset side names (“Blue”, “Red”, …).
+    They contain no data identifying you.</p>
+  <p>They are <strong>deleted with the app</strong>: uninstalling Riskelo
+    erases everything, for good and without remainder. No backup is sent to any
+    server; if you have enabled iCloud Backup on your device, these files may
+    be included in Apple's encrypted backup, on your account and under your
+    exclusive control.</p>
+</section>
+
+<section>
+  <h2>4. Playing across several devices</h2>
+  <p>There are three ways to link devices, and you choose yours for each game.
+    They do not have the same consequences, which is why they are described
+    separately.</p>
+
+  <h3>In the same room</h3>
+  <p>The devices find each other through Bonjour and talk over TCP,
+    <strong>directly</strong> between themselves — over the local Wi-Fi
+    network, or device to device when there is no network.
+    <strong>Without passing through any server</strong>, and without anything
+    travelling over the internet.</p>
+  <ul>
+    <li><strong>Your device's name is visible</strong> to nearby devices that
+      have opened the same screen, while a table is being looked for. It is the
+      name you gave your device (for example “Camille's iPhone”); it serves
+      only so that the people you play with recognise you in the list. You can
+      change it in Settings ▸ General ▸ About ▸ Name.</li>
+    <li><strong>Only the moves of the game travel</strong> — a few dozen bytes
+      describing a reinforcement, an assault or an answer.</li>
+  </ul>
+  <p>The “local network” permission the system asks for serves that purpose
+    alone. Refusing it does not prevent you from playing alone, or several
+    around one device.</p>
+
+  <h3>Far away, with a code</h3>
+  <p>Two devices that are not in the same room cannot find each other on their
+    own: they need a meeting point. Riskelo keeps one, hosted by
+    <strong>Cloudflare</strong>. It does one thing only — copy packets whose
+    contents it does not know from one device to the other.</p>
+  <p>What reaches it:</p>
+  <ul>
+    <li><strong>an identifier drawn at random</strong> when the game is
+      installed, belonging to that device. It designates nobody, is tied to no
+      account, and serves only to give you your seat back if the link
+      drops;</li>
+    <li><strong>the moves of the game</strong>, in a form it does not try to
+      read and simply passes along.</li>
+  </ul>
+  <p>What <strong>never</strong> reaches it: your name, your nickname, the name
+    of your device, your email address, any Apple identifier. The first name
+    you give yourself travels inside the packets, and goes from one player to
+    another without the relay seeing it.</p>
+  <p>The room is erased <strong>two minutes</strong> after the last player
+    leaves, and the code becomes free again. Nothing is kept afterwards:
+    neither the games, nor the moves, nor who played with whom.</p>
+  <p>The invitation link you share contains nothing but the room code. The app
+    or service you send it through — messaging, text message, mail — applies
+    its own rules, over which Riskelo obviously has no say.</p>
+
+  <h3>Through Game Center</h3>
+  <p>Game Center is <strong>Apple's</strong> gaming service, and the game runs
+    through it end to end: Apple brings you together and carries the moves.
+    Riskelo receives only the Game Center nickname of the players in the game,
+    as Apple displays it, and does not keep it.</p>
+  <p>What Game Center collects on its own account is covered by
+    <a href="https://www.apple.com/legal/privacy/">Apple's privacy
+    policy</a>. That path is optional: the other two ask for no account.</p>
+</section>
+
+<section>
+  <h2>5. What Apple may receive</h2>
+  <p>Independently of Riskelo, Apple collects certain information related to
+    downloading and using apps (purchase, installation, aggregate statistics).
+    If you have agreed to <em>share analytics with app developers</em> in your
+    device settings, Apple may pass me crash reports and
+    <strong>anonymous, aggregated</strong> statistics. That is the only form in
+    which I have access to them, and those reports identify nobody. This
+    sharing can be turned off at any time in Settings ▸ Privacy &amp; Security ▸
+    Analytics &amp; Improvements.</p>
+</section>
+
+<section>
+  <h2>6. Children</h2>
+  <p>Riskelo collects no data, whatever the player's age, and contains no
+    advertising, no links to social networks, and no content generated by other
+    users. The optional question packs are bought through the
+    App&nbsp;Store: no payment goes through the app, and no banking data is
+    given to it. The “Easy questions” setting is meant for playing with
+    children. The app therefore complies, by construction, with COPPA and with
+    Article 8 of the GDPR.</p>
+</section>
+
+<section>
+  <h2>7. Your rights</h2>
+  <p>The GDPR gives you rights of access, rectification, erasure, objection and
+    portability over your personal data. As Riskelo holds none, those rights
+    have in practice no object: there is no file to consult, correct or erase
+    anywhere but on your device, where you have complete control.</p>
+  <p>To erase all of the game's data: delete the app. For any question, write
+    to <a href="mailto:bob.oulhen@gmail.com">bob.oulhen@gmail.com</a>; you will
+    be answered within thirty days. You may also lodge a complaint with the
+    French data protection authority, the CNIL
+    (<a href="https://www.cnil.fr">cnil.fr</a>), or with the supervisory
+    authority of your own country.</p>
+</section>
+
+<section>
+  <h2>8. This site</h2>
+  <p>This site is hosted by GitHub Pages (GitHub&nbsp;Inc., 88 Colin P. Kelly
+    Jr. Street, San Francisco, CA 94107, United States). It sets no cookie and
+    contains no tracker, no font and no script loaded from a third party. Like
+    any host, GitHub records technical connection logs (IP address, date, page
+    requested) for security and service delivery; that processing is covered by
+    <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub's
+    privacy statement</a>.</p>
+</section>
+
+<section>
+  <h2>9. Changes</h2>
+  <p>If a future version of Riskelo were to collect any data at all, this
+    policy would be updated <strong>before</strong> that version is released,
+    and the change would be announced in the App Store release notes. The date
+    at the top of this page governs.</p>
+</section>
+
+<section>
+  <p><small>This page is a translation of the French
+    <a href="../confidentialite.html">politique de confidentialité</a>. Should
+    the two differ, the French version prevails.</small></p>
+</section>
+
+</div>
+</main>
+
+<footer>
+  <div class="enveloppe">
+    <span>© 2026 Robert Oulhen — Riskelo</span>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="support.html">Support</a>
+      <a href="terms.html">Terms</a>
+      <a href="../confidentialite.html" hreflang="fr" lang="fr">Français</a>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>

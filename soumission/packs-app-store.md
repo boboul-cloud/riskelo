@@ -320,7 +320,7 @@ Capture               soumission/captures/achats/fr-3.png
 
 ## 14 / 17 — Histoire — 3e
 
-- [ ] créé  - [ ] localisé  - [ ] capture  - [ ] prix
+- [x] créé  - [x] localisé  - [x] capture  - [ ] prix
 
 ```
 Nom de référence      Pack Histoire 3e
@@ -334,7 +334,7 @@ Capture               soumission/captures/achats/fr-3.png
 
 ## 15 / 17 — Géographie — 3e
 
-- [ ] créé  - [ ] localisé  - [ ] capture  - [ ] prix
+- [x] créé  - [x] localisé  - [x] capture  - [ ] prix
 
 ```
 Nom de référence      Pack Géographie 3e
@@ -348,7 +348,7 @@ Capture               soumission/captures/achats/fr-3.png
 
 ## 16 / 17 — Français — 3e
 
-- [ ] créé  - [ ] localisé  - [ ] capture  - [ ] prix
+- [x] créé  - [x] localisé  - [x] capture  - [ ] prix
 
 ```
 Nom de référence      Pack Français 3e
@@ -362,7 +362,7 @@ Capture               soumission/captures/achats/fr-3.png
 
 ## 17 / 17 — SVT — 3e
 
-- [ ] créé  - [ ] localisé  - [ ] capture  - [ ] prix
+- [x] créé  - [x] localisé  - [x] capture  - [ ] prix
 
 ```
 Nom de référence      Pack SVT 3e
@@ -378,7 +378,7 @@ Capture               soumission/captures/achats/fr-3.png
 
 ## 1 / 17 — Rock 70-80
 
-- [ ] créé  - [ ] localisé  - [ ] capture  - [ ] prix
+- [x] créé  - [x] localisé  - [x] capture  - [ ] prix
 
 ```
 Nom de référence      Rock 70 80 Pack
@@ -392,7 +392,7 @@ Capture               soumission/captures/achats/en-1.png
 
 ## 2 / 17 — History — Grade 6
 
-- [ ] créé  - [ ] localisé  - [ ] capture  - [ ] prix
+- [x] créé  - [x] localisé  - [x] capture  - [ ] prix
 
 ```
 Nom de référence      History Grade 6 Pack
@@ -406,7 +406,7 @@ Capture               soumission/captures/achats/en-1.png
 
 ## 3 / 17 — Geography — Grade 6
 
-- [ ] créé  - [ ] localisé  - [ ] capture  - [ ] prix
+- [x] créé  - [x] localisé  - [x] capture  - [ ] prix
 
 ```
 Nom de référence      Geography Grade 6 Pack
@@ -420,7 +420,7 @@ Capture               soumission/captures/achats/en-1.png
 
 ## 4 / 17 — English — Grade 6
 
-- [ ] créé  - [ ] localisé  - [ ] capture  - [ ] prix
+- [x] créé  - [x] localisé  - [x] capture  - [ ] prix
 
 ```
 Nom de référence      English Grade 6 Pack
@@ -434,7 +434,7 @@ Capture               soumission/captures/achats/en-1.png
 
 ## 5 / 17 — Science — Grade 6
 
-- [ ] créé  - [ ] localisé  - [ ] capture  - [ ] prix
+- [x] créé  - [x] localisé  - [x] capture  - [ ] prix
 
 ```
 Nom de référence      Science Grade 6 Pack
@@ -448,7 +448,7 @@ Capture               soumission/captures/achats/en-1.png
 
 ## 6 / 17 — History — Grade 7
 
-- [ ] créé  - [ ] localisé  - [ ] capture  - [ ] prix
+- [x] créé  - [x] localisé  - [x] capture  - [ ] prix
 
 ```
 Nom de référence      History Grade 7 Pack
@@ -462,7 +462,7 @@ Capture               soumission/captures/achats/en-2.png
 
 ## 7 / 17 — Geography — Grade 7
 
-- [ ] créé  - [ ] localisé  - [ ] capture  - [ ] prix
+- [x] créé  - [x] localisé  - [x] capture  - [ ] prix
 
 ```
 Nom de référence      Geography Grade 7 Pack
@@ -476,7 +476,7 @@ Capture               soumission/captures/achats/en-2.png
 
 ## 8 / 17 — English — Grade 7
 
-- [ ] créé  - [ ] localisé  - [ ] capture  - [ ] prix
+- [x] créé  - [x] localisé  - [x] capture  - [ ] prix
 
 ```
 Nom de référence      English Grade 7 Pack
@@ -490,7 +490,7 @@ Capture               soumission/captures/achats/en-2.png
 
 ## 9 / 17 — Science — Grade 7
 
-- [ ] créé  - [ ] localisé  - [ ] capture  - [ ] prix
+- [x] créé  - [x] localisé  - [x] capture  - [ ] prix
 
 ```
 Nom de référence      Science Grade 7 Pack
@@ -504,7 +504,7 @@ Capture               soumission/captures/achats/en-2.png
 
 ## 10 / 17 — History — Grade 8
 
-- [ ] créé  - [ ] localisé  - [ ] capture  - [ ] prix
+- [x] créé  - [x] localisé  - [x] capture  - [ ] prix
 
 ```
 Nom de référence      History Grade 8 Pack
@@ -518,7 +518,7 @@ Capture               soumission/captures/achats/en-2.png
 
 ## 11 / 17 — Geography — Grade 8
 
-- [ ] créé  - [ ] localisé  - [ ] capture  - [ ] prix
+- [x] créé  - [x] localisé  - [x] capture  - [ ] prix
 
 ```
 Nom de référence      Geography Grade 8 Pack
@@ -532,7 +532,7 @@ Capture               soumission/captures/achats/en-2.png
 
 ## 12 / 17 — English — Grade 8
 
-- [ ] créé  - [ ] localisé  - [ ] capture  - [ ] prix
+- [x] créé  - [x] localisé  - [x] capture  - [ ] prix
 
 ```
 Nom de référence      English Grade 8 Pack
@@ -546,7 +546,7 @@ Capture               soumission/captures/achats/en-3.png
 
 ## 13 / 17 — Science — Grade 8
 
-- [ ] créé  - [ ] localisé  - [ ] capture  - [ ] prix
+- [x] créé  - [x] localisé  - [x] capture  - [ ] prix
 
 ```
 Nom de référence      Science Grade 8 Pack
@@ -560,7 +560,7 @@ Capture               soumission/captures/achats/en-3.png
 
 ## 14 / 17 — History — Grade 9
 
-- [ ] créé  - [ ] localisé  - [ ] capture  - [ ] prix
+- [x] créé  - [x] localisé  - [x] capture  - [ ] prix
 
 ```
 Nom de référence      History Grade 9 Pack
@@ -574,7 +574,7 @@ Capture               soumission/captures/achats/en-3.png
 
 ## 15 / 17 — Geography — Grade 9
 
-- [ ] créé  - [ ] localisé  - [ ] capture  - [ ] prix
+- [x] créé  - [x] localisé  - [x] capture  - [ ] prix
 
 ```
 Nom de référence      Geography Grade 9 Pack
@@ -588,7 +588,7 @@ Capture               soumission/captures/achats/en-3.png
 
 ## 16 / 17 — English — Grade 9
 
-- [ ] créé  - [ ] localisé  - [ ] capture  - [ ] prix
+- [x] créé  - [x] localisé  - [x] capture  - [ ] prix
 
 ```
 Nom de référence      English Grade 9 Pack
@@ -602,7 +602,7 @@ Capture               soumission/captures/achats/en-3.png
 
 ## 17 / 17 — Science — Grade 9
 
-- [ ] créé  - [ ] localisé  - [ ] capture  - [ ] prix
+- [x] créé  - [x] localisé  - [x] capture  - [ ] prix
 
 ```
 Nom de référence      Science Grade 9 Pack

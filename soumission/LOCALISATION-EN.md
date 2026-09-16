@@ -138,10 +138,14 @@ simulateur.
 
 ## Ce qui change dans le binaire
 
+L'App Store porte aujourd'hui la **1.2, build 5**. La 1.3 build 6 n'est jamais
+partie : c'est la version en attente, et c'est elle qui emportera la
+localisation. Les numéros ne bougent donc pas.
+
 | | |
 |---|---|
-| Version | 1.3 → **1.4** |
-| Build | 6 → **7** |
+| Version | **1.3** — inchangée, jamais publiée |
+| Build | **6** — inchangé |
 | Dialecte réseau | 7 → **8** — une 1.3 ne doit pas jouer avec une 1.4 |
 | Questions | 6 000 → **12 000**, deux banques |
 | Articles | 17 → **34** |

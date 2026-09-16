@@ -167,22 +167,31 @@ extension QuestionBank {
     /// recours à l'identifiant, et à lui seul : un thème sans nom lisible est
     /// une faute qu'il faut voir, pas une faute qu'il faut deviner.
     private static func theme(_ e: [String: String], nomDeFichier: String) -> Theme? {
+        // Chaque banque se déclare dans sa langue : « ! nom » d'un côté,
+        // « ! name » de l'autre. Traduire les en-têtes d'une des deux aurait
+        // obligé qui corrige une question anglaise à écrire « rang » et
+        // « teinte ». L'analyseur accepte les deux, et personne n'y pense.
+        func champ(_ fr: String, _ en: String) -> String? { e[fr] ?? e[en] }
+
         let id = e["id"] ?? nomDeFichier
-        guard let nom = e["nom"] else {
+        guard let nom = champ("nom", "name") else {
             assertionFailure("\(nomDeFichier).txt : « ! nom | … » manquant")
             return nil
         }
         return Theme(id: id,
                      nom: nom,
+                     // L'élision n'existe qu'en français. Un thème anglais ne
+                     // s'en sert jamais, mais il lui en faut une valeur.
                      de: e["de"] ?? "de \(nom)",
-                     icone: e["icone"] ?? "questionmark.circle",
-                     teinte: teinte(e["teinte"]),
+                     langue: Langue(rawValue: champ("langue", "lang") ?? "") ?? .fr,
+                     icone: champ("icone", "icon") ?? "questionmark.circle",
+                     teinte: teinte(champ("teinte", "tint")),
                      detail: e["detail"] ?? "",
                      // Un article vide vaut pas d'article : une déclaration
                      // laissée en blanc ne doit pas rendre un thème invendable
                      // et inutilisable à la fois.
-                     produit: e["produit"].flatMap { $0.isEmpty ? nil : $0 },
-                     rang: e["rang"].flatMap(Int.init) ?? 99)
+                     produit: champ("produit", "product").flatMap { $0.isEmpty ? nil : $0 },
+                     rang: champ("rang", "rank").flatMap(Int.init) ?? 99)
     }
 
     /// « 0.85 0.66 0.22 » — trois nombres de 0 à 1. Un gris moyen à défaut :
@@ -231,11 +240,15 @@ extension QuestionBank {
 }
 
 extension Difficulty {
+    /// Les deux alphabets. Les fichiers français écrivent F, M, D ; les
+    /// américains E, M, H — easy, medium, hard. Normaliser les six mille
+    /// lignes d'une des deux banques aurait rendu ses fichiers illisibles à
+    /// qui les corrige : un thème se relit dans sa langue, lettre comprise.
     init?(lettre: String) {
         switch lettre.uppercased() {
-        case "F": self = .facile
-        case "M": self = .moyen
-        case "D": self = .difficile
+        case "F", "E": self = .facile
+        case "M":      self = .moyen
+        case "D", "H": self = .difficile
         default: return nil
         }
     }

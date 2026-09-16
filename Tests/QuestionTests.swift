@@ -16,7 +16,7 @@ struct QuestionTests {
     /// Le fichier remplace le compilateur : ce qu'il ne relit plus, ce test
     /// le relit. Et mieux — le compilateur n'a jamais su dire qu'un leurre
     /// était égal à la bonne réponse.
-    @Test(arguments: Themes.tous)
+    @Test(arguments: Themes.toutesLangues)
     func chaqueFichierSeLit(_ c: Category) {
         let lues = QuestionBank.questions(in: c)
         #expect(!lues.isEmpty, "\(c.label) : fichier absent ou vide")
@@ -258,7 +258,7 @@ struct QuestionTests {
     /// Deux fois la même question dans un thème, c'est une question de moins
     /// et un joueur qui croit à un bogue. À la main, sur un millier de lignes,
     /// cela arrive.
-    @Test(arguments: Themes.tous)
+    @Test(arguments: Themes.toutesLangues)
     func aucunEnonceNiReponseNEstRepeteDansUnTheme(_ c: Category) {
         let lues = QuestionBank.questions(in: c)
         let enonces = lues.map { $0.prompt.lowercased() }
@@ -273,7 +273,7 @@ struct QuestionTests {
     /// la main, j'ai laissé trois fois mes propres hésitations dans le texte —
     /// « Quel jeu se joue avec des dominos... plutôt : combien de faces a un
     /// dé ? ». Rien ne plante, et le joueur lit une phrase absurde.
-    @Test(arguments: Themes.tous)
+    @Test(arguments: Themes.toutesLangues)
     func chaqueEnonceEstUneSeuleQuestion(_ c: Category) {
         for q in QuestionBank.questions(in: c) {
             #expect(q.prompt.filter { $0 == "?" }.count == 1,
@@ -286,7 +286,7 @@ struct QuestionTests {
 
     /// Une question qui ne tient pas dans la feuille se fait tronquer, et la
     /// réponse devient une devinette.
-    @Test(arguments: Themes.tous)
+    @Test(arguments: Themes.toutesLangues)
     func rienNEstTropLong(_ c: Category) {
         for q in QuestionBank.questions(in: c) {
             #expect(q.prompt.count <= 110, "trop long : \(q.prompt)")
@@ -314,7 +314,7 @@ struct QuestionTests {
 
     /// Chaque catégorie doit tenir un assaut long sans se répéter.
     @Test func chaqueCategorieEstFournie() {
-        for c in Themes.tous {
+        for c in Themes.toutesLangues {
             #expect(QuestionBank().count(in: c) >= 8, "\(c.label) est trop maigre")
         }
     }
@@ -541,7 +541,7 @@ struct QuestionTests {
     /// cinquante à cent soixante questions, et un thème peut en brûler
     /// vingt-cinq dans une seule.
     @Test func laBanqueTientPlusieursSoirees() {
-        for c in Themes.tous {
+        for c in Themes.toutesLangues {
             #expect(QuestionBank().count(in: c) >= 30, "\(c.label) s'épuiserait trop vite")
         }
     }

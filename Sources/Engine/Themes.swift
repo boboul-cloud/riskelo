@@ -71,6 +71,26 @@ struct Category: Hashable, Identifiable, Codable {
     var produit: String? { Themes.connu(self)?.produit }
 }
 
+// MARK: - La langue
+
+/// La langue d'un thème, c'est-à-dire celle de ses questions.
+///
+/// Une seule application porte les deux banques, parce qu'Apple refuse deux
+/// applications qui ne diffèrent que par la langue de leur contenu. Le thème
+/// déclare la sienne en tête de son fichier ; l'appareil n'affiche que la
+/// sienne, et le catalogue les garde toutes pour que la table à plusieurs
+/// appareils reste possible entre deux langues.
+enum Langue: String, Codable, CaseIterable {
+    case fr, en
+
+    /// Celle de l'appareil, à défaut d'un choix. Tout ce qui n'est pas
+    /// français est servi en anglais : c'est la seule autre banque, et un
+    /// joueur allemand préfère des questions qu'il peut lire.
+    static var deLAppareil: Langue {
+        (Locale.preferredLanguages.first ?? "fr").hasPrefix("fr") ? .fr : .en
+    }
+}
+
 // MARK: - Ce qu'un thème déclare
 
 /// La carte d'identité d'un thème, lue en tête de son fichier de questions.
@@ -85,6 +105,8 @@ struct Theme: Hashable, Identifiable, Codable {
     let nom: String
     /// La forme élidée : « d'Histoire », « de Géographie ».
     let de: String
+    /// La langue de ses questions.
+    let langue: Langue
     let icone: String
     let teinte: Teinte
     /// Une phrase, pour la page des packs. Vide pour les thèmes du jeu : on
@@ -124,18 +146,40 @@ enum Themes {
         Dictionary(uniqueKeysWithValues: QuestionBank.tousLesThemes.map { ($0.theme.id, $0.theme) })
     }()
 
-    /// Les thèmes dans l'ordre où ils s'affichent.
-    static let tous: [Category] = catalogue.values
+    /// Tous les thèmes livrés, les deux langues mêlées, dans l'ordre
+    /// d'affichage. Sert aux tests et aux outils, qui doivent voir la banque
+    /// entière ; le jeu, lui, passe par `tous`.
+    static let toutesLangues: [Category] = catalogue.values
         .sorted { $0.rang != $1.rang ? $0.rang < $1.rang : $0.id < $1.id }
         .map(\.category)
 
+    private static let parLangue: [Langue: [Category]] =
+        Dictionary(grouping: toutesLangues) { connu($0)?.langue ?? .fr }
+
+    /// La langue des questions. Elle suit l'appareil, et se change dans les
+    /// réglages — hors partie : un catalogue qui bougerait en cours de jeu
+    /// changerait le tirage sous les pieds des joueurs.
+    static var langue: Langue {
+        get { UserDefaults.standard.string(forKey: cleDeLangue)
+                .flatMap(Langue.init(rawValue:)) ?? .deLAppareil }
+        set { UserDefaults.standard.set(newValue.rawValue, forKey: cleDeLangue) }
+    }
+
+    private static let cleDeLangue = "langue-des-questions"
+
+    /// Les thèmes dans l'ordre où ils s'affichent, dans la langue en cours.
+    static var tous: [Category] { parLangue[langue] ?? [] }
+
+    /// Le thème nommé, **quelle que soit sa langue**. Un appareil qui rejoint
+    /// une table doit savoir lire le thème de l'hôte, fût-il d'une autre
+    /// banque que la sienne.
     static func connu(_ c: Category) -> Theme? { catalogue[c.id] }
 
     /// Les thèmes du jeu — ceux qui n'ont pas de prix.
-    static let base: [Category] = tous.filter { connu($0)?.produit == nil }
+    static var base: [Category] { tous.filter { connu($0)?.produit == nil } }
 
     /// Les packs, ceux qui s'achètent.
-    static let packs: [Category] = tous.filter { connu($0)?.produit != nil }
+    static var packs: [Category] { tous.filter { connu($0)?.produit != nil } }
 
     /// Le thème nommé, s'il existe. Sert aux tests et aux outils.
     static func parNom(_ id: String) -> Category? { catalogue[id].map(\.category) }

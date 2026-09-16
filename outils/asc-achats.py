@@ -172,6 +172,87 @@ def notes():
     return out
 
 
+# --- Le prix ---------------------------------------------------------------
+#
+# Il ne se pose pas comme le reste. Apple ne prend pas un montant : il prend un
+# « point de prix », choisi dans une grille, pour un territoire de référence —
+# et calcule lui-même les autres pays. La France est la référence ici, puisque
+# c'est la langue principale de l'app.
+
+TERRITOIRE = "FRA"
+
+
+def point_de_prix(cfg, iap_id, montant):
+    """Le point de la grille qui vaut ce montant, ou rien."""
+    url = ("/v2/inAppPurchases/%s/pricePoints?filter[territory]=%s&limit=200"
+           % (iap_id, TERRITOIRE))
+    while url:
+        rep = appel(cfg, "GET", url)
+        for d in rep["data"]:
+            if d["attributes"].get("customerPrice") == montant:
+                return d["id"]
+        url = rep.get("links", {}).get("next")
+    return None
+
+
+def prix_pose(cfg, iap_id):
+    """Y a-t-il déjà un prix ? Un article sans prix reste incomplet chez Apple."""
+    rep = appel(cfg, "GET", "/v2/inAppPurchases/%s/iapPriceSchedule" % iap_id, doux=True)
+    return bool((rep or {}).get("data"))
+
+
+def poser_le_prix(cfg, iap_id, point):
+    appel(cfg, "POST", "/v1/inAppPurchasePriceSchedules", {
+        "data": {
+            "type": "inAppPurchasePriceSchedules",
+            "relationships": {
+                "inAppPurchase": {"data": {"type": "inAppPurchases", "id": iap_id}},
+                "baseTerritory": {"data": {"type": "territories", "id": TERRITOIRE}},
+                "manualPrices": {"data": [{"type": "inAppPurchasePrices", "id": "${prix}"}]}}},
+        "included": [{
+            "type": "inAppPurchasePrices",
+            "id": "${prix}",
+            "attributes": {"startDate": None, "endDate": None},
+            "relationships": {"inAppPurchasePricePoint": {
+                "data": {"type": "inAppPurchasePricePoints", "id": point}}}}]})
+
+
+def les_prix(cfg, liste, deja, montant, applique):
+    """Le même palier pour les trente-quatre."""
+    montant = montant.replace(",", ".").replace("€", "").strip()
+    print("Prix demandé : %s € en France — Apple en déduit les autres pays.\n" % montant)
+    a_poser = []
+    for p in liste:
+        iap = deja.get(p["id"])
+        if not iap:
+            print("  %-40s pas encore créé" % p["id"]); continue
+        if prix_pose(cfg, iap):
+            print("  %-40s prix déjà posé" % p["id"]); continue
+        point = point_de_prix(cfg, iap, montant)
+        if not point:
+            raise SystemExit("Aucun point de prix à %s € pour %s : la grille d'Apple "
+                             "ne le propose pas." % (montant, p["id"]))
+        a_poser.append((p, iap, point))
+        print("  %-40s à poser" % p["id"])
+
+    if not a_poser:
+        print("\nRien à faire : les prix sont posés.")
+        return
+    if not applique:
+        print("\nÀ blanc. %d prix seraient posés. « --apply » pour écrire." % len(a_poser))
+        return
+    if "--oui" not in sys.argv:
+        try:
+            reponse = input("\n%d prix à %s €. Taper oui pour écrire : " % (len(a_poser), montant))
+        except EOFError:
+            reponse = ""
+        if reponse.strip().lower() not in ("oui", "o", "yes"):
+            raise SystemExit("Rien n'a été envoyé.")
+    for p, iap, point in a_poser:
+        poser_le_prix(cfg, iap, point)
+        print("  %-40s %s € posé" % (p["id"], montant))
+
+
 def existants(cfg):
     out, url = {}, "/v1/apps/%s/inAppPurchasesV2?limit=200" % cfg["app_id"]
     while url:
@@ -314,7 +395,7 @@ def etat_dans_la_fiche(cfg, liste, deja):
 
 def main():
     applique = "--apply" in sys.argv
-    compare = applique or "--check" in sys.argv
+    compare = applique or "--check" in sys.argv or "--prix" in sys.argv
 
     liste, refs, mots = packs(), fiche(), notes()
     maux = controles(liste, refs, mots, captures_requises=applique)
@@ -326,6 +407,12 @@ def main():
 
     cfg = config() if compare else None
     deja = existants(cfg) if compare else {}
+
+    if "--prix" in sys.argv:
+        montant = sys.argv[sys.argv.index("--prix") + 1]
+        les_prix(cfg, liste, deja, montant, applique)
+        return
+
     if applique:
         a_creer = [p for p in liste if p["id"] not in deja]
         if not a_creer:

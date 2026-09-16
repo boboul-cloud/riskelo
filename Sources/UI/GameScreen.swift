@@ -565,7 +565,7 @@ private struct BottomBar: View {
     /// du tour. Sa **hauteur**, elle, ne bouge pas : quarante-quatre points,
     /// le plancher de ce qui se touche sans rater, et c'est le bouton le plus
     /// tapé de la partie.
-    private func action(_ titre: String, _ icone: String, enabled: Bool = true,
+    private func action(_ titre: LocalizedStringKey, _ icone: String, enabled: Bool = true,
                         _ geste: @escaping () -> Void) -> some View {
         Button(action: geste) {
             Label(titre, systemImage: icone)

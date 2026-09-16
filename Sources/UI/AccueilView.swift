@@ -337,7 +337,7 @@ struct AccueilView: View {
         }
     }
 
-    private func petitBouton(_ titre: String, _ icone: String,
+    private func petitBouton(_ titre: LocalizedStringKey, _ icone: String,
                              _ geste: @escaping () -> Void) -> some View {
         Button(action: geste) {
             Label(titre, systemImage: icone)
@@ -368,7 +368,7 @@ struct AccueilView: View {
 
     /// `SwiftUI.Link` en toutes lettres : dans ce module, `Link` tout court
     /// désigne le fil entre deux appareils, et c'est lui qui gagne.
-    @ViewBuilder private func lien(_ titre: String, _ adresse: String) -> some View {
+    @ViewBuilder private func lien(_ titre: LocalizedStringKey, _ adresse: String) -> some View {
         if let url = URL(string: adresse) {
             SwiftUI.Link(titre, destination: url)
                 .foregroundStyle(Palette.dim)

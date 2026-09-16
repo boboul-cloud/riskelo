@@ -122,7 +122,7 @@ struct PlusieursView: View {
     /// Une façon de jouer, et ce qu'elle coûte. Les deux ensemble, toujours :
     /// un bouton qui ne dit pas sa contrainte la fait découvrir au pire
     /// moment, quand deux personnes sont déjà installées pour jouer.
-    private func porte(_ titre: String, _ icone: String, _ teinte: Color,
+    private func porte(_ titre: LocalizedStringKey, _ icone: String, _ teinte: Color,
                        _ dit: String, _ geste: @escaping () -> Void) -> some View {
         Button(action: geste) {
             HStack(alignment: .top, spacing: 14) {

@@ -215,7 +215,7 @@ struct AreneView: View {
         return dits.joined(separator: " · ")
     }
 
-    private func bouton(_ titre: String, _ icone: String, _ teinte: Color,
+    private func bouton(_ titre: LocalizedStringKey, _ icone: String, _ teinte: Color,
                         _ geste: @escaping () -> Void) -> some View {
         Button(action: geste) {
             Label(titre, systemImage: icone)

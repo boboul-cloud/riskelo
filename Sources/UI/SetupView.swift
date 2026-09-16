@@ -424,7 +424,7 @@ struct SetupView: View {
 
     /// `SwiftUI.Link` en toutes lettres : dans ce module, `Link` tout court
     /// désigne le fil entre deux appareils, et c'est lui qui gagne.
-    @ViewBuilder private func lien(_ titre: String, _ adresse: String) -> some View {
+    @ViewBuilder private func lien(_ titre: LocalizedStringKey, _ adresse: String) -> some View {
         if let url = URL(string: adresse) {
             SwiftUI.Link(titre, destination: url)
                 .foregroundStyle(Palette.dim)

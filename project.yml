@@ -1,5 +1,9 @@
 name: Riskelo
 options:
+  # Le français est la langue d'origine : les clés du catalogue sont ses
+  # phrases, et l'anglais en est la traduction. C'est aussi ce qui s'affiche
+  # sur un appareil dont la langue n'est ni l'une ni l'autre.
+  developmentLanguage: fr
   bundleIdPrefix: com.oulhen
   deploymentTarget:
     iOS: "17.0"
@@ -9,6 +13,11 @@ options:
 
 settings:
   base:
+    # Xcode relève lui-même les chaînes du code et remplit le catalogue. Les
+    # deviner à la main aurait mal tourné sur les phrases interpolées, dont la
+    # clé n'est pas le texte écrit mais sa forme à spécificateurs.
+    SWIFT_EMIT_LOC_STRINGS: YES
+    LOCALIZATION_PREFERS_STRING_CATALOGS: YES
     SWIFT_VERSION: "5.0"
     # Le numéro qu'on lit sur l'App Store, et celui qui compte les envois.
     # Le premier ne bouge qu'à une vraie version ; le second monte à chaque
@@ -30,6 +39,7 @@ targets:
       - path: Sources
       # Les questions sont des ressources et non du code : mille lignes de
       # texte n'ont rien à faire dans un fichier Swift.
+      - path: Resources/Localizable.xcstrings
       - path: Resources/Questions
       # Le faux App Store, visible dans Xcode pour qu'on puisse en changer les
       # prix — mais hors de toute phase de construction : il ne part pas dans

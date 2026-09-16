@@ -376,7 +376,7 @@ struct LoinView: View {
         .background(Palette.panel, in: RoundedRectangle(cornerRadius: 10))
     }
 
-    private func bouton(_ titre: String, _ icone: String, _ teinte: Color,
+    private func bouton(_ titre: LocalizedStringKey, _ icone: String, _ teinte: Color,
                         _ geste: @escaping () -> Void) -> some View {
         Button(action: geste) {
             Label(titre, systemImage: icone)

@@ -31,6 +31,11 @@ struct LoinView: View {
     let regles: Rules
     /// Un code arrivé par un lien : on n'a alors rien à choisir ni à taper.
     var codeRecu: String?
+    /// Une partie commencée une autre fois, qu'on vient reprendre : le
+    /// rendez-vous gardé sur cet appareil, et la partie qui dormait à côté.
+    /// Il n'y a alors ni code à taper, ni réglages à choisir, ni camps à
+    /// distribuer — tout cela a été décidé l'autre soir.
+    var reprise: (rendezVous: RendezVous, partie: GameState)?
     var onReady: (GameSession) -> Void
     var onCancel: () -> Void
     var onReglages: () -> Void = { }
@@ -54,7 +59,7 @@ struct LoinView: View {
                 VStack(spacing: 20) {
                     Image(systemName: "globe.europe.africa.fill")
                         .font(.system(size: 40)).foregroundStyle(Palette.camp(2))
-                    Text("Jouer au loin")
+                    Text(reprise == nil ? "Jouer au loin" : "Reprendre la partie")
                         .font(.title3.weight(.semibold)).foregroundStyle(Palette.ink)
 
                     contenu
@@ -72,8 +77,16 @@ struct LoinView: View {
         .onDisappear { UIApplication.shared.isIdleTimerDisabled = false }
         #endif
         .onAppear {
+            guard case .aLArret = relais.etat else { return }
+            // On revient sur une partie commencée : celui qui l'héberge
+            // rouvre son salon sous l'ancien code — ceux qui reviennent n'ont
+            // que celui-là — et les autres y rentrent comme au premier soir.
+            if reprise != nil {
+                entrerAuRendezVous()
+                return
+            }
             // Arrivé par un lien : il n'y a rien à demander à personne.
-            if let codeRecu, case .aLArret = relais.etat {
+            if let codeRecu {
                 preparer()
                 relais.rejoindre(code: codeRecu)
             }
@@ -87,7 +100,11 @@ struct LoinView: View {
         switch relais.etat {
         case .aLArret, .refuse:
             if case let .refuse(panne) = relais.etat { leRefus(panne) }
-            ouvrirOuRejoindre
+            // Pas de « Ouvrir une partie » sous un rendez-vous manqué : on est
+            // venu reprendre celle qui existe, et en ouvrir une neuve d'ici la
+            // remplacerait dans le tiroir. Il reste « Réessayer », et
+            // « Annuler » qui rend l'accueil.
+            if reprise == nil { ouvrirOuRejoindre }
 
         case .ouvre:
             ProgressView().tint(Palette.dim)
@@ -99,11 +116,11 @@ struct LoinView: View {
                 .font(.headline).foregroundStyle(Palette.ink)
 
         case let .ouvert(code):
-            laTable(code)
+            if reprise != nil { laReprise(code) } else { laTable(code) }
 
         case .relie:
             if relais.jeSuisLHote {
-                laTable(relais.code ?? "")
+                if reprise != nil { laReprise(relais.code ?? "") } else { laTable(relais.code ?? "") }
             } else {
                 enAttente
             }
@@ -262,6 +279,73 @@ struct LoinView: View {
         }
     }
 
+    // MARK: - La table qu'on retrouve
+
+    /// Ceux qu'on attend : les appareils de l'autre soir, et eux seuls. Un
+    /// curieux qui aurait tapé le code au hasard entre dans le salon sans
+    /// entrer dans la partie — il ne compte pas, et ne retient personne.
+    private var revenus: [Pair] {
+        guard let attendus = reprise?.rendezVous.attendus else { return relais.relies }
+        return relais.relies.filter { attendus.contains($0.id) }
+    }
+
+    private var manquantsALaReprise: Int {
+        guard let rendezVous = reprise?.rendezVous else { return 0 }
+        return max(0, rendezVous.rangs.count - revenus.count)
+    }
+
+    @ViewBuilder private func laReprise(_ code: String) -> some View {
+        if let partie = reprise?.partie {
+            Text("Tour \(partie.turn) — la partie vous attend")
+                .font(.headline).foregroundStyle(Palette.ink)
+                .multilineTextAlignment(.center)
+        }
+
+        Text("LE MÊME CODE QUE L'AUTRE SOIR").font(.caption.weight(.semibold))
+            .foregroundStyle(Palette.dim).kerning(0.6)
+        Text(code)
+            .font(.system(size: 34, weight: .bold, design: .monospaced))
+            .kerning(8)
+            .foregroundStyle(Palette.campVif(0))
+            .padding(.vertical, 18).frame(maxWidth: .infinity)
+            .background(Palette.panel, in: RoundedRectangle(cornerRadius: 14))
+            .accessibilityLabel(Text(code.map(String.init).joined(separator: " ")))
+
+        if manquantsALaReprise > 0, let lien = Relais.lien(pour: code) {
+            // Le même lien qu'au premier soir : l'autre l'a peut-être perdu,
+            // et c'est plus court que de lui dicter six lettres au téléphone.
+            ShareLink(item: lien,
+                      subject: Text("On reprend la partie ?"),
+                      message: Text("Notre partie de Riskelo nous attend : le code est \(code).")) {
+                Label("Le rappeler", systemImage: "square.and.arrow.up")
+                    .font(.subheadline.weight(.medium))
+                    .frame(maxWidth: .infinity).padding(.vertical, 12)
+            }
+            .buttonStyle(.bordered).tint(Palette.dim)
+        }
+
+        Divider().overlay(Palette.dim.opacity(0.3)).padding(.vertical, 4)
+
+        Text(manquantsALaReprise > 0
+             ? "En attente de \(manquantsALaReprise) joueur\(manquantsALaReprise > 1 ? "s" : "")…"
+             : "Tout le monde est revenu.")
+            .font(.headline)
+            .foregroundStyle(manquantsALaReprise > 0 ? Palette.ink : Palette.held)
+        if manquantsALaReprise > 0 {
+            ProgressView().tint(Palette.dim)
+            Text("""
+                 Il faut être là tous les deux en même temps : une question se \
+                 répond sablier en main. Le code, lui, reste bon une semaine.
+                 """)
+                .font(.caption).foregroundStyle(Palette.dim)
+                .multilineTextAlignment(.center)
+        }
+
+        if manquantsALaReprise == 0 {
+            bouton("Reprendre la partie", "play.fill", Palette.held) { lancerLaReprise() }
+        }
+    }
+
     // MARK: - Ce que voit celui qui a rejoint
 
     @ViewBuilder private var enAttente: some View {
@@ -277,7 +361,8 @@ struct LoinView: View {
                 .multilineTextAlignment(.center)
         } else {
             ProgressView().tint(Palette.held)
-            Text("Vous êtes dans la partie").font(.headline).foregroundStyle(Palette.held)
+            Text(reprise == nil ? "Vous êtes dans la partie" : "Vous y êtes")
+                .font(.headline).foregroundStyle(Palette.held)
             VStack(spacing: 6) {
                 ForEach(Array(relais.relies.enumerated()), id: \.element) { _, pair in
                     ligne(noms[pair] ?? pair.nom, camp: 0)
@@ -285,14 +370,21 @@ struct LoinView: View {
             }
             if silence {
                 Text("Rien n'est venu.").font(.subheadline).foregroundStyle(Palette.lostVif)
-                Text("""
-                     La liaison est bonne : c'est le lancement qui n'arrive pas. \
-                     Celui qui a ouvert la partie doit toucher « Commencer ».
-                     """)
+                Text(reprise == nil
+                     ? """
+                       La liaison est bonne : c'est le lancement qui n'arrive pas. \
+                       Celui qui a ouvert la partie doit toucher « Commencer ».
+                       """
+                     : """
+                       La liaison est bonne : c'est la partie qui n'arrive pas. \
+                       Celui qui l'a ouverte doit être là lui aussi, et toucher \
+                       « Reprendre la partie ».
+                       """)
                     .font(.caption).foregroundStyle(Palette.dim)
                     .multilineTextAlignment(.center)
             } else {
-                Text("En attente du lancement…")
+                Text(reprise == nil ? "En attente du lancement…"
+                                    : "En attente de celui qui a ouvert la partie…")
                     .font(.caption).foregroundStyle(Palette.dim)
                     .task {
                         try? await Task.sleep(for: .seconds(20))
@@ -305,15 +397,33 @@ struct LoinView: View {
     // MARK: - Quand cela n'a pas marché
 
     @ViewBuilder private func leRefus(_ panne: Relais.Panne) -> some View {
+        // Celui qui revient et trouve porte close n'a pas fait d'erreur :
+        // l'autre n'est simplement pas encore là. Lui dire « vérifiez les six
+        // lettres » l'enverrait chercher une faute qu'il n'a pas commise —
+        // d'autant qu'il n'a rien tapé du tout.
+        let enAvance = reprise != nil && panne == .codeInconnu
         VStack(spacing: 10) {
-            Image(systemName: icone(panne))
-                .font(.system(size: 32)).foregroundStyle(Palette.lostVif)
-            Text(titre(panne)).font(.headline).foregroundStyle(Palette.lostVif)
-            Text(.init(remede(panne)))
+            Image(systemName: enAvance ? "clock.fill" : icone(panne))
+                .font(.system(size: 32))
+                .foregroundStyle(enAvance ? Palette.camp(3) : Palette.lostVif)
+            Text(enAvance ? dit("La partie n'est pas encore rouverte") : titre(panne))
+                .font(.headline)
+                .foregroundStyle(enAvance ? Palette.ink : Palette.lostVif)
+            Text(.init(enAvance
+                       ? dit("""
+                             Celui qui a ouvert la partie doit venir le premier : \
+                             c'est son appareil qui la tient. Réessayez quand il \
+                             sera là.
+                             """)
+                       : remede(panne)))
                 .font(.footnote).foregroundStyle(Palette.dim)
                 .multilineTextAlignment(.center)
         }
         .padding(.bottom, 6)
+
+        if reprise != nil, panne != .salonRepris {
+            bouton("Réessayer", "arrow.clockwise", Palette.camp(1)) { entrerAuRendezVous() }
+        }
     }
 
     private func icone(_ panne: Relais.Panne) -> String {
@@ -321,6 +431,7 @@ struct LoinView: View {
         case .codeInconnu:    return "questionmark.circle.fill"
         case .salonPlein:     return "person.3.fill"
         case .dejaCommencee:  return "flag.fill"
+        case .salonRepris:    return "person.crop.circle.badge.xmark"
         case .sansReponse:    return "wifi.slash"
         case .serveur:        return "exclamationmark.triangle.fill"
         }
@@ -331,6 +442,7 @@ struct LoinView: View {
         case .codeInconnu:    return dit("Ce code ne mène à rien")
         case .salonPlein:     return dit("La partie est complète")
         case .dejaCommencee:  return dit("La partie a déjà commencé")
+        case .salonRepris:    return dit("Ce code n'est plus le vôtre")
         case .sansReponse:    return dit("Rien n'a répondu")
         case .serveur:        return dit("Le serveur a refusé")
         }
@@ -358,6 +470,13 @@ struct LoinView: View {
                    On ne se glisse pas dans une partie en cours. Demandez qu'on \
                    en rouvre une.
                    """
+        case .salonRepris:
+            return """
+                   Votre partie a attendu plus d'une semaine, et le code est \
+                   reparti à quelqu'un d'autre. La partie, elle, est dans la \
+                   bibliothèque : on peut la rouvrir, mais il faudra un \
+                   nouveau code.
+                   """
         case .sansReponse:
             return """
                    Vérifiez votre connexion — Wi-Fi ou données mobiles. \
@@ -365,6 +484,14 @@ struct LoinView: View {
                    qui ne répond pas : la même pièce, elle, ne dépend de personne.
                    """
         case let .serveur(dit):
+            if dit == "serveur trop ancien" {
+                return """
+                       Le serveur des parties n'a pas encore été mis à jour : il ne \
+                       sait pas rendre à celui qui a ouvert la partie le code qu'il \
+                       avait. C'est une chose à faire une fois, du côté du serveur, \
+                       et non sur cet appareil.
+                       """
+            }
             let quoi = dit == "dialecte"
                 ? """
                   Les deux appareils n'ont pas la même version de Riskelo. \
@@ -431,6 +558,36 @@ struct LoinView: View {
                                     monRang: rang, compteur: numero))
             },
             desaccord: { desaccord = true })
+    }
+
+    /// Revenir à la table de l'autre soir.
+    ///
+    /// Une fonction et non deux lignes dans `onAppear` : on y revient par le
+    /// bouton « Réessayer », et c'est le cas le plus courant de tous. Celui
+    /// qui héberge doit être là le premier — c'est lui qui rouvre le salon —
+    /// et l'autre tombe donc sur une porte close s'il arrive en avance.
+    private func entrerAuRendezVous() {
+        guard let reprise else { return }
+        preparer()
+        if reprise.rendezVous.jHeberge {
+            relais.reprendreLeSalon(code: reprise.rendezVous.code)
+        } else {
+            relais.rejoindre(code: reprise.rendezVous.code)
+        }
+    }
+
+    /// L'hôte redonne la partie à chacun, et l'on repart d'où l'on en était.
+    private func lancerLaReprise() {
+        guard let reprise else { return }
+        var rangs: [Pair: PlayerID] = [:]
+        for pair in revenus {
+            guard let rang = reprise.rendezVous.rangs[pair.id] else { continue }
+            rangs[pair] = rang
+        }
+        lancee = true
+        onReady(MiseEnPlace.reprendre(relais, partie: reprise.partie, rangs: rangs,
+                                      compteur: reprise.rendezVous.compteur,
+                                      partieID: reprise.rendezVous.partieID))
     }
 
     private func lancer() {

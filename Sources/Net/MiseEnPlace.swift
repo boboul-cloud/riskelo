@@ -59,6 +59,28 @@ enum MiseEnPlace {
         }
     }
 
+    /// L'hôte reprend une partie commencée une autre fois, et la redonne.
+    ///
+    /// C'est `lancer` moins la mise en place : les camps existent déjà, les
+    /// rangs sont ceux d'hier, et la partie est celle qui dormait sur cet
+    /// appareil. Rien de neuf ne se décide ici — c'est bien l'objet : reprendre
+    /// n'est pas recommencer.
+    ///
+    /// La table ne se referme pas. Le salon a pu s'effacer entre les deux
+    /// soirées et renaître sous le même code, vide de sa liste : la refermer
+    /// maintenant tiendrait dehors ceux qui ne sont pas encore revenus.
+    static func reprendre(_ fil: any Fil, partie: GameState,
+                          rangs: [Pair: PlayerID], compteur: Int,
+                          partieID: UUID) -> GameSession {
+        for (pair, rang) in rangs {
+            if let data = Message.partie(partie, votreRang: rang, numero: compteur).data {
+                fil.envoyer(data, a: pair)
+            }
+        }
+        return GameSession(fil: fil, heberge: true, game: partie, monRang: 0,
+                           rangs: rangs, compteur: compteur, partie: partieID)
+    }
+
     /// L'hôte crée la partie et donne son rang à chacun, dans l'ordre
     /// d'arrivée. Chaque appareil reçoit le sien, et lui seul.
     ///

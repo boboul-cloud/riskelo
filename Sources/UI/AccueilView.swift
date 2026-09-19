@@ -184,6 +184,11 @@ struct AccueilView: View {
     /// Proposé seulement s'il y a une partie en attente : un bouton qui ne
     /// mène nulle part vaut mieux absent.
     var onResume: (() -> Void)?
+    /// La partie en attente est-elle une partie au loin ? Le bouton ne mène
+    /// alors pas au plateau mais au rendez-vous : il faut que l'autre vienne
+    /// aussi. Le dire sur le bouton évite de le découvrir après l'avoir
+    /// touché.
+    var repriseAuLoin = false
     var onManuel: () -> Void
     /// Proposé seulement s'il y a quelque chose sur les rayons.
     var onArchives: (() -> Void)?
@@ -283,7 +288,10 @@ struct AccueilView: View {
 
             if let onResume {
                 Button(action: onResume) {
-                    Label("Reprendre la partie en cours", systemImage: "arrow.uturn.backward")
+                    Label(repriseAuLoin ? "Reprendre la partie au loin"
+                                        : "Reprendre la partie en cours",
+                          systemImage: repriseAuLoin ? "globe.europe.africa.fill"
+                                                     : "arrow.uturn.backward")
                         .font(.headline)
                         .frame(maxWidth: .infinity).padding(.vertical, 13)
                 }

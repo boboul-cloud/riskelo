@@ -898,6 +898,13 @@ enum Manuel {
                + "cours » apparaît alors sur l'écran d'accueil. Un duel en attente "
                + "repasse par « je suis prêt » — le sablier ne court pas pendant que "
                + "vous rallumez l'appareil."),
+            .p("Une partie jouée au loin se garde elle aussi, et le même bouton la "
+               + "rend — mais il mène au salon et non au plateau, puisqu'il faut que "
+               + "l'autre vienne aussi. Voir « Jouer à plusieurs »."),
+            .note("Une partie jouée dans la même pièce, ou par Game Center, ne se garde "
+                  + "pas ainsi : ni l'une ni l'autre n'a de quoi se retrouver. La "
+                  + "rendre sans son fil mettrait les deux camps sur un seul appareil, "
+                  + "chacun jouant l'autre."),
             .h("La bibliothèque"),
             .p("La sauvegarde ci-dessus ne garde qu'un état, le dernier, et l'écrase à "
                + "chaque coup : c'est ce qu'il faut pour reprendre, et exactement ce "
@@ -970,6 +977,22 @@ enum Manuel {
                   + "dès que la liaison revient. Elle attend deux minutes — gardez "
                   + "l'écran allumé."),
 
+            .h("Reprendre une autre fois"),
+            .p("Une partie au loin ne doit pas tenir dans une soirée. On s'arrête où "
+               + "l'on veut, et le bouton vert de l'accueil — « Reprendre la partie au "
+               + "loin » — la rend telle qu'on l'a laissée."),
+            .puces([
+                "Celui qui a ouvert la partie revient le premier : c'est son appareil "
+                + "qui la tient, et lui seul retrouve le code.",
+                "L'autre touche le même bouton, ou retape les six lettres. Le code n'a "
+                + "pas changé.",
+                "Quand tout le monde est revenu, « Reprendre la partie » repart au tour "
+                + "où l'on en était.",
+            ]),
+            .note("Le code reste bon une semaine après la dernière séance. Il faut être "
+                  + "là tous les deux en même temps : une question se répond sablier en "
+                  + "main, ce n'est pas une partie par correspondance."),
+
             .h("Par Game Center"),
             .p("Le service de jeu d'Apple : vos amis Game Center, ou un adversaire au "
                + "hasard. Il demande d'y être connecté, et une partie qui s'y coupe ne "
@@ -983,9 +1006,11 @@ enum Manuel {
                  + "sont proches."),
                 ("Rien ne se passe malgré tout", "Inversez les rôles : que celui qui "
                  + "cherchait ouvre la table. Une liaison peut ne passer que dans un sens."),
-                ("Ce code ne mène à rien", "Un code vit le temps d'une partie, et "
-                 + "s'efface deux minutes après le départ du dernier joueur. Vérifiez "
-                 + "les six lettres, ou demandez-en un nouveau."),
+                ("Ce code ne mène à rien", "Un code vaut une semaine après la dernière "
+                 + "séance, puis il s'efface. Si vous repreniez une partie, c'est "
+                 + "peut-être que celui qui l'a ouverte n'est pas encore revenu : "
+                 + "c'est à lui de rouvrir le salon, touchez « Réessayer » quand il "
+                 + "sera là."),
                 ("La partie a déjà commencé", "On ne se glisse pas dans une partie en "
                  + "cours. Mais celui qui en était et qui a été coupé, lui, est "
                  + "toujours attendu."),

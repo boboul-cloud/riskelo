@@ -87,7 +87,7 @@ enum ManuelEN {
         resume: "What you need to play your first turn.",
         icone: "bolt.fill", teinte: Palette.camp(0),
         blocs: [
-            .p("Riskelo US is a conquest game: territories, troops, and an opponent "
+            .p("Riskelo is a conquest game: territories, troops, and an opponent "
                + "to dislodge. There are no dice. When you attack, a trivia question "
                + "decides the outcome."),
             .h("Your first turn"),
@@ -404,8 +404,8 @@ enum ManuelEN {
                  + "progress is on the home screen instead."),
                 ("Saved games", "The library of moments — see the chapter \"Resume, "
                  + "mark, go back\"."),
-                ("Play across devices", "One device per player, up to four, in the same "
-                 + "room."),
+                ("Play across devices", "One device per player, up to four — in the "
+                 + "same room, with a six-letter code, or through Game Center."),
             ]),
         ])
 
@@ -558,6 +558,14 @@ enum ManuelEN {
                + "nothing to do. The \"Resume game in progress\" button then appears on "
                + "the home screen. A duel left waiting goes back through \"I'm ready\" "
                + "— the clock does not run while you turn your device back on."),
+            .p("A game played far away is saved too, and the same button brings it "
+               + "back — but it takes you to the room rather than to the board, because "
+               + "the other player has to come as well. See \"Playing across "
+               + "devices\"."),
+            .note("A game played in the same room, or through Game Center, is not kept "
+                  + "that way: neither has anything to find its way back with. Handing "
+                  + "it back without its link would put both sides on a single device, "
+                  + "each of you playing the other."),
             .h("The library"),
             .p("The save above keeps a single state, the last one, and overwrites it at "
                + "every move: that is what resuming needs, and exactly what going back "
@@ -583,52 +591,93 @@ enum ManuelEN {
 
     private static let network = Chapitre(
         id: "reseau", titre: "Playing across devices",
-        resume: "Up to four devices, with no account and no configuration.",
-        icone: "iphone.gen3.radiowaves.left.and.right", teinte: Palette.camp(0),
+        resume: "Up to four devices — in the same room, or a continent apart.",
+        icone: "person.2.fill", teinte: Palette.camp(0),
         blocs: [
-            .p("One device per player, up to four. Nothing to type, no account, no "
-               + "network to configure: the devices find each other over the local "
-               + "network, or directly over Wi-Fi when there is no network at all — so "
-               + "it works on a train."),
-            .h("Opening and joining"),
-            .puces([
-                "One player taps \"Play across devices\", picks the number of players, "
-                + "then \"Open the table\".",
-                "The others tap \"Join a table\" and pick its name from the list.",
-                "Whoever opens chooses the board and the rules, and sends them with the "
-                + "game: the others have nothing to set. They also give each player "
-                + "their seat, in order of arrival.",
-                "When everyone is there, they start the game.",
-            ]),
-            .p("On each device, only the player whose turn it is can act — and only the "
+            .p("One device per player, up to four. Tap \"Play across devices\" on the "
+               + "home screen, then choose how to link them."),
+            .p("Whichever way you choose, whoever opens the game picks the board and the "
+               + "rules and sends them along with the game: nobody else has anything to "
+               + "set up. They also hand out the seats, in order of arrival. On each "
+               + "device, only the player whose turn it is can act — and only the "
                + "defender can answer, wherever they are."),
             .note("No machine in a networked game: an artificial opponent would have to "
                   + "be played by every device at once."),
-            .h("What you need, and nothing more"),
+
+            .h("In the same room"),
+            .p("Nothing to type, no account, no network to configure: the devices find "
+               + "each other on their own, and it works on a train."),
             .puces([
-                "The devices in the same room.",
-                "Both on the same Wi-Fi network — or both with no network at all, in "
-                + "which case they link up directly.",
+                "One player picks the number of players, then \"Open the table\".",
+                "The others tap \"Join a table\" and pick its name from the list.",
+                "Wi-Fi switched on at both ends, even with no network to join — Wi-Fi is "
+                + "what carries the direct link.",
                 "The \"local network\" permission, which the system asks for once. "
-                + "Refused, the devices never see each other: you can turn it back on "
-                + "in Settings ▸ Riskelo US.",
-                "The same version of Riskelo US on both.",
+                + "Refused, the devices never see each other: you can turn it back on in "
+                + "Settings ▸ Riskelo.",
             ]),
+
+            .h("Far away, with a code"),
+            .p("Each of you at home, on your own network. Still no account to create."),
+            .puces([
+                "One player taps \"Open a game\". A six-letter code appears — MARENO, "
+                + "say.",
+                "They tap \"Send the invitation\" and pick WhatsApp, a text message, "
+                + "Messages, an email. The other receives a link.",
+                "The other taps the link: Riskelo opens on the right game. If nothing "
+                + "opens, they type the six letters by hand.",
+            ]),
+            .p("The code is as easy to read out as it is to paste: it alternates "
+               + "consonants and vowels on purpose, so that it survives being repeated "
+               + "over the phone. Case and spaces do not matter, and the digit zero "
+               + "counts as the letter O."),
+            .note("A dropout does not lose the game. A tunnel, a lift, an incoming "
+                  + "call: a banner appears, and the game picks itself back up as soon "
+                  + "as the link returns. It waits two minutes — keep the screen on."),
+
+            .h("Picking it up another evening"),
+            .p("A game played far away does not have to fit into one evening. Stop "
+               + "wherever you like: the green button on the home screen — \"Resume the "
+               + "game far away\" — hands it back exactly as you left it."),
+            .puces([
+                "Whoever opened the game comes back first: their device is the one "
+                + "holding it, and they are the only one who can reopen the code.",
+                "The other taps the same button, or types the six letters again. The "
+                + "code has not changed.",
+                "Once everyone is back, \"Resume the game\" starts again on the turn "
+                + "you had reached.",
+            ]),
+            .note("The code stays good for a week after your last session. You do have "
+                  + "to be there at the same time: a question is answered against the "
+                  + "clock, so this is not play-by-mail."),
+
+            .h("Through Game Center"),
+            .p("Apple's gaming service: your Game Center friends, or a stranger. It "
+               + "requires you to be signed in to it, and a game cut short there cannot "
+               + "be picked up again, unlike one played with a code. That is why it "
+               + "comes last."),
+
             .h("When it does not work"),
             .termes([
                 ("No table in sight", "Check that the other device really did open the "
-                 + "table, that both are on the same Wi-Fi network, and that the "
-                 + "devices are close by."),
-                ("The link could not be established", "The connection timed out after "
-                 + "fifteen seconds. Start again — and if a network permission is "
-                 + "asked for, accept it right away."),
-                ("Linked, but nothing comes", "The link is good: it is the launch that "
-                 + "is not arriving. It is up to whoever opened the table to start the "
-                 + "game."),
-                ("Different versions", "One device sent a game the other cannot read. "
-                 + "Update both."),
+                 + "table, that Wi-Fi is on at both ends, and that the devices are close "
+                 + "by."),
                 ("Still nothing happens", "Swap the roles: let whoever was searching "
                  + "open the table. A link can go through in one direction only."),
+                ("That code leads nowhere", "A code stays good for a week after your "
+                 + "last session, then it is wiped. If you were picking a game back up, "
+                 + "it may be that whoever opened it is not back yet: reopening the room "
+                 + "is up to them, so tap \"Try again\" once they are there."),
+                ("The game has already started", "You cannot slip into a game in "
+                 + "progress. But anyone who was in it and got cut off is still "
+                 + "expected."),
+                ("Nothing answered", "Check your connection. If all is well at your end, "
+                 + "it is the game server that is not answering: \"in the same room\" "
+                 + "depends on nobody and is always available."),
+                ("Linked, but nothing comes", "The link is good: it is the launch that "
+                 + "is not arriving. It is up to whoever opened the game to start it."),
+                ("Different versions", "One device sent a game the other cannot read. "
+                 + "Update both."),
             ]),
         ])
 
@@ -712,7 +761,7 @@ enum ManuelEN {
                 ("Terms of use",
                  "License, ownership, warranties, governing law.",
                  Manuel.conditionsURL),
-                ("The Riskelo US Manuel.site",
+                ("The Riskelo website",
                  Manuel.site,
                  Manuel.siteURL),
             ]),
@@ -723,10 +772,10 @@ enum ManuelEN {
                 ("Write to the author", Manuel.contact, Manuel.contactURL),
             ]),
             .h("Notices"),
-            .p("Riskelo US is an independent game, inspired by traditional conquest "
+            .p("Riskelo is an independent game, inspired by traditional conquest "
                + "games. It is not affiliated with any board game publisher or any of "
                + "their trademarks."),
-            .p("Riskelo US \(Manuel.version) — © 2026 Robert Oulhen. All rights "
+            .p("Riskelo \(Manuel.version) — © 2026 Robert Oulhen. All rights "
                + "reserved."),
         ])
 }

@@ -933,11 +933,11 @@ chacune a une portée et chacune a un prix. Le jeu, lui, ne sait pas laquelle
 est en service — c'est tout l'objet du protocole `Fil`, qui tient en six
 fonctions parce que c'est tout ce que `GameSession` a jamais demandé.
 
-| | Portée | Ce qu'elle demande | Reprise après coupure |
-|---|---|---|---|
-| **La même pièce** (`Link`) | quelques mètres | rien du tout | non — un appareil hors de portée est éteint |
-| **Le loin** (`Relais`) | le monde | un serveur, six lettres | oui, deux minutes |
-| **Game Center** (`Arene`) | le monde | un compte Apple | non — Apple ne la propose pas |
+| | Portée | Ce qu'elle demande | Reprise après coupure | D'une soirée sur l'autre |
+|---|---|---|---|---|
+| **La même pièce** (`Link`) | quelques mètres | rien du tout | non — un appareil hors de portée est éteint | non |
+| **Le loin** (`Relais`) | le monde | un serveur, six lettres | oui, deux minutes | oui, une semaine |
+| **Game Center** (`Arene`) | le monde | un compte Apple | non — Apple ne la propose pas | non |
 
 La même pièce reste le chemin par défaut, et l'ordre des trois à l'écran n'est
 pas neutre : elle ne dépend de personne, ni serveur ni compte, et c'est la
@@ -1037,8 +1037,47 @@ La bonne surprise est que la reprise **n'a demandé aucun message nouveau**.
 Celui qui revient dit « je ne suis plus à la même partie que vous » —
 `Message.perdu`, qui existait déjà pour les divergences — et celui qui la tient
 la renvoie entière, comme au premier jour. Il suffisait que le salon garde la
-place au chaud deux minutes, et que le fil rappelle tout seul en espaçant ses
-essais.
+place au chaud, et que le fil rappelle tout seul en espaçant ses essais.
+
+### D'une soirée sur l'autre
+
+Les deux minutes de rappel automatique couvrent le tunnel et l'ascenseur, pas
+le lendemain soir. Or une partie de Riskelo ne tient pas dans une soirée, et
+c'est le même mécanisme qui la reprend — à trois pièces près :
+
+- **le salon garde le code une semaine** (`GRACE_MS`), et non plus deux
+  minutes. Ce qui attend est un point de rendez-vous, pas une partie ;
+- **l'appareil garde son rôle** à côté de la partie (`RendezVous`) : le code,
+  quel camp est le sien, où en était le compte des coups, et le camp de chaque
+  appareil. Sans ce dernier, celui qui héberge ne saurait plus à qui renvoyer
+  quel rang — et ne renverrait donc rien ;
+- **celui qui héberge rouvre son propre code** (`Relais.reprendreLeSalon`).
+  Un code neuf ne servirait à rien : les autres n'ont que l'ancien. Le serveur
+  le reconnaît à son identifiant, ou refuse en le disant si le code est reparti
+  à quelqu'un d'autre depuis.
+
+Le salon peut très bien avoir été effacé entre les deux soirées : il renaît
+alors vide sous le même code, et cela ne change rien — il n'a jamais tenu la
+partie.
+
+La troisième pièce a réparé au passage une panne qui n'avait rien à voir avec
+le lendemain. **L'hôte qui se reconnectait après une coupure obtenait un salon
+neuf**, sous un code neuf : il demandait à héberger, et le serveur, qui ne
+regardait pas le code qu'il proposait, lui en tirait un autre. Les autres
+restaient dans l'ancien salon à parler tout seuls, l'hôte dans le sien à
+attendre, et son écran ne bougeait plus. Rien ne le disait — le bandeau
+disparaissait, la liaison était parfaite : c'est le gel qu'on a vu au bout de
+quelques assauts, du côté de celui qui avait ouvert la partie.
+
+Ce n'est pas la partie par correspondance, et le jeu ne le laisse pas croire :
+un duel se joue sablier en main, les deux appareils allumés en même temps. Ce
+qui se reprend est le **rendez-vous**.
+
+C'est aussi ce qui décide si une partie va dans le tiroir de la reprise, et
+`Fil.codeDeReprise` porte la question. Une partie à plusieurs rangée sans de
+quoi rouvrir son fil se rouvrait **sans lui** : les deux camps redevenaient
+jouables sur un seul téléphone, des deux côtés à la fois, chacun jouant
+l'adversaire de l'autre sans le savoir.
 
 Un garde est venu avec : **on ne joue pas dans le vide**. Sans lui, un coup
 joué pendant que la liaison est tombée est appliqué ici et n'arrive nulle part.

@@ -177,6 +177,11 @@ final class Arene: NSObject, Fil {
     /// Rien à faire : chez Apple, la partie est close dès qu'elle est
     /// rendue. Personne ne peut plus y entrer, et il n'y a donc pas de porte
     /// à refermer.
+    /// Game Center sait reprendre une partie — c'est même tout son objet —
+    /// mais ce chemin-là n'a jamais été exécuté (voir l'en-tête). On ne promet
+    /// pas une reprise qu'on n'a pas éprouvée.
+    var codeDeReprise: String? { nil }
+
     func fermerLaTable() {}
 
     func arreter() {

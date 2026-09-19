@@ -60,6 +60,11 @@ final class RootModel {
     var salon: (regles: Rules, plateau: Boards)?
     /// Le code arrivé par un lien, le temps que le salon s'ouvre dessus.
     var codeRecu: String?
+    /// Une partie au loin commencée une autre fois, qu'on vient reprendre :
+    /// le rendez-vous gardé ici, et la partie qui dormait à côté. Tant qu'elle
+    /// est posée là, l'écran montre le salon et non le plateau — il faut que
+    /// l'autre vienne aussi.
+    var repriseAuLoin: (rendezVous: RendezVous, partie: GameState)?
     /// Les réglages de la table, ouverts depuis le salon. Ils vivent ici et
     /// non dans le salon : celui-ci se refait avec les réglages qu'on vient
     /// de choisir, et un écran qui se refait perd ce qu'il gardait.
@@ -103,11 +108,39 @@ final class RootModel {
         // vert de l'accueil la rendra telle quelle.
         session?.saveNow()
         session = nil
+        repriseAuLoin = nil
         bibliotheque = false; manuel = false; packs = false
         reglages = false; salonReglages = false
         ouvertureJouee = true
         codeRecu = code
         salon = (PartieRapide.regles(), PartieRapide.plateau)
+    }
+}
+
+/// Ce qui attend derrière le bouton vert de l'accueil.
+///
+/// Deux reprises et non une, et il faut les distinguer avant de dessiner le
+/// bouton : celle d'une partie jouée ici rend le plateau tout de suite, celle
+/// d'une partie au loin rend d'abord le salon — elle a besoin que l'autre
+/// vienne aussi.
+enum Reprise {
+    case ici
+    case auLoin(RendezVous)
+
+    /// Y a-t-il quelque chose à reprendre ?
+    ///
+    /// Le rendez-vous se consulte **en premier** : périmé, il emporte la
+    /// partie avec lui, et le bouton ne doit alors pas paraître du tout. Dans
+    /// l'autre ordre, il paraissait et ne faisait rien — un bouton mort, ce
+    /// qui est pire que pas de bouton.
+    ///
+    /// La partie elle-même n'est pas lue ici : ce serait décoder toute une
+    /// partie à chaque fois que l'accueil se redessine. On ne la lit qu'au
+    /// moment où l'on y va.
+    @MainActor static func enAttente() -> Reprise? {
+        let rendezVous = GameStore.shared.loadRendezVous()
+        guard GameStore.shared.hasSavedGame else { return nil }
+        return rendezVous.map { .auLoin($0) } ?? .ici
     }
 }
 
@@ -158,6 +191,18 @@ struct RootView: View {
                           onManuel: { withAnimation { model.manuel = true } },
                           onRetour: { withAnimation { model.salonReglages = false } })
                     .transition(.opacity)
+            } else if let reprise = model.repriseAuLoin {
+                // Droit au salon : une partie reprise n'a ni chemin à choisir
+                // ni réglages à revoir. Tout cela a été décidé l'autre soir.
+                LoinView(plateau: reprise.partie.boardKind, regles: reprise.partie.rules,
+                         reprise: reprise,
+                         onReady: { partie in
+                             withAnimation {
+                                 model.repriseAuLoin = nil
+                                 model.session = partie
+                             }
+                         },
+                         onCancel: { withAnimation { model.repriseAuLoin = nil } })
             } else if let salon = model.salon {
                 PlusieursView(plateau: salon.plateau, regles: salon.regles,
                               codeRecu: model.codeRecu,
@@ -195,6 +240,7 @@ struct RootView: View {
                 },
                 onRetour: { withAnimation { model.reglages = false } })
             } else {
+                let reprise = Reprise.enAttente()
                 AccueilView(
                     onPartieRapide: {
                         depuisAccueil {
@@ -218,11 +264,22 @@ struct RootView: View {
                     // au lancement. Elle ne le fait plus : un accueil qu'on ne
                     // voit jamais n'est pas un accueil. La reprise vient juste
                     // après la table, et reste le seul bouton vert.
-                    onResume: GameStore.shared.hasSavedGame ? {
-                        if let sauvee = GameStore.shared.load() {
-                            depuisAccueil { model.session = GameSession(resuming: sauvee) }
+                    // Le rendez-vous décide de ce que fait le bouton vert, et
+                    // le bouton le dit : au loin, il mène au salon et non au
+                    // plateau.
+                    onResume: reprise.map { quoi in
+                        {
+                            guard let sauvee = GameStore.shared.load() else { return }
+                            depuisAccueil {
+                                if case let .auLoin(rendezVous) = quoi {
+                                    model.repriseAuLoin = (rendezVous, sauvee)
+                                } else {
+                                    model.session = GameSession(resuming: sauvee)
+                                }
+                            }
                         }
-                    } : nil,
+                    },
+                    repriseAuLoin: { if case .auLoin = reprise { true } else { false } }(),
                     onManuel: { depuisAccueil { model.manuel = true } },
                     onArchives: Archives.shared.liste().isEmpty ? nil : {
                         depuisAccueil { model.bibliotheque = true }

@@ -53,6 +53,20 @@ protocol Fil: AnyObject {
     /// Notre identité sur le fil.
     var moi: Pair { get }
 
+    /// De quoi retrouver cette table dans huit jours, quand il y a moyen.
+    ///
+    /// Les trois fils ne se valent pas là-dessus, et c'est pour cela que la
+    /// question se pose ici plutôt que dans la partie. Le loin rend son code :
+    /// six lettres qu'on retape, et le salon garde la place une semaine. La
+    /// même pièce ne rend rien — on s'y retrouve en s'y retrouvant, il n'y a
+    /// rien à retenir. Game Center non plus, pour l'instant.
+    ///
+    /// C'est aussi ce qui décide si la partie va dans le tiroir de la reprise.
+    /// Une partie rangée sans de quoi rouvrir son fil se rouvrait **sans lui** :
+    /// les deux camps redevenaient jouables sur un seul téléphone, chacun
+    /// jouant l'adversaire de l'autre sans le savoir.
+    var codeDeReprise: String? { get }
+
     /// Ce qui arrive d'un autre appareil, et de qui.
     var onReceive: ((Data, Pair) -> Void)? { get set }
 

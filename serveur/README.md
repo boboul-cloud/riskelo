@@ -133,8 +133,14 @@ des paquets, que le serveur recopie sans savoir les lire. Ce n'est pas un
 détail de présentation : c'est ce qui permet à la politique de confidentialité
 de rester ce qu'elle était.
 
-Deux minutes après le départ du dernier joueur, tout est effacé et le code
-redevient libre.
+Une semaine après le départ du dernier joueur, tout est effacé et le code
+redevient libre. Une semaine, parce qu'une partie de Riskelo ne tient pas dans
+une soirée : celui qui l'a ouverte rouvre son salon sous le même code, ceux qui
+y étaient y rentrent, et l'on repart où l'on en était. Ce qui attend pendant ce
+temps-là tient en quelques octets — qui a ouvert, quel dialecte, et la liste
+des identifiants admis. **La partie, elle, n'est jamais ici** : elle dort sur
+les appareils, et celui qui l'héberge la redonne à chacun quand tout le monde
+est revenu.
 
 Les journaux conservés sont **éteints** (`observability` dans
 `wrangler.jsonc`), et ce n'est pas un choix technique : allumés, ils gardent

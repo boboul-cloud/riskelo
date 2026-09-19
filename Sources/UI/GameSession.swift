@@ -391,6 +391,12 @@ final class GameSession {
     /// n'y a pas d'autre porte.
     @discardableResult
     private func jouer(_ action: Action) -> DuelReport? {
+        // On ne joue pas dans le vide. Un coup appliqué ici pendant que la
+        // liaison est tombée n'arrive nulle part : il avance le compteur d'un
+        // seul côté, et tout ce qui suit est décalé. Les écrans s'en gardaient
+        // déjà — `aMoiDeJouer`, `aMoiDeRepondre` — mais le sablier, lui,
+        // arrivait à zéro et répondait quand même.
+        guard filTenu else { return nil }
         let rapport = game.apply(action)
         if let fil {
             compteur += 1
@@ -415,6 +421,9 @@ final class GameSession {
             game = etat
             report = nil
             stage = nil
+            // La partie repart d'où l'hôte la tient : le sablier d'avant ne
+            // compte plus rien.
+            stopCountdown()
             annoncerOuverture()
             resume()
 
@@ -426,19 +435,37 @@ final class GameSession {
 
         case let .coup(action, numero, empreinte):
             // Déjà joué : à quatre, l'hôte relaie, et le coup peut arriver
-            // deux fois. On le reconnaît à son numéro.
-            guard numero > compteur else { return }
-            // Il en manque un : reprendre ici jouerait une autre partie.
-            guard numero == compteur + 1 else { redemanderLaPartie(); return }
-
-            compteur = numero
-            let rapport = game.apply(action)
-            guard game.digest == empreinte else {
-                // Les parties ont divergé. Chacune reste cohérente de son côté
-                // — c'est bien le danger — donc on ne continue pas.
-                redemanderLaPartie()
+            // deux fois chez un invité. On le reconnaît à son numéro.
+            //
+            // L'hôte, lui, ne reçoit jamais de relais — c'est lui qui relaie.
+            // Un numéro déjà pris chez lui n'est donc pas un doublon : c'est
+            // que les deux appareils ont donné le même rang à deux coups
+            // différents, et le sien a gagné. Se taire était le pire choix :
+            // celui d'en face croit avoir joué et attend la suite, l'hôte
+            // attend son tour, et les deux écrans s'arrêtent là. Il redonne
+            // donc sa partie, qui fait foi.
+            guard numero > compteur else {
+                if jHeberge { imposerLaPartie() }
                 return
             }
+            // Il en manque un : reprendre ici jouerait une autre partie.
+            guard numero == compteur + 1 else { seRemettreDAplomb(); return }
+
+            // Le coup se joue d'abord à côté, sur une copie. S'il ne donne pas
+            // la partie annoncée, la nôtre n'a pas bougé : on la répare au
+            // lieu de continuer sur un état qu'on sait faux. Il était appliqué
+            // avant d'être vérifié, et une divergence laissait donc derrière
+            // elle un coup qu'on ne pouvait plus retirer.
+            var essai = game
+            let rapport = essai.apply(action)
+            guard essai.digest == empreinte else {
+                // Les parties ont divergé. Chacune reste cohérente de son côté
+                // — c'est bien le danger — donc on ne continue pas.
+                seRemettreDAplomb()
+                return
+            }
+            compteur = numero
+            game = essai
             // L'hôte fait suivre aux autres : rien ne garantit que deux
             // invités se voient directement.
             if jHeberge, let fil { fil.envoyer(data, saufA: pair) }
@@ -459,6 +486,34 @@ final class GameSession {
     private func redemanderLaPartie() {
         guard let data = Message.perdu.data else { return }
         fil?.envoyer(data)
+    }
+
+    /// Se remettre d'aplomb quand la partie d'en face n'est plus la nôtre.
+    ///
+    /// Les deux sens ne sont pas le même, et c'est ce qui manquait. Celui qui
+    /// a rejoint demande la partie à l'hôte, qui fait foi. Mais l'hôte, lui,
+    /// la demandait à un invité qui n'a jamais su répondre — `.perdu` n'est
+    /// écouté que par l'hôte — et restait donc seul avec une partie fausse :
+    /// son compteur en avance, les coups d'en face ignorés un à un sans que
+    /// rien ne paraisse, et l'écran qui ne bouge plus. C'est le gel qu'on a vu
+    /// au bout de quelques assauts, toujours du côté de celui qui avait ouvert
+    /// la partie.
+    ///
+    /// L'hôte n'a rien à demander à personne : il impose la sienne.
+    private func seRemettreDAplomb() {
+        guard jHeberge else { redemanderLaPartie(); return }
+        imposerLaPartie()
+    }
+
+    /// L'hôte renvoie la partie à chacun, avec son rang et le compte des
+    /// coups. Après quoi les appareils repartent du même endroit.
+    private func imposerLaPartie() {
+        guard let fil else { return }
+        for (pair, rang) in rangs {
+            guard let data = Message.partie(game, votreRang: rang, numero: compteur).data
+            else { continue }
+            fil.envoyer(data, a: pair)
+        }
     }
 
     /// Ce que l'écran doit montrer d'un coup joué en face.
@@ -490,7 +545,38 @@ final class GameSession {
     func saveNow() {
         saveWork?.cancel()
         retenirLesQuestions()
-        if game.isOver { GameStore.shared.discard() } else { GameStore.shared.save(game) }
+        // Une partie à plusieurs ne se range que si son fil sait se retrouver.
+        //
+        // Elle se rangeait toujours, et le bouton vert de l'accueil la rendait
+        // ensuite **sans son fil** : les deux camps redevenaient jouables sur
+        // un même téléphone, des deux côtés à la fois, chacun jouant
+        // l'adversaire de l'autre sans le savoir. Elle écrasait au passage la
+        // partie solo qu'on avait laissée en plan.
+        //
+        // Le loin sait se retrouver : six lettres, et le salon garde la place
+        // une semaine. Elle part donc au tiroir avec son rendez-vous à côté —
+        // c'est ce qui permet de la reprendre le lendemain. La même pièce et
+        // Game Center ne savent pas encore, et l'on ne range rien plutôt que
+        // de ranger ce qui ne se rouvre pas. On ne touche alors même pas au
+        // tiroir : ce qui s'y trouve appartient à quelqu'un d'autre.
+        guard let fil else {
+            if game.isOver { GameStore.shared.discard() } else { GameStore.shared.save(game) }
+            return
+        }
+        guard let code = fil.codeDeReprise else { return }
+        guard !game.isOver else {
+            // Finie, elle n'a plus de rendez-vous : `discard` emporte les deux.
+            GameStore.shared.discard()
+            return
+        }
+        GameStore.shared.save(game)
+        GameStore.shared.saveID(partieID)
+        GameStore.shared.saveRendezVous(
+            RendezVous(code: code, jHeberge: jHeberge, monRang: monRang,
+                       compteur: compteur,
+                       rangs: Dictionary(uniqueKeysWithValues:
+                                            rangs.map { ($0.key.id, $0.value) }),
+                       partieID: partieID, quand: Date()))
     }
 
     /// Ce que la partie a posé rejoint la mémoire de l'appareil, pour que la
@@ -542,6 +628,9 @@ final class GameSession {
                                seed: seed)
         partieID = UUID()
         poseesALOuverture = game.bank.alreadyServed
+        // Le tiroir ne tient qu'une partie : celle-ci prend la place, et le
+        // rendez-vous de celle qu'elle remplace n'a plus rien à désigner.
+        GameStore.shared.discardRendezVous()
         GameStore.shared.saveID(partieID)
         saveNow()
         archiver("Ouverture")
@@ -552,10 +641,14 @@ final class GameSession {
     /// Ouvre une partie sur deux appareils. Celui qui héberge crée la partie
     /// et l'envoie ; celui qui rejoint la reçoit avant d'afficher quoi que ce
     /// soit.
+    ///
+    /// `partie` n'est donné qu'à la reprise d'une soirée sur l'autre : la
+    /// partie garde alors son identité dans la bibliothèque, au lieu d'en
+    /// ouvrir une neuve à chaque retrouvaille.
     init(fil: any Fil, heberge: Bool, game partie: GameState, monRang rang: PlayerID,
-         rangs: [Pair: PlayerID] = [:], compteur: Int = 0) {
+         rangs: [Pair: PlayerID] = [:], compteur: Int = 0, partie identite: UUID? = nil) {
         game = partie
-        partieID = UUID()
+        partieID = identite ?? UUID()
         self.fil = fil
         self.jHeberge = heberge
         self.monRang = rang
@@ -567,6 +660,10 @@ final class GameSession {
         // avec son écran, et ses fermetures tenaient encore le fil.
         fil.onConnected = { [weak self] _, pair in self?.revenu(pair) }
         fil.onLiaison = { [weak self] etat in self?.liaison = etat }
+        // Rangée dès sa naissance, avec de quoi la rouvrir : l'application
+        // peut être arrêtée avant le premier coup, et une partie au loin dont
+        // on a perdu le code est une partie perdue.
+        saveNow()
         annoncerOuverture()
         resume()
     }
@@ -604,6 +701,9 @@ final class GameSession {
         game = saved
         partieID = partie ?? GameStore.shared.loadID() ?? UUID()
         poseesALOuverture = game.bank.alreadyServed
+        // Reprise sur un seul appareil : s'il restait un rendez-vous, il
+        // désignait une autre partie que celle-ci.
+        GameStore.shared.discardRendezVous()
         GameStore.shared.saveID(partieID)
         if partie != nil { archiver("Repris ici") }
         annoncerOuverture()
@@ -779,7 +879,11 @@ final class GameSession {
     }
 
     func answer(_ index: Int?) {
-        guard let duel, stage == .asking else { return }
+        // `filTenu` en plus de l'étape : `jouer` refuse de jouer dans le vide,
+        // et la suite de cette fonction lit son compte rendu pour décider de
+        // ce que l'écran montre. Sans ce garde, un refus se lirait comme une
+        // première réponse de face à face.
+        guard let duel, stage == .asking, filTenu else { return }
         stopCountdown()
         let elapsed = max(0, duel.allowance - remaining)
         let rapport = jouer(.answer(index.map { .chosen($0, elapsed: elapsed) } ?? .timeout))
@@ -862,7 +966,20 @@ final class GameSession {
         let t = Timer(timeInterval: 0.1, repeats: true) { [weak self] minuteur in
             Task { @MainActor in
                 guard let self else { minuteur.invalidate(); return }
-                guard self.stage == .asking else { return }
+                // Plus de duel : il n'y a plus rien à chronométrer, et le
+                // sablier n'avait aucune raison de survivre au sien. Il le
+                // faisait : `stopCountdown` n'était appelé que par la réponse,
+                // et un duel dénoué autrement — la partie renvoyée après une
+                // coupure — laissait le minuteur tourner jusqu'à la fin.
+                guard self.game.assault != nil else { self.stopCountdown(); return }
+                // Il ne court que pour celui qui répond, et seulement tant que
+                // le fil tient. En réseau, `.asking` est aussi l'écran de
+                // l'attaquant, qui lit la question sans y répondre : un
+                // sablier resté d'un tour précédent y arrivait à zéro et
+                // envoyait une réponse à sa place. Deux coups portaient alors
+                // le même numéro, et les deux parties divergeaient pour de
+                // bon.
+                guard self.stage == .asking, self.aMoiDeRepondre else { return }
                 self.remaining = max(0, self.remaining - 0.1)
                 if self.remaining <= 0 { self.answer(nil) }
             }

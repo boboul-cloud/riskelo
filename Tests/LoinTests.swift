@@ -35,6 +35,9 @@ final class FilFactice: Fil {
     let moi: Pair
     var relies: [Pair] = []
     var jeSuisLHote: Bool
+    /// Un fil d'essai se retrouve par son nom : c'est ce qui permet
+    /// d'éprouver le rangement d'une partie au loin sans vrai salon.
+    var codeDeReprise: String?
 
     var onReceive: ((Data, Pair) -> Void)?
     var onConnected: ((Bool, Pair) -> Void)?
@@ -361,6 +364,136 @@ struct LoinTests {
 
         hote.retablir()
         #expect(session.aMoiDeJouer)
+    }
+
+    // MARK: - Se retrouver une autre fois
+
+    /// Reprendre n'est pas recommencer : la partie repart telle quelle, à son
+    /// tour, avec les mêmes camps et le même compte de coups.
+    @Test func laPartieReprisePartDOuElleEtait() {
+        let (hote, invite) = FilFactice.paire()
+        var partie = partieNeuve()
+        partie.debugSkipToAttack()
+        let identite = UUID()
+
+        let session = MiseEnPlace.reprendre(hote, partie: partie,
+                                            rangs: [invite.moi: 1], compteur: 12,
+                                            partieID: identite)
+
+        #expect(session.game.digest == partie.digest, "ce n'est pas la même partie")
+        #expect(session.monRang == 0, "celui qui héberge garde son camp")
+        #expect(session.partieID == identite,
+                "trois soirées ne doivent pas faire trois parties dans la bibliothèque")
+        // Et chacun reçoit la partie, avec son rang : sans cela l'autre
+        // appareil attend un lancement qui n'arrive jamais.
+        let recue = hote.envoyes.compactMap { message -> (PlayerID, Int)? in
+            guard case let .partie(_, rang, numero) = message else { return nil }
+            return (rang, numero)
+        }
+        #expect(recue.count == 1)
+        #expect(recue.first?.0 == 1)
+        #expect(recue.first?.1 == 12, "le compte des coups repart de là où on s'est quittés")
+    }
+
+    /// Le rendez-vous se périme, et il emporte la partie avec lui : rendue
+    /// sans son fil, elle ouvrirait les deux camps sur un seul téléphone.
+    @Test func unRendezVousPerimeNeVautPlus() {
+        let frais = RendezVous(code: "MARENO", jHeberge: true, monRang: 0, compteur: 3,
+                               rangs: ["marie": 1], partieID: UUID(), quand: Date())
+        #expect(!frais.perime)
+        #expect(frais.attendus == ["marie"])
+
+        let vieux = RendezVous(code: "MARENO", jHeberge: true, monRang: 0, compteur: 3,
+                               rangs: ["marie": 1], partieID: UUID(),
+                               quand: Date().addingTimeInterval(-RendezVous.dureeDeVie - 60))
+        #expect(vieux.perime)
+    }
+
+    // MARK: - Quand les deux parties divergent
+
+    /// L'hôte ne demande pas la partie : il la donne.
+    ///
+    /// C'est le défaut qui figeait le téléphone de celui qui avait ouvert la
+    /// table, au bout de quelques assauts. Un coup manquant, ou un coup qui ne
+    /// donne pas la partie annoncée, et l'hôte envoyait `Message.perdu` —
+    /// qu'il est le seul au monde à savoir écouter. Personne ne lui répondait
+    /// jamais, son compteur restait décalé, les coups d'en face étaient
+    /// ignorés un à un sans que rien ne paraisse, et l'écran ne bougeait plus.
+    ///
+    /// Rien ici ne fait bouger la partie : un coup qu'on refuse n'est pas
+    /// appliqué, et c'est justement ce qu'on vérifie.
+    @Test func lHoteQuiPerdLeFilImposeSaPartie() {
+        let (hote, invite) = FilFactice.paire()
+        let partie = partieNeuve()
+        let session = GameSession(fil: hote, heberge: true, game: partie,
+                                  monRang: 0, rangs: [invite.moi: 1], compteur: 0)
+
+        // Le coup numéro 3 alors qu'on en attendait le premier : il en manque
+        // deux, et l'hôte ne peut pas les deviner.
+        let troue = Message.coup(.advance, numero: 3, empreinte: 0).data!
+        hote.onReceive?(troue, invite.moi)
+
+        #expect(hote.envoyes.contains { if case .partie = $0 { return true } else { return false } },
+                "l'hôte doit renvoyer sa partie, qui fait foi")
+        #expect(!hote.envoyes.contains { if case .perdu = $0 { return true } else { return false } },
+                "l'hôte n'a personne à qui la demander")
+        #expect(session.game.digest == partie.digest, "un coup refusé ne s'applique pas")
+    }
+
+    /// Un coup qui ne donne pas la partie annoncée n'est pas joué.
+    ///
+    /// Il l'était, et la vérification venait après : l'appareil gardait donc
+    /// un coup qu'il savait faux, en plus de ne pas savoir s'en défaire.
+    @Test func unCoupQuiDivergeNeSApplique() {
+        let (hote, invite) = FilFactice.paire()
+        let partie = partieNeuve()
+        let session = GameSession(fil: hote, heberge: true, game: partie,
+                                  monRang: 0, rangs: [invite.moi: 1], compteur: 0)
+
+        // Le bon numéro, mais une empreinte qui ne peut pas être la sienne.
+        let faux = Message.coup(.advance, numero: 1, empreinte: 1).data!
+        hote.onReceive?(faux, invite.moi)
+
+        #expect(session.game.digest == partie.digest)
+        #expect(hote.envoyes.contains { if case .partie = $0 { return true } else { return false } })
+    }
+
+    /// Deux coups au même rang : l'hôte redonne la partie plutôt que de se
+    /// taire.
+    ///
+    /// Il se taisait — le numéro était déjà pris, donc le coup passait pour un
+    /// doublon de relais. Mais l'hôte ne reçoit jamais de relais. Celui d'en
+    /// face, lui, croyait avoir joué et attendait la suite : les deux écrans
+    /// s'arrêtaient là, chacun attendant l'autre.
+    @Test func deuxCoupsAuMemeRangNeSePerdentPas() {
+        let (hote, invite) = FilFactice.paire()
+        let partie = partieNeuve()
+        let session = GameSession(fil: hote, heberge: true, game: partie,
+                                  monRang: 0, rangs: [invite.moi: 1], compteur: 4)
+
+        let enRetard = Message.coup(.advance, numero: 4, empreinte: 0).data!
+        hote.onReceive?(enRetard, invite.moi)
+
+        #expect(hote.envoyes.contains { if case .partie = $0 { return true } else { return false } })
+        #expect(session.game.digest == partie.digest)
+    }
+
+    /// Celui qui a rejoint, lui, demande — et ne renvoie surtout pas la
+    /// sienne : c'est la partie de l'hôte qui fait foi, sans quoi deux
+    /// appareils se renverraient chacun sa version sans fin.
+    @Test func lInviteQuiPerdLeFilRedemandeLaPartie() {
+        let (hote, invite) = FilFactice.paire()
+        defer { _ = hote }
+        let partie = partieNeuve()
+        let session = GameSession(fil: invite, heberge: false, game: partie,
+                                  monRang: 1, compteur: 0)
+
+        let troue = Message.coup(.advance, numero: 3, empreinte: 0).data!
+        invite.onReceive?(troue, hote.moi)
+
+        #expect(invite.envoyes.count == 1)
+        #expect(invite.envoyes.contains { if case .perdu = $0 { return true } else { return false } })
+        #expect(session.game.digest == partie.digest)
     }
 
     // Il n'y a pas de test du cas « hors réseau » ici, et c'est délibéré :

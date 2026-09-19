@@ -157,6 +157,60 @@ extension GameState: Codable {
 
 // MARK: - Le tiroir
 
+// MARK: - Le rendez-vous
+
+/// De quoi retrouver une partie au loin, une soirée plus tard.
+///
+/// Une partie de Riskelo ne tient pas toujours dans une soirée, et deux
+/// personnes ne sont pas libres à la même heure. Ce qu'il faut pour reprendre
+/// tient pourtant en peu de chose : **six lettres**, et de quoi savoir qui
+/// l'on était à cette table. Le reste — la partie elle-même — dort déjà à côté
+/// dans `GameStore`.
+///
+/// Ce n'est pas la partie par correspondance, et il ne faut pas le laisser
+/// croire : un duel se joue sablier en main, les deux appareils allumés en
+/// même temps. Ce qui se reprend, c'est le **rendez-vous** — on se retrouve
+/// demain soir, et la partie repart où on l'avait laissée.
+///
+/// Rangé à côté de la partie et non dedans : une partie est une partie, elle
+/// ne sait pas par quel fil elle est arrivée, et c'est très bien ainsi.
+struct RendezVous: Codable {
+
+    /// Le salon. C'est lui qui fait tout : celui qui héberge le rouvre, les
+    /// autres le retapent, et l'on est de nouveau ensemble.
+    let code: String
+    /// Étions-nous celui qui a ouvert la partie ? Il fait foi — c'est sa
+    /// partie qu'on redonne à chacun au retour — et il est le seul à qui le
+    /// serveur rende son ancien code.
+    let jHeberge: Bool
+    /// Quel camp est le nôtre.
+    let monRang: PlayerID
+    /// Où en était le compte des coups. Il repart de là, des deux côtés.
+    let compteur: Int
+    /// Le camp de chaque appareil, par son identifiant. Sans lui, celui qui
+    /// héberge ne saurait plus à qui renvoyer quel rang — et ne renverrait
+    /// donc rien du tout.
+    let rangs: [String: PlayerID]
+    /// La partie dans la bibliothèque. Gardée pour que trois soirées ne
+    /// fassent pas trois parties différentes.
+    let partieID: UUID
+    /// Quand on s'est quittés.
+    let quand: Date
+
+    /// Une semaine, la même valeur que le salon garde de son côté — voir
+    /// `GRACE_MS` dans `serveur/src/index.js`. Les deux doivent s'accorder :
+    /// proposer de reprendre une partie dont le code est mort ne mène qu'à un
+    /// écran de refus, et laisser mourir un rendez-vous que le serveur tient
+    /// encore serait perdre une partie pour rien.
+    static let dureeDeVie: TimeInterval = 7 * 24 * 60 * 60
+
+    var perime: Bool { Date().timeIntervalSince(quand) > RendezVous.dureeDeVie }
+
+    /// Ce qu'on attend : les autres appareils, et rien d'autre. Un curieux
+    /// qui aurait tapé le code au hasard ne compte pas dans le rendez-vous.
+    var attendus: Set<String> { Set(rangs.keys) }
+}
+
 /// Où dort la partie en cours.
 ///
 /// Un fichier, et non les réglages du système : une partie est un document.
@@ -184,7 +238,41 @@ struct GameStore {
         url.deletingLastPathComponent().appendingPathComponent("partie-en-cours-id.txt")
     }
 
+    /// Le rendez-vous, quand la partie en cours est une partie au loin. Il vit
+    /// à côté de l'état, comme l'identité : la partie ne sait pas par quel fil
+    /// elle est arrivée.
+    private var rendezVousURL: URL {
+        url.deletingLastPathComponent().appendingPathComponent("rendez-vous.json")
+    }
+
     var hasSavedGame: Bool { FileManager.default.fileExists(atPath: url.path) }
+
+    func saveRendezVous(_ rendezVous: RendezVous) {
+        guard let data = try? JSONEncoder().encode(rendezVous) else { return }
+        try? data.write(to: rendezVousURL, options: .atomic)
+    }
+
+    /// Le rendez-vous en cours, s'il en reste un.
+    ///
+    /// Passé le délai, il s'oublie — et la partie avec lui. C'est un ménage et
+    /// non une perte : une partie au loin sans son fil ne se joue pas, et la
+    /// rendre telle quelle ouvrirait les deux camps sur un seul téléphone.
+    /// La bibliothèque, elle, la garde.
+    func loadRendezVous() -> RendezVous? {
+        guard let data = try? Data(contentsOf: rendezVousURL),
+              let rendezVous = try? JSONDecoder().decode(RendezVous.self, from: data)
+        else { return nil }
+        guard !rendezVous.perime else {
+            discardRendezVous()
+            discard()
+            return nil
+        }
+        return rendezVous
+    }
+
+    func discardRendezVous() {
+        try? FileManager.default.removeItem(at: rendezVousURL)
+    }
 
     func saveID(_ id: UUID) {
         try? id.uuidString.write(to: idURL, atomically: true, encoding: .utf8)
@@ -220,6 +308,7 @@ struct GameStore {
 
     func discard() {
         try? FileManager.default.removeItem(at: url)
+        try? FileManager.default.removeItem(at: rendezVousURL)
     }
 }
 

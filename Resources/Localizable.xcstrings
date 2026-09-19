@@ -1845,6 +1845,16 @@
         }
       }
     },
+    "Ce code n'est plus le vôtre": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "That code is no longer yours"
+          }
+        }
+      }
+    },
     "Ce code ne mène à rien": {
       "localizations": {
         "en": {
@@ -1905,6 +1915,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ce que chacun cherchait"
+          }
+        }
+      }
+    },
+    "Celui qui a ouvert la partie doit venir le premier : c'est son appareil qui la tient. Réessayez quand il sera là.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Whoever opened the game has to come back first: their device is the one holding it. Try again once they are there."
           }
         }
       }
@@ -2885,6 +2905,16 @@
         }
       }
     },
+    "En attente de celui qui a ouvert la partie…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Waiting for whoever opened the game…"
+          }
+        }
+      }
+    },
     "En attente du lancement…": {
       "localizations": {
         "en": {
@@ -3465,6 +3495,16 @@
         }
       }
     },
+    "Il faut être là tous les deux en même temps : une question se répond sablier en main. Le code, lui, reste bon une semaine.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You both have to be there at the same time: a question is answered against the clock. The code itself stays good for a week."
+          }
+        }
+      }
+    },
     "Il lui reste %lld territoire": {
       "localizations": {
         "en": {
@@ -3865,6 +3905,16 @@
         }
       }
     },
+    "LE MÊME CODE QUE L'AUTRE SOIR": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "THE SAME CODE AS LAST TIME"
+          }
+        }
+      }
+    },
     "La conquête de %@": {
       "localizations": {
         "en": {
@@ -3877,6 +3927,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "La conquête de %@"
+          }
+        }
+      }
+    },
+    "La liaison est bonne : c'est la partie qui n'arrive pas. Celui qui l'a ouverte doit être là lui aussi, et toucher « Reprendre la partie ».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The link is good: it is the game that is not arriving. Whoever opened it has to be there too, and tap “Resume the game”."
           }
         }
       }
@@ -4005,6 +4065,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "La partie est rangée : vous la retrouverez à l'accueil."
+          }
+        }
+      }
+    },
+    "La partie n'est pas encore rouverte": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The game is not open again yet"
           }
         }
       }
@@ -4249,6 +4319,16 @@
         }
       }
     },
+    "Le rappeler": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Send it again"
+          }
+        }
+      }
+    },
     "Le score est le sien : vert, il y répond bien ; rouge, il y trébuche. Attention — un thème où il trébuche ne vous sert que si vous, vous tenez debout.": {
       "localizations": {
         "en": {
@@ -4293,6 +4373,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Le serveur a refusé"
+          }
+        }
+      }
+    },
+    "Le serveur des parties n'a pas encore été mis à jour : il ne sait pas rendre à celui qui a ouvert la partie le code qu'il avait. C'est une chose à faire une fois, du côté du serveur, et non sur cet appareil.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The game server has not been updated yet: it cannot hand back to whoever opened the game the code they had. That is something to do once, on the server, not on this device."
           }
         }
       }
@@ -4905,6 +4995,16 @@
         }
       }
     },
+    "Notre partie de Riskelo nous attend : le code est %@.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Our game of Riskelo is waiting for us — the code is %@."
+          }
+        }
+      }
+    },
     "Nouvelle partie": {
       "localizations": {
         "en": {
@@ -5077,6 +5177,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "On prépare le salon…"
+          }
+        }
+      }
+    },
+    "On reprend la partie ?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shall we pick our game back up?"
           }
         }
       }
@@ -5701,6 +5811,26 @@
           "stringUnit": {
             "state": "translated",
             "value": "Renforts"
+          }
+        }
+      }
+    },
+    "Reprendre la partie": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resume the game"
+          }
+        }
+      }
+    },
+    "Reprendre la partie au loin": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resume the game far away"
           }
         }
       }
@@ -6665,6 +6795,16 @@
         }
       }
     },
+    "Tour %lld — la partie vous attend": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turn %lld — the game is waiting for you"
+          }
+        }
+      }
+    },
     "Tour %lld — à %@ de jouer.": {
       "localizations": {
         "en": {
@@ -6725,6 +6865,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tout le monde est là."
+          }
+        }
+      }
+    },
+    "Tout le monde est revenu.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Everyone is back."
           }
         }
       }
@@ -7258,6 +7408,16 @@
         }
       }
     },
+    "Votre partie a attendu plus d'une semaine, et le code est reparti à quelqu'un d'autre. La partie, elle, est dans la bibliothèque : on peut la rouvrir, mais il faudra un nouveau code.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your game waited more than a week, and the code has gone to someone else. The game itself is in the library: you can open it again, but it will need a new code."
+          }
+        }
+      }
+    },
     "Votre réponse est prise. %@ répond maintenant à la même question : le plus sûr l'emporte, et si vous savez tous les deux, le plus rapide.": {
       "localizations": {
         "en": {
@@ -7398,6 +7558,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vous vous êtes trompé : %@ perd %@."
+          }
+        }
+      }
+    },
+    "Vous y êtes": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You are in"
           }
         }
       }

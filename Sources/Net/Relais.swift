@@ -167,6 +167,17 @@ final class Relais: Fil {
     private var rappel: Task<Void, Never>?
     /// Combien de fois on a rappelé d'affilée, pour espacer les essais.
     private var essais = 0
+    /// Quand la liaison a été établie pour la dernière fois.
+    ///
+    /// Sert à distinguer une liaison qui **tient** d'une qui s'ouvre et retombe
+    /// aussitôt. Sans cette distinction, la seconde remettait les compteurs à
+    /// zéro à chaque tentative : jamais de délai qui s'allonge, jamais de délai
+    /// de grâce atteint, et donc un rappel par seconde sans fin.
+    private var ouverteLe: Date?
+
+    /// En deçà, une liaison n'a pas tenu : elle a juste eu le temps de dire
+    /// bonjour avant de retomber.
+    private static let tenueMinimale: TimeInterval = 10
 
     /// Au-delà, on renonce.
     ///
@@ -256,6 +267,7 @@ final class Relais: Fil {
         socket = nil
         relies = []
         rompueDepuis = nil
+        ouverteLe = nil
         essais = 0
         if case .aLArret = etat {} else { etat = .aLArret }
     }
@@ -328,6 +340,19 @@ final class Relais: Fil {
                     }
                     self.ecouter(tache)
                 case let .failure(erreur):
+                    // Le serveur nous a mis dehors proprement — c'est ce qu'il
+                    // fait quand une autre liaison du **même appareil** arrive :
+                    // il ferme l'ancienne, qui est nous. Rappeler reviendrait à
+                    // se battre avec soi-même, chacun fermant l'autre, et c'est
+                    // exactement la boucle sans fin qu'on a vue dans les
+                    // journaux — une liaison neuve par seconde, pour toujours.
+                    if tache.closeCode == .normalClosure {
+                        print("Riskelo — salon : liaison reprise ailleurs, on s'efface")
+                        self.raccroche = true
+                        self.rappel?.cancel(); self.rappel = nil
+                        self.socket = nil
+                        return
+                    }
                     print("Riskelo — salon : liaison interrompue (\(erreur))")
                     self.tombe()
                 }
@@ -343,9 +368,16 @@ final class Relais: Fil {
     /// suite, et la reprise part aussitôt.
     private func battre(_ tache: URLSessionWebSocketTask) {
         Task { @MainActor [weak self] in
-            while let self, self.socket === tache, !self.raccroche {
+            // `while let self` tenait le relais **fortement** tant que la boucle
+            // tournait — c'est-à-dire pour toujours, puisque la boucle ne
+            // s'arrête que si le relais a changé de socket. Un salon quitté ne
+            // mourait donc jamais : il restait branché, sous l'identifiant de
+            // l'appareil, et la partie suivante se faisait évincer par son
+            // propre fantôme. Le `self` se reprend ici à chaque tour, et se
+            // relâche entre deux battements.
+            while true {
                 try? await Task.sleep(for: .seconds(20))
-                guard self.socket === tache else { return }
+                guard let self, self.socket === tache, !self.raccroche else { return }
                 tache.sendPing { erreur in
                     guard let erreur else { return }
                     print("Riskelo — salon : battement sans écho (\(erreur))")
@@ -397,8 +429,18 @@ final class Relais: Fil {
                 codeVise = donne
             }
             let revenu = rompueDepuis != nil
-            rompueDepuis = nil
-            essais = 0
+            // Les compteurs ne se remettent à zéro que si la liaison
+            // précédente avait tenu. Une qui s'ouvre et retombe dans la
+            // seconde doit continuer d'espacer ses essais, et finir par
+            // renoncer en le disant — plutôt que de rappeler pour toujours.
+            let avaitTenu = ouverteLe.map {
+                Date().timeIntervalSince($0) >= Relais.tenueMinimale
+            } ?? true
+            ouverteLe = Date()
+            if avaitTenu {
+                rompueDepuis = nil
+                essais = 0
+            }
             if let gens = dit["gens"] as? [[String: Any]] {
                 for gars in gens { noter(gars, arrive: true) }
             }

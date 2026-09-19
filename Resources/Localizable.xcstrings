@@ -1765,6 +1765,16 @@
         }
       }
     },
+    "C'est vous qui l'avez ouverte : vous rouvrez le salon.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You are the one who opened it: you reopen the room."
+          }
+        }
+      }
+    },
     "CODE": {
       "localizations": {
         "en": {
@@ -1925,6 +1935,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Whoever opened the game has to come back first: their device is the one holding it. Try again once they are there."
+          }
+        }
+      }
+    },
+    "Celui qui l'a ouverte doit être là aussi.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Whoever opened it has to be there too."
           }
         }
       }
@@ -5815,6 +5835,16 @@
         }
       }
     },
+    "Reprendre cette partie": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pick this game back up"
+          }
+        }
+      }
+    },
     "Reprendre la partie": {
       "localizations": {
         "en": {
@@ -7228,6 +7258,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "VOTRE CODE"
+          }
+        }
+      }
+    },
+    "VOTRE PARTIE EN COURS": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "YOUR GAME IN PROGRESS"
           }
         }
       }

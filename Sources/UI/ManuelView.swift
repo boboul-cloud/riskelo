@@ -898,9 +898,10 @@ enum Manuel {
                + "cours » apparaît alors sur l'écran d'accueil. Un duel en attente "
                + "repasse par « je suis prêt » — le sablier ne court pas pendant que "
                + "vous rallumez l'appareil."),
-            .p("Une partie jouée au loin se garde elle aussi, et le même bouton la "
-               + "rend — mais il mène au salon et non au plateau, puisqu'il faut que "
-               + "l'autre vienne aussi. Voir « Jouer à plusieurs »."),
+            .p("Une partie jouée au loin se garde de son côté, dans son propre tiroir : "
+               + "ouvrir une partie ici ne la remplace pas, et elle ne remplace pas "
+               + "celle-ci. Elle ne se reprend pas par ce bouton mais depuis « Jouer à "
+               + "plusieurs », puisqu'il faut que l'autre vienne aussi."),
             .note("Une partie jouée dans la même pièce, ou par Game Center, ne se garde "
                   + "pas ainsi : ni l'une ni l'autre n'a de quoi se retrouver. La "
                   + "rendre sans son fil mettrait les deux camps sur un seul appareil, "
@@ -979,13 +980,14 @@ enum Manuel {
 
             .h("Reprendre une autre fois"),
             .p("Une partie au loin ne doit pas tenir dans une soirée. On s'arrête où "
-               + "l'on veut, et le bouton vert de l'accueil — « Reprendre la partie au "
-               + "loin » — la rend telle qu'on l'a laissée."),
+               + "l'on veut, et on la retrouve là où on l'avait ouverte : « Jouer à "
+               + "plusieurs », puis « Au loin, avec un code ». Elle attend en haut de "
+               + "cette page, avec son code, sous « Votre partie en cours »."),
             .puces([
                 "Celui qui a ouvert la partie revient le premier : c'est son appareil "
                 + "qui la tient, et lui seul retrouve le code.",
-                "L'autre touche le même bouton, ou retape les six lettres. Le code n'a "
-                + "pas changé.",
+                "L'autre touche « Reprendre cette partie » de son côté, ou retape les "
+                + "six lettres. Le code n'a pas changé.",
                 "Quand tout le monde est revenu, « Reprendre la partie » repart au tour "
                 + "où l'on en était.",
             ]),

@@ -92,7 +92,10 @@ final class FilFactice: Fil {
     }
 
     func fermerLaTable() {}
-    func arreter() {}
+    /// A-t-on raccroché ? C'est ce qui manquait dans le vrai jeu : quitter une
+    /// partie laissait le fil branché.
+    private(set) var raccroche = false
+    func arreter() { raccroche = true }
 
     private func noter(_ data: Data) {
         if case let .message(m) = Message.lire(data) { envoyes.append(m) }
@@ -364,6 +367,23 @@ struct LoinTests {
 
         hote.retablir()
         #expect(session.aMoiDeJouer)
+    }
+
+    /// Quitter une partie rend son fil.
+    ///
+    /// Rien ne le faisait, et le fil du loin se tenait lui-même en vie : le
+    /// salon quitté restait branché sous l'identifiant de l'appareil. À la
+    /// reprise, le serveur voyait deux liaisons du même appareil, fermait la
+    /// plus ancienne, qui rappelait aussitôt — laquelle faisait fermer la
+    /// neuve, et ainsi de suite. L'appareil se faisait la guerre à lui-même.
+    @Test func quitterUnePartieRendLeFil() {
+        let (hote, invite) = FilFactice.paire()
+        let session = GameSession(fil: hote, heberge: true, game: partieNeuve(),
+                                  monRang: 0, rangs: [invite.moi: 1], compteur: 0)
+        #expect(!hote.raccroche)
+
+        session.raccrocher()
+        #expect(hote.raccroche, "un salon quitté doit être débranché")
     }
 
     // MARK: - Se retrouver une autre fois

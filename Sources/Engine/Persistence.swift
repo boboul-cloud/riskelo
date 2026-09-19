@@ -211,81 +211,118 @@ struct RendezVous: Codable {
     var attendus: Set<String> { Set(rangs.keys) }
 }
 
-/// Où dort la partie en cours.
+/// Où dorment les parties en cours.
 ///
 /// Un fichier, et non les réglages du système : une partie est un document.
 /// L'écriture est atomique — une coupure de courant en plein enregistrement
 /// laisserait sinon un fichier à moitié écrit, c'est-à-dire une partie perdue
 /// en croyant la sauver.
+///
+/// **Deux tiroirs, et non un seul.** Une partie jouée ici et une partie au
+/// loin ne se remplacent pas : elles n'attendent pas la même chose. La
+/// première attend qu'on rouvre l'application, et cela peut être dans dix
+/// minutes ; la seconde attend qu'on se retrouve à deux, et cela peut être
+/// samedi. Elles partageaient le même tiroir, et chacune chassait l'autre —
+/// on ouvrait une partie contre la machine en attendant, et la partie au loin
+/// disparaissait avec son rendez-vous.
 struct GameStore {
 
     static let shared = GameStore()
 
-    private let url: URL = {
-        let base = (try? FileManager.default.url(for: .applicationSupportDirectory,
-                                                 in: .userDomainMask,
-                                                 appropriateFor: nil, create: true))
-            ?? URL(fileURLWithPath: NSTemporaryDirectory())
-        let dossier = base.appendingPathComponent("Riskelo", isDirectory: true)
-        try? FileManager.default.createDirectory(at: dossier, withIntermediateDirectories: true)
-        return dossier.appendingPathComponent("partie-en-cours.json")
-    }()
-
-    /// L'identité de la partie en cours dans la bibliothèque. Elle vit à
-    /// côté de l'état, et non dedans : la changer n'invalide pas les
-    /// sauvegardes déjà écrites.
-    private var idURL: URL {
-        url.deletingLastPathComponent().appendingPathComponent("partie-en-cours-id.txt")
+    /// Lequel des deux.
+    enum Tiroir: String, CaseIterable {
+        /// Ce qui se joue sur cet appareil : seul contre la machine, ou à
+        /// plusieurs autour du même téléphone.
+        case ici = "partie-en-cours"
+        /// Ce qui se joue à deux cents kilomètres, et qui attend le prochain
+        /// rendez-vous.
+        case auLoin = "partie-au-loin"
     }
 
-    /// Le rendez-vous, quand la partie en cours est une partie au loin. Il vit
-    /// à côté de l'état, comme l'identité : la partie ne sait pas par quel fil
-    /// elle est arrivée.
+    private let dossier: URL
+
+    /// `dossier` n'est donné que par les essais.
+    ///
+    /// Sans cette porte, le rangement ne s'éprouvait pas : `GameStore.shared`
+    /// écrit dans le vrai dossier de l'application, et un essai qui y toucherait
+    /// coûterait à celui qui le lance la partie qu'il avait en cours. On s'en
+    /// remettait donc à la lecture — et deux tiroirs qui ne doivent pas se
+    /// chasser l'un l'autre sont précisément ce qui se lit mal.
+    init(dossier: URL? = nil) {
+        if let dossier {
+            self.dossier = dossier
+        } else {
+            let base = (try? FileManager.default.url(for: .applicationSupportDirectory,
+                                                     in: .userDomainMask,
+                                                     appropriateFor: nil, create: true))
+                ?? URL(fileURLWithPath: NSTemporaryDirectory())
+            self.dossier = base.appendingPathComponent("Riskelo", isDirectory: true)
+        }
+        try? FileManager.default.createDirectory(at: self.dossier,
+                                                 withIntermediateDirectories: true)
+    }
+
+    private func url(_ tiroir: Tiroir) -> URL {
+        dossier.appendingPathComponent("\(tiroir.rawValue).json")
+    }
+
+    /// L'identité de la partie dans la bibliothèque. Elle vit à côté de
+    /// l'état, et non dedans : la changer n'invalide pas les sauvegardes déjà
+    /// écrites.
+    private func idURL(_ tiroir: Tiroir) -> URL {
+        dossier.appendingPathComponent("\(tiroir.rawValue)-id.txt")
+    }
+
+    /// Le rendez-vous du tiroir du loin. Il vit à côté de l'état, comme
+    /// l'identité : une partie ne sait pas par quel fil elle est arrivée.
     private var rendezVousURL: URL {
-        url.deletingLastPathComponent().appendingPathComponent("rendez-vous.json")
+        dossier.appendingPathComponent("rendez-vous.json")
     }
 
-    var hasSavedGame: Bool { FileManager.default.fileExists(atPath: url.path) }
+    func has(_ tiroir: Tiroir) -> Bool {
+        FileManager.default.fileExists(atPath: url(tiroir).path)
+    }
+
+    // MARK: - Le rendez-vous
 
     func saveRendezVous(_ rendezVous: RendezVous) {
         guard let data = try? JSONEncoder().encode(rendezVous) else { return }
         try? data.write(to: rendezVousURL, options: .atomic)
     }
 
-    /// Le rendez-vous en cours, s'il en reste un.
+    /// Le rendez-vous en attente, s'il en reste un.
     ///
-    /// Passé le délai, il s'oublie — et la partie avec lui. C'est un ménage et
-    /// non une perte : une partie au loin sans son fil ne se joue pas, et la
-    /// rendre telle quelle ouvrirait les deux camps sur un seul téléphone.
-    /// La bibliothèque, elle, la garde.
+    /// Passé le délai, il s'oublie — et la partie au loin avec lui. C'est un
+    /// ménage et non une perte : une partie au loin sans son fil ne se joue
+    /// pas, et la rendre telle quelle ouvrirait les deux camps sur un seul
+    /// téléphone. La bibliothèque, elle, la garde. Le tiroir d'ici n'est pas
+    /// touché : ce qui s'y trouve ne regarde pas le loin.
     func loadRendezVous() -> RendezVous? {
+        ranger()
         guard let data = try? Data(contentsOf: rendezVousURL),
               let rendezVous = try? JSONDecoder().decode(RendezVous.self, from: data)
         else { return nil }
         guard !rendezVous.perime else {
-            discardRendezVous()
-            discard()
+            discard(.auLoin)
             return nil
         }
         return rendezVous
     }
 
-    func discardRendezVous() {
-        try? FileManager.default.removeItem(at: rendezVousURL)
+    // MARK: - La partie
+
+    func saveID(_ id: UUID, dans tiroir: Tiroir) {
+        try? id.uuidString.write(to: idURL(tiroir), atomically: true, encoding: .utf8)
     }
 
-    func saveID(_ id: UUID) {
-        try? id.uuidString.write(to: idURL, atomically: true, encoding: .utf8)
+    func loadID(_ tiroir: Tiroir) -> UUID? {
+        (try? String(contentsOf: idURL(tiroir), encoding: .utf8)).flatMap(UUID.init)
     }
 
-    func loadID() -> UUID? {
-        (try? String(contentsOf: idURL, encoding: .utf8)).flatMap(UUID.init)
-    }
-
-    func save(_ game: GameState) {
+    func save(_ game: GameState, dans tiroir: Tiroir) {
         do {
             let data = try JSONEncoder().encode(game)
-            try data.write(to: url, options: .atomic)
+            try data.write(to: url(tiroir), options: .atomic)
         } catch {
             // Une sauvegarde ratée ne doit pas interrompre une partie : on la
             // retentera au coup suivant, il y en a un toutes les secondes.
@@ -293,22 +330,47 @@ struct GameStore {
         }
     }
 
-    func load() -> GameState? {
-        guard let data = try? Data(contentsOf: url) else { return nil }
+    func load(_ tiroir: Tiroir) -> GameState? {
+        ranger()
+        guard let data = try? Data(contentsOf: url(tiroir)) else { return nil }
         do {
             return try JSONDecoder().decode(GameState.self, from: data)
         } catch {
             // Sauvegarde d'un autre plateau, ou d'une version qui ne se lit
             // plus : on l'écarte plutôt que de reprendre une partie fausse.
             print("Riskelo — sauvegarde écartée : \(error.localizedDescription)")
-            discard()
+            discard(tiroir)
             return nil
         }
     }
 
-    func discard() {
-        try? FileManager.default.removeItem(at: url)
-        try? FileManager.default.removeItem(at: rendezVousURL)
+    /// Vider un tiroir. Celui du loin emporte son rendez-vous : l'un sans
+    /// l'autre ne mène nulle part.
+    func discard(_ tiroir: Tiroir) {
+        try? FileManager.default.removeItem(at: url(tiroir))
+        try? FileManager.default.removeItem(at: idURL(tiroir))
+        if tiroir == .auLoin {
+            try? FileManager.default.removeItem(at: rendezVousURL)
+        }
+    }
+
+    // MARK: - Ce qui reste d'avant
+
+    /// Les deux tiroirs n'en faisaient qu'un, et une partie au loin dormait
+    /// donc dans celui d'ici, son rendez-vous posé à côté. On la déménage au
+    /// premier regard, plutôt que de la perdre ou de la rendre sans son fil.
+    ///
+    /// Silencieux et sans risque : s'il n'y a rien à déménager, il n'y a rien
+    /// à faire, et ce cas-là est le seul qui se présentera passé la première
+    /// fois.
+    private func ranger() {
+        let fichiers = FileManager.default
+        guard fichiers.fileExists(atPath: rendezVousURL.path),
+              fichiers.fileExists(atPath: url(.ici).path),
+              !fichiers.fileExists(atPath: url(.auLoin).path)
+        else { return }
+        try? fichiers.moveItem(at: url(.ici), to: url(.auLoin))
+        try? fichiers.moveItem(at: idURL(.ici), to: idURL(.auLoin))
     }
 }
 

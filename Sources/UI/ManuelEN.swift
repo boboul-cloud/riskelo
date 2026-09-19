@@ -558,10 +558,10 @@ enum ManuelEN {
                + "nothing to do. The \"Resume game in progress\" button then appears on "
                + "the home screen. A duel left waiting goes back through \"I'm ready\" "
                + "— the clock does not run while you turn your device back on."),
-            .p("A game played far away is saved too, and the same button brings it "
-               + "back — but it takes you to the room rather than to the board, because "
-               + "the other player has to come as well. See \"Playing across "
-               + "devices\"."),
+            .p("A game played far away is saved in a drawer of its own: opening a game "
+               + "here does not replace it, and it does not replace this one. It is not "
+               + "picked back up with this button but from \"Play across devices\", "
+               + "since the other player has to come as well."),
             .note("A game played in the same room, or through Game Center, is not kept "
                   + "that way: neither has anything to find its way back with. Handing "
                   + "it back without its link would put both sides on a single device, "
@@ -637,13 +637,15 @@ enum ManuelEN {
 
             .h("Picking it up another evening"),
             .p("A game played far away does not have to fit into one evening. Stop "
-               + "wherever you like: the green button on the home screen — \"Resume the "
-               + "game far away\" — hands it back exactly as you left it."),
+               + "wherever you like: you find it again where you opened it — \"Play "
+               + "across devices\", then \"Far away, with a code\". It is waiting at "
+               + "the top of that page, with its code, under \"Your game in "
+               + "progress\"."),
             .puces([
                 "Whoever opened the game comes back first: their device is the one "
                 + "holding it, and they are the only one who can reopen the code.",
-                "The other taps the same button, or types the six letters again. The "
-                + "code has not changed.",
+                "The other taps \"Pick this game back up\" on their side, or types the "
+                + "six letters again. The code has not changed.",
                 "Once everyone is back, \"Resume the game\" starts again on the turn "
                 + "you had reached.",
             ]),

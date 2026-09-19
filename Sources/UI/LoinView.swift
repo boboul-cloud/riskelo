@@ -31,14 +31,24 @@ struct LoinView: View {
     let regles: Rules
     /// Un code arrivé par un lien : on n'a alors rien à choisir ni à taper.
     var codeRecu: String?
-    /// Une partie commencée une autre fois, qu'on vient reprendre : le
-    /// rendez-vous gardé sur cet appareil, et la partie qui dormait à côté.
-    /// Il n'y a alors ni code à taper, ni réglages à choisir, ni camps à
-    /// distribuer — tout cela a été décidé l'autre soir.
-    var reprise: (rendezVous: RendezVous, partie: GameState)?
     var onReady: (GameSession) -> Void
     var onCancel: () -> Void
     var onReglages: () -> Void = { }
+
+    /// La partie au loin qu'on vient reprendre, une fois son bouton touché :
+    /// le rendez-vous gardé sur cet appareil, et la partie qui dormait à côté.
+    /// Il n'y a alors ni code à taper, ni réglages à choisir, ni camps à
+    /// distribuer — tout cela a été décidé l'autre soir.
+    ///
+    /// C'est ici que la reprise vit, et non sur l'accueil. Le bouton vert de
+    /// l'accueil rendait les deux parties — celle d'ici et celle du loin — sans
+    /// dire laquelle, alors que l'une ouvre le plateau et que l'autre ouvre un
+    /// salon où il faut attendre quelqu'un. Reprendre une partie au loin est
+    /// une façon de jouer au loin : c'est sur cette page-ci qu'on vient la
+    /// chercher.
+    @State private var reprise: (rendezVous: RendezVous, partie: GameState)?
+    /// Le rendez-vous gardé sur cet appareil, relu à l'ouverture de l'écran.
+    @State private var rendezVousGarde: RendezVous?
 
     @State private var relais = Relais()
     @State private var noms: [Pair: String] = [:]
@@ -78,6 +88,11 @@ struct LoinView: View {
         #endif
         .onAppear {
             guard case .aLArret = relais.etat else { return }
+            // Une partie au loin laissée en plan ? On le dit avant tout le
+            // reste : c'est ce qu'on vient chercher ici neuf fois sur dix.
+            if rendezVousGarde == nil, GameStore.shared.has(.auLoin) {
+                rendezVousGarde = GameStore.shared.loadRendezVous()
+            }
             // On revient sur une partie commencée : celui qui l'héberge
             // rouvre son salon sous l'ancien code — ceux qui reviennent n'ont
             // que celui-là — et les autres y rentrent comme au premier soir.
@@ -142,6 +157,14 @@ struct LoinView: View {
     // MARK: - Ouvrir, ou rejoindre
 
     @ViewBuilder private var ouvrirOuRejoindre: some View {
+        // Avant tout le reste : la partie qu'on a laissée en plan. En ouvrir
+        // une neuve par-dessus serait le geste le plus coûteux de l'écran, et
+        // c'était le premier proposé.
+        if let rendezVous = rendezVousGarde {
+            laPartieQuiAttend(rendezVous)
+            Divider().overlay(Palette.dim.opacity(0.3)).padding(.vertical, 2)
+        }
+
         Text("""
              Chacun chez soi, sur son propre réseau. Un code à six lettres \
              suffit — ni compte, ni inscription.
@@ -277,6 +300,36 @@ struct LoinView: View {
         if manquants == 0 {
             bouton("Commencer", "flag.fill", Palette.held) { lancer() }
         }
+    }
+
+    /// Ce qui attend, et ce qu'il faut pour y retourner.
+    @ViewBuilder private func laPartieQuiAttend(_ rendezVous: RendezVous) -> some View {
+        VStack(spacing: 10) {
+            Text("VOTRE PARTIE EN COURS").font(.caption.weight(.semibold))
+                .foregroundStyle(Palette.dim).kerning(0.6)
+            Text(rendezVous.code)
+                .font(.system(size: 26, weight: .bold, design: .monospaced))
+                .kerning(6)
+                .foregroundStyle(Palette.campVif(0))
+                .accessibilityLabel(Text(rendezVous.code.map(String.init).joined(separator: " ")))
+            Text(rendezVous.jHeberge
+                 ? "C'est vous qui l'avez ouverte : vous rouvrez le salon."
+                 : "Celui qui l'a ouverte doit être là aussi.")
+                .font(.caption).foregroundStyle(Palette.dim)
+                .multilineTextAlignment(.center)
+
+            bouton("Reprendre cette partie", "play.fill", Palette.held) {
+                guard let partie = GameStore.shared.load(.auLoin) else {
+                    // La partie a disparu sous son rendez-vous : mieux vaut
+                    // retirer la proposition que de tendre un bouton mort.
+                    rendezVousGarde = nil
+                    return
+                }
+                reprise = (rendezVous, partie)
+                entrerAuRendezVous()
+            }
+        }
+        .padding(.vertical, 4)
     }
 
     // MARK: - La table qu'on retrouve

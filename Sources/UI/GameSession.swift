@@ -545,38 +545,56 @@ final class GameSession {
     func saveNow() {
         saveWork?.cancel()
         retenirLesQuestions()
+        // Chaque partie va dans son tiroir, et n'y chasse que la sienne.
+        //
         // Une partie à plusieurs ne se range que si son fil sait se retrouver.
-        //
-        // Elle se rangeait toujours, et le bouton vert de l'accueil la rendait
-        // ensuite **sans son fil** : les deux camps redevenaient jouables sur
-        // un même téléphone, des deux côtés à la fois, chacun jouant
-        // l'adversaire de l'autre sans le savoir. Elle écrasait au passage la
-        // partie solo qu'on avait laissée en plan.
-        //
-        // Le loin sait se retrouver : six lettres, et le salon garde la place
-        // une semaine. Elle part donc au tiroir avec son rendez-vous à côté —
-        // c'est ce qui permet de la reprendre le lendemain. La même pièce et
-        // Game Center ne savent pas encore, et l'on ne range rien plutôt que
-        // de ranger ce qui ne se rouvre pas. On ne touche alors même pas au
-        // tiroir : ce qui s'y trouve appartient à quelqu'un d'autre.
+        // Le loin sait : six lettres, et le salon garde la place une semaine.
+        // Elle part donc au tiroir du loin, avec son rendez-vous à côté — sans
+        // toucher à la partie qu'on jouait ici, qui attend de son côté. La même
+        // pièce et Game Center ne savent pas encore se retrouver, et l'on ne
+        // range rien plutôt que de ranger ce qui ne se rouvre pas : rendue sans
+        // son fil, une partie à plusieurs mettrait les deux camps sur un seul
+        // téléphone, chacun jouant l'adversaire de l'autre.
         guard let fil else {
-            if game.isOver { GameStore.shared.discard() } else { GameStore.shared.save(game) }
+            if game.isOver { GameStore.shared.discard(.ici) }
+            else { GameStore.shared.save(game, dans: .ici) }
             return
         }
         guard let code = fil.codeDeReprise else { return }
         guard !game.isOver else {
-            // Finie, elle n'a plus de rendez-vous : `discard` emporte les deux.
-            GameStore.shared.discard()
+            // Finie, elle n'a plus de rendez-vous : le tiroir emporte les deux.
+            GameStore.shared.discard(.auLoin)
             return
         }
-        GameStore.shared.save(game)
-        GameStore.shared.saveID(partieID)
+        GameStore.shared.save(game, dans: .auLoin)
+        GameStore.shared.saveID(partieID, dans: .auLoin)
         GameStore.shared.saveRendezVous(
             RendezVous(code: code, jHeberge: jHeberge, monRang: monRang,
                        compteur: compteur,
                        rangs: Dictionary(uniqueKeysWithValues:
                                             rangs.map { ($0.key.id, $0.value) }),
                        partieID: partieID, quand: Date()))
+    }
+
+    /// Quitter la partie : on range, et l'on raccroche.
+    ///
+    /// Raccrocher manquait, et c'était la panne. Rien ne débranchait le fil
+    /// quand on revenait à l'accueil : ni ceci, qui n'existait pas, ni un
+    /// `deinit`, puisque le fil du loin se tenait lui-même en vie par sa
+    /// boucle de battement. Le salon quitté restait donc branché, sous
+    /// l'identifiant de l'appareil — et à la reprise, le serveur voyait deux
+    /// liaisons du même appareil, fermait la plus ancienne, qui rappelait, ce
+    /// qui fermait la neuve, sans fin. « Perte du serveur à la reprise » :
+    /// l'appareil se faisait la guerre à lui-même.
+    ///
+    /// Sans danger pour une partie au loin : elle est rangée avec son
+    /// rendez-vous, et le bouton vert la rendra.
+    func raccrocher() {
+        saveNow()
+        pump?.cancel(); pump = nil
+        annonceWork?.cancel()
+        stopCountdown()
+        fil?.arreter()
     }
 
     /// Ce que la partie a posé rejoint la mémoire de l'appareil, pour que la
@@ -628,10 +646,7 @@ final class GameSession {
                                seed: seed)
         partieID = UUID()
         poseesALOuverture = game.bank.alreadyServed
-        // Le tiroir ne tient qu'une partie : celle-ci prend la place, et le
-        // rendez-vous de celle qu'elle remplace n'a plus rien à désigner.
-        GameStore.shared.discardRendezVous()
-        GameStore.shared.saveID(partieID)
+        GameStore.shared.saveID(partieID, dans: .ici)
         saveNow()
         archiver("Ouverture")
         annoncerOuverture()
@@ -699,12 +714,9 @@ final class GameSession {
     /// côté de la sauvegarde.
     init(resuming saved: GameState, partie: UUID? = nil) {
         game = saved
-        partieID = partie ?? GameStore.shared.loadID() ?? UUID()
+        partieID = partie ?? GameStore.shared.loadID(.ici) ?? UUID()
         poseesALOuverture = game.bank.alreadyServed
-        // Reprise sur un seul appareil : s'il restait un rendez-vous, il
-        // désignait une autre partie que celle-ci.
-        GameStore.shared.discardRendezVous()
-        GameStore.shared.saveID(partieID)
+        GameStore.shared.saveID(partieID, dans: .ici)
         if partie != nil { archiver("Repris ici") }
         annoncerOuverture()
         resume()

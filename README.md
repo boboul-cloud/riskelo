@@ -1073,11 +1073,29 @@ Ce n'est pas la partie par correspondance, et le jeu ne le laisse pas croire :
 un duel se joue sablier en main, les deux appareils allumés en même temps. Ce
 qui se reprend est le **rendez-vous**.
 
-C'est aussi ce qui décide si une partie va dans le tiroir de la reprise, et
+C'est aussi ce qui décide si une partie va dans un tiroir, et
 `Fil.codeDeReprise` porte la question. Une partie à plusieurs rangée sans de
 quoi rouvrir son fil se rouvrait **sans lui** : les deux camps redevenaient
 jouables sur un seul téléphone, des deux côtés à la fois, chacun jouant
 l'adversaire de l'autre sans le savoir.
+
+### Deux tiroirs, et deux portes
+
+`GameStore` tient **deux** parties et non une. Elles n'attendent pas la même
+chose : celle d'ici attend qu'on rouvre l'application, celle du loin attend
+qu'on se retrouve à deux. Elles partageaient le même fichier, et chacune
+chassait l'autre — une partie contre la machine un soir de semaine effaçait
+celle qu'on avait commencée avec sa sœur, rendez-vous compris.
+
+Chacune a sa porte, et c'est ce qui les distingue à l'écran. Le bouton vert de
+l'accueil rend la partie **d'ici**, et le plateau paraît aussitôt. Celle du
+loin se reprend depuis « Jouer à plusieurs ▸ Au loin », en tête de page, sous
+son code : elle mène à un salon où il faut attendre quelqu'un, ce qu'un bouton
+vert partagé ne pouvait pas dire.
+
+Une sauvegarde d'avant les deux tiroirs déménage toute seule au premier
+regard — une partie au loin y dormait dans le tiroir d'ici, son rendez-vous
+posé à côté.
 
 Un garde est venu avec : **on ne joue pas dans le vide**. Sans lui, un coup
 joué pendant que la liaison est tombée est appliqué ici et n'arrive nulle part.

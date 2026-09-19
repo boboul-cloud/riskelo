@@ -183,12 +183,12 @@ struct AccueilView: View {
     var onPacks: () -> Void = { }
     /// Proposé seulement s'il y a une partie en attente : un bouton qui ne
     /// mène nulle part vaut mieux absent.
+    /// La partie **d'ici**, et elle seule. Celle qu'on joue au loin se reprend
+    /// depuis « Jouer au loin », où l'on va déjà pour en ouvrir une : le même
+    /// bouton vert pour les deux ne disait pas laquelle il allait rendre, et
+    /// l'une des deux mène au plateau quand l'autre mène à un salon où il faut
+    /// attendre quelqu'un.
     var onResume: (() -> Void)?
-    /// La partie en attente est-elle une partie au loin ? Le bouton ne mène
-    /// alors pas au plateau mais au rendez-vous : il faut que l'autre vienne
-    /// aussi. Le dire sur le bouton évite de le découvrir après l'avoir
-    /// touché.
-    var repriseAuLoin = false
     var onManuel: () -> Void
     /// Proposé seulement s'il y a quelque chose sur les rayons.
     var onArchives: (() -> Void)?
@@ -288,10 +288,7 @@ struct AccueilView: View {
 
             if let onResume {
                 Button(action: onResume) {
-                    Label(repriseAuLoin ? "Reprendre la partie au loin"
-                                        : "Reprendre la partie en cours",
-                          systemImage: repriseAuLoin ? "globe.europe.africa.fill"
-                                                     : "arrow.uturn.backward")
+                    Label("Reprendre la partie en cours", systemImage: "arrow.uturn.backward")
                         .font(.headline)
                         .frame(maxWidth: .infinity).padding(.vertical, 13)
                 }

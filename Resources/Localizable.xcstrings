@@ -5855,16 +5855,6 @@
         }
       }
     },
-    "Reprendre la partie au loin": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Resume the game far away"
-          }
-        }
-      }
-    },
     "Reprendre la partie en cours": {
       "localizations": {
         "en": {

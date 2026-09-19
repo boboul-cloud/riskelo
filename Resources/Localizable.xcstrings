@@ -1093,6 +1093,36 @@
         }
       }
     },
+    "Abandonner": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Give it up"
+          }
+        }
+      }
+    },
+    "Abandonner cette partie": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Give up this game"
+          }
+        }
+      }
+    },
+    "Abandonner cette partie ?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Give up this game?"
+          }
+        }
+      }
+    },
     "Accepter": {
       "localizations": {
         "en": {
@@ -1765,16 +1795,6 @@
         }
       }
     },
-    "C'est vous qui l'avez ouverte : vous rouvrez le salon.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "You are the one who opened it: you reopen the room."
-          }
-        }
-      }
-    },
     "CODE": {
       "localizations": {
         "en": {
@@ -1935,16 +1955,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Whoever opened the game has to come back first: their device is the one holding it. Try again once they are there."
-          }
-        }
-      }
-    },
-    "Celui qui l'a ouverte doit être là aussi.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Whoever opened it has to be there too."
           }
         }
       }
@@ -2889,6 +2899,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Elle concentre, vise un continent, et sait où vous frapper."
+          }
+        }
+      }
+    },
+    "Elle ne sera plus proposée ici, et l'autre appareil vous attendra pour rien. La bibliothèque, elle, garde les instants de cette partie.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "It will no longer be offered here, and the other device will wait for you for nothing. The library still keeps this game's moments."
           }
         }
       }
@@ -4999,6 +5019,16 @@
         }
       }
     },
+    "Non, la garder": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No, keep it"
+          }
+        }
+      }
+    },
     "Norvège": {
       "localizations": {
         "en": {
@@ -5419,6 +5449,16 @@
         }
       }
     },
+    "Partie à plusieurs": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Game across devices"
+          }
+        }
+      }
+    },
     "Parties enregistrées": {
       "localizations": {
         "en": {
@@ -5831,16 +5871,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Renforts"
-          }
-        }
-      }
-    },
-    "Reprendre cette partie": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pick this game back up"
           }
         }
       }
@@ -7236,6 +7266,16 @@
         }
       }
     },
+    "VOS PARTIES AU LOIN": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "YOUR GAMES FAR AWAY"
+          }
+        }
+      }
+    },
     "VOTRE CODE": {
       "localizations": {
         "en": {
@@ -7252,12 +7292,12 @@
         }
       }
     },
-    "VOTRE PARTIE EN COURS": {
+    "VOTRE PARTIE AU LOIN": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "YOUR GAME IN PROGRESS"
+            "value": "YOUR GAME FAR AWAY"
           }
         }
       }
@@ -7842,6 +7882,16 @@
         }
       }
     },
+    "tour %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "turn %lld"
+          }
+        }
+      }
+    },
     "toutes catégories mêlées": {
       "localizations": {
         "en": {
@@ -7918,6 +7968,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "un homme"
+          }
+        }
+      }
+    },
+    "vous l'avez ouverte": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "you opened it"
           }
         }
       }

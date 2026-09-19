@@ -638,9 +638,13 @@ enum ManuelEN {
             .h("Picking it up another evening"),
             .p("A game played far away does not have to fit into one evening. Stop "
                + "wherever you like: you find it again where you opened it — \"Play "
-               + "across devices\", then \"Far away, with a code\". It is waiting at "
-               + "the top of that page, with its code, under \"Your game in "
-               + "progress\"."),
+               + "across devices\", then \"Far away, with a code\". They wait at the "
+               + "top of that page: who you are playing, which turn, and how long "
+               + "ago."),
+            .note("You can have several at once: one with your sister, one with a "
+                  + "friend, each at its own pace. Opening a new one does not erase "
+                  + "the others, and each keeps its own code. The cross gives up a "
+                  + "game you no longer want."),
             .puces([
                 "Whoever opened the game comes back first: their device is the one "
                 + "holding it, and they are the only one who can reopen the code.",

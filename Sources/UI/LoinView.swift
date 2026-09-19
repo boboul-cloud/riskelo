@@ -47,8 +47,11 @@ struct LoinView: View {
     /// une façon de jouer au loin : c'est sur cette page-ci qu'on vient la
     /// chercher.
     @State private var reprise: (rendezVous: RendezVous, partie: GameState)?
-    /// Le rendez-vous gardé sur cet appareil, relu à l'ouverture de l'écran.
-    @State private var rendezVousGarde: RendezVous?
+    /// Les parties au loin qui attendent, relues à l'ouverture de l'écran.
+    /// La dernière jouée en tête.
+    @State private var enCours: [RendezVous] = []
+    /// Celle qu'on s'apprête à abandonner, le temps de le confirmer.
+    @State private var aAbandonner: RendezVous?
 
     @State private var relais = Relais()
     @State private var noms: [Pair: String] = [:]
@@ -90,9 +93,7 @@ struct LoinView: View {
             guard case .aLArret = relais.etat else { return }
             // Une partie au loin laissée en plan ? On le dit avant tout le
             // reste : c'est ce qu'on vient chercher ici neuf fois sur dix.
-            if rendezVousGarde == nil, GameStore.shared.has(.auLoin) {
-                rendezVousGarde = GameStore.shared.loadRendezVous()
-            }
+            enCours = GameStore.shared.partiesAuLoin()
             // On revient sur une partie commencée : celui qui l'héberge
             // rouvre son salon sous l'ancien code — ceux qui reviennent n'ont
             // que celui-là — et les autres y rentrent comme au premier soir.
@@ -160,8 +161,8 @@ struct LoinView: View {
         // Avant tout le reste : la partie qu'on a laissée en plan. En ouvrir
         // une neuve par-dessus serait le geste le plus coûteux de l'écran, et
         // c'était le premier proposé.
-        if let rendezVous = rendezVousGarde {
-            laPartieQuiAttend(rendezVous)
+        if !enCours.isEmpty {
+            lesPartiesQuiAttendent
             Divider().overlay(Palette.dim.opacity(0.3)).padding(.vertical, 2)
         }
 
@@ -302,37 +303,119 @@ struct LoinView: View {
         }
     }
 
-    /// Ce qui attend, et ce qu'il faut pour y retourner.
-    @ViewBuilder private func laPartieQuiAttend(_ rendezVous: RendezVous) -> some View {
+    /// Les parties au loin en cours, et de quoi y retourner.
+    ///
+    /// Elles passent avant « Ouvrir une partie », et ce n'est pas un détail de
+    /// mise en page : ouvrir une partie neuve est le geste le plus coûteux de
+    /// l'écran quand on venait en reprendre une, et c'était le premier proposé.
+    @ViewBuilder private var lesPartiesQuiAttendent: some View {
         VStack(spacing: 10) {
-            Text("VOTRE PARTIE EN COURS").font(.caption.weight(.semibold))
+            Text(enCours.count > 1 ? "VOS PARTIES AU LOIN" : "VOTRE PARTIE AU LOIN")
+                .font(.caption.weight(.semibold))
                 .foregroundStyle(Palette.dim).kerning(0.6)
-            Text(rendezVous.code)
-                .font(.system(size: 26, weight: .bold, design: .monospaced))
-                .kerning(6)
-                .foregroundStyle(Palette.campVif(0))
-                .accessibilityLabel(Text(rendezVous.code.map(String.init).joined(separator: " ")))
-            Text(rendezVous.jHeberge
-                 ? "C'est vous qui l'avez ouverte : vous rouvrez le salon."
-                 : "Celui qui l'a ouverte doit être là aussi.")
-                .font(.caption).foregroundStyle(Palette.dim)
-                .multilineTextAlignment(.center)
 
-            bouton("Reprendre cette partie", "play.fill", Palette.held) {
-                guard let partie = GameStore.shared.load(.auLoin) else {
-                    // La partie a disparu sous son rendez-vous : mieux vaut
-                    // retirer la proposition que de tendre un bouton mort.
-                    rendezVousGarde = nil
-                    return
-                }
-                reprise = (rendezVous, partie)
-                entrerAuRendezVous()
+            ForEach(enCours, id: \.code) { rendezVous in
+                laPartieQuiAttend(rendezVous)
             }
         }
         .padding(.vertical, 4)
+        .alert("Abandonner cette partie ?", isPresented: Binding(
+            get: { aAbandonner != nil },
+            set: { if !$0 { aAbandonner = nil } }
+        )) {
+            Button("Abandonner", role: .destructive) {
+                if let code = aAbandonner?.code {
+                    GameStore.shared.discard(.auLoin(code: code))
+                    enCours = GameStore.shared.partiesAuLoin()
+                }
+                aAbandonner = nil
+            }
+            Button("Non, la garder", role: .cancel) { aAbandonner = nil }
+        } message: {
+            Text("""
+                 Elle ne sera plus proposée ici, et l'autre appareil vous \
+                 attendra pour rien. La bibliothèque, elle, garde les instants \
+                 de cette partie.
+                 """)
+        }
     }
 
-    // MARK: - La table qu'on retrouve
+    /// Une partie qui attend : contre qui, où l'on en est, et son code.
+    ///
+    /// Le nom d'abord, parce que c'est ce qu'on cherche — « celle avec
+    /// Marie » — et le code en dernier : il ne sert qu'à le redonner à
+    /// quelqu'un qui l'a perdu.
+    @ViewBuilder private func laPartieQuiAttend(_ rendezVous: RendezVous) -> some View {
+        HStack(spacing: 12) {
+            Button {
+                reprendre(rendezVous)
+            } label: {
+                VStack(alignment: .leading, spacing: 4) {
+                    HStack {
+                        Text(rendezVous.contre.isEmpty
+                             ? dit("Partie à plusieurs")
+                             : rendezVous.contre.joined(separator: ", "))
+                            .font(.subheadline.weight(.semibold))
+                            .foregroundStyle(Palette.ink)
+                            .lineLimit(1)
+                        Spacer(minLength: 6)
+                        Text("tour \(rendezVous.tour)")
+                            .font(.caption.weight(.medium))
+                            .foregroundStyle(Palette.dim)
+                    }
+                    HStack(spacing: 6) {
+                        Text(rendezVous.code)
+                            .font(.caption.monospaced().weight(.semibold))
+                            .foregroundStyle(Palette.campVif(0))
+                        Text("·").foregroundStyle(Palette.dim.opacity(0.6))
+                        Text(rendezVous.quand, format: .relative(presentation: .named))
+                            .font(.caption)
+                            .foregroundStyle(Palette.dim)
+                        if rendezVous.jHeberge {
+                            Text("·").foregroundStyle(Palette.dim.opacity(0.6))
+                            // Qui rouvre le salon n'est pas un détail : celui
+                            // qui héberge doit venir le premier, et c'est la
+                            // question qu'on se pose devant cette ligne.
+                            Text("vous l'avez ouverte")
+                                .font(.caption).foregroundStyle(Palette.dim)
+                        }
+                    }
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+
+            Button {
+                aAbandonner = rendezVous
+            } label: {
+                Image(systemName: "xmark")
+                    .font(.footnote.weight(.semibold))
+                    .foregroundStyle(Palette.dim)
+                    .padding(8)
+                    .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel(Text("Abandonner cette partie"))
+        }
+        .padding(.horizontal, 12).padding(.vertical, 10)
+        .background(Palette.panel, in: RoundedRectangle(cornerRadius: 12))
+    }
+
+    /// Retourner à une partie : on charge ce qui dormait, et l'on entre au
+    /// rendez-vous.
+    private func reprendre(_ rendezVous: RendezVous) {
+        guard let partie = GameStore.shared.load(.auLoin(code: rendezVous.code)) else {
+            // La partie a disparu sous son rendez-vous : mieux vaut retirer la
+            // ligne que de tendre un bouton mort.
+            enCours = GameStore.shared.partiesAuLoin()
+            return
+        }
+        reprise = (rendezVous, partie)
+        entrerAuRendezVous()
+    }
+
+    // MARK: - La table qu'on retrouve    // MARK: - La table qu'on retrouve
 
     /// Ceux qu'on attend : les appareils de l'autre soir, et eux seuls. Un
     /// curieux qui aurait tapé le code au hasard entre dans le salon sans

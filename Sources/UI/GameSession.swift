@@ -563,17 +563,21 @@ final class GameSession {
         guard let code = fil.codeDeReprise else { return }
         guard !game.isOver else {
             // Finie, elle n'a plus de rendez-vous : le tiroir emporte les deux.
-            GameStore.shared.discard(.auLoin)
+            GameStore.shared.discard(.auLoin(code: code))
             return
         }
-        GameStore.shared.save(game, dans: .auLoin)
-        GameStore.shared.saveID(partieID, dans: .auLoin)
+        GameStore.shared.save(game, dans: .auLoin(code: code))
         GameStore.shared.saveRendezVous(
             RendezVous(code: code, jHeberge: jHeberge, monRang: monRang,
                        compteur: compteur,
                        rangs: Dictionary(uniqueKeysWithValues:
                                             rangs.map { ($0.key.id, $0.value) }),
-                       partieID: partieID, quand: Date()))
+                       partieID: partieID, quand: Date(),
+                       // De quoi se reconnaître dans une liste : contre qui, et
+                       // où l'on en est. Sans cela, trois parties au loin ne se
+                       // distinguent que par six lettres tirées au sort.
+                       contre: game.players.filter { $0.id != monRang }.map(\.name),
+                       tour: game.turn))
     }
 
     /// Quitter la partie : on range, et l'on raccroche.

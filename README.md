@@ -1079,23 +1079,39 @@ quoi rouvrir son fil se rouvrait **sans lui** : les deux camps redevenaient
 jouables sur un seul téléphone, des deux côtés à la fois, chacun jouant
 l'adversaire de l'autre sans le savoir.
 
-### Deux tiroirs, et deux portes
+### Une partie d'ici, et autant de parties au loin qu'on en ouvre
 
-`GameStore` tient **deux** parties et non une. Elles n'attendent pas la même
-chose : celle d'ici attend qu'on rouvre l'application, celle du loin attend
-qu'on se retrouve à deux. Elles partageaient le même fichier, et chacune
-chassait l'autre — une partie contre la machine un soir de semaine effaçait
-celle qu'on avait commencée avec sa sœur, rendez-vous compris.
+`GameStore` tenait une partie. Il en tient maintenant une d'ici, et une par
+salon au loin — le **code** fait la clé : il est unique par partie, c'est déjà
+ce que les joueurs s'échangent, et le serveur le garde une semaine de son côté.
+
+Elles n'attendent pas la même chose, et c'est pour cela qu'elles ne peuvent pas
+partager un fichier. Celle d'ici attend qu'on rouvre l'application. Celles du
+loin attendent chacune leur monde : celle de Marie ne croise jamais celle de
+Paul, elles vont à leur rythme. Tout dans un seul fichier, chacune chassait les
+autres — ouvrir une partie contre la machine un soir de semaine effaçait celle
+qu'on avait commencée avec sa sœur, rendez-vous compris et sans rien dire.
+
+Rien à changer côté serveur : chaque code est déjà un salon indépendant. Et
+l'identifiant de l'appareil ne pose pas de problème non plus — le salon ne
+vérifie les doublons qu'**en son sein**, donc le même téléphone peut tenir
+plusieurs salons. C'est ce qui sépare cette idée-ci de la panne du fantôme,
+qui était deux liaisons vers *le même* salon.
 
 Chacune a sa porte, et c'est ce qui les distingue à l'écran. Le bouton vert de
-l'accueil rend la partie **d'ici**, et le plateau paraît aussitôt. Celle du
-loin se reprend depuis « Jouer à plusieurs ▸ Au loin », en tête de page, sous
-son code : elle mène à un salon où il faut attendre quelqu'un, ce qu'un bouton
-vert partagé ne pouvait pas dire.
+l'accueil rend la partie **d'ici**, et le plateau paraît aussitôt. Celles du
+loin s'alignent en tête de « Jouer à plusieurs ▸ Au loin » — contre qui, quel
+tour, depuis quand — parce qu'elles mènent à un salon où il faut attendre
+quelqu'un, ce qu'un bouton vert partagé ne pouvait pas dire.
 
-Une sauvegarde d'avant les deux tiroirs déménage toute seule au premier
-regard — une partie au loin y dormait dans le tiroir d'ici, son rendez-vous
-posé à côté.
+Ce qui dormait dans les rangements d'avant déménage tout seul au premier
+regard, sous son code : la partie au loin unique avait déjà dormi à deux
+endroits, d'abord dans le tiroir d'ici avec son rendez-vous posé à côté.
+
+Ce n'est toujours pas la partie par correspondance : rien ne prévient que
+c'est votre tour dans l'autre partie. Il faudrait des notifications, donc un
+serveur qui garde des jetons d'appareil — exactement ce que ce jeu ne fait
+pas.
 
 Un garde est venu avec : **on ne joue pas dans le vide**. Sans lui, un coup
 joué pendant que la liaison est tombée est appliqué ici et n'arrive nulle part.

@@ -981,8 +981,12 @@ enum Manuel {
             .h("Reprendre une autre fois"),
             .p("Une partie au loin ne doit pas tenir dans une soirée. On s'arrête où "
                + "l'on veut, et on la retrouve là où on l'avait ouverte : « Jouer à "
-               + "plusieurs », puis « Au loin, avec un code ». Elle attend en haut de "
-               + "cette page, avec son code, sous « Votre partie en cours »."),
+               + "plusieurs », puis « Au loin, avec un code ». Elles attendent en haut "
+               + "de cette page — contre qui, quel tour, et depuis quand."),
+            .note("Vous pouvez en avoir plusieurs à la fois : une avec votre sœur, une "
+                  + "avec un ami, chacune à son rythme. Ouvrir une partie neuve "
+                  + "n'efface pas les autres, et chacune garde son code. La croix "
+                  + "abandonne une partie dont on ne veut plus."),
             .puces([
                 "Celui qui a ouvert la partie revient le premier : c'est son appareil "
                 + "qui la tient, et lui seul retrouve le code.",

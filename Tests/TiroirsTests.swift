@@ -35,10 +35,101 @@ struct TiroirsTests {
                         rules: Rules(), seed: 11)
     }
 
-    private func rendezVous(_ code: String = "MARENO") -> RendezVous {
+    private func rendezVous(_ code: String = "MARENO", quand: Date = Date(),
+                           contre: [String] = ["Rouge · Marie"], tour: Int = 3) -> RendezVous {
         RendezVous(code: code, jHeberge: true, monRang: 0, compteur: 4,
-                   rangs: ["marie": 1], partieID: UUID(), quand: Date())
+                   rangs: ["marie": 1], partieID: UUID(), quand: quand,
+                   contre: contre, tour: tour)
     }
+
+    /// Ranger une partie au loin, avec son rendez-vous, en une fois.
+    private func poser(_ tiroirs: GameStore, _ rendezVous: RendezVous) {
+        tiroirs.save(partie(), dans: .auLoin(code: rendezVous.code))
+        tiroirs.saveRendezVous(rendezVous)
+    }
+
+    // MARK: - Plusieurs parties au loin
+
+    /// Deux amis, deux parties, et elles ne se connaissent pas.
+    ///
+    /// Elles tenaient dans le même fichier : ouvrir une partie avec Paul
+    /// effaçait celle de Marie, rendez-vous compris et sans rien dire.
+    @Test func deuxPartiesAuLoinTiennentEnsemble() throws {
+        dansUnCoin { tiroirs, _ in
+            poser(tiroirs, rendezVous("MARENO", contre: ["Rouge · Marie"]))
+            poser(tiroirs, rendezVous("VABETO", contre: ["Rouge · Paul", "Vert · Léa"]))
+
+            let liste = tiroirs.partiesAuLoin()
+            #expect(liste.count == 2)
+            #expect(Set(liste.map(\.code)) == ["MARENO", "VABETO"])
+            #expect(tiroirs.rendezVous("MARENO")?.contre == ["Rouge · Marie"])
+            #expect(tiroirs.rendezVous("VABETO")?.contre.count == 2)
+        }
+    }
+
+    /// La dernière jouée en tête : c'est celle qu'on vient reprendre.
+    @Test func laDerniereJoueeEstEnTete() throws {
+        dansUnCoin { tiroirs, _ in
+            poser(tiroirs, rendezVous("MARENO", quand: Date().addingTimeInterval(-86_400)))
+            poser(tiroirs, rendezVous("VABETO", quand: Date()))
+            poser(tiroirs, rendezVous("SODIRA", quand: Date().addingTimeInterval(-3_600)))
+
+            #expect(tiroirs.partiesAuLoin().map(\.code) == ["VABETO", "SODIRA", "MARENO"])
+        }
+    }
+
+    /// En abandonner une ne touche pas aux autres.
+    @Test func abandonnerUnePartieLaisseLesAutres() throws {
+        dansUnCoin { tiroirs, _ in
+            poser(tiroirs, rendezVous("MARENO"))
+            poser(tiroirs, rendezVous("VABETO"))
+            tiroirs.save(partie(), dans: .ici)
+
+            tiroirs.discard(.auLoin(code: "MARENO"))
+
+            #expect(tiroirs.partiesAuLoin().map(\.code) == ["VABETO"])
+            #expect(tiroirs.rendezVous("MARENO") == nil)
+            #expect(tiroirs.has(.ici), "et surtout pas à celle d'ici")
+        }
+    }
+
+    /// Une partie périmée s'efface, les autres restent.
+    @Test func seuleLaPerimeeSEfface() throws {
+        dansUnCoin { tiroirs, _ in
+            poser(tiroirs, rendezVous("MARENO"))
+            poser(tiroirs, rendezVous("VABETO",
+                                      quand: Date().addingTimeInterval(-RendezVous.dureeDeVie - 60)))
+
+            #expect(tiroirs.partiesAuLoin().map(\.code) == ["MARENO"])
+            #expect(!tiroirs.has(.auLoin(code: "VABETO")))
+            #expect(tiroirs.has(.auLoin(code: "MARENO")))
+        }
+    }
+
+    /// Un rendez-vous sans sa partie ne mène nulle part : on le balaie plutôt
+    /// que de proposer une ligne qui ne s'ouvre pas.
+    @Test func unRendezVousOrphelinNeSePropose() throws {
+        dansUnCoin { tiroirs, _ in
+            tiroirs.saveRendezVous(rendezVous("MARENO"))
+            #expect(tiroirs.partiesAuLoin().isEmpty)
+        }
+    }
+
+    /// Un rendez-vous écrit par la version d'avant n'a ni le nom de l'autre ni
+    /// le tour. Il doit se relire quand même — sinon la mise à jour coûte la
+    /// partie en cours.
+    @Test func unRendezVousDAvantSeRelitQuandMeme() throws {
+        let ancien = """
+            {"code":"MARENO","jHeberge":true,"monRang":0,"compteur":4,
+             "rangs":{"marie":1},"partieID":"\(UUID().uuidString)",
+             "quand":\(Date().timeIntervalSinceReferenceDate)}
+            """
+        let lu = try JSONDecoder().decode(RendezVous.self, from: Data(ancien.utf8))
+        #expect(lu.code == "MARENO")
+        #expect(lu.contre.isEmpty)
+        #expect(lu.tour == 1)
+    }
+
 
     /// Les deux attendent en même temps, et ne se voient pas.
     @Test func lesDeuxPartiesAttendentCoteACote() throws {
@@ -47,14 +138,14 @@ struct TiroirsTests {
             duLoin.debugSkipToAttack()
 
             tiroirs.save(partie(), dans: .ici)
-            tiroirs.save(duLoin, dans: .auLoin)
+            tiroirs.save(duLoin, dans: .auLoin(code: "MARENO"))
             tiroirs.saveRendezVous(rendezVous())
 
             #expect(tiroirs.has(.ici))
-            #expect(tiroirs.has(.auLoin))
+            #expect(tiroirs.has(.auLoin(code: "MARENO")))
             #expect(tiroirs.load(.ici)?.digest == partie().digest)
-            #expect(tiroirs.load(.auLoin)?.digest == duLoin.digest)
-            #expect(tiroirs.loadRendezVous()?.code == "MARENO")
+            #expect(tiroirs.load(.auLoin(code: "MARENO"))?.digest == duLoin.digest)
+            #expect(tiroirs.rendezVous("MARENO")?.code == "MARENO")
         }
     }
 
@@ -62,14 +153,14 @@ struct TiroirsTests {
     @Test func finirIciNeTouchePasAuLoin() throws {
         dansUnCoin { tiroirs, _ in
             tiroirs.save(partie(), dans: .ici)
-            tiroirs.save(partie(), dans: .auLoin)
+            tiroirs.save(partie(), dans: .auLoin(code: "MARENO"))
             tiroirs.saveRendezVous(rendezVous())
 
             tiroirs.discard(.ici)
 
             #expect(!tiroirs.has(.ici))
-            #expect(tiroirs.has(.auLoin), "la partie au loin n'a rien à voir avec celle-ci")
-            #expect(tiroirs.loadRendezVous() != nil, "et son rendez-vous non plus")
+            #expect(tiroirs.has(.auLoin(code: "MARENO")), "la partie au loin n'a rien à voir avec celle-ci")
+            #expect(tiroirs.rendezVous("MARENO") != nil, "et son rendez-vous non plus")
         }
     }
 
@@ -78,12 +169,12 @@ struct TiroirsTests {
     @Test func leLoinEmporteSonRendezVous() throws {
         dansUnCoin { tiroirs, _ in
             tiroirs.save(partie(), dans: .ici)
-            tiroirs.save(partie(), dans: .auLoin)
+            tiroirs.save(partie(), dans: .auLoin(code: "MARENO"))
             tiroirs.saveRendezVous(rendezVous())
 
-            tiroirs.discard(.auLoin)
+            tiroirs.discard(.auLoin(code: "MARENO"))
 
-            #expect(tiroirs.loadRendezVous() == nil)
+            #expect(tiroirs.rendezVous("MARENO") == nil)
             #expect(tiroirs.has(.ici), "celle d'ici reste")
         }
     }
@@ -92,39 +183,69 @@ struct TiroirsTests {
     @Test func unRendezVousPerimeNEmporteQueLaSienne() throws {
         dansUnCoin { tiroirs, _ in
             tiroirs.save(partie(), dans: .ici)
-            tiroirs.save(partie(), dans: .auLoin)
+            tiroirs.save(partie(), dans: .auLoin(code: "MARENO"))
             tiroirs.saveRendezVous(
                 RendezVous(code: "MARENO", jHeberge: true, monRang: 0, compteur: 4,
                            rangs: ["marie": 1], partieID: UUID(),
                            quand: Date().addingTimeInterval(-RendezVous.dureeDeVie - 60)))
 
-            #expect(tiroirs.loadRendezVous() == nil)
-            #expect(!tiroirs.has(.auLoin), "une partie au loin sans code ne se joue pas")
+            #expect(tiroirs.rendezVous("MARENO") == nil)
+            #expect(!tiroirs.has(.auLoin(code: "MARENO")), "une partie au loin sans code ne se joue pas")
             #expect(tiroirs.has(.ici))
         }
     }
 
-    /// Ce qui dormait dans l'ancien tiroir unique déménage tout seul.
+    /// Ce qui dormait dans les rangements d'avant déménage tout seul.
     ///
-    /// Une partie au loin y était rangée avec son rendez-vous posé à côté.
-    /// Sans ce déménagement, elle serait rendue par le bouton d'ici — donc
-    /// sans son fil, les deux camps sur un seul téléphone.
-    @Test func lAncienneSauvegardeAuLoinDemenage() throws {
-        dansUnCoin { tiroirs, coin in
-            var avant = partie()
-            avant.debugSkipToAttack()
-            let identite = UUID()
+    /// La partie au loin n'était qu'une, et elle a dormi à deux endroits avant
+    /// celui-ci : d'abord dans le tiroir d'ici avec son rendez-vous posé à
+    /// côté, puis dans un tiroir « partie-au-loin » unique. Sans ce
+    /// déménagement, elle serait rendue par le bouton d'ici — donc sans son
+    /// fil, les deux camps sur un seul téléphone — ou perdue tout court.
+    @Test func lesAnciensRangementsDemenagent() throws {
+        for ancienNom in ["partie-en-cours", "partie-au-loin"] {
+            try dansUnCoin { tiroirs, coin in
+                var avant = partie()
+                avant.debugSkipToAttack()
+                let garde = rendezVous("MARENO")
 
-            // L'état d'avant : tout dans « partie-en-cours », rendez-vous à côté.
-            tiroirs.save(avant, dans: .ici)
-            tiroirs.saveID(identite, dans: .ici)
-            tiroirs.saveRendezVous(rendezVous())
+                // L'état d'avant, écrit tel qu'il l'était : la partie sous son
+                // ancien nom, le rendez-vous seul à la racine.
+                try JSONEncoder().encode(avant).write(
+                    to: coin.appendingPathComponent("\(ancienNom).json"))
+                try JSONEncoder().encode(garde).write(
+                    to: coin.appendingPathComponent("rendez-vous.json"))
 
-            // Le premier regard suffit à ranger.
-            #expect(tiroirs.load(.auLoin)?.digest == avant.digest)
-            #expect(tiroirs.loadID(.auLoin) == identite)
-            #expect(!tiroirs.has(.ici), "elle n'est plus là : elle a déménagé")
-            #expect(FileManager.default.fileExists(atPath: coin.path))
+                // Le premier regard suffit à ranger.
+                #expect(tiroirs.partiesAuLoin().map(\.code) == ["MARENO"],
+                        "déménagement depuis « \(ancienNom) »")
+                #expect(tiroirs.load(.auLoin(code: "MARENO"))?.digest == avant.digest)
+                #expect(tiroirs.rendezVous("MARENO")?.partieID == garde.partieID)
+                #expect(!FileManager.default.fileExists(
+                    atPath: coin.appendingPathComponent("rendez-vous.json").path),
+                        "l'ancien rendez-vous ne traîne plus")
+            }
+        }
+    }
+
+    /// Une partie d'ici qui dort à côté d'une partie au loin ne déménage pas
+    /// avec elle. C'est le cas de celui qui jouait les deux.
+    @Test func lePlusAncienRangementNEmportePasLaPartieDIci() throws {
+        try dansUnCoin { tiroirs, coin in
+            var duLoin = partie()
+            duLoin.debugSkipToAttack()
+
+            // L'étape intermédiaire : chacune son fichier, un seul rendez-vous.
+            try JSONEncoder().encode(partie()).write(
+                to: coin.appendingPathComponent("partie-en-cours.json"))
+            try JSONEncoder().encode(duLoin).write(
+                to: coin.appendingPathComponent("partie-au-loin.json"))
+            try JSONEncoder().encode(rendezVous("MARENO")).write(
+                to: coin.appendingPathComponent("rendez-vous.json"))
+
+            #expect(tiroirs.load(.auLoin(code: "MARENO"))?.digest == duLoin.digest)
+            #expect(tiroirs.has(.ici), "celle d'ici reste chez elle")
+            #expect(tiroirs.load(.ici)?.digest == partie().digest)
         }
     }
 
@@ -132,7 +253,7 @@ struct TiroirsTests {
     @Test func unePartieDIciResteChezElle() throws {
         dansUnCoin { tiroirs, _ in
             tiroirs.save(partie(), dans: .ici)
-            #expect(tiroirs.load(.auLoin) == nil)
+            #expect(tiroirs.load(.auLoin(code: "MARENO")) == nil)
             #expect(tiroirs.has(.ici))
         }
     }

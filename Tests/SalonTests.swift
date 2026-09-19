@@ -168,19 +168,18 @@ struct SalonTests {
     /// Rien de tout cela ne se voit d'un côté seulement — c'est l'accord entre
     /// l'application et le serveur, et il ne s'éprouve que de bout en bout.
     ///
-    /// Contre le serveur **local** seulement. Cet essai porte sur ce que le
-    /// serveur sait faire depuis cette version : le lancer contre celui qui est
-    /// déployé n'apprendrait qu'une chose, c'est qu'il n'a pas encore été
-    /// redéployé — et il le dirait sous la forme d'un essai rouge, ce qui
-    /// désigne le mauvais coupable.
+    /// Le local d'abord, le serveur déployé à défaut — comme l'essai
+    /// ci-dessus. S'il échoue contre le déployé, ce n'est pas le code qui a
+    /// tort : c'est que le serveur n'a pas été redéployé depuis qu'on a touché
+    /// à `src/index.js`. `cd serveur && npx wrangler deploy`.
     @Test func onSeRetrouveLeLendemain() async throws {
-        guard await trouverLeServeur() == "localhost:8787" else {
-            print("Riskelo — essai de la reprise sauté : il demande le serveur de "
-                  + "cette version. Lancez « cd serveur && npm run dev ».")
+        guard let ou = await trouverLeServeur() else {
+            print("Riskelo — essai de la reprise sauté : aucun serveur joignable.")
             return
         }
+        print("Riskelo — essai de la reprise : on éprouve \(ou).")
         let avant = Relais.serveur
-        Relais.serveur = "localhost:8787"
+        Relais.serveur = ou
         defer { Relais.serveur = avant }
 
         let hote = Relais(moi: Pair(id: "essai-hier-\(UUID().uuidString)", nom: "Robert"))

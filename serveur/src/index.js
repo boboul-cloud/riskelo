@@ -42,7 +42,10 @@ import { DurableObject } from "cloudflare:workers";
 /// ouvre le navigateur au lieu du jeu.
 const EQUIPE = "38DQ8FW23J";
 const PAQUET = "com.oulhen.riskelo";
-const APP_STORE = "https://apps.apple.com/app/riskelo/id0000000000";
+/// La fiche de Riskelo sur l'App Store : c'est là que mène la page
+/// d'invitation quand on n'a pas encore le jeu. Elle portait un numéro
+/// d'exemple tant que la fiche n'existait pas.
+const APP_STORE = "https://apps.apple.com/app/riskelo/id6806804539";
 
 /// Le même alphabet que dans l'application — voir `Relais.consonnes`.
 /// Consonne, voyelle, consonne, voyelle, consonne, voyelle : un code qui se

@@ -287,14 +287,22 @@ struct BoardView: View {
                 // détache la route de la mer, et le pointillé clair par-dessus.
                 // Un seul trait pâle se perdait sur le fond, et l'on ne
                 // devinait pas qu'on pouvait passer.
+                //
+                // Deux fois plus fins sur une carte dessinée. Elle a vingt
+                // traversées là où un damier en a trois, et à l'épaisseur du
+                // damier elles barraient la carte de traits plus lourds que
+                // les côtes.
+                let finesse: CGFloat = layout.shapes.isEmpty ? 1 : 0.5
                 ZStack {
                     chemin.stroke(Palette.sea.opacity(0.9),
-                                  style: StrokeStyle(lineWidth: max(5, radius * 0.30),
+                                  style: StrokeStyle(lineWidth: max(5, radius * 0.30) * finesse,
                                                      lineCap: .round))
                     chemin.stroke(Palette.ink.opacity(0.72),
-                                  style: StrokeStyle(lineWidth: max(2.5, radius * 0.15),
+                                  style: StrokeStyle(lineWidth: max(2.5, radius * 0.15) * finesse,
                                                      lineCap: .round,
-                                                     dash: [radius * 0.30, radius * 0.26]))
+                                                     dash: layout.shapes.isEmpty
+                                                        ? [radius * 0.30, radius * 0.26]
+                                                        : [radius * 0.22, radius * 0.20]))
                 }
                 .allowsHitTesting(false)
             }
@@ -385,9 +393,15 @@ struct BoardView: View {
                 // L'épaisseur vient du plateau et non du territoire : prise sur
                 // chacun, le trait d'un continent s'épaississait en Sibérie et
                 // s'effaçait en Islande, alors que c'est le **même** trait.
+                //
+                // Fin, aussi : il suit chaque côte, et une carte du monde en a
+                // beaucoup. Deux fois plus épais, il dessinait le monde en
+                // couleurs vives et prenait le pas sur les territoires eux-
+                // mêmes ; à cette finesse il suffit encore à dire où finit un
+                // continent.
                 Brins(brins: layout.frontierPaths[id] ?? [], cote: side)
                     .stroke(Palette.continent(rang: session.game.map.tint(of: id)),
-                            style: StrokeStyle(lineWidth: max(1.5, rayonOrdinaire(side) * 0.16),
+                            style: StrokeStyle(lineWidth: max(1, rayonOrdinaire(side) * 0.08),
                                                lineCap: .round, lineJoin: .round))
             )
             .contentShape(forme)

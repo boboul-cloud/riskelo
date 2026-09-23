@@ -350,7 +350,7 @@ enum Bot {
             // sec, et la relance peut en prendre deux d'un coup. La dernière
             // paire d'hommes peut donc achever une place — s'en priver, c'est
             // abandonner des conquêtes réelles.
-            if style.retientSesPiles, g.rules.mode == .classique,
+            if style.retientSesPiles, g.rules.mode != .faceAFace,
                g.armies(from) <= 2, menace(g, from) > 0 { continue }
             for to in g.targets(from: from) {
                 let advantage = Double(g.armies(from) - 1 - g.armies(to))
@@ -432,7 +432,7 @@ enum Bot {
             // ni redoutable ni offert, donc digne d'être sondé.
             let leur = score.asked == 0 ? 0.5 : score.rate
             var p: Double
-            if g.rules.mode == .classique {
+            if g.rules.mode != .faceAFace {
                 let echec = 1 - leur
                 p = 0.20 + echec * echec * style.flair
             } else {

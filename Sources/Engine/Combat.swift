@@ -30,6 +30,16 @@
 //  savant lent — elle ne sert qu'à trancher ce que le Risk tranchait par le
 //  chiffre du dé.
 //
+//  Aux **dés**, enfin, il n'y a plus de question du tout : une face contre une
+//  face, l'égalité au défenseur. C'est le chemin inverse des deux autres —
+//  ceux-ci traduisent une réponse en dé, celui-là se passe de la traduction.
+//
+//  L'économie ne change pas d'un mode à l'autre, et ce n'est pas un hasard :
+//  un dé contre un dé, égalité au défenseur, l'assaillant l'emporte 15 fois
+//  sur 36, soit 41,7 % — la part même que la question lui donne à quinze
+//  secondes de sablier (48 %) et que le face à face lui rend (44 %). Les trois
+//  modes se jouent donc à la même longueur ; seul change ce qui décide.
+//
 
 import Foundation
 
@@ -90,14 +100,21 @@ enum DuelVerdict: String, Equatable, Codable {
     case vitesse
     /// Face à face : aucun des deux n'a su. La place tient — l'égalité du Risk.
     case egalite
+    /// Aux dés : personne n'a rien su, il n'y avait rien à savoir.
+    case des
 }
 
 /// Le compte rendu d'un duel, tel que la vue le raconte.
 struct DuelReport: Equatable, Identifiable {
     let id = UUID()
-    let question: AskedQuestion
-    /// Celle du défenseur : c'est lui qui répond dans les deux modes.
-    let answer: Answer
+    /// Absente aux dés : il n'y a pas eu de question, et un énoncé de
+    /// convention se serait retrouvé dans le journal et dans le bilan.
+    let question: AskedQuestion?
+    /// Celle du défenseur : c'est lui qui répond, dans les deux modes qui
+    /// posent des questions. Absente aux dés, pour la même raison.
+    let answer: Answer?
+    /// Le défenseur a-t-il su ? Aux dés, toujours faux : il n'y avait rien à
+    /// savoir, et ce champ n'y veut plus rien dire.
     let correct: Bool
     /// En face à face, ce qu'a répondu l'attaquant.
     var attackerAnswer: Answer?
@@ -237,5 +254,32 @@ enum Combat {
                             defender: DiceEquivalence.face(defender,
                                                            allowance: duel.allowance, correct: d)),
                           allowance: duel.allowance)
+    }
+
+    /// Un dé, tiré du hasard de la partie.
+    ///
+    /// Du hasard **de la partie**, et non de celui de l'appareil : c'est toute
+    /// la condition pour que les dés existent en réseau. Les deux appareils
+    /// rejouent la même suite depuis la même graine, et tombent donc sur les
+    /// mêmes faces sans que rien ne voyage — le coup envoyé reste la
+    /// déclaration d'assaut, comme en questions.
+    static func de<G: RandomNumberGenerator>(using rng: inout G) -> Int {
+        Int.random(in: 1 ... 6, using: &rng)
+    }
+
+    /// Les dés, sans question : une face contre une face.
+    ///
+    /// L'égalité profite au défenseur — c'est la règle du Risk, et c'est aussi
+    /// celle que les deux autres modes appliquent déjà, l'un faute d'avoir un
+    /// match nul à offrir, l'autre quand aucun des deux joueurs ne sait.
+    static func resolveDes(attacker: Int, defender: Int, mise: Int = 1) -> DuelReport {
+        DuelReport(question: nil,
+                   answer: nil,
+                   correct: false,
+                   outcome: attacker > defender ? .attackerBreaks : .defenderHolds,
+                   verdict: .des,
+                   mise: mise,
+                   dice: DiceEquivalence(attacker: attacker, defender: defender),
+                   allowance: 0)
     }
 }

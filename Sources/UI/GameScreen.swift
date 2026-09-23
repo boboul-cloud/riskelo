@@ -770,6 +770,9 @@ private struct AssaultPanel: View {
                         }.buttonStyle(.plain).foregroundStyle(Palette.dim)
                     }
 
+                    // Aux dés, il n'y a pas de terrain à choisir : le panneau
+                    // n'est plus qu'un compte de dés et un bouton.
+                    if g.rules.mode.interroge {
                     VStack(alignment: .leading, spacing: 7) {
                         Text(g.rules.mode == .classique
                              ? "Vous posez la question — choisissez le terrain"
@@ -794,14 +797,21 @@ private struct AssaultPanel: View {
                         }
                         auHasard
                     }
+                    }
 
                     VStack(alignment: .leading, spacing: 7) {
-                        Text("Combien de questions — vos dés")
+                        Text(g.rules.mode.interroge
+                             ? "Combien de questions — vos dés"
+                             : "Combien de dés")
                             .font(.caption.weight(.medium)).foregroundStyle(Palette.dim)
                         Picker("", selection: Binding(get: { session.draftQuestions },
                                                       set: { session.draftQuestions = $0 })) {
                             ForEach(1...max(1, g.maxQuestions(from: base)), id: \.self) { n in
-                                Text(n == 1 ? "Une question" : "Deux questions").tag(n)
+                                if g.rules.mode.interroge {
+                                    Text(n == 1 ? "Une question" : "Deux questions").tag(n)
+                                } else {
+                                    Text(n == 1 ? "Un dé" : "Deux dés").tag(n)
+                                }
                             }
                         }
                         .pickerStyle(.segmented)
@@ -846,6 +856,17 @@ private struct AssaultPanel: View {
     /// classique ou en face à face — où le défenseur peut encore doubler.
     private func legendeDesDes(_ g: GameState) -> String {
         let une = session.draftQuestions == 1
+        if g.rules.mode == .des {
+            return une
+                ? dit("""
+                      Un dé contre le sien. L'égalité lui profite : il faut faire mieux, \
+                      pas aussi bien.
+                      """)
+                : dit("""
+                      Deux dés l'un après l'autre, chacun contre le sien. Deux chances de \
+                      passer — et deux hommes à y laisser.
+                      """)
+        }
         if g.rules.mode == .classique {
             return une
                 ? dit("Un duel : au plus un homme perdu de chaque côté.")

@@ -187,6 +187,38 @@
         }
       }
     },
+    "%@ attaque %@ depuis %@ — deux dés.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ attacks %@ from %@ — two dice."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$@ attaque %2$@ depuis %3$@ — deux dés."
+          }
+        }
+      }
+    },
+    "%@ attaque %@ depuis %@ — un dé.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ attacks %@ from %@ — one die."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$@ attaque %2$@ depuis %3$@ — un dé."
+          }
+        }
+      }
+    },
     "%@ est prise.": {
       "localizations": {
         "en": {
@@ -715,6 +747,54 @@
         }
       }
     },
+    "%lld contre %lld : %@ perd %@.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld against %lld: %@ loses %@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$lld contre %2$lld : %3$@ perd %4$@."
+          }
+        }
+      }
+    },
+    "%lld contre %lld : %@ tient, l'assaillant laisse %@.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld against %lld: %@ holds, the attacker leaves %@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$lld contre %2$lld : %3$@ tient, l'assaillant laisse %4$@."
+          }
+        }
+      }
+    },
+    "%lld contre %lld : l'égalité tient %@, l'assaillant laisse %@.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld against %lld: the tie holds %@, the attacker leaves %@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$lld contre %2$lld : l'égalité tient %3$@, l'assaillant laisse %4$@."
+          }
+        }
+      }
+    },
     "%lld homme avance sur %@.": {
       "localizations": {
         "en": {
@@ -1156,6 +1236,7 @@
       }
     },
     "Afrique": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1172,6 +1253,7 @@
       }
     },
     "Afrique de l'Est": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1188,6 +1270,7 @@
       }
     },
     "Afrique du Nord": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1204,6 +1287,7 @@
       }
     },
     "Afrique du Sud": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1220,6 +1304,7 @@
       }
     },
     "Albanie": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1236,6 +1321,7 @@
       }
     },
     "Alizé": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1252,6 +1338,7 @@
       }
     },
     "Allemagne": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1268,6 +1355,7 @@
       }
     },
     "Ambre": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1284,6 +1372,7 @@
       }
     },
     "Amérique centrale": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1300,6 +1389,7 @@
       }
     },
     "Amérique du Nord": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1316,6 +1406,7 @@
       }
     },
     "Amérique du Sud": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1332,6 +1423,7 @@
       }
     },
     "Angleterre": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1364,6 +1456,7 @@
       }
     },
     "Argentine": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1380,6 +1473,7 @@
       }
     },
     "Armorique": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1412,6 +1506,7 @@
       }
     },
     "Asie": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1555,6 +1650,26 @@
         }
       }
     },
+    "Aucune question : le dé est le dé.\nUne face contre une face, et l'égalité au défenseur.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No questions: the die is the die.\nOne face against one face, and ties go to the defender."
+          }
+        }
+      }
+    },
+    "Aucune question : un dé contre un dé, l'égalité au défenseur.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No questions: one die against one die, ties to the defender."
+          }
+        }
+      }
+    },
     "Aucune table en vue.": {
       "localizations": {
         "en": {
@@ -1572,6 +1687,7 @@
       }
     },
     "Australie occidentale": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1588,6 +1704,7 @@
       }
     },
     "Australie orientale": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1604,6 +1721,7 @@
       }
     },
     "Autriche": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1636,6 +1754,7 @@
       }
     },
     "Baie d'Or": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1652,6 +1771,7 @@
       }
     },
     "Baléares": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1668,6 +1788,7 @@
       }
     },
     "Belgique": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1700,6 +1821,7 @@
       }
     },
     "Biélorussie": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1716,6 +1838,7 @@
       }
     },
     "Bleu": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1732,6 +1855,7 @@
       }
     },
     "Bocage": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1748,6 +1872,7 @@
       }
     },
     "Boréa": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1764,6 +1889,7 @@
       }
     },
     "Brésil": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1780,6 +1906,7 @@
       }
     },
     "Bulgarie": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1828,6 +1955,7 @@
       }
     },
     "Cap Blanc": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2008,6 +2136,7 @@
       }
     },
     "Certaines box interdisent à deux appareils de se parler entre eux. Dans ce cas seulement, **coupez le Wi-Fi depuis le centre de contrôle** (le bouton, pas les Réglages) des deux côtés : ils se relieront sans passer par elle.": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2152,6 +2281,7 @@
       }
     },
     "Chine": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2275,6 +2405,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Combien d'hommes avancent ?"
+          }
+        }
+      }
+    },
+    "Combien de dés": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "How many dice"
           }
         }
       }
@@ -2440,6 +2580,7 @@
       }
     },
     "Corail": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2456,6 +2597,7 @@
       }
     },
     "Corse": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2488,6 +2630,7 @@
       }
     },
     "Croatie": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2504,6 +2647,7 @@
       }
     },
     "Crète": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2616,6 +2760,7 @@
       }
     },
     "Danemark": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2648,6 +2793,7 @@
       }
     },
     "De l'Atlantique à la mer Noire. 38 territoires.": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2743,6 +2889,26 @@
         }
       }
     },
+    "Deux dés": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Two dice"
+          }
+        }
+      }
+    },
+    "Deux dés l'un après l'autre, chacun contre le sien. Deux chances de passer — et deux hommes à y laisser.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Two dice one after the other, each against theirs. Two chances to break through — and two troops to leave behind."
+          }
+        }
+      }
+    },
     "Deux questions": {
       "localizations": {
         "en": {
@@ -2807,6 +2973,22 @@
         }
       }
     },
+    "Dé %lld sur %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die %lld of %lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Dé %1$lld sur %2$lld"
+          }
+        }
+      }
+    },
     "Défenseur": {
       "localizations": {
         "en": {
@@ -2867,6 +3049,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Déplacer et finir le tour"
+          }
+        }
+      }
+    },
+    "Dés": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dice"
           }
         }
       }
@@ -3030,6 +3222,7 @@
       }
     },
     "Espagne": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3046,6 +3239,7 @@
       }
     },
     "Est des États-Unis": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3062,6 +3256,7 @@
       }
     },
     "Europe centrale": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3078,6 +3273,7 @@
       }
     },
     "Europe de l'Est": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3094,6 +3290,7 @@
       }
     },
     "Europe de l'Ouest": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3110,6 +3307,7 @@
       }
     },
     "Europe du Nord": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3126,6 +3324,7 @@
       }
     },
     "Europe du Sud": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3286,6 +3485,7 @@
       }
     },
     "Finlande": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3360,6 +3560,7 @@
       }
     },
     "Grande-Bretagne": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3376,6 +3577,7 @@
       }
     },
     "Grise-Lande": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3392,6 +3594,7 @@
       }
     },
     "Groenland": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3408,6 +3611,7 @@
       }
     },
     "Grèce": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3440,6 +3644,7 @@
       }
     },
     "Havreterre": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3456,6 +3661,7 @@
       }
     },
     "Hongrie": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3488,6 +3694,7 @@
       }
     },
     "Iakoutie": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3578,6 +3785,7 @@
       }
     },
     "Inde": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3594,6 +3802,7 @@
       }
     },
     "Indonésie": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3642,6 +3851,7 @@
       }
     },
     "Irkoutsk": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3658,6 +3868,7 @@
       }
     },
     "Islande": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3674,6 +3885,7 @@
       }
     },
     "Italie": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3690,6 +3902,7 @@
       }
     },
     "Italie du Nord": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3706,6 +3919,7 @@
       }
     },
     "Japon": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3802,6 +4016,7 @@
       }
     },
     "Kamtchatka": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3818,6 +4033,7 @@
       }
     },
     "Khanat": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3834,6 +4050,7 @@
       }
     },
     "L'Anneau": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -3913,6 +4130,22 @@
         }
       }
     },
+    "L'assaut a le dé le plus fort : %@ perd %@.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The assault has the higher die: %@ loses %@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "L'assaut a le dé le plus fort : %1$@ perd %2$@."
+          }
+        }
+      }
+    },
     "L'attaquant choisit le thème, le défenseur seul répond.": {
       "localizations": {
         "en": {
@@ -3967,6 +4200,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "La conquête de %@"
+          }
+        }
+      }
+    },
+    "La défense a le dé le plus fort : %@ tient, l'assaillant laisse %@.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The defence has the higher die: %@ holds, the attacker leaves %@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "La défense a le dé le plus fort : %1$@ tient, l'assaillant laisse %2$@."
           }
         }
       }
@@ -4184,6 +4433,7 @@
       }
     },
     "Lagune": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -4216,6 +4466,7 @@
       }
     },
     "Landes Hautes": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -4327,6 +4578,16 @@
         }
       }
     },
+    "Le jeu de plateau tel quel, pour les soirs où l'on ne veut pas réfléchir et pour les joueurs trop jeunes pour les questions. Tout le reste ne bouge pas : les renforts, les continents, les cartes, les conquêtes.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The board game as it is, for evenings when you would rather not think and for players too young for the questions. Everything else stays put: reinforcements, continents, cards, objectives."
+          }
+        }
+      }
+    },
     "Le minimum": {
       "localizations": {
         "en": {
@@ -4418,6 +4679,7 @@
       }
     },
     "Le serveur des parties n'a pas encore été mis à jour : il ne sait pas rendre à celui qui a ouvert la partie le code qu'il avait. C'est une chose à faire une fois, du côté du serveur, et non sur cet appareil.": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -4460,6 +4722,7 @@
       }
     },
     "Les Marches": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -4524,6 +4787,7 @@
       }
     },
     "Les deux appareils doivent être sur **le même réseau Wi-Fi** — ou tous les deux sans réseau du tout, auquel cas ils se relient directement.": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -4540,6 +4804,7 @@
       }
     },
     "Les deux appareils doivent être sur **le même réseau Wi-Fi**. C'est de loin la cause la plus fréquente : l'un sur la box, l'autre sur le réseau invité, et ils ne se voient pas.": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -4572,6 +4837,7 @@
       }
     },
     "Les deux appareils n'ont pas la même version de Riskelo. Mettez-les à jour tous les deux.": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -4716,6 +4982,7 @@
       }
     },
     "Les six continents, 42 territoires — comme la boîte.": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -4844,6 +5111,7 @@
       }
     },
     "Moldavie": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -4860,6 +5128,7 @@
       }
     },
     "Monde": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -4876,6 +5145,7 @@
       }
     },
     "Mongolie": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -4892,6 +5162,7 @@
       }
     },
     "Mont Rouge": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -4924,6 +5195,7 @@
       }
     },
     "Moyen-Orient": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -4956,6 +5228,7 @@
       }
     },
     "Méditerranée": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -4972,6 +5245,7 @@
       }
     },
     "Méridia": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -5030,6 +5304,7 @@
       }
     },
     "Norvège": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -5072,6 +5347,7 @@
       }
     },
     "Nouvelle-Guinée": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -5104,6 +5380,7 @@
       }
     },
     "Océanie": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -5120,6 +5397,7 @@
       }
     },
     "Oliveraie": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -5200,6 +5478,7 @@
       }
     },
     "On ne se glisse pas dans une partie en cours. Demandez qu'on en rouvre une.": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -5274,6 +5553,7 @@
       }
     },
     "Ouest des États-Unis": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -5306,6 +5586,7 @@
       }
     },
     "Oural": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -5402,6 +5683,7 @@
       }
     },
     "Palmeraie": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -5492,6 +5774,7 @@
       }
     },
     "Pays baltes": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -5508,6 +5791,7 @@
       }
     },
     "Pays-Bas": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -5572,6 +5856,7 @@
       }
     },
     "Pierregrise": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -5620,6 +5905,7 @@
       }
     },
     "Pologne": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -5636,6 +5922,7 @@
       }
     },
     "Ponant": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -5668,6 +5955,7 @@
       }
     },
     "Pérou": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -5684,6 +5972,7 @@
       }
     },
     "Quatre joueurs au plus, un appareil chacun. Il faudra attendre la partie suivante.": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -5732,6 +6021,7 @@
       }
     },
     "Québec": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -6030,6 +6320,7 @@
       }
     },
     "Riskelo doit être **à l'écran** sur l'autre appareil. En arrière-plan, ou l'écran verrouillé, il cesse de répondre.": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -6046,6 +6337,7 @@
       }
     },
     "Rouge": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -6062,6 +6354,7 @@
       }
     },
     "Roumanie": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -6078,6 +6371,7 @@
       }
     },
     "Russie": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -6110,6 +6404,7 @@
       }
     },
     "Récif": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -6174,6 +6469,7 @@
       }
     },
     "Réglages → Confidentialité et sécurité → Réseau local : Riskelo activé, sur les deux.": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -6238,6 +6534,7 @@
       }
     },
     "Sablier": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -6254,6 +6551,7 @@
       }
     },
     "Saline": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -6286,6 +6584,7 @@
       }
     },
     "Sardaigne": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -6302,6 +6601,7 @@
       }
     },
     "Scandinavie": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -6318,6 +6618,7 @@
       }
     },
     "Serbie": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -6382,6 +6683,7 @@
       }
     },
     "Sibérie": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -6398,6 +6700,7 @@
       }
     },
     "Sicile": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -6446,6 +6749,7 @@
       }
     },
     "Skerrie": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -6462,6 +6766,7 @@
       }
     },
     "Slovaquie": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -6478,6 +6783,7 @@
       }
     },
     "Slovénie": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -6542,6 +6848,7 @@
       }
     },
     "Steppe Haute": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -6574,6 +6881,7 @@
       }
     },
     "Suisse": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -6606,6 +6914,7 @@
       }
     },
     "Sur l'autre appareil : « Ouvrir la table », et laissez son écran allumé.": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -6654,6 +6963,7 @@
       }
     },
     "Suède": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -6670,6 +6980,7 @@
       }
     },
     "Tchéquie": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -6750,6 +7061,7 @@
       }
     },
     "Territoires du Nord-Ouest": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -6962,6 +7274,7 @@
       }
     },
     "Turquie": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -6994,6 +7307,7 @@
       }
     },
     "Un code vit le temps d'une partie. Vérifiez les six lettres, ou demandez-en un nouveau à celui qui a ouvert.": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -7037,6 +7351,26 @@
           "stringUnit": {
             "state": "translated",
             "value": "Un duel, la même question pour vous deux. S'il double la mise, il vaudra deux hommes."
+          }
+        }
+      }
+    },
+    "Un dé": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One die"
+          }
+        }
+      }
+    },
+    "Un dé contre le sien. L'égalité lui profite : il faut faire mieux, pas aussi bien.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One die against theirs. Ties go to them: you have to do better, not just as well."
           }
         }
       }
@@ -7090,6 +7424,7 @@
       }
     },
     "Un monde inventé, cinq terres en cercle. 28 territoires.": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -7201,7 +7536,16 @@
         }
       }
     },
-    "Une carte se gagne en prenant au moins une place dans le tour.": {},
+    "Une carte se gagne en prenant au moins une place dans le tour.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You earn one card by taking at least one place during the turn."
+          }
+        }
+      }
+    },
     "Une note brève à chaque homme posé, une autre à l'issue de chaque échange — montante quand il tourne pour vous, descendante sinon — et l'ouverture au lancement. Vaut pour toutes les parties, et non pour celle-ci seule.": {
       "localizations": {
         "en": {
@@ -7303,6 +7647,7 @@
       }
     },
     "Val-Clair": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -7335,6 +7680,7 @@
       }
     },
     "Vert": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -7399,6 +7745,7 @@
       }
     },
     "Vieux-Port": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -7415,6 +7762,7 @@
       }
     },
     "Violet": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -7479,6 +7827,7 @@
       }
     },
     "Votre partie a attendu plus d'une semaine, et le code est reparti à quelqu'un d'autre. La partie, elle, est dans la bibliothèque : on peut la rouvrir, mais il faudra un nouveau code.": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -7659,6 +8008,7 @@
       }
     },
     "Vérifiez votre connexion — Wi-Fi ou données mobiles. Si tout va bien de votre côté, c'est le serveur des parties qui ne répond pas : la même pièce, elle, ne dépend de personne.": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -7691,6 +8041,7 @@
       }
     },
     "Zéphyrie": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -8111,6 +8462,7 @@
       }
     },
     "Écosse": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -8126,7 +8478,24 @@
         }
       }
     },
+    "Égalité — elle va au défenseur : %@ tient, l'assaillant laisse %@.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A tie — and it goes to the defender: %@ holds, the attacker leaves %@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Égalité — elle va au défenseur : %1$@ tient, l'assaillant laisse %2$@."
+          }
+        }
+      }
+    },
     "Égypte": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -8143,6 +8512,7 @@
       }
     },
     "Îles Britanniques": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {

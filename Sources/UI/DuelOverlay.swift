@@ -53,8 +53,58 @@ struct DuelOverlay: View {
         case .handover: handover
         case .adversaireRepond: adversaire
         case .asking, .revealed: question
+        case .desLances: lancer
         case .summary: summary
         }
+    }
+
+    // MARK: - Les dés
+
+    /// Une paire de faces, et ce qu'elle coûte.
+    ///
+    /// Il n'y a rien d'autre à montrer, et c'est exactement le propos du mode :
+    /// l'écran qui remplaçait le lancer de dés redevient un lancer de dés. La
+    /// feuille garde pourtant sa taille — les hommes tombent derrière elle sur
+    /// le plateau, et c'est là qu'il faut pouvoir regarder.
+    @ViewBuilder private var lancer: some View {
+        if let r = session.report, let a = session.assault {
+            VStack(spacing: 20) {
+                Text("\(session.player(a.attacker)?.name ?? "?") attaque \(session.game.name(a.to))")
+                    .font(.subheadline.weight(.medium))
+                    .foregroundStyle(Palette.dim)
+
+                HStack(spacing: 18) {
+                    DeQuiRoule(face: r.dice.attacker, legende: "assaut",
+                               teinte: Palette.camp(a.attacker), cle: r.id)
+                    Image(systemName: signeDesDes(r))
+                        .font(.title2.weight(.bold))
+                        .foregroundStyle(Palette.dim)
+                    DeQuiRoule(face: r.dice.defender, legende: "défense",
+                               teinte: Palette.camp(a.defender), cle: r.id)
+                }
+
+                Text(verdictTexte(r))
+                    .font(.subheadline.weight(.medium))
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .foregroundStyle(couleurDuVerdict(r))
+
+                // Le rang du dé dans la salve : sans lui, deux dés qui tombent
+                // sur la même face donnent l'impression que l'écran s'est figé.
+                if a.volley > 1 {
+                    Text("Dé \(min(a.asked, a.reports.count)) sur \(a.volley)")
+                        .font(.caption2).foregroundStyle(Palette.dim.opacity(0.8))
+                }
+            }
+            .foregroundStyle(Palette.ink)
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 6)
+        }
+    }
+
+    private func signeDesDes(_ r: DuelReport) -> String {
+        if r.dice.attacker == r.dice.defender { return "equal" }
+        return r.dice.attacker > r.dice.defender ? "greaterthan" : "lessthan"
     }
 
     // MARK: - « Prêt ? »
@@ -181,8 +231,10 @@ struct DuelOverlay: View {
     /// Tant qu'un compte rendu est là, c'est sa question qui règne. Le moteur
     /// attendra.
     private var duelAffiche: Duel? {
-        if let r = session.report {
-            return Duel(question: r.question, allowance: r.allowance, siege: 0)
+        // Aux dés il n'y a pas de question à retenir à l'écran : le compte
+        // rendu n'en porte pas, et cette étape ne s'affiche pas de toute façon.
+        if let r = session.report, let q = r.question {
+            return Duel(question: q, allowance: r.allowance, siege: 0)
         }
         return session.duel
     }
@@ -443,6 +495,19 @@ struct DuelOverlay: View {
                    Personne ne savait. Comme sur une égalité de dés, \(lieu) tient \
                    et l'assaillant laisse \(cout).
                    """
+
+        case .des:
+            // Les faces sont déjà au-dessus de la phrase : elle n'a pas à les
+            // répéter, elle a à dire qui perd un homme et pourquoi.
+            if r.dice.attacker == r.dice.defender {
+                return """
+                       Égalité — elle va au défenseur : \(lieu) tient, l'assaillant \
+                       laisse \(cout).
+                       """
+            }
+            return r.outcome == .defenderHolds
+                ? "La défense a le dé le plus fort : \(lieu) tient, l'assaillant laisse \(cout)."
+                : "L'assaut a le dé le plus fort : \(lieu) perd \(cout)."
         }
     }
 
@@ -480,7 +545,7 @@ struct DuelOverlay: View {
         var texte = "sans réponse"
         var temps: String?
         if case let .chosen(i, e)? = reponse {
-            if r.question.choices.indices.contains(i) { texte = r.question.choices[i] }
+            if let choix = r.question?.choices, choix.indices.contains(i) { texte = choix[i] }
             temps = String(format: "%.1f s", min(e, r.allowance))
         }
         return HStack(spacing: 7) {
@@ -745,5 +810,54 @@ struct OccupationPanel: View {
     private var moitie: Int? {
         let m = min(haut, max(minimum, (haut + 1) / 2))
         return m > minimum && m < haut ? m : nil
+    }
+}
+
+/// Un dé qui roule avant de se poser.
+///
+/// La face est déjà connue — le moteur l'a tirée à la déclaration, et elle
+/// est la même sur l'appareil d'en face. Ce qui roule ici ne décide donc de
+/// rien : c'est du théâtre, et c'est nécessaire. Un chiffre qui paraît d'un
+/// coup ne se lit pas comme un dé lancé, il se lit comme un verdict rendu
+/// ailleurs — ce qu'il est, précisément, et ce qu'il ne faut pas qu'on voie.
+///
+/// Le hasard de l'affichage est local et sans conséquence : il ne touche pas
+/// à celui de la partie, qui doit rester identique sur les deux appareils.
+private struct DeQuiRoule: View {
+
+    let face: Int
+    let legende: String.LocalizationValue
+    let teinte: Color
+    /// L'identité du compte rendu : elle change à chaque dé de la salve, et
+    /// c'est elle qui relance le roulement. Sans elle, deux dés qui tombent
+    /// sur la même face ne se distingueraient pas l'un de l'autre.
+    let cle: UUID
+
+    @State private var affichee = 1
+    @State private var posee = false
+
+    var body: some View {
+        VStack(spacing: 5) {
+            Image(systemName: "die.face.\(min(6, max(1, affichee)))")
+                .font(.system(size: 52))
+                .foregroundStyle(posee ? teinte : Palette.dim)
+                .scaleEffect(posee ? 1 : 0.92)
+                .rotationEffect(.degrees(posee ? 0 : -8))
+                .animation(.spring(duration: 0.28, bounce: 0.45), value: posee)
+            Text(dit(legende)).font(.caption2).foregroundStyle(Palette.dim)
+        }
+        .task(id: cle) {
+            posee = false
+            // Six coups d'horloge, puis la vraie face. Assez pour que l'œil
+            // voie tourner, assez peu pour ne pas faire attendre : la salve
+            // entière ne dure que deux secondes et demie.
+            for _ in 0 ..< 6 {
+                affichee = Int.random(in: 1 ... 6)
+                try? await Task.sleep(for: .milliseconds(70))
+                if Task.isCancelled { break }
+            }
+            affichee = face
+            posee = true
+        }
     }
 }

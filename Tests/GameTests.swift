@@ -268,7 +268,7 @@ struct GameTests {
         g.declareAssault(from: base, to: cible, questions: 2, category: .sciences)
         let posee = g.assault!.current!.question.id
         let rapport = g.answer(.chosen(g.assault!.current!.question.answer, elapsed: 2))
-        #expect(rapport?.question.id == posee)
+        #expect(rapport?.question?.id == posee)
         #expect(g.assault?.current != nil)
         #expect(g.assault?.current?.question.id != posee, "le moteur tient déjà la suivante")
     }

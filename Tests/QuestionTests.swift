@@ -568,7 +568,7 @@ struct ManuelTests {
         let fr = Manuel.chapitres(.fr).map(\.id)
         let en = Manuel.chapitres(.en).map(\.id)
         #expect(fr == en, "les chapitres ne se correspondent plus : \(fr) contre \(en)")
-        #expect(fr.count == 14)
+        #expect(fr.count == 15)
     }
 
     /// Chaque chapitre dit quelque chose, dans les deux langues.

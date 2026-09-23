@@ -208,10 +208,13 @@ struct FaceAFaceTests {
             // ne passe la barre d'aucune façon et le test ne dirait rien.
             var rng = SeededRandom(seed: 3)
             let plan = Bot.assault(g, boldness: 2, using: &rng)
-            if mode == .classique {
-                #expect(plan == nil, "en classique elle tient sa dernière paire")
-            } else {
+            // Aux dés, l'échange coûte un homme et n'en prend qu'un, comme en
+            // classique : une pile de deux ne finit rien, et la retenir vaut
+            // pour la même raison.
+            if mode == .faceAFace {
                 #expect(plan?.from == base, "en face à face elle s'en sert")
+            } else {
+                #expect(plan == nil, "elle tient sa dernière paire")
             }
         }
     }

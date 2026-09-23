@@ -50,7 +50,11 @@ enum Message: Codable {
     /// changé côté anglais, et la banque a doublé. Une 1.3 et une version
     /// fusionnée qui croiraient se comprendre tireraient des questions
     /// différentes — pire qu'un refus de connexion, qui au moins se voit.
-    static let dialecte = 8
+    /// 9 : le mode « dés ». Une règle de partie de plus dans `Rules`, et un
+    /// assaut qui se tranche à la déclaration au lieu d'attendre des
+    /// réponses. Un appareil resté en 1.3 ne sait pas décoder le mode et,
+    /// s'il le savait, attendrait une question qui ne viendra jamais.
+    static let dialecte = 9
 
     /// La partie entière, envoyée par celui qui l'a ouverte — à chacun son
     /// rang, et le compte des coups déjà joués.

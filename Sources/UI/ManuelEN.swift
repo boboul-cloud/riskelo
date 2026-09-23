@@ -76,7 +76,7 @@ enum ManuelEN {
 
 
     static let chapitres: [Chapitre] = [
-        firstGame, duel, showdown, turn, victory, setup, screen,
+        firstGame, duel, showdown, dice, turn, victory, setup, screen,
         cards, file, memory, network, bank, tips, legal,
     ]
 
@@ -88,8 +88,9 @@ enum ManuelEN {
         icone: "bolt.fill", teinte: Palette.camp(0),
         blocs: [
             .p("Riskelo is a conquest game: territories, troops, and an opponent "
-               + "to dislodge. There are no dice. When you attack, a trivia question "
-               + "decides the outcome."),
+               + "to dislodge. When you attack, a trivia question decides the "
+               + "outcome — it stands in for the die. If you would rather have the "
+               + "die back, that is the third mode."),
             .h("Your first turn"),
             .puces([
                 "Tap \"Quick game\": two players, the Ring board, a machine of medium "
@@ -213,6 +214,50 @@ enum ManuelEN {
 
     // MARK: 4
 
+    private static let dice = Chapitre(
+        id: "des", titre: "Dice",
+        resume: "The third mode: no questions at all, one die against one die.",
+        icone: "dice.fill", teinte: Palette.camp(3),
+        blocs: [
+            .p("The first two modes replace the die with a question. This one goes "
+               + "the other way: there is no question at all. You declare the "
+               + "assault, the dice fall, and the place holds or gives."),
+            .tableau(["What comes up", "What follows"],
+                     [["The attacking die is higher", "The place loses a troop"],
+                      ["The defending die is higher", "The attacker leaves a troop"],
+                      ["The two are equal", "The place holds — ties go to the defender"]]),
+            .p("This is the board game's rule, word for word, and the tie going to "
+               + "the defender is the heart of it: you have to do better than them, "
+               + "not as well. The attacker wins fifteen throws out of thirty-six."),
+            .note("All three modes therefore run to the same length. A question on a "
+                  + "fifteen-second timer gives the attacker 48 % of exchanges, the "
+                  + "showdown 44 %, the dice 41.7 %: a game lasts no longer and no "
+                  + "shorter for the mode you picked."),
+            .h("What goes away"),
+            .p("No subject to choose before an assault, no timer, no raise, and no "
+               + "knowledge file to consult: there is nothing to know about anyone. "
+               + "Setup drops the question mix and the scholar's reinforcement on its "
+               + "own, since neither has anything left to act on."),
+            .h("What stays"),
+            .p("Everything else: reinforcements, continents, territory cards, private "
+               + "objectives, the end-of-turn move, the victory threshold. One or two "
+               + "dice per assault, just as one or two questions, and you never attack "
+               + "with your garrison."),
+            .h("Who it is for"),
+            .puces([
+                "Evenings when you would rather not think.",
+                "Players too young for the questions — the map, the reinforcements and "
+                + "the continents are enough to make a game.",
+                "Anyone who wants to see where the rest comes from: play one with dice, "
+                + "then the same one in classic, and the variant explains itself.",
+            ]),
+            .note("Across devices the dice fall on both sides with nothing sent: the "
+                  + "two devices draw the same sequence from the same seed. It is the "
+                  + "same mechanism that lets a game resume where it was left."),
+        ])
+
+    // MARK: 5
+
     private static let turn = Chapitre(
         id: "tour", titre: "The turn",
         resume: "Reinforce, attack, one move — then the turn passes.",
@@ -246,7 +291,7 @@ enum ManuelEN {
             ]),
         ])
 
-    // MARK: 5
+    // MARK: 6
 
     private static let victory = Chapitre(
         id: "victoire", titre: "Winning the game",
@@ -314,7 +359,7 @@ enum ManuelEN {
                + "neighbors instead of one."),
         ])
 
-    // MARK: 6
+    // MARK: 7
 
     private static let setup = Chapitre(
         id: "reglages", titre: "Setting up",
@@ -409,7 +454,7 @@ enum ManuelEN {
             ]),
         ])
 
-    // MARK: 7
+    // MARK: 8
 
     private static let screen = Chapitre(
         id: "ecran", titre: "The game screen",
@@ -481,7 +526,7 @@ enum ManuelEN {
                + "got it wrong; the verdict always names whoever answered."),
         ])
 
-    // MARK: 8
+    // MARK: 9
 
     private static let cards = Chapitre(
         id: "cartes", titre: "Territory cards",
@@ -516,7 +561,7 @@ enum ManuelEN {
                + "questions longer, and knowledge weighs slightly more."),
         ])
 
-    // MARK: 9
+    // MARK: 10
 
     private static let file = Chapitre(
         id: "dossier", titre: "The file and the log",
@@ -546,7 +591,7 @@ enum ManuelEN {
                + "them all."),
         ])
 
-    // MARK: 10
+    // MARK: 11
 
     private static let memory = Chapitre(
         id: "memoire", titre: "Resume, mark, go back",
@@ -587,7 +632,7 @@ enum ManuelEN {
                   + "that no longer lines up."),
         ])
 
-    // MARK: 11
+    // MARK: 12
 
     private static let network = Chapitre(
         id: "reseau", titre: "Playing across devices",
@@ -687,7 +732,7 @@ enum ManuelEN {
             ]),
         ])
 
-    // MARK: 12
+    // MARK: 13
 
     private static let bank = Chapitre(
         id: "questions", titre: "The questions",
@@ -713,7 +758,7 @@ enum ManuelEN {
                   + "fixed in the next version."),
         ])
 
-    // MARK: 13
+    // MARK: 14
 
     private static let tips = Chapitre(
         id: "conseils", titre: "Tips",
@@ -741,10 +786,10 @@ enum ManuelEN {
             ]),
         ])
 
-    // MARK: 14
+    // MARK: 15
 
     private static let legal = Chapitre(
-        id: "mentions", titre: "Privacy and Manuel.contact",
+        id: "mentions", titre: "Privacy and contact",
         resume: "What the app does with your data — which is nothing.",
         icone: "hand.raised.fill", teinte: Palette.dim,
         blocs: [

@@ -36,6 +36,10 @@ final class GameSession {
         case adversaireRepond
         case asking
         case revealed
+        /// Aux dés : une paire de faces, et ce qu'elle coûte. Le moteur a déjà
+        /// tout tranché à la déclaration — cette étape n'est que le récit, et
+        /// c'est la seule du jeu qui n'attende rien de personne.
+        case desLances
         /// L'assaut est fini : ce qu'il a coûté, et ce qu'il a pris.
         case summary
     }
@@ -308,11 +312,45 @@ final class GameSession {
         /// Face à face : le temps que la machine a l'air de chercher, quand sa
         /// réponse ne sera pas montrée.
         static let reflexion: Double = 2.2
+        /// Une paire de dés : deux chiffres et une phrase. Il n'y a rien à
+        /// lire d'autre, et une salve de deux dés ne doit pas durer plus
+        /// qu'une question.
+        static let des: Double = 2.6
     }
 
     /// Le temps laissé sur le résultat, selon ce qu'il y a à y lire.
     private var tempsDeVerdict: Double {
-        game.rules.mode == .faceAFace ? Tempo.verdictCroise : Tempo.verdict
+        switch game.rules.mode {
+        case .faceAFace: Tempo.verdictCroise
+        case .des:       Tempo.des
+        case .classique: Tempo.verdict
+        }
+    }
+
+    // MARK: - Les dés
+    //
+    // L'assaut aux dés arrive tranché : le moteur a joué toute la salve au
+    // moment de la déclaration. L'écran le déroule ensuite coup par coup, et
+    // il lui faut donc savoir où il en est de son récit.
+    //
+    // Le repère n'est pas un compteur que l'on remettrait à zéro quelque part
+    // — il y aurait toujours un chemin par lequel on aurait oublié de le
+    // faire, et le second assaut du tour ne montrerait rien. C'est
+    // l'identité du premier compte rendu de l'assaut : elle change quand
+    // l'assaut change, et elle ne change qu'alors.
+    private var desRacine: UUID?
+    private var desVus = 0
+
+    /// Le récit des dés est-il en retard sur le moteur ?
+    private func desARaconter(_ a: Assault) -> DuelReport? {
+        guard let premier = a.reports.first else { return nil }
+        if premier.id != desRacine {
+            desRacine = premier.id
+            desVus = 0
+        }
+        guard desVus < a.reports.count else { return nil }
+        defer { desVus += 1 }
+        return a.reports[desVus]
     }
 
     /// Ce qui reste du moment en cours, de 1 à 0. La barre du haut s'en sert
@@ -331,7 +369,8 @@ final class GameSession {
     /// appui parti trop tôt, ou le second d'un double appui, emportait le
     /// verdict avant qu'on ait pu le lire.
     var canSkip: Bool {
-        (thinking || stage == .revealed || stage == .announcing || stage == .summary)
+        (thinking || stage == .revealed || stage == .desLances
+            || stage == .announcing || stage == .summary)
             && waitPart < 0.85
     }
 
@@ -737,9 +776,9 @@ final class GameSession {
     /// Le verdict paraît, et sonne. Passer par ici plutôt que d'affecter le
     /// rapport à la main : c'est le seul endroit d'où le son part, donc aucun
     /// verdict ne peut l'oublier — la même règle que pour l'enregistrement.
-    private func devoiler(_ rapport: DuelReport) {
+    private func devoiler(_ rapport: DuelReport, etape: Stage = .revealed) {
         report = rapport
-        stage = .revealed
+        stage = etape
         guard let a = game.assault, let cote = monCote(a) else { return }
         let gagne = rapport.outcome == .attackerBreaks ? cote == a.attacker
                                                        : cote == a.defender
@@ -1100,6 +1139,22 @@ final class GameSession {
                 if Task.isCancelled { return }
                 report = nil
                 stage = nil
+                continue
+            }
+
+            // 1 bis. Les dés sont déjà jetés : l'écran les montre un par un.
+            //
+            // Rien n'attend ici de coup à jouer, ni en solitaire ni en réseau —
+            // les deux appareils ont tiré les mêmes faces de la même graine et
+            // déroulent donc le même récit, chacun chez soi. C'est la seule
+            // étape du jeu qui ne demande rien à personne, et c'est pour cela
+            // qu'elle se laisse écourter d'un doigt.
+            if game.rules.mode == .des, let a = game.assault,
+               let tour = desARaconter(a) {
+                devoiler(tour, etape: .desLances)
+                await pause(Tempo.des)
+                if Task.isCancelled { return }
+                report = nil
                 continue
             }
 

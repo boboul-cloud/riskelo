@@ -410,7 +410,7 @@ enum Manuel {
     }
 
     static let chapitresFR: [Chapitre] = [
-        premierePartie, duel, faceAFace, tour, victoire, miseEnPlace, ecran,
+        premierePartie, duel, faceAFace, desSeuls, tour, victoire, miseEnPlace, ecran,
         cartes, dossier, memoire, reseau, banque, conseils, mentions,
     ]
 
@@ -422,8 +422,9 @@ enum Manuel {
         icone: "bolt.fill", teinte: Palette.camp(0),
         blocs: [
             .p("Riskelo est un jeu de conquête : des territoires, des hommes, "
-               + "et un adversaire à déloger. Il n'y a pas de dés. Quand vous "
-               + "attaquez, une question de culture générale décide de l'issue."),
+               + "et un adversaire à déloger. Quand vous attaquez, une question de "
+               + "culture générale décide de l'issue — elle tient la place du dé. "
+               + "Qui préfère le dé peut le reprendre : c'est le troisième mode."),
             .h("Le premier tour"),
             .puces([
                 "Touchez « Partie rapide » : deux joueurs, le plateau de l'Anneau, une "
@@ -548,6 +549,52 @@ enum Manuel {
 
     // MARK: 4
 
+    private static let desSeuls = Chapitre(
+        id: "des", titre: "Les dés",
+        resume: "Le troisième mode : plus de question du tout, un dé contre un dé.",
+        icone: "dice.fill", teinte: Palette.camp(3),
+        blocs: [
+            .p("Les deux premiers modes remplacent le dé par une question. Celui-ci "
+               + "fait le chemin inverse : il n'y a plus de question du tout. On "
+               + "déclare l'assaut, les dés tombent, et la place tient ou cède."),
+            .tableau(["Ce qui sort", "Ce qu'il advient"],
+                     [["Le dé de l'assaut est le plus fort", "La place perd un homme"],
+                      ["Celui de la défense est le plus fort", "L'assaillant laisse un homme"],
+                      ["Les deux sont égaux", "La place tient — l'égalité va au défenseur"]]),
+            .p("C'est la règle du jeu de plateau, mot pour mot, et l'égalité au "
+               + "défenseur en est la pièce maîtresse : il faut faire mieux que lui, "
+               + "pas aussi bien. L'assaillant l'emporte quinze fois sur trente-six."),
+            .note("Les trois modes se jouent donc à la même longueur. La question à "
+                  + "quinze secondes donne 48 % des échanges à l'assaillant, le face à "
+                  + "face 44 %, les dés 41,7 % : une partie ne dure ni plus ni moins "
+                  + "selon ce qu'on a choisi."),
+            .h("Ce qui disparaît"),
+            .p("Il n'y a plus de terrain à choisir avant l'assaut, plus de sablier, "
+               + "plus de relance, et plus de dossier de culture à consulter : il n'y "
+               + "a rien à savoir sur personne. La mise en place retire d'elle-même le "
+               + "dosage des questions et le renfort d'érudition, qui ne portent plus "
+               + "sur rien."),
+            .h("Ce qui ne bouge pas"),
+            .p("Tout le reste : les renforts, les continents, les cartes de territoire, "
+               + "les conquêtes personnelles, le déplacement de fin de tour, le seuil "
+               + "de victoire. Un ou deux dés par assaut, comme une ou deux questions, "
+               + "et l'on n'attaque jamais avec sa garnison."),
+            .h("À qui il sert"),
+            .puces([
+                "Aux soirs où l'on ne veut pas réfléchir.",
+                "Aux joueurs trop jeunes pour les questions — la carte, les renforts et "
+                + "les continents suffisent à faire une partie.",
+                "À qui veut voir d'où vient le reste : jouez-en une aux dés, puis la "
+                + "même en classique, et la variante s'explique d'elle-même.",
+            ]),
+            .note("En réseau, les dés tombent des deux côtés sans que rien ne circule : "
+                  + "les deux appareils tirent la même suite depuis la même graine. "
+                  + "C'est le même mécanisme qui permet de reprendre une partie là où "
+                  + "on l'a laissée."),
+        ])
+
+    // MARK: 5
+
     private static let tour = Chapitre(
         id: "tour", titre: "Le tour",
         resume: "Renforts, attaques, un déplacement — puis le tour passe.",
@@ -581,7 +628,7 @@ enum Manuel {
             ]),
         ])
 
-    // MARK: 5
+    // MARK: 6
 
     private static let victoire = Chapitre(
         id: "victoire", titre: "Gagner la partie",
@@ -654,7 +701,7 @@ enum Manuel {
                + "deux voisins au lieu d'un."),
         ])
 
-    // MARK: 6
+    // MARK: 7
 
     private static let miseEnPlace = Chapitre(
         id: "reglages", titre: "La mise en place",
@@ -747,7 +794,7 @@ enum Manuel {
             ]),
         ])
 
-    // MARK: 7
+    // MARK: 8
 
     private static let ecran = Chapitre(
         id: "ecran", titre: "L'écran de jeu",
@@ -820,7 +867,7 @@ enum Manuel {
                + "répondu."),
         ])
 
-    // MARK: 8
+    // MARK: 9
 
     private static let cartes = Chapitre(
         id: "cartes", titre: "Les cartes de territoire",
@@ -855,7 +902,7 @@ enum Manuel {
                + "questions, et la culture pèse un peu plus."),
         ])
 
-    // MARK: 9
+    // MARK: 10
 
     private static let dossier = Chapitre(
         id: "dossier", titre: "Le dossier et le journal",
@@ -885,7 +932,7 @@ enum Manuel {
                + "tous."),
         ])
 
-    // MARK: 10
+    // MARK: 11
 
     private static let memoire = Chapitre(
         id: "memoire", titre: "Reprendre, marquer, revenir",
@@ -929,7 +976,7 @@ enum Manuel {
                   + "partie de travers."),
         ])
 
-    // MARK: 11
+    // MARK: 12
 
     private static let reseau = Chapitre(
         id: "reseau", titre: "Jouer à plusieurs",
@@ -1030,7 +1077,7 @@ enum Manuel {
             ]),
         ])
 
-    // MARK: 12
+    // MARK: 13
 
     private static let banque = Chapitre(
         id: "questions", titre: "Les questions",
@@ -1059,7 +1106,7 @@ enum Manuel {
                   + "corrigée dans la version suivante."),
         ])
 
-    // MARK: 13
+    // MARK: 14
 
     private static let conseils = Chapitre(
         id: "conseils", titre: "Conseils",
@@ -1087,7 +1134,7 @@ enum Manuel {
             ]),
         ])
 
-    // MARK: 14
+    // MARK: 15
 
     private static let mentions = Chapitre(
         id: "mentions", titre: "Confidentialité et contact",

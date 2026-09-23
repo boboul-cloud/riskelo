@@ -102,9 +102,7 @@ struct SetupView: View {
             GeometryReader { geo in
                 ScrollView {
                     VStack(spacing: 26) {
-                        Text(mode == .classique
-                             ? "Le dé est remplacé par une question.\nL'attaquant choisit le terrain, le défenseur répond."
-                             : "Le dé est remplacé par une question.\nLes deux la reçoivent : le plus sûr, ou le plus vif, l'emporte.")
+                        Text(enTete)
                             .font(.subheadline).foregroundStyle(Palette.dim)
                             .multilineTextAlignment(.center)
                             .padding(.top, 22)
@@ -120,6 +118,15 @@ struct SetupView: View {
                                 Text("""
                                      Les deux savent : le sablier tranche. Aucun des deux : la \
                                      place tient, comme sur une égalité de dés.
+                                     """)
+                                    .font(.caption2).foregroundStyle(Palette.dim.opacity(0.8))
+                            }
+                            if mode == .des {
+                                Text("""
+                                     Le jeu de plateau tel quel, pour les soirs où l'on ne veut \
+                                     pas réfléchir et pour les joueurs trop jeunes pour les \
+                                     questions. Tout le reste ne bouge pas : les renforts, les \
+                                     continents, les cartes, les conquêtes.
                                      """)
                                     .font(.caption2).foregroundStyle(Palette.dim.opacity(0.8))
                             }
@@ -183,6 +190,11 @@ struct SetupView: View {
 
                         }
 
+                        // Aux dés, ces deux réglages ne portent sur rien : il
+                        // n'y a ni question à doser, ni bonne réponse à
+                        // récompenser. Les laisser paraîtrait promettre des
+                        // questions qui ne viendront pas.
+                        if mode.interroge {
                         reglage("Questions") {
                             Picker("", selection: $dosage) {
                                 ForEach(Rules.Dosage.allCases) { d in
@@ -220,6 +232,7 @@ struct SetupView: View {
                                    attaque ou qu'il défende.
                                    """)
                                 .font(.caption2).foregroundStyle(Palette.dim)
+                        }
                         }
 
                         reglage("Règles du jeu") {
@@ -457,6 +470,19 @@ struct SetupView: View {
     /// question déjà vue, et c'est tout. Mais cela se voit — sans quoi le
     /// joueur ne saurait ni pourquoi ses questions cessent de revenir, ni
     /// quoi faire le jour où il aura fait le tour de la banque.
+    /// La phrase d'ouverture. Elle dit en deux lignes ce que le mode choisi
+    /// remplace — et aux dés, qu'il ne remplace rien.
+    private var enTete: LocalizedStringKey {
+        switch mode {
+        case .classique:
+            "Le dé est remplacé par une question.\nL'attaquant choisit le terrain, le défenseur répond."
+        case .faceAFace:
+            "Le dé est remplacé par une question.\nLes deux la reçoivent : le plus sûr, ou le plus vif, l'emporte."
+        case .des:
+            "Aucune question : le dé est le dé.\nUne face contre une face, et l'égalité au défenseur."
+        }
+    }
+
     private var suiviDesQuestions: some View {
         HStack(alignment: .top, spacing: 10) {
             VStack(alignment: .leading, spacing: 2) {

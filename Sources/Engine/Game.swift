@@ -469,11 +469,31 @@ struct GameState {
         guard canDeclare(from: from, to: to, questions: questions),
               let defender = owner[to] else { return false }
 
+        // Aux dés, le terrain n'existe pas : la catégorie annoncée est
+        // ignorée, et non pas seulement inutile. La machine la choisit encore
+        // dans son plan, et la garder ici lui ferait croire qu'elle a déjà
+        // usé ce thème contre ce joueur.
+        let terrain = rules.mode.interroge ? category : nil
         var a = Assault(attacker: currentPlayer.id, defender: defender,
-                        from: from, to: to, category: category, volley: questions)
+                        from: from, to: to, category: terrain, volley: questions)
+
+        if rules.mode == .des {
+            // Deux phrases entières, et non un « dé » suivi d'un « s »
+            // conditionnel : le pluriel de « dé » se fait par une lettre en
+            // français et par un mot entier en anglais, et une phrase montée
+            // morceau par morceau n'entre dans aucun catalogue de langues.
+            note(.duel, questions > 1
+                 ? dit("\(currentPlayer.name) attaque \(name(to)) depuis \(name(from)) — deux dés.")
+                 : dit("\(currentPlayer.name) attaque \(name(to)) depuis \(name(from)) — un dé."))
+            lancerLesDes(&a)
+            assault = a
+            if a.conquered { conquer(from: a.from, to: a.to, volley: a.volley) }
+            return true
+        }
+
         // Deux phrases : le thème se raccorde par « de » en français et par
         // « on » en anglais, et « au hasard » ne se raccorde à rien.
-        note(.duel, category.map { c in
+        note(.duel, terrain.map { c in
             dit("""
                 \(currentPlayer.name) attaque \(name(to)) depuis \(name(from)) — \
                 \(questions) question\(questions > 1 ? "s" : "") \(c.dansLaPhrase).
@@ -485,10 +505,58 @@ struct GameState {
         // Le terrain laissé au sort ne compte pas comme un terrain choisi :
         // la machine s'interdit de reprendre le même thème deux fois de
         // suite, et « au hasard » ne l'engage à rien.
-        if let category { lastCategoryAgainst[defender] = category }
+        if let terrain { lastCategoryAgainst[defender] = terrain }
         if !drawQuestion(&a) { assault = nil; return false }
         assault = a
         return true
+    }
+
+    /// L'assaut aux dés se tranche d'un coup.
+    ///
+    /// Il n'attend aucune réponse : tout ce qu'il va coûter est déjà connu à
+    /// la déclaration, et le moteur n'a donc rien à faire attendre. C'est
+    /// l'écran qui le raconte coup par coup — le moteur ne connaît pas la
+    /// mise en scène, et n'a jamais eu à la connaître.
+    ///
+    /// La salve s'arrête pour les mêmes raisons qu'en questions : la place est
+    /// prise, ou l'assaillant n'a plus d'homme à risquer au-delà de sa
+    /// garnison.
+    private mutating func lancerLesDes(_ a: inout Assault) {
+        while a.asked < a.volley, !a.conquered, armies(a.from) >= 2 {
+            encaisser(Combat.resolveDes(attacker: Combat.de(using: &rng),
+                                        defender: Combat.de(using: &rng)), &a)
+        }
+    }
+
+    /// Ce qu'un échange coûte, et à qui.
+    ///
+    /// C'est le seul endroit où le sang coule. La question et le dé y arrivent
+    /// par deux chemins, et en repartent avec le même compte : c'est ce qui
+    /// garantit qu'un mode ne se règle pas à côté de l'autre.
+    private mutating func encaisser(_ report: DuelReport, _ a: inout Assault) {
+        a.current = nil
+        a.defenderAnswer = nil
+        a.asked += 1
+        a.reports.append(report)
+        siege[a.to, default: 0] += 1
+
+        switch report.outcome {
+        case .defenderHolds:
+            // On n'enlève jamais à l'assaillant sa garnison : une mise de deux
+            // ne rapporte que ce que la pile d'en face peut payer.
+            let perte = max(0, min(report.mise, armies(a.from) - 1))
+            armies[a.from, default: 0] -= perte
+            a.attackerLosses += perte
+            note(.duel, recit(report, place: name(a.to), perte: perte))
+        case .attackerBreaks:
+            let perte = min(report.mise, armies(a.to))
+            armies[a.to, default: 0] -= perte
+            a.defenderLosses += perte
+            note(.duel, recit(report, place: name(a.to), perte: perte))
+        }
+
+        a.mise = 1
+        if armies(a.to) <= 0 { a.conquered = true }
     }
 
     private mutating func drawQuestion(_ a: inout Assault) -> Bool {
@@ -580,30 +648,9 @@ struct GameState {
             crediter(a.defender, duel.question.category, juste: report.correct)
         }
 
-        a.current = nil
-        a.defenderAnswer = nil
-        a.asked += 1
-        a.reports.append(report)
-        siege[a.to, default: 0] += 1
+        encaisser(report, &a)
 
-        switch report.outcome {
-        case .defenderHolds:
-            // On n'enlève jamais à l'assaillant sa garnison : une mise de deux
-            // ne rapporte que ce que la pile d'en face peut payer.
-            let perte = max(0, min(report.mise, armies(a.from) - 1))
-            armies[a.from, default: 0] -= perte
-            a.attackerLosses += perte
-            note(.duel, recit(report, place: name(a.to), perte: perte))
-        case .attackerBreaks:
-            let perte = min(report.mise, armies(a.to))
-            armies[a.to, default: 0] -= perte
-            a.defenderLosses += perte
-            note(.duel, recit(report, place: name(a.to), perte: perte))
-        }
-
-        a.mise = 1
-        if armies(a.to) <= 0 {
-            a.conquered = true
+        if a.conquered {
             assault = a
             conquer(from: a.from, to: a.to, volley: a.volley)
             return report
@@ -650,6 +697,21 @@ struct GameState {
                       """)
         case .egalite:
             return dit("Personne ne savait : \(place) tient, et l'assaillant laisse \(hommes(perte)).")
+        case .des:
+            // Les deux faces dans le journal : c'est tout ce qu'il y a eu, et
+            // sans elles la ligne ne dirait rien qu'on puisse relire.
+            if r.dice.attacker == r.dice.defender {
+                return dit("""
+                           \(r.dice.attacker) contre \(r.dice.defender) : l'égalité tient \
+                           \(place), l'assaillant laisse \(hommes(perte)).
+                           """)
+            }
+            return tient
+                ? dit("""
+                      \(r.dice.attacker) contre \(r.dice.defender) : \(place) tient, \
+                      l'assaillant laisse \(hommes(perte)).
+                      """)
+                : dit("\(r.dice.attacker) contre \(r.dice.defender) : \(place) perd \(hommes(perte)).")
         }
     }
 

@@ -388,9 +388,29 @@ struct GameStore {
                     discard(.auLoin(code: code))
                     return nil
                 }
-                return rendezVous
+                return complete(rendezVous)
             }
             .sorted { $0.quand > $1.quand }
+    }
+
+    /// Un rendez-vous posé avant que le nom des camps et le tour n'y figurent
+    /// ne dit pas contre qui l'on joue : dans une liste, toutes les parties se
+    /// ressemblent — « Partie à plusieurs · tour 1 », trois fois. On les lui
+    /// ajoute une fois, en lisant sa partie, et on le réécrit complet. La fois
+    /// d'après il n'y a plus rien à lire.
+    private func complete(_ rendezVous: RendezVous) -> RendezVous {
+        guard rendezVous.contre.isEmpty,
+              let partie = load(.auLoin(code: rendezVous.code))
+        else { return rendezVous }
+        let complet = RendezVous(
+            code: rendezVous.code, jHeberge: rendezVous.jHeberge,
+            monRang: rendezVous.monRang, compteur: rendezVous.compteur,
+            rangs: rendezVous.rangs, partieID: rendezVous.partieID,
+            quand: rendezVous.quand,
+            contre: partie.players.filter { $0.id != rendezVous.monRang }.map(\.name),
+            tour: partie.turn)
+        saveRendezVous(complet)
+        return complet
     }
 
     // MARK: - La partie

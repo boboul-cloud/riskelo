@@ -115,6 +115,25 @@ struct TiroirsTests {
         }
     }
 
+    /// Un rendez-vous d'avant ne dit pas contre qui l'on joue. Il se complète
+    /// tout seul au premier regard, en lisant sa partie — sinon la liste
+    /// afficherait « Partie à plusieurs · tour 1 » autant de fois qu'il y a de
+    /// parties, ce qui est exactement ce qu'elle existe pour éviter.
+    @Test func unRendezVousDAvantSeCompleteToutSeul() throws {
+        dansUnCoin { tiroirs, _ in
+            var avancee = partie()
+            avancee.debugSkipToAttack()
+            tiroirs.save(avancee, dans: .auLoin(code: "MARENO"))
+            tiroirs.saveRendezVous(rendezVous("MARENO", contre: [], tour: 1))
+
+            let liste = tiroirs.partiesAuLoin()
+            #expect(liste.first?.contre == ["J1"], "le camp d'en face, lu dans la partie")
+            #expect(liste.first?.tour == avancee.turn)
+            // Et réécrit : la fois d'après, il n'y a plus rien à lire.
+            #expect(tiroirs.rendezVous("MARENO")?.contre == ["J1"])
+        }
+    }
+
     /// Un rendez-vous écrit par la version d'avant n'a ni le nom de l'autre ni
     /// le tour. Il doit se relire quand même — sinon la mise à jour coûte la
     /// partie en cours.

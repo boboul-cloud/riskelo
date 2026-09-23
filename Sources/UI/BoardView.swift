@@ -48,14 +48,26 @@ struct BoardView: View {
             ZStack {
                 ForEach(session.game.map.order, id: \.self) { id in
                     if let boucles = layout.shapes[id] {
-                        contour(id, boucles: boucles, side: side,
-                                center: layout.centers[id] ?? Point(x: 0, y: 0))
+                        contour(id, boucles: boucles, side: side)
                     } else {
                         tile(id, side: side, radius: radius,
                              center: layout.centers[id] ?? Point(x: 0, y: 0))
                     }
                 }
                 traversees(side: side, radius: radius)
+                // Les noms passent au-dessus de tout le reste.
+                //
+                // Chaque territoire est une vue pleine carte, et le
+                // remplissage de celui qui vient après recouvrait donc le nom
+                // de celui d'avant : « Groenland » disparaissait sous
+                // l'Islande, « Iakoutie » sous la Sibérie. Sur un damier le cas
+                // ne se posait pas, les cases ne se recouvrant jamais.
+                if !layout.shapes.isEmpty {
+                    ForEach(session.game.map.order, id: \.self) { id in
+                        nomDessine(id, side: side,
+                                   center: layout.centers[id] ?? Point(x: 0, y: 0))
+                    }
+                }
                 fleche(side: side, radius: radius)
             }
             .frame(width: side, height: side * layout.aspect)
@@ -282,11 +294,19 @@ struct BoardView: View {
     /// Une traversée courte va tout droit. Une longue s'arque, et s'écarte du
     /// centre du plateau — ce qui la fait passer par-dessus la carte plutôt
     /// qu'au travers.
+    ///
+    /// Le seuil se mesure au **plateau** et non à la case. Pris sur la case, il
+    /// valait le dixième de la carte du monde, et dix-neuf traversées sur vingt
+    /// s'arquaient : deux sauts voisins du Groenland, arqués tous deux dans la
+    /// même direction — celle qui s'éloigne du centre —, finissaient côte à
+    /// côte et se lisaient comme un seul lien tracé deux fois. Une seule
+    /// traversée est vraiment longue, l'Alaska au Kamtchatka, et c'est la seule
+    /// qu'il faut faire passer par-dessus la carte.
     private func courbure(_ a: CGPoint, _ b: CGPoint,
                           side: CGFloat, aspect: Double, radius: CGFloat) -> CGPoint? {
         let dx = b.x - a.x, dy = b.y - a.y
         let d = (dx * dx + dy * dy).squareRoot()
-        guard d > radius * 4 else { return nil }
+        guard d > max(radius * 4, side * 0.28) else { return nil }
 
         let milieu = CGPoint(x: (a.x + b.x) / 2, y: (a.y + b.y) / 2)
         let centre = CGPoint(x: side / 2, y: side * CGFloat(aspect) / 2)
@@ -345,26 +365,20 @@ struct BoardView: View {
     /// lui-même, si bien que quarante-deux vues superposées se laissent
     /// toucher chacune à sa place.
     private func contour(_ id: TerritoryID, boucles: [[Point]],
-                         side: CGFloat, center: Point) -> some View {
+                         side: CGFloat) -> some View {
         let layout = session.game.board.layout
-        let rayon = CGFloat(layout.radius(of: id)) * side
         let forme = Contour(boucles: boucles, cote: side)
         return forme
             .fill(fill(id), style: FillStyle(eoFill: true))
             .overlay(forme.stroke(border(id), lineWidth: borderWidth(id)))
             .overlay(
+                // L'épaisseur vient du plateau et non du territoire : prise sur
+                // chacun, le trait d'un continent s'épaississait en Sibérie et
+                // s'effaçait en Islande, alors que c'est le **même** trait.
                 Brins(brins: layout.frontierPaths[id] ?? [], cote: side)
                     .stroke(Palette.continent(rang: session.game.map.tint(of: id)),
-                            style: StrokeStyle(lineWidth: max(1.5, rayon * 0.14),
+                            style: StrokeStyle(lineWidth: max(1.5, rayonOrdinaire(side) * 0.16),
                                                lineCap: .round, lineJoin: .round))
-            )
-            .overlay(
-                legende(id, radius: rayon, echelle: echelle)
-                    // Le nom tient dans la place, ou se resserre : sans largeur
-                    // imposée, « Territoires du Nord-Ouest » débordait sur la
-                    // mer et sur ses voisins.
-                    .frame(width: rayon * 3.4)
-                    .position(x: center.x * side, y: center.y * side)
             )
             .contentShape(forme)
             .onTapGesture { withAnimation(.snappy(duration: 0.11)) { session.tap(id) } }
@@ -380,6 +394,64 @@ struct BoardView: View {
         return BorderEdges(edges: bords)
             .stroke(teinte, style: StrokeStyle(lineWidth: max(1.5, radius * 0.075),
                                                lineCap: .round, lineJoin: .round))
+    }
+
+    /// Le nom et la garnison d'un territoire dessiné, posés à son pôle.
+    private func nomDessine(_ id: TerritoryID, side: CGFloat, center: Point) -> some View {
+        let rayon = CGFloat(session.game.board.layout.radius(of: id)) * side
+        return legendeDessinee(id, rayon: rayon, ordinaire: rayonOrdinaire(side))
+            // Le nom tient dans la place, ou se resserre : sans largeur
+            // imposée, « Territoires du Nord-Ouest » débordait sur la mer et
+            // sur ses voisins.
+            .frame(width: max(rayon * 3.0, 44))
+            .position(x: center.x * side, y: center.y * side)
+    }
+
+    /// Le rayon d'un territoire ordinaire de ce plateau, en points.
+    private func rayonOrdinaire(_ side: CGFloat) -> CGFloat {
+        CGFloat(session.game.board.layout.typicalRadius) * side
+    }
+
+    /// Le nom et la garnison, sur un plateau dessiné.
+    ///
+    /// Un damier a des cases égales : la même règle de taille vaut pour toutes,
+    /// et le nom peut se mesurer à la case. Une carte n'a rien d'égal — la
+    /// Sibérie fait dix fois l'Islande — et une taille prise sur le territoire
+    /// donnait un nom illisible partout sauf sur cinq places, et invisible sur
+    /// les autres. Le nom se mesure donc au plateau, avec un plancher : il est
+    /// toujours lisible, quitte à déborder un peu sur la mer.
+    ///
+    /// Deux lignes, aussi. « Territoires du Nord-Ouest » sur une seule se
+    /// réduisait à rien pour tenir, et se coupait quand même.
+    private func legendeDessinee(_ id: TerritoryID, rayon: CGFloat,
+                                 ordinaire: CGFloat) -> some View {
+        let nombre = session.game.armies(id)
+        let nom = session.game.name(id)
+        let corps = max(8, min(ordinaire * 0.44, rayon * 0.48))
+        // Le nom paraît dès que la place fait une trentaine de points à
+        // l'écran. Plus tôt, les noms se chevauchent plus qu'ils ne
+        // renseignent ; plus tard, la carte reste muette jusqu'à un
+        // rapprochement que personne ne pense à faire.
+        let large = rayon * echelle > 15
+        return VStack(spacing: 0) {
+            Text("\(nombre)")
+                .font(.system(size: max(12, min(ordinaire * 1.1, rayon * 0.75)),
+                              weight: .bold, design: .rounded))
+                .foregroundStyle(.white)
+                .shadow(color: .black.opacity(0.55), radius: 1.5, y: 1)
+                .contentTransition(.numericText())
+                .animation(.snappy(duration: 0.2), value: nombre)
+            if large {
+                Text(nom)
+                    .font(.system(size: corps, weight: .semibold))
+                    .foregroundStyle(.white.opacity(0.95))
+                    .shadow(color: .black.opacity(0.7), radius: 1.5, y: 0.5)
+                    .lineLimit(2)
+                    .multilineTextAlignment(.center)
+                    .minimumScaleFactor(0.65)
+            }
+        }
+        .allowsHitTesting(false)
     }
 
     /// Le nombre d'hommes, et le nom si la case est assez large pour le lire.

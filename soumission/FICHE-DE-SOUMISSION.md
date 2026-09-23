@@ -76,10 +76,10 @@ C'est la seule raison pour laquelle ce paragraphe existe.
 
 ### c. Le lien vers l'App Store dans la page d'invitation
 
-`serveur/src/index.js`, constante `APP_STORE` : un numéro d'exemple y attend
-la vraie adresse. C'est ce que voit celui qui reçoit une invitation sans avoir
-le jeu. À faire **après** que la fiche existe chez Apple, donc après la
-section 1, puis `npx wrangler deploy` à nouveau.
+`serveur/src/index.js`, constante `APP_STORE` : c'est ce que voit celui qui
+reçoit une invitation sans avoir le jeu. **Fait le 24 septembre 2026** : elle
+porte la vraie adresse, `https://apps.apple.com/app/riskelo/id6806804539`, et
+le serveur a été redéployé.
 
 ### d. Ce qui change dans les questionnaires
 
@@ -251,8 +251,13 @@ iPhone, iPad et Mac — une seule application, en français.
 
 ### Nouveautés de cette version — 4 000 caractères max
 
-C'est ce texte qui se colle, et il dit ce qui a changé depuis la `1.1` — rien
-d'autre : c'est ce qu'un joueur y cherche.
+**La note à coller est dans [README.md](README.md)**, en français et en
+anglais — celle de la 1.5, qui dit ce qui a changé depuis la 1.4. Riskelo est
+en vente depuis le 30 août : la case se remplit à chaque version, et c'est le
+README qui porte la note de la version en cours. Rien n'est recopié ici,
+pour qu'on ne colle pas une note périmée.
+
+<details><summary>Ce qui avait été écrit ici pour la 1.3</summary>
 
 ```
 JOUER AU LOIN
@@ -277,13 +282,7 @@ UN DÉTAIL
 • Le bouton des réglages, sur l'accueil, passe au rose : il ne désigne ni un camp ni un état du plateau, c'est la couleur d'une porte.
 ```
 
-Si Riskelo n'a toujours pas été publié quand cette version part, App Store
-Connect ne pose pas la question : une première version n'a pas de nouveautés,
-et tout est déjà dit dans la description. La case reste alors :
-
-```
-Première version de Riskelo.
-```
+</details>
 
 <details><summary>Ce qui avait été écrit pour la 1.1, depuis la 1.0</summary>
 

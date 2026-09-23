@@ -162,6 +162,7 @@ enum Atlas {
         var frontieres: [TerritoryID: [[Point]]] = [:]
         var centres: [TerritoryID: Point] = [:]
         var rayons: [TerritoryID: Double] = [:]
+        var cartouches: [TerritoryID: [LabelBox]] = [:]
 
         for p in places {
             let amas = cases[p.symbole] ?? []
@@ -189,6 +190,12 @@ enum Atlas {
             centres[id] = Point(x: (Double(pole.x) + 0.5) * echelle,
                                 y: (Double(pole.y) + 0.5) * echelle)
             rayons[id] = Double(rayon) * echelle
+            cartouches[id] = rectanglesOuEcrire(amas, pole: pole).map { r in
+                LabelBox(center: Point(x: (Double(r.x) + Double(r.largeur) / 2) * echelle,
+                                       y: (Double(r.y) + Double(r.hauteur) / 2) * echelle),
+                         width: Double(r.largeur) * echelle,
+                         height: Double(r.hauteur) * echelle)
+            }
         }
 
         let layout = BoardLayout(centers: centres,
@@ -197,7 +204,8 @@ enum Atlas {
                                  seaRoutes: routes,
                                  shapes: formes,
                                  frontierPaths: frontieres,
-                                 radii: rayons)
+                                 radii: rayons,
+                                 labelBoxes: cartouches)
         return Board(map: GameMap(territories: territoires, continents: continents),
                      layout: layout)
     }
@@ -370,5 +378,69 @@ enum Atlas {
         }
         guard let meilleur else { return (amas.first ?? Case(x: 0, y: 0), 1) }
         return (meilleur.key, meilleur.value)
+    }
+
+    /// Un rectangle de cases, compté depuis son coin haut gauche.
+    private struct Rectangle {
+        var x: Int
+        var y: Int
+        var largeur: Int
+        var hauteur: Int
+    }
+
+    /// Pour chaque hauteur, le rectangle le plus large que l'amas contienne en
+    /// entier — du plus plat au plus haut.
+    ///
+    /// Un rectangle plus bas et pas plus large qu'un autre ne servirait à
+    /// rien : il est écarté. À largeur égale, le plus proche du pôle, qui est
+    /// le cœur du territoire ; puis le plus haut et le plus à gauche, pour
+    /// qu'un plan relu deux fois écrive au même endroit.
+    ///
+    /// On essaie toutes les bandes de lignes, et dans chacune toutes les suites
+    /// de colonnes pleines : un territoire tient dans une trentaine de cases de
+    /// côté, et cela ne se fait qu'une fois, à la fabrication du plateau.
+    private static func rectanglesOuEcrire(_ amas: Set<Case>, pole: Case) -> [Rectangle] {
+        guard let minX = amas.map(\.x).min(), let maxX = amas.map(\.x).max(),
+              let minY = amas.map(\.y).min(), let maxY = amas.map(\.y).max() else { return [] }
+
+        func eloignement(_ r: Rectangle) -> Int {
+            // En demi-cases, pour rester entier.
+            let dx = 2 * r.x + r.largeur - 1 - 2 * pole.x
+            let dy = 2 * r.y + r.hauteur - 1 - 2 * pole.y
+            return dx * dx + dy * dy
+        }
+
+        var parHauteur: [Int: Rectangle] = [:]
+        for haut in minY ... maxY {
+            var pleine = Array(repeating: true, count: maxX - minX + 1)
+            for bas in haut ... maxY {
+                for x in minX ... maxX where !amas.contains(Case(x: x, y: bas)) {
+                    pleine[x - minX] = false
+                }
+                var debut = 0
+                while debut < pleine.count {
+                    guard pleine[debut] else { debut += 1; continue }
+                    var fin = debut
+                    while fin + 1 < pleine.count, pleine[fin + 1] { fin += 1 }
+                    let r = Rectangle(x: minX + debut, y: haut,
+                                      largeur: fin - debut + 1, hauteur: bas - haut + 1)
+                    if let deja = parHauteur[r.hauteur],
+                       (deja.largeur, -eloignement(deja)) >= (r.largeur, -eloignement(r)) {
+                        // Déjà mieux.
+                    } else {
+                        parHauteur[r.hauteur] = r
+                    }
+                    debut = fin + 1
+                }
+            }
+        }
+
+        var retenus: [Rectangle] = []
+        for hauteur in parHauteur.keys.sorted(by: >) {
+            guard let r = parHauteur[hauteur] else { continue }
+            if let plusHaut = retenus.last, plusHaut.largeur >= r.largeur { continue }
+            retenus.append(r)
+        }
+        return retenus.reversed()
     }
 }

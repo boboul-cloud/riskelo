@@ -167,6 +167,21 @@ struct BoardLayout {
     /// pour les deux les rendrait illisibles l'un ou l'autre.
     var radii: [TerritoryID: Double] = [:]
 
+    /// Les rectangles où l'on peut écrire dans chaque territoire, quand le
+    /// plateau est dessiné.
+    ///
+    /// Le rayon ne suffit pas : il mesure le plus grand **carré** qu'un
+    /// territoire contienne, et un nom est large et plat. Les Territoires du
+    /// Nord-Ouest sont une longue bande, où « Territoires du Nord-Ouest » tient
+    /// en entier sans rien toucher ; mesurés au carré, ils n'offraient que la
+    /// place d'un chiffre, et le nom débordait sur ses voisins.
+    ///
+    /// Plusieurs rectangles, un par hauteur — le plus large que le territoire
+    /// contienne à cette hauteur —, parce qu'un nom sur une ligne veut une
+    /// bande et un nom sur deux un pavé. C'est à la vue de choisir, elle seule
+    /// sait ce que mesure le texte.
+    var labelBoxes: [TerritoryID: [LabelBox]] = [:]
+
     /// De quoi écrire dans ce territoire : son rayon propre s'il en a un, la
     /// taille d'une case sinon.
     func radius(of id: TerritoryID) -> Double { radii[id] ?? cellRadius }
@@ -194,6 +209,14 @@ struct BoardLayout {
                          y: c.y + cellRadius * sin(angle))
         }
     }
+}
+
+/// Un rectangle entièrement contenu dans un territoire, dans les unités du
+/// plateau.
+struct LabelBox: Hashable {
+    var center: Point
+    var width: Double
+    var height: Double
 }
 
 /// Une carte et son dessin, livrés ensemble.

@@ -62,10 +62,20 @@ struct BoardView: View {
                 // de celui d'avant : « Groenland » disparaissait sous
                 // l'Islande, « Iakoutie » sous la Sibérie. Sur un damier le cas
                 // ne se posait pas, les cases ne se recouvrant jamais.
+                //
+                // Ils se posent tous ensemble, et non un à un : c'est la seule
+                // façon de savoir qu'un nom touche celui d'à côté (voir
+                // `Legendes`).
                 if !layout.shapes.isEmpty {
+                    let legendes = Legendes.placer(layout: layout, ordre: session.game.map.order,
+                                                   nom: { session.game.name($0) },
+                                                   nombre: { session.game.armies($0) },
+                                                   cote: side, echelle: echelle)
                     ForEach(session.game.map.order, id: \.self) { id in
-                        nomDessine(id, side: side,
-                                   center: layout.centers[id] ?? Point(x: 0, y: 0))
+                        if let legende = legendes[id] {
+                            EtiquetteDessinee(legende: legende, nombre: session.game.armies(id),
+                                              echelle: echelle)
+                        }
                     }
                 }
                 fleche(side: side, radius: radius)
@@ -396,62 +406,9 @@ struct BoardView: View {
                                                lineCap: .round, lineJoin: .round))
     }
 
-    /// Le nom et la garnison d'un territoire dessiné, posés à son pôle.
-    private func nomDessine(_ id: TerritoryID, side: CGFloat, center: Point) -> some View {
-        let rayon = CGFloat(session.game.board.layout.radius(of: id)) * side
-        return legendeDessinee(id, rayon: rayon, ordinaire: rayonOrdinaire(side))
-            // Le nom tient dans la place, ou se resserre : sans largeur
-            // imposée, « Territoires du Nord-Ouest » débordait sur la mer et
-            // sur ses voisins.
-            .frame(width: max(rayon * 3.0, 44))
-            .position(x: center.x * side, y: center.y * side)
-    }
-
     /// Le rayon d'un territoire ordinaire de ce plateau, en points.
     private func rayonOrdinaire(_ side: CGFloat) -> CGFloat {
         CGFloat(session.game.board.layout.typicalRadius) * side
-    }
-
-    /// Le nom et la garnison, sur un plateau dessiné.
-    ///
-    /// Un damier a des cases égales : la même règle de taille vaut pour toutes,
-    /// et le nom peut se mesurer à la case. Une carte n'a rien d'égal — la
-    /// Sibérie fait dix fois l'Islande — et une taille prise sur le territoire
-    /// donnait un nom illisible partout sauf sur cinq places, et invisible sur
-    /// les autres. Le nom se mesure donc au plateau, avec un plancher : il est
-    /// toujours lisible, quitte à déborder un peu sur la mer.
-    ///
-    /// Deux lignes, aussi. « Territoires du Nord-Ouest » sur une seule se
-    /// réduisait à rien pour tenir, et se coupait quand même.
-    private func legendeDessinee(_ id: TerritoryID, rayon: CGFloat,
-                                 ordinaire: CGFloat) -> some View {
-        let nombre = session.game.armies(id)
-        let nom = session.game.name(id)
-        let corps = max(8, min(ordinaire * 0.44, rayon * 0.48))
-        // Le nom paraît dès que la place fait une trentaine de points à
-        // l'écran. Plus tôt, les noms se chevauchent plus qu'ils ne
-        // renseignent ; plus tard, la carte reste muette jusqu'à un
-        // rapprochement que personne ne pense à faire.
-        let large = rayon * echelle > 15
-        return VStack(spacing: 0) {
-            Text("\(nombre)")
-                .font(.system(size: max(12, min(ordinaire * 1.1, rayon * 0.75)),
-                              weight: .bold, design: .rounded))
-                .foregroundStyle(.white)
-                .shadow(color: .black.opacity(0.55), radius: 1.5, y: 1)
-                .contentTransition(.numericText())
-                .animation(.snappy(duration: 0.2), value: nombre)
-            if large {
-                Text(nom)
-                    .font(.system(size: corps, weight: .semibold))
-                    .foregroundStyle(.white.opacity(0.95))
-                    .shadow(color: .black.opacity(0.7), radius: 1.5, y: 0.5)
-                    .lineLimit(2)
-                    .multilineTextAlignment(.center)
-                    .minimumScaleFactor(0.65)
-            }
-        }
-        .allowsHitTesting(false)
     }
 
     /// Le nombre d'hommes, et le nom si la case est assez large pour le lire.

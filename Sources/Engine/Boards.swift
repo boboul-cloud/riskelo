@@ -9,13 +9,15 @@
 //  voisinage saisi de travers ne plante rien, il rend un territoire imprenable
 //  et se découvre trois parties plus tard.
 //
-//  Les cartes réelles sont ici des hexagones posés sur la géographie, et non
-//  des contours relevés. On y gagne le plan qui se retouche en déplaçant une
-//  lettre, le tracé des frontières, et les tests qui vérifient à chaque
-//  compilation que le monde se tient. On y perd la silhouette des côtes — que
-//  personne ne distinguerait à cette taille sur un téléphone. Le moteur ne
-//  connaissant que le voisinage, un rendu réaliste pourra remplacer celui-ci
-//  sans qu'une ligne des règles bouge.
+//  Deux façons de dessiner, et la même garantie.
+//
+//  L'Anneau et l'Europe sont des damiers d'hexagones : une case par
+//  territoire, et le plan se retouche en déplaçant une lettre. Le Monde est
+//  une grille fine où un territoire est un amas de cases, ce qui lui rend ses
+//  côtes (voir `Atlas` et `PlanDuMonde`). Dans les deux cas les voisinages se
+//  déduisent du dessin au lieu d'être saisis, et c'est tout ce qui compte :
+//  un voisinage écrit de travers ne plante rien, il rend un territoire
+//  imprenable et se découvre trois parties plus tard.
 //
 
 import Foundation
@@ -56,7 +58,7 @@ enum Boards: String, CaseIterable, Identifiable, Codable {
         switch self {
         case .anneau: nomTraduit("Un monde inventé, cinq terres en cercle. 28 territoires.")
         case .europe: nomTraduit("De l'Atlantique à la mer Noire. 38 territoires.")
-        case .monde:  nomTraduit("Les six continents, 42 territoires — comme la boîte.")
+        case .monde:  nomTraduit("La carte du monde, 42 territoires sur six continents.")
         }
     }
 
@@ -71,8 +73,12 @@ enum Boards: String, CaseIterable, Identifiable, Codable {
         case .anneau: HexPlan.build(rows: Boards.planAnneau, continents: Boards.terresAnneau)
         case .europe: HexPlan.build(rows: Boards.planEurope, continents: Boards.terresEurope,
                                     seaRoutes: Boards.traverseesEurope)
-        case .monde:  HexPlan.build(rows: Boards.planMonde, continents: Boards.terresMonde,
-                                    seaRoutes: Boards.traverseesMonde)
+        // Le monde est le seul plateau dessiné : ses côtes viennent de la
+        // géographie et non d'un damier. Les deux autres sont des mondes
+        // inventés, et l'hexagone leur va — il dit franchement qu'ils le sont.
+        case .monde:  Atlas.build(rows: Boards.planDuMonde, terres: Boards.terresDuMonde,
+                                  places: Boards.placesDuMonde,
+                                  traversees: Boards.traverseesDuMonde)
         }
     }
 
@@ -151,59 +157,6 @@ enum Boards: String, CaseIterable, Identifiable, Codable {
         ("Écosse", "Norvège"),
     ]
 
-    // MARK: - Monde
-
-    /// Les six continents du Risk, posés comme sur la boîte : l'Amérique à
-    /// gauche, l'Asie qui occupe tout le nord-est, l'Afrique au centre-sud,
-    /// l'Océanie dans son coin. Les traversées font le reste — c'est ainsi
-    /// que le jeu d'origine relie l'Alaska au Kamtchatka.
-    static let planMonde = [
-        "N N N . E E . A A A .",
-        "N N N . E E E A A A A",
-        ". N N . E E . A A . .",
-        ". N . . F F A A A . .",
-        ". S . . F F . . . O O",
-        ". S S . F F . . . O O",
-        ". S . . . . . . . . .",
-    ]
-
-    static let terresMonde: [HexPlan.ContinentSpec] = [
-        .init(id: "N", name: "Amérique du Nord", bonus: 5,
-              names: ["Alaska", "Territoires du Nord-Ouest", "Groenland",
-                      "Alberta", "Ontario", "Québec",
-                      "Ouest des États-Unis", "Est des États-Unis",
-                      "Amérique centrale"]),
-        .init(id: "S", name: "Amérique du Sud", bonus: 2,
-              names: ["Venezuela", "Pérou", "Brésil", "Argentine"]),
-        .init(id: "E", name: "Europe", bonus: 5,
-              names: ["Islande", "Scandinavie", "Grande-Bretagne",
-                      "Europe du Nord", "Ukraine", "Europe de l'Ouest",
-                      "Europe du Sud"]),
-        .init(id: "F", name: "Afrique", bonus: 3,
-              names: ["Afrique du Nord", "Égypte", "Congo",
-                      "Afrique de l'Est", "Afrique du Sud", "Madagascar"]),
-        .init(id: "A", name: "Asie", bonus: 7,
-              names: ["Sibérie", "Iakoutie", "Kamtchatka",
-                      "Oural", "Irkoutsk", "Mongolie", "Japon",
-                      "Afghanistan", "Chine",
-                      "Moyen-Orient", "Inde", "Siam"]),
-        .init(id: "O", name: "Océanie", bonus: 2,
-              names: ["Indonésie", "Nouvelle-Guinée",
-                      "Australie occidentale", "Australie orientale"]),
-    ]
-
-    /// Trois traversées, et trois seulement.
-    ///
-    /// L'Amérique du Sud a été écartée de l'Afrique : les deux se touchaient
-    /// par le Brésil, ce qui faisait passer un continent dans l'autre à pied.
-    /// Elles sont désormais séparées par la mer, avec une seule porte —
-    /// Congo–Brésil. De même l'Océanie ne tient plus à l'Asie que par
-    /// Siam–Indonésie, qui se touchent et n'ont donc pas besoin de route.
-    static let traverseesMonde: [(String, String)] = [
-        ("Alaska", "Kamtchatka"),
-        ("Groenland", "Islande"),
-        ("Congo", "Brésil"),
-    ]
 }
 
 /// Le plateau par défaut, celui des essais et des aperçus.

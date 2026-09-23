@@ -719,7 +719,8 @@ enum Manuel {
                 ("L'Anneau", "Un monde inventé, cinq terres en cercle. 28 territoires. "
                  + "Le plus court."),
                 ("Europe", "De l'Atlantique à la mer Noire. 38 territoires, six régions."),
-                ("Monde", "Les six continents, 42 territoires — comme la boîte."),
+                ("Monde", "La carte du monde, tracée d'après les côtes réelles. "
+                 + "42 territoires sur six continents, vingt traversées."),
             ]),
             .h("Joueurs, et humains sur cet appareil"),
             .p("De deux à quatre joueurs. Le second réglage dit combien sont assis "

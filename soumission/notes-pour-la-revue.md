@@ -89,7 +89,9 @@ CONTENU
 Questions, plateaux, dessins et icône sont des créations originales. Riskelo
 est un jeu indépendant, inspiré du genre des jeux de conquête territoriale ; il
 n'emploie aucune marque, aucun visuel et aucun texte appartenant à un éditeur
-de jeu de société.
+de jeu de société. La carte du monde est tracée d'après les côtes réelles —
+longitudes et latitudes — et les noms de pays et de continents sont ceux de la
+géographie.
 
 Merci de votre lecture,
 Robert Oulhen — bob.oulhen@gmail.com

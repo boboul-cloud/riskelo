@@ -144,7 +144,7 @@ violence figurée, pas de contenu sexuel, pas de jeu d'argent, pas d'alcool ni
 de tabac, pas de contenu généré par les utilisateurs, pas d'accès web libre.
 Résultat attendu : **4+**.
 
-Le jeu est un affrontement territorial abstrait : des hexagones et des nombres,
+Le jeu est un affrontement territorial : une carte, des formes et des nombres,
 aucune représentation de violence.
 
 ## Disponibilité

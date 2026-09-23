@@ -42,13 +42,18 @@ struct BoardView: View {
         GeometryReader { geo in
             let layout = session.game.board.layout
             let side = min(geo.size.width, geo.size.height / layout.aspect)
-            let radius = layout.cellRadius * side
+            let radius = layout.typicalRadius * side
             let couvert = partCouverte(geo.frame(in: .named(Espace.ecran)))
             let repere = Repere(couvert: couvert, stage: session.stage, cible: session.target)
             ZStack {
                 ForEach(session.game.map.order, id: \.self) { id in
-                    tile(id, side: side, radius: radius,
-                         center: layout.centers[id] ?? Point(x: 0, y: 0))
+                    if let boucles = layout.shapes[id] {
+                        contour(id, boucles: boucles, side: side,
+                                center: layout.centers[id] ?? Point(x: 0, y: 0))
+                    } else {
+                        tile(id, side: side, radius: radius,
+                             center: layout.centers[id] ?? Point(x: 0, y: 0))
+                    }
                 }
                 traversees(side: side, radius: radius)
                 fleche(side: side, radius: radius)
@@ -92,7 +97,11 @@ struct BoardView: View {
             .onAppear {
                 guard !ajuste else { return }
                 ajuste = true
-                zoom = min(2.2, max(1, 54 / max(radius * 1.7, 1)))
+                // Un plateau dessiné se rapproche moins : la première chose
+                // qu'il a à montrer, c'est le monde entier. Les noms viennent
+                // sous le doigt, et les nombres se lisent déjà.
+                let plafond: CGFloat = layout.shapes.isEmpty ? 2.2 : 1.4
+                zoom = min(plafond, max(1, 54 / max(radius * 1.7, 1)))
             }
             // Trois choses appellent un recadrage, et toutes passent par ici.
             // L'étape du duel, parce que la feuille qui monte prend le bas de
@@ -324,6 +333,40 @@ struct BoardView: View {
             .frame(width: largeur, height: hauteur)
             .contentShape(Hexagon())
             .position(x: center.x * side, y: center.y * side)
+            .onTapGesture { withAnimation(.snappy(duration: 0.11)) { session.tap(id) } }
+            .animation(.easeInOut(duration: 0.16), value: session.game.armies(id))
+    }
+
+    /// Un territoire dessiné : son contour, son trait de frontière, son nom.
+    ///
+    /// Il occupe toute la carte et non un petit cadre posé à son centre : le
+    /// contour est donné en coordonnées de plateau, et le découper en cadres
+    /// obligerait à le replier sur lui-même. La zone sensible est le contour
+    /// lui-même, si bien que quarante-deux vues superposées se laissent
+    /// toucher chacune à sa place.
+    private func contour(_ id: TerritoryID, boucles: [[Point]],
+                         side: CGFloat, center: Point) -> some View {
+        let layout = session.game.board.layout
+        let rayon = CGFloat(layout.radius(of: id)) * side
+        let forme = Contour(boucles: boucles, cote: side)
+        return forme
+            .fill(fill(id), style: FillStyle(eoFill: true))
+            .overlay(forme.stroke(border(id), lineWidth: borderWidth(id)))
+            .overlay(
+                Brins(brins: layout.frontierPaths[id] ?? [], cote: side)
+                    .stroke(Palette.continent(rang: session.game.map.tint(of: id)),
+                            style: StrokeStyle(lineWidth: max(1.5, rayon * 0.14),
+                                               lineCap: .round, lineJoin: .round))
+            )
+            .overlay(
+                legende(id, radius: rayon, echelle: echelle)
+                    // Le nom tient dans la place, ou se resserre : sans largeur
+                    // imposée, « Territoires du Nord-Ouest » débordait sur la
+                    // mer et sur ses voisins.
+                    .frame(width: rayon * 3.4)
+                    .position(x: center.x * side, y: center.y * side)
+            )
+            .contentShape(forme)
             .onTapGesture { withAnimation(.snappy(duration: 0.11)) { session.tap(id) } }
             .animation(.easeInOut(duration: 0.16), value: session.game.armies(id))
     }

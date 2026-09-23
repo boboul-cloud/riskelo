@@ -149,6 +149,41 @@ struct BoardLayout {
     /// une liaison qui n'existe pas, du point de vue du joueur.
     var seaRoutes: [SeaRoute] = []
 
+    /// Le contour de chaque territoire, quand le plateau en a un.
+    ///
+    /// Plusieurs boucles par territoire, parce qu'un territoire peut être fait
+    /// de plusieurs îles — l'Indonésie en a quatre. Vide, c'est un plateau
+    /// d'hexagones : la vue retombe alors sur `corners(of:)`.
+    var shapes: [TerritoryID: [[Point]]] = [:]
+
+    /// Les brins du contour qui donnent sur la mer ou sur une autre terre.
+    /// Ils sortent du même parcours que le contour, et tombent donc dessus au
+    /// point près.
+    var frontierPaths: [TerritoryID: [[Point]]] = [:]
+
+    /// De quelle place on dispose au centre de chaque territoire pour y écrire.
+    /// Sur un plateau dessiné, un territoire n'a pas la taille de son voisin —
+    /// l'Islande n'a pas celle de la Sibérie — et une seule taille de lettre
+    /// pour les deux les rendrait illisibles l'un ou l'autre.
+    var radii: [TerritoryID: Double] = [:]
+
+    /// De quoi écrire dans ce territoire : son rayon propre s'il en a un, la
+    /// taille d'une case sinon.
+    func radius(of id: TerritoryID) -> Double { radii[id] ?? cellRadius }
+
+    /// Le rayon d'un territoire ordinaire de ce plateau.
+    ///
+    /// Tout ce qui ne vise pas un territoire en particulier s'en sert : la
+    /// flèche d'assaut, l'épaisseur des traversées, et le rapprochement de
+    /// départ. Sur un damier, c'est la case ; sur un plateau dessiné, c'est la
+    /// médiane — la moyenne se ferait tirer par la Sibérie, et tout le reste
+    /// paraîtrait à sa mesure.
+    var typicalRadius: Double {
+        guard !radii.isEmpty else { return cellRadius }
+        let tries = radii.values.sorted()
+        return tries[tries.count / 2]
+    }
+
     /// Sommets de la case, prêts à tracer.
     func corners(of id: TerritoryID) -> [Point] {
         guard let c = centers[id] else { return [] }

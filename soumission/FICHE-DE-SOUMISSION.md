@@ -508,7 +508,8 @@ envoyées ne comptent pas comme collectées.
 ### Classification par âge
 
 Répondre **Aucun / Jamais** à toutes les questions : pas de violence figurée
-(le jeu est fait d'hexagones et de nombres), pas de contenu sexuel, pas de jeu
+(le jeu est fait d'une carte, de formes et de nombres), pas de contenu sexuel,
+pas de jeu
 d'argent, pas d'alcool ni de tabac, pas de contenu généré par les
 utilisateurs, pas d'accès web libre. Résultat attendu : **4+**.
 

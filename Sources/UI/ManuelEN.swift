@@ -377,7 +377,8 @@ enum ManuelEN {
                 ("The Ring", "An invented world, five lands in a circle. 28 territories. "
                  + "The shortest game."),
                 ("Europe", "From the Atlantic to the Black Sea. 38 territories, six regions."),
-                ("World", "The six continents, 42 territories — like the box."),
+                ("World", "The world map, drawn from real coastlines. 42 territories "
+                 + "across six continents, twenty sea crossings."),
             ]),
             .h("Players, and humans on this device"),
             .p("Two to four players. The second setting says how many are sitting in "

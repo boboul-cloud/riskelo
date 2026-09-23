@@ -23,9 +23,9 @@ Ensuite, dans l'ordre :
 2. **Créer la fiche du jeu** sur `appstoreconnect.apple.com`. C'est le moment
    où le nom « Riskelo » est réservé à vous. Les valeurs à saisir sont en
    section 1, les adresses du site en section 2.
-3. **Refaire les captures d'écran** — celles qui sont rangées datent du
-   9 septembre et montrent un accueil qui n'existe plus. Une commande les
-   refait toutes : section 7.
+3. **Finir les captures d'écran** — l'iPad et le 6,5 pouces ont été refaits le
+   17 septembre, dans les deux langues. Il manque la seule taille d'iPhone
+   qu'Apple exige, le 6,9 pouces : section 7.
 4. **Envoyer l'application** depuis votre Mac — deux commandes et un bouton,
    en section 8.
 5. **Recopier les textes** de la section 4 dans les cases du site, répondre
@@ -635,23 +635,35 @@ Robert Oulhen — bob.oulhen@gmail.com
 
 ## 7. Les captures d'écran
 
-> **À refaire avant le dépôt — 16 septembre 2026.** Les dix-huit fichiers
-> datent du 9 septembre, et l'accueil a changé deux fois depuis : les packs
-> s'y sont ajoutés, puis « Jouer à plusieurs » est monté en tête. La sixième
-> capture montre donc un écran d'accueil qui n'existe plus — trois boutons au
-> lieu de cinq. Apple rejette une capture qui ne correspond pas à l'app.
+**Où on les dépose.** Sur la page de la version 1.3, au menu de langue en haut
+de la page : sur *Français (France)* pour les séries françaises, sur
+*Anglais (É.-U.)* pour les anglaises. Les cases changent avec la langue, et
+elles sont rangées par taille d'appareil.
+
+Vingt-neuf fichiers, un dossier par langue puis un par taille, dans
+`soumission/captures/` :
+
+| Dossier | Langue | Taille | Résolution | Nombre | Exigée ? |
+|---|---|---|---|---|---|
+| `captures/fr/iphone-6.9/` | français | iPhone 6,9 pouces | 1320 × 2868 | 6 | oui — mais **périmée**, 30 août |
+| `captures/fr/iphone-6.5/` | français | iPhone 6,5 pouces | 1242 × 2688 | 6 | non — fournie quand même |
+| `captures/fr/ipad-13/` | français | iPad 13 pouces | 2064 × 2752 | 5 | oui, si l'iPad est proposé |
+| `captures/en/iphone-6.9/` | anglais | iPhone 6,9 pouces | — | **0** | oui — **manquante** |
+| `captures/en/iphone-6.5/` | anglais | iPhone 6,5 pouces | 1242 × 2688 | 8 | non — fournie quand même |
+| `captures/en/ipad-13/` | anglais | iPad 13 pouces | 2064 × 2752 | 4 | oui, si l'iPad est proposé |
+| — | — | Mac | 2880 × 1800 (16:10) | 0 | seulement si le Mac part aussi |
+
+> **Ce qui bloque aujourd'hui — 17 septembre 2026.** Le 6,9 pouces est la seule
+> taille d'iPhone exigée, et les séries prises le 17 septembre sont toutes en
+> 6,5 pouces. Côté anglais il n'y a rien du tout ; côté français il reste celle
+> du 30 août, dont le sixième écran montre un accueil à trois boutons qui
+> n'existe plus. Une série 6,9 pouces neuve est à prendre dans les deux
+> langues avant de déposer.
 >
-> Une commande les refait toutes (voir plus bas). L'outil, lui, n'a pas besoin
-> d'être retouché : il ne s'appuie sur aucun libellé qui ait changé.
-
-Dix-huit fichiers, six par taille, dans `soumission/captures/` :
-
-| Dossier | Taille | Résolution | Exigée ? |
-|---|---|---|---|
-| `captures/iphone-6.9/` | iPhone 6,9 pouces | 1320 × 2868 | oui |
-| `captures/iphone-6.5/` | iPhone 6,5 pouces | 1242 × 2688 | non — fournie quand même |
-| `captures/ipad-13/` | iPad 13 pouces | 2064 × 2752 | oui, si l'iPad est proposé |
-| — | Mac | 2880 × 1800 (16:10) | seulement si le Mac part aussi |
+> Sept autres captures ont été mises de côté dans `captures/_ecartees/` — deux
+> montages, un doublon, et quatre qui montrent du français dans l'app anglaise
+> ou de l'anglais dans l'app française. Le détail est dans
+> [captures-decran.md](captures-decran.md).
 
 Une capture d'iPhone 6,9" suffit pour toutes les autres tailles d'iPhone.
 Minimum une par taille, maximum dix.
@@ -670,10 +682,11 @@ résultats de recherche :
 6. **L'accueil** — il ne dit pas ce qu'est le jeu, d'où la dernière place, mais
    il montre l'icône et le seul bouton dont on ait besoin pour commencer.
 
-Pour les refaire — après un changement d'écran, ou à la prochaine version —
-`outils/captures.py` joue la partie tout seul sur les trois appareils, prend
-les six écrans, règle la barre d'état à 9:41 et range le tout aux noms
-ci-dessus :
+Pour refaire la série française — après un changement d'écran, ou à la
+prochaine version — `outils/captures.py` joue la partie tout seul sur les
+trois appareils, prend les six écrans, règle la barre d'état à 9:41 et range
+le tout dans `captures/fr/`. Il ne sait pas prendre l'anglaise : il clique des
+boutons qu'il appelle par leur nom français.
 
 ```bash
 xcodebuild -project Riskelo.xcodeproj -scheme Riskelo \
@@ -812,8 +825,10 @@ une question de calendrier, plus d'un obstacle technique.
 - [ ] Archive envoyée, build traitée et visible dans la fiche
 - [ ] Essai TestFlight sur un appareil réel
 - [ ] Textes de la section 4 collés
-- [x] Captures prises — 18 fichiers dans `soumission/captures/`
-- [ ] Captures déposées (iPhone 6,9" et iPad 13" au minimum)
+- [x] Captures prises — 29 fichiers dans `soumission/captures/`, deux langues
+      (dont 23 du 17 septembre)
+- [ ] **Série iPhone 6,9" à refaire** — français périmé, anglais absent
+- [ ] Captures déposées, langue par langue (iPhone 6,9" et iPad 13" au minimum)
 - [ ] Questionnaires de la section 5 remplis
 - [ ] Notes de la section 6 collées
 - [ ] Prix et disponibilité choisis

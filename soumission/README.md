@@ -73,9 +73,13 @@ dossier `docs/` de ce dépôt :
 ### Les fiches App Store Connect
 
 - [ ] Métadonnées collées depuis [metadonnees.md](metadonnees.md)
-- [x] Captures d'écran prises — 18 fichiers dans `captures/`, engendrées par
-      `outils/captures.py` ; voir [captures-decran.md](captures-decran.md)
-- [ ] Captures d'écran déposées dans App Store Connect
+- [x] Captures d'écran prises — 29 fichiers dans `captures/`, un dossier par
+      langue ; voir [captures-decran.md](captures-decran.md)
+- [ ] **Série iPhone 6,9 pouces à refaire** — la seule taille exigée : la
+      française date du 30 août et montre un accueil périmé, l'anglaise
+      n'existe pas
+- [ ] Captures d'écran déposées dans App Store Connect, langue par langue —
+      le menu de langue en haut de la page de la version commande les cases
 - [ ] Questionnaire de confidentialité rempli — voir
       [confidentialite-app-store.md](confidentialite-app-store.md)
 - [ ] Classification par âge : répondre « Aucun » partout → **4+**

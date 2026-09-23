@@ -174,9 +174,33 @@ françaises. C'est la règle : la table joue la langue de celui qui l'ouvre.
 
 ## Les captures d'écran
 
-Une série par langue. Celles de l'anglais restent à prendre — l'app se lance
-en anglais avec `-AppleLanguages "(en)"`, ce qui évite de changer la langue du
-simulateur.
+Une série par langue, et c'est le menu de langue en haut de la page de la
+version qui décide où elles tombent : sur *Anglais (É.-U.)*, les cases à
+images sont celles de la fiche anglaise.
+
+L'anglais a été pris à la main le 17 septembre — l'app se lance en anglais
+avec `-AppleLanguages "(en)"`, ce qui évite de changer la langue du
+simulateur. `outils/captures.py`, lui, ne sait pas la prendre tout seul : il
+clique des boutons qu'il appelle par leur nom, et ces noms sont français.
+
+| Dossier | Taille | Nombre |
+|---|---|---|
+| `captures/en/iphone-6.9/` | 1320 × 2868 | **0 — manquante, et c'est la seule exigée** |
+| `captures/en/iphone-6.5/` | 1242 × 2688 | 8 |
+| `captures/en/ipad-13/` | 2064 × 2752 | 4 |
+
+Deux choses vues en rangeant la série anglaise, et qui la regardent :
+
+- **Le salon parle français dans l'app anglaise.** « Ouvrir la table » et
+  « Rejoindre une table » sont écrits en clair dans
+  `Sources/UI/LobbyView.swift`, lignes 113 et 118, et manquent au catalogue
+  `Resources/Localizable.xcstrings` — ce sont les deux seules chaînes de
+  l'interface dans ce cas. La capture qui les montre est dans
+  `captures/_ecartees/`, et l'écran est celui qu'un relecteur atteint en deux
+  touches depuis l'accueil.
+- **Les deux séries ne montrent pas les mêmes écrans.** L'anglaise a les
+  réglages et pas de plateau vide, la française l'inverse. Rien ne l'interdit ;
+  cela se décide.
 
 ## Ce qui change dans le binaire
 

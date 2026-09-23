@@ -79,7 +79,7 @@ struct GameTests {
         g.debugSkipToAttack()
         let mien = g.territories(of: 0).first { g.armies($0) == 1 && !g.targets(from: $0).isEmpty }
         if let mien {
-            #expect(g.maxQuestions(from: mien) == 0)
+            #expect(g.volleyMax(from: mien) == 0)
             let cible = g.targets(from: mien)[0]
             #expect(g.declareAssault(from: mien, to: cible, questions: 1, category: .histoire) == false)
         }
@@ -90,7 +90,7 @@ struct GameTests {
         g.debugSkipToAttack()
         let base = g.territories(of: 0).first { g.armies($0) >= 4 && !g.targets(from: $0).isEmpty }
         guard let base else { return }
-        #expect(g.maxQuestions(from: base) == 2)
+        #expect(g.volleyMax(from: base) == 2)
         #expect(g.declareAssault(from: base, to: g.targets(from: base)[0],
                                  questions: 3, category: .histoire) == false)
     }

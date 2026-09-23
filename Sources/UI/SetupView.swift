@@ -123,10 +123,10 @@ struct SetupView: View {
                             }
                             if mode == .des {
                                 Text("""
-                                     Le jeu de plateau tel quel, pour les soirs où l'on ne veut \
-                                     pas réfléchir et pour les joueurs trop jeunes pour les \
-                                     questions. Tout le reste ne bouge pas : les renforts, les \
-                                     continents, les cartes, les conquêtes.
+                                     Le jeu de plateau tel quel : l'assaillant lance jusqu'à \
+                                     trois dés, le défenseur deux, et les mains triées se \
+                                     comparent paire par paire. Un même jet peut coûter un homme \
+                                     à chacun. Tout le reste ne bouge pas.
                                      """)
                                     .font(.caption2).foregroundStyle(Palette.dim.opacity(0.8))
                             }
@@ -479,7 +479,7 @@ struct SetupView: View {
         case .faceAFace:
             "Le dé est remplacé par une question.\nLes deux la reçoivent : le plus sûr, ou le plus vif, l'emporte."
         case .des:
-            "Aucune question : le dé est le dé.\nUne face contre une face, et l'égalité au défenseur."
+            "Aucune question : le dé est le dé.\nTrois dés contre deux, et l'égalité au défenseur."
         }
     }
 

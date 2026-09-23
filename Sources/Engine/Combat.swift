@@ -30,15 +30,24 @@
 //  savant lent — elle ne sert qu'à trancher ce que le Risk tranchait par le
 //  chiffre du dé.
 //
-//  Aux **dés**, enfin, il n'y a plus de question du tout : une face contre une
-//  face, l'égalité au défenseur. C'est le chemin inverse des deux autres —
-//  ceux-ci traduisent une réponse en dé, celui-là se passe de la traduction.
+//  Aux **dés**, enfin, il n'y a plus de question du tout, et l'on joue la règle
+//  du plateau telle quelle : l'assaillant lance jusqu'à **trois** dés, le
+//  défenseur jusqu'à **deux**, on trie chaque main du plus fort au plus faible
+//  et l'on compare paire par paire. Chaque comparaison coûte un homme à celui
+//  qui a le dé le plus faible, l'égalité allant au défenseur.
 //
-//  L'économie ne change pas d'un mode à l'autre, et ce n'est pas un hasard :
-//  un dé contre un dé, égalité au défenseur, l'assaillant l'emporte 15 fois
-//  sur 36, soit 41,7 % — la part même que la question lui donne à quinze
-//  secondes de sablier (48 %) et que le face à face lui rend (44 %). Les trois
-//  modes se jouent donc à la même longueur ; seul change ce qui décide.
+//  Un même lancer peut donc coûter un homme à chacun — c'est la seule chose
+//  qu'aucun des deux autres modes ne sait faire, une question n'ayant qu'un
+//  perdant. C'est aussi ce qui rend l'assaut rentable : à trois dés contre
+//  deux, l'assaillant perd 0,92 homme quand le défenseur en perd 1,08, et
+//  l'attaque finit par payer là où la question la décourage.
+//
+//  La partie garde pourtant sa forme. Mesuré sur des parties à trois menées
+//  par la machine contre elle-même : huit tours aux dés, sept en classique,
+//  huit en face à face. Ce qui change est le nombre d'échanges — 66 aux dés
+//  contre 116 et 140 — puisqu'un jet prend jusqu'à deux hommes là où une
+//  question n'en prend qu'un. Autant de tours, moitié moins d'écrans : c'est
+//  exactement ce qu'on vient chercher un soir où l'on ne veut pas réfléchir.
 //
 
 import Foundation
@@ -126,8 +135,47 @@ struct DuelReport: Equatable, Identifiable {
     var mise = 1
     let dice: DiceEquivalence
     let allowance: TimeInterval
+    /// Le lancer entier, aux dés : jusqu'à trois faces contre deux. `dice` n'en
+    /// garde que la première paire, qui suffit aux deux autres modes.
+    var lancer: Lancer?
+
+    /// Ce que l'échange coûte à chacun.
+    ///
+    /// Une question n'a qu'un perdant : c'est `mise`, du côté qui cède. Un
+    /// lancer de dés en a parfois deux — trois dés contre deux, et chacun
+    /// ramasse une paire. Tout le reste du moteur passe par ces deux nombres,
+    /// et n'a donc pas à savoir lequel des trois modes est en cours.
+    var coutAttaquant: Int {
+        lancer?.perteAttaquant ?? (outcome == .defenderHolds ? mise : 0)
+    }
+    var coutDefenseur: Int {
+        lancer?.perteDefenseur ?? (outcome == .attackerBreaks ? mise : 0)
+    }
 
     static func == (a: DuelReport, b: DuelReport) -> Bool { a.id == b.id }
+}
+
+/// Un lancer : jusqu'à trois dés contre deux.
+///
+/// Les deux mains sont triées du plus fort au plus faible — c'est dans cet
+/// ordre qu'elles se comparent, et dans cet ordre qu'elles se montrent. Le
+/// troisième dé de l'assaillant n'a pas de vis-à-vis : il ne sert qu'à lui
+/// donner de meilleures chances sur les deux premiers.
+struct Lancer: Equatable {
+    var attaque: [Int]
+    var defense: [Int]
+
+    /// Le nombre de paires réellement comparées.
+    var paires: Int { min(attaque.count, defense.count) }
+
+    /// Qui cède, paire par paire. L'égalité va au défenseur : il faut faire
+    /// mieux que lui, pas aussi bien.
+    var issues: [DuelOutcome] {
+        (0 ..< paires).map { attaque[$0] > defense[$0] ? .attackerBreaks : .defenderHolds }
+    }
+
+    var perteDefenseur: Int { issues.filter { $0 == .attackerBreaks }.count }
+    var perteAttaquant: Int { issues.filter { $0 == .defenderHolds }.count }
 }
 
 /// Un assaut : une déclaration, puis une ou deux questions.
@@ -267,19 +315,34 @@ enum Combat {
         Int.random(in: 1 ... 6, using: &rng)
     }
 
-    /// Les dés, sans question : une face contre une face.
+    /// Le lancer : les deux mains tirées et triées.
+    static func lancer<G: RandomNumberGenerator>(attaque: Int, defense: Int,
+                                                 using rng: inout G) -> Lancer {
+        Lancer(attaque: (0 ..< max(0, attaque)).map { _ in de(using: &rng) }.sorted(by: >),
+               defense: (0 ..< max(0, defense)).map { _ in de(using: &rng) }.sorted(by: >))
+    }
+
+    /// Ce qu'un lancer a donné.
     ///
-    /// L'égalité profite au défenseur — c'est la règle du Risk, et c'est aussi
-    /// celle que les deux autres modes appliquent déjà, l'un faute d'avoir un
-    /// match nul à offrir, l'autre quand aucun des deux joueurs ne sait.
-    static func resolveDes(attacker: Int, defender: Int, mise: Int = 1) -> DuelReport {
+    /// `outcome` ne dit plus qu'une chose — la place a-t-elle tenu — et ne
+    /// suffit donc plus à compter les pertes : un lancer partagé un partout
+    /// laisse la place debout tout en coûtant un homme à chacun. Ce sont
+    /// `coutAttaquant` et `coutDefenseur` qui font foi.
+    static func resolveDes(_ lancer: Lancer) -> DuelReport {
         DuelReport(question: nil,
                    answer: nil,
                    correct: false,
-                   outcome: attacker > defender ? .attackerBreaks : .defenderHolds,
+                   outcome: lancer.perteDefenseur > lancer.perteAttaquant
+                            ? .attackerBreaks : .defenderHolds,
                    verdict: .des,
-                   mise: mise,
-                   dice: DiceEquivalence(attacker: attacker, defender: defender),
-                   allowance: 0)
+                   dice: DiceEquivalence(attacker: lancer.attaque.first ?? 0,
+                                         defender: lancer.defense.first ?? 0),
+                   allowance: 0,
+                   lancer: lancer)
+    }
+
+    /// Un dé contre un dé, pour ce qui n'en demande pas plus.
+    static func resolveDes(attacker: Int, defender: Int) -> DuelReport {
+        resolveDes(Lancer(attaque: [attacker], defense: [defender]))
     }
 }

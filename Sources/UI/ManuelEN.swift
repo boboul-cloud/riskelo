@@ -220,19 +220,35 @@ enum ManuelEN {
         icone: "dice.fill", teinte: Palette.camp(3),
         blocs: [
             .p("The first two modes replace the die with a question. This one goes "
-               + "the other way: there is no question at all. You declare the "
-               + "assault, the dice fall, and the place holds or gives."),
-            .tableau(["What comes up", "What follows"],
+               + "the other way: there is no question at all, and you play the board "
+               + "game's rule as it stands. You declare the assault, the dice fall, "
+               + "and everything is settled at once."),
+            .h("The throw"),
+            .p("The attacker calls one, two or three dice — one troop more than the "
+               + "dice called, since you never attack with your garrison. The defender "
+               + "answers with two, or one if a single troop holds the place; they do "
+               + "not choose, the second die always being in their favour."),
+            .p("Both hands are sorted highest to lowest and compared pair by pair: best "
+               + "against best, then next against next. The attacker's third die faces "
+               + "no one — it only makes the other two better."),
+            .tableau(["On one pair", "What follows"],
                      [["The attacking die is higher", "The place loses a troop"],
                       ["The defending die is higher", "The attacker leaves a troop"],
-                      ["The two are equal", "The place holds — ties go to the defender"]]),
-            .p("This is the board game's rule, word for word, and the tie going to "
-               + "the defender is the heart of it: you have to do better than them, "
-               + "not as well. The attacker wins fifteen throws out of thirty-six."),
-            .note("All three modes therefore run to the same length. A question on a "
-                  + "fifteen-second timer gives the attacker 48 % of exchanges, the "
-                  + "showdown 44 %, the dice 41.7 %: a game lasts no longer and no "
-                  + "shorter for the mode you picked."),
+                      ["The two are equal", "The tie goes to the defender"]]),
+            .p("The tie going to the defender is the heart of it: you have to do better "
+               + "than them, not as well. One throw can therefore cost each side a "
+               + "troop — the one thing neither of the other modes can do, a question "
+               + "never having more than one loser."),
+            .note("At three dice against two, the attacker loses 0.92 troops where the "
+                  + "defender loses 1.08: attacking pays here, where the question "
+                  + "discourages it. Always throw everything you can — the defender "
+                  + "answers with two dice whatever happens."),
+            .note("The game keeps its shape all the same. Measured over three-player "
+                  + "games played by the machine: eight turns with dice, seven in "
+                  + "classic, eight in showdown. What changes is the number of "
+                  + "exchanges — 66 instead of 116 — since a throw takes up to two "
+                  + "troops where a question takes one. As many turns, half as many "
+                  + "screens."),
             .h("What goes away"),
             .p("No subject to choose before an assault, no timer, no raise, and no "
                + "knowledge file to consult: there is nothing to know about anyone. "
@@ -240,9 +256,9 @@ enum ManuelEN {
                + "own, since neither has anything left to act on."),
             .h("What stays"),
             .p("Everything else: reinforcements, continents, territory cards, private "
-               + "objectives, the end-of-turn move, the victory threshold. One or two "
-               + "dice per assault, just as one or two questions, and you never attack "
-               + "with your garrison."),
+               + "objectives, the end-of-turn move, the victory threshold. And the "
+               + "garrison moving into a captured place can never be fewer than the "
+               + "number of dice thrown, just as in the board game."),
             .h("Who it is for"),
             .puces([
                 "Evenings when you would rather not think.",
@@ -329,6 +345,7 @@ enum ManuelEN {
             .h("On Europe"),
             .puces(ManuelEN.conquests(.europe)),
             .h("On the World"),
+            .p("Both Worlds carry the same six lands: these cards hold for either one."),
             .puces(ManuelEN.conquests(.monde)),
             .p("At three players and above, one card per side is added: \"wipe out "
                + "Red's side\", or Green's, Amber's or Purple's — and never your own."),
@@ -377,8 +394,10 @@ enum ManuelEN {
                 ("The Ring", "An invented world, five lands in a circle. 28 territories. "
                  + "The shortest game."),
                 ("Europe", "From the Atlantic to the Black Sea. 38 territories, six regions."),
-                ("World", "The world map, drawn from real coastlines. 42 territories "
-                 + "across six continents, twenty sea crossings."),
+                ("World", "The six continents in hexagons. 42 territories, three sea "
+                 + "crossings — Asia fits in eleven cells."),
+                ("Real World", "The same map, drawn from real coastlines. 42 territories, "
+                 + "twenty sea crossings, and Kamchatka back at its true distance."),
             ]),
             .h("Players, and humans on this device"),
             .p("Two to four players. The second setting says how many are sitting in "

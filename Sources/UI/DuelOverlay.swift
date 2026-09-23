@@ -60,27 +60,43 @@ struct DuelOverlay: View {
 
     // MARK: - Les dés
 
-    /// Une paire de faces, et ce qu'elle coûte.
+    /// Un lancer entier : jusqu'à trois faces contre deux, en colonnes.
     ///
-    /// Il n'y a rien d'autre à montrer, et c'est exactement le propos du mode :
-    /// l'écran qui remplaçait le lancer de dés redevient un lancer de dés. La
-    /// feuille garde pourtant sa taille — les hommes tombent derrière elle sur
-    /// le plateau, et c'est là qu'il faut pouvoir regarder.
+    /// Les colonnes sont la règle, pas un choix de mise en page. Au jeu de
+    /// plateau on aligne les deux mains triées et l'on compare ce qui se fait
+    /// face ; une ligne de dés à gauche et une à droite ne dirait pas quel dé
+    /// affronte quel dé, et c'est pourtant tout ce qu'il y a à lire.
+    ///
+    /// Le troisième dé de l'assaillant n'a pas de vis-à-vis : il paraît en
+    /// retrait, sous un tiret, parce qu'il n'a rien décidé lui-même — il a
+    /// seulement rendu les deux autres meilleurs.
     @ViewBuilder private var lancer: some View {
-        if let r = session.report, let a = session.assault {
-            VStack(spacing: 20) {
+        if let r = session.report, let a = session.assault, let l = r.lancer {
+            let colonnes = max(l.attaque.count, l.defense.count)
+            VStack(spacing: 18) {
                 Text("\(session.player(a.attacker)?.name ?? "?") attaque \(session.game.name(a.to))")
                     .font(.subheadline.weight(.medium))
                     .foregroundStyle(Palette.dim)
 
-                HStack(spacing: 18) {
-                    DeQuiRoule(face: r.dice.attacker, legende: "assaut",
-                               teinte: Palette.camp(a.attacker), cle: r.id)
-                    Image(systemName: signeDesDes(r))
-                        .font(.title2.weight(.bold))
-                        .foregroundStyle(Palette.dim)
-                    DeQuiRoule(face: r.dice.defender, legende: "défense",
-                               teinte: Palette.camp(a.defender), cle: r.id)
+                Grid(horizontalSpacing: 8, verticalSpacing: 3) {
+                    GridRow {
+                        etiquette("assaut", Palette.camp(a.attacker))
+                        ForEach(0 ..< colonnes, id: \.self) { k in
+                            deDuLancer(l.attaque, k, teinte: Palette.camp(a.attacker),
+                                       cle: r.id, comparee: k < l.paires)
+                        }
+                    }
+                    GridRow {
+                        Color.clear.frame(width: 1, height: 14)
+                        ForEach(0 ..< colonnes, id: \.self) { k in marqueur(l, k) }
+                    }
+                    GridRow {
+                        etiquette("défense", Palette.camp(a.defender))
+                        ForEach(0 ..< colonnes, id: \.self) { k in
+                            deDuLancer(l.defense, k, teinte: Palette.camp(a.defender),
+                                       cle: r.id, comparee: k < l.paires)
+                        }
+                    }
                 }
 
                 Text(verdictTexte(r))
@@ -88,13 +104,6 @@ struct DuelOverlay: View {
                     .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)
                     .foregroundStyle(couleurDuVerdict(r))
-
-                // Le rang du dé dans la salve : sans lui, deux dés qui tombent
-                // sur la même face donnent l'impression que l'écran s'est figé.
-                if a.volley > 1 {
-                    Text("Dé \(min(a.asked, a.reports.count)) sur \(a.volley)")
-                        .font(.caption2).foregroundStyle(Palette.dim.opacity(0.8))
-                }
             }
             .foregroundStyle(Palette.ink)
             .frame(maxWidth: .infinity)
@@ -102,9 +111,43 @@ struct DuelOverlay: View {
         }
     }
 
-    private func signeDesDes(_ r: DuelReport) -> String {
-        if r.dice.attacker == r.dice.defender { return "equal" }
-        return r.dice.attacker > r.dice.defender ? "greaterthan" : "lessthan"
+    private func etiquette(_ mot: String.LocalizationValue, _ teinte: Color) -> some View {
+        Text(dit(mot))
+            .font(.caption2.weight(.semibold))
+            .foregroundStyle(teinte)
+            .gridColumnAlignment(.trailing)
+    }
+
+    private func deDuLancer(_ main: [Int], _ k: Int, teinte: Color,
+                            cle: UUID, comparee: Bool) -> some View {
+        Group {
+            if k < main.count {
+                DeQuiRoule(face: main[k], teinte: teinte, cle: cle, rang: k)
+                    // Un dé sans vis-à-vis n'a rien tranché : il s'efface, mais
+                    // il reste, sans quoi on ne verrait pas qu'on en a lancé trois.
+                    .opacity(comparee ? 1 : 0.38)
+            } else {
+                Color.clear
+            }
+        }
+        .frame(width: 52, height: 54)
+    }
+
+    /// La flèche désigne le camp qui laisse un homme sur cette paire.
+    private func marqueur(_ l: Lancer, _ k: Int) -> some View {
+        Group {
+            if k < l.paires {
+                Image(systemName: l.issues[k] == .attackerBreaks
+                                  ? "arrowtriangle.down.fill" : "arrowtriangle.up.fill")
+                    .font(.system(size: 11))
+                    .foregroundStyle(Palette.lostVif)
+            } else {
+                Text(verbatim: "—")
+                    .font(.caption2)
+                    .foregroundStyle(Palette.dim.opacity(0.45))
+            }
+        }
+        .frame(width: 52, height: 14)
     }
 
     // MARK: - « Prêt ? »
@@ -498,17 +541,24 @@ struct DuelOverlay: View {
 
         case .des:
             // Les faces sont déjà au-dessus de la phrase : elle n'a pas à les
-            // répéter, elle a à dire qui perd un homme et pourquoi.
-            if r.dice.attacker == r.dice.defender {
+            // répéter, elle a à dire qui laisse un homme, et où.
+            let sien = hommes(r.coutDefenseur), mien = hommes(r.coutAttaquant)
+            if r.coutDefenseur > 0 && r.coutAttaquant > 0 {
                 return """
-                       Égalité — elle va au défenseur : \(lieu) tient, l'assaillant \
-                       laisse \(cout).
+                       Chacun emporte une paire : \(lieu) perd \(sien), et l'assaillant \
+                       \(mien).
                        """
             }
-            return r.outcome == .defenderHolds
-                ? "La défense a le dé le plus fort : \(lieu) tient, l'assaillant laisse \(cout)."
-                : "L'assaut a le dé le plus fort : \(lieu) perd \(cout)."
+            if r.coutDefenseur > 0 {
+                return "Les dés de l'assaut l'emportent : \(lieu) perd \(sien)."
+            }
+            return "\(lieu) tient : l'assaillant laisse \(mien)."
         }
+    }
+
+    /// « un homme » ou « deux hommes » — jamais plus, aux dés comme ailleurs.
+    private func hommes(_ n: Int) -> String {
+        n > 1 ? dit("deux hommes") : dit("un homme")
     }
 
     /// Ma propre réponse, pour savoir où poser la croix. En face à face les
@@ -826,38 +876,36 @@ struct OccupationPanel: View {
 private struct DeQuiRoule: View {
 
     let face: Int
-    let legende: String.LocalizationValue
     let teinte: Color
-    /// L'identité du compte rendu : elle change à chaque dé de la salve, et
-    /// c'est elle qui relance le roulement. Sans elle, deux dés qui tombent
-    /// sur la même face ne se distingueraient pas l'un de l'autre.
+    /// L'identité du compte rendu : elle change à chaque lancer, et c'est elle
+    /// qui relance le roulement.
     let cle: UUID
+    /// Le rang du dé dans sa main. Il décale le moment où celui-ci se pose :
+    /// cinq dés qui s'arrêtent tous ensemble ressemblent à un affichage, cinq
+    /// dés qui s'arrêtent l'un après l'autre ressemblent à un lancer.
+    var rang: Int = 0
 
     @State private var affichee = 1
     @State private var posee = false
 
     var body: some View {
-        VStack(spacing: 5) {
-            Image(systemName: "die.face.\(min(6, max(1, affichee)))")
-                .font(.system(size: 52))
-                .foregroundStyle(posee ? teinte : Palette.dim)
-                .scaleEffect(posee ? 1 : 0.92)
-                .rotationEffect(.degrees(posee ? 0 : -8))
-                .animation(.spring(duration: 0.28, bounce: 0.45), value: posee)
-            Text(dit(legende)).font(.caption2).foregroundStyle(Palette.dim)
-        }
-        .task(id: cle) {
-            posee = false
-            // Six coups d'horloge, puis la vraie face. Assez pour que l'œil
-            // voie tourner, assez peu pour ne pas faire attendre : la salve
-            // entière ne dure que deux secondes et demie.
-            for _ in 0 ..< 6 {
-                affichee = Int.random(in: 1 ... 6)
-                try? await Task.sleep(for: .milliseconds(70))
-                if Task.isCancelled { break }
+        Image(systemName: "die.face.\(min(6, max(1, affichee)))")
+            .font(.system(size: 44))
+            .foregroundStyle(posee ? teinte : Palette.dim)
+            .scaleEffect(posee ? 1 : 0.92)
+            .rotationEffect(.degrees(posee ? 0 : -8))
+            .animation(.spring(duration: 0.28, bounce: 0.45), value: posee)
+            .task(id: cle) {
+                posee = false
+                // Assez pour que l'œil voie tourner, assez peu pour ne pas
+                // faire attendre : le dernier dé se pose en moins d'une seconde.
+                for _ in 0 ..< (5 + rang * 2) {
+                    affichee = Int.random(in: 1 ... 6)
+                    try? await Task.sleep(for: .milliseconds(70))
+                    if Task.isCancelled { break }
+                }
+                affichee = face
+                posee = true
             }
-            affichee = face
-            posee = true
-        }
     }
 }

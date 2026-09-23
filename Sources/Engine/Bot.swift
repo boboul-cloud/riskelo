@@ -397,7 +397,13 @@ enum Bot {
                     score -= Double(menace(g, to)) * 0.15
                 }
                 let plan = Plan(from: from, to: to,
-                                questions: min(g.maxQuestions(from: from), advantage >= 2 ? 2 : 1),
+                                // Aux dés, toujours le maximum : le défenseur
+                                // n'oppose que deux dés quoi qu'il arrive, si
+                                // bien qu'un troisième améliore les deux
+                                // comparaisons sans rien risquer de plus.
+                                questions: g.rules.mode == .des
+                                    ? g.volleyMax(from: from)
+                                    : min(g.volleyMax(from: from), advantage >= 2 ? 2 : 1),
                                 category: category(g, against: g.owner[to] ?? -1, using: &rng))
                 if best == nil || score > best!.score { best = (score, plan) }
             }

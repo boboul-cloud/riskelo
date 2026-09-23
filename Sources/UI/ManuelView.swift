@@ -354,6 +354,20 @@ enum Manuel {
     /// écrite à la main mentirait au premier continent qui change de taille.
     /// Les cartes d'élimination sont laissées de côté : elles se disent en une
     /// phrase, et il y en a une par camp.
+    /// Le seuil de victoire, plateau par plateau. Calculé et non recopié : un
+    /// plateau ajouté entre de lui-même dans le tableau, avec ses vrais
+    /// chiffres — c'est ce qui manquait quand le quatrième est arrivé.
+    static var lignesDeVictoire: [[String]] {
+        let regles = Rules()
+        return Boards.allCases.map { plateau in
+            let total = plateau.board.map.order.count
+            return ["\(plateau.label) — \(total) territoires"]
+                + [2, 3, 4].map {
+                    "\(regles.dominationThreshold(territories: total, playerCount: $0))"
+                }
+        }
+    }
+
     static func conquetes(_ plateau: Boards) -> [String] {
         Objectif.paquet(pour: plateau.board, joueurs: 2).map { $0.texte(plateau.board) }
     }
@@ -555,19 +569,35 @@ enum Manuel {
         icone: "dice.fill", teinte: Palette.camp(3),
         blocs: [
             .p("Les deux premiers modes remplacent le dé par une question. Celui-ci "
-               + "fait le chemin inverse : il n'y a plus de question du tout. On "
-               + "déclare l'assaut, les dés tombent, et la place tient ou cède."),
-            .tableau(["Ce qui sort", "Ce qu'il advient"],
+               + "fait le chemin inverse : il n'y a plus de question du tout, et l'on "
+               + "joue la règle du jeu de plateau telle quelle. On déclare l'assaut, "
+               + "les dés tombent, et tout est réglé d'un coup."),
+            .h("Le lancer"),
+            .p("L'assaillant annonce un, deux ou trois dés — il lui faut un homme de "
+               + "plus par dé, car on n'attaque jamais avec sa garnison. Le défenseur "
+               + "en oppose deux, ou un seul s'il ne tient la place qu'à un homme ; il "
+               + "ne le choisit pas, le second dé lui étant toujours favorable."),
+            .p("Les deux mains se trient du plus fort au plus faible et se comparent "
+               + "paire par paire : le meilleur contre le meilleur, puis le suivant "
+               + "contre le suivant. Le troisième dé de l'assaillant n'affronte "
+               + "personne — il rend seulement les deux autres meilleurs."),
+            .tableau(["Sur une paire", "Ce qu'il advient"],
                      [["Le dé de l'assaut est le plus fort", "La place perd un homme"],
                       ["Celui de la défense est le plus fort", "L'assaillant laisse un homme"],
-                      ["Les deux sont égaux", "La place tient — l'égalité va au défenseur"]]),
-            .p("C'est la règle du jeu de plateau, mot pour mot, et l'égalité au "
-               + "défenseur en est la pièce maîtresse : il faut faire mieux que lui, "
-               + "pas aussi bien. L'assaillant l'emporte quinze fois sur trente-six."),
-            .note("Les trois modes se jouent donc à la même longueur. La question à "
-                  + "quinze secondes donne 48 % des échanges à l'assaillant, le face à "
-                  + "face 44 %, les dés 41,7 % : une partie ne dure ni plus ni moins "
-                  + "selon ce qu'on a choisi."),
+                      ["Les deux sont égaux", "L'égalité va au défenseur"]]),
+            .p("L'égalité au défenseur est la pièce maîtresse : il faut faire mieux que "
+               + "lui, pas aussi bien. Un même jet peut donc coûter un homme à chacun — "
+               + "c'est la seule chose qu'aucun des deux autres modes ne sait faire, "
+               + "une question n'ayant jamais qu'un perdant."),
+            .note("À trois dés contre deux, l'assaillant perd 0,92 homme quand le "
+                  + "défenseur en perd 1,08 : l'attaque paye, là où la question la "
+                  + "décourage. Lancez toujours tout ce que vous pouvez — le défenseur "
+                  + "n'oppose que deux dés quoi qu'il arrive."),
+            .note("La partie garde pourtant sa forme. Mesuré sur des parties à trois "
+                  + "menées par la machine : huit tours aux dés, sept en classique, huit "
+                  + "en face à face. Ce qui change est le nombre d'échanges — 66 au lieu "
+                  + "de 116 — puisqu'un jet prend jusqu'à deux hommes là où une question "
+                  + "n'en prend qu'un. Autant de tours, moitié moins d'écrans."),
             .h("Ce qui disparaît"),
             .p("Il n'y a plus de terrain à choisir avant l'assaut, plus de sablier, "
                + "plus de relance, et plus de dossier de culture à consulter : il n'y "
@@ -577,8 +607,8 @@ enum Manuel {
             .h("Ce qui ne bouge pas"),
             .p("Tout le reste : les renforts, les continents, les cartes de territoire, "
                + "les conquêtes personnelles, le déplacement de fin de tour, le seuil "
-               + "de victoire. Un ou deux dés par assaut, comme une ou deux questions, "
-               + "et l'on n'attaque jamais avec sa garnison."),
+               + "de victoire. Et la garnison qui avance dans une place prise ne peut "
+               + "être inférieure au nombre de dés lancés, comme au jeu de plateau."),
             .h("À qui il sert"),
             .puces([
                 "Aux soirs où l'on ne veut pas réfléchir.",
@@ -638,10 +668,7 @@ enum Manuel {
             .p("La victoire ne demande pas de tout prendre : il faut tenir sa part de "
                + "départ, plus sept territoires. C'est un écart, et non une part fixe "
                + "du monde — un joueur sur quatre part de 25 % et non de 50 %."),
-            .tableau(["Plateau", "À 2", "À 3", "À 4"],
-                     [["L'Anneau — 28 territoires", "21", "17", "14"],
-                      ["Europe — 38 territoires", "26", "20", "17"],
-                      ["Monde — 42 territoires", "28", "21", "18"]]),
+            .tableau(["Plateau", "À 2", "À 3", "À 4"], Manuel.lignesDeVictoire),
             .p("La barre du haut porte ce compte en permanence : vos territoires sur le "
                + "seuil à franchir. Les conquêtes personnelles, plus bas, retirent ce "
                + "seuil : la barre montre alors le plateau entier."),
@@ -669,6 +696,8 @@ enum Manuel {
             .h("Sur l'Europe"),
             .puces(Manuel.conquetes(.europe)),
             .h("Sur le Monde"),
+            .p("Les deux Mondes portent les mêmes six terres : ces cartes valent pour "
+               + "l'un comme pour l'autre."),
             .puces(Manuel.conquetes(.monde)),
             .p("À trois joueurs et plus s'ajoute une carte par camp : « faire "
                + "disparaître le camp de Rouge », de Vert, d'Ambre ou de Violet — et "
@@ -719,8 +748,10 @@ enum Manuel {
                 ("L'Anneau", "Un monde inventé, cinq terres en cercle. 28 territoires. "
                  + "Le plus court."),
                 ("Europe", "De l'Atlantique à la mer Noire. 38 territoires, six régions."),
-                ("Monde", "La carte du monde, tracée d'après les côtes réelles. "
-                 + "42 territoires sur six continents, vingt traversées."),
+                ("Monde", "Les six continents en hexagones. 42 territoires, trois "
+                 + "traversées — l'Asie y tient en onze cases."),
+                ("Monde réel", "La même carte, tracée d'après les côtes réelles. "
+                 + "42 territoires, vingt traversées, et le Kamtchatka à sa distance."),
             ]),
             .h("Joueurs, et humains sur cet appareil"),
             .p("De deux à quatre joueurs. Le second réglage dit combien sont assis "

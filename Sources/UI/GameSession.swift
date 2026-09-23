@@ -312,10 +312,11 @@ final class GameSession {
         /// Face à face : le temps que la machine a l'air de chercher, quand sa
         /// réponse ne sera pas montrée.
         static let reflexion: Double = 2.2
-        /// Une paire de dés : deux chiffres et une phrase. Il n'y a rien à
-        /// lire d'autre, et une salve de deux dés ne doit pas durer plus
-        /// qu'une question.
-        static let des: Double = 2.6
+        /// Un lancer : jusqu'à cinq dés, deux comparaisons et une phrase. Les
+        /// dés se posent l'un après l'autre et le dernier met près d'une
+        /// seconde ; il reste de quoi lire les deux mains, voir qui l'emporte
+        /// sur chaque paire, et compter ce que le jet a coûté.
+        static let des: Double = 6.0
     }
 
     /// Le temps laissé sur le résultat, selon ce qu'il y a à y lire.
@@ -882,7 +883,7 @@ final class GameSession {
                 target = nil
             } else if let base = selected, game.map.areAdjacent(base, id) {
                 target = id
-                draftQuestions = min(draftQuestions, game.maxQuestions(from: base))
+                draftQuestions = min(draftQuestions, game.volleyMax(from: base))
                 if !categoryChosen {
                     draftCategory = game.weakness(of: game.owner[id] ?? -1) ?? draftCategory
                 }

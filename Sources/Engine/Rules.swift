@@ -90,7 +90,7 @@ struct Rules: Equatable, Codable {
             case .faceAFace:
                 dit("Les deux répondent à la même question. Le défenseur peut doubler l'enjeu.")
             case .des:
-                dit("Aucune question : un dé contre un dé, l'égalité au défenseur.")
+                dit("Aucune question : trois dés contre deux, comme au jeu de plateau.")
             }
         }
     }

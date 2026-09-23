@@ -806,11 +806,12 @@ private struct AssaultPanel: View {
                             .font(.caption.weight(.medium)).foregroundStyle(Palette.dim)
                         Picker("", selection: Binding(get: { session.draftQuestions },
                                                       set: { session.draftQuestions = $0 })) {
-                            ForEach(1...max(1, g.maxQuestions(from: base)), id: \.self) { n in
+                            ForEach(1...max(1, g.volleyMax(from: base)), id: \.self) { n in
                                 if g.rules.mode.interroge {
                                     Text(n == 1 ? "Une question" : "Deux questions").tag(n)
                                 } else {
-                                    Text(n == 1 ? "Un dé" : "Deux dés").tag(n)
+                                    Text(n == 1 ? "Un dé"
+                                         : (n == 2 ? "Deux dés" : "Trois dés")).tag(n)
                                 }
                             }
                         }
@@ -857,15 +858,32 @@ private struct AssaultPanel: View {
     private func legendeDesDes(_ g: GameState) -> String {
         let une = session.draftQuestions == 1
         if g.rules.mode == .des {
-            return une
-                ? dit("""
-                      Un dé contre le sien. L'égalité lui profite : il faut faire mieux, \
-                      pas aussi bien.
-                      """)
-                : dit("""
-                      Deux dés l'un après l'autre, chacun contre le sien. Deux chances de \
-                      passer — et deux hommes à y laisser.
-                      """)
+            // Le défenseur en oppose deux dès qu'il a deux hommes, quoi qu'on
+            // annonce : ce qu'on choisit ici, c'est seulement combien de dés on
+            // lui oppose, et les deux plus forts de chaque main se comparent.
+            let defense = min(2, g.armies(session.target ?? ""))
+            switch session.draftQuestions {
+            case 1:
+                return defense > 1
+                    ? dit("""
+                          Un dé contre ses deux. L'égalité lui profite : il faut faire mieux, \
+                          pas aussi bien.
+                          """)
+                    : dit("""
+                          Un dé contre le sien. L'égalité lui profite : il faut faire mieux, \
+                          pas aussi bien.
+                          """)
+            case 2:
+                return dit("""
+                           Deux dés. Les deux meilleurs de chaque main se comparent, et le \
+                           jet peut coûter un homme à chacun.
+                           """)
+            default:
+                return dit("""
+                           Trois dés contre ses deux. Le troisième n'affronte personne — il \
+                           rend seulement les deux autres meilleurs.
+                           """)
+            }
         }
         if g.rules.mode == .classique {
             return une

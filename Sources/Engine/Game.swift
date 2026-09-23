@@ -315,8 +315,14 @@ struct GameState {
 
     /// Le nombre de questions possibles : un dé par homme au-delà du premier,
     /// dans la limite de la règle. Il faut toujours laisser une garnison.
-    func maxQuestions(from id: TerritoryID) -> Int {
-        max(0, min(rules.maxQuestions, armies(id) - 1))
+    /// Combien de dés — ou de questions — peuvent partir d'ici.
+    ///
+    /// On n'attaque jamais avec sa garnison : il en faut un de plus par dé
+    /// annoncé. Aux dés, trois au plus, comme au jeu de plateau ; en questions,
+    /// deux, parce qu'une question coûte du temps là où un dé n'en coûte pas.
+    func volleyMax(from id: TerritoryID) -> Int {
+        let plafond = rules.mode == .des ? 3 : rules.maxQuestions
+        return max(0, min(plafond, armies(id) - 1))
     }
 
     /// Deux territoires amis reliés par une chaîne de territoires amis.
@@ -459,7 +465,7 @@ struct GameState {
               owner[from] == currentPlayer.id,
               let defenseur = owner[to], defenseur != currentPlayer.id,
               map.areAdjacent(from, to),
-              questions >= 1, questions <= maxQuestions(from: from) else { return false }
+              questions >= 1, questions <= volleyMax(from: from) else { return false }
         return true
     }
 
@@ -522,10 +528,17 @@ struct GameState {
     /// prise, ou l'assaillant n'a plus d'homme à risquer au-delà de sa
     /// garnison.
     private mutating func lancerLesDes(_ a: inout Assault) {
-        while a.asked < a.volley, !a.conquered, armies(a.from) >= 2 {
-            encaisser(Combat.resolveDes(attacker: Combat.de(using: &rng),
-                                        defender: Combat.de(using: &rng)), &a)
-        }
+        // Le défenseur lance tout ce qu'il peut — deux dés, ou un s'il n'a
+        // qu'un homme. Il n'a pas à le choisir : au jeu de plateau le second
+        // dé est toujours à son avantage, et un choix qui n'en est pas un
+        // n'est qu'un appui de plus à donner.
+        let defense = min(2, armies(a.to))
+        encaisser(Combat.resolveDes(Combat.lancer(attaque: a.volley, defense: defense,
+                                                  using: &rng)), &a)
+        // Un lancer épuise la salve : aux dés, la salve **est** le jet, et ses
+        // trois dés partent ensemble. Presser la place demande un nouvel
+        // assaut, comme au jeu de plateau.
+        a.asked = a.volley
     }
 
     /// Ce qu'un échange coûte, et à qui.
@@ -540,20 +553,21 @@ struct GameState {
         a.reports.append(report)
         siege[a.to, default: 0] += 1
 
-        switch report.outcome {
-        case .defenderHolds:
-            // On n'enlève jamais à l'assaillant sa garnison : une mise de deux
-            // ne rapporte que ce que la pile d'en face peut payer.
-            let perte = max(0, min(report.mise, armies(a.from) - 1))
-            armies[a.from, default: 0] -= perte
-            a.attackerLosses += perte
-            note(.duel, recit(report, place: name(a.to), perte: perte))
-        case .attackerBreaks:
-            let perte = min(report.mise, armies(a.to))
-            armies[a.to, default: 0] -= perte
-            a.defenderLosses += perte
-            note(.duel, recit(report, place: name(a.to), perte: perte))
-        }
+        // Les deux camps peuvent payer le même échange : c'est le lancer à
+        // trois dés contre deux, où chacun ramasse une paire. Une question n'a
+        // qu'un perdant, et l'un des deux comptes est alors nul.
+        //
+        // On n'enlève jamais à l'assaillant sa garnison : ce qu'il doit ne se
+        // paie que sur ce qu'il a de trop.
+        let perteA = max(0, min(report.coutAttaquant, armies(a.from) - 1))
+        armies[a.from, default: 0] -= perteA
+        a.attackerLosses += perteA
+
+        let perteD = min(report.coutDefenseur, armies(a.to))
+        armies[a.to, default: 0] -= perteD
+        a.defenderLosses += perteD
+
+        note(.duel, recit(report, lieu: name(a.to), assaillant: perteA, defense: perteD))
 
         a.mise = 1
         if armies(a.to) <= 0 { a.conquered = true }
@@ -669,50 +683,58 @@ struct GameState {
     /// issues là où le classique en a deux, et il faut les nommer : un joueur
     /// qui perd une place doit savoir si c'est parce qu'il ignorait, ou parce
     /// qu'il a été moins vif.
-    private func recit(_ r: DuelReport, place: String, perte: Int) -> String {
+    private func recit(_ r: DuelReport, lieu: String, assaillant: Int, defense: Int) -> String {
         let tient = r.outcome == .defenderHolds
+        // Ce que l'échange a coûté au camp qui a cédé. Une question n'en fait
+        // payer qu'un ; le lancer de dés est le seul cas où les deux comptes
+        // sont non nuls à la fois, et il a sa phrase à lui.
+        let perte = max(assaillant, defense)
         switch r.verdict {
         case .reponse:
             return tient
-                ? dit("\(place) tient : bonne réponse, l'assaillant laisse \(hommes(perte)).")
+                ? dit("\(lieu) tient : bonne réponse, l'assaillant laisse \(hommes(perte)).")
                 : (r.answer == .timeout
-                   ? dit("Temps écoulé : \(place) perd \(hommes(perte)).")
-                   : dit("Mauvaise réponse : \(place) perd \(hommes(perte))."))
+                   ? dit("Temps écoulé : \(lieu) perd \(hommes(perte)).")
+                   : dit("Mauvaise réponse : \(lieu) perd \(hommes(perte))."))
         case .seul:
             return tient
                 ? dit("""
-                      \(place) tient : le défenseur savait, l'assaillant non — \
+                      \(lieu) tient : le défenseur savait, l'assaillant non — \
                       \(hommes(perte)) de moins pour lui.
                       """)
-                : dit("L'assaillant savait, la place non : \(place) perd \(hommes(perte)).")
+                : dit("L'assaillant savait, la place non : \(lieu) perd \(hommes(perte)).")
         case .vitesse:
             return tient
                 ? dit("""
-                      Les deux savaient : le défenseur a été le plus vif, \(place) \
+                      Les deux savaient : le défenseur a été le plus vif, \(lieu) \
                       tient et coûte \(hommes(perte)).
                       """)
                 : dit("""
-                      Les deux savaient : l'assaillant a été le plus vif, \(place) \
+                      Les deux savaient : l'assaillant a été le plus vif, \(lieu) \
                       perd \(hommes(perte)).
                       """)
         case .egalite:
-            return dit("Personne ne savait : \(place) tient, et l'assaillant laisse \(hommes(perte)).")
+            return dit("Personne ne savait : \(lieu) tient, et l'assaillant laisse \(hommes(perte)).")
         case .des:
-            // Les deux faces dans le journal : c'est tout ce qu'il y a eu, et
+            // Les deux mains dans le journal : c'est tout ce qu'il y a eu, et
             // sans elles la ligne ne dirait rien qu'on puisse relire.
-            if r.dice.attacker == r.dice.defender {
+            let jets = "\(faces(r.lancer?.attaque ?? [])) / \(faces(r.lancer?.defense ?? []))"
+            if assaillant > 0 && defense > 0 {
                 return dit("""
-                           \(r.dice.attacker) contre \(r.dice.defender) : l'égalité tient \
-                           \(place), l'assaillant laisse \(hommes(perte)).
+                           \(jets) : \(lieu) perd \(hommes(defense)), et l'assaillant \
+                           \(hommes(assaillant)).
                            """)
             }
-            return tient
-                ? dit("""
-                      \(r.dice.attacker) contre \(r.dice.defender) : \(place) tient, \
-                      l'assaillant laisse \(hommes(perte)).
-                      """)
-                : dit("\(r.dice.attacker) contre \(r.dice.defender) : \(place) perd \(hommes(perte)).")
+            if defense > 0 {
+                return dit("\(jets) : \(lieu) perd \(hommes(defense)).")
+            }
+            return dit("\(jets) : \(lieu) tient, l'assaillant laisse \(hommes(assaillant)).")
         }
+    }
+
+    /// Une main de dés, lisible d'un coup d'œil : « 6 4 2 ».
+    private func faces(_ des: [Int]) -> String {
+        des.map(String.init).joined(separator: " ")
     }
 
     /// Range l'assaut terminé et rend la main.

@@ -1,5 +1,8 @@
 # Soumission à l'App Store — Riskelo 1.5 (build 9)
 
+**Pour coller la 1.5 : [FEUILLE-DE-SOUMISSION-1.5.md](FEUILLE-DE-SOUMISSION-1.5.md).**
+Ce README garde le détail et les explications.
+
 > **Ce qui est chez Apple**, relu en lecture seule le 24 septembre 2026 : la
 > **1.4 (build 8) est en vente**, sur iPhone et iPad. Les **34 packs sont
 > approuvés**. Il n'y a pas de version Mac sur l'App Store.

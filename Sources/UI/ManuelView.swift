@@ -398,9 +398,19 @@ enum Manuel {
     /// Les quatre adresses de l'application, écrites ici et nulle part
     /// ailleurs : l'écran d'accueil y puise les siennes. Un site qui
     /// déménage se corrige donc en un seul endroit.
-    static let siteURL = "https://boboul-cloud.github.io/riskelo/"
-    static let confidentialiteURL = "https://boboul-cloud.github.io/riskelo/confidentialite.html"
-    static let conditionsURL = "https://boboul-cloud.github.io/riskelo/conditions.html"
+    ///
+    /// Le site a sa version anglaise sous `en/`, et les trois pages suivent la
+    /// langue du jeu : un joueur anglais n'a pas à lire ses conditions en
+    /// français. Les deux manuels, eux, écrivent chacun la sienne en dur — ils
+    /// sont calculés une fois, et les tests les lisent tous les deux.
+    static let racine = "https://boboul-cloud.github.io/riskelo/"
+    static var siteURL: String { Themes.langue == .en ? racine + "en/" : racine }
+    static var confidentialiteURL: String {
+        racine + (Themes.langue == .en ? "en/privacy.html" : "confidentialite.html")
+    }
+    static var conditionsURL: String {
+        racine + (Themes.langue == .en ? "en/terms.html" : "conditions.html")
+    }
     static let contactURL = "mailto:bob.oulhen@gmail.com"
 
     static func apres(_ c: Chapitre) -> Chapitre? {
@@ -758,6 +768,8 @@ enum Manuel {
                 ("Classique", "L'attaquant choisit le thème, le défenseur seul répond."),
                 ("Face à face", "Les deux répondent à la même question ; le défenseur "
                  + "peut doubler l'enjeu."),
+                ("Dés", "Sans question : jusqu'à trois dés contre un ou deux, l'égalité "
+                 + "au défenseur."),
             ]),
             .h("Plateau"),
             .termes([
@@ -809,6 +821,8 @@ enum Manuel {
                  + "trois assorties valent des hommes, et le barème monte."),
                 ("Guerre totale", "Il faut tous les territoires, sans exception. "
                  + "Environ deux fois plus de questions."),
+                ("Conquêtes personnelles", "Un objectif secret pour chacun ; le remplir "
+                 + "gagne, et le seuil de territoires se retire."),
             ]),
             .h("Vous"),
             .p("Un nom, facultatif, pour celui qui tient l'appareil. Il s'ajoute à la "
@@ -1085,8 +1099,8 @@ enum Manuel {
             .puces([
                 "Celui qui a ouvert la partie revient le premier : c'est son appareil "
                 + "qui la tient, et lui seul retrouve le code.",
-                "L'autre touche « Reprendre cette partie » de son côté, ou retape les "
-                + "six lettres. Le code n'a pas changé.",
+                "L'autre touche la partie qui l'attend, en haut de la même page, ou "
+                + "retape les six lettres. Le code n'a pas changé.",
                 "Quand tout le monde est revenu, « Reprendre la partie » repart au tour "
                 + "où l'on en était.",
             ]),
@@ -1186,31 +1200,37 @@ enum Manuel {
 
     private static let mentions = Chapitre(
         id: "mentions", titre: "Confidentialité et contact",
-        resume: "Ce que l'application fait de vos données — c'est-à-dire rien.",
+        resume: "Ce que l'application fait de vos données — le moins possible.",
         icone: "hand.raised.fill", teinte: Palette.dim,
         blocs: [
-            .h("Aucune donnée ne quitte l'appareil"),
+            .h("Presque rien ne quitte l'appareil"),
             .puces([
                 "Pas de compte, pas d'inscription, pas de courriel demandé.",
                 "Aucune mesure d'audience, aucun traceur, aucune publicité.",
                 "Vos parties sont enregistrées sur l'appareil seul, et disparaissent avec "
                 + "l'application si vous la supprimez.",
-                "Le jeu à plusieurs appareils ne passe par aucun serveur : les coups "
-                + "voyagent directement d'un appareil à l'autre, par Bluetooth ou Wi-Fi "
-                + "direct, et rien n'en est conservé.",
-                "Aucune connexion à Internet n'est nécessaire pour jouer.",
+                "Dans la même pièce, les coups voyagent directement d'un appareil à "
+                + "l'autre, par le Wi-Fi, sans passer par aucun serveur, et rien n'en "
+                + "est conservé.",
+                "Au loin, les coups passent par un relais qui les fait suivre sans les "
+                + "lire ni les garder. Il ne connaît qu'un numéro tiré au sort à "
+                + "l'installation, qui ne désigne personne, et le garde une semaine "
+                + "pour vous laisser reprendre la partie. Aucun nom ne lui parvient.",
+                "Par Game Center, la partie passe par Apple, selon ses propres règles.",
+                "Aucune connexion à Internet n'est nécessaire pour jouer seul, ou dans "
+                + "la même pièce.",
             ]),
             .h("Les textes complets"),
             .liens([
                 ("Politique de confidentialité",
-                 "Ce qui est enregistré, où, et ce qui ne quitte jamais l'appareil.",
-                 confidentialiteURL),
+                 "Ce qui est enregistré, où, et ce qui sort de l'appareil.",
+                 racine + "confidentialite.html"),
                 ("Conditions d'utilisation",
                  "Licence, propriété, garanties, droit applicable.",
-                 conditionsURL),
+                 racine + "conditions.html"),
                 ("Le site de Riskelo",
                  site,
-                 siteURL),
+                 racine),
             ]),
             .h("Contact"),
             .p("Une question, une coquille dans une question, une panne : écrivez, "

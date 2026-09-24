@@ -404,6 +404,8 @@ enum ManuelEN {
                 ("Classic", "The attacker picks the theme, the defender alone answers."),
                 ("Showdown", "Both answer the same question; the defender can double "
                  + "the stake."),
+                ("Dice", "No question: up to three dice against one or two, ties to the "
+                 + "defender."),
             ]),
             .h("Board"),
             .termes([
@@ -729,8 +731,8 @@ enum ManuelEN {
             .puces([
                 "Whoever opened the game comes back first: their device is the one "
                 + "holding it, and they are the only one who can reopen the code.",
-                "The other taps \"Pick this game back up\" on their side, or types the "
-                + "six letters again. The code has not changed.",
+                "The other taps the game waiting for them, at the top of the same page, "
+                + "or types the six letters again. The code has not changed.",
                 "Once everyone is back, \"Resume the game\" starts again on the turn "
                 + "you had reached.",
             ]),
@@ -826,31 +828,38 @@ enum ManuelEN {
 
     private static let legal = Chapitre(
         id: "mentions", titre: "Privacy and contact",
-        resume: "What the app does with your data — which is nothing.",
+        resume: "What the app does with your data — as little as possible.",
         icone: "hand.raised.fill", teinte: Palette.dim,
         blocs: [
-            .h("No data leaves the device"),
+            .h("Almost nothing leaves the device"),
             .puces([
                 "No account, no sign-up, no email address asked for.",
                 "No analytics, no trackers, no ads.",
                 "Your games are saved on the device alone, and go with the app if you "
                 + "delete it.",
-                "Playing across devices goes through no server: the moves travel "
-                + "directly from one device to the other over the local network, and "
-                + "nothing is kept.",
-                "No internet connection is needed to play.",
+                "In the same room, the moves travel directly from one device to the "
+                + "other over the local network, through no server, and nothing is "
+                + "kept.",
+                "Far away, the moves go through a relay that passes them along without "
+                + "reading or keeping them. All it knows is a number drawn at random "
+                + "when the game is installed, which designates nobody, and it keeps "
+                + "that number for a week so you can pick the game back up. No name "
+                + "ever reaches it.",
+                "Through Game Center, the game goes through Apple, under Apple's own "
+                + "rules.",
+                "No internet connection is needed to play alone, or in the same room.",
             ]),
             .h("The full texts"),
             .liens([
                 ("Privacy policy",
-                 "What is saved, where, and what never leaves the device.",
-                 Manuel.confidentialiteURL),
+                 "What is saved, where, and what leaves the device.",
+                 Manuel.racine + "en/privacy.html"),
                 ("Terms of use",
                  "License, ownership, warranties, governing law.",
-                 Manuel.conditionsURL),
+                 Manuel.racine + "en/terms.html"),
                 ("The Riskelo website",
                  Manuel.site,
-                 Manuel.siteURL),
+                 Manuel.racine + "en/"),
             ]),
             .h("Contact"),
             .p("A question, a typo in a question, something broken: write in and you "

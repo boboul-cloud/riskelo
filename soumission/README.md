@@ -7,42 +7,51 @@
 ## En clair : la mise à jour 1.5
 
 L'application, ses packs, ses questionnaires et ses captures sont déjà chez
-Apple, et ils y restent. Tous les textes de la 1.5 sont plus bas, et
-AgentDouble sait les écrire à ta place.
-
-Une précaution : la fenêtre d'AgentDouble (« + Choisir une app ») refuse les
-apps déjà en vente, et Riskelo l'est. C'est sa **ligne de commande** qui fait
-les mises à jour, à partir de sa fiche `metadata/apps/riskelo.yaml`, déjà
-remplie pour la 1.5.
+Apple, et ils y restent. Tout se remplit à la main : la fenêtre d'AgentDouble
+ne propose que les apps pas encore en vente. Chaque texte est plus bas, avec
+son nombre de caractères, prêt à copier.
 
 1. ~~Envoyer le build 9~~ — **fait**.
-2. **Créer la version 1.5** dans App Store Connect : le « + » à côté de
-   « App iOS », puis « 1.5 ». Rien d'autre à remplir. Il faut le faire
-   avant l'étape suivante : sans version 1.5, AgentDouble ne peut pas écrire
-   le sous-titre.
-3. **Dans le Terminal**, trois lignes. `check` ne fait que lire et vérifier ;
-   `push` écrit :
-
-   ```bash
-   cd ~/Desktop/AgentDouble
-   npm run check riskelo
-   npm run push riskelo
-   ```
-
-   En français et en anglais, `push` écrit le sous-titre, le texte
-   promotionnel, la description, les mots-clés, la note de version, les
-   adresses et les notes pour la revue, puis rattache le build 9. Il
-   n'envoie aucune capture — celles de la 1.4 restent — et il ne soumet pas.
-4. **Sur le site d'Apple, « Confidentialité de l'app »** : passer la réponse
-   à « Oui », avec les quatre réponses du tableau plus bas. Cela ne dépend
-   pas de la version : ça peut se faire tout de suite.
-5. **Relire la page de la version 1.5**, dans les deux langues, puis
+2. **Créer la version 1.5** : le « + » à côté de « App iOS », puis « 1.5 ».
+   Dans la section « Build » de la nouvelle page, choisir le **build 9**.
+3. **Sur la page de la version 1.5, en français** — le menu de langue est en
+   haut à droite de la page. Remplacer quatre cases :
+   - **Texte promotionnel** ;
+   - **Description** — le texte en entier, à la place de l'ancien ;
+   - **Mots-clés** ;
+   - **Nouveautés de cette version** — la note de version.
+4. **Même page, en anglais** : les mêmes quatre cases, avec les textes
+   anglais, et en plus deux adresses, qui pointaient vers les pages
+   françaises :
+   - **URL d'assistance** : `https://boboul-cloud.github.io/riskelo/en/support.html`
+   - **URL marketing** : `https://boboul-cloud.github.io/riskelo/en/`
+5. **Plus bas sur la même page, « Informations sur la vérification de
+   l'app » ▸ Notes** : les notes de la 1.4 y sont reprises d'office. Une
+   seule phrase est devenue fausse ; la remplacer (elle est juste en
+   dessous).
+6. **« Informations sur l'app »**, dans le menu de gauche : le
+   **Sous-titre**, en français puis en anglais.
+7. **« Confidentialité de l'app »**, dans le menu de gauche :
+   - passer la réponse à **« Oui »**, avec les quatre réponses du tableau
+     plus bas ;
+   - en anglais, l'adresse de la **politique de confidentialité** :
+     `https://boboul-cloud.github.io/riskelo/en/privacy.html`
+8. **Relire la page de la version 1.5**, dans les deux langues, puis
    **soumettre à la revue**.
 
-Sans AgentDouble, tout se colle aussi à la main : chaque texte est plus bas,
-avec son nombre de caractères. Le sous-titre est dans « Informations sur
-l'app », le reste sur la page de la version 1.5 ; le menu de langue, en haut
-de page, change la case qu'on remplit.
+### La phrase à remplacer dans les notes pour la revue
+
+Dans le paragraphe « 2. AU LOIN, AVEC UN CODE », remplacer :
+
+```
+Il connaît un identifiant tiré au sort à l'installation, le garde deux minutes après la partie pour permettre d'en reprendre une coupée, puis l'efface.
+```
+
+par :
+
+```
+Il connaît un identifiant tiré au sort à l'installation, le garde une semaine après la dernière séance pour qu'une partie se reprenne un autre soir, puis l'efface.
+```
 
 Ce qui change par rapport à la 1.4, en plus des textes :
 
@@ -320,8 +329,10 @@ iPhone, iPad and Mac — one app, in English and French.
       ne l'a encore joué sur deux vrais téléphones.
 - [x] Build 9 envoyé
 - [ ] Version 1.5 créée dans App Store Connect
-- [ ] `npm run check riskelo`, puis `npm run push riskelo` — ou les textes
-      collés à la main
+- [ ] Textes collés, en français puis en anglais : texte promotionnel,
+      description, mots-clés, note de version — et les deux adresses anglaises
+- [ ] La phrase des notes pour la revue remplacée
+- [ ] Sous-titre remplacé, dans les deux langues
 - [ ] « Confidentialité de l'app » passée à « Oui »
 - [ ] Page de la version 1.5 relue, en français et en anglais — le build 9
       y est bien choisi

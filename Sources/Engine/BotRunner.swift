@@ -25,7 +25,8 @@ enum BotRunner {
         case occupied(Int)
         case fortified
         case endedTurn
-        /// Un humain doit répondre : la machine s'arrête et rend la main.
+        /// Un humain doit répondre — ou, aux dés, choisir ses dés : la machine
+        /// s'arrête et rend la main.
         case waitingForHuman
         /// Plus rien à faire (partie finie, ou ce n'est pas son tour).
         case idle
@@ -51,6 +52,10 @@ enum BotRunner {
             guard let report = g.answer(answer) else { return .pending }
             return .answered(correct: report.correct)
         }
+        // Aux dés, un défenseur humain choisit ses dés : l'assaut est
+        // suspendu à son coup, et la machine n'a pas à passer outre. Sans ce
+        // garde, elle tentait un nouvel assaut par-dessus le premier.
+        if g.attendLaDefense { return .waitingForHuman }
         if let a = g.assault, a.isOver, case .attack = g.phase {
             g.dismissAssault()
         }

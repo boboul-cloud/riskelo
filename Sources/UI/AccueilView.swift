@@ -45,10 +45,10 @@ enum PartieRapide {
         let packs = enJeu.filter { $0.produit != nil }
         let base = enJeu.contains { $0.produit == nil }
         if packs.isEmpty {
-            return "Culture générale seule"
+            return dit("Culture générale seule")
         }
         let noms = packs.map(\.label).joined(separator: " · ")
-        return base ? "Culture générale · " + noms : noms
+        return base ? dit("Culture générale · ") + noms : noms
     }
 
     /// Les règles, assemblées à partir de ce que l'écran des réglages propose.
@@ -85,10 +85,10 @@ enum PartieRapide {
     /// qui annonce la partie rapide, et aux réglages, qui la font varier.
     static func niveauDit(_ n: Double) -> String {
         switch n {
-        case ..<0.45: "Distraite"
-        case ..<0.60: "Honnête"
-        case ..<0.75: "Cultivée"
-        default:      "Redoutable"
+        case ..<0.45: dit("Distraite")
+        case ..<0.60: dit("Honnête")
+        case ..<0.75: dit("Cultivée")
+        default:      dit("Redoutable")
         }
     }
 
@@ -99,8 +99,11 @@ enum PartieRapide {
         // « sur L'Anneau » au milieu d'une phrase sonne comme un titre : le
         // nom du plateau y perd sa majuscule, mais pas son article.
         let ou = plateau.label.prefix(1).lowercased() + plateau.label.dropFirst()
-        return "\(camps) camps sur \(ou), contre une machine "
-            + niveauDit(niveau).lowercased() + "."
+        let force = niveauDit(niveau).lowercased()
+        // La phrase entière est la clé, et non ses morceaux : une langue met
+        // le niveau avant la machine, une autre après, et recoller des bouts
+        // traduits séparément donne une phrase qui n'est d'aucune langue.
+        return dit("\(camps) camps sur \(ou), contre une machine \(force).")
     }
 }
 
@@ -180,6 +183,11 @@ struct AccueilView: View {
     var onPacks: () -> Void = { }
     /// Proposé seulement s'il y a une partie en attente : un bouton qui ne
     /// mène nulle part vaut mieux absent.
+    /// La partie **d'ici**, et elle seule. Celle qu'on joue au loin se reprend
+    /// depuis « Jouer au loin », où l'on va déjà pour en ouvrir une : le même
+    /// bouton vert pour les deux ne disait pas laquelle il allait rendre, et
+    /// l'une des deux mène au plateau quand l'autre mène à un salon où il faut
+    /// attendre quelqu'un.
     var onResume: (() -> Void)?
     var onManuel: () -> Void
     /// Proposé seulement s'il y a quelque chose sur les rayons.
@@ -337,7 +345,7 @@ struct AccueilView: View {
         }
     }
 
-    private func petitBouton(_ titre: String, _ icone: String,
+    private func petitBouton(_ titre: LocalizedStringKey, _ icone: String,
                              _ geste: @escaping () -> Void) -> some View {
         Button(action: geste) {
             Label(titre, systemImage: icone)
@@ -368,7 +376,7 @@ struct AccueilView: View {
 
     /// `SwiftUI.Link` en toutes lettres : dans ce module, `Link` tout court
     /// désigne le fil entre deux appareils, et c'est lui qui gagne.
-    @ViewBuilder private func lien(_ titre: String, _ adresse: String) -> some View {
+    @ViewBuilder private func lien(_ titre: LocalizedStringKey, _ adresse: String) -> some View {
         if let url = URL(string: adresse) {
             SwiftUI.Link(titre, destination: url)
                 .foregroundStyle(Palette.dim)

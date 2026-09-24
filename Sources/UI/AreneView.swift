@@ -100,10 +100,12 @@ struct AreneView: View {
                 .font(.system(size: 32)).foregroundStyle(Palette.lostVif)
             Text("Pas connecté à Game Center")
                 .font(.headline).foregroundStyle(Palette.lostVif)
-            Text("Game Center est le service de jeu d'Apple, et il demande un "
-                 + "compte. Vous pouvez vous y connecter dans les Réglages — ou "
-                 + "revenir en arrière et **jouer au loin avec un code**, qui ne "
-                 + "demande rien à personne.")
+            Text("""
+                 Game Center est le service de jeu d'Apple, et il demande un \
+                 compte. Vous pouvez vous y connecter dans les Réglages — ou \
+                 revenir en arrière et **jouer au loin avec un code**, qui ne \
+                 demande rien à personne.
+                 """)
                 .font(.footnote).foregroundStyle(Palette.dim)
                 .multilineTextAlignment(.center)
             #if os(iOS)
@@ -126,8 +128,10 @@ struct AreneView: View {
                 }
             }
 
-            Text("Vos amis Game Center, ou quelqu'un au hasard. "
-                 + "Apple s'occupe de vous mettre en présence.")
+            Text("""
+                 Vos amis Game Center, ou quelqu'un au hasard. \
+                 Apple s'occupe de vous mettre en présence.
+                 """)
                 .font(.footnote).foregroundStyle(Palette.dim)
                 .multilineTextAlignment(.center)
 
@@ -146,8 +150,10 @@ struct AreneView: View {
             }
 
             // Ce qu'Apple ne dira pas, et qu'il vaut mieux savoir avant.
-            Text("Une partie Game Center ne se reprend pas : si quelqu'un perd "
-                 + "le réseau, elle s'arrête. Le code, lui, laisse revenir.")
+            Text("""
+                 Une partie Game Center ne se reprend pas : si quelqu'un perd \
+                 le réseau, elle s'arrête. Le code, lui, laisse revenir.
+                 """)
                 .font(.caption2).foregroundStyle(Palette.dim.opacity(0.85))
                 .multilineTextAlignment(.center)
 
@@ -209,13 +215,13 @@ struct AreneView: View {
 
     private var laPartieQuOnOuvre: String {
         var dits = [plateau.label, regles.mode.label]
-        if regles.territoryCards { dits.append("cartes") }
-        if regles.objectifs { dits.append("conquêtes personnelles") }
-        if regles.dominationOverride == 0 { dits.append("guerre totale") }
+        if regles.territoryCards { dits.append(dit("cartes")) }
+        if regles.objectifs { dits.append(dit("conquêtes personnelles")) }
+        if regles.dominationOverride == 0 { dits.append(dit("guerre totale")) }
         return dits.joined(separator: " · ")
     }
 
-    private func bouton(_ titre: String, _ icone: String, _ teinte: Color,
+    private func bouton(_ titre: LocalizedStringKey, _ icone: String, _ teinte: Color,
                         _ geste: @escaping () -> Void) -> some View {
         Button(action: geste) {
             Label(titre, systemImage: icone)

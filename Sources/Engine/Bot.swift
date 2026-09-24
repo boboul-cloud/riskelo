@@ -45,20 +45,20 @@ enum Bot {
 
         var label: String {
             switch self {
-            case .facile:  "Facile"
-            case .moyenne: "Moyenne"
-            case .forte:   "Forte"
+            case .facile:  dit("Facile")
+            case .moyenne: dit("Moyenne")
+            case .forte:   dit("Forte")
             }
         }
 
         var detail: String {
             switch self {
             case .facile:
-                "Elle avance au hasard et sème des garnisons d'un homme."
+                dit("Elle avance au hasard et sème des garnisons d'un homme.")
             case .moyenne:
-                "Elle tient ce qu'elle prend et cherche vos points faibles."
+                dit("Elle tient ce qu'elle prend et cherche vos points faibles.")
             case .forte:
-                "Elle concentre, vise un continent, et sait où vous frapper."
+                dit("Elle concentre, vise un continent, et sait où vous frapper.")
             }
         }
 
@@ -350,7 +350,7 @@ enum Bot {
             // sec, et la relance peut en prendre deux d'un coup. La dernière
             // paire d'hommes peut donc achever une place — s'en priver, c'est
             // abandonner des conquêtes réelles.
-            if style.retientSesPiles, g.rules.mode == .classique,
+            if style.retientSesPiles, g.rules.mode != .faceAFace,
                g.armies(from) <= 2, menace(g, from) > 0 { continue }
             for to in g.targets(from: from) {
                 let advantage = Double(g.armies(from) - 1 - g.armies(to))
@@ -397,7 +397,13 @@ enum Bot {
                     score -= Double(menace(g, to)) * 0.15
                 }
                 let plan = Plan(from: from, to: to,
-                                questions: min(g.maxQuestions(from: from), advantage >= 2 ? 2 : 1),
+                                // Aux dés, toujours le maximum : le défenseur
+                                // n'oppose jamais plus de deux dés, si bien
+                                // qu'un troisième améliore les comparaisons
+                                // sans rien risquer de plus.
+                                questions: g.rules.mode == .des
+                                    ? g.volleyMax(from: from)
+                                    : min(g.volleyMax(from: from), advantage >= 2 ? 2 : 1),
                                 category: category(g, against: g.owner[to] ?? -1, using: &rng))
                 if best == nil || score > best!.score { best = (score, plan) }
             }
@@ -432,7 +438,7 @@ enum Bot {
             // ni redoutable ni offert, donc digne d'être sondé.
             let leur = score.asked == 0 ? 0.5 : score.rate
             var p: Double
-            if g.rules.mode == .classique {
+            if g.rules.mode != .faceAFace {
                 let echec = 1 - leur
                 p = 0.20 + echec * echec * style.flair
             } else {

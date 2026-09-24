@@ -14,7 +14,9 @@
 
   // « sqlite » et non « kv » : c'est le seul adossement disponible sur le
   // forfait gratuit, et il suffit très largement — un salon garde trois
-  // valeurs et les oublie deux minutes plus tard.
+  // valeurs plus une liste d'identifiants, et les oublie une semaine après le
+  // départ du dernier. Une semaine parce qu'une partie ne tient pas dans une
+  // soirée ; quelques octets, et jamais la partie elle-même.
   "exports": {
     "Salon": { "type": "durable-object", "storage": "sqlite" }
   },

@@ -53,8 +53,196 @@ struct DuelOverlay: View {
         case .handover: handover
         case .adversaireRepond: adversaire
         case .asking, .revealed: question
+        case .defense: defense
+        case .desLances: lancer
         case .summary: summary
         }
+    }
+
+    // MARK: - Un dé ou deux
+
+    /// Le défenseur choisit ses dés.
+    ///
+    /// Chaque bouton dit ce qu'il risque, parce que c'est tout le choix : deux
+    /// dés font plus mal à l'assaillant mais peuvent coûter deux hommes d'un
+    /// coup, un seul n'en coûte jamais plus d'un. Face à un seul dé, le second
+    /// ne risque rien de plus — une seule paire se compare — et le bouton le
+    /// dit aussi, plutôt que d'agiter un danger qui n'existe pas.
+    ///
+    /// Les deux boutons ont le même poids. L'écran n'a pas à souffler la
+    /// réponse : c'est la seule décision que le mode laisse au défenseur.
+    @ViewBuilder private var defense: some View {
+        if let a = session.assault, let attaquant = session.player(a.attacker),
+           let defenseur = session.player(a.defender) {
+            VStack(spacing: 18) {
+                Image(systemName: "shield.lefthalf.filled")
+                    .font(.system(size: 40))
+                    .foregroundStyle(Palette.camp(defenseur.id))
+                VStack(spacing: 6) {
+                    Text("\(attaquant.name) attaque \(session.game.name(a.to))")
+                        .font(.title3.weight(.semibold))
+                    Text(desALAssaut(a.volley))
+                        .foregroundStyle(Palette.dim)
+                }
+                .multilineTextAlignment(.center)
+
+                if session.defenseurIci {
+                    Text("\(defenseur.name), combien de dés opposez-vous ?")
+                        .font(.headline)
+                        .multilineTextAlignment(.center)
+                    HStack(spacing: 10) {
+                        choixDeDefense(1, risque: "Ne coûte jamais plus d'un homme",
+                                       camp: defenseur.id)
+                        choixDeDefense(2, risque: a.volley > 1
+                                       ? "Frappe plus fort, mais peut coûter deux hommes"
+                                       : "Face à un seul dé, ne risque rien de plus",
+                                       camp: defenseur.id)
+                    }
+                    .disabled(!session.aMoiDeDefendre)
+                } else {
+                    Label("\(defenseur.name) choisit ses dés…", systemImage: "ellipsis.bubble")
+                        .font(.headline)
+                        .foregroundStyle(Palette.dim)
+                }
+            }
+            .foregroundStyle(Palette.ink)
+            .frame(maxWidth: .infinity)
+        }
+    }
+
+    /// Le nombre de dés de l'assaut, en toutes lettres. Trois phrases et non
+    /// un nombre suivi d'un « s » : le pluriel de « dé » se fait par une
+    /// lettre en français et par un mot entier en anglais.
+    private func desALAssaut(_ n: Int) -> String {
+        switch n {
+        case 1:  dit("Un dé à l'assaut")
+        case 2:  dit("Deux dés à l'assaut")
+        default: dit("Trois dés à l'assaut")
+        }
+    }
+
+    private func choixDeDefense(_ des: Int, risque: String.LocalizationValue,
+                                camp: PlayerID) -> some View {
+        Button { withAnimation { session.defendre(des) } } label: {
+            VStack(spacing: 6) {
+                HStack(spacing: 2) {
+                    ForEach(0 ..< des, id: \.self) { k in
+                        Image(systemName: k == 0 ? "die.face.5.fill" : "die.face.3.fill")
+                    }
+                }
+                .font(.system(size: 26))
+                Text(des == 1 ? dit("Un dé") : dit("Deux dés"))
+                    .font(.headline)
+                Text(dit(risque))
+                    .font(.caption)
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .opacity(0.85)
+            }
+            .frame(maxWidth: .infinity, minHeight: 112)
+            .padding(.vertical, 6)
+            .padding(.horizontal, 2)
+        }
+        .buttonStyle(.borderedProminent)
+        // Un rectangle aux coins ronds, et non la gélule d'iOS 26 : sur un
+        // bouton de trois lignes, la gélule devenait un ovale qui rognait la
+        // dernière.
+        .buttonBorderShape(.roundedRectangle(radius: 16))
+        .tint(Palette.camp(camp))
+    }
+
+    // MARK: - Les dés
+
+    /// Un lancer entier : jusqu'à trois faces contre deux, en colonnes.
+    ///
+    /// Les colonnes sont la règle, pas un choix de mise en page. Au jeu de
+    /// plateau on aligne les deux mains triées et l'on compare ce qui se fait
+    /// face ; une ligne de dés à gauche et une à droite ne dirait pas quel dé
+    /// affronte quel dé, et c'est pourtant tout ce qu'il y a à lire.
+    ///
+    /// Le troisième dé de l'assaillant n'a pas de vis-à-vis : il paraît en
+    /// retrait, sous un tiret, parce qu'il n'a rien décidé lui-même — il a
+    /// seulement rendu les deux autres meilleurs.
+    @ViewBuilder private var lancer: some View {
+        // L'assaut raconté, et non celui du moteur : le jet qui achève la
+        // partie l'a déjà effacé, et c'est pourtant celui qu'on attend de voir.
+        if let r = session.report, let a = session.assautAffiche, let l = r.lancer {
+            let colonnes = max(l.attaque.count, l.defense.count)
+            VStack(spacing: 18) {
+                Text("\(session.player(a.attacker)?.name ?? "?") attaque \(session.game.name(a.to))")
+                    .font(.subheadline.weight(.medium))
+                    .foregroundStyle(Palette.dim)
+
+                Grid(horizontalSpacing: 8, verticalSpacing: 3) {
+                    GridRow {
+                        etiquette("assaut", Palette.camp(a.attacker))
+                        ForEach(0 ..< colonnes, id: \.self) { k in
+                            deDuLancer(l.attaque, k, teinte: Palette.camp(a.attacker),
+                                       cle: r.id, comparee: k < l.paires)
+                        }
+                    }
+                    GridRow {
+                        Color.clear.frame(width: 1, height: 14)
+                        ForEach(0 ..< colonnes, id: \.self) { k in marqueur(l, k) }
+                    }
+                    GridRow {
+                        etiquette("défense", Palette.camp(a.defender))
+                        ForEach(0 ..< colonnes, id: \.self) { k in
+                            deDuLancer(l.defense, k, teinte: Palette.camp(a.defender),
+                                       cle: r.id, comparee: k < l.paires)
+                        }
+                    }
+                }
+
+                Text(verdictTexte(r))
+                    .font(.subheadline.weight(.medium))
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .foregroundStyle(couleurDuVerdict(r))
+            }
+            .foregroundStyle(Palette.ink)
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 6)
+        }
+    }
+
+    private func etiquette(_ mot: String.LocalizationValue, _ teinte: Color) -> some View {
+        Text(dit(mot))
+            .font(.caption2.weight(.semibold))
+            .foregroundStyle(teinte)
+            .gridColumnAlignment(.trailing)
+    }
+
+    private func deDuLancer(_ main: [Int], _ k: Int, teinte: Color,
+                            cle: UUID, comparee: Bool) -> some View {
+        Group {
+            if k < main.count {
+                DeQuiRoule(face: main[k], teinte: teinte, cle: cle, rang: k)
+                    // Un dé sans vis-à-vis n'a rien tranché : il s'efface, mais
+                    // il reste, sans quoi on ne verrait pas qu'on en a lancé trois.
+                    .opacity(comparee ? 1 : 0.38)
+            } else {
+                Color.clear
+            }
+        }
+        .frame(width: 52, height: 54)
+    }
+
+    /// La flèche désigne le camp qui laisse un homme sur cette paire.
+    private func marqueur(_ l: Lancer, _ k: Int) -> some View {
+        Group {
+            if k < l.paires {
+                Image(systemName: l.issues[k] == .attackerBreaks
+                                  ? "arrowtriangle.down.fill" : "arrowtriangle.up.fill")
+                    .font(.system(size: 11))
+                    .foregroundStyle(Palette.lostVif)
+            } else {
+                Text(verbatim: "—")
+                    .font(.caption2)
+                    .foregroundStyle(Palette.dim.opacity(0.45))
+            }
+        }
+        .frame(width: 52, height: 14)
     }
 
     // MARK: - « Prêt ? »
@@ -74,8 +262,10 @@ struct DuelOverlay: View {
                 VStack(spacing: 8) {
                     Text("\(attaquant.name) attaque \(session.game.name(a.to))")
                         .font(.title3.weight(.semibold))
-                    Text("Question \(duel.question.category.apresDe)"
-                         + " — \(duel.question.difficulty.label.lowercased())")
+                    Text("""
+                         Question \(duel.question.category.dansLaPhrase) — \
+                         \(duel.question.difficulty.label.lowercased())
+                         """)
                         .foregroundStyle(Palette.dim)
                     if croise, a.defenderAnswer != nil {
                         // On dit qu'il a répondu, jamais ce qu'il a répondu.
@@ -136,12 +326,16 @@ struct DuelOverlay: View {
                                 in: Capsule())
                     .foregroundStyle(Palette.category(duel.question.category))
                 Text(session.assault?.defenderAnswer != nil
-                     ? "Votre réponse est prise. \(repondeur.name) répond maintenant à "
-                       + "la même question : le plus sûr l'emporte, et si vous savez "
-                       + "tous les deux, le plus rapide."
-                     : "Vous recevrez la même question juste après : en face à face, "
-                       + "l'attaquant répond aussi. Le plus sûr l'emporte, et si vous "
-                       + "savez tous les deux, le plus rapide.")
+                     ? """
+                       Votre réponse est prise. \(repondeur.name) répond maintenant à \
+                       la même question : le plus sûr l'emporte, et si vous savez \
+                       tous les deux, le plus rapide.
+                       """
+                     : """
+                       Vous recevrez la même question juste après : en face à face, \
+                       l'attaquant répond aussi. Le plus sûr l'emporte, et si vous \
+                       savez tous les deux, le plus rapide.
+                       """)
                     .font(.footnote).foregroundStyle(Palette.dim)
                     .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)
@@ -175,8 +369,10 @@ struct DuelOverlay: View {
     /// Tant qu'un compte rendu est là, c'est sa question qui règne. Le moteur
     /// attendra.
     private var duelAffiche: Duel? {
-        if let r = session.report {
-            return Duel(question: r.question, allowance: r.allowance, siege: 0)
+        // Aux dés il n'y a pas de question à retenir à l'écran : le compte
+        // rendu n'en porte pas, et cette étape ne s'affiche pas de toute façon.
+        if let r = session.report, let q = r.question {
+            return Duel(question: q, allowance: r.allowance, siege: 0)
         }
         return session.duel
     }
@@ -327,7 +523,7 @@ struct DuelOverlay: View {
     /// c'est elle qu'on lit en premier. À deux humains sur un appareil, il n'y
     /// a pas de « vous » : la phrase reste alors blanche.
     private func couleurDuVerdict(_ r: DuelReport) -> Color {
-        guard let a = session.assault else { return Palette.ink }
+        guard let a = session.assautAffiche else { return Palette.ink }
         let attaquantEstMoi: Bool
         if session.enReseau {
             attaquantEstMoi = a.attacker == session.monRang
@@ -376,39 +572,88 @@ struct DuelOverlay: View {
     /// perdre un homme se prend alors pour une erreur de l'application. Nommer
     /// celui qui répond lève tout le doute, et la place nommée dit où l'homme
     /// tombe.
-    private func verdictTexte(_ r: DuelReport) -> String {
-        let nom = session.assault.flatMap { session.player($0.defender)?.name } ?? "Le défenseur"
-        let att = session.assault.flatMap { session.player($0.attacker)?.name } ?? "L'assaillant"
-        let lieu = session.assault.map { session.game.name($0.to) } ?? "La place"
-        let cout = r.mise > 1 ? "deux hommes" : "un homme"
+    private func verdictTexte(_ r: DuelReport) -> LocalizedStringKey {
+        // Un libellé, et non une chaîne assemblée : la phrase était composée
+        // morceau par morceau — « Vous avez répondu juste » + « : la place
+        // tient… » — et une phrase composée à l'exécution n'entre dans aucun
+        // catalogue de langues. Elle restait donc française à chaque question,
+        // sur l'écran qu'on lit le plus souvent. Chaque cas écrit maintenant
+        // sa phrase entière ; c'est aussi la seule forme qu'un traducteur
+        // puisse relire.
+        let nom = session.assautAffiche.flatMap { session.player($0.defender)?.name }
+            ?? dit("Le défenseur")
+        let att = session.assautAffiche.flatMap { session.player($0.attacker)?.name }
+            ?? dit("L'assaillant")
+        let lieu = session.assautAffiche.map { session.game.name($0.to) }
+            ?? dit("La place")
+        let cout = r.mise > 1 ? dit("deux hommes")
+                              : dit("un homme")
 
         switch r.verdict {
         case .reponse:
             let vous = session.aMoiDeRepondre
             if r.correct {
-                return (vous ? "Vous avez répondu juste" : "\(nom) a répondu juste")
-                    + " : \(lieu) tient, l'assaillant laisse \(cout)."
+                return vous
+                    ? """
+                      Vous avez répondu juste : \(lieu) tient, l'assaillant \
+                      laisse \(cout).
+                      """
+                    : """
+                      \(nom) a répondu juste : \(lieu) tient, l'assaillant \
+                      laisse \(cout).
+                      """
             }
-            let faute = r.answer == .timeout
-                ? (vous ? "Vous n'avez pas répondu à temps" : "\(nom) n'a pas répondu à temps")
-                : (vous ? "Vous vous êtes trompé" : "\(nom) s'est trompé")
-            return faute + " : \(lieu) perd \(cout)."
+            if r.answer == .timeout {
+                return vous
+                    ? "Vous n'avez pas répondu à temps : \(lieu) perd \(cout)."
+                    : "\(nom) n'a pas répondu à temps : \(lieu) perd \(cout)."
+            }
+            return vous
+                ? "Vous vous êtes trompé : \(lieu) perd \(cout)."
+                : "\(nom) s'est trompé : \(lieu) perd \(cout)."
 
         case .seul:
             return r.correct
-                ? "\(nom) savait, \(att) non : \(lieu) tient, l'assaillant laisse \(cout)."
+                ? """
+                  \(nom) savait, \(att) non : \(lieu) tient, l'assaillant \
+                  laisse \(cout).
+                  """
                 : "\(att) savait, \(nom) non : \(lieu) perd \(cout)."
 
         case .vitesse:
             return r.outcome == .defenderHolds
-                ? "Les deux savaient. \(nom) a été le plus vif : \(lieu) tient, "
-                    + "l'assaillant laisse \(cout)."
+                ? """
+                  Les deux savaient. \(nom) a été le plus vif : \(lieu) tient, \
+                  l'assaillant laisse \(cout).
+                  """
                 : "Les deux savaient. \(att) a été le plus vif : \(lieu) perd \(cout)."
 
         case .egalite:
-            return "Personne ne savait. Comme sur une égalité de dés, \(lieu) tient "
-                + "et l'assaillant laisse \(cout)."
+            return """
+                   Personne ne savait. Comme sur une égalité de dés, \(lieu) tient \
+                   et l'assaillant laisse \(cout).
+                   """
+
+        case .des:
+            // Les faces sont déjà au-dessus de la phrase : elle n'a pas à les
+            // répéter, elle a à dire qui laisse un homme, et où.
+            let sien = hommes(r.coutDefenseur), mien = hommes(r.coutAttaquant)
+            if r.coutDefenseur > 0 && r.coutAttaquant > 0 {
+                return """
+                       Chacun emporte une paire : \(lieu) perd \(sien), et l'assaillant \
+                       \(mien).
+                       """
+            }
+            if r.coutDefenseur > 0 {
+                return "Les dés de l'assaut l'emportent : \(lieu) perd \(sien)."
+            }
+            return "\(lieu) tient : l'assaillant laisse \(mien)."
         }
+    }
+
+    /// « un homme » ou « deux hommes » — jamais plus, aux dés comme ailleurs.
+    private func hommes(_ n: Int) -> String {
+        n > 1 ? dit("deux hommes") : dit("un homme")
     }
 
     /// Ma propre réponse, pour savoir où poser la croix. En face à face les
@@ -445,7 +690,7 @@ struct DuelOverlay: View {
         var texte = "sans réponse"
         var temps: String?
         if case let .chosen(i, e)? = reponse {
-            if r.question.choices.indices.contains(i) { texte = r.question.choices[i] }
+            if let choix = r.question?.choices, choix.indices.contains(i) { texte = choix[i] }
             temps = String(format: "%.1f s", min(e, r.allowance))
         }
         return HStack(spacing: 7) {
@@ -470,12 +715,12 @@ struct DuelOverlay: View {
                     in: RoundedRectangle(cornerRadius: 8))
     }
 
-    private func de(_ face: Int, legende: String) -> some View {
+    private func de(_ face: Int, legende: String.LocalizationValue) -> some View {
         VStack(spacing: 3) {
             Image(systemName: "die.face.\(min(6, max(1, face)))")
                 .font(.system(size: 34))
                 .foregroundStyle(Palette.ink)
-            Text(legende).font(.caption2).foregroundStyle(Palette.dim)
+            Text(dit(legende)).font(.caption2).foregroundStyle(Palette.dim)
         }
     }
 
@@ -521,9 +766,9 @@ struct DuelOverlay: View {
         }
     }
 
-    private func bilan(_ titre: String, _ pertes: Int, _ camp: PlayerID) -> some View {
+    private func bilan(_ titre: String.LocalizationValue, _ pertes: Int, _ camp: PlayerID) -> some View {
         VStack(spacing: 5) {
-            Text(titre).font(.caption).foregroundStyle(Palette.dim)
+            Text(dit(titre)).font(.caption).foregroundStyle(Palette.dim)
             Text("−\(pertes)")
                 .font(.title2.weight(.bold).monospacedDigit())
                 .foregroundStyle(pertes > 0 ? Palette.lostVif : Palette.dim)
@@ -688,12 +933,12 @@ struct OccupationPanel: View {
     }
 
     /// Les cas courants, en un appui.
-    private func raccourci(_ titre: String, _ valeur: Int) -> some View {
+    private func raccourci(_ titre: String.LocalizationValue, _ valeur: Int) -> some View {
         let choisi = count == valeur
         return Button {
             withAnimation(.snappy(duration: 0.12)) { count = valeur }
         } label: {
-            Text(titre)
+            Text(dit(titre))
                 .font(.caption.weight(.semibold)).lineLimit(1)
                 .padding(.horizontal, 12).padding(.vertical, 8)
                 .background(Capsule().fill(choisi ? Palette.campVif(camp).opacity(0.28)
@@ -710,5 +955,52 @@ struct OccupationPanel: View {
     private var moitie: Int? {
         let m = min(haut, max(minimum, (haut + 1) / 2))
         return m > minimum && m < haut ? m : nil
+    }
+}
+
+/// Un dé qui roule avant de se poser.
+///
+/// La face est déjà connue — le moteur l'a tirée à la déclaration, et elle
+/// est la même sur l'appareil d'en face. Ce qui roule ici ne décide donc de
+/// rien : c'est du théâtre, et c'est nécessaire. Un chiffre qui paraît d'un
+/// coup ne se lit pas comme un dé lancé, il se lit comme un verdict rendu
+/// ailleurs — ce qu'il est, précisément, et ce qu'il ne faut pas qu'on voie.
+///
+/// Le hasard de l'affichage est local et sans conséquence : il ne touche pas
+/// à celui de la partie, qui doit rester identique sur les deux appareils.
+private struct DeQuiRoule: View {
+
+    let face: Int
+    let teinte: Color
+    /// L'identité du compte rendu : elle change à chaque lancer, et c'est elle
+    /// qui relance le roulement.
+    let cle: UUID
+    /// Le rang du dé dans sa main. Il décale le moment où celui-ci se pose :
+    /// cinq dés qui s'arrêtent tous ensemble ressemblent à un affichage, cinq
+    /// dés qui s'arrêtent l'un après l'autre ressemblent à un lancer.
+    var rang: Int = 0
+
+    @State private var affichee = 1
+    @State private var posee = false
+
+    var body: some View {
+        Image(systemName: "die.face.\(min(6, max(1, affichee)))")
+            .font(.system(size: 44))
+            .foregroundStyle(posee ? teinte : Palette.dim)
+            .scaleEffect(posee ? 1 : 0.92)
+            .rotationEffect(.degrees(posee ? 0 : -8))
+            .animation(.spring(duration: 0.28, bounce: 0.45), value: posee)
+            .task(id: cle) {
+                posee = false
+                // Assez pour que l'œil voie tourner, assez peu pour ne pas
+                // faire attendre : le dernier dé se pose en moins d'une seconde.
+                for _ in 0 ..< (5 + rang * 2) {
+                    affichee = Int.random(in: 1 ... 6)
+                    try? await Task.sleep(for: .milliseconds(70))
+                    if Task.isCancelled { break }
+                }
+                affichee = face
+                posee = true
+            }
     }
 }

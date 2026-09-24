@@ -19,9 +19,9 @@ enum Difficulty: Int, CaseIterable, Comparable, Hashable, Codable {
     static func < (a: Difficulty, b: Difficulty) -> Bool { a.rawValue < b.rawValue }
     var label: String {
         switch self {
-        case .facile: "Facile"
-        case .moyen: "Moyen"
-        case .difficile: "Difficile"
+        case .facile: dit("Facile")
+        case .moyen: dit("Moyen")
+        case .difficile: dit("Difficile")
         }
     }
 }

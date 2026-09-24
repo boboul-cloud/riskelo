@@ -148,11 +148,11 @@ struct ArchivesView: View {
 
     private func etat(_ p: PartieArchivee) -> String {
         let n = p.moments.count
-        let instants = "\(n) instant\(n > 1 ? "s" : "")"
+        let instants = dit("\(n) instant\(n > 1 ? "s" : "")")
         if let v = p.vainqueur, v < p.joueurs.count {
-            return "\(p.joueurs[v]) l'a emporté · \(instants)"
+            return dit("\(p.joueurs[v]) l'a emporté · \(instants)")
         }
-        return "Interrompue au tour \(p.moments.last?.tour ?? 1) · \(instants)"
+        return dit("Interrompue au tour \(p.moments.last?.tour ?? 1) · \(instants)")
     }
 
     // MARK: - Les instants d'une partie
@@ -160,8 +160,10 @@ struct ArchivesView: View {
     private func moments(de p: PartieArchivee) -> some View {
         ScrollView {
             VStack(spacing: 8) {
-                Text("Choisir un instant reprend la partie à partir de là, sans "
-                     + "effacer celle-ci : la suite que vous jouerez sera rangée à part.")
+                Text("""
+                     Choisir un instant reprend la partie à partir de là, sans \
+                     effacer celle-ci : la suite que vous jouerez sera rangée à part.
+                     """)
                     .font(.caption).foregroundStyle(Palette.dim)
                     .multilineTextAlignment(.center)
                     .padding(.bottom, 6)

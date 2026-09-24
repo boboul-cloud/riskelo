@@ -148,6 +148,12 @@ final class Link: Fil {
 
     var jeSuisLHote: Bool { jHeberge }
 
+    /// Rien à retenir : dans la même pièce, on se retrouve en s'y retrouvant.
+    /// Rallumer les deux appareils côte à côte les remet en présence tout
+    /// seuls — mais la partie, elle, ne se reprend pas ainsi : il faudrait
+    /// reconnaître la table d'hier parmi celles d'aujourd'hui.
+    nonisolated var codeDeReprise: String? { nil }
+
     /// Ce qui arrive d'un autre appareil, et de qui.
     var onReceive: ((Data, Pair) -> Void)?
     /// Appelé à chaque appareil relié, avec `true` si c'est nous qui avons

@@ -23,9 +23,9 @@ Ensuite, dans l'ordre :
 2. **Créer la fiche du jeu** sur `appstoreconnect.apple.com`. C'est le moment
    où le nom « Riskelo » est réservé à vous. Les valeurs à saisir sont en
    section 1, les adresses du site en section 2.
-3. **Refaire les captures d'écran** — celles qui sont rangées datent du
-   9 septembre et montrent un accueil qui n'existe plus. Une commande les
-   refait toutes : section 7.
+3. **Finir les captures d'écran** — l'iPad et le 6,5 pouces ont été refaits le
+   17 septembre, dans les deux langues. Il manque la seule taille d'iPhone
+   qu'Apple exige, le 6,9 pouces : section 7.
 4. **Envoyer l'application** depuis votre Mac — deux commandes et un bouton,
    en section 8.
 5. **Recopier les textes** de la section 4 dans les cases du site, répondre
@@ -76,10 +76,10 @@ C'est la seule raison pour laquelle ce paragraphe existe.
 
 ### c. Le lien vers l'App Store dans la page d'invitation
 
-`serveur/src/index.js`, constante `APP_STORE` : un numéro d'exemple y attend
-la vraie adresse. C'est ce que voit celui qui reçoit une invitation sans avoir
-le jeu. À faire **après** que la fiche existe chez Apple, donc après la
-section 1, puis `npx wrangler deploy` à nouveau.
+`serveur/src/index.js`, constante `APP_STORE` : c'est ce que voit celui qui
+reçoit une invitation sans avoir le jeu. **Fait le 24 septembre 2026** : elle
+porte la vraie adresse, `https://apps.apple.com/app/riskelo/id6806804539`, et
+le serveur a été redéployé.
 
 ### d. Ce qui change dans les questionnaires
 
@@ -100,7 +100,7 @@ pour les mêmes raisons : voir `soumission/confidentialite-app-store.md`, qui a
 | Identifiant Apple de l'app | attribué par App Store Connect à la création |
 | Langue principale | Français (France) |
 | Version | `1.3` |
-| Build | `6` |
+| Build | `7` |
 | Plateformes | iOS et macOS (une seule cible, deux plateformes dans la fiche) |
 | Version minimale | iOS 17.0 · macOS 14.0 |
 | Appareils | iPhone et iPad (`TARGETED_DEVICE_FAMILY = 1,2`) et Mac |
@@ -109,15 +109,15 @@ pour les mêmes raisons : voir `soumission/confidentialite-app-store.md`, qui a
 | Catégorie secondaire | Jeux ▸ **Culture générale** |
 | Classification par âge | **4+** |
 | Game Center | non |
-| Achats intégrés | dix-sept packs, non consommables — section 4 bis |
-| Prix | **à décider** — celui de l'application, et le palier des dix-sept packs |
+| Achats intégrés | trente-quatre packs, non consommables — dix-sept par langue, section 4 bis |
+| Prix | **à décider** — celui de l'application, et le palier des trente-quatre packs |
 | Territoires | tous |
 | Publication | **à décider** — automatique à l'approbation, ou manuelle |
 
 Les deux numéros se lisent dans `project.yml` (`MARKETING_VERSION` et
 `CURRENT_PROJECT_VERSION`), seule source : le mode d'emploi de l'application y
 prend celui qu'il affiche. Le build monte à chaque envoi — le `5` est parti,
-celui-ci est le `6` — et la version monte quand ce qui part mérite un nom :
+celui-ci est le `7` — et la version monte quand ce qui part mérite un nom :
 la fin de partie qui sonne vaut une `1.3`, parce qu'elle s'entend dès la
 première partie jouée.
 
@@ -129,6 +129,12 @@ première partie jouée.
 | **URL d'assistance** (obligatoire) | `https://boboul-cloud.github.io/riskelo/assistance.html` |
 | **URL de la politique de confidentialité** (obligatoire) | `https://boboul-cloud.github.io/riskelo/confidentialite.html` |
 | CLUF personnalisé (facultatif) | `https://boboul-cloud.github.io/riskelo/conditions.html` |
+
+Ces quatre adresses sont celles de la fiche **française**. La fiche anglaise a
+les siennes, dans `/en/` — voir [LOCALISATION-EN.md](LOCALISATION-EN.md). Les
+deux versions d'une même page se répondent par un bouton dans la barre du
+haut : un lecteur arrivé du mauvais côté n'est jamais coincé.
+
 | Dépôt du code et du site | `https://github.com/boboul-cloud/riskelo` |
 
 Les trois premières sont publiques et vérifiées. Si l'une répond autre chose
@@ -245,8 +251,13 @@ iPhone, iPad et Mac — une seule application, en français.
 
 ### Nouveautés de cette version — 4 000 caractères max
 
-C'est ce texte qui se colle, et il dit ce qui a changé depuis la `1.1` — rien
-d'autre : c'est ce qu'un joueur y cherche.
+**La note à coller est dans [README.md](README.md)**, en français et en
+anglais — celle de la 1.5, qui dit ce qui a changé depuis la 1.4. Riskelo est
+en vente depuis le 30 août : la case se remplit à chaque version, et c'est le
+README qui porte la note de la version en cours. Rien n'est recopié ici,
+pour qu'on ne colle pas une note périmée.
+
+<details><summary>Ce qui avait été écrit ici pour la 1.3</summary>
 
 ```
 JOUER AU LOIN
@@ -271,13 +282,7 @@ UN DÉTAIL
 • Le bouton des réglages, sur l'accueil, passe au rose : il ne désigne ni un camp ni un état du plateau, c'est la couleur d'une porte.
 ```
 
-Si Riskelo n'a toujours pas été publié quand cette version part, App Store
-Connect ne pose pas la question : une première version n'a pas de nouveautés,
-et tout est déjà dit dans la description. La case reste alors :
-
-```
-Première version de Riskelo.
-```
+</details>
 
 <details><summary>Ce qui avait été écrit pour la 1.1, depuis la 1.0</summary>
 
@@ -325,22 +330,34 @@ CE QUI SE VOIT MIEUX
 > Une version soumise avec la page des packs mais sans articles joints
 > montrerait « indisponible » à tout le monde.
 
-Dix-sept packs de questions, **non consommables** : achetés une fois, gardés
-pour toujours. Seize packs scolaires — Histoire, Géographie, Français et SVT
+**Trente-quatre packs de questions, non consommables** : achetés une fois,
+gardés pour toujours. Dix-sept par langue, depuis que l'anglais est une langue
+de Riskelo et non une seconde application.
+
+Côté français : seize packs scolaires — Histoire, Géographie, Français et SVT
 pour les quatre années du collège, deux cents questions chacun — et « Rock
-70-80 », quatre cents questions sur la musique des années 1970 et 1980. Deux cents questions chacun — la taille qui donne deux soirées sans
-redite, mesurée et non estimée ; le tableau est dans le README. Le jeu de base
-— les six thèmes de culture générale, 2 400 questions — reste entier sans eux.
+70-80 », quatre cents questions sur la musique des années 1970 et 1980. Deux
+cents questions chacun — la taille qui donne deux soirées sans redite, mesurée
+et non estimée ; le tableau est dans le README. Côté anglais : seize packs du
+programme américain, de la sixième à la troisième année de collège, et le même
+Rock 70-80 écrit pour un lecteur américain.
+
+Le jeu de base — les six thèmes de culture générale, 2 400 questions dans
+chaque langue — reste entier sans eux. La page des packs ne montre que la
+langue en cours : un Français n'y voit pas les seize packs américains.
 
 Ce qui s'achète n'est pas le contenu : les fichiers sont dans l'application,
 sur tous les appareils. C'est le droit de **choisir** un pack. C'est ce qui
 permet à celui qui rejoint une table de jouer les packs de l'hôte sans les
 avoir achetés — et c'est voulu.
 
-### Les trois articles à créer
+### Les dix-sept articles français
 
-Type : **Non-Consumable** pour les trois. Les identifiants sont ceux que le
-code demande : une lettre de travers et l'article n'est jamais trouvé.
+Type : **Non-Consumable** pour les dix-sept. Les identifiants sont ceux que le
+code demande : une lettre de travers et l'article n'est jamais trouvé. Les
+dix-sept anglais portent la famille `com.oulhen.riskelo.pack.us.…` et sont
+listés, comme ceux-ci, dans
+[packs-app-store.md](packs-app-store.md) — un bloc à recopier par article.
 
 | Identifiant | Nom de référence | Nom affiché |
 |---|---|---|
@@ -362,7 +379,10 @@ code demande : une lettre de travers et l'article n'est jamais trouvé.
 | `com.oulhen.riskelo.pack.svt3e` | Pack SVT 3e | SVT — 3e |
 | `com.oulhen.riskelo.pack.geographie3e` | Pack Géographie 3e | Géographie — 3e |
 
-Les descriptions, à coller telles quelles :
+Les descriptions longues, **à lire et non à coller** : le formulaire d'App
+Store Connect s'arrête à 45 signes, et celles-ci en font près du double. Les
+versions courtes, comptées, sont dans
+[packs-app-store.md](packs-app-store.md).
 
 ```
 Les groupes et les voix des années 1970 et 1980, en France et ailleurs. 400 questions.
@@ -478,7 +498,7 @@ envoyées ne comptent pas comme collectées.
 |---|---|
 | Utilisez-vous l'identifiant publicitaire (IDFA) ? | Non |
 | Suivi (App Tracking Transparency) ? | Non |
-| Achats intégrés ? | Oui — dix-sept packs non consommables |
+| Achats intégrés ? | Oui — trente-quatre packs non consommables |
 | Publicité dans l'app ? | Non |
 | Contenu de tiers soumis à droits ? | Non — code, questions, plateaux et icône sont l'œuvre de l'éditeur |
 | Chiffrement / conformité export | `ITSAppUsesNonExemptEncryption = false`, déjà dans l'Info.plist : plus rien à répondre à chaque envoi |
@@ -487,7 +507,8 @@ envoyées ne comptent pas comme collectées.
 ### Classification par âge
 
 Répondre **Aucun / Jamais** à toutes les questions : pas de violence figurée
-(le jeu est fait d'hexagones et de nombres), pas de contenu sexuel, pas de jeu
+(le jeu est fait d'une carte, de formes et de nombres), pas de contenu sexuel,
+pas de jeu
 d'argent, pas d'alcool ni de tabac, pas de contenu généré par les
 utilisateurs, pas d'accès web libre. Résultat attendu : **4+**.
 
@@ -614,23 +635,35 @@ Robert Oulhen — bob.oulhen@gmail.com
 
 ## 7. Les captures d'écran
 
-> **À refaire avant le dépôt — 16 septembre 2026.** Les dix-huit fichiers
-> datent du 9 septembre, et l'accueil a changé deux fois depuis : les packs
-> s'y sont ajoutés, puis « Jouer à plusieurs » est monté en tête. La sixième
-> capture montre donc un écran d'accueil qui n'existe plus — trois boutons au
-> lieu de cinq. Apple rejette une capture qui ne correspond pas à l'app.
+**Où on les dépose.** Sur la page de la version 1.3, au menu de langue en haut
+de la page : sur *Français (France)* pour les séries françaises, sur
+*Anglais (É.-U.)* pour les anglaises. Les cases changent avec la langue, et
+elles sont rangées par taille d'appareil.
+
+Vingt-neuf fichiers, un dossier par langue puis un par taille, dans
+`soumission/captures/` :
+
+| Dossier | Langue | Taille | Résolution | Nombre | Exigée ? |
+|---|---|---|---|---|---|
+| `captures/fr/iphone-6.9/` | français | iPhone 6,9 pouces | 1320 × 2868 | 6 | oui — mais **périmée**, 30 août |
+| `captures/fr/iphone-6.5/` | français | iPhone 6,5 pouces | 1242 × 2688 | 6 | non — fournie quand même |
+| `captures/fr/ipad-13/` | français | iPad 13 pouces | 2064 × 2752 | 5 | oui, si l'iPad est proposé |
+| `captures/en/iphone-6.9/` | anglais | iPhone 6,9 pouces | — | **0** | oui — **manquante** |
+| `captures/en/iphone-6.5/` | anglais | iPhone 6,5 pouces | 1242 × 2688 | 8 | non — fournie quand même |
+| `captures/en/ipad-13/` | anglais | iPad 13 pouces | 2064 × 2752 | 4 | oui, si l'iPad est proposé |
+| — | — | Mac | 2880 × 1800 (16:10) | 0 | seulement si le Mac part aussi |
+
+> **Ce qui bloque aujourd'hui — 17 septembre 2026.** Le 6,9 pouces est la seule
+> taille d'iPhone exigée, et les séries prises le 17 septembre sont toutes en
+> 6,5 pouces. Côté anglais il n'y a rien du tout ; côté français il reste celle
+> du 30 août, dont le sixième écran montre un accueil à trois boutons qui
+> n'existe plus. Une série 6,9 pouces neuve est à prendre dans les deux
+> langues avant de déposer.
 >
-> Une commande les refait toutes (voir plus bas). L'outil, lui, n'a pas besoin
-> d'être retouché : il ne s'appuie sur aucun libellé qui ait changé.
-
-Dix-huit fichiers, six par taille, dans `soumission/captures/` :
-
-| Dossier | Taille | Résolution | Exigée ? |
-|---|---|---|---|
-| `captures/iphone-6.9/` | iPhone 6,9 pouces | 1320 × 2868 | oui |
-| `captures/iphone-6.5/` | iPhone 6,5 pouces | 1242 × 2688 | non — fournie quand même |
-| `captures/ipad-13/` | iPad 13 pouces | 2064 × 2752 | oui, si l'iPad est proposé |
-| — | Mac | 2880 × 1800 (16:10) | seulement si le Mac part aussi |
+> Sept autres captures ont été mises de côté dans `captures/_ecartees/` — deux
+> montages, un doublon, et quatre qui montrent du français dans l'app anglaise
+> ou de l'anglais dans l'app française. Le détail est dans
+> [captures-decran.md](captures-decran.md).
 
 Une capture d'iPhone 6,9" suffit pour toutes les autres tailles d'iPhone.
 Minimum une par taille, maximum dix.
@@ -649,10 +682,11 @@ résultats de recherche :
 6. **L'accueil** — il ne dit pas ce qu'est le jeu, d'où la dernière place, mais
    il montre l'icône et le seul bouton dont on ait besoin pour commencer.
 
-Pour les refaire — après un changement d'écran, ou à la prochaine version —
-`outils/captures.py` joue la partie tout seul sur les trois appareils, prend
-les six écrans, règle la barre d'état à 9:41 et range le tout aux noms
-ci-dessus :
+Pour refaire la série française — après un changement d'écran, ou à la
+prochaine version — `outils/captures.py` joue la partie tout seul sur les
+trois appareils, prend les six écrans, règle la barre d'état à 9:41 et range
+le tout dans `captures/fr/`. Il ne sait pas prendre l'anglaise : il clique des
+boutons qu'il appelle par leur nom français.
 
 ```bash
 xcodebuild -project Riskelo.xcodeproj -scheme Riskelo \
@@ -734,7 +768,15 @@ construisent.
 ### Essayé, et la liaison tient
 
 **28 août 2026 — vérifié sur un vrai Mac et un vrai iPhone : la partie à deux
-appareils fonctionne avec le bac à sable actif.** C'était le seul point du
+appareils fonctionne avec le bac à sable actif.**
+
+**16 septembre 2026 — revérifié après la fusion des deux langues, dans les deux
+modes.** Le dialecte réseau est passé de 7 à 8 et les identifiants de trois
+thèmes ont changé : il fallait s'assurer que deux appareils se trouvent encore
+et jouent bien la même partie. Essayé au loin par le code à six lettres, et en
+local par Bonjour. Dans les deux cas, l'iPhone français ouvre la table, le Mac
+anglais la rejoint, et les deux jouent les questions françaises — la langue de
+celui qui ouvre, comme annoncé sur l'écran des packs. C'était le seul point du
 dossier qu'aucune commande ne pouvait établir, et il est levé : la version Mac
 peut partir en même temps que celle de l'iPhone.
 
@@ -783,12 +825,14 @@ une question de calendrier, plus d'un obstacle technique.
 - [ ] Archive envoyée, build traitée et visible dans la fiche
 - [ ] Essai TestFlight sur un appareil réel
 - [ ] Textes de la section 4 collés
-- [x] Captures prises — 18 fichiers dans `soumission/captures/`
-- [ ] Captures déposées (iPhone 6,9" et iPad 13" au minimum)
+- [x] Captures prises — 29 fichiers dans `soumission/captures/`, deux langues
+      (dont 23 du 17 septembre)
+- [ ] **Série iPhone 6,9" à refaire** — français périmé, anglais absent
+- [ ] Captures déposées, langue par langue (iPhone 6,9" et iPad 13" au minimum)
 - [ ] Questionnaires de la section 5 remplis
 - [ ] Notes de la section 6 collées
 - [ ] Prix et disponibilité choisis
-- [ ] Les dix-sept achats intégrés créés (section 4 bis) et **joints à la version**
+- [ ] Les trente-quatre achats intégrés créés (section 4 bis) et **joints à la version**
 - [ ] Achats essayés avec un compte sandbox sur un appareil réel
 - [ ] Soumis à la revue
 
@@ -801,7 +845,7 @@ relecteur : un fil qui traîne repart en bas de la file.
 
 | Point | Pourquoi c'est à vous |
 |---|---|
-| Le prix | Deux décisions, pas une : le prix de l'application — gratuite fait des joueurs, payante fait un revenu — et le palier des dix-sept packs, qui sont la seule autre recette du jeu. |
+| Le prix | Deux décisions, pas une : le prix de l'application — gratuite fait des joueurs, payante fait un revenu — et le palier des trente-quatre packs, qui sont la seule autre recette du jeu. |
 | Le numéro de téléphone de la revue | Apple l'exige ; il n'est jamais rendu public. |
 | Publication automatique ou manuelle | Manuelle si vous voulez choisir le jour. |
 | macOS maintenant ou plus tard | Plus aucun obstacle : le bac à sable est posé et la liaison Mac ↔ iPhone est vérifiée avec. Pure question de calendrier. |

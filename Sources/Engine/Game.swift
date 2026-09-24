@@ -112,6 +112,15 @@ struct GameState {
     /// retourne alors, comme au Risk.
     private(set) var elimines: [PlayerID: PlayerID] = [:]
 
+    /// Le dernier assaut aux dés, tel que son jet l'a laissé.
+    ///
+    /// L'écran en a besoin pour raconter le lancer, et `assault` ne suffit
+    /// pas : le jet qui achève la partie efface l'assaut dans la foulée, et
+    /// ce lancer-là — le plus attendu de tous — ne se montrait jamais. Rien de
+    /// la règle n'en dépend : il n'est ni enregistré, ni compté dans
+    /// l'empreinte, et une partie reprise ou renvoyée repart sans lui.
+    private(set) var dernierJet: Assault?
+
     var bank: QuestionBank
     var rng: SeededRandom
 
@@ -172,7 +181,7 @@ struct GameState {
                                               using: &g.rng)
         }
         g.phase = .reinforcement(remaining: g.reinforcements(for: g.currentPlayer.id))
-        g.note(.tour, "Tour \(g.turn) — à \(g.currentPlayer.name) de jouer.")
+        g.note(.tour, dit("Tour \(g.turn) — à \(g.currentPlayer.name) de jouer."))
         return g
     }
 
@@ -247,7 +256,7 @@ struct GameState {
         hands[joueur] = main.filter { !ids.contains($0.id) }
         discard.append(contentsOf: trio)
         phase = .reinforcement(remaining: reste + valeur)
-        note(.renfort, "\(currentPlayer.name) échange trois cartes : \(valeur) hommes.")
+        note(.renfort, dit("\(currentPlayer.name) échange trois cartes : \(valeur) hommes."))
         return true
     }
 
@@ -260,7 +269,7 @@ struct GameState {
         }
         guard let carte = deck.popLast() else { return }
         hands[player, default: []].append(carte)
-        note(.renfort, "\(players.first { $0.id == player }?.name ?? "?") gagne une carte.")
+        note(.renfort, dit("\(players.first { $0.id == player }?.name ?? "?") gagne une carte."))
     }
 
     // MARK: - Lecture
@@ -297,8 +306,10 @@ struct GameState {
         let du = eruditionOwed(player)
         guard du > 0 else { return }
         bonusPaid[player] = eruditionEarned(player)
-        note(.renfort, "\(du) homme\(du > 1 ? "s" : "") de plus pour "
-             + "\(players.first { $0.id == player }?.name ?? "?") : ses bonnes réponses.")
+        note(.renfort, dit("""
+                           \(du) homme\(du > 1 ? "s" : "") de plus pour \
+                           \(players.first { $0.id == player }?.name ?? "?") : ses bonnes réponses.
+                           """))
     }
 
     /// D'où peut-on attaquer : ses propres terres, à plus d'un homme, qui
@@ -313,8 +324,14 @@ struct GameState {
 
     /// Le nombre de questions possibles : un dé par homme au-delà du premier,
     /// dans la limite de la règle. Il faut toujours laisser une garnison.
-    func maxQuestions(from id: TerritoryID) -> Int {
-        max(0, min(rules.maxQuestions, armies(id) - 1))
+    /// Combien de dés — ou de questions — peuvent partir d'ici.
+    ///
+    /// On n'attaque jamais avec sa garnison : il en faut un de plus par dé
+    /// annoncé. Aux dés, trois au plus, comme au jeu de plateau ; en questions,
+    /// deux, parce qu'une question coûte du temps là où un dé n'en coûte pas.
+    func volleyMax(from id: TerritoryID) -> Int {
+        let plafond = rules.mode == .des ? 3 : rules.maxQuestions
+        return max(0, min(plafond, armies(id) - 1))
     }
 
     /// Deux territoires amis reliés par une chaîne de territoires amis.
@@ -359,7 +376,13 @@ struct GameState {
     /// une partie sans question ne se distingue pas d'une panne.
     var themesEnJeu: [Category] {
         guard let choisis = rules.themes, !choisis.isEmpty else { return Themes.base }
-        let retenus = Themes.tous.filter { choisis.contains($0.id) }
+        // Toutes langues, et non la seule de cet appareil : quand l'hôte
+        // nomme ses thèmes, l'invité doit les retenir même s'ils viennent de
+        // l'autre banque. Filtré par la langue locale, un appareil anglais
+        // n'aurait reconnu aucun thème français, serait retombé sur ses six
+        // thèmes de base, et les deux tables auraient tiré des questions
+        // différentes — sans que rien ne s'affiche.
+        let retenus = Themes.toutesLangues.filter { choisis.contains($0.id) }
         return retenus.isEmpty ? Themes.base : retenus
     }
 
@@ -417,7 +440,7 @@ struct GameState {
         let left = remaining - count
         phase = .reinforcement(remaining: left)
         if left == 0 {
-            note(.renfort, "\(currentPlayer.name) a placé ses renforts.")
+            note(.renfort, dit("\(currentPlayer.name) a placé ses renforts."))
             phase = .attack
         }
         // Un objectif qui demande tant de places à deux ou trois hommes se
@@ -451,7 +474,7 @@ struct GameState {
               owner[from] == currentPlayer.id,
               let defenseur = owner[to], defenseur != currentPlayer.id,
               map.areAdjacent(from, to),
-              questions >= 1, questions <= maxQuestions(from: from) else { return false }
+              questions >= 1, questions <= volleyMax(from: from) else { return false }
         return true
     }
 
@@ -461,18 +484,148 @@ struct GameState {
         guard canDeclare(from: from, to: to, questions: questions),
               let defender = owner[to] else { return false }
 
+        // Aux dés, le terrain n'existe pas : la catégorie annoncée est
+        // ignorée, et non pas seulement inutile. La machine la choisit encore
+        // dans son plan, et la garder ici lui ferait croire qu'elle a déjà
+        // usé ce thème contre ce joueur.
+        let terrain = rules.mode.interroge ? category : nil
         var a = Assault(attacker: currentPlayer.id, defender: defender,
-                        from: from, to: to, category: category, volley: questions)
-        note(.duel, "\(currentPlayer.name) attaque \(name(to)) depuis \(name(from)) — "
-             + "\(questions) question\(questions > 1 ? "s" : "") "
-             + "\(category?.apresDe ?? "au hasard").")
+                        from: from, to: to, category: terrain, volley: questions)
+
+        if rules.mode == .des {
+            // Deux phrases entières, et non un « dé » suivi d'un « s »
+            // conditionnel : le pluriel de « dé » se fait par une lettre en
+            // français et par un mot entier en anglais, et une phrase montée
+            // morceau par morceau n'entre dans aucun catalogue de langues.
+            note(.duel, questions > 1
+                 ? dit("\(currentPlayer.name) attaque \(name(to)) depuis \(name(from)) — deux dés.")
+                 : dit("\(currentPlayer.name) attaque \(name(to)) depuis \(name(from)) — un dé."))
+            // Un défenseur qui choisit ses dés suspend l'assaut : rien n'est
+            // encore jeté, et c'est son coup à lui qui le fera.
+            if choisitSesDes(defender, garnison: armies(to)) {
+                assault = a
+                return true
+            }
+            lancerLesDes(&a, defense: min(2, armies(to)))
+            assault = a
+            dernierJet = a
+            if a.conquered { conquer(from: a.from, to: a.to, volley: a.volley) }
+            return true
+        }
+
+        // Deux phrases : le thème se raccorde par « de » en français et par
+        // « on » en anglais, et « au hasard » ne se raccorde à rien.
+        note(.duel, terrain.map { c in
+            dit("""
+                \(currentPlayer.name) attaque \(name(to)) depuis \(name(from)) — \
+                \(questions) question\(questions > 1 ? "s" : "") \(c.dansLaPhrase).
+                """)
+        } ?? dit("""
+                 \(currentPlayer.name) attaque \(name(to)) depuis \(name(from)) — \
+                 \(questions) question\(questions > 1 ? "s" : "") au hasard.
+                 """))
         // Le terrain laissé au sort ne compte pas comme un terrain choisi :
         // la machine s'interdit de reprendre le même thème deux fois de
         // suite, et « au hasard » ne l'engage à rien.
-        if let category { lastCategoryAgainst[defender] = category }
+        if let terrain { lastCategoryAgainst[defender] = terrain }
         if !drawQuestion(&a) { assault = nil; return false }
         assault = a
         return true
+    }
+
+    /// L'assaut aux dés se tranche d'un coup.
+    ///
+    /// Il n'attend aucune réponse : tout ce qu'il va coûter est déjà connu à
+    /// la déclaration, et le moteur n'a donc rien à faire attendre. C'est
+    /// l'écran qui le raconte coup par coup — le moteur ne connaît pas la
+    /// mise en scène, et n'a jamais eu à la connaître.
+    ///
+    /// La salve s'arrête pour les mêmes raisons qu'en questions : la place est
+    /// prise, ou l'assaillant n'a plus d'homme à risquer au-delà de sa
+    /// garnison.
+    private mutating func lancerLesDes(_ a: inout Assault, defense: Int) {
+        encaisser(Combat.resolveDes(Combat.lancer(attaque: a.volley, defense: defense,
+                                                  using: &rng)), &a)
+        // Un lancer épuise la salve : aux dés, la salve **est** le jet, et ses
+        // trois dés partent ensemble. Presser la place demande un nouvel
+        // assaut, comme au jeu de plateau.
+        a.asked = a.volley
+    }
+
+    /// Le défenseur choisit-il ses dés ?
+    ///
+    /// Au jeu de plateau, il lance un dé ou deux, à son gré. Deux dés font
+    /// plus mal à l'assaillant — contre trois, celui-ci perd 0,92 homme par jet
+    /// au lieu de 0,34 — mais peuvent coûter deux hommes d'un coup, 37 fois
+    /// sur 100. Un seul n'en coûte jamais plus d'un. C'est la prudence contre
+    /// le rendement, et c'est à celui qui tient la place d'en juger.
+    ///
+    /// Tout défenseur humain choisit — contre un autre humain, sur le même
+    /// appareil ou au loin, comme contre la machine. La machine, elle, lance
+    /// tout ce qu'elle peut, et ne fait donc attendre personne. Un homme seul
+    /// n'a rien à choisir : il n'a qu'un dé.
+    ///
+    /// La règle se lit dans la liste des joueurs, qui ne change pas en cours
+    /// de partie : les appareils en réseau tombent donc d'accord sans avoir
+    /// à se le dire.
+    func choisitSesDes(_ defenseur: PlayerID, garnison: Int) -> Bool {
+        rules.mode == .des && garnison >= 2
+            && players.first(where: { $0.id == defenseur })?.isBot == false
+    }
+
+    /// Un assaut aux dés attend-il que le défenseur choisisse ?
+    ///
+    /// L'état n'a pas de champ pour le dire, et n'en a pas besoin : un assaut
+    /// aux dés est jeté d'un bloc, et tant qu'il ne l'est pas, sa salve n'est
+    /// pas entamée. Une partie enregistrée à cet instant se relit donc telle
+    /// quelle, sur les versions qui ne connaissent pas encore le choix.
+    var attendLaDefense: Bool {
+        guard rules.mode == .des, let a = assault else { return false }
+        return a.current == nil && !a.conquered && a.asked < a.volley
+    }
+
+    /// Le défenseur choisit un dé ou deux, et le lancer part.
+    @discardableResult
+    mutating func defendre(avec des: Int) -> Bool {
+        guard attendLaDefense, var a = assault,
+              des >= 1, des <= min(2, armies(a.to)) else { return false }
+        lancerLesDes(&a, defense: des)
+        assault = a
+        dernierJet = a
+        if a.conquered { conquer(from: a.from, to: a.to, volley: a.volley) }
+        return true
+    }
+
+    /// Ce qu'un échange coûte, et à qui.
+    ///
+    /// C'est le seul endroit où le sang coule. La question et le dé y arrivent
+    /// par deux chemins, et en repartent avec le même compte : c'est ce qui
+    /// garantit qu'un mode ne se règle pas à côté de l'autre.
+    private mutating func encaisser(_ report: DuelReport, _ a: inout Assault) {
+        a.current = nil
+        a.defenderAnswer = nil
+        a.asked += 1
+        a.reports.append(report)
+        siege[a.to, default: 0] += 1
+
+        // Les deux camps peuvent payer le même échange : c'est le lancer à
+        // trois dés contre deux, où chacun ramasse une paire. Une question n'a
+        // qu'un perdant, et l'un des deux comptes est alors nul.
+        //
+        // On n'enlève jamais à l'assaillant sa garnison : ce qu'il doit ne se
+        // paie que sur ce qu'il a de trop.
+        let perteA = max(0, min(report.coutAttaquant, armies(a.from) - 1))
+        armies[a.from, default: 0] -= perteA
+        a.attackerLosses += perteA
+
+        let perteD = min(report.coutDefenseur, armies(a.to))
+        armies[a.to, default: 0] -= perteD
+        a.defenderLosses += perteD
+
+        note(.duel, recit(report, lieu: name(a.to), assaillant: perteA, defense: perteD))
+
+        a.mise = 1
+        if armies(a.to) <= 0 { a.conquered = true }
     }
 
     private mutating func drawQuestion(_ a: inout Assault) -> Bool {
@@ -517,8 +670,10 @@ struct GameState {
     mutating func relancer() {
         guard peutRelancer else { return }
         assault?.mise = 2
-        note(.duel, "\(playerName(assault?.defender ?? -1)) relance : "
-             + "l'échange vaudra deux hommes.")
+        note(.duel, dit("""
+                        \(playerName(assault?.defender ?? -1)) relance : \
+                        l'échange vaudra deux hommes.
+                        """))
     }
 
     func playerName(_ id: PlayerID) -> String {
@@ -532,7 +687,7 @@ struct GameState {
         knowledge[joueur, default: [:]][categorie] = score
     }
 
-    private func hommes(_ n: Int) -> String { "\(n) homme\(n > 1 ? "s" : "")" }
+    private func hommes(_ n: Int) -> String { dit("\(n) homme\(n > 1 ? "s" : "")") }
 
     /// Une réponse arrive. C'est le seul coup qui fait couler du sang — sauf
     /// la première des deux en face à face, qui ne fait qu'attendre l'autre.
@@ -562,30 +717,9 @@ struct GameState {
             crediter(a.defender, duel.question.category, juste: report.correct)
         }
 
-        a.current = nil
-        a.defenderAnswer = nil
-        a.asked += 1
-        a.reports.append(report)
-        siege[a.to, default: 0] += 1
+        encaisser(report, &a)
 
-        switch report.outcome {
-        case .defenderHolds:
-            // On n'enlève jamais à l'assaillant sa garnison : une mise de deux
-            // ne rapporte que ce que la pile d'en face peut payer.
-            let perte = max(0, min(report.mise, armies(a.from) - 1))
-            armies[a.from, default: 0] -= perte
-            a.attackerLosses += perte
-            note(.duel, recit(report, place: name(a.to), perte: perte))
-        case .attackerBreaks:
-            let perte = min(report.mise, armies(a.to))
-            armies[a.to, default: 0] -= perte
-            a.defenderLosses += perte
-            note(.duel, recit(report, place: name(a.to), perte: perte))
-        }
-
-        a.mise = 1
-        if armies(a.to) <= 0 {
-            a.conquered = true
+        if a.conquered {
             assault = a
             conquer(from: a.from, to: a.to, volley: a.volley)
             return report
@@ -604,26 +738,58 @@ struct GameState {
     /// issues là où le classique en a deux, et il faut les nommer : un joueur
     /// qui perd une place doit savoir si c'est parce qu'il ignorait, ou parce
     /// qu'il a été moins vif.
-    private func recit(_ r: DuelReport, place: String, perte: Int) -> String {
+    private func recit(_ r: DuelReport, lieu: String, assaillant: Int, defense: Int) -> String {
         let tient = r.outcome == .defenderHolds
+        // Ce que l'échange a coûté au camp qui a cédé. Une question n'en fait
+        // payer qu'un ; le lancer de dés est le seul cas où les deux comptes
+        // sont non nuls à la fois, et il a sa phrase à lui.
+        let perte = max(assaillant, defense)
         switch r.verdict {
         case .reponse:
             return tient
-                ? "\(place) tient : bonne réponse, l'assaillant laisse \(hommes(perte))."
+                ? dit("\(lieu) tient : bonne réponse, l'assaillant laisse \(hommes(perte)).")
                 : (r.answer == .timeout
-                   ? "Temps écoulé : \(place) perd \(hommes(perte))."
-                   : "Mauvaise réponse : \(place) perd \(hommes(perte)).")
+                   ? dit("Temps écoulé : \(lieu) perd \(hommes(perte)).")
+                   : dit("Mauvaise réponse : \(lieu) perd \(hommes(perte))."))
         case .seul:
             return tient
-                ? "\(place) tient : le défenseur savait, l'assaillant non — \(hommes(perte)) de moins pour lui."
-                : "L'assaillant savait, la place non : \(place) perd \(hommes(perte))."
+                ? dit("""
+                      \(lieu) tient : le défenseur savait, l'assaillant non — \
+                      \(hommes(perte)) de moins pour lui.
+                      """)
+                : dit("L'assaillant savait, la place non : \(lieu) perd \(hommes(perte)).")
         case .vitesse:
             return tient
-                ? "Les deux savaient : le défenseur a été le plus vif, \(place) tient et coûte \(hommes(perte))."
-                : "Les deux savaient : l'assaillant a été le plus vif, \(place) perd \(hommes(perte))."
+                ? dit("""
+                      Les deux savaient : le défenseur a été le plus vif, \(lieu) \
+                      tient et coûte \(hommes(perte)).
+                      """)
+                : dit("""
+                      Les deux savaient : l'assaillant a été le plus vif, \(lieu) \
+                      perd \(hommes(perte)).
+                      """)
         case .egalite:
-            return "Personne ne savait : \(place) tient, et l'assaillant laisse \(hommes(perte))."
+            return dit("Personne ne savait : \(lieu) tient, et l'assaillant laisse \(hommes(perte)).")
+        case .des:
+            // Les deux mains dans le journal : c'est tout ce qu'il y a eu, et
+            // sans elles la ligne ne dirait rien qu'on puisse relire.
+            let jets = "\(faces(r.lancer?.attaque ?? [])) / \(faces(r.lancer?.defense ?? []))"
+            if assaillant > 0 && defense > 0 {
+                return dit("""
+                           \(jets) : \(lieu) perd \(hommes(defense)), et l'assaillant \
+                           \(hommes(assaillant)).
+                           """)
+            }
+            if defense > 0 {
+                return dit("\(jets) : \(lieu) perd \(hommes(defense)).")
+            }
+            return dit("\(jets) : \(lieu) tient, l'assaillant laisse \(hommes(assaillant)).")
         }
+    }
+
+    /// Une main de dés, lisible d'un coup d'œil : « 6 4 2 ».
+    private func faces(_ des: [Int]) -> String {
+        des.map(String.init).joined(separator: " ")
     }
 
     /// Range l'assaut terminé et rend la main.
@@ -651,8 +817,10 @@ struct GameState {
         guard !butin.isEmpty else { return }
         hands[vaincu] = []
         hands[currentPlayer.id, default: []].append(contentsOf: butin)
-        note(.renfort, "\(currentPlayer.name) hérite de \(butin.count) carte"
-             + "\(butin.count > 1 ? "s" : "") du vaincu.")
+        note(.renfort, dit("""
+                           \(currentPlayer.name) hérite de \(butin.count) \
+                           carte\(butin.count > 1 ? "s" : "") du vaincu.
+                           """))
     }
 
     private mutating func conquer(from: TerritoryID, to: TerritoryID, volley: Int) {
@@ -660,13 +828,13 @@ struct GameState {
         owner[to] = currentPlayer.id
         armies[to] = 0
         conqueredThisTurn = true
-        note(.conquete, "\(name(to)) tombe. \(currentPlayer.name) s'en empare.")
+        note(.conquete, dit("\(name(to)) tombe. \(currentPlayer.name) s'en empare."))
 
         if let loser, territories(of: loser).isEmpty,
            let i = players.firstIndex(where: { $0.id == loser }) {
             players[i].eliminated = true
             elimines[loser] = currentPlayer.id
-            note(.elimination, "\(players[i].name) est éliminé.")
+            note(.elimination, dit("\(players[i].name) est éliminé."))
             heriter(de: loser)
         }
 
@@ -691,8 +859,11 @@ struct GameState {
                 note(.fin, recitDeLObjectif(currentPlayer.id))
             } else {
                 note(.fin, survivors.count > 1
-                     ? "\(currentPlayer.name) tient assez du monde pour que le reste ne compte plus."
-                     : "\(currentPlayer.name) tient le monde entier.")
+                     ? dit("""
+                           \(currentPlayer.name) tient assez du monde pour que le \
+                           reste ne compte plus.
+                           """)
+                     : dit("\(currentPlayer.name) tient le monde entier."))
             }
             return
         }
@@ -712,7 +883,12 @@ struct GameState {
         armies[to, default: 0] += n
         assault = nil
         phase = .attack
-        note(.conquete, "\(n) homme\(n > 1 ? "s avancent" : " avance") sur \(name(to)).")
+        // Le verbe suit le nombre, et il ne le suit pas de la même façon dans
+        // les deux langues : deux phrases plutôt qu'un morceau de verbe glissé
+        // dans un trou.
+        note(.conquete, n > 1
+             ? dit("\(n) hommes avancent sur \(name(to)).")
+             : dit("\(n) homme avance sur \(name(to)).")) 
         verifierLObjectif()
         return true
     }
@@ -726,7 +902,7 @@ struct GameState {
               count > 0, count <= armies(from) - 1 else { return false }
         armies[from, default: 0] -= count
         armies[to, default: 0] += count
-        note(.renfort, "\(count) homme\(count > 1 ? "s" : "") de \(name(from)) vers \(name(to)).")
+        note(.renfort, dit("\(count) homme\(count > 1 ? "s" : "") de \(name(from)) vers \(name(to))."))
         // Avant de passer la main : un déplacement peut porter la dernière
         // place à deux hommes, et c'est encore votre tour.
         verifierLObjectif()
@@ -767,12 +943,12 @@ struct GameState {
         let renforts = reinforcements(for: currentPlayer.id)
         settleErudition(currentPlayer.id)
         phase = .reinforcement(remaining: renforts)
-        note(.tour, "Tour \(turn) — à \(currentPlayer.name) de jouer.")
+        note(.tour, dit("Tour \(turn) — à \(currentPlayer.name) de jouer."))
     }
 
     // MARK: - Journal
 
-    func name(_ id: TerritoryID) -> String { map[id]?.name ?? id }
+    func name(_ id: TerritoryID) -> String { nomTraduit(map[id]?.name ?? id) }
 
     private mutating func note(_ kind: Entry.Kind, _ text: String) {
         journal.append(Entry(turn: turn, player: players.indices.contains(current) ? currentPlayer.id : nil,

@@ -1,100 +1,97 @@
 # Notes pour la revue (App Review Information)
 
-À coller dans le champ **Notes** de la fiche de version. Le relecteur d'Apple
-les lit avant d'ouvrir l'app ; ce qui est expliqué ici ne devient pas un rejet.
+À coller dans le champ **Remarques** de « Informations utiles à la vérification
+de l'app ». Le relecteur d'Apple les lit avant d'ouvrir l'app ; ce qui est
+expliqué ici ne devient pas un rejet.
+
+**La case accepte 4 000 signes.** Ce texte en fait un peu moins de 3 900 : il a
+été resserré le 17 septembre 2026, la version longue n'entrait pas. Ce qui a
+été coupé l'est parce que la fiche de confidentialité et la politique en ligne
+le disent déjà — pas parce que ça ne comptait plus.
+
+La case **« Connexion requise »**, juste au-dessus, **reste décochée** : le jeu
+n'a ni compte ni mot de passe.
 
 ---
 
 ```
 Bonjour,
 
-Riskelo est un jeu de conquête au tour par tour : l'issue de chaque combat est
-décidée par une question de culture générale à choix multiple, au lieu d'un
-lancer de dés.
+Riskelo est un jeu de conquête au tour par tour : chaque combat se décide par
+une question de culture générale, au lieu d'un lancer de dés.
 
 AUCUN COMPTE N'EST NÉCESSAIRE
-L'application n'a ni inscription, ni connexion, ni publicité. Il n'y a donc pas
-d'identifiants de démonstration à fournir.
+Ni inscription, ni connexion, ni publicité. Pas de compte de démonstration.
+
+LANGUES — ET LA RÉPONSE À 4.3(a)
+L'application porte le français et l'anglais dans un seul paquet : interface,
+mode d'emploi et deux banques de 2 400 questions chacune, écrites dans leur
+langue et non traduites. L'interface suit la langue de l'appareil ; la banque
+de questions se choisit en plus par le bouton « Français / English » en haut de
+la page des packs.
+
+C'est la réponse à l'examen de « Riskelo US », refusée deux fois sous 4.3(a),
+où Apple recommandait « consider consolidating these variants into a single
+app ». C'est fait : l'enregistrement américain ne sera pas repris.
 
 ACHATS INTÉGRÉS
-Dix-sept packs de questions, non consommables, achetés une fois et gardés.
-Seize packs scolaires de deux cents questions — Histoire, Géographie, Français
-et SVT pour les quatre années du collège — et un pack musical de quatre cents
-questions sur les années 1970 et 1980. Le jeu est entier sans eux : les six thèmes de culture générale et
-leurs 2 400 questions sont accessibles dès le lancement, sans rien acheter.
+Trente-quatre packs non consommables, dix-sept par langue : seize packs
+scolaires de 200 questions (le collège français, les grades 6 à 9 américains)
+et un pack musical de 400 questions. Le jeu est entier sans eux. Accueil ▸
+« Packs de questions » ; la page porte aussi « Restaurer mes achats ».
 
-Pour les voir : écran d'accueil, bouton « Packs de questions ». La page porte
-aussi le bouton « Restaurer mes achats ».
-
-Les fichiers de questions des packs sont inclus dans l'application pour tout le
-monde ; ce qui s'achète est le droit de les choisir. C'est ce qui permet à un
-joueur qui rejoint une partie de jouer les packs de celui qui l'héberge sans
-les avoir achetés — c'est voulu, et non un défaut de contrôle.
+Les fichiers des packs sont inclus dans l'application pour tout le monde ; ce
+qui s'achète est le droit de les choisir. C'est ce qui permet à un joueur qui
+rejoint une partie de jouer les packs de son hôte sans les avoir achetés —
+c'est voulu, et non un défaut de contrôle.
 
 POUR ESSAYER EN UNE MINUTE
-1. Touchez « Partie rapide » sur l'écran d'accueil.
+1. « Partie rapide » sur l'écran d'accueil.
 2. Touchez vos territoires pour poser vos renforts, puis « À l'attaque ».
-3. Touchez un de vos territoires d'au moins deux hommes, puis un voisin ennemi.
+3. Touchez un territoire à vous d'au moins deux hommes, puis un voisin ennemi.
 4. Choisissez un thème et « Lancer l'assaut » : une question apparaît.
+Mode d'emploi complet dans l'app.
 
-Le mode d'emploi complet est dans l'application : bouton « Mode d'emploi » sur
-l'écran d'accueil, ou le point d'interrogation de la barre du haut pendant une
-partie.
+JOUER À PLUSIEURS — TROIS CHEMINS, TOUS FACULTATIFS
+Le jeu est entier sans eux : seul contre l'ordinateur, ou à plusieurs sur un
+même appareil.
 
-FONCTIONS QUI DEMANDENT DEUX APPAREILS
-« Jouer à plusieurs » relie de deux à quatre appareils, un par joueur, et
-propose trois chemins. Tous trois sont facultatifs : le jeu est entier sans
-eux, seul contre l'ordinateur ou à plusieurs joueurs sur un même appareil.
+1. DANS LA MÊME PIÈCE — framework Network d'Apple, Bonjour et TCP, sans
+serveur. Demande deux appareils proches et l'autorisation « réseau local ».
 
-1. DANS LA MÊME PIÈCE — framework Network d'Apple : Bonjour pour se trouver,
-TCP pour se parler. Les appareils passent par le réseau Wi-Fi local, ou
-directement de l'un à l'autre lorsqu'il n'y a pas de réseau. Aucun serveur.
-Demande deux appareils physiques proches et l'autorisation « réseau local ».
-
-2. AU LOIN, AVEC UN CODE — c'est le chemin le plus simple à essayer, et nous
-le signalons parce qu'il lève la difficulté habituelle : les deux appareils
-n'ont pas besoin d'être proches, ni sur le même réseau. Une connexion Internet
-de chaque côté suffit, et un appareil physique avec un simulateur convient.
-
+2. AU LOIN, AVEC UN CODE — le chemin le plus simple à essayer : les appareils
+n'ont besoin ni d'être proches, ni du même réseau, et un appareil physique avec
+un simulateur suffit.
   a. Appareil A : accueil ▸ « Jouer à plusieurs » ▸ « Au loin, avec un code »
      ▸ « Ouvrir une partie ». Un code de six lettres s'affiche.
   b. Appareil B : le même chemin, puis « Rejoindre » et ces six lettres.
   c. Appareil A : « Commencer ».
+Les coups passent par un relais que nous hébergeons (Cloudflare Workers). Il
+recopie des paquets sans les lire : ni question, ni réponse, ni nom de joueur.
+Il connaît un identifiant tiré au sort à l'installation, le garde deux minutes
+après la partie pour permettre d'en reprendre une coupée, puis l'efface.
 
-Les coups transitent par un relais que nous hébergeons (Cloudflare Workers).
-Ce relais recopie des paquets sans les lire : il ne tient pas la partie, ne
-voit aucune question ni aucune réponse, et ne reçoit aucun nom de joueur — pas
-même dans l'adresse de connexion. Il connaît un identifiant tiré au sort à
-l'installation, qu'il garde deux minutes après la fin pour permettre de
-reprendre une partie coupée, puis efface. Aucun journal n'est conservé.
+3. PAR GAME CENTER — facultatif, pour ceux qui y sont déjà. Riskelo n'y voit
+que le pseudonyme des joueurs de la partie en cours et ne le conserve pas.
+Nous le signalons franchement : « trouver quelqu'un au hasard » demande un
+autre joueur connecté au même moment, ce qu'une application qui paraît ne peut
+garantir ; seul « inviter un ami » aboutit à coup sûr, à deux comptes Game
+Center. Pour éprouver le jeu à plusieurs, préférez le chemin 2.
 
-3. PAR GAME CENTER — chemin facultatif, pour les joueurs qui y sont déjà.
-Aucune donnée ne nous en revient : Riskelo n'y voit que le pseudonyme Game
-Center des joueurs de la partie en cours, et ne le conserve pas.
-
-AUTORISATIONS
-Deux, toutes deux facultatives et demandées seulement si le joueur ouvre la
-fonction concernée : le réseau local (chemin 1) et Game Center (chemin 3).
-Aucune autre — ni position, ni photos, ni contacts, ni micro, ni
-notifications.
-
-CONFIDENTIALITÉ
-Aucune donnée personnelle n'est collectée. L'application n'intègre aucun kit
-tiers — ni régie publicitaire, ni outil d'analyse, ni service
-d'authentification. Le jeu fonctionne hors ligne : les questions sont incluses
-dans le paquet, et rien ne sort de l'appareil tant que le joueur n'ouvre pas
-lui-même « Au loin » ou « Game Center ». Ce qui sort alors est décrit
-ci-dessus, et n'est conservé nulle part au-delà de la partie. Les achats
-intégrés passent par StoreKit et ne transmettent rien d'autre.
+AUTORISATIONS ET CONFIDENTIALITÉ
+Deux autorisations, facultatives, demandées seulement à l'ouverture de la
+fonction concernée : réseau local (chemin 1) et Game Center (chemin 3). Aucune
+autre. Aucune donnée personnelle collectée, aucun kit tiers — ni publicité, ni
+analyse, ni authentification. Le jeu fonctionne hors ligne ; rien ne sort de
+l'appareil tant que le joueur n'ouvre pas « Au loin » ou « Game Center ».
 
 CONTENU
-Les questions, les plateaux, les dessins et l'icône sont des créations
-originales. Riskelo est un jeu indépendant, inspiré du genre des jeux de
-conquête territoriale ; il n'utilise aucune marque, aucun visuel et aucun texte
-appartenant à un éditeur de jeu de société.
-
-LANGUE
-L'application est en français, y compris les questions. C'est sa seule langue.
+Questions, plateaux, dessins et icône sont des créations originales. Riskelo
+est un jeu indépendant, inspiré du genre des jeux de conquête territoriale ; il
+n'emploie aucune marque, aucun visuel et aucun texte appartenant à un éditeur
+de jeu de société. La carte du monde est tracée d'après les côtes réelles —
+longitudes et latitudes — et les noms de pays et de continents sont ceux de la
+géographie.
 
 Merci de votre lecture,
 Robert Oulhen — bob.oulhen@gmail.com

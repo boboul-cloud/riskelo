@@ -242,3 +242,48 @@ struct Hexagon: InsettableShape {
         return p
     }
 }
+
+/// Le contour d'un territoire dessiné : une ou plusieurs boucles fermées, en
+/// coordonnées 0…1 rapportées au **côté** du plateau et non à la case.
+///
+/// Plusieurs boucles, parce qu'un territoire peut être fait de plusieurs îles.
+/// Le remplissage est pair-impair, ce qui donne gratuitement le bon résultat
+/// si l'une d'elles venait un jour à en cerner une autre.
+struct Contour: Shape {
+    let boucles: [[Point]]
+    /// Le côté du plateau, en points : c'est lui qui donne l'échelle, et non
+    /// le cadre — la vue occupe toute la carte, pas la seule place qu'elle
+    /// dessine.
+    let cote: CGFloat
+
+    func path(in _: CGRect) -> Path {
+        var p = Path()
+        for boucle in boucles where boucle.count > 2 {
+            p.move(to: CGPoint(x: boucle[0].x * cote, y: boucle[0].y * cote))
+            for s in boucle.dropFirst() {
+                p.addLine(to: CGPoint(x: s.x * cote, y: s.y * cote))
+            }
+            p.closeSubpath()
+        }
+        return p
+    }
+}
+
+/// Les brins de frontière d'un territoire dessiné : des lignes ouvertes, pas
+/// des boucles. Elles tombent exactement sur le contour, parce qu'elles en
+/// sortent.
+struct Brins: Shape {
+    let brins: [[Point]]
+    let cote: CGFloat
+
+    func path(in _: CGRect) -> Path {
+        var p = Path()
+        for brin in brins where brin.count > 1 {
+            p.move(to: CGPoint(x: brin[0].x * cote, y: brin[0].y * cote))
+            for s in brin.dropFirst() {
+                p.addLine(to: CGPoint(x: s.x * cote, y: s.y * cote))
+            }
+        }
+        return p
+    }
+}

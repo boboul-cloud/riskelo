@@ -102,9 +102,7 @@ struct SetupView: View {
             GeometryReader { geo in
                 ScrollView {
                     VStack(spacing: 26) {
-                        Text(mode == .classique
-                             ? "Le dé est remplacé par une question.\nL'attaquant choisit le terrain, le défenseur répond."
-                             : "Le dé est remplacé par une question.\nLes deux la reçoivent : le plus sûr, ou le plus vif, l'emporte.")
+                        Text(enTete)
                             .font(.subheadline).foregroundStyle(Palette.dim)
                             .multilineTextAlignment(.center)
                             .padding(.top, 22)
@@ -117,8 +115,20 @@ struct SetupView: View {
                             Text(mode.detail)
                                 .font(.caption2).foregroundStyle(Palette.dim)
                             if mode == .faceAFace {
-                                Text("Les deux savent : le sablier tranche. Aucun des deux : la "
-                                     + "place tient, comme sur une égalité de dés.")
+                                Text("""
+                                     Les deux savent : le sablier tranche. Aucun des deux : la \
+                                     place tient, comme sur une égalité de dés.
+                                     """)
+                                    .font(.caption2).foregroundStyle(Palette.dim.opacity(0.8))
+                            }
+                            if mode == .des {
+                                Text("""
+                                     Le jeu de plateau tel quel : l'assaillant lance jusqu'à \
+                                     trois dés, le défenseur un ou deux à son choix — la machine \
+                                     toujours deux —, et les mains triées se comparent paire par \
+                                     paire. Un même jet peut coûter un homme à chacun. Tout le \
+                                     reste ne bouge pas.
+                                     """)
                                     .font(.caption2).foregroundStyle(Palette.dim.opacity(0.8))
                             }
                         }
@@ -166,6 +176,11 @@ struct SetupView: View {
                                     .font(.caption2).foregroundStyle(Palette.dim)
                             }
 
+                            // Aux dés, la culture ne décide de rien : il n'y a
+                            // pas de question. Le curseur restait pourtant là,
+                            // et promettait une machine plus ou moins forte
+                            // qu'il ne réglait pas. Seule la stratégie compte.
+                            if mode.interroge {
                             reglage("Culture de la machine") {
                                 HStack {
                                     Text(libelleNiveau).font(.subheadline.weight(.medium))
@@ -177,10 +192,16 @@ struct SetupView: View {
                                 Slider(value: $niveau, in: 0.35...0.90, step: 0.05)
                                     .tint(Palette.camp(1))
                             }
+                            }
                         }
 
                         }
 
+                        // Aux dés, ces deux réglages ne portent sur rien : il
+                        // n'y a ni question à doser, ni bonne réponse à
+                        // récompenser. Les laisser paraîtrait promettre des
+                        // questions qui ne viendront pas.
+                        if mode.interroge {
                         reglage("Questions") {
                             Picker("", selection: $dosage) {
                                 ForEach(Rules.Dosage.allCases) { d in
@@ -208,12 +229,17 @@ struct SetupView: View {
                                    in: 0...10, step: 1)
                                 .tint(Palette.held)
                             Text(mode == .classique
-                                 ? "Seul le défenseur répond : ce renfort revient à qui tient sa "
-                                   + "place en sachant. Mesuré, il creuse un peu l'écart entre deux "
-                                   + "cultures inégales — nettement en dessous de quatre."
-                                 : "Les deux répondent : le renfort revient à qui sait, qu'il "
-                                   + "attaque ou qu'il défende.")
+                                 ? """
+                                   Seul le défenseur répond : ce renfort revient à qui tient sa \
+                                   place en sachant. Mesuré, il creuse un peu l'écart entre deux \
+                                   cultures inégales — nettement en dessous de quatre.
+                                   """
+                                 : """
+                                   Les deux répondent : le renfort revient à qui sait, qu'il \
+                                   attaque ou qu'il défende.
+                                   """)
                                 .font(.caption2).foregroundStyle(Palette.dim)
+                        }
                         }
 
                         reglage("Règles du jeu") {
@@ -222,8 +248,10 @@ struct SetupView: View {
                                     Text("Cartes de territoire")
                                         .font(.subheadline.weight(.medium))
                                         .foregroundStyle(Palette.ink)
-                                    Text("Une carte par tour où l'on prend une place. "
-                                         + "Trois assorties valent des hommes, et le barème monte.")
+                                    Text("""
+                                         Une carte par tour où l'on prend une place. \
+                                         Trois assorties valent des hommes, et le barème monte.
+                                         """)
                                         .font(.caption2).foregroundStyle(Palette.dim)
                                 }
                             }
@@ -234,8 +262,10 @@ struct SetupView: View {
                                     Text("Guerre totale")
                                         .font(.subheadline.weight(.medium))
                                         .foregroundStyle(Palette.ink)
-                                    Text("Il faut tous les territoires, sans exception. "
-                                         + "Compter environ deux fois plus de questions.")
+                                    Text("""
+                                         Il faut tous les territoires, sans exception. \
+                                         Compter environ deux fois plus de questions.
+                                         """)
                                         .font(.caption2).foregroundStyle(Palette.dim)
                                 }
                             }
@@ -246,21 +276,25 @@ struct SetupView: View {
                                     Text("Conquêtes personnelles")
                                         .font(.subheadline.weight(.medium))
                                         .foregroundStyle(Palette.ink)
-                                    Text("Chacun reçoit au départ un objectif secret — deux "
-                                         + "continents, tant de places tenues, un camp à faire "
-                                         + "tomber — et le remplir gagne la partie. Le seuil de "
-                                         + "territoires se retire : la carte décide, ou personne. "
-                                         + "Le compte de la barre du haut ne dit alors plus rien "
-                                         + "de qui va gagner.")
+                                    Text("""
+                                         Chacun reçoit au départ un objectif secret — deux \
+                                         continents, tant de places tenues, un camp à faire \
+                                         tomber — et le remplir gagne la partie. Le seuil de \
+                                         territoires se retire : la carte décide, ou personne. \
+                                         Le compte de la barre du haut ne dit alors plus rien \
+                                         de qui va gagner.
+                                         """)
                                         .font(.caption2).foregroundStyle(Palette.dim)
                                 }
                             }
                             .tint(Palette.camp(3))
 
                             if guerreTotale || objectifs {
-                                Text("Ces deux-là ne vont pas ensemble : allumer l'une "
-                                     + "éteint l'autre. Prendre le monde entier, ou remplir "
-                                     + "sa conquête — il faut choisir la fin de la partie.")
+                                Text("""
+                                     Ces deux-là ne vont pas ensemble : allumer l'une \
+                                     éteint l'autre. Prendre le monde entier, ou remplir \
+                                     sa conquête — il faut choisir la fin de la partie.
+                                     """)
                                     .font(.caption2).foregroundStyle(Palette.dim.opacity(0.8))
                             }
                         }
@@ -281,11 +315,13 @@ struct SetupView: View {
                                     let court = String(saisi.prefix(Pseudo.maximum))
                                     if court != saisi { pseudo = court }
                                 }
-                            Text("Facultatif. Votre camp se lira « Bleu · "
-                                 + "\(Pseudo.actuel ?? "Robert") · moi » — la couleur, votre "
-                                 + "nom, et « moi » pour dire que c'est le vôtre. En réseau, "
-                                 + "il fait le voyage : les autres vous verront ainsi, et "
-                                 + "vous les verrez de même.")
+                            Text("""
+                                 Facultatif. Votre camp se lira « Bleu · \
+                                 \(Pseudo.actuel ?? "Robert") · moi » — la couleur, votre \
+                                 nom, et « moi » pour dire que c'est le vôtre. En réseau, \
+                                 il fait le voyage : les autres vous verront ainsi, et \
+                                 vous les verrez de même.
+                                 """)
                                 .font(.caption2).foregroundStyle(Palette.dim)
                         }
 
@@ -295,11 +331,13 @@ struct SetupView: View {
                                     Text("Sons du jeu")
                                         .font(.subheadline.weight(.medium))
                                         .foregroundStyle(Palette.ink)
-                                    Text("Une note brève à chaque homme posé, une autre à "
-                                         + "l'issue de chaque échange — montante quand il "
-                                         + "tourne pour vous, descendante sinon — et "
-                                         + "l'ouverture au lancement. Vaut pour toutes les "
-                                         + "parties, et non pour celle-ci seule.")
+                                    Text("""
+                                         Une note brève à chaque homme posé, une autre à \
+                                         l'issue de chaque échange — montante quand il \
+                                         tourne pour vous, descendante sinon — et \
+                                         l'ouverture au lancement. Vaut pour toutes les \
+                                         parties, et non pour celle-ci seule.
+                                         """)
                                         .font(.caption2).foregroundStyle(Palette.dim)
                                 }
                             }
@@ -311,8 +349,10 @@ struct SetupView: View {
                                 .font(.footnote).foregroundStyle(Palette.dim)
                                 .multilineTextAlignment(.center)
                             if compensation > 0 {
-                                Text("Celui qui ouvre part avec \(compensation) hommes de moins : "
-                                     + "ici, la défense l'emporte, et ouvrir se paie.")
+                                Text("""
+                                     Celui qui ouvre part avec \(compensation) hommes de moins : \
+                                     ici, la défense l'emporte, et ouvrir se paie.
+                                     """)
                                     .font(.caption2).foregroundStyle(Palette.dim)
                                     .multilineTextAlignment(.center)
                             }
@@ -424,7 +464,7 @@ struct SetupView: View {
 
     /// `SwiftUI.Link` en toutes lettres : dans ce module, `Link` tout court
     /// désigne le fil entre deux appareils, et c'est lui qui gagne.
-    @ViewBuilder private func lien(_ titre: String, _ adresse: String) -> some View {
+    @ViewBuilder private func lien(_ titre: LocalizedStringKey, _ adresse: String) -> some View {
         if let url = URL(string: adresse) {
             SwiftUI.Link(titre, destination: url)
                 .foregroundStyle(Palette.dim)
@@ -437,13 +477,28 @@ struct SetupView: View {
     /// question déjà vue, et c'est tout. Mais cela se voit — sans quoi le
     /// joueur ne saurait ni pourquoi ses questions cessent de revenir, ni
     /// quoi faire le jour où il aura fait le tour de la banque.
+    /// La phrase d'ouverture. Elle dit en deux lignes ce que le mode choisi
+    /// remplace — et aux dés, qu'il ne remplace rien.
+    private var enTete: LocalizedStringKey {
+        switch mode {
+        case .classique:
+            "Le dé est remplacé par une question.\nL'attaquant choisit le terrain, le défenseur répond."
+        case .faceAFace:
+            "Le dé est remplacé par une question.\nLes deux la reçoivent : le plus sûr, ou le plus vif, l'emporte."
+        case .des:
+            "Aucune question : le dé est le dé.\nTrois dés contre deux, et l'égalité au défenseur."
+        }
+    }
+
     private var suiviDesQuestions: some View {
         HStack(alignment: .top, spacing: 10) {
             VStack(alignment: .leading, spacing: 2) {
                 Text("Déjà posées sur cet appareil : \(vues) sur \(QuestionBank.francaises.count)")
                     .font(.caption.monospacedDigit()).foregroundStyle(Palette.ink)
-                Text("D'une partie à l'autre, une question jamais sortie passe avant "
-                     + "une question déjà vue.")
+                Text("""
+                     D'une partie à l'autre, une question jamais sortie passe avant \
+                     une question déjà vue.
+                     """)
                     .font(.caption2).foregroundStyle(Palette.dim)
                     .fixedSize(horizontal: false, vertical: true)
             }
@@ -459,9 +514,12 @@ struct SetupView: View {
         }
     }
 
-    private func reglage<C: View>(_ titre: String, @ViewBuilder _ contenu: () -> C) -> some View {
+    // Le titre est un libellé, non une chaîne : en String, il ne passait par
+    // aucune traduction, et les onze en-têtes de cette page restaient français.
+    private func reglage<C: View>(_ titre: String.LocalizationValue,
+                                  @ViewBuilder _ contenu: () -> C) -> some View {
         VStack(alignment: .leading, spacing: 9) {
-            Text(titre.uppercased()).font(.caption.weight(.semibold))
+            Text(dit(titre).uppercased()).font(.caption.weight(.semibold))
                 .foregroundStyle(Palette.dim).kerning(0.6)
             contenu()
         }
@@ -503,11 +561,11 @@ struct SetupView: View {
     private var resumeDeLaVictoire: String {
         let total = plateau.board.map.order.count
         if objectifs {
-            return "Victoire à sa conquête personnelle, et à rien d'autre"
+            return dit("Victoire à sa conquête personnelle, et à rien d'autre")
         }
         return guerreTotale
-            ? "Victoire à la conquête intégrale des \(total) territoires"
-            : "Victoire à \(seuil) territoires sur \(total)"
+            ? dit("Victoire à la conquête intégrale des \(total) territoires")
+            : dit("Victoire à \(seuil) territoires sur \(total)")
     }
 
     private var compensation: Int { Rules().compensation(playerCount: count) }

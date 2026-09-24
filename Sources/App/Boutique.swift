@@ -129,7 +129,11 @@ final class Boutique {
     // MARK: - L'App Store
 
     private func charger() async {
-        let ids = Themes.packs.compactMap(\.produit)
+        // Les deux langues, et non la seule affichée : celui qui a acheté
+        // des packs français puis basculé son appareil en anglais doit
+        // retrouver ses achats, et la restauration doit savoir de quoi elle
+        // parle. L'écran, lui, ne montre que la langue en cours.
+        let ids = Themes.toutesLangues.compactMap(\.produit)
         guard !ids.isEmpty else { return }
         do {
             let trouves = try await Product.products(for: ids)

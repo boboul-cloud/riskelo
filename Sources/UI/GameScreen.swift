@@ -147,7 +147,9 @@ private struct TopBar: View {
     var onManuel: () -> Void
 
     var body: some View {
-        let g = session.game
+        // Ce que montre le plateau, et non la partie elle-même : aux dés, les
+        // comptes attendent que le lancer ait fini de rouler.
+        let g = session.plateau
         HStack(spacing: 12) {
             Button(action: onQuit) {
                 Image(systemName: "chevron.left").font(.headline)
@@ -276,7 +278,7 @@ private struct StandingsBar: View {
     let session: GameSession
 
     var body: some View {
-        let g = session.game
+        let g = session.plateau
         VStack(spacing: 7) {
             // Chaque camp nommé, et un drapeau à celui qui a la main. La
             // pastille seule ne suffisait pas : elle disait la couleur, pas
@@ -365,7 +367,7 @@ private struct StandingsBar: View {
     }
 
     private func camp(_ j: Player) -> some View {
-        let g = session.game
+        let g = session.plateau
         let aLaMain = j.id == g.currentPlayer.id && !g.isOver
         let terres = g.territories(of: j.id).count
         let hommes = g.territories(of: j.id).reduce(0) { $0 + g.armies($1) }
@@ -398,7 +400,7 @@ private struct StandingsBar: View {
     }
 
     private func tenu(_ c: Continent) -> PlayerID? {
-        let g = session.game
+        let g = session.plateau
         guard let premier = g.owner[c.territories[0]],
               c.territories.allSatisfy({ g.owner[$0] == premier }) else { return nil }
         return premier
@@ -418,7 +420,7 @@ private struct BottomBar: View {
     var body: some View {
         let g = session.game
         VStack(spacing: 8) {
-            if session.stage == .announcing, let a = session.assault {
+            if session.stage == .announcing, let a = session.assautAffiche {
                 annonce(a)
             } else {
                 consigneEnCapsule
@@ -476,9 +478,13 @@ private struct BottomBar: View {
     /// c'est précisément le regret qu'on veut éviter au joueur pressé.
     private var avertissementDeplacement: String {
         let g = session.game
-        let base = "On ne revient pas à l'attaque une fois le déplacement commencé."
-        guard g.rules.territoryCards, !g.conqueredThisTurn else { return base }
-        return base + " Et sans une seule conquête ce tour, vous ne piochez pas de carte."
+        guard g.rules.territoryCards, !g.conqueredThisTurn else {
+            return dit("On ne revient pas à l'attaque une fois le déplacement commencé.")
+        }
+        return dit("""
+                   On ne revient pas à l'attaque une fois le déplacement commencé. \
+                   Et sans une seule conquête ce tour, vous ne piochez pas de carte.
+                   """)
     }
 
     /// La consigne a la forme du bouton — même capsule, même largeur — mais
@@ -549,8 +555,13 @@ private struct BottomBar: View {
                 }
                 Text("\(g.name(a.from)) → \(g.name(a.to))")
                     .font(.headline).foregroundStyle(Palette.ink)
-                Label("\(a.volley) question\(a.volley > 1 ? "s" : "") "
-                      + "\(a.category?.apresDe ?? "au hasard")",
+                // Deux phrases plutôt qu'une avec un trou : le thème se
+                // raccorde par « de » en français et par « on » en anglais,
+                // et « au hasard » ne se raccorde à rien. Une seule phrase à
+                // trou aurait donné « 2 questions on at random ».
+                Label(a.category.map { c in
+                          "\(a.volley) question\(a.volley > 1 ? "s" : "") \(c.dansLaPhrase)"
+                      } ?? "\(a.volley) question\(a.volley > 1 ? "s" : "") au hasard",
                       systemImage: a.category?.symbol ?? "dice")
                     .font(.caption2)
                     .foregroundStyle(a.category.map(Palette.category) ?? Palette.dim)
@@ -565,7 +576,7 @@ private struct BottomBar: View {
     /// du tour. Sa **hauteur**, elle, ne bouge pas : quarante-quatre points,
     /// le plancher de ce qui se touche sans rater, et c'est le bouton le plus
     /// tapé de la partie.
-    private func action(_ titre: String, _ icone: String, enabled: Bool = true,
+    private func action(_ titre: LocalizedStringKey, _ icone: String, enabled: Bool = true,
                         _ geste: @escaping () -> Void) -> some View {
         Button(action: geste) {
             Label(titre, systemImage: icone)
@@ -586,28 +597,29 @@ private struct BottomBar: View {
     private var consigne: String {
         let g = session.game
         if !session.aMoiDeJouer && !g.isOver {
-            return session.enReseau ? "À \(g.currentPlayer.name) de jouer, sur l'autre appareil…"
-                                    : "\(g.currentPlayer.name) joue…"
+            return session.enReseau
+                ? dit("À \(g.currentPlayer.name) de jouer, sur l'autre appareil…")
+                : dit("\(g.currentPlayer.name) joue…")
         }
         switch g.phase {
         case .reinforcement(let n):
             if g.doitEchanger(g.currentPlayer.id) {
-                return "Cinq cartes en main : il faut en échanger trois avant de poser."
+                return dit("Cinq cartes en main : il faut en échanger trois avant de poser.")
             }
-            return n > 0 ? "Touchez vos territoires pour y poser vos \(n) renforts."
-                         : "Tous les renforts sont posés."
+            return n > 0 ? dit("Touchez vos territoires pour y poser vos \(n) renforts.")
+                         : dit("Tous les renforts sont posés.")
         case .attack:
             if let base = session.selected {
-                return "Depuis \(g.name(base)) — touchez un voisin ennemi à attaquer."
+                return dit("Depuis \(g.name(base)) — touchez un voisin ennemi à attaquer.")
             }
-            return "Touchez un de vos territoires d'au moins deux hommes pour partir de là."
+            return dit("Touchez un de vos territoires d'au moins deux hommes pour partir de là.")
         case .occupation:
-            return "Choisissez combien d'hommes avancent."
+            return dit("Choisissez combien d'hommes avancent.")
         case .fortify:
             if let base = session.selected {
-                return "Depuis \(g.name(base)) — touchez un de vos territoires reliés."
+                return dit("Depuis \(g.name(base)) — touchez un de vos territoires reliés.")
             }
-            return "Un seul déplacement, puis le tour passe. Ou terminez directement."
+            return dit("Un seul déplacement, puis le tour passe. Ou terminez directement.")
         case .finished:
             return ""
         }
@@ -637,9 +649,9 @@ private struct FilDuTour: View {
 
         var label: String {
             switch self {
-            case .renforts:    "Renforts"
-            case .attaque:     "Attaque"
-            case .deplacement: "Déplacement"
+            case .renforts:    dit("Renforts")
+            case .attaque:     dit("Attaque")
+            case .deplacement: dit("Déplacement")
             }
         }
     }
@@ -760,17 +772,24 @@ private struct AssaultPanel: View {
                         }.buttonStyle(.plain).foregroundStyle(Palette.dim)
                     }
 
+                    // Aux dés, il n'y a pas de terrain à choisir : le panneau
+                    // n'est plus qu'un compte de dés et un bouton.
+                    if g.rules.mode.interroge {
                     VStack(alignment: .leading, spacing: 7) {
                         Text(g.rules.mode == .classique
                              ? "Vous posez la question — choisissez le terrain"
                              : "Vous choisissez le terrain — mais vous y répondez aussi")
                             .font(.caption.weight(.medium)).foregroundStyle(Palette.dim)
                         Text(g.rules.mode == .classique
-                             ? "Le score est le sien : vert, il y répond bien ; rouge, il y "
-                               + "trébuche. La lunette marque son point faible."
-                             : "Le score est le sien : vert, il y répond bien ; rouge, il y "
-                               + "trébuche. Attention — un thème où il trébuche ne vous sert "
-                               + "que si vous, vous tenez debout.")
+                             ? """
+                               Le score est le sien : vert, il y répond bien ; rouge, il y \
+                               trébuche. La lunette marque son point faible.
+                               """
+                             : """
+                               Le score est le sien : vert, il y répond bien ; rouge, il y \
+                               trébuche. Attention — un thème où il trébuche ne vous sert \
+                               que si vous, vous tenez debout.
+                               """)
                             .font(.system(size: 10)).foregroundStyle(Palette.dim.opacity(0.8))
                         LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 7),
                                                  count: 3), spacing: 7) {
@@ -780,14 +799,22 @@ private struct AssaultPanel: View {
                         }
                         auHasard
                     }
+                    }
 
                     VStack(alignment: .leading, spacing: 7) {
-                        Text("Combien de questions — vos dés")
+                        Text(g.rules.mode.interroge
+                             ? "Combien de questions — vos dés"
+                             : "Combien de dés")
                             .font(.caption.weight(.medium)).foregroundStyle(Palette.dim)
                         Picker("", selection: Binding(get: { session.draftQuestions },
                                                       set: { session.draftQuestions = $0 })) {
-                            ForEach(1...max(1, g.maxQuestions(from: base)), id: \.self) { n in
-                                Text(n == 1 ? "Une question" : "Deux questions").tag(n)
+                            ForEach(1...max(1, g.volleyMax(from: base)), id: \.self) { n in
+                                if g.rules.mode.interroge {
+                                    Text(n == 1 ? "Une question" : "Deux questions").tag(n)
+                                } else {
+                                    Text(n == 1 ? "Un dé"
+                                         : (n == 2 ? "Deux dés" : "Trois dés")).tag(n)
+                                }
                             }
                         }
                         .pickerStyle(.segmented)
@@ -832,17 +859,70 @@ private struct AssaultPanel: View {
     /// classique ou en face à face — où le défenseur peut encore doubler.
     private func legendeDesDes(_ g: GameState) -> String {
         let une = session.draftQuestions == 1
+        if g.rules.mode == .des {
+            // La machine en oppose deux dès qu'elle a deux hommes, quoi qu'on
+            // annonce ; un humain choisit un dé ou deux après l'annonce. Ce
+            // qu'on choisit ici, c'est seulement combien de dés on lui oppose,
+            // et les plus forts de chaque main se comparent.
+            let cible = session.target ?? ""
+            let defense = min(2, g.armies(cible))
+            let aSonChoix = g.choisitSesDes(g.owner[cible] ?? -1, garnison: g.armies(cible))
+            switch session.draftQuestions {
+            case 1:
+                if aSonChoix {
+                    return dit("""
+                               Un dé contre un ou deux, à son choix. L'égalité lui profite : \
+                               il faut faire mieux, pas aussi bien.
+                               """)
+                }
+                return defense > 1
+                    ? dit("""
+                          Un dé contre ses deux. L'égalité lui profite : il faut faire mieux, \
+                          pas aussi bien.
+                          """)
+                    : dit("""
+                          Un dé contre le sien. L'égalité lui profite : il faut faire mieux, \
+                          pas aussi bien.
+                          """)
+            case 2:
+                return aSonChoix
+                    ? dit("""
+                          Deux dés contre un ou deux, à son choix. Contre deux, le jet peut \
+                          coûter un homme à chacun.
+                          """)
+                    : dit("""
+                          Deux dés. Les deux meilleurs de chaque main se comparent, et le \
+                          jet peut coûter un homme à chacun.
+                          """)
+            default:
+                return aSonChoix
+                    ? dit("""
+                          Trois dés contre un ou deux, à son choix. Le troisième n'affronte \
+                          personne — il rend seulement les autres meilleurs.
+                          """)
+                    : dit("""
+                          Trois dés contre ses deux. Le troisième n'affronte personne — il \
+                          rend seulement les deux autres meilleurs.
+                          """)
+            }
+        }
         if g.rules.mode == .classique {
             return une
-                ? "Un duel : au plus un homme perdu de chaque côté."
-                : "Deux duels de suite. Le sablier se resserre au second — mais deux bonnes "
-                    + "réponses vous coûtent deux hommes."
+                ? dit("Un duel : au plus un homme perdu de chaque côté.")
+                : dit("""
+                      Deux duels de suite. Le sablier se resserre au second — mais deux bonnes \
+                      réponses vous coûtent deux hommes.
+                      """)
         }
         return une
-            ? "Un duel, la même question pour vous deux. S'il double la mise, il vaudra "
-                + "deux hommes."
-            : "Deux duels de suite, la même question à chaque fois pour vous deux. Le sablier "
-                + "se resserre au second, et il peut doubler la mise sur chacun."
+            ? dit("""
+                  Un duel, la même question pour vous deux. S'il double la mise, il vaudra \
+                  deux hommes.
+                  """)
+            : dit("""
+                  Deux duels de suite, la même question à chaque fois pour vous deux. Le sablier \
+                  se resserre au second, et il peut doubler la mise sur chacun.
+                  """)
     }
 
     /// Le septième terrain : celui qu'on ne choisit pas.
@@ -991,8 +1071,12 @@ private struct VictoryOverlay: View {
                                 HStack(alignment: .top, spacing: 8) {
                                     Circle().fill(Palette.campVif(joueur.id))
                                         .frame(width: 8, height: 8).padding(.top, 5)
-                                    Text("**\(joueur.name)** — \(session.game.texte(carte))"
-                                         + (remplie ? " *Remplie.*" : ""))
+                                    // Deux libellés assemblés en Text, et non
+                                    // deux chaînes assemblées en une : une
+                                    // phrase faite de « + » n'entre pas dans le
+                                    // catalogue de langues.
+                                    (Text("**\(joueur.name)** — \(session.game.texte(carte))")
+                                     + (remplie ? Text(" *Remplie.*") : Text("")))
                                         .font(.caption)
                                         .fixedSize(horizontal: false, vertical: true)
                                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -1096,18 +1180,24 @@ private struct ObjectifSheet: View {
                     // arrive à une carte morte : c'est le seul endroit où le
                     // joueur peut l'apprendre avant que ça lui tombe dessus.
                     VStack(alignment: .leading, spacing: 6) {
-                        Text("La remplir gagne la partie, sur-le-champ. Il n'y a pas d'autre "
-                             + "porte : aucun nombre de territoires ne gagne la partie.")
+                        Text("""
+                             La remplir gagne la partie, sur-le-champ. Il n'y a pas d'autre \
+                             porte : aucun nombre de territoires ne gagne la partie.
+                             """)
                         if case .eliminer = carte {
-                            Text("Si un autre fait tomber ce camp avant vous, votre carte se "
-                                 + "retourne et devient « tenir "
-                                 + "\(Objectif.repli(g.board).nombreDemande ?? 0) territoires » — "
-                                 + "quatre places sur cinq du plateau.")
+                            Text("""
+                                 Si un autre fait tomber ce camp avant vous, votre carte se \
+                                 retourne et devient « tenir \
+                                 \(Objectif.repli(g.board).nombreDemande ?? 0) territoires » — \
+                                 quatre places sur cinq du plateau.
+                                 """)
                         } else if g.conqueteRetournee(de: joueur) {
-                            Text("Ce n'est pas la carte que vous aviez tirée : le camp qu'on "
-                                 + "vous demandait d'abattre est tombé sous d'autres coups. "
-                                 + "Elle s'est retournée en ce repli, pour que vous puissiez "
-                                 + "encore gagner.")
+                            Text("""
+                                 Ce n'est pas la carte que vous aviez tirée : le camp qu'on \
+                                 vous demandait d'abattre est tombé sous d'autres coups. \
+                                 Elle s'est retournée en ce repli, pour que vous puissiez \
+                                 encore gagner.
+                                 """)
                         }
                         Text(session.enReseau
                              ? "Les autres appareils ne montrent que la leur."
@@ -1142,8 +1232,10 @@ private struct CartesSheet: View {
                     Text("Vos cartes").font(.headline).foregroundStyle(Palette.ink)
                     Text(main.isEmpty
                          ? "Une carte se gagne en prenant au moins une place dans le tour."
-                         : "Trois symboles identiques, ou trois différents. "
-                           + "Le prochain échange vaut \(g.prochainEchange) hommes.")
+                         : """
+                           Trois symboles identiques, ou trois différents. \
+                           Le prochain échange vaut \(g.prochainEchange) hommes.
+                           """)
                         .font(.caption).foregroundStyle(Palette.dim)
                     if g.doitEchanger(g.currentPlayer.id) {
                         Text("Cinq cartes en main : l'échange est obligatoire.")

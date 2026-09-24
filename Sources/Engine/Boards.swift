@@ -9,43 +9,67 @@
 //  voisinage saisi de travers ne plante rien, il rend un territoire imprenable
 //  et se découvre trois parties plus tard.
 //
-//  Les cartes réelles sont ici des hexagones posés sur la géographie, et non
-//  des contours relevés. On y gagne le plan qui se retouche en déplaçant une
-//  lettre, le tracé des frontières, et les tests qui vérifient à chaque
-//  compilation que le monde se tient. On y perd la silhouette des côtes — que
-//  personne ne distinguerait à cette taille sur un téléphone. Le moteur ne
-//  connaissant que le voisinage, un rendu réaliste pourra remplacer celui-ci
-//  sans qu'une ligne des règles bouge.
+//  Deux façons de dessiner, et la même garantie.
+//
+//  L'Anneau et l'Europe sont des damiers d'hexagones : une case par
+//  territoire, et le plan se retouche en déplaçant une lettre. Le Monde est
+//  une grille fine où un territoire est un amas de cases, ce qui lui rend ses
+//  côtes (voir `Atlas` et `PlanDuMonde`). Dans les deux cas les voisinages se
+//  déduisent du dessin au lieu d'être saisis, et c'est tout ce qui compte :
+//  un voisinage écrit de travers ne plante rien, il rend un territoire
+//  imprenable et se découvre trois parties plus tard.
 //
 
 import Foundation
+
+/// Le nom d'une chose de la carte, dans la langue de l'interface.
+///
+/// Les plateaux sont écrits en français dans les données — c'est la langue
+/// d'origine du jeu — et le catalogue en porte l'anglais. La traduction se
+/// fait ici, au moment de lire, et non dans les données : un territoire est
+/// une case du plateau avant d'être un mot, et sa définition n'a pas à
+/// exister en double.
+func nomTraduit(_ brut: String) -> String {
+    dit(String.LocalizationValue(brut))
+}
 
 enum Boards: String, CaseIterable, Identifiable, Codable {
 
     /// Le nom d'un camp. Il tient ici plutôt que dans une vue : deux appareils
     /// doivent nommer les mêmes joueurs de la même façon.
     static func nomDeCamp(_ rang: PlayerID) -> String {
-        let noms = ["Bleu", "Rouge", "Vert", "Ambre", "Violet"]
+        let noms = ["Bleu", "Rouge", "Vert", "Ambre", "Violet"].map(nomTraduit)
         return noms[((rang % noms.count) + noms.count) % noms.count]
     }
 
-    case anneau, europe, monde
+    /// Quatre plateaux, dans l'ordre où ils grandissent — et le Monde deux
+    /// fois, parce que ce sont deux jeux.
+    ///
+    /// Le Monde en hexagones et le Monde réel portent les mêmes quarante-deux
+    /// noms et les mêmes six terres, mais pas les mêmes voisinages : le damier
+    /// serre l'Asie en onze cases et n'a que trois traversées, la carte en a
+    /// vingt et rend au Kamtchatka sa distance. On ne joue pas pareil sur
+    /// l'un et sur l'autre, et c'est pourquoi les deux restent.
+    case anneau, europe, monde, mondeReel
 
     var id: String { rawValue }
 
     var label: String {
         switch self {
-        case .anneau: "L'Anneau"
-        case .europe: "Europe"
-        case .monde:  "Monde"
+        case .anneau:    nomTraduit("L'Anneau")
+        case .europe:    nomTraduit("Europe")
+        case .monde:     nomTraduit("Monde")
+        case .mondeReel: nomTraduit("Monde réel")
         }
     }
 
     var detail: String {
         switch self {
-        case .anneau: "Un monde inventé, cinq terres en cercle. 28 territoires."
-        case .europe: "De l'Atlantique à la mer Noire. 38 territoires."
-        case .monde:  "Les six continents, 42 territoires — comme la boîte."
+        case .anneau: nomTraduit("Un monde inventé, cinq terres en cercle. 28 territoires.")
+        case .europe: nomTraduit("De l'Atlantique à la mer Noire. 38 territoires.")
+        case .monde:  nomTraduit("Les six continents en hexagones. 42 territoires, trois traversées.")
+        case .mondeReel:
+            nomTraduit("Les côtes réelles. 42 territoires, vingt traversées.")
         }
     }
 
@@ -62,6 +86,11 @@ enum Boards: String, CaseIterable, Identifiable, Codable {
                                     seaRoutes: Boards.traverseesEurope)
         case .monde:  HexPlan.build(rows: Boards.planMonde, continents: Boards.terresMonde,
                                     seaRoutes: Boards.traverseesMonde)
+        // Le seul plateau dessiné : ses côtes viennent de la géographie et non
+        // d'un damier.
+        case .mondeReel: Atlas.build(rows: Boards.planDuMonde, terres: Boards.terresDuMonde,
+                                     places: Boards.placesDuMonde,
+                                     traversees: Boards.traverseesDuMonde)
         }
     }
 
@@ -140,9 +169,9 @@ enum Boards: String, CaseIterable, Identifiable, Codable {
         ("Écosse", "Norvège"),
     ]
 
-    // MARK: - Monde
+    // MARK: - Monde, en hexagones
 
-    /// Les six continents du Risk, posés comme sur la boîte : l'Amérique à
+    /// Les six continents posés comme sur un damier : l'Amérique à
     /// gauche, l'Asie qui occupe tout le nord-est, l'Afrique au centre-sud,
     /// l'Océanie dans son coin. Les traversées font le reste — c'est ainsi
     /// que le jeu d'origine relie l'Alaska au Kamtchatka.
@@ -181,7 +210,8 @@ enum Boards: String, CaseIterable, Identifiable, Codable {
                       "Australie occidentale", "Australie orientale"]),
     ]
 
-    /// Trois traversées, et trois seulement.
+    /// Trois traversées, et trois seulement — c'est ce qui distingue ce
+    /// plateau du Monde réel, qui en a vingt.
     ///
     /// L'Amérique du Sud a été écartée de l'Afrique : les deux se touchaient
     /// par le Brésil, ce qui faisait passer un continent dans l'autre à pied.
@@ -193,6 +223,7 @@ enum Boards: String, CaseIterable, Identifiable, Codable {
         ("Groenland", "Islande"),
         ("Congo", "Brésil"),
     ]
+
 }
 
 /// Le plateau par défaut, celui des essais et des aperçus.

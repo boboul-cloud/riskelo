@@ -25,6 +25,15 @@
 //  de la partie et disparaît — rien n'est gardé, ni les noms, ni les coups,
 //  ni qui a joué avec qui.
 //
+//  ## D'une soirée sur l'autre
+//
+//  Le code vaut une semaine, et non le temps d'une séance : une partie de
+//  Riskelo ne tient pas dans une soirée. Celui qui l'a ouverte rouvre son
+//  salon sous le même code — `reprendreLeSalon` — les autres y rentrent comme
+//  au premier soir, et la partie repart où elle en était. Ce qui attend
+//  pendant ce temps-là n'est pas la partie : c'est un point de rendez-vous.
+//  La partie, elle, dort sur les appareils (voir `RendezVous`).
+//
 //  ## La coupure est la règle, pas l'accident
 //
 //  Dans la même pièce, une liaison qui tombe est un appareil qu'on a éteint :
@@ -104,6 +113,8 @@ final class Relais: Fil {
         case salonPlein
         /// La partie a déjà commencé sans nous.
         case dejaCommencee
+        /// On revenait sur son propre code, et il ne nous appartient plus.
+        case salonRepris
         /// Rien n'a répondu.
         case sansReponse
         /// Le serveur a répondu, mais pas ce qu'on attendait.
@@ -116,6 +127,11 @@ final class Relais: Fil {
     private(set) var code: String?
 
     var jeSuisLHote: Bool { jHeberge }
+
+    /// Six lettres, et l'on retrouve la même table une semaine plus tard.
+    /// C'est ce qui permet de reprendre une partie au loin d'une soirée sur
+    /// l'autre — voir `RendezVous`.
+    var codeDeReprise: String? { code }
 
     let moi: Pair
 
@@ -151,6 +167,17 @@ final class Relais: Fil {
     private var rappel: Task<Void, Never>?
     /// Combien de fois on a rappelé d'affilée, pour espacer les essais.
     private var essais = 0
+    /// Quand la liaison a été établie pour la dernière fois.
+    ///
+    /// Sert à distinguer une liaison qui **tient** d'une qui s'ouvre et retombe
+    /// aussitôt. Sans cette distinction, la seconde remettait les compteurs à
+    /// zéro à chaque tentative : jamais de délai qui s'allonge, jamais de délai
+    /// de grâce atteint, et donc un rappel par seconde sans fin.
+    private var ouverteLe: Date?
+
+    /// En deçà, une liaison n'a pas tenu : elle a juste eu le temps de dire
+    /// bonjour avant de retomber.
+    private static let tenueMinimale: TimeInterval = 10
 
     /// Au-delà, on renonce.
     ///
@@ -205,6 +232,33 @@ final class Relais: Fil {
         composer()
     }
 
+    /// Rouvrir le salon qu'on tenait déjà, sous son ancien code.
+    ///
+    /// Ouvrir en tirant un code neuf ne servirait à rien : ceux qui doivent
+    /// revenir n'ont que l'ancien, et c'est leur seul point de rendez-vous.
+    /// Le serveur reconnaît l'appareil à son identifiant et lui rend son
+    /// salon — ou, si le code a été repris par un autre depuis, le refuse en
+    /// le disant, plutôt que de le faire entrer chez un inconnu.
+    ///
+    /// Le salon peut très bien avoir été effacé entre-temps : il renaît alors
+    /// sous le même code, vide, et c'est exactement ce qu'il faut. Le salon
+    /// n'a jamais tenu la partie — elle est sur les appareils, et celui qui
+    /// l'héberge la redonne à chacun dès que tout le monde est là.
+    func reprendreLeSalon(code brut: String) {
+        let propre = Relais.normaliser(brut)
+        guard propre.count == Relais.longueurDuCode else {
+            etat = .refuse(.codeInconnu)
+            return
+        }
+        arreter()
+        raccroche = false
+        jHeberge = true
+        codeVise = propre
+        code = propre
+        etat = .ouvre
+        composer()
+    }
+
     /// Raccrocher pour de bon. Aucun rappel ne suivra.
     func arreter() {
         raccroche = true
@@ -213,6 +267,7 @@ final class Relais: Fil {
         socket = nil
         relies = []
         rompueDepuis = nil
+        ouverteLe = nil
         essais = 0
         if case .aLArret = etat {} else { etat = .aLArret }
     }
@@ -285,6 +340,19 @@ final class Relais: Fil {
                     }
                     self.ecouter(tache)
                 case let .failure(erreur):
+                    // Le serveur nous a mis dehors proprement — c'est ce qu'il
+                    // fait quand une autre liaison du **même appareil** arrive :
+                    // il ferme l'ancienne, qui est nous. Rappeler reviendrait à
+                    // se battre avec soi-même, chacun fermant l'autre, et c'est
+                    // exactement la boucle sans fin qu'on a vue dans les
+                    // journaux — une liaison neuve par seconde, pour toujours.
+                    if tache.closeCode == .normalClosure {
+                        print("Riskelo — salon : liaison reprise ailleurs, on s'efface")
+                        self.raccroche = true
+                        self.rappel?.cancel(); self.rappel = nil
+                        self.socket = nil
+                        return
+                    }
                     print("Riskelo — salon : liaison interrompue (\(erreur))")
                     self.tombe()
                 }
@@ -300,9 +368,16 @@ final class Relais: Fil {
     /// suite, et la reprise part aussitôt.
     private func battre(_ tache: URLSessionWebSocketTask) {
         Task { @MainActor [weak self] in
-            while let self, self.socket === tache, !self.raccroche {
+            // `while let self` tenait le relais **fortement** tant que la boucle
+            // tournait — c'est-à-dire pour toujours, puisque la boucle ne
+            // s'arrête que si le relais a changé de socket. Un salon quitté ne
+            // mourait donc jamais : il restait branché, sous l'identifiant de
+            // l'appareil, et la partie suivante se faisait évincer par son
+            // propre fantôme. Le `self` se reprend ici à chaque tour, et se
+            // relâche entre deux battements.
+            while true {
                 try? await Task.sleep(for: .seconds(20))
-                guard self.socket === tache else { return }
+                guard let self, self.socket === tache, !self.raccroche else { return }
                 tache.sendPing { erreur in
                     guard let erreur else { return }
                     print("Riskelo — salon : battement sans écho (\(erreur))")
@@ -330,12 +405,42 @@ final class Relais: Fil {
             // s'y trouve déjà. Il arrive aussi au retour d'une coupure, et il
             // remet alors tout le monde en place d'un coup.
             if let donne = dit["code"] as? String {
+                // On reprenait une partie sous un code précis et le serveur en
+                // rend un autre : c'est qu'il est plus ancien que cette
+                // application et qu'il ne sait pas rendre un salon à son hôte.
+                // Sans ce garde, la reprise **paraissait marcher** — un code
+                // s'affichait, le salon s'ouvrait — et les autres attendaient
+                // devant un code qui n'existait plus. La panne la plus
+                // difficile à comprendre est celle qui ressemble à une
+                // réussite.
+                if jHeberge, let vise = codeVise, donne != vise {
+                    raccroche = true
+                    socket?.cancel(with: .goingAway, reason: nil)
+                    socket = nil
+                    etat = .refuse(.serveur("serveur trop ancien"))
+                    // Et le dire à la partie, si elle est en cours : elle ne
+                    // regarde pas `etat`, elle ne connaît que la liaison.
+                    // Sans cette ligne, l'écran restait tel quel et l'on
+                    // attendait un coup qui ne pouvait plus venir.
+                    onLiaison?(.perdue("le serveur des parties"))
+                    return
+                }
                 code = donne
                 codeVise = donne
             }
             let revenu = rompueDepuis != nil
-            rompueDepuis = nil
-            essais = 0
+            // Les compteurs ne se remettent à zéro que si la liaison
+            // précédente avait tenu. Une qui s'ouvre et retombe dans la
+            // seconde doit continuer d'espacer ses essais, et finir par
+            // renoncer en le disant — plutôt que de rappeler pour toujours.
+            let avaitTenu = ouverteLe.map {
+                Date().timeIntervalSince($0) >= Relais.tenueMinimale
+            } ?? true
+            ouverteLe = Date()
+            if avaitTenu {
+                rompueDepuis = nil
+                essais = 0
+            }
             if let gens = dit["gens"] as? [[String: Any]] {
                 for gars in gens { noter(gars, arrive: true) }
             }
@@ -375,6 +480,7 @@ final class Relais: Fil {
             case "inconnu":  etat = .refuse(.codeInconnu)
             case "plein":    etat = .refuse(.salonPlein)
             case "commence": etat = .refuse(.dejaCommencee)
+            case "repris":   etat = .refuse(.salonRepris)
             default:         etat = .refuse(.serveur(pourquoi))
             }
 

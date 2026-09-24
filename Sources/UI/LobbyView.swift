@@ -83,17 +83,19 @@ struct LobbyView: View {
     /// les options qui changent vraiment la partie.
     private var laPartieQuOnOuvre: String {
         var dits = [plateau.label, regles.mode.label]
-        if regles.territoryCards { dits.append("cartes") }
-        if regles.objectifs { dits.append("conquêtes personnelles") }
-        if regles.dominationOverride == 0 { dits.append("guerre totale") }
+        if regles.territoryCards { dits.append(dit("cartes")) }
+        if regles.objectifs { dits.append(dit("conquêtes personnelles")) }
+        if regles.dominationOverride == 0 { dits.append(dit("guerre totale")) }
         return dits.joined(separator: " · ")
     }
 
     @ViewBuilder private var contenu: some View {
         switch link.state {
         case .aLArret:
-            Text("Les appareils doivent être proches. Ni compte ni réseau : "
-                 + "le Bluetooth ou le Wi-Fi suffisent.")
+            Text("""
+                 Les appareils doivent être proches. Ni compte ni réseau : \
+                 le Bluetooth ou le Wi-Fi suffisent.
+                 """)
                 .font(.footnote).foregroundStyle(Palette.dim)
                 .multilineTextAlignment(.center)
 
@@ -147,14 +149,20 @@ struct LobbyView: View {
                     Text("Aucune table en vue.")
                         .font(.headline).foregroundStyle(Palette.lostVif)
                     VStack(alignment: .leading, spacing: 6) {
-                        cause("Les deux appareils doivent être sur **le même "
-                              + "réseau Wi-Fi**. C'est de loin la cause la plus "
-                              + "fréquente : l'un sur la box, l'autre sur le réseau "
-                              + "invité, et ils ne se voient pas.")
-                        cause("Sur l'autre appareil : « Ouvrir la table », et laissez "
-                              + "son écran allumé.")
-                        cause("Réglages → Confidentialité et sécurité → Réseau local : "
-                              + "Riskelo activé, sur les deux.")
+                        cause("""
+                              Les deux appareils doivent être sur **le même \
+                              réseau Wi-Fi**. C'est de loin la cause la plus \
+                              fréquente : l'un sur la box, l'autre sur le réseau \
+                              invité, et ils ne se voient pas.
+                              """)
+                        cause("""
+                              Sur l'autre appareil : « Ouvrir la table », et laissez \
+                              son écran allumé.
+                              """)
+                        cause("""
+                              Réglages → Confidentialité et sécurité → Réseau local : \
+                              Riskelo activé, sur les deux.
+                              """)
                     }
                     .font(.caption).foregroundStyle(Palette.dim)
                 } else {
@@ -179,8 +187,10 @@ struct LobbyView: View {
         case .invite(let nom):
             ProgressView().tint(Palette.camp(1))
             Text("Connexion à \(nom)…").font(.headline).foregroundStyle(Palette.ink)
-            Text("Si un appareil demande l'autorisation d'utiliser le réseau local, "
-                 + "acceptez-la : sans elle, la liaison ne peut pas s'établir.")
+            Text("""
+                 Si un appareil demande l'autorisation d'utiliser le réseau local, \
+                 acceptez-la : sans elle, la liaison ne peut pas s'établir.
+                 """)
                 .font(.caption).foregroundStyle(Palette.dim)
                 .multilineTextAlignment(.center)
 
@@ -205,17 +215,25 @@ struct LobbyView: View {
                  : "\(nom) n'a pas répondu.")
                 .font(.subheadline).foregroundStyle(Palette.ink)
             VStack(alignment: .leading, spacing: 7) {
-                cause("Les deux appareils doivent être sur **le même réseau "
-                      + "Wi-Fi** — ou tous les deux sans réseau du tout, auquel cas "
-                      + "ils se relient directement.")
-                cause("Riskelo doit être **à l'écran** sur l'autre appareil. En "
-                      + "arrière-plan, ou l'écran verrouillé, il cesse de répondre.")
-                cause("Réglages → Confidentialité et sécurité → Réseau local : "
-                      + "Riskelo activé, sur les deux.")
-                cause("Certaines box interdisent à deux appareils de se parler entre "
-                      + "eux. Dans ce cas seulement, **coupez le Wi-Fi depuis le "
-                      + "centre de contrôle** (le bouton, pas les Réglages) des deux "
-                      + "côtés : ils se relieront sans passer par elle.")
+                cause("""
+                      Les deux appareils doivent être sur **le même réseau \
+                      Wi-Fi** — ou tous les deux sans réseau du tout, auquel cas \
+                      ils se relient directement.
+                      """)
+                cause("""
+                      Riskelo doit être **à l'écran** sur l'autre appareil. En \
+                      arrière-plan, ou l'écran verrouillé, il cesse de répondre.
+                      """)
+                cause("""
+                      Réglages → Confidentialité et sécurité → Réseau local : \
+                      Riskelo activé, sur les deux.
+                      """)
+                cause("""
+                      Certaines box interdisent à deux appareils de se parler entre \
+                      eux. Dans ce cas seulement, **coupez le Wi-Fi depuis le \
+                      centre de contrôle** (le bouton, pas les Réglages) des deux \
+                      côtés : ils se relieront sans passer par elle.
+                      """)
             }
             .font(.caption).foregroundStyle(Palette.dim)
             bouton("Réessayer", "arrow.clockwise", Palette.camp(0)) { link.arreter() }
@@ -239,8 +257,10 @@ struct LobbyView: View {
                 .font(.system(size: 30)).foregroundStyle(Palette.dim)
             Text("Une autorisation manque")
                 .font(.headline).foregroundStyle(Palette.ink)
-            Text("iOS demande votre accord avant qu'un jeu puisse voir les "
-                 + "autres appareils de la maison. Riskelo ne l'a pas encore.")
+            Text("""
+                 iOS demande votre accord avant qu'un jeu puisse voir les \
+                 autres appareils de la maison. Riskelo ne l'a pas encore.
+                 """)
                 .font(.subheadline).foregroundStyle(Palette.dim)
                 .multilineTextAlignment(.center)
             #if os(iOS)
@@ -276,9 +296,11 @@ struct LobbyView: View {
             Image(systemName: "exclamationmark.triangle.fill")
                 .font(.system(size: 34)).foregroundStyle(Palette.lostVif)
             Text("Versions différentes").font(.headline).foregroundStyle(Palette.lostVif)
-            Text("\(nom) a envoyé une partie que cet appareil ne sait pas lire. "
-                 + "Installez la même version de Riskelo sur les deux, puis "
-                 + "recommencez.")
+            Text("""
+                 \(nom) a envoyé une partie que cet appareil ne sait pas lire. \
+                 Installez la même version de Riskelo sur les deux, puis \
+                 recommencez.
+                 """)
                 .font(.footnote).foregroundStyle(Palette.dim)
                 .multilineTextAlignment(.center)
         } else {
@@ -287,9 +309,11 @@ struct LobbyView: View {
             if silence {
                 Text("Rien n'est venu de \(nom).")
                     .font(.subheadline).foregroundStyle(Palette.lostVif)
-                Text("La liaison est bonne : c'est le lancement qui n'arrive pas. "
-                     + "Vérifiez que \(nom) a bien touché « Commencer », et que les "
-                     + "deux appareils ont la même version de Riskelo.")
+                Text("""
+                     La liaison est bonne : c'est le lancement qui n'arrive pas. \
+                     Vérifiez que \(nom) a bien touché « Commencer », et que les \
+                     deux appareils ont la même version de Riskelo.
+                     """)
                     .font(.caption).foregroundStyle(Palette.dim)
                     .multilineTextAlignment(.center)
             } else {
@@ -314,9 +338,11 @@ struct LobbyView: View {
             if manquants > 0 {
                 ProgressView().tint(Palette.dim)
                 if rienEnVue {
-                    Text("Personne ne s'est présenté. Le Wi-Fi doit être allumé des "
-                         + "deux côtés — c'est lui qui porte la liaison, même sans "
-                         + "réseau commun — et Riskelo autorisé au réseau local.")
+                    Text("""
+                         Personne ne s'est présenté. Le Wi-Fi doit être allumé des \
+                         deux côtés — c'est lui qui porte la liaison, même sans \
+                         réseau commun — et Riskelo autorisé au réseau local.
+                         """)
                         .font(.caption).foregroundStyle(Palette.dim)
                         .multilineTextAlignment(.center)
                 } else {
@@ -333,8 +359,10 @@ struct LobbyView: View {
                     ligne(noms[pair] ?? pair.nom, camp: i + 1)
                 }
             }
-            Text("Sur les autres appareils : « Rejoindre une table ».\n"
-                 + "Laissez cet écran allumé jusqu'au lancement.")
+            Text("""
+                 Sur les autres appareils : « Rejoindre une table ».\n\
+                 Laissez cet écran allumé jusqu'au lancement.
+                 """)
                 .font(.caption).foregroundStyle(Palette.dim.opacity(0.85))
                 .multilineTextAlignment(.center)
 

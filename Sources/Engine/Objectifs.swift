@@ -220,13 +220,17 @@ extension GameState {
                 let a_moi = c.territories.filter { owner[$0] == joueur }.count
                 return "\(c.name) \(a_moi)/\(c.territories.count)"
             }
-            return "\(tenus) sur \(ids.count) — " + detail.joined(separator: " · ")
+            return dit("\(tenus) sur \(ids.count) — \(detail.joined(separator: " · "))")
         case let .territoires(nombre, hommes):
-            return "\(territoires(de: joueur, dAuMoins: hommes)) sur \(nombre)"
+            return dit("\(territoires(de: joueur, dAuMoins: hommes)) sur \(nombre)")
         case .eliminer(let cible):
             let reste = territories(of: cible).count
-            return reste == 0 ? "Le camp est tombé"
-                              : "Il lui reste \(reste) territoire\(reste > 1 ? "s" : "")"
+            // Deux phrases : le pluriel anglais de « territory » n'est pas un
+            // « s » ajouté, et un morceau de pluriel glissé dans un trou
+            // donnerait « territors ».
+            if reste == 0 { return dit("Le camp est tombé") }
+            return reste > 1 ? dit("Il lui reste \(reste) territoires")
+                             : dit("Il lui reste \(reste) territoire")
         }
     }
 
@@ -250,12 +254,15 @@ extension GameState {
     func porteDite(_ joueur: PlayerID) -> String {
         switch porteDeLaVictoire(joueur) {
         case .plateauEntier:
-            return "Le plateau entier, sans un territoire laissé."
+            return dit("Le plateau entier, sans un territoire laissé.")
         case .conquete:
-            guard let carte = objectif(de: joueur) else { return "Sa conquête personnelle." }
-            return "Sa conquête personnelle — \(texte(carte))"
+            guard let carte = objectif(de: joueur) else { return dit("Sa conquête personnelle.") }
+            return dit("Sa conquête personnelle — \(texte(carte))")
         case .seuil:
-            return "Le seuil de \(dominationThreshold) territoires sur \(map.order.count)."
+            return dit("""
+                       Le seuil de \(dominationThreshold) territoires sur \
+                       \(map.order.count).
+                       """)
         }
     }
 
@@ -265,15 +272,16 @@ extension GameState {
         switch carte {
         case .continents(let ids):
             let noms = ids.compactMap { map.continents[$0]?.name }
-            return "\(playerName(joueur)) tenait " + Objectif.liste(noms)
-                + " — c'était sa conquête."
+            return dit("\(playerName(joueur)) tenait \(Objectif.liste(noms)) — c'était sa conquête.")
         case let .territoires(nombre, hommes):
             return hommes > 1
-                ? "\(playerName(joueur)) tient \(nombre) places à "
-                    + "\(Objectif.enLettres(hommes)) hommes — c'était sa conquête."
-                : "\(playerName(joueur)) tient \(nombre) territoires — c'était sa conquête."
+                ? dit("""
+                      \(playerName(joueur)) tient \(nombre) places à \
+                      \(Objectif.enLettres(hommes)) hommes — c'était sa conquête.
+                      """)
+                : dit("\(playerName(joueur)) tient \(nombre) territoires — c'était sa conquête.")
         case .eliminer(let cible):
-            return "\(playerName(joueur)) a fait tomber \(playerName(cible)) — c'était sa conquête."
+            return dit("\(playerName(joueur)) a fait tomber \(playerName(cible)) — c'était sa conquête.")
         }
     }
 }
@@ -290,13 +298,15 @@ extension Objectif {
         switch self {
         case .continents(let ids):
             let noms = ids.compactMap { board.map.continents[$0]?.name }
-            return "Tenir en entier " + Objectif.liste(noms) + "."
+            return dit("Tenir en entier \(Objectif.liste(noms)).")
         case let .territoires(nombre, hommes):
-            guard hommes > 1 else { return "Tenir \(nombre) territoires." }
-            return "Tenir \(nombre) territoires avec au moins "
-                + "\(Objectif.enLettres(hommes)) hommes sur chacun."
+            guard hommes > 1 else { return dit("Tenir \(nombre) territoires.") }
+            return dit("""
+                       Tenir \(nombre) territoires avec au moins \
+                       \(Objectif.enLettres(hommes)) hommes sur chacun.
+                       """)
         case .eliminer(let cible):
-            return "Faire disparaître le camp de \(nomDuCamp(cible)) — de votre main."
+            return dit("Faire disparaître le camp de \(nomDuCamp(cible)) — de votre main.")
         }
     }
 
@@ -313,15 +323,17 @@ extension Objectif {
     static func liste(_ mots: [String]) -> String {
         guard let dernier = mots.last else { return "" }
         guard mots.count > 1 else { return dernier }
-        return mots.dropLast().joined(separator: ", ") + " et " + dernier
+        // « et » se dit « and » : le mot qui relie est de la langue, pas de la
+        // liste.
+        return dit("\(mots.dropLast().joined(separator: ", ")) et \(dernier)")
     }
 
     static func enLettres(_ n: Int) -> String {
         switch n {
-        case 1: "un"
-        case 2: "deux"
-        case 3: "trois"
-        case 4: "quatre"
+        case 1: dit("un")
+        case 2: dit("deux")
+        case 3: dit("trois")
+        case 4: dit("quatre")
         default: "\(n)"
         }
     }

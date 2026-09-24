@@ -84,16 +84,20 @@ struct PlusieursView: View {
                     porte("Dans la même pièce",
                           "iphone.gen3.radiowaves.left.and.right",
                           Palette.camp(0),
-                          "Les appareils se trouvent tout seuls. Ni compte, ni code, "
-                          + "ni serveur — cela marche même dans un train.") {
+                          """
+                          Les appareils se trouvent tout seuls. Ni compte, ni code, \
+                          ni serveur — cela marche même dans un train.
+                          """) {
                         chemin = .memePiece
                     }
 
                     porte("Au loin, avec un code",
                           "globe.europe.africa.fill",
                           Palette.camp(2),
-                          "Six lettres à envoyer par WhatsApp ou par SMS. "
-                          + "Chacun chez soi, et rien à créer.") {
+                          """
+                          Six lettres à envoyer par WhatsApp ou par SMS. \
+                          Chacun chez soi, et rien à créer.
+                          """) {
                         chemin = .auLoin
                     }
 
@@ -101,9 +105,11 @@ struct PlusieursView: View {
                     porte("Par Game Center",
                           "person.2.wave.2.fill",
                           Palette.camp(3),
-                          "Vos amis Game Center, ou un adversaire au hasard. "
-                          + "Demande un compte Apple, et ne se reprend pas "
-                          + "après une coupure.") {
+                          """
+                          Vos amis Game Center, ou un adversaire au hasard. \
+                          Demande un compte Apple, et ne se reprend pas \
+                          après une coupure.
+                          """) {
                         chemin = .gameCenter
                     }
                     #endif
@@ -122,8 +128,11 @@ struct PlusieursView: View {
     /// Une façon de jouer, et ce qu'elle coûte. Les deux ensemble, toujours :
     /// un bouton qui ne dit pas sa contrainte la fait découvrir au pire
     /// moment, quand deux personnes sont déjà installées pour jouer.
-    private func porte(_ titre: String, _ icone: String, _ teinte: Color,
-                       _ dit: String, _ geste: @escaping () -> Void) -> some View {
+    // « dit » est un libellé, non une chaîne quelconque : en String, Text
+    // choisissait la surcharge qui ne traduit pas, et les trois portes
+    // restaient en français sur un appareil anglais.
+    private func porte(_ titre: LocalizedStringKey, _ icone: String, _ teinte: Color,
+                       _ dit: LocalizedStringKey, _ geste: @escaping () -> Void) -> some View {
         Button(action: geste) {
             HStack(alignment: .top, spacing: 14) {
                 Image(systemName: icone)

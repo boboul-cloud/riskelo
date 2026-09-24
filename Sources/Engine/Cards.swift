@@ -24,9 +24,9 @@ struct Card: Codable, Equatable, Hashable, Identifiable {
 
         var label: String {
             switch self {
-            case .infanterie: "Infanterie"
-            case .cavalerie:  "Cavalerie"
-            case .artillerie: "Artillerie"
+            case .infanterie: dit("Infanterie")
+            case .cavalerie:  dit("Cavalerie")
+            case .artillerie: dit("Artillerie")
             }
         }
 

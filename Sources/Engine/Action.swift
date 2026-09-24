@@ -25,6 +25,9 @@ enum Action: Codable, Equatable {
     case answer(Answer)
     /// Le défenseur double l'enjeu, en face à face.
     case relancer
+    /// Aux dés, le défenseur oppose un dé ou deux. C'est ce coup, et non la
+    /// déclaration, qui jette les dés quand il a le choix.
+    case defendre(Int)
     case dismissAssault
     case occupy(Int)
     case fortify(from: TerritoryID, to: TerritoryID, count: Int)
@@ -37,10 +40,11 @@ enum Action: Codable, Equatable {
     /// Qui a le droit de jouer ce coup : celui dont c'est le tour, sauf
     /// autour du duel. En classique le défenseur seul répond ; en face à face
     /// les deux répondent, chacun son tour, et c'est le moteur qui dit lequel.
+    /// Aux dés, le défenseur choisit les siens.
     func author(in game: GameState) -> PlayerID? {
         switch self {
         case .answer: game.quiRepond ?? game.assault?.defender
-        case .relancer: game.assault?.defender
+        case .relancer, .defendre: game.assault?.defender
         default: game.currentPlayer.id
         }
     }
@@ -62,6 +66,8 @@ extension GameState {
             return answer(reponse)
         case .relancer:
             relancer()
+        case .defendre(let des):
+            defendre(avec: des)
         case .dismissAssault:
             dismissAssault()
         case .occupy(let n):

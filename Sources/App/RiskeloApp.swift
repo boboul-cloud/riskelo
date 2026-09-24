@@ -16,9 +16,18 @@ struct RiskeloApp: App {
     @Environment(\.scenePhase) private var scenePhase
     @State private var racine = RootModel()
 
+    /// La langue choisie dans l'application, lue là où elle est écrite.
+    ///
+    /// C'est elle qui pose la locale de toute la hiérarchie de vues : SwiftUI
+    /// résout ses textes contre celle de l'environnement, donc il suffit de la
+    /// poser une fois, à la racine. Et comme c'est un @AppStorage, en changer
+    /// redessine l'app sans qu'on ait à prévenir personne.
+    @AppStorage("langue-des-questions") private var langue = Langue.deLAppareil.rawValue
+
     var body: some Scene {
         WindowGroup {
             RootView(model: racine)
+                .environment(\.locale, Locale(identifier: langue))
                 // Le lien d'invitation, touché dans WhatsApp, dans un SMS ou
                 // dans un mail. Les deux formes y passent : l'adresse du
                 // site, qui ouvre le jeu quand le système a fait le
@@ -92,7 +101,7 @@ final class RootModel {
 
         // La partie en cours n'est pas jetée : elle est rangée, et le bouton
         // vert de l'accueil la rendra telle quelle.
-        session?.saveNow()
+        session?.raccrocher()
         session = nil
         bibliotheque = false; manuel = false; packs = false
         reglages = false; salonReglages = false
@@ -102,6 +111,12 @@ final class RootModel {
     }
 }
 
+/// Ce qui attend derrière le bouton vert de l'accueil.
+///
+/// Deux reprises et non une, et il faut les distinguer avant de dessiner le
+/// bouton : celle d'une partie jouée ici rend le plateau tout de suite, celle
+/// d'une partie au loin rend d'abord le salon — elle a besoin que l'autre
+/// vienne aussi.
 struct RootView: View {
     @Bindable var model: RootModel
 
@@ -113,7 +128,10 @@ struct RootView: View {
             Palette.sea.ignoresSafeArea()
             if let session = model.session {
                 GameScreen(session: session) {
-                    session.saveNow()
+                    // `raccrocher` et non `saveNow` : une partie qu'on quitte
+                    // doit rendre son fil, sans quoi il reste branché au salon
+                    // et la partie suivante se fait évincer par son fantôme.
+                    session.raccrocher()
                     withAnimation { model.session = nil }
                 }
             } else if model.bibliotheque {
@@ -207,12 +225,15 @@ struct RootView: View {
                     onPacks: { depuisAccueil { model.packs = true } },
                     // L'application reprenait la partie enregistrée d'elle-même
                     // au lancement. Elle ne le fait plus : un accueil qu'on ne
-                    // voit jamais n'est pas un accueil. La reprise vient juste
-                    // après la table, et reste le seul bouton vert.
-                    onResume: GameStore.shared.hasSavedGame ? {
-                        if let sauvee = GameStore.shared.load() {
-                            depuisAccueil { model.session = GameSession(resuming: sauvee) }
-                        }
+                    // voit jamais n'est pas un accueil. Les reprises viennent
+                    // juste après la table.
+                    // La partie d'ici, et elle seule : celle du loin se
+                    // reprend depuis « Jouer au loin », où l'on va déjà pour en
+                    // ouvrir une. Les deux tiroirs sont séparés, donc ce bouton
+                    // ne peut plus rendre l'une à la place de l'autre.
+                    onResume: GameStore.shared.has(.ici) ? {
+                        guard let sauvee = GameStore.shared.load(.ici) else { return }
+                        depuisAccueil { model.session = GameSession(resuming: sauvee) }
                     } : nil,
                     onManuel: { depuisAccueil { model.manuel = true } },
                     onArchives: Archives.shared.liste().isEmpty ? nil : {

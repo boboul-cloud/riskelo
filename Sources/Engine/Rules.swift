@@ -53,27 +53,44 @@ struct Rules: Equatable, Codable {
     /// `p × (1−p)` des échanges — 23 % à 65 % de bonnes réponses — et la
     /// partie se figerait, personne ne pouvant plus prendre une place. Avec
     /// lui on remonte à 44 %, la fourchette du dé contre dé du Risk (41,7 %).
+    ///
+    /// Aux **dés**, il n'y a plus de question : une face contre une face,
+    /// l'égalité au défenseur. C'est le jeu de plateau tel quel, et il est là
+    /// pour les soirs où l'on ne veut pas réfléchir, pour les joueurs trop
+    /// jeunes pour les questions, et pour montrer d'où vient le reste. Les
+    /// deux réglages qui ne parlent qu'aux questions — le dosage et le renfort
+    /// d'érudition — n'y servent plus à rien et l'écran de mise en place les
+    /// retire.
     var mode: Mode = .classique
 
     enum Mode: String, CaseIterable, Identifiable, Codable {
         case classique
         case faceAFace
+        case des
 
         var id: String { rawValue }
 
+        /// Ce mode pose-t-il des questions ? Tout ce qui tient à la culture —
+        /// les thèmes, le dosage, le sablier, le renfort d'érudition — se
+        /// range derrière cette seule question.
+        var interroge: Bool { self != .des }
+
         var label: String {
             switch self {
-            case .classique: "Classique"
-            case .faceAFace: "Face à face"
+            case .classique: dit("Classique")
+            case .faceAFace: dit("Face à face")
+            case .des:       dit("Dés")
             }
         }
 
         var detail: String {
             switch self {
             case .classique:
-                "L'attaquant choisit le thème, le défenseur seul répond."
+                dit("L'attaquant choisit le thème, le défenseur seul répond.")
             case .faceAFace:
-                "Les deux répondent à la même question. Le défenseur peut doubler l'enjeu."
+                dit("Les deux répondent à la même question. Le défenseur peut doubler l'enjeu.")
+            case .des:
+                dit("Aucune question : trois dés contre deux, comme au jeu de plateau.")
             }
         }
     }
@@ -121,17 +138,17 @@ struct Rules: Equatable, Codable {
 
         var label: String {
             switch self {
-            case .faciles: "Faciles"
-            case .melees:  "Mêlées"
-            case .corsees: "Corsées"
+            case .faciles: dit("Faciles")
+            case .melees:  dit("Mêlées")
+            case .corsees: dit("Corsées")
             }
         }
 
         var detail: String {
             switch self {
-            case .faciles: "De quoi jouer avec des enfants."
-            case .melees:  "Les trois niveaux, comme dans une boîte de jeu."
-            case .corsees: "Pour ceux qui trouvent le reste trop facile."
+            case .faciles: dit("De quoi jouer avec des enfants.")
+            case .melees:  dit("Les trois niveaux, comme dans une boîte de jeu.")
+            case .corsees: dit("Pour ceux qui trouvent le reste trop facile.")
             }
         }
 

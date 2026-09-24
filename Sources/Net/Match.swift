@@ -46,7 +46,19 @@ enum Message: Codable {
     ///     enum ne connaît pas « histoire-4e », et c'est l'état entier qui
     ///     devenait illisible — la panne muette que cette enveloppe existe
     ///     précisément pour éviter.
-    static let dialecte = 7
+    /// 8 : la fusion des deux langues. Les identifiants de trois thèmes ont
+    /// changé côté anglais, et la banque a doublé. Une 1.3 et une version
+    /// fusionnée qui croiraient se comprendre tireraient des questions
+    /// différentes — pire qu'un refus de connexion, qui au moins se voit.
+    /// 9 : le mode « dés ». Une règle de partie de plus dans `Rules`, et un
+    /// assaut qui se tranche à la déclaration au lieu d'attendre des
+    /// réponses. Un appareil resté en 1.3 ne sait pas décoder le mode et,
+    /// s'il le savait, attendrait une question qui ne viendra jamais.
+    /// 10 : aux dés, le défenseur humain choisit un dé ou deux — un coup de
+    /// plus dans `Action`. Un appareil en dialecte 9 jetterait les dés dès la
+    /// déclaration pendant que l'autre attendrait le choix : deux parties
+    /// différentes, sans que rien ne le dise.
+    static let dialecte = 10
 
     /// La partie entière, envoyée par celui qui l'a ouverte — à chacun son
     /// rang, et le compte des coups déjà joués.

@@ -19,8 +19,14 @@
 //
 //  Trois valeurs par salon : qui l'a ouvert, quel dialecte on y parle, et si
 //  la partie est partie. Plus la liste des identifiants admis, qui sert
-//  uniquement à laisser revenir quelqu'un après une coupure. Deux minutes
-//  après le départ du dernier, tout est effacé — le code redevient libre.
+//  uniquement à laisser revenir ceux qui y étaient. Une semaine après le
+//  départ du dernier, tout est effacé — le code redevient libre.
+//
+//  Une semaine, parce qu'une partie de Riskelo ne tient pas dans une soirée
+//  et que deux personnes ne sont pas libres à la même heure. Ce qui attend
+//  pendant ce temps-là, c'est un point de rendez-vous, pas une partie : la
+//  partie dort sur les appareils, et celui qui l'a ouverte la redonne à
+//  chacun quand tout le monde est revenu.
 //
 //  Un « identifiant » est un nombre tiré au sort à l'installation du jeu. Il
 //  ne désigne personne, et le serveur ne reçoit rien d'autre : **aucun nom de
@@ -36,7 +42,10 @@ import { DurableObject } from "cloudflare:workers";
 /// ouvre le navigateur au lieu du jeu.
 const EQUIPE = "38DQ8FW23J";
 const PAQUET = "com.oulhen.riskelo";
-const APP_STORE = "https://apps.apple.com/app/riskelo/id0000000000";
+/// La fiche de Riskelo sur l'App Store : c'est là que mène la page
+/// d'invitation quand on n'a pas encore le jeu. Elle portait un numéro
+/// d'exemple tant que la fiche n'existait pas.
+const APP_STORE = "https://apps.apple.com/app/riskelo/id6806804539";
 
 /// Le même alphabet que dans l'application — voir `Relais.consonnes`.
 /// Consonne, voyelle, consonne, voyelle, consonne, voyelle : un code qui se
@@ -49,13 +58,25 @@ const LONGUEUR = 6;
 /// serveur — mais c'est ici qu'elle se fait respecter.
 const MAX_JOUEURS = 4;
 
-/// Combien de temps un salon vide reste ouvert.
+/// Combien de temps un salon vide garde sa place.
 ///
-/// C'est la reprise après coupure, et rien d'autre : le tunnel, l'ascenseur,
-/// l'appel qu'on prend. Deux minutes, la même valeur que du côté de
-/// l'application — les deux doivent s'accorder, sinon l'un rappelle un salon
-/// que l'autre a déjà effacé.
-const GRACE_MS = 2 * 60 * 1000;
+/// Une semaine, et non plus deux minutes. Les deux minutes ne couvraient que
+/// la coupure — le tunnel, l'ascenseur, l'appel qu'on prend — et une partie
+/// qui s'arrêtait là était une partie perdue : le code mourait avant qu'on
+/// ait pu se redonner rendez-vous.
+///
+/// Or une partie de Riskelo dure plus qu'une soirée, et deux personnes ne
+/// sont pas toujours libres la même heure. Le salon garde donc le code au
+/// chaud jusqu'au week-end suivant. Il ne garde pas la partie pour autant :
+/// elle est sur les appareils, et elle y reste. Ce qui vit ici tient en
+/// quelques octets — qui a ouvert, quel dialecte, et la liste de ceux qu'on
+/// laisse revenir.
+///
+/// À ne pas confondre avec les deux minutes de `Relais.dureeDeGrace`, qui
+/// sont restées ce qu'elles étaient : elles disent combien de temps
+/// l'application rappelle **toute seule** après une coupure. Au-delà, elle
+/// rend la main — mais le code, lui, marche encore.
+const GRACE_MS = 7 * 24 * 60 * 60 * 1000;
 
 // ---------------------------------------------------------------------------
 // Le code
@@ -115,9 +136,11 @@ export class Salon extends DurableObject {
     const admis = (await this.ctx.storage.get("admis")) || [];
     const dejaVu = admis.includes(id);
 
-    // Celui qui ouvre : le code doit être libre, ou déjà le sien — il peut
-    // revenir après une coupure. Sinon on rend 409, et le serveur en tire un
-    // autre. Ce refus-ci ne remonte jamais jusqu'au joueur.
+    // Celui qui ouvre : le code doit être libre, ou déjà le sien — il revient
+    // chez lui, une semaine après s'il le faut. Sinon 409. Quand il ouvrait
+    // une partie neuve, le serveur en tirait simplement un autre et le joueur
+    // n'en savait rien ; quand il reprend la sienne, il n'y a pas d'autre
+    // code à tirer, et c'est à lui qu'on le dit.
     if (veutHeberger && hote !== undefined && hote !== id) {
       return new Response("code occupé", { status: 409 });
     }
@@ -341,6 +364,20 @@ async function ouvrirUnSalon(request, env, url) {
       return refusImmediat("inconnu");
     }
     return env.SALONS.getByName(code).fetch(reecrire(request, url, code));
+  }
+
+  // Celui qui reprend une partie revient avec le code qu'il avait. On ne lui
+  // en tire pas un neuf : ses invités ont l'ancien, et c'est le seul point de
+  // rendez-vous qu'ils connaissent. Le salon le reconnaît à son identifiant
+  // et le laisse rentrer chez lui — ou rend 409 si le code a été repris par
+  // quelqu'un d'autre depuis, ce qui se dit alors au joueur au lieu de le
+  // faire atterrir chez un inconnu.
+  const voulu = normaliser(demande.get("code"));
+  if (voulu) {
+    if (!estUnCode(voulu)) return refusImmediat("inconnu");
+    const reponse = await env.SALONS.getByName(voulu)
+      .fetch(reecrire(request, url, voulu));
+    return reponse.status === 409 ? refusImmediat("repris") : reponse;
   }
 
   // On tire un code, et l'on demande au salon qu'il désigne s'il est libre.

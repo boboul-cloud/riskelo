@@ -30,7 +30,10 @@ Trois pièges, tous payés une fois :
 
     python3 outils/captures.py
 
-Elles sortent dans soumission/captures/, aux noms et dans l'ordre de la fiche.
+Elles sortent dans soumission/captures/fr/, aux noms et dans l'ordre de la
+fiche — un dossier par langue, parce que la fiche anglaise a les siennes.
+Celles-là ne se prennent pas d'ici : l'outil appelle les boutons par leur nom,
+et ces noms sont français. La série anglaise se prend à la main.
 """
 
 
@@ -303,7 +306,7 @@ def main():
                         "--cellularBars", "4"], capture_output=True)
         serie(Appareil(uuid, fenetre, profondeur), dossier)
 
-        sortie = os.path.join(RACINE, "soumission", "captures", dossier)
+        sortie = os.path.join(RACINE, "soumission", "captures", "fr", dossier)
         os.makedirs(sortie, exist_ok=True)
         for brut, propre in ORDRE:
             src = os.path.join(S, "%s-%s.png" % (dossier, brut))

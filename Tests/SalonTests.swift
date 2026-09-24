@@ -159,4 +159,70 @@ struct SalonTests {
                 "une partie commencée ne doit plus accueillir")
         tard.arreter()
     }
+
+    /// Se retrouver le lendemain.
+    ///
+    /// Tout le jeu au loin sur plusieurs soirées tient à ceci : celui qui a
+    /// ouvert la partie doit pouvoir **rouvrir le même code**, et ceux qui y
+    /// étaient doivent pouvoir y rentrer, même une fois la partie commencée.
+    /// Rien de tout cela ne se voit d'un côté seulement — c'est l'accord entre
+    /// l'application et le serveur, et il ne s'éprouve que de bout en bout.
+    ///
+    /// Le local d'abord, le serveur déployé à défaut — comme l'essai
+    /// ci-dessus. S'il échoue contre le déployé, ce n'est pas le code qui a
+    /// tort : c'est que le serveur n'a pas été redéployé depuis qu'on a touché
+    /// à `src/index.js`. `cd serveur && npx wrangler deploy`.
+    @Test func onSeRetrouveLeLendemain() async throws {
+        guard let ou = await trouverLeServeur() else {
+            print("Riskelo — essai de la reprise sauté : aucun serveur joignable.")
+            return
+        }
+        print("Riskelo — essai de la reprise : on éprouve \(ou).")
+        let avant = Relais.serveur
+        Relais.serveur = ou
+        defer { Relais.serveur = avant }
+
+        let hote = Relais(moi: Pair(id: "essai-hier-\(UUID().uuidString)", nom: "Robert"))
+        let invite = Relais(moi: Pair(id: "essai-marie-\(UUID().uuidString)", nom: "Marie"))
+        defer { hote.arreter(); invite.arreter() }
+
+        // --- Le premier soir ---------------------------------------------
+        hote.ouvrir()
+        #expect(await jusqua { if case .ouvert = hote.etat { return true }; return false })
+        guard case let .ouvert(code) = hote.etat else { return }
+
+        invite.rejoindre(code: code)
+        #expect(await jusqua { invite.etat == .relie })
+        #expect(await jusqua { hote.relies.count == 1 })
+        // La partie part : la porte se ferme aux nouveaux, pas à eux deux.
+        hote.fermerLaTable()
+
+        // --- On se quitte -------------------------------------------------
+        hote.arreter()
+        invite.arreter()
+
+        // --- Le lendemain -------------------------------------------------
+        // L'hôte rouvre son salon sous le même code. Un code neuf ne servirait
+        // à rien : l'autre n'a que celui-là.
+        hote.reprendreLeSalon(code: code)
+        #expect(await jusqua { if case .ouvert = hote.etat { return true }; return false },
+                "l'hôte n'a pas retrouvé son salon")
+        guard case let .ouvert(retrouve) = hote.etat else { return }
+        #expect(retrouve == code, "le salon rendu n'est pas le sien : \(retrouve) au lieu de \(code)")
+
+        // Et l'invité y rentre, bien que la partie soit commencée : il y était.
+        invite.rejoindre(code: code)
+        #expect(await jusqua { invite.etat == .relie },
+                "celui qui y était doit pouvoir revenir, même après le lancement")
+        #expect(await jusqua { hote.relies.count == 1 })
+
+        // --- Le code d'un autre -------------------------------------------
+        // Un appareil qui prétendrait rouvrir ce salon-ci se fait renvoyer, et
+        // on le lui dit : sans quoi il atterrirait dans la partie d'un inconnu.
+        let usurpateur = Relais(moi: Pair(id: "essai-autre-\(UUID().uuidString)", nom: "Autre"))
+        usurpateur.reprendreLeSalon(code: code)
+        #expect(await jusqua { usurpateur.etat == .refuse(.salonRepris) },
+                "un salon ne se reprend que par celui qui l'a ouvert")
+        usurpateur.arreter()
+    }
 }

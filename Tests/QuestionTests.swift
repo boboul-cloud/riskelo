@@ -13,10 +13,17 @@ import Testing
 
 struct QuestionTests {
 
+    /// La langue des questions n'est pas un réglage de test, mais l'app la
+    /// garde d'une fois sur l'autre — et ces essais tirent des thèmes
+    /// français. Lancés après un passage de l'app en anglais, ils ne
+    /// trouvaient plus « histoire » et tombaient sur un dépliage de nil, ce
+    /// qui donnait l'air d'une régression là où il n'y avait qu'un réglage.
+    init() { Themes.langue = .fr }
+
     /// Le fichier remplace le compilateur : ce qu'il ne relit plus, ce test
     /// le relit. Et mieux — le compilateur n'a jamais su dire qu'un leurre
     /// était égal à la bonne réponse.
-    @Test(arguments: Themes.tous)
+    @Test(arguments: Themes.toutesLangues)
     func chaqueFichierSeLit(_ c: Category) {
         let lues = QuestionBank.questions(in: c)
         #expect(!lues.isEmpty, "\(c.label) : fichier absent ou vide")
@@ -258,7 +265,7 @@ struct QuestionTests {
     /// Deux fois la même question dans un thème, c'est une question de moins
     /// et un joueur qui croit à un bogue. À la main, sur un millier de lignes,
     /// cela arrive.
-    @Test(arguments: Themes.tous)
+    @Test(arguments: Themes.toutesLangues)
     func aucunEnonceNiReponseNEstRepeteDansUnTheme(_ c: Category) {
         let lues = QuestionBank.questions(in: c)
         let enonces = lues.map { $0.prompt.lowercased() }
@@ -273,7 +280,7 @@ struct QuestionTests {
     /// la main, j'ai laissé trois fois mes propres hésitations dans le texte —
     /// « Quel jeu se joue avec des dominos... plutôt : combien de faces a un
     /// dé ? ». Rien ne plante, et le joueur lit une phrase absurde.
-    @Test(arguments: Themes.tous)
+    @Test(arguments: Themes.toutesLangues)
     func chaqueEnonceEstUneSeuleQuestion(_ c: Category) {
         for q in QuestionBank.questions(in: c) {
             #expect(q.prompt.filter { $0 == "?" }.count == 1,
@@ -286,7 +293,7 @@ struct QuestionTests {
 
     /// Une question qui ne tient pas dans la feuille se fait tronquer, et la
     /// réponse devient une devinette.
-    @Test(arguments: Themes.tous)
+    @Test(arguments: Themes.toutesLangues)
     func rienNEstTropLong(_ c: Category) {
         for q in QuestionBank.questions(in: c) {
             #expect(q.prompt.count <= 110, "trop long : \(q.prompt)")
@@ -314,7 +321,7 @@ struct QuestionTests {
 
     /// Chaque catégorie doit tenir un assaut long sans se répéter.
     @Test func chaqueCategorieEstFournie() {
-        for c in Themes.tous {
+        for c in Themes.toutesLangues {
             #expect(QuestionBank().count(in: c) >= 8, "\(c.label) est trop maigre")
         }
     }
@@ -541,8 +548,165 @@ struct QuestionTests {
     /// cinquante à cent soixante questions, et un thème peut en brûler
     /// vingt-cinq dans une seule.
     @Test func laBanqueTientPlusieursSoirees() {
-        for c in Themes.tous {
+        for c in Themes.toutesLangues {
             #expect(QuestionBank().count(in: c) >= 30, "\(c.label) s'épuiserait trop vite")
+        }
+    }
+}
+
+// MARK: - Le mode d'emploi, dans les deux langues
+
+struct ManuelTests {
+
+    /// Les deux manuels sont deux textes, pas une traduction — mais ils
+    /// décrivent le même jeu, donc ils ont les mêmes chapitres.
+    ///
+    /// C'est l'invariant qui compte : un chapitre ajouté d'un côté et oublié
+    /// de l'autre laisserait la moitié des joueurs sans la page qui explique
+    /// une règle. Le compilateur ne peut pas le voir ; ce test, si.
+    @Test func lesDeuxManuelsCouvrentLesMemesChapitres() {
+        let fr = Manuel.chapitres(.fr).map(\.id)
+        let en = Manuel.chapitres(.en).map(\.id)
+        #expect(fr == en, "les chapitres ne se correspondent plus : \(fr) contre \(en)")
+        #expect(fr.count == 15)
+    }
+
+    /// Chaque chapitre dit quelque chose, dans les deux langues.
+    @Test func aucunChapitreNEstVide() {
+        for langue in Langue.allCases {
+            for c in Manuel.chapitres(langue) {
+                #expect(!c.titre.isEmpty, "\(langue) — \(c.id) sans titre")
+                #expect(!c.resume.isEmpty, "\(langue) — \(c.id) sans résumé")
+                #expect(!c.blocs.isEmpty, "\(langue) — \(c.id) sans contenu")
+            }
+        }
+    }
+
+    /// Les deux textes sont bien deux textes. Sans cela, un manuel anglais
+    /// resté français passerait tous les autres contrôles.
+    @Test func lesTitresDifferentDUneLangueALAutre() {
+        let fr = Manuel.chapitres(.fr).map(\.titre)
+        let en = Manuel.chapitres(.en).map(\.titre)
+        #expect(Set(fr).isDisjoint(with: Set(en)),
+                "un titre est identique dans les deux manuels")
+    }
+}
+
+// MARK: - Les articles, les deux langues réunies
+
+struct ArticlesTests {
+
+    /// Trente-quatre packs, trente-quatre identifiants distincts.
+    ///
+    /// Deux familles cohabitent désormais sous un même bundle, et un
+    /// identifiant partagé par deux packs en ouvrirait un pour l'achat de
+    /// l'autre. Le compte par langue ne l'aurait pas vu : il faut les
+    /// regarder ensemble.
+    @Test func chaquePackAUnArticleAlui() {
+        let vendus = Themes.toutesLangues.compactMap { Themes.connu($0)?.produit }
+        #expect(vendus.count == 34, "trente-quatre packs attendus, \(vendus.count) trouvés")
+        #expect(Set(vendus).count == vendus.count, "deux packs partagent un article")
+        #expect(vendus.allSatisfy { $0.hasPrefix("com.oulhen.riskelo.pack.") })
+    }
+
+    /// Les packs anglais se reconnaissent à leur famille, et eux seuls.
+    @Test func lesDeuxFamillesNeSeMelangentPas() {
+        for c in Themes.toutesLangues {
+            guard let t = Themes.connu(c), let article = t.produit else { continue }
+            #expect(article.contains(".pack.us.") == (t.langue == .en),
+                    "\(c.id) : article \(article) pour la langue \(t.langue)")
+        }
+    }
+}
+
+// MARK: - La table mixte
+
+struct TableMixteTests {
+
+    /// Les thèmes nommés par l'hôte sont retenus, de quelque banque qu'ils
+    /// viennent.
+    ///
+    /// C'est ce qui rend possible une table entre un appareil français et un
+    /// américain : les deux banques sont sur tous les appareils, l'hôte
+    /// décide, et l'invité doit savoir lire ce qu'on lui envoie. Filtré par la
+    /// langue locale, l'invité serait retombé sur ses propres thèmes et aurait
+    /// tiré d'autres questions que l'hôte, sans que rien ne le dise.
+    @Test func lesThemesDeLHoteSontRetenusQuelleQueSoitLeurLangue() {
+        var r = Rules()
+        r.themes = ["histoire", "history"]
+        let g = GameState.start(board: .anneau,
+                                players: [Player(id: 0, name: "A", kind: .humain),
+                                          Player(id: 1, name: "B", kind: .humain)],
+                                rules: r, seed: 3)
+        #expect(g.themesEnJeu.map(\.id).sorted() == ["histoire", "history"],
+                "un thème de l'autre banque a été écarté : \(g.themesEnJeu.map(\.id))")
+    }
+
+    /// Et le tirage sort bien des deux, sans jamais quitter ce qui est en jeu.
+    @Test func leTirageSertLesDeuxBanques() {
+        var r = Rules()
+        r.themes = ["histoire", "history"]
+        var g = GameState.start(board: .anneau,
+                                players: [Player(id: 0, name: "A", kind: .humain),
+                                          Player(id: 1, name: "B", kind: .humain)],
+                                rules: r, seed: 5)
+        var rng = SeededRandom(seed: 5)
+        var vus: Set<String> = []
+        for _ in 0 ..< 120 {
+            guard let q = g.bank.draw(category: nil, parmi: g.themesEnJeu,
+                                      difficulty: nil, using: &rng) else { break }
+            vus.insert(q.question.category.id)
+        }
+        #expect(vus == ["histoire", "history"], "banques servies : \(vus.sorted())")
+    }
+}
+
+/// Le journal de la partie, dans la langue de l'app.
+///
+/// Il est écrit par le moteur, hors de toute vue, et il a longtemps été écrit
+/// en français quelle que soit la langue choisie : un joueur américain lisait
+/// « Tour 1 — à Blue de jouer » sous une interface entière en anglais. Ces
+/// essais tiennent la promesse dans les deux sens — et le français, qui n'a
+/// pas de table à lui, doit rendre la phrase telle qu'elle est écrite.
+@Suite(.serialized) struct JournalTests {
+
+    private func dansLaLangue<T>(_ langue: Langue, _ corps: () -> T) -> T {
+        let avant = Themes.langue
+        Themes.langue = langue
+        defer { Themes.langue = avant }
+        return corps()
+    }
+
+    private func partie() -> GameState {
+        GameState.start(players: [Player(id: 0, name: "Alex"), Player(id: 1, name: "Bo")],
+                        seed: 7)
+    }
+
+    @Test func leJournalSuitLaLangueChoisie() {
+        #expect(dansLaLangue(.fr) { partie().journal.first?.text } == "Tour 1 — à Alex de jouer.")
+        #expect(dansLaLangue(.en) { partie().journal.first?.text } == "Turn 1 — Alex to play.")
+    }
+
+    @Test func leRecitDuDuelSuitLaLangueChoisie() {
+        // Le thème doit être de la langue en cours : la banque ne tire que
+        // dans les thèmes en jeu, et « geographie » n'existe pas côté anglais.
+        for (langue, theme, attendu) in [(Langue.fr, "geographie", "homme"),
+                                         (Langue.en, "geography", "troop")] {
+            let recits: [String] = dansLaLangue(langue) {
+                var g = partie()
+                g.debugSkipToAttack()
+                guard let (base, cible) = g.debugFirstAssault(minArmies: 3, targetArmies: 2)
+                else { return [] }
+                g.declareAssault(from: base, to: cible, questions: 1,
+                                 category: Riskelo.Category(theme))
+                guard let posee = g.assault?.current else { return [] }
+                let mauvaise = (posee.question.answer + 1) % 4
+                g.answer(.chosen(mauvaise, elapsed: 3))
+                return g.journal.filter { $0.kind == .duel }.map(\.text)
+            }
+            #expect(!recits.isEmpty, "aucun récit de duel")
+            #expect(recits.contains { $0.contains(attendu) },
+                    "le récit ne parle pas la bonne langue : \(recits)")
         }
     }
 }

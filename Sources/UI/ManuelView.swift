@@ -84,9 +84,11 @@ struct ManuelView: View {
                     Text("Riskelo")
                         .font(.system(size: 30, weight: .bold, design: .rounded))
                         .foregroundStyle(Palette.ink)
-                    Text("Un jeu de conquête où le lancer de dés est remplacé par une "
-                         + "question de culture générale. Tout ce que fait l'application "
-                         + "est écrit ici.")
+                    Text("""
+                         Un jeu de conquête où le lancer de dés est remplacé par une \
+                         question de culture générale. Tout ce que fait l'application \
+                         est écrit ici.
+                         """)
                         .font(.footnote).foregroundStyle(Palette.dim)
                         .fixedSize(horizontal: false, vertical: true)
                 }
@@ -352,6 +354,20 @@ enum Manuel {
     /// écrite à la main mentirait au premier continent qui change de taille.
     /// Les cartes d'élimination sont laissées de côté : elles se disent en une
     /// phrase, et il y en a une par camp.
+    /// Le seuil de victoire, plateau par plateau. Calculé et non recopié : un
+    /// plateau ajouté entre de lui-même dans le tableau, avec ses vrais
+    /// chiffres — c'est ce qui manquait quand le quatrième est arrivé.
+    static var lignesDeVictoire: [[String]] {
+        let regles = Rules()
+        return Boards.allCases.map { plateau in
+            let total = plateau.board.map.order.count
+            return ["\(plateau.label) — \(total) territoires"]
+                + [2, 3, 4].map {
+                    "\(regles.dominationThreshold(territories: total, playerCount: $0))"
+                }
+        }
+    }
+
     static func conquetes(_ plateau: Boards) -> [String] {
         Objectif.paquet(pour: plateau.board, joueurs: 2).map { $0.texte(plateau.board) }
     }
@@ -392,8 +408,23 @@ enum Manuel {
         return chapitres[i + 1]
     }
 
-    static let chapitres: [Chapitre] = [
-        premierePartie, duel, faceAFace, tour, victoire, miseEnPlace, ecran,
+    /// Les chapitres, dans la langue en cours.
+    ///
+    /// Deux textes, pas une traduction : l'anglais a été écrit pour son
+    /// lecteur, avec ses exemples et ses tournures. Le français reste le
+    /// fichier d'origine, intact — il est lu par des joueurs depuis la 1.0, et
+    /// une refonte de forme n'avait aucune raison de le réécrire.
+    static var chapitres: [Chapitre] { chapitres(Themes.langue) }
+
+    /// La même chose, sans lire de réglage : les tests comparent les deux
+    /// manuels sans avoir à déplacer une préférence globale sous les pieds
+    /// des autres tests.
+    static func chapitres(_ langue: Langue) -> [Chapitre] {
+        langue == .en ? ManuelEN.chapitres : chapitresFR
+    }
+
+    static let chapitresFR: [Chapitre] = [
+        premierePartie, duel, faceAFace, desSeuls, tour, victoire, miseEnPlace, ecran,
         cartes, dossier, memoire, reseau, banque, conseils, mentions,
     ]
 
@@ -405,8 +436,9 @@ enum Manuel {
         icone: "bolt.fill", teinte: Palette.camp(0),
         blocs: [
             .p("Riskelo est un jeu de conquête : des territoires, des hommes, "
-               + "et un adversaire à déloger. Il n'y a pas de dés. Quand vous "
-               + "attaquez, une question de culture générale décide de l'issue."),
+               + "et un adversaire à déloger. Quand vous attaquez, une question de "
+               + "culture générale décide de l'issue — elle tient la place du dé. "
+               + "Qui préfère le dé peut le reprendre : c'est le troisième mode."),
             .h("Le premier tour"),
             .puces([
                 "Touchez « Partie rapide » : deux joueurs, le plateau de l'Anneau, une "
@@ -531,6 +563,84 @@ enum Manuel {
 
     // MARK: 4
 
+    private static let desSeuls = Chapitre(
+        id: "des", titre: "Les dés",
+        resume: "Le troisième mode : plus de question du tout, un dé contre un dé.",
+        icone: "dice.fill", teinte: Palette.camp(3),
+        blocs: [
+            .p("Les deux premiers modes remplacent le dé par une question. Celui-ci "
+               + "fait le chemin inverse : il n'y a plus de question du tout, et l'on "
+               + "joue la règle du jeu de plateau telle quelle. On déclare l'assaut, "
+               + "le défenseur choisit ses dés, et tout est réglé d'un jet."),
+            .h("Le lancer"),
+            .p("L'assaillant annonce un, deux ou trois dés — il lui faut un homme de "
+               + "plus par dé, car on n'attaque jamais avec sa garnison. Le défenseur "
+               + "répond par un dé ou deux, à son choix, une fois l'annonce faite et "
+               + "avant que rien ne tombe — sur un même appareil, au loin, et contre la "
+               + "machine. La machine, elle, oppose toujours deux dés ; et une place "
+               + "tenue par un seul homme n'en a qu'un."),
+            .p("Les deux mains se trient du plus fort au plus faible et se comparent "
+               + "paire par paire : le meilleur contre le meilleur, puis le suivant "
+               + "contre le suivant. Le troisième dé de l'assaillant n'affronte "
+               + "personne — il rend seulement les deux autres meilleurs."),
+            .tableau(["Sur une paire", "Ce qu'il advient"],
+                     [["Le dé de l'assaut est le plus fort", "La place perd un homme"],
+                      ["Celui de la défense est le plus fort", "L'assaillant laisse un homme"],
+                      ["Les deux sont égaux", "L'égalité va au défenseur"]]),
+            .p("L'égalité au défenseur est la pièce maîtresse : il faut faire mieux que "
+               + "lui, pas aussi bien. Un même jet peut donc coûter un homme à chacun — "
+               + "c'est la seule chose qu'aucun des deux autres modes ne sait faire, "
+               + "une question n'ayant jamais qu'un perdant."),
+            .note("À trois dés contre deux, l'assaillant perd 0,92 homme quand le "
+                  + "défenseur en perd 1,08 : l'attaque paye, là où la question la "
+                  + "décourage. Lancez toujours tout ce que vous pouvez — le défenseur "
+                  + "n'oppose jamais plus de deux dés."),
+            .h("Un dé ou deux"),
+            .p("Deux dés font plus mal à l'assaillant, mais peuvent vous coûter deux "
+               + "hommes d'un coup — 37 fois sur 100 contre trois dés. Un seul ne vous "
+               + "en coûte jamais plus d'un. C'est la prudence contre le rendement :"),
+            .tableau(["Contre trois dés", "Vous perdez", "L'assaillant perd"],
+                     [["Deux dés", "1,08 homme", "0,92 homme"],
+                      ["Un dé", "0,66 homme", "0,34 homme"]]),
+            .p("Deux dés restent le meilleur rendement : l'assaillant paie plus cher "
+               + "chaque homme qu'il vous prend. Un seul dé sert quand la place doit "
+               + "tenir ce tour-ci : une garnison de deux hommes ne tombe pas sur un "
+               + "seul jet. Face à un seul dé d'assaut, une seule paire se compare, et "
+               + "le second dé ne vous fait courir aucun risque de plus."),
+            .note("La partie garde pourtant sa forme. Mesuré sur des parties à trois "
+                  + "menées par la machine : huit tours aux dés, sept en classique, huit "
+                  + "en face à face. Ce qui change est le nombre d'échanges — 66 au lieu "
+                  + "de 116 — puisqu'un jet prend jusqu'à deux hommes là où une question "
+                  + "n'en prend qu'un. Autant de tours, moitié moins d'écrans."),
+            .h("Ce qui disparaît"),
+            .p("Il n'y a plus de terrain à choisir avant l'assaut, plus de sablier, "
+               + "plus de relance, et plus de dossier de culture à consulter : il n'y "
+               + "a rien à savoir sur personne. La mise en place retire d'elle-même le "
+               + "dosage des questions, le renfort d'érudition et la culture de la "
+               + "machine, qui ne portent plus sur rien : contre elle, seule sa "
+               + "stratégie compte."),
+            .h("Ce qui ne bouge pas"),
+            .p("Tout le reste : les renforts, les continents, les cartes de territoire, "
+               + "les conquêtes personnelles, le déplacement de fin de tour, le seuil "
+               + "de victoire. Et la garnison qui avance dans une place prise ne peut "
+               + "être inférieure au nombre de dés lancés, comme au jeu de plateau."),
+            .h("À qui il sert"),
+            .puces([
+                "Aux soirs où l'on ne veut pas réfléchir.",
+                "Aux joueurs trop jeunes pour les questions — la carte, les renforts et "
+                + "les continents suffisent à faire une partie.",
+                "À qui veut voir d'où vient le reste : jouez-en une aux dés, puis la "
+                + "même en classique, et la variante s'explique d'elle-même.",
+            ]),
+            .note("En réseau, les dés tombent des deux côtés sans que rien ne circule "
+                  + "que l'annonce et le choix du défenseur : les deux appareils tirent "
+                  + "la même suite depuis la même graine. "
+                  + "C'est le même mécanisme qui permet de reprendre une partie là où "
+                  + "on l'a laissée."),
+        ])
+
+    // MARK: 5
+
     private static let tour = Chapitre(
         id: "tour", titre: "Le tour",
         resume: "Renforts, attaques, un déplacement — puis le tour passe.",
@@ -564,7 +674,7 @@ enum Manuel {
             ]),
         ])
 
-    // MARK: 5
+    // MARK: 6
 
     private static let victoire = Chapitre(
         id: "victoire", titre: "Gagner la partie",
@@ -574,10 +684,7 @@ enum Manuel {
             .p("La victoire ne demande pas de tout prendre : il faut tenir sa part de "
                + "départ, plus sept territoires. C'est un écart, et non une part fixe "
                + "du monde — un joueur sur quatre part de 25 % et non de 50 %."),
-            .tableau(["Plateau", "À 2", "À 3", "À 4"],
-                     [["L'Anneau — 28 territoires", "21", "17", "14"],
-                      ["Europe — 38 territoires", "26", "20", "17"],
-                      ["Monde — 42 territoires", "28", "21", "18"]]),
+            .tableau(["Plateau", "À 2", "À 3", "À 4"], Manuel.lignesDeVictoire),
             .p("La barre du haut porte ce compte en permanence : vos territoires sur le "
                + "seuil à franchir. Les conquêtes personnelles, plus bas, retirent ce "
                + "seuil : la barre montre alors le plateau entier."),
@@ -605,6 +712,8 @@ enum Manuel {
             .h("Sur l'Europe"),
             .puces(Manuel.conquetes(.europe)),
             .h("Sur le Monde"),
+            .p("Les deux Mondes portent les mêmes six terres : ces cartes valent pour "
+               + "l'un comme pour l'autre."),
             .puces(Manuel.conquetes(.monde)),
             .p("À trois joueurs et plus s'ajoute une carte par camp : « faire "
                + "disparaître le camp de Rouge », de Vert, d'Ambre ou de Violet — et "
@@ -637,7 +746,7 @@ enum Manuel {
                + "deux voisins au lieu d'un."),
         ])
 
-    // MARK: 6
+    // MARK: 7
 
     private static let miseEnPlace = Chapitre(
         id: "reglages", titre: "La mise en place",
@@ -655,7 +764,10 @@ enum Manuel {
                 ("L'Anneau", "Un monde inventé, cinq terres en cercle. 28 territoires. "
                  + "Le plus court."),
                 ("Europe", "De l'Atlantique à la mer Noire. 38 territoires, six régions."),
-                ("Monde", "Les six continents, 42 territoires — comme la boîte."),
+                ("Monde", "Les six continents en hexagones. 42 territoires, trois "
+                 + "traversées — l'Asie y tient en onze cases."),
+                ("Monde réel", "La même carte, tracée d'après les côtes réelles. "
+                 + "42 territoires, vingt traversées, et le Kamtchatka à sa distance."),
             ]),
             .h("Joueurs, et humains sur cet appareil"),
             .p("De deux à quatre joueurs. Le second réglage dit combien sont assis "
@@ -730,7 +842,7 @@ enum Manuel {
             ]),
         ])
 
-    // MARK: 7
+    // MARK: 8
 
     private static let ecran = Chapitre(
         id: "ecran", titre: "L'écran de jeu",
@@ -803,7 +915,7 @@ enum Manuel {
                + "répondu."),
         ])
 
-    // MARK: 8
+    // MARK: 9
 
     private static let cartes = Chapitre(
         id: "cartes", titre: "Les cartes de territoire",
@@ -838,7 +950,7 @@ enum Manuel {
                + "questions, et la culture pèse un peu plus."),
         ])
 
-    // MARK: 9
+    // MARK: 10
 
     private static let dossier = Chapitre(
         id: "dossier", titre: "Le dossier et le journal",
@@ -868,7 +980,7 @@ enum Manuel {
                + "tous."),
         ])
 
-    // MARK: 10
+    // MARK: 11
 
     private static let memoire = Chapitre(
         id: "memoire", titre: "Reprendre, marquer, revenir",
@@ -881,6 +993,14 @@ enum Manuel {
                + "cours » apparaît alors sur l'écran d'accueil. Un duel en attente "
                + "repasse par « je suis prêt » — le sablier ne court pas pendant que "
                + "vous rallumez l'appareil."),
+            .p("Une partie jouée au loin se garde de son côté, dans son propre tiroir : "
+               + "ouvrir une partie ici ne la remplace pas, et elle ne remplace pas "
+               + "celle-ci. Elle ne se reprend pas par ce bouton mais depuis « Jouer à "
+               + "plusieurs », puisqu'il faut que l'autre vienne aussi."),
+            .note("Une partie jouée dans la même pièce, ou par Game Center, ne se garde "
+                  + "pas ainsi : ni l'une ni l'autre n'a de quoi se retrouver. La "
+                  + "rendre sans son fil mettrait les deux camps sur un seul appareil, "
+                  + "chacun jouant l'autre."),
             .h("La bibliothèque"),
             .p("La sauvegarde ci-dessus ne garde qu'un état, le dernier, et l'écrase à "
                + "chaque coup : c'est ce qu'il faut pour reprendre, et exactement ce "
@@ -904,7 +1024,7 @@ enum Manuel {
                   + "partie de travers."),
         ])
 
-    // MARK: 11
+    // MARK: 12
 
     private static let reseau = Chapitre(
         id: "reseau", titre: "Jouer à plusieurs",
@@ -953,6 +1073,27 @@ enum Manuel {
                   + "dès que la liaison revient. Elle attend deux minutes — gardez "
                   + "l'écran allumé."),
 
+            .h("Reprendre une autre fois"),
+            .p("Une partie au loin ne doit pas tenir dans une soirée. On s'arrête où "
+               + "l'on veut, et on la retrouve là où on l'avait ouverte : « Jouer à "
+               + "plusieurs », puis « Au loin, avec un code ». Elles attendent en haut "
+               + "de cette page — contre qui, quel tour, et depuis quand."),
+            .note("Vous pouvez en avoir plusieurs à la fois : une avec votre sœur, une "
+                  + "avec un ami, chacune à son rythme. Ouvrir une partie neuve "
+                  + "n'efface pas les autres, et chacune garde son code. La croix "
+                  + "abandonne une partie dont on ne veut plus."),
+            .puces([
+                "Celui qui a ouvert la partie revient le premier : c'est son appareil "
+                + "qui la tient, et lui seul retrouve le code.",
+                "L'autre touche « Reprendre cette partie » de son côté, ou retape les "
+                + "six lettres. Le code n'a pas changé.",
+                "Quand tout le monde est revenu, « Reprendre la partie » repart au tour "
+                + "où l'on en était.",
+            ]),
+            .note("Le code reste bon une semaine après la dernière séance. Il faut être "
+                  + "là tous les deux en même temps : une question se répond sablier en "
+                  + "main, ce n'est pas une partie par correspondance."),
+
             .h("Par Game Center"),
             .p("Le service de jeu d'Apple : vos amis Game Center, ou un adversaire au "
                + "hasard. Il demande d'y être connecté, et une partie qui s'y coupe ne "
@@ -966,9 +1107,11 @@ enum Manuel {
                  + "sont proches."),
                 ("Rien ne se passe malgré tout", "Inversez les rôles : que celui qui "
                  + "cherchait ouvre la table. Une liaison peut ne passer que dans un sens."),
-                ("Ce code ne mène à rien", "Un code vit le temps d'une partie, et "
-                 + "s'efface deux minutes après le départ du dernier joueur. Vérifiez "
-                 + "les six lettres, ou demandez-en un nouveau."),
+                ("Ce code ne mène à rien", "Un code vaut une semaine après la dernière "
+                 + "séance, puis il s'efface. Si vous repreniez une partie, c'est "
+                 + "peut-être que celui qui l'a ouverte n'est pas encore revenu : "
+                 + "c'est à lui de rouvrir le salon, touchez « Réessayer » quand il "
+                 + "sera là."),
                 ("La partie a déjà commencé", "On ne se glisse pas dans une partie en "
                  + "cours. Mais celui qui en était et qui a été coupé, lui, est "
                  + "toujours attendu."),
@@ -982,7 +1125,7 @@ enum Manuel {
             ]),
         ])
 
-    // MARK: 12
+    // MARK: 13
 
     private static let banque = Chapitre(
         id: "questions", titre: "Les questions",
@@ -1011,7 +1154,7 @@ enum Manuel {
                   + "corrigée dans la version suivante."),
         ])
 
-    // MARK: 13
+    // MARK: 14
 
     private static let conseils = Chapitre(
         id: "conseils", titre: "Conseils",
@@ -1039,7 +1182,7 @@ enum Manuel {
             ]),
         ])
 
-    // MARK: 14
+    // MARK: 15
 
     private static let mentions = Chapitre(
         id: "mentions", titre: "Confidentialité et contact",

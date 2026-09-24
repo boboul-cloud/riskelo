@@ -78,12 +78,36 @@ struct PacksView: View {
     @State private var choisis = Packs.choisis
     @State private var avecBase = Packs.avecBase
 
+    /// La langue des questions, et de tout le reste avec elles.
+    ///
+    /// Elle est ici plutôt que dans les réglages de la partie : une partie se
+    /// règle au coup par coup, une langue se choisit une fois. Et c'est sur
+    /// cet écran qu'on vient voir ce qu'il y a à jouer — le moment où la
+    /// question se pose.
+    ///
+    /// iOS offre déjà le même choix dans ses Réglages, app par app. Personne
+    /// ne l'y cherche.
+    @AppStorage("langue-des-questions") private var langue = Langue.deLAppareil.rawValue
+
+    @ViewBuilder private var choixDeLangue: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Picker("Langue", selection: $langue) {
+                Text("Français").tag(Langue.fr.rawValue)
+                Text("English").tag(Langue.en.rawValue)
+            }
+            .pickerStyle(.segmented)
+            Text("Les questions, les menus et le mode d'emploi suivent ensemble.")
+                .font(.caption2).foregroundStyle(Palette.dim)
+        }
+    }
+
     var body: some View {
         VStack(spacing: 0) {
             entete
             ScrollView {
                 VStack(alignment: .leading, spacing: 18) {
                     presentation
+                    choixDeLangue
                     jeuDeBase
                     ForEach(Themes.packs) { pack in ligne(pack) }
                     restauration
@@ -121,10 +145,16 @@ struct PacksView: View {
     }
 
     private var presentation: some View {
-        Text("Un pack est un jeu de questions qui s'ajoute au vôtre. Cochez ceux "
-             + "que vous voulez jouer — un seul, ou plusieurs mêlés. Le choix vaut "
-             + "pour toutes vos parties, et c'est celui qui ouvre la table qui "
-             + "décide pour tout le monde.")
+        // Une seule chaîne, coupée par des « \ » et non par des « + » : une
+        // phrase assemblée à coups de plus n'est plus un libellé aux yeux du
+        // compilateur, elle n'entre jamais dans le catalogue de langues, et
+        // elle reste en français sur un appareil anglais.
+        Text("""
+             Un pack est un jeu de questions qui s'ajoute au vôtre. Cochez ceux \
+             que vous voulez jouer — un seul, ou plusieurs mêlés. Le choix vaut \
+             pour toutes vos parties, et c'est celui qui ouvre la table qui \
+             décide pour tout le monde.
+             """)
             .font(.caption).foregroundStyle(Palette.dim)
     }
 
@@ -231,16 +261,20 @@ struct PacksView: View {
             Button("Restaurer mes achats") { Task { await boutique.restaurer() } }
                 .buttonStyle(.bordered).tint(Palette.dim)
                 .font(.subheadline)
-            Text("Un pack acheté vous suit sur vos appareils. Celui qui rejoint votre "
-                 + "table joue vos packs sans avoir à les acheter.")
+            Text("""
+                 Un pack acheté vous suit sur vos appareils. Celui qui rejoint votre \
+                 table joue vos packs sans avoir à les acheter.
+                 """)
                 .font(.caption2).foregroundStyle(Palette.dim)
         }
     }
 
     private var resume: some View {
         let enJeu = Themes.tous.filter { Packs.enJeu.contains($0.id) }
-        return Text("\(enJeu.count) thème\(enJeu.count > 1 ? "s" : "") en jeu — "
-                    + "\(compte(enJeu)) questions.")
+        return Text("""
+                    \(enJeu.count) thème\(enJeu.count > 1 ? "s" : "") en jeu — \
+                    \(compte(enJeu)) questions.
+                    """)
             .font(.caption.weight(.medium)).foregroundStyle(Palette.ink)
             .frame(maxWidth: .infinity, alignment: .leading)
     }

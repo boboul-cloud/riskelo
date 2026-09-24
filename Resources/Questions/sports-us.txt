@@ -1,0 +1,491 @@
+# Sports & Games — one question per line.
+#
+# level | prompt ? | correct answer | decoy | decoy | decoy
+# E easy · M medium · H hard
+#
+# Choices are shuffled at draw time: their order here means nothing.
+# A decoy must be wrong but plausible — an absurd decoy does not make
+# a question, it makes a question with three choices.
+#
+# Football, baseball, basketball and hockey first, the rest of the world
+# after, and board and card games at the end.
+#
+# No current champions and no standing records. A deck that names whoever
+# leads today is a deck that is wrong by next season, and nobody will write
+# in to say so — they will simply stop trusting it. Rules, firsts and
+# settled history only.
+
+# What this theme declares — readable name, icon, color, and its
+# place in the grid. These lines are not comments: without
+# them the theme has no name.
+
+! id      | sports-us
+! lang    | en
+! name    | Sports & Games
+! icon    | figure.run
+! tint    | 0.88 0.52 0.24
+! rank    | 4
+
+
+# --- Football ---
+
+E | How many players from one team are on the field in football? | Eleven | Ten | Twelve | Nine
+E | How many points is a touchdown worth? | Six | Seven | Three | Five
+E | How many points is a field goal worth? | Three | Six | One | Two
+E | How long is a football field between the goal lines? | 100 yards | 120 yards | 90 yards | 110 yards
+E | How many downs does an offense get to gain ten yards? | Four | Three | Five | Two
+E | What is the championship game of the NFL called? | The Super Bowl | The World Series | The Stanley Cup | The Final Four
+M | How many points is a safety worth? | Two | One | Three | Six
+M | Which team won the first Super Bowl, in 1967? | The Green Bay Packers | The Kansas City Chiefs | The New York Jets | The Baltimore Colts
+M | Which trophy goes to the Super Bowl winner? | The Vince Lombardi Trophy | The Halas Trophy | The Heisman Trophy | The Commissioner's Cup
+M | Which award honors the best player in college football? | The Heisman Trophy | The Maxwell Award | The Outland Trophy | The Lombardi Award
+M | How many yards deep is each end zone? | Ten | Five | Fifteen | Twenty
+M | How long is each quarter in an NFL game? | Fifteen minutes | Twelve minutes | Twenty minutes | Ten minutes
+M | What is the position that throws the ball called? | Quarterback | Running back | Tight end | Center
+M | Which line does the ball have to cross for a touchdown? | The goal line | The line of scrimmage | The ten-yard line | The sideline
+M | Which conference and which other make up the NFL? | The AFC and the NFC | The AFL and the NFL | The East and the West | The National and the American
+M | How many points does a successful kick after a touchdown add? | One | Two | Three | Six
+H | Which two leagues merged to form the modern NFL in 1970? | The NFL and the AFL | The NFL and the AAFC | The AFL and the CFL | The NFL and the USFL
+H | Which team plays its home games at Lambeau Field? | The Green Bay Packers | The Chicago Bears | The Minnesota Vikings | The Detroit Lions
+H | Which college football game is played in Pasadena on New Year's Day? | The Rose Bowl | The Sugar Bowl | The Orange Bowl | The Cotton Bowl
+H | Which coach has the Super Bowl trophy named after him? | Vince Lombardi | George Halas | Paul Brown | Tom Landry
+H | Which quarterback led the Jets to a famous upset in Super Bowl III? | Joe Namath | Johnny Unitas | Bart Starr | Len Dawson
+H | Which running back gained the most yards in a single NFL season in 1984? | Eric Dickerson | Walter Payton | O. J. Simpson | Barry Sanders
+H | Which team was the first to complete an undefeated NFL season and win it all? | The 1972 Miami Dolphins | The 1985 Chicago Bears | The 2007 New England Patriots | The 1962 Green Bay Packers
+H | How many officials normally work an NFL game? | Seven | Five | Nine | Four
+H | Which service academies meet in a famous December football game? | Army and Navy | Army and Air Force | Navy and Coast Guard | Air Force and Navy
+
+# --- Baseball ---
+
+E | How many innings are in a regulation baseball game? | Nine | Seven | Six | Eleven
+E | How many strikes make an out? | Three | Two | Four | Five
+E | How many balls make a walk? | Four | Three | Five | Six
+E | How many players from one team take the field on defense? | Nine | Ten | Eight | Eleven
+E | What is the championship series of Major League Baseball called? | The World Series | The Super Bowl | The Fall Classic Cup | The Commissioner's Series
+E | How many bases must a runner touch to score? | Four | Three | Five | Two
+M | How far apart are the bases on a major league diamond? | Ninety feet | Eighty feet | One hundred feet | Sixty feet
+M | How far is the pitcher's rubber from home plate? | Sixty feet six inches | Sixty feet | Fifty feet | Sixty-six feet
+M | Which award honors the best pitcher in each league? | The Cy Young Award | The Silver Slugger | The Gold Glove | The Hank Aaron Award
+M | Who broke Major League Baseball's color barrier in 1947? | Jackie Robinson | Larry Doby | Satchel Paige | Roy Campanella
+M | For which team did Jackie Robinson first play in the majors? | The Brooklyn Dodgers | The New York Giants | The Cleveland Indians | The Boston Braves
+M | Which slugger was nicknamed the Sultan of Swat? | Babe Ruth | Lou Gehrig | Hank Aaron | Ty Cobb
+M | Which ballpark is home to the Green Monster? | Fenway Park | Wrigley Field | Yankee Stadium | Camden Yards
+M | Which Chicago ballpark is famous for its ivy-covered outfield walls? | Wrigley Field | Comiskey Park | Guaranteed Rate Field | Soldier Field
+M | What is it called when a batter hits the ball out of play in fair territory and circles the bases? | A home run | A triple | A ground-rule double | An inside hit
+M | How many outs end a half-inning? | Three | Two | Four | One
+H | Which player was nicknamed the Iron Horse and played 2,130 straight games? | Lou Gehrig | Cal Ripken Jr. | Joe DiMaggio | Ty Cobb
+H | Which player broke Gehrig's consecutive games streak in 1995? | Cal Ripken Jr. | Pete Rose | Steve Garvey | Miguel Tejada
+H | Which player hit safely in fifty-six straight games in 1941? | Joe DiMaggio | Ted Williams | Pete Rose | Willie Keeler
+H | Which player was the last to bat over .400 in a season, in 1941? | Ted Williams | Joe DiMaggio | Rogers Hornsby | Stan Musial
+H | Which pitcher struck out the most batters in a career, retiring in 1993? | Nolan Ryan | Walter Johnson | Steve Carlton | Randy Johnson
+H | Which town holds the National Baseball Hall of Fame? | Cooperstown | Springfield | Canton | Saratoga
+H | What do we call a pitch that no batter reaches base on all game? | A perfect game | A no-hitter | A shutout | A complete game
+H | What do we call a game in which the pitcher allows no hits? | A no-hitter | A perfect game | A shutout | A quality start
+H | Which leagues did Black players form before integration? | The Negro Leagues | The Continental League | The Federal League | The Players League
+H | Which player hit 714 home runs and pitched for the Red Sox first? | Babe Ruth | Lou Gehrig | Jimmie Foxx | Mel Ott
+
+# --- Basketball ---
+
+E | How many players from one team are on the court in basketball? | Five | Six | Four | Seven
+E | How high is a basketball hoop from the floor? | Ten feet | Nine feet | Twelve feet | Eight feet
+E | How many points is a basket from beyond the arc worth? | Three | Two | Four | One
+E | How many points is a free throw worth? | One | Two | Three | Half a point
+E | What is the championship round of the NBA called? | The NBA Finals | The World Series | The Super Bowl | The Stanley Cup
+M | How long is each quarter in an NBA game? | Twelve minutes | Ten minutes | Fifteen minutes | Eight minutes
+M | How long does a team have to attempt a shot in the NBA? | Twenty-four seconds | Thirty seconds | Thirty-five seconds | Twenty seconds
+M | Which trophy goes to the NBA champion? | The Larry O'Brien Trophy | The Vince Lombardi Trophy | The Naismith Cup | The Commissioner's Trophy
+M | Who invented basketball in 1891? | James Naismith | Amos Alonzo Stagg | Walter Camp | Abner Doubleday
+M | With what did Naismith's first players score in the original game? | A peach basket | A wooden hoop | A net on a pole | A barrel
+M | Which nickname is given to the NCAA basketball tournament? | March Madness | The Big Dance only | The Final Countdown | The Spring Classic
+M | How many teams reach the semifinal round of the NCAA tournament? | Four | Eight | Two | Sixteen
+M | What is it called when a player takes more than two steps without dribbling? | Traveling | Double dribble | Carrying | Backcourt
+M | What is it called when a player stops dribbling then starts again? | A double dribble | Traveling | Palming | A backcourt violation
+H | Which player scored one hundred points in a single NBA game in 1962? | Wilt Chamberlain | Elgin Baylor | Bob Pettit | Oscar Robertson
+H | Which team won eight straight NBA titles from 1959 to 1966? | The Boston Celtics | The Minneapolis Lakers | The Philadelphia Warriors | The Syracuse Nationals
+H | Which center won eleven NBA championships with Boston? | Bill Russell | Wilt Chamberlain | Kareem Abdul-Jabbar | Bob Cousy
+H | Which shot is Kareem Abdul-Jabbar most identified with? | The skyhook | The fadeaway | The jump hook | The finger roll
+H | Which women's professional basketball league began play in 1997? | The WNBA | The ABL | The NWBL | The WBL
+H | Which college coach won ten NCAA titles at UCLA? | John Wooden | Dean Smith | Adolph Rupp | Bob Knight
+H | Which trophy is given to the best college basketball player? | The Naismith Award | The Heisman Trophy | The Wooden Cup | The Rupp Trophy
+H | In which town is the Basketball Hall of Fame? | Springfield | Cooperstown | Canton | Indianapolis
+H | Which team of touring showmen has played exhibition basketball since 1926? | The Harlem Globetrotters | The New York Rens | The Original Celtics | The Barnstormers
+
+# --- Hockey ---
+
+E | How many skaters and a goalie make a hockey team on the ice? | Five skaters and a goalie | Six skaters and a goalie | Four skaters and a goalie | Seven skaters and a goalie
+E | What trophy goes to the NHL champion? | The Stanley Cup | The Vince Lombardi Trophy | The Commissioner's Trophy | The Hart Cup
+E | How many periods are in a hockey game? | Three | Four | Two | Five
+M | How long is each period in an NHL game? | Twenty minutes | Fifteen minutes | Twelve minutes | Twenty-five minutes
+M | What is it called when a player scores three goals in a game? | A hat trick | A triple | A trifecta | A treble play
+M | Which award honors the NHL's most valuable player? | The Hart Trophy | The Norris Trophy | The Vezina Trophy | The Art Ross Trophy
+M | Which award honors the NHL's best goaltender? | The Vezina Trophy | The Hart Trophy | The Selke Trophy | The Calder Trophy
+M | What is the rubber disc used in hockey called? | The puck | The ball | The disc | The biscuit stone
+H | Which penalty sends a player off for two minutes? | A minor penalty | A major penalty | A misconduct | A match penalty
+H | Which nickname belongs to Wayne Gretzky? | The Great One | The Rocket | Mr. Hockey | The Golden Jet
+H | Which player was nicknamed Mr. Hockey? | Gordie Howe | Wayne Gretzky | Bobby Orr | Maurice Richard
+H | Which 1980 Olympic hockey upset is called the Miracle on Ice? | The United States over the Soviet Union | Canada over Sweden | Finland over the Soviet Union | The United States over Canada
+H | Which trophy goes to the NHL's leading scorer in a season? | The Art Ross Trophy | The Hart Trophy | The Richard Trophy | The Lady Byng Trophy
+H | Which is the oldest of the original six NHL franchises still playing? | The Montreal Canadiens | The Toronto Maple Leafs | The Boston Bruins | The Detroit Red Wings
+H | What is it called when a team plays short-handed after a penalty? | A penalty kill | A power play | An icing call | A short shift
+
+# --- Soccer ---
+
+E | How many players from one team are on the field in soccer? | Eleven | Ten | Nine | Twelve
+E | How long is a regulation soccer match? | Ninety minutes | Eighty minutes | One hundred minutes | Sixty minutes
+E | Which tournament is soccer's world championship? | The World Cup | The Champions League | The Copa America | The Euros
+E | How often is the soccer World Cup held? | Every four years | Every two years | Every three years | Every five years
+M | Which country won the first men's World Cup, in 1930? | Uruguay | Brazil | Argentina | Italy
+M | Which country hosted the first men's World Cup? | Uruguay | Brazil | Italy | France
+M | Which card does a referee show to send a player off? | The red card | The yellow card | The black card | The blue card
+M | Which card does a referee show as a formal warning? | The yellow card | The red card | The white card | The green card
+M | Which Brazilian player is often called Pele? | Edson Arantes do Nascimento | Manuel Francisco dos Santos | Arthur Antunes Coimbra | Ricardo Izecson
+M | Which US city hosted the final of the 1994 men's World Cup? | Pasadena | New York | Chicago | Dallas
+M | Which country won the first Women's World Cup, in 1991? | The United States | Norway | Germany | China
+H | Which country has won the most men's World Cups? | Brazil | Germany | Italy | Argentina
+H | What is the penalty spot's distance from the goal line? | Twelve yards | Ten yards | Fifteen yards | Eighteen yards
+H | Which competition crowns the best club team in Europe? | The Champions League | The World Cup | The Europa Cup | The Club Series
+H | Which position is the only one allowed to handle the ball in play? | The goalkeeper | The sweeper | The center back | The captain
+H | Which American won the Women's World Cup final on a penalty kick in 1999? | Brandi Chastain | Mia Hamm | Michelle Akers | Julie Foudy
+H | Which league is the top level of professional soccer in the United States? | Major League Soccer | The NASL | The USL Championship | The A-League
+
+# --- Tennis ---
+
+E | What is a score of zero called in tennis? | Love | Nil | Blank | Duck
+E | How many Grand Slam tournaments are played each year? | Four | Three | Five | Six
+E | Which Grand Slam tournament is played on grass? | Wimbledon | The US Open | The French Open | The Australian Open
+M | Which Grand Slam tournament is played on clay? | The French Open | Wimbledon | The US Open | The Australian Open
+M | What is the score called when both players reach forty? | Deuce | Match point | Advantage | Break point
+M | How many points does a player need to win a game from deuce? | Two in a row | One | Three in a row | Four
+M | Which two Grand Slam tournaments are played on hard courts? | The Australian and US Opens | Wimbledon and the US Open | The French and Australian Opens | Wimbledon and the French Open
+M | In which city is Wimbledon played? | London | Paris | Melbourne | New York
+M | In which city is the French Open played? | Paris | Lyon | Nice | Marseille
+H | Which stadium hosts the French Open? | Roland Garros | Flushing Meadows | Melbourne Park | Centre Court
+H | Which American sisters both won Wimbledon singles titles? | Venus and Serena Williams | Chris and Jeanne Evert | Tracy and Cammy Austin | Lindsay and Ann Davenport
+H | Which American woman won a famous 1973 exhibition against Bobby Riggs? | Billie Jean King | Chris Evert | Margaret Court | Martina Navratilova
+H | What is a serve that the receiver cannot touch called? | An ace | A winner | A let | A fault
+H | What is a serve that clips the net and lands in called? | A let | A fault | An ace | A double fault
+H | How many sets does a man need to win a Grand Slam final? | Three | Two | Four | Five
+H | What is winning all four Grand Slam titles in one year called? | A calendar Grand Slam | A career slam | A golden slam | A super slam
+
+# --- Golf ---
+
+E | How many holes are on a standard golf course? | Eighteen | Nine | Twelve | Twenty-four
+E | What is a score of one under par on a hole called? | A birdie | An eagle | A bogey | A par
+E | What is a score of one over par on a hole called? | A bogey | A birdie | An eagle | A double
+M | What is a score of two under par on a hole called? | An eagle | A birdie | An albatross | A condor
+M | Which major tournament awards a green jacket? | The Masters | The US Open | The PGA Championship | The Open Championship
+M | Where is the Masters played every year? | Augusta National | Pebble Beach | St. Andrews | Pinehurst
+M | Which Scottish course is called the home of golf? | St. Andrews | Carnoustie | Muirfield | Troon
+M | How many clubs may a player carry in a round? | Fourteen | Twelve | Sixteen | Ten
+M | Which stroke is played on the putting green? | The putt | The drive | The chip | The pitch
+H | What is a score of three under par on a hole called? | An albatross | An eagle | A condor | A birdie
+H | Which four tournaments make up the men's majors? | Masters, PGA, US Open, The Open | Masters, Ryder, US Open, The Open | Masters, PGA, Players, The Open | PGA, US Open, The Open, Memorial
+H | Which team competition pits the United States against Europe? | The Ryder Cup | The Presidents Cup | The Walker Cup | The Solheim Cup only
+H | Which team competition pits American women against European women? | The Solheim Cup | The Ryder Cup | The Curtis Cup | The Presidents Cup
+H | Which golfer was nicknamed the Golden Bear? | Jack Nicklaus | Arnold Palmer | Gary Player | Tom Watson
+H | What is a hole scored in one stroke called? | A hole in one | An eagle | An albatross | A double eagle
+
+# --- Track, swimming and the Olympics ---
+
+E | How often are the Summer Olympic Games held? | Every four years | Every two years | Every three years | Every five years
+E | How many rings are on the Olympic flag? | Five | Four | Six | Three
+E | What is the exact distance of a marathon? | 26.2 miles | 25 miles | 30 miles | 24.8 miles
+M | Which American won four gold medals at the 1936 Berlin Olympics? | Jesse Owens | Ralph Metcalfe | Cornelius Johnson | Archie Williams
+M | Which Olympic event combines running, swimming and cycling? | The triathlon | The pentathlon | The decathlon | The biathlon
+M | How many events make up the decathlon? | Ten | Seven | Twelve | Eight
+M | How many events make up the heptathlon? | Seven | Five | Ten | Eight
+M | Which winter event combines cross-country skiing and rifle shooting? | The biathlon | The triathlon | The nordic combined | The skeleton
+M | Which race is the shortest sprint on an Olympic track? | The 100 meters | The 200 meters | The 60 meters | The 400 meters
+M | How many laps of a standard outdoor track make a mile? | About four | About three | About five | About six
+M | Which American athlete won the decathlon and the pentathlon in 1912? | Jim Thorpe | Jesse Owens | Bob Mathias | Rafer Johnson
+H | Which city hosted the first Winter Olympics, in 1924? | Chamonix | St. Moritz | Lake Placid | Garmisch
+H | Which American city has hosted the Summer Olympics twice before 1990? | Los Angeles | St. Louis | Atlanta | Chicago
+H | Which swimming stroke is swum on the back? | The backstroke | The breaststroke | The butterfly | The freestyle
+H | Which swimming stroke is the fastest in competition? | The freestyle | The backstroke | The breaststroke | The butterfly
+H | Which order do the strokes come in an individual medley? | Butterfly, back, breast, free | Free, back, breast, fly | Back, fly, breast, free | Breast, fly, back, free
+H | Which field event throws a heavy metal ball from the shoulder? | The shot put | The discus | The hammer | The javelin
+H | Which field event uses a flexible pole to clear a bar? | The pole vault | The high jump | The long jump | The triple jump
+H | Which Olympic motto means faster, higher, stronger? | Citius, Altius, Fortius | Veni, Vidi, Vici | Ad Astra | Per Aspera
+H | Which race is run over 26.2 miles at the end of the Summer Games? | The marathon | The 10,000 meters | The race walk | The steeplechase
+
+# --- Cars, horses and other sports ---
+
+E | Which race is called the greatest spectacle in racing and runs 500 miles? | The Indianapolis 500 | The Daytona 500 | The Coca-Cola 600 | The Brickyard 400
+M | Which stock car race opens the NASCAR season each February? | The Daytona 500 | The Indianapolis 500 | The Southern 500 | The Talladega 500
+M | Which three races make up horse racing's Triple Crown? | Kentucky Derby, Preakness, Belmont | Kentucky Derby, Travers, Belmont | Preakness, Belmont, Breeders' Cup | Derby, Preakness, Haskell
+M | Which is the first leg of the Triple Crown each May? | The Kentucky Derby | The Preakness Stakes | The Belmont Stakes | The Wood Memorial
+M | How far is the Kentucky Derby run? | A mile and a quarter | A mile | A mile and a half | Two miles
+M | Which horse won the Triple Crown in 1973 by thirty-one lengths at Belmont? | Secretariat | Seattle Slew | Affirmed | Citation
+M | How many rounds are in a modern championship boxing match? | Twelve | Fifteen | Ten | Eight
+M | Which boxer called himself the Greatest and lit the 1996 Olympic flame? | Muhammad Ali | Joe Frazier | George Foreman | Sugar Ray Leonard
+H | Which race is the most famous endurance event in France? | The 24 Hours of Le Mans | The Monaco Grand Prix | The Paris-Dakar | The Tour de France
+H | Which cycling race ends on the Champs-Elysees each July? | The Tour de France | The Giro d'Italia | The Vuelta | Paris-Roubaix
+H | Which jersey does the leader of the Tour de France wear? | Yellow | Green | Polka dot | White
+H | Which sailing trophy is the oldest in international sport? | The America's Cup | The Admiral's Cup | The Fastnet Trophy | The Volvo Trophy
+H | How many players are on a volleyball team on the court? | Six | Five | Seven | Four
+H | How many players are on a water polo team in the water? | Seven | Six | Five | Eight
+H | Which sport is played with a shuttlecock? | Badminton | Squash | Table tennis | Racquetball
+H | Which sport uses stones and brooms on ice? | Curling | Bocce | Shuffleboard | Bowling
+H | How many pins stand at the start of a bowling frame? | Ten | Nine | Twelve | Eight
+H | What is a bowling score of three strikes in a row called? | A turkey | A hat trick | A triple | A hammer
+H | What is the highest possible score in a game of bowling? | 300 | 250 | 200 | 350
+
+# --- Board games and cards ---
+
+E | How many squares are on a chessboard? | Sixty-four | Eighty-one | One hundred | Forty-nine
+E | How many pieces does each player start with in chess? | Sixteen | Twelve | Twenty | Eight
+E | What is the winning move in chess called? | Checkmate | Stalemate | Castling | En passant
+E | How many cards are in a standard deck without jokers? | Fifty-two | Fifty-four | Forty-eight | Sixty
+E | How many suits are in a standard deck of cards? | Four | Two | Three | Five
+E | How many cards are in each suit of a standard deck? | Thirteen | Twelve | Ten | Fourteen
+M | Which chess piece moves only diagonally? | The bishop | The rook | The knight | The queen
+M | Which chess piece moves in an L shape? | The knight | The bishop | The rook | The king
+M | Which chess piece is the most powerful on the board? | The queen | The king | The rook | The knight
+M | What is it called when a king is not in check but has no legal move? | Stalemate | Checkmate | A draw by repetition | Zugzwang
+M | Which move lets the king and rook switch places under conditions? | Castling | En passant | Promotion | The fork
+M | How many dice are used in a standard game of craps? | Two | One | Three | Five
+M | How many tiles does each player draw at the start of Scrabble? | Seven | Five | Ten | Six
+M | Which Monopoly property is the most expensive on the American board? | Boardwalk | Park Place | Pennsylvania Avenue | Marvin Gardens
+M | Which two Monopoly squares send a player to jail or let them out? | Go to Jail and Chance | Free Parking and Go | Community Chest only | Income Tax and Go
+M | Which card game asks players to reach twenty-one without going over? | Blackjack | Poker | Bridge | Rummy
+H | Which poker hand beats a full house? | Four of a kind | A flush | A straight | Three of a kind
+H | Which poker hand is the highest possible? | A royal flush | Four of a kind | A straight flush | A full house
+H | Which poker hand is made of five cards of the same suit? | A flush | A straight | A full house | Three of a kind
+H | Which game uses black and white stones on a nineteen-line grid? | Go | Chess | Shogi | Backgammon
+H | Which ancient game uses two rows of twelve points and doubling cubes? | Backgammon | Checkers | Mancala | Nine Men's Morris
+H | How many squares does a checkerboard use for play? | Thirty-two | Sixty-four | Twenty-four | Forty-eight
+H | Which chess opening moves the king's pawn two squares first? | The king's pawn opening | The Sicilian Defense | The Queen's Gambit | The English Opening
+H | Which world chess champion beat a computer in 1996 and lost to one in 1997? | Garry Kasparov | Anatoly Karpov | Bobby Fischer | Vladimir Kramnik
+H | Which American won the world chess championship in 1972? | Bobby Fischer | Paul Morphy | Samuel Reshevsky | Larry Evans
+H | How many dominoes are in a standard double-six set? | Twenty-eight | Twenty-four | Thirty-two | Thirty-six
+H | Which card game is played with bidding, trumps and a dummy hand? | Bridge | Poker | Hearts | Canasta
+H | Which trivia board game divides questions into six colored categories? | Trivial Pursuit | Scattergories | Cranium | Balderdash
+
+# --- Openers ---
+
+E | Which sport is played at Fenway Park? | Baseball | Football | Basketball | Hockey
+E | Which sport uses a bat, a diamond and a catcher's mitt? | Baseball | Cricket | Softball | Lacrosse
+E | Which sport uses a puck and a rink? | Hockey | Basketball | Soccer | Curling
+E | Which sport uses a racket and a net across a court? | Tennis | Golf | Baseball | Bowling
+E | Which sport is played on a course with a small white ball and clubs? | Golf | Croquet | Polo | Cricket
+E | In which sport would you find a quarterback and a linebacker? | Football | Baseball | Soccer | Rugby
+E | In which sport do teams try to score a goal past a goalkeeper with their feet? | Soccer | Basketball | Volleyball | Handball
+E | Which sport features a slam dunk? | Basketball | Volleyball | Tennis | Football
+E | Which sport features a home run? | Baseball | Basketball | Football | Hockey
+E | Which sport features a touchdown? | Football | Baseball | Soccer | Golf
+E | Which sport features a hole in one? | Golf | Bowling | Darts | Archery
+E | Which sport features a strike and a spare? | Bowling | Baseball | Cricket | Archery
+E | Which sport is played on ice with a stone slid toward a target? | Curling | Hockey | Figure skating | Speed skating
+E | Which piece of equipment does a boxer wear on the hands? | Gloves | Pads | Wraps only | Mitts
+E | Which sport takes place in a pool over a set number of lengths? | Swimming | Rowing | Sailing | Diving
+E | Which sport uses a bow and a target with colored rings? | Archery | Darts | Shooting | Fencing
+E | Which sport is played with swords and protective masks? | Fencing | Boxing | Wrestling | Judo
+E | Which sport is contested on a balance beam and uneven bars? | Gymnastics | Diving | Figure skating | Cheerleading
+M | Which sport is played on a pitch with wickets and overs? | Cricket | Baseball | Rounders | Field hockey
+M | Which sport uses a stick with a net to carry a ball? | Lacrosse | Field hockey | Hurling | Polo
+
+# --- More football ---
+
+M | Which position snaps the ball to start a play? | The center | The guard | The tackle | The fullback
+M | What is it called when the defense tackles the quarterback behind the line? | A sack | A blitz | A tackle for loss only | An interception
+M | What is it called when the defense catches a forward pass? | An interception | A fumble | A safety | A turnover on downs
+M | What is it called when a ball carrier loses the ball before being down? | A fumble | An interception | An incompletion | A muff
+M | What is it called when several defenders rush the passer at once? | A blitz | A stunt | A screen | A zone
+M | How many points does a two-point conversion add after a touchdown? | Two | One | Three | Six
+M | Which special teams play sends the ball downfield to start a half? | The kickoff | The punt | The field goal | The onside try
+M | Which kick surrenders possession on fourth down? | The punt | The kickoff | The field goal | The extra point
+H | Which quarterback and coach pair won the first two Super Bowls? | Bart Starr and Vince Lombardi | Joe Namath and Weeb Ewbank | Len Dawson and Hank Stram | Johnny Unitas and Don Shula
+H | Which team is nicknamed America's Team? | The Dallas Cowboys | The New York Giants | The Washington franchise | The Chicago Bears
+H | Which stadium is known as the Big House and seats over one hundred thousand? | Michigan Stadium | Ohio Stadium | Beaver Stadium | Neyland Stadium
+H | Which trophy goes to the winner of the Army-Navy and Air Force series? | The Commander-in-Chief's Trophy | The Heisman | The Lambert Trophy | The Bednarik Award
+H | Which college football conference is known as the Big Ten? | A Midwestern conference | A Southern conference | A Pacific conference | A Southwestern conference
+H | Which position lines up on the end of the line and can catch or block? | The tight end | The guard | The nose tackle | The safety
+H | How many players make up an offensive line? | Five | Four | Six | Seven
+
+# --- More baseball ---
+
+M | What is it called when a batter is hit by a pitch? | He takes first base | He strikes out | The pitch is a ball | The at-bat restarts
+M | What is a batted ball caught before it touches the ground called? | A fly out | A ground out | A foul tip | A line drive single
+M | What is it called when a runner advances by stealing without a hit? | A stolen base | A balk | A wild pitch only | A passed ball
+M | What is it called when a pitcher illegally deceives a runner? | A balk | A wild pitch | A passed ball | An error
+M | How many players bat in a National League lineup without a designated hitter? | Nine | Eight | Ten | Seven
+M | What is the batting statistic that divides hits by at-bats? | Batting average | On-base percentage | Slugging percentage | OPS
+M | What is it called when a batter hits a home run with the bases loaded? | A grand slam | A cycle | A walk-off | A triple play
+M | What is it called when a batter hits a single, double, triple and home run in one game? | The cycle | The grand slam | The natural | The quadruple
+H | Which league added the designated hitter first, in 1973? | The American League | The National League | The Pacific Coast League | The International League
+H | Which player is credited with the most career hits in the majors? | Pete Rose | Ty Cobb | Hank Aaron | Stan Musial
+H | Which pitcher won the most games in major league history? | Cy Young | Walter Johnson | Christy Mathewson | Warren Spahn
+H | Which annual event lets teams select amateur players? | The amateur draft | The winter meetings | The rule five draft | The combine
+H | Which pitch breaks downward sharply as it reaches the plate? | The curveball | The fastball | The changeup | The cutter
+H | Which pitch is thrown to look fast but arrives slowly? | The changeup | The slider | The curveball | The sinker
+H | Which two teams contest the oldest rivalry in the American League East? | The Yankees and the Red Sox | The Orioles and the Yankees | The Blue Jays and the Rays | The Red Sox and the Orioles
+
+# --- More basketball, hockey and soccer ---
+
+M | What is it called when a defender illegally makes contact with a shooter? | A shooting foul | A charge | A technical | A violation
+M | What is it called when an offensive player runs into a set defender? | A charge | A block | A screen | A pick and roll
+M | What is it called when a player sets a legal block to free a teammate? | A screen | A charge | A trap | A box out
+M | What is it called when a player records double figures in two categories? | A double-double | A twofer | A double play | A pair
+M | Which line marks where free throws are shot from? | The foul line | The baseline | The three-point line | The half-court line
+M | Which hockey infraction sends the puck across two lines untouched? | Icing | Offside | Interference | High-sticking
+M | Which hockey infraction has an attacker cross the blue line before the puck? | Offside | Icing | Hooking | Tripping
+M | Which soccer restart follows a foul inside the penalty area? | A penalty kick | A free kick | A corner kick | A throw-in
+M | Which soccer restart follows the ball going out over the touchline? | A throw-in | A goal kick | A corner kick | A drop ball
+M | Which soccer restart follows a defender putting the ball over their own goal line? | A corner kick | A goal kick | A throw-in | A penalty
+H | Which basketball violation keeps the offense in the paint too long? | Three seconds | Five seconds | Ten seconds | Eight seconds
+H | Which basketball violation blocks a shot on its way down? | Goaltending | Basket interference only | Palming | Charging
+H | Which award honors the NBA's best defensive player? | Defensive Player of the Year | The Hart Trophy | The Selke Trophy | The Gold Glove
+H | Which hockey trophy goes to the playoff most valuable player? | The Conn Smythe Trophy | The Hart Trophy | The Vezina Trophy | The Norris Trophy
+H | Which soccer award honors the best player of the year worldwide? | The Ballon d'Or | The Golden Boot | The Golden Ball | The World Trophy
+H | Which soccer award honors the top scorer of a World Cup? | The Golden Boot | The Ballon d'Or | The Golden Glove | The Silver Ball
+
+# --- More games and pastimes ---
+
+E | How many players does a game of chess need? | Two | Four | Three | One
+E | What do the letters on Scrabble tiles carry besides a letter? | A point value | A color | A number of turns | A wildcard mark
+E | Which game asks players to sink an opponent's fleet on a grid? | Battleship | Risk | Stratego | Connect Four
+E | Which game has players drop colored discs to make a row of four? | Connect Four | Checkers | Othello | Go
+E | Which game uses a spinner and colored circles on a mat? | Twister | Candy Land | Chutes and Ladders | Operation
+M | Which game has players guess a hidden word letter by letter on a wheel? | Hangman | Boggle | Charades | Pictionary
+M | Which game asks players to draw clues without speaking? | Pictionary | Charades | Taboo | Password
+M | Which game asks players to act out clues without speaking? | Charades | Pictionary | Taboo | Balderdash
+M | Which game flips tiles between two colors on an eight-by-eight board? | Othello | Checkers | Go | Mancala
+M | Which strategy game has players conquer territories with armies and dice? | Risk | Diplomacy | Axis and Allies | Stratego
+M | Which game hides ranks and a flag behind facedown pieces? | Stratego | Risk | Battleship | Clue
+M | Which game asks who did it, with what and where? | Clue | Mystery Date | Whodunit | Sleuth
+M | How many letters does each player hold in a game of Boggle? | None, the letters are on dice in a grid | Seven | Ten | Twelve
+H | Which card game has players avoid taking the queen of spades? | Hearts | Spades | Bridge | Euchre
+H | Which card game gives points for melding sets and runs? | Rummy | Hearts | Cribbage | Whist
+H | Which card game uses a pegboard to keep score? | Cribbage | Bridge | Canasta | Pinochle
+H | Which tile game from China uses suits of bamboo, circles and characters? | Mahjong | Dominoes | Shogi | Pachisi
+H | Which Indian board game inspired the Western game of Parcheesi? | Pachisi | Chaturanga | Snakes and Ladders | Carrom
+H | Which ancient game is considered an ancestor of chess? | Chaturanga | Senet | Go | Backgammon
+H | Which puzzle asks players to fill a nine-by-nine grid with digits? | Sudoku | Kakuro | Nonogram | Crossword
+H | Which cube puzzle has six colored faces and turning layers? | The Rubik's Cube | The Soma cube | The Pyraminx | The Tower of Hanoi
+H | Which word puzzle appeared first in a New York newspaper in 1913? | The crossword | The acrostic | The cryptogram | The word search
+
+# --- More openers ---
+
+E | Which sport is played on a court divided by a high net over which a ball is spiked? | Volleyball | Tennis | Badminton | Squash
+E | Which sport is contested on a track by horses and jockeys? | Horse racing | Polo | Rodeo | Dressage
+E | Which sport is contested on skis down a marked mountain course? | Alpine skiing | Snowboarding | Bobsled | Luge
+E | Which winter sport sends a team down an icy track in a sled? | Bobsled | Curling | Ski jumping | Speed skating
+E | Which winter sport has skaters perform jumps and spins to music? | Figure skating | Speed skating | Hockey | Curling
+E | Which sport features a pommel horse and rings? | Gymnastics | Weightlifting | Wrestling | Fencing
+E | Which sport is contested in a ring with three-minute rounds and gloves? | Boxing | Wrestling | Fencing | Judo
+E | Which sport has surfers ride waves standing on a board? | Surfing | Windsurfing | Kayaking | Rowing
+E | Which sport uses a board with bindings on snow? | Snowboarding | Skateboarding | Surfing | Waterskiing
+E | Which sport uses a board with four wheels on pavement? | Skateboarding | Snowboarding | Rollerblading | Surfing
+E | Which sport pairs a rider and a horse over a course of jumps? | Show jumping | Polo | Rodeo | Dressage
+E | Which sport sends teams down a river in inflatable boats? | Whitewater rafting | Rowing | Canoeing | Sailing
+E | Which sport uses oars and a narrow boat with a coxswain? | Rowing | Sailing | Kayaking | Canoeing
+E | Which sport has climbers ascend rock faces with ropes and harnesses? | Rock climbing | Caving | Hiking | Bouldering only
+E | Which sport uses a small hard ball hit against a front wall in an enclosed court? | Squash | Tennis | Badminton | Handball
+M | Which sport combines a horse, a mallet and a ball on a grass field? | Polo | Croquet | Cricket | Hurling
+M | Which sport features a scrum and a try? | Rugby | Football | Soccer | Lacrosse
+M | Which sport is Ireland's fastest field game, played with a stick and a small ball? | Hurling | Gaelic football | Camogie | Shinty
+M | Which sport is played on a diamond with an underhand pitch and a larger ball? | Softball | Baseball | Cricket | Kickball
+M | Which sport has athletes throw an opponent using holds on a mat? | Wrestling | Boxing | Fencing | Karate
+M | Which martial art from Japan uses throws and grappling in a white uniform? | Judo | Karate | Aikido | Kendo
+M | Which martial art from Korea emphasizes high kicks and is an Olympic sport? | Taekwondo | Karate | Judo | Kung fu
+M | Which sport is played on horseback in an arena with barrels and roping? | Rodeo | Polo | Dressage | Steeplechase
+M | Which sport sends athletes down a track feet first on a small sled? | Luge | Skeleton | Bobsled | Ski cross
+M | Which sport sends athletes down a track head first on a small sled? | Skeleton | Luge | Bobsled | Snowboard cross
+
+# --- The Olympic record book ---
+
+E | What are the three Olympic medals? | Gold, silver and bronze | Gold, silver and copper | Platinum, gold and silver | Gold, bronze and iron
+E | What is carried by relay to open the Olympic Games? | The torch | The flag | The wreath | The oath
+M | Which US city hosted the 1984 Summer Olympics? | Los Angeles | Atlanta | New York | Chicago
+M | Which US city hosted the 1996 Summer Olympics? | Atlanta | Los Angeles | Seattle | Miami
+M | Which US city hosted the 1904 Summer Olympics? | St. Louis | Chicago | Philadelphia | Boston
+M | Which US town hosted the Winter Olympics twice, in 1932 and 1980? | Lake Placid | Squaw Valley | Salt Lake City | Aspen
+M | Which US city hosted the 2002 Winter Olympics? | Salt Lake City | Denver | Lake Placid | Anchorage
+M | Which city hosted the 1964 Summer Olympics, the first in Asia? | Tokyo | Seoul | Beijing | Osaka
+M | Which city hosted the 1968 Summer Olympics at high altitude? | Mexico City | Bogota | La Paz | Quito
+H | Which city hosted the 1972 Summer Olympics? | Munich | Montreal | Moscow | Melbourne
+H | Which city hosted the 1980 Summer Olympics, boycotted by the United States? | Moscow | Montreal | Munich | Mexico City
+H | Which city hosted the 1992 Summer Olympics? | Barcelona | Seoul | Atlanta | Sydney
+H | Which city hosted the 2000 Summer Olympics? | Sydney | Athens | Barcelona | Melbourne
+H | Which Olympic ceremony includes an athlete's oath and the parade of nations? | The opening ceremony | The closing ceremony | The medal ceremony | The torch lighting
+H | Which Olympic sport was contested at the ancient Games and returned in 1896? | The discus | The javelin only | Basketball | Rowing
+H | Which committee governs the Olympic movement? | The International Olympic Committee | The World Games Council | FIFA | The Olympic Federation
+
+# --- College and school sports ---
+
+M | Which federal law of 1972 required equal opportunity in school sports? | Title IX | The Civil Rights Act | The Amateur Sports Act | The Education Act
+M | Which organization governs most American college athletics? | The NCAA | The NAIA | The AAU | The USOC
+M | Which round of the NCAA basketball tournament is called the Sweet Sixteen? | The round of sixteen | The quarterfinals | The first round | The semifinals
+M | How many teams reach the round called the Elite Eight? | Eight | Sixteen | Four | Thirty-two
+H | Which conference is known as the SEC? | The Southeastern Conference | The Southern Eastern Conference | The Southwest Conference | The Sunbelt Conference
+H | Which conference is known as the ACC? | The Atlantic Coast Conference | The American Coastal Conference | The Athletic Central Conference | The Allied College Conference
+H | Which group of eight private northeastern colleges shares an athletic league? | The Ivy League | The Patriot League | The Colonial League | The Little Three
+H | Which award honors the best college basketball player named for the sport's inventor? | The Naismith Trophy | The Wooden Award | The Rupp Trophy | The Cousy Award
+H | Which annual event lets NFL teams select college players? | The NFL Draft | The combine | The scouting fair | The showcase
+H | Which spring event tests college prospects with drills before the draft? | The scouting combine | The pro day only | The senior showcase | The talent camp
+
+# --- Terms, gear and the rest ---
+
+E | What does a referee use to stop play in most team sports? | A whistle | A bell | A flag only | A horn
+E | What piece of gear protects a hockey goaltender's face? | A mask | A visor only | Goggles | A shield cap
+E | What piece of gear does a baseball catcher wear on the hand? | A mitt | A glove with fingers | A pad | A wrap
+E | What surface is a tennis court at Wimbledon made of? | Grass | Clay | Hard court | Carpet
+E | How many holes are played in a typical round of golf on the front nine? | Nine | Eighteen | Twelve | Six
+E | What do we call the person who trains and directs a team? | The coach | The manager only | The captain | The trainer
+E | What do we call a game that ends with the same score for both teams? | A tie | A forfeit | A draw round | A void
+E | What do we call the extra time played to break a tie? | Overtime | Injury time only | The tiebreak round | The playoff period
+M | What do we call a player brought on to replace another? | A substitute | A reserve only | A backup call | A relief starter
+M | What do we call the first game of a season? | The season opener | The kickoff classic | The debut round | The curtain game
+M | What do we call the series of games that decides a champion? | The playoffs | The regular season | The preseason | The exhibition round
+M | What do we call a game played before the season counts? | A preseason game | A playoff game | A bye | A scrimmage only
+M | What do we call a week in which a team does not play? | A bye | A break | A rest round | A layoff
+M | What do we call the right to choose players in order of finish? | The draft | The waiver | The trade window | The lottery pick only
+M | What do we call moving a player from one team to another for value? | A trade | A draft | A waiver claim only | A loan
+M | What do we call a player free to sign with any team? | A free agent | A draftee | A waiver | A rookie
+M | What do we call a first-year professional player? | A rookie | A prospect | A journeyman | A veteran
+H | What do we call the statistic counting assists in soccer and hockey? | Assists | Points only | Helpers only | Setups
+H | What do we call the pace at which a basketball team plays? | Tempo | Rhythm | Cadence | Flow rate
+H | What do we call a defense that assigns each player an opponent? | Man-to-man | Zone | Press | Trap
+H | What do we call a defense that assigns each player an area? | Zone | Man-to-man | Switch | Help side
+H | What do we call pressure applied over the whole court in basketball? | A full-court press | A half-court trap | A run and jump | A box and one
+
+# --- More sports around the world ---
+
+E | Which sport is the most watched in the world? | Soccer | Basketball | Cricket | Tennis
+E | Which sport is played on a wicket with bowlers and batters? | Cricket | Baseball | Rounders | Stoolball
+M | How many players are on a cricket team? | Eleven | Nine | Ten | Twelve
+M | What is it called when a cricket bowler takes three wickets in three balls? | A hat trick | A maiden | A duck | A century
+M | What is a batter's score of one hundred runs in cricket called? | A century | A ton mark | A double | A maiden
+M | What is a batter's score of zero in cricket called? | A duck | A blank | A nought round | A love
+M | Which country invented rugby, according to tradition? | England | Wales | New Zealand | Ireland
+M | How many players are on a rugby union team? | Fifteen | Thirteen | Eleven | Twenty
+M | How many points is a try worth in rugby union? | Five | Three | Six | Four
+M | Which Australian sport is played on an oval field with four posts at each end? | Australian rules football | Rugby league | Gaelic football | Touch football
+M | Which sport does the Ashes series belong to? | Cricket | Rugby | Sailing | Lawn bowls
+H | Which country's national sport is sumo wrestling? | Japan | Mongolia | Korea | China
+H | Which sport is played in a fronton with a curved basket strapped to the arm? | Jai alai | Squash | Handball | Pelota only
+H | Which sport features a peloton and a time trial? | Cycling | Marathon running | Cross-country skiing | Rowing
+H | Which cycling race is Italy's grand tour? | The Giro d'Italia | The Tour de France | The Vuelta | Milan-San Remo
+H | Which sport is the national game of Canada in summer by law? | Lacrosse | Hockey | Curling | Baseball
+H | Which sport is the national game of Canada in winter by law? | Hockey | Lacrosse | Curling | Skiing
+H | Which sport contests the Davis Cup? | Tennis | Golf | Sailing | Rugby
+H | Which sport contests the America's Cup? | Sailing | Rowing | Swimming | Powerboating
+H | Which sport contests the Cricket World Cup every four years? | Cricket | Field hockey | Netball | Rugby league
+
+# --- More openers ---
+
+E | Which sport uses a shuttlecock over a high net? | Badminton | Volleyball | Tennis | Table tennis
+E | Which sport uses a small ball and paddles on a table? | Table tennis | Badminton | Squash | Racquetball
+E | Which sport features a balance beam routine? | Gymnastics | Diving | Figure skating | Trampolining only
+E | Which sport features a triple axel? | Figure skating | Gymnastics | Diving | Freestyle skiing
+E | Which sport is contested on a course of gates down a snowy slope? | Slalom skiing | Ski jumping | Cross-country skiing | Snowboarding
+E | Which sport features a caddie? | Golf | Tennis | Bowling | Cricket
+E | Which sport features a coxswain? | Rowing | Sailing | Canoeing | Swimming
+E | Which sport features a bullpen? | Baseball | Football | Rodeo | Polo
+E | Which sport features a power play? | Hockey | Baseball | Golf | Tennis
+E | Which sport features a love game? | Tennis | Bowling | Darts | Squash
+E | Which sport features a birdie on the scorecard? | Golf | Badminton | Archery | Shooting
+E | Which sport features a scrum half? | Rugby | Football | Soccer | Cricket
+E | Which sport features a designated hitter? | Baseball | Softball | Cricket | Football
+E | Which sport features a point guard? | Basketball | Football | Hockey | Volleyball
+H | Which sport features a hat trick, a power play and a face-off circle? | Hockey | Soccer | Lacrosse | Water polo

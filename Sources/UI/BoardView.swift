@@ -40,13 +40,13 @@ struct BoardView: View {
 
     var body: some View {
         GeometryReader { geo in
-            let layout = session.game.board.layout
+            let layout = session.plateau.board.layout
             let side = min(geo.size.width, geo.size.height / layout.aspect)
             let radius = layout.typicalRadius * side
             let couvert = partCouverte(geo.frame(in: .named(Espace.ecran)))
             let repere = Repere(couvert: couvert, stage: session.stage, cible: session.target)
             ZStack {
-                ForEach(session.game.map.order, id: \.self) { id in
+                ForEach(session.plateau.map.order, id: \.self) { id in
                     if let boucles = layout.shapes[id] {
                         contour(id, boucles: boucles, side: side)
                     } else {
@@ -67,13 +67,13 @@ struct BoardView: View {
                 // façon de savoir qu'un nom touche celui d'à côté (voir
                 // `Legendes`).
                 if !layout.shapes.isEmpty {
-                    let legendes = Legendes.placer(layout: layout, ordre: session.game.map.order,
-                                                   nom: { session.game.name($0) },
-                                                   nombre: { session.game.armies($0) },
+                    let legendes = Legendes.placer(layout: layout, ordre: session.plateau.map.order,
+                                                   nom: { session.plateau.name($0) },
+                                                   nombre: { session.plateau.armies($0) },
                                                    cote: side, echelle: echelle)
-                    ForEach(session.game.map.order, id: \.self) { id in
+                    ForEach(session.plateau.map.order, id: \.self) { id in
                         if let legende = legendes[id] {
-                            EtiquetteDessinee(legende: legende, nombre: session.game.armies(id),
+                            EtiquetteDessinee(legende: legende, nombre: session.plateau.armies(id),
                                               echelle: echelle)
                         }
                     }
@@ -196,14 +196,14 @@ struct BoardView: View {
     private func cadrerSurLAssaut(dans taille: CGSize, side: CGFloat, aspect: Double,
                                   couvert: CGFloat) {
         guard let (de, vers) = placesEnJeu,
-              let depart = session.game.board.layout.centers[de],
-              let arrivee = session.game.board.layout.centers[vers] else { return }
+              let depart = session.plateau.board.layout.centers[de],
+              let arrivee = session.plateau.board.layout.centers[vers] else { return }
         // Rien à faire si les deux places tiennent déjà dans ce qui reste
         // visible : une carte qui glisse sans raison gêne plus que le
         // recadrage ne rend service. Un plateau entier à l'écran, et rien
         // par-dessus, tombe de lui-même dans ce cas — c'est l'ancienne règle,
         // mais dite en termes de ce qu'on voit et non de ce qui existe.
-        let rayon = CGFloat(session.game.board.layout.cellRadius) * side * echelle
+        let rayon = CGFloat(session.plateau.board.layout.cellRadius) * side * echelle
         if enVue(depart, dans: taille, side: side, aspect: aspect, marge: rayon,
                  couvert: couvert),
            enVue(arrivee, dans: taille, side: side, aspect: aspect, marge: rayon,
@@ -240,7 +240,7 @@ struct BoardView: View {
     /// choisir. Un départ sans cible ne compte pas : la carte n'a pas à
     /// glisser au premier appui, seulement quand un panneau vient la couvrir.
     private var placesEnJeu: (TerritoryID, TerritoryID)? {
-        if let a = session.assault { return (a.from, a.to) }
+        if let a = session.assautAffiche { return (a.from, a.to) }
         if let base = session.selected, let cible = session.target { return (base, cible) }
         return nil
     }
@@ -274,7 +274,7 @@ struct BoardView: View {
     /// cases séparées par la mer n'a aucune raison de croire qu'il peut passer
     /// de l'une à l'autre — et il ne l'essaiera jamais.
     private func traversees(side: CGFloat, radius: CGFloat) -> some View {
-        let layout = session.game.board.layout
+        let layout = session.plateau.board.layout
         return ForEach(layout.seaRoutes, id: \.self) { route in
             if let a = layout.centers[route.from], let b = layout.centers[route.to] {
                 let depart = CGPoint(x: a.x * side, y: a.y * side)
@@ -339,9 +339,9 @@ struct BoardView: View {
     /// assaut : le reste du temps, le plateau n'a rien à raconter.
     @ViewBuilder
     private func fleche(side: CGFloat, radius: CGFloat) -> some View {
-        if let a = session.assault,
-           let depart = session.game.board.layout.centers[a.from],
-           let arrivee = session.game.board.layout.centers[a.to] {
+        if let a = session.assautAffiche,
+           let depart = session.plateau.board.layout.centers[a.from],
+           let arrivee = session.plateau.board.layout.centers[a.to] {
             AttackArrow(from: CGPoint(x: depart.x * side, y: depart.y * side),
                         to: CGPoint(x: arrivee.x * side, y: arrivee.y * side),
                         // Deux cases voisines n'ont qu'un rayon et demi entre
@@ -372,7 +372,7 @@ struct BoardView: View {
             .contentShape(Hexagon())
             .position(x: center.x * side, y: center.y * side)
             .onTapGesture { withAnimation(.snappy(duration: 0.11)) { session.tap(id) } }
-            .animation(.easeInOut(duration: 0.16), value: session.game.armies(id))
+            .animation(.easeInOut(duration: 0.16), value: session.plateau.armies(id))
     }
 
     /// Un territoire dessiné : son contour, son trait de frontière, son nom.
@@ -384,7 +384,7 @@ struct BoardView: View {
     /// toucher chacune à sa place.
     private func contour(_ id: TerritoryID, boucles: [[Point]],
                          side: CGFloat) -> some View {
-        let layout = session.game.board.layout
+        let layout = session.plateau.board.layout
         let forme = Contour(boucles: boucles, cote: side)
         return forme
             .fill(fill(id), style: FillStyle(eoFill: true))
@@ -400,19 +400,19 @@ struct BoardView: View {
                 // mêmes ; à cette finesse il suffit encore à dire où finit un
                 // continent.
                 Brins(brins: layout.frontierPaths[id] ?? [], cote: side)
-                    .stroke(Palette.continent(rang: session.game.map.tint(of: id)),
+                    .stroke(Palette.continent(rang: session.plateau.map.tint(of: id)),
                             style: StrokeStyle(lineWidth: max(1, rayonOrdinaire(side) * 0.08),
                                                lineCap: .round, lineJoin: .round))
             )
             .contentShape(forme)
             .onTapGesture { withAnimation(.snappy(duration: 0.11)) { session.tap(id) } }
-            .animation(.easeInOut(duration: 0.16), value: session.game.armies(id))
+            .animation(.easeInOut(duration: 0.16), value: session.plateau.armies(id))
     }
 
     /// Le trait de frontière du continent, du côté de cette case.
     private func frontiere(_ id: TerritoryID, radius: CGFloat) -> some View {
-        let bords = session.game.board.layout.frontierEdges[id] ?? []
-        let teinte = Palette.continent(rang: session.game.map.tint(of: id))
+        let bords = session.plateau.board.layout.frontierEdges[id] ?? []
+        let teinte = Palette.continent(rang: session.plateau.map.tint(of: id))
         // Deux fois plus fin qu'avant : c'est ce qui permet à la teinte d'être
         // vive sans se battre avec la couleur du camp qui remplit la case.
         return BorderEdges(edges: bords)
@@ -422,13 +422,13 @@ struct BoardView: View {
 
     /// Le rayon d'un territoire ordinaire de ce plateau, en points.
     private func rayonOrdinaire(_ side: CGFloat) -> CGFloat {
-        CGFloat(session.game.board.layout.typicalRadius) * side
+        CGFloat(session.plateau.board.layout.typicalRadius) * side
     }
 
     /// Le nombre d'hommes, et le nom si la case est assez large pour le lire.
     private func legende(_ id: TerritoryID, radius: CGFloat, echelle: CGFloat) -> some View {
-        let nombre: Int = session.game.armies(id)
-        let nom: String = session.game.name(id)
+        let nombre: Int = session.plateau.armies(id)
+        let nom: String = session.plateau.name(id)
         // C'est la taille réellement vue qui décide : une case trop petite
         // pour son nom le retrouve dès qu'on rapproche la carte.
         let large: Bool = radius * echelle * 1.7 > 52
@@ -455,11 +455,11 @@ struct BoardView: View {
     // MARK: - Ce que la couleur raconte
 
     private func fill(_ id: TerritoryID) -> some ShapeStyle {
-        let g = session.game
+        let g = session.plateau
         let base = Palette.camp(g.owner[id] ?? 0)
         // Sous les projecteurs : les deux places d'un assaut, puis ce qui est
         // jouable.
-        if session.assault?.to == id || session.assault?.from == id {
+        if session.assautAffiche?.to == id || session.assautAffiche?.from == id {
             return AnyShapeStyle(base.opacity(1))
         }
         if isTarget(id) || session.selected == id { return AnyShapeStyle(base.opacity(0.95)) }
@@ -467,8 +467,8 @@ struct BoardView: View {
     }
 
     private func border(_ id: TerritoryID) -> Color {
-        if session.assault?.to == id { return Palette.lost }
-        if let a = session.assault, a.from == id { return Palette.camp(a.attacker) }
+        if session.assautAffiche?.to == id { return Palette.lost }
+        if let a = session.assautAffiche, a.from == id { return Palette.camp(a.attacker) }
         if session.selected == id { return .white }
         if isTarget(id) { return Palette.lost.opacity(0.9) }
         // Le contour d'une case n'a plus à porter le continent : les traits de
@@ -478,13 +478,13 @@ struct BoardView: View {
     }
 
     private func borderWidth(_ id: TerritoryID) -> CGFloat {
-        if session.assault?.to == id || session.assault?.from == id { return 3.5 }
+        if session.assautAffiche?.to == id || session.assautAffiche?.from == id { return 3.5 }
         return session.selected == id || isTarget(id) ? 3 : 1.5
     }
 
     /// Une case sur laquelle le joueur peut agir maintenant.
     private func playable(_ id: TerritoryID) -> Bool {
-        let g = session.game
+        let g = session.plateau
         guard !g.currentPlayer.isBot else { return true }
         switch g.phase {
         case .reinforcement: return g.owner[id] == g.currentPlayer.id
@@ -497,7 +497,7 @@ struct BoardView: View {
     /// Une cible atteignable depuis la case retenue.
     private func isTarget(_ id: TerritoryID) -> Bool {
         guard let base = session.selected else { return false }
-        let g = session.game
+        let g = session.plateau
         switch g.phase {
         case .attack:
             return g.map.areAdjacent(base, id) && g.owner[id] != g.currentPlayer.id

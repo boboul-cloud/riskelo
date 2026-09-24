@@ -112,6 +112,15 @@ struct GameState {
     /// retourne alors, comme au Risk.
     private(set) var elimines: [PlayerID: PlayerID] = [:]
 
+    /// Le dernier assaut aux dés, tel que son jet l'a laissé.
+    ///
+    /// L'écran en a besoin pour raconter le lancer, et `assault` ne suffit
+    /// pas : le jet qui achève la partie efface l'assaut dans la foulée, et
+    /// ce lancer-là — le plus attendu de tous — ne se montrait jamais. Rien de
+    /// la règle n'en dépend : il n'est ni enregistré, ni compté dans
+    /// l'empreinte, et une partie reprise ou renvoyée repart sans lui.
+    private(set) var dernierJet: Assault?
+
     var bank: QuestionBank
     var rng: SeededRandom
 
@@ -499,6 +508,7 @@ struct GameState {
             }
             lancerLesDes(&a, defense: min(2, armies(to)))
             assault = a
+            dernierJet = a
             if a.conquered { conquer(from: a.from, to: a.to, volley: a.volley) }
             return true
         }
@@ -581,6 +591,7 @@ struct GameState {
               des >= 1, des <= min(2, armies(a.to)) else { return false }
         lancerLesDes(&a, defense: des)
         assault = a
+        dernierJet = a
         if a.conquered { conquer(from: a.from, to: a.to, volley: a.volley) }
         return true
     }

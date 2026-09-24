@@ -164,7 +164,9 @@ struct DuelOverlay: View {
     /// retrait, sous un tiret, parce qu'il n'a rien décidé lui-même — il a
     /// seulement rendu les deux autres meilleurs.
     @ViewBuilder private var lancer: some View {
-        if let r = session.report, let a = session.assault, let l = r.lancer {
+        // L'assaut raconté, et non celui du moteur : le jet qui achève la
+        // partie l'a déjà effacé, et c'est pourtant celui qu'on attend de voir.
+        if let r = session.report, let a = session.assautAffiche, let l = r.lancer {
             let colonnes = max(l.attaque.count, l.defense.count)
             VStack(spacing: 18) {
                 Text("\(session.player(a.attacker)?.name ?? "?") attaque \(session.game.name(a.to))")
@@ -521,7 +523,7 @@ struct DuelOverlay: View {
     /// c'est elle qu'on lit en premier. À deux humains sur un appareil, il n'y
     /// a pas de « vous » : la phrase reste alors blanche.
     private func couleurDuVerdict(_ r: DuelReport) -> Color {
-        guard let a = session.assault else { return Palette.ink }
+        guard let a = session.assautAffiche else { return Palette.ink }
         let attaquantEstMoi: Bool
         if session.enReseau {
             attaquantEstMoi = a.attacker == session.monRang
@@ -578,11 +580,11 @@ struct DuelOverlay: View {
         // sur l'écran qu'on lit le plus souvent. Chaque cas écrit maintenant
         // sa phrase entière ; c'est aussi la seule forme qu'un traducteur
         // puisse relire.
-        let nom = session.assault.flatMap { session.player($0.defender)?.name }
+        let nom = session.assautAffiche.flatMap { session.player($0.defender)?.name }
             ?? dit("Le défenseur")
-        let att = session.assault.flatMap { session.player($0.attacker)?.name }
+        let att = session.assautAffiche.flatMap { session.player($0.attacker)?.name }
             ?? dit("L'assaillant")
-        let lieu = session.assault.map { session.game.name($0.to) }
+        let lieu = session.assautAffiche.map { session.game.name($0.to) }
             ?? dit("La place")
         let cout = r.mise > 1 ? dit("deux hommes")
                               : dit("un homme")

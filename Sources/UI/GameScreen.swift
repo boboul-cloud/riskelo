@@ -147,7 +147,9 @@ private struct TopBar: View {
     var onManuel: () -> Void
 
     var body: some View {
-        let g = session.game
+        // Ce que montre le plateau, et non la partie elle-même : aux dés, les
+        // comptes attendent que le lancer ait fini de rouler.
+        let g = session.plateau
         HStack(spacing: 12) {
             Button(action: onQuit) {
                 Image(systemName: "chevron.left").font(.headline)
@@ -276,7 +278,7 @@ private struct StandingsBar: View {
     let session: GameSession
 
     var body: some View {
-        let g = session.game
+        let g = session.plateau
         VStack(spacing: 7) {
             // Chaque camp nommé, et un drapeau à celui qui a la main. La
             // pastille seule ne suffisait pas : elle disait la couleur, pas
@@ -365,7 +367,7 @@ private struct StandingsBar: View {
     }
 
     private func camp(_ j: Player) -> some View {
-        let g = session.game
+        let g = session.plateau
         let aLaMain = j.id == g.currentPlayer.id && !g.isOver
         let terres = g.territories(of: j.id).count
         let hommes = g.territories(of: j.id).reduce(0) { $0 + g.armies($1) }
@@ -398,7 +400,7 @@ private struct StandingsBar: View {
     }
 
     private func tenu(_ c: Continent) -> PlayerID? {
-        let g = session.game
+        let g = session.plateau
         guard let premier = g.owner[c.territories[0]],
               c.territories.allSatisfy({ g.owner[$0] == premier }) else { return nil }
         return premier
@@ -418,7 +420,7 @@ private struct BottomBar: View {
     var body: some View {
         let g = session.game
         VStack(spacing: 8) {
-            if session.stage == .announcing, let a = session.assault {
+            if session.stage == .announcing, let a = session.assautAffiche {
                 annonce(a)
             } else {
                 consigneEnCapsule

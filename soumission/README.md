@@ -212,8 +212,9 @@ iPhone, iPad and Mac — one app, in English and French.
 
 ## Avant d'envoyer
 
-- [x] Les essais automatiques : 229, tous verts sur le simulateur iPhone, le
-      24 septembre 2026 — après l'ajout du choix du défenseur aux dés
+- [x] Les essais automatiques : 233, tous verts sur le simulateur iPhone, le
+      24 septembre 2026 — après le choix du défenseur aux dés, et le plateau
+      qui attend la fin des dés pour montrer la prise
 - [ ] Une partie sur le **Monde réel** et une **aux dés**, sur un vrai iPhone —
       en se faisant attaquer, pour voir le choix « un dé ou deux »
 - [ ] Une partie **aux dés à deux appareils** : la note annonce que les deux

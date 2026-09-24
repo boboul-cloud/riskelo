@@ -482,6 +482,102 @@ struct DesTests {
         #expect(g.digest == reprise.digest)
     }
 
+    // MARK: - Le récit
+
+    /// Le moteur garde le dernier jet, pour que l'écran puisse le raconter
+    /// après coup.
+    @Test func leDernierJetSeRetient() {
+        var g = partie(2, seed: 17)
+        g.debugSkipToAttack()
+        guard let (base, cible) = g.debugFirstAssault(minArmies: 9, targetArmies: 9) else {
+            Issue.record("pas de front"); return
+        }
+        #expect(g.dernierJet == nil)
+        g.declareAssault(from: base, to: cible, questions: 3, category: nil)
+        #expect(g.dernierJet?.reports.last?.id == g.assault?.reports.last?.id)
+    }
+
+    /// Le jet qui achève la partie efface l'assaut du moteur — et c'est
+    /// pourtant celui qu'on attend de voir. Le moteur le garde de côté : sans
+    /// lui, l'écran passait droit à la victoire sans montrer les dés.
+    @Test func leJetQuiAcheveLaPartieSeRetient() {
+        var vu = false
+        for graine in UInt64(1) ... 40 where !vu {
+            var g = partie(2, seed: graine)
+            g.debugSkipToAttack()
+            guard let (base, cible) = g.debugFirstAssault(minArmies: 9, targetArmies: 1)
+            else { continue }
+            // Tout le plateau à l'assaillant, sauf la dernière place d'en face.
+            let moi = g.currentPlayer.id, lui = g.owner[cible]!
+            for id in g.map.order where id != cible && id != base {
+                g.seize(id, by: moi, armies: 1)
+            }
+            g.declareAssault(from: base, to: cible, questions: 3, category: nil)
+            guard g.isOver else { continue }
+            vu = true
+            #expect(g.assault == nil, "la partie finie ne garde pas d'assaut")
+            #expect(g.dernierJet?.conquered == true)
+            #expect(g.dernierJet?.reports.count == 1)
+            #expect(g.dernierJet?.defender == lui)
+        }
+        #expect(vu, "aucune graine n'a achevé la partie")
+    }
+
+    /// Le dernier jet ne voyage pas et ne s'enregistre pas : ce n'est pas la
+    /// partie, c'est ce que l'écran en raconte.
+    @Test func leDernierJetNeSEnregistrePas() throws {
+        var g = partie(2, seed: 17)
+        g.debugSkipToAttack()
+        guard let (base, cible) = g.debugFirstAssault(minArmies: 9, targetArmies: 9) else {
+            Issue.record("pas de front"); return
+        }
+        g.declareAssault(from: base, to: cible, questions: 3, category: nil)
+        let relue = try JSONDecoder().decode(GameState.self, from: JSONEncoder().encode(g))
+        #expect(relue.dernierJet == nil)
+        #expect(relue.digest == g.digest)
+    }
+
+    /// L'écran ne montre pas la prise avant les dés.
+    ///
+    /// Le moteur tranche l'assaut d'un bloc, et le plateau affichait donc la
+    /// place prise pendant que les dés roulaient encore. Il lit désormais la
+    /// partie d'avant le jet tant que celui-ci n'a pas été raconté — ici sur
+    /// l'appareil qui reçoit l'assaut d'en face, là où le décalage se voyait.
+    @Test @MainActor func lePlateauAttendLaFinDesDes() async throws {
+        var g = partie(2, seed: 23, humains: 2)
+        g.debugSkipToAttack()
+        guard let (base, cible) = g.debugFirstAssault(minArmies: 9, targetArmies: 1) else {
+            Issue.record("pas de front"); return
+        }
+        let (hote, invite) = FilFactice.paire()
+        defer { _ = hote }
+        let session = GameSession(fil: invite, heberge: false, game: g, monRang: 1, compteur: 0)
+
+        // Un seul homme en face : rien à choisir, le jet part à la déclaration.
+        let coup = Action.declareAssault(from: base, to: cible, questions: 3, category: nil)
+        var attendu = g
+        attendu.apply(coup)
+        guard let data = Message.coup(coup, numero: 1, empreinte: attendu.digest).data else {
+            Issue.record("le coup ne s'écrit pas"); return
+        }
+        invite.onReceive?(data, hote.moi)
+
+        #expect(session.game.digest == attendu.digest, "la partie, elle, a joué le coup")
+        #expect(session.plateau.armies(base) == 9, "le plateau attend les dés")
+        #expect(session.plateau.armies(cible) == 1)
+        #expect(session.plateau.owner[cible] == g.owner[cible])
+        #expect(session.assautAffiche?.to == cible, "la flèche reste dessinée")
+
+        // L'annonce, puis le lancer, écourtés d'un doigt.
+        for _ in 0 ..< 60 where session.plateau.digest != session.game.digest {
+            session.skipAhead()
+            try await Task.sleep(for: .milliseconds(100))
+        }
+        #expect(session.plateau.digest == session.game.digest,
+                "le lancer raconté, le plateau rattrape la partie")
+        session.raccrocher()
+    }
+
     /// Aucune question n'est tirée de la banque. Sans quoi le mode dépendrait
     /// des thèmes achetés, et une partie aux dés pourrait être refusée faute
     /// de questions dans la langue choisie.

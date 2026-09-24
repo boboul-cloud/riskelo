@@ -68,8 +68,9 @@ un simulateur suffit.
   c. Appareil A : « Commencer ».
 Les coups passent par un relais que nous hébergeons (Cloudflare Workers). Il
 recopie des paquets sans les lire : ni question, ni réponse, ni nom de joueur.
-Il connaît un identifiant tiré au sort à l'installation, le garde deux minutes
-après la partie pour permettre d'en reprendre une coupée, puis l'efface.
+Il connaît un identifiant tiré au sort à l'installation, le garde une semaine
+après la dernière séance pour qu'une partie se reprenne un autre soir, puis
+l'efface.
 
 3. PAR GAME CENTER — facultatif, pour ceux qui y sont déjà. Riskelo n'y voit
 que le pseudonyme des joueurs de la partie en cours et ne le conserve pas.

@@ -6,36 +6,127 @@
 
 ## En clair : la mise à jour 1.5
 
-Une mise à jour ne demande presque rien. L'application, ses packs, ses
-questionnaires et ses captures sont déjà chez Apple, et ils y restent. Pas
-d'AgentDouble pour une mise à jour : tout se fait à la main, en quelques
-cases.
+L'application, ses packs, ses questionnaires et ses captures sont déjà chez
+Apple, et ils y restent. Tous les textes de la 1.5 sont plus bas, et
+AgentDouble sait les écrire à ta place.
 
-1. **Envoyer le build 9** depuis Xcode : Product ▸ Archive, puis « Distribute
-   App » vers App Store Connect. La version 1.5 et le build 9 sont déjà
-   réglés dans `project.yml`.
-2. **Créer la version 1.5** dans App Store Connect — le « + » à côté de
-   « App iOS » —, puis choisir le build 9 quand Apple a fini de le traiter
-   (un quart d'heure environ).
-3. **Coller la note de version**, en français puis en anglais : les deux
-   textes sont juste en dessous. Le menu de langue, en haut de la page de la
-   version, change la case qu'on remplit.
-4. **Conseillé : remplacer la description.** Celle d'aujourd'hui annonce
-   « trois plateaux » et deux façons de se battre ; il y en a désormais
-   quatre et trois. Les deux textes à jour sont plus bas. Une description ne
-   change qu'avec une nouvelle version : c'est maintenant, ou à la suivante.
-5. **Soumettre à la revue.**
+Une précaution : la fenêtre d'AgentDouble (« + Choisir une app ») refuse les
+apps déjà en vente, et Riskelo l'est. C'est sa **ligne de commande** qui fait
+les mises à jour, à partir de sa fiche `metadata/apps/riskelo.yaml`, déjà
+remplie pour la 1.5.
 
-Rien d'autre à toucher. Les packs, déjà approuvés, n'ont pas à être joints de
-nouveau. Les questionnaires (confidentialité, âge) ne changent pas : la 1.5 ne
-recueille rien de plus que la 1.4. Les captures restent celles de la 1.4 ; en
-ajouter une du Monde réel est un plus, pas une obligation.
+1. ~~Envoyer le build 9~~ — **fait**.
+2. **Créer la version 1.5** dans App Store Connect : le « + » à côté de
+   « App iOS », puis « 1.5 ». Rien d'autre à remplir. Il faut le faire
+   avant l'étape suivante : sans version 1.5, AgentDouble ne peut pas écrire
+   le sous-titre.
+3. **Dans le Terminal**, trois lignes. `check` ne fait que lire et vérifier ;
+   `push` écrit :
+
+   ```bash
+   cd ~/Desktop/AgentDouble
+   npm run check riskelo
+   npm run push riskelo
+   ```
+
+   En français et en anglais, `push` écrit le sous-titre, le texte
+   promotionnel, la description, les mots-clés, la note de version, les
+   adresses et les notes pour la revue, puis rattache le build 9. Il
+   n'envoie aucune capture — celles de la 1.4 restent — et il ne soumet pas.
+4. **Sur le site d'Apple, « Confidentialité de l'app »** : passer la réponse
+   à « Oui », avec les quatre réponses du tableau plus bas. Cela ne dépend
+   pas de la version : ça peut se faire tout de suite.
+5. **Relire la page de la version 1.5**, dans les deux langues, puis
+   **soumettre à la revue**.
+
+Sans AgentDouble, tout se colle aussi à la main : chaque texte est plus bas,
+avec son nombre de caractères. Le sous-titre est dans « Informations sur
+l'app », le reste sur la page de la version 1.5 ; le menu de langue, en haut
+de page, change la case qu'on remplit.
+
+Ce qui change par rapport à la 1.4, en plus des textes :
+
+- **La fiche anglaise renvoie enfin vers les pages anglaises du site**
+  (assistance, confidentialité, site). Elle renvoyait vers les pages
+  françaises.
+- **La déclaration de confidentialité** passe de « Aucune donnée collectée »
+  à « Oui : un identifiant d'appareil ». Depuis la 1.4, le relais du jeu au
+  loin garde une semaine, au lieu de deux minutes, le numéro tiré au sort de
+  chaque appareil, pour qu'une partie se reprenne un autre soir. Apple
+  compte cela comme une donnée collectée. La politique de confidentialité du
+  site le dit, et la note de version l'annonce, comme la politique le
+  promet.
+- Les packs, déjà approuvés, n'ont pas à être joints de nouveau, et la
+  classification par âge ne change pas.
+
+### Confidentialité de l'app — les réponses
+
+| Écran d'App Store Connect | Réponse |
+|---|---|
+| Collectez-vous des données depuis cette app ? | **Oui** |
+| Types de données | **Identifiants ▸ Identifiant de l'appareil** — rien d'autre |
+| À quoi sert-elle ? | **Fonctionnalité de l'app** — rien d'autre |
+| Est-elle liée à l'identité de l'utilisateur ? | **Non** |
+| Sert-elle au suivi ? | **Non** |
+
+### Les adresses de la fiche anglaise
+
+| Champ | Adresse |
+|---|---|
+| URL d'assistance | `https://boboul-cloud.github.io/riskelo/en/support.html` |
+| URL marketing | `https://boboul-cloud.github.io/riskelo/en/` |
+| Politique de confidentialité | `https://boboul-cloud.github.io/riskelo/en/privacy.html` |
+
+La fiche française garde les siennes.
+
+---
+
+## Le sous-titre, le texte promotionnel et les mots-clés
+
+Sous-titre français — 28 caractères sur 30 :
+
+```
+Conquête et culture générale
+```
+
+Sous-titre anglais — 19 caractères sur 30 :
+
+```
+Conquest and trivia
+```
+
+Texte promotionnel français — 167 caractères sur 170 :
+
+```
+2 400 questions, quatre plateaux, trois manières de se battre, dés compris. Seul, à plusieurs sur un appareil, ou au loin avec un code. Aucune publicité, aucun compte.
+```
+
+Texte promotionnel anglais — 154 caractères sur 170 :
+
+```
+2,400 questions, four boards, three ways to fight — dice included. Play alone, around one device, or far apart with a six-letter code. No ads, no account.
+```
+
+Mots-clés français — 97 caractères sur 100. « conquête » et « culture
+générale » sont maintenant dans le sous-titre, qu'Apple indexe déjà : ils
+laissent leur place à « dés », « géographie », « histoire » et « questions ».
+
+```
+stratégie,quiz,dés,plateau,territoires,duel,solo,famille,hors ligne,géographie,histoire,questions
+```
+
+Mots-clés anglais — 97 caractères sur 100. « trivia » passe dans le
+sous-titre, « dice » entre.
+
+```
+quiz,strategy,board,territory,turn-based,offline,online,multiplayer,family,geography,history,dice
+```
 
 ---
 
 ## La note de version — français
 
-1249 caractères sur 4 000.
+1545 caractères sur 4 000.
 
 ```
 LE MONDE RÉEL
@@ -48,12 +139,15 @@ LES DÉS, COMME DANS LA BOÎTE
 • Deux dés font plus mal à l'assaillant, mais peuvent coûter deux hommes d'un coup ; un seul n'en coûte jamais plus d'un. Le choix se fait à chaque assaut, contre un ami comme contre la machine.
 • Il se choisit à la mise en place, à côté du Classique et du Face à face, et se joue aussi à plusieurs appareils : les deux écrans voient tomber les mêmes dés.
 
+LA CONFIDENTIALITÉ, DITE EXACTEMENT
+• Pour qu'une partie au loin se reprenne un autre soir, le relais garde une semaine un numéro tiré au sort à l'installation. Il ne désigne personne, et aucun nom ne lui parvient. La fiche de l'App Store et la politique de confidentialité le disent désormais.
+
 iPhone, iPad et Mac, comme toujours.
 ```
 
 ## La note de version — anglais
 
-1074 caractères sur 4 000.
+1334 caractères sur 4 000.
 
 ```
 THE REAL WORLD
@@ -65,6 +159,9 @@ DICE, JUST LIKE THE BOX
 • For those who prefer the board game: a third mode, with no questions. The attacker rolls up to three dice, the defender one or two, as they choose; the highest are compared pair by pair, and ties go to the defender. A single roll can cost each side a man.
 • Two dice hurt the attacker more, but can cost two men at once; one never costs more than one. The choice comes with every assault, against a friend or against the machine.
 • Choose it when you set up, alongside Classic and Showdown. It plays across devices too: both screens see the same dice fall.
+
+PRIVACY, STATED EXACTLY
+• So that a game far away can pick up again another evening, the relay keeps a number drawn at random at installation for a week. It designates nobody, and no name ever reaches it. The App Store page and the privacy policy now say so.
 
 iPhone, iPad and Mac, as always.
 ```
@@ -89,7 +186,7 @@ Quatre retouches à la description de la 1.4, rien d'autre :
 
 Chaque texte se colle **en entier**, à la place de l'ancien.
 
-### Français — 3971 caractères sur 4 000
+### Français — 3980 caractères sur 4 000
 
 ```
 Riskelo est un jeu de conquête au tour par tour où le lancer de dés est remplacé par une question de culture générale.
@@ -138,7 +235,7 @@ Une partie au loin tient sur plusieurs soirées, et vous pouvez en avoir plusieu
 
 CE QUE RISKELO NE FAIT PAS
 
-Aucune publicité. Aucun abonnement. Aucun compte. Aucun traceur, aucune mesure d'audience. Les questions sont dans l'application : jouer ne demande aucune connexion. Seule la partie au loin passe par un relais, qui n'apprend rien de vous et ne garde rien.
+Aucune publicité. Aucun abonnement. Aucun compte. Aucun traceur, aucune mesure d'audience. Les questions sont dans l'application : jouer ne demande aucune connexion. Seule la partie au loin passe par un relais, qui n'apprend rien de vous et ne garde pas la partie.
 
 DIX-SEPT PACKS, EN OPTION
 
@@ -147,7 +244,7 @@ Seize packs scolaires — Histoire, Géographie, Français et SVT, pour les quat
 iPhone, iPad et Mac — une seule application, en français et en anglais.
 ```
 
-### Anglais — 3912 caractères sur 4 000
+### Anglais — 3921 caractères sur 4 000
 
 La version anglaise tenait sans rien couper : seules les deux lignes neuves
 et les deux titres changent.
@@ -199,7 +296,7 @@ A game played far away can span several evenings: the code stays good for a week
 
 WHAT RISKELO DOES NOT DO
 
-No ads. No subscription. No account. No tracker, no analytics. The questions are in the app: playing needs no connection at all. Only a game played far away goes through a relay, which learns nothing about you and keeps nothing.
+No ads. No subscription. No account. No tracker, no analytics. The questions are in the app: playing needs no connection at all. Only a game played far away goes through a relay, which learns nothing about you and does not keep the game.
 
 SEVENTEEN PACKS, IF YOU WANT THEM
 
@@ -221,9 +318,13 @@ iPhone, iPad and Mac — one app, in English and French.
       écrans voient tomber les mêmes dés, et le choix du défenseur voyage d'un
       téléphone à l'autre. Des essais automatiques le vérifient, mais personne
       ne l'a encore joué sur deux vrais téléphones.
-- [ ] Build 9 envoyé, et choisi dans la version 1.5
-- [ ] Note de version collée, en français et en anglais
-- [ ] Description remplacée, dans les deux langues (conseillé)
+- [x] Build 9 envoyé
+- [ ] Version 1.5 créée dans App Store Connect
+- [ ] `npm run check riskelo`, puis `npm run push riskelo` — ou les textes
+      collés à la main
+- [ ] « Confidentialité de l'app » passée à « Oui »
+- [ ] Page de la version 1.5 relue, en français et en anglais — le build 9
+      y est bien choisi
 - [ ] Soumis à la revue
 
 ## À côté de la mise à jour
@@ -248,7 +349,7 @@ Les titres viennent des notes réellement publiées, relues chez Apple.
 | 1.2 | 8 septembre | les conquêtes personnelles décident la partie |
 | 1.3 | 17 septembre | le jeu au loin, la table à plusieurs appareils |
 | 1.4 (build 8) | 19 septembre | reprendre un autre soir, plusieurs parties à la fois, le français ou l'anglais |
-| **1.5 (build 9)** | à envoyer | le Monde réel, les dés — et le défenseur qui choisit un dé ou deux |
+| **1.5 (build 9)** | build envoyé le 24 septembre | le Monde réel, les dés — et le défenseur qui choisit un dé ou deux |
 
 Les notes de la 1.3 et de la 1.4 reprenaient à leur suite les sections des
 versions d'avant. Celle de la 1.5 ne dit que ce qui est neuf ; pour garder
@@ -266,9 +367,9 @@ la fiche change. Pour une mise à jour comme la 1.5, cette page suffit.
 
 | Fichier | Ce qu'il contient |
 |---|---|
-| [FICHE-DE-SOUMISSION.md](FICHE-DE-SOUMISSION.md) | Tout, dans l'ordre où App Store Connect le demande. **Sa section 4 porte encore la note de la 1.3 : ne pas la coller**, la bonne est plus haut. |
+| [FICHE-DE-SOUMISSION.md](FICHE-DE-SOUMISSION.md) | Tout, dans l'ordre où App Store Connect le demande. Pour la description et la note de version, sa section 4 renvoie ici. |
 | [metadonnees.md](metadonnees.md) | Nom, sous-titre, mots-clés, description, catégories, URL |
-| [LOCALISATION-EN.md](LOCALISATION-EN.md) | La fiche anglaise, telle qu'elle a été préparée pour la 1.4 |
+| [LOCALISATION-EN.md](LOCALISATION-EN.md) | La fiche anglaise : adresses, sous-titre, mots-clés, texte promotionnel |
 | [confidentialite-app-store.md](confidentialite-app-store.md) | Les réponses au questionnaire « Confidentialité des données » |
 | [captures-decran.md](captures-decran.md) | Les tailles exigées, les écrans à photographier, la marche à suivre |
 | [packs-app-store.md](packs-app-store.md) | Les trente-quatre achats intégrés — dix-sept par langue |
@@ -280,6 +381,12 @@ le dossier `docs/` de ce dépôt :
 - Assistance — <https://boboul-cloud.github.io/riskelo/assistance.html>
 - Confidentialité — <https://boboul-cloud.github.io/riskelo/confidentialite.html>
 - Marketing — <https://boboul-cloud.github.io/riskelo/>
+
+Et leurs versions anglaises, pour la fiche anglaise :
+
+- Support — <https://boboul-cloud.github.io/riskelo/en/support.html>
+- Privacy — <https://boboul-cloud.github.io/riskelo/en/privacy.html>
+- Marketing — <https://boboul-cloud.github.io/riskelo/en/>
 
 ### Le Mac
 

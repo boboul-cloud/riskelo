@@ -4,10 +4,23 @@ App Store Connect ▸ votre app ▸ **Confidentialité de l'app**.
 
 ## La réponse d'ensemble
 
-> **Collectez-vous des données depuis cette app ?**
-> → **Non, nous ne collectons aucune donnée de cette app.**
+> **Collectez-vous des données depuis cette app ?** → **Oui, nous collectons
+> des données de cette app.**
 
-C'est exact et vérifiable :
+Une seule donnée, et quatre réponses :
+
+| Écran d'App Store Connect | Réponse |
+|---|---|
+| Types de données | **Identifiants ▸ Identifiant de l'appareil** — rien d'autre |
+| À quoi sert-elle ? | **Fonctionnalité de l'app** — rien d'autre |
+| Est-elle liée à l'identité de l'utilisateur ? | **Non** |
+| Sert-elle au suivi ? | **Non** |
+
+La fiche de l'App Store affichera alors « Données non liées à vous :
+Identifiants ». Cela ne change rien au classement ni à la mise en avant, et se
+modifie sans nouvelle version.
+
+Tout le reste ne sort pas de l'appareil, et c'est vérifiable :
 
 - aucun kit tiers (pas de régie publicitaire, pas d'outil d'analyse, pas de
   service d'authentification) — le projet n'a **aucune dépendance externe** ;
@@ -31,7 +44,7 @@ ouvre cet écran :
 
 | Ce qui sort | Où | Combien de temps c'est gardé |
 |---|---|---|
-| Un identifiant tiré au sort à l'installation | Le relais, chez Cloudflare | ≤ 2 minutes après le départ du dernier joueur, puis effacé |
+| Un identifiant tiré au sort à l'installation | Le relais, chez Cloudflare | **une semaine** après le départ du dernier joueur, puis effacé |
 | Les coups de la partie, sous forme opaque | Le relais | le temps de les recopier — rien n'est écrit |
 
 Ce qui **ne sort jamais** : le pseudo, le nom de l'appareil, aucune adresse,
@@ -46,15 +59,17 @@ d'ensemble devrait alors passer à **Oui**, catégorie *Identifiants ▸
 Identifiant d'appareil*, usage *Fonctionnalité de l'app*, **non lié à
 l'identité**.
 
-**La réponse reste donc « Non ».** Les deux mouvements ci-dessus servent la
-requête immédiate et rien d'autre, et les deux minutes du salon sont le délai
-de reprise après coupure — sans elles, un joueur qui passe dans un tunnel perd
-sa partie.
+**La réponse est donc « Oui », depuis la 1.4.** Jusqu'à la 1.3, le salon
+s'effaçait deux minutes après le départ du dernier joueur : c'était le délai de
+reprise après une coupure, et « Non » se défendait. Depuis la 1.4, le salon
+garde le code **une semaine**, pour qu'une partie se reprenne un autre soir
+(`GRACE_MS` dans `serveur/src/index.js`). L'identifiant tiré au sort reste donc
+une semaine hors de l'appareil : c'est bien plus long que la requête immédiate,
+et c'est ce qu'Apple appelle une donnée collectée.
 
-C'est un jugement, et il est défendable. Si vous préférez la prudence,
-répondre « Oui » avec *Identifiant d'appareil · Fonctionnalité de l'app · non
-lié à l'identité* est également exact, et n'a aucune conséquence sur le
-classement ni sur la mise en avant de l'app.
+Ce que garde le salon pendant cette semaine, et rien d'autre : le code,
+l'identifiant de celui qui l'a ouvert, ceux des joueurs admis, la version du
+jeu, et si la partie a commencé. Pas la partie, pas les coups, aucun nom.
 
 ## Les questions annexes
 

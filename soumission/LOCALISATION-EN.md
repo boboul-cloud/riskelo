@@ -41,92 +41,32 @@ renvoie plutôt que de promettre une page qui n'existe pas.
 ### Sous-titre — 30 signes max
 
 ```
-The conquest game without dice
+Conquest and trivia
 ```
 
 ### Mots-clés — 100 signes max
 
 ```
-trivia,quiz,strategy,board,territory,turn-based,offline,multiplayer,family,geography,history,solo
+quiz,strategy,board,territory,turn-based,offline,online,multiplayer,family,geography,history,dice
 ```
 
 ### Texte promotionnel — 170 signes max
 
 ```
-2,400 questions in the game, three boards, two ways to duel. No ads, no account, no connection needed — the whole thing runs on the device, even on a plane.
+2,400 questions, four boards, three ways to fight — dice included. Play alone, around one device, or far apart with a six-letter code. No ads, no account.
 ```
 
 ### Description — 4 000 signes max
 
-```
-Riskelo is a turn-based conquest game where the roll of the dice is replaced by a trivia question.
-
-The attacker picks the subject and how many questions — those are the dice. The defender answers against the clock. A right answer and it is the attacker who loses a man; a wrong answer, or time running out, and it is the defender. One question is worth exactly one roll: it costs a man to one side or the other.
-
-TWO WAYS TO FIGHT
-
-• Classic — the attacker asks and picks the ground; the defender answers alone. What you know is your armor.
-• Showdown — both players get the same question. Both know it? The clock settles it. Neither? The territory holds, the way a tied roll holds it. And the defender can double the stake before answering.
-
-THE PRESSURE OF A SIEGE
-
-Without chance, a player who knows would never lose a place. What replaces the statistics of the dice is time: fifteen seconds on the first question, and the clock tightens with every question the same territory takes in the same turn. Pressing a place eventually pays — but it is the defender's breath that gives out, not their luck.
-
-THREE BOARDS
-
-• The Ring — an invented world, five lands in a circle, 28 territories. The short game.
-• Europe — from the Atlantic to the Black Sea, 38 territories.
-• World — six continents, 42 territories.
-
-TWO TO FOUR PLAYERS
-
-• Alone against the machine, whose knowledge sets anywhere from 35% to 90% correct answers and whose play has three levels — knowing and playing well are two different things.
-• Around one device, passed from hand to hand.
-• On several devices, one per player: no account, no setup, no server. The local Wi-Fi does it, or a direct link between the devices when there is no network — it works on a train.
-
-Everyone can enter a name: a side reads "Blue · Marie", and the name travels from device to device.
-
-THE RULES FROM THE BOX, OPTIONAL
-
-• Territory cards, with the trade-in climbing at every exchange.
-• Total war: every territory, no exception — a whole evening in one game.
-• Personal conquests: each player is dealt an objective only they can see — two continents, so many places held, one side to bring down. Filling it wins outright, and the territory count no longer tells you who is winning.
-• Scholar's reinforcement: one extra man for every few right answers in the same subject.
-
-2,400 QUESTIONS IN THE GAME
-
-Six subjects — Geography, History, Science & Nature, Arts & Literature, Sports & Games, Screen & Music — four hundred questions each, at three levels of difficulty. The mix is set before the game: easy for playing with children, mixed the way a boxed game would be, tough for anyone who finds the rest too easy. The draw never leaves the subject asked for: when you choose the ground, it is held. A seventh choice leaves the subject to chance, for anyone who would rather not pick. And a question does not come back: the device remembers what has already been asked, and puts the ones you have never seen in front.
-
-QUESTION PACKS, IF YOU WANT THEM
-
-Seventeen optional packs add 3,600 more questions. Sixteen school decks — History, Geography, English and Science, for grades 6 through 9, two hundred questions each — and Rock 70-80, four hundred questions on the music of the 1970s and 1980s. The base game is whole without them. And at a table of several devices, everyone plays the host's packs, bought or not.
-
-THE GAME KEEPS
-
-You find it where you left it. And the library records every turn without being asked: you can go back to the moment it all turned and play the rest again, without erasing the original.
-
-WHAT RISKELO DOES NOT DO
-
-No ads. No account. No tracker, no analytics. No internet connection is needed: the questions are in the app, and your games never leave your device.
-
-iPhone, iPad and Mac — one app, in English and French.
-```
-
-> La dernière ligne a changé depuis la fiche américaine : elle annonçait
-> « one app, in English ». L'application porte maintenant les deux langues, et
-> une description qui l'ignore serait fausse le jour où un lecteur anglais
-> bascule son appareil en français.
+**La description à jour est dans [README.md](README.md)**, en français et
+en anglais — celle de la 1.5. Rien n'est recopié ici : deux copies d'un
+même texte finissent par dire deux choses différentes, et c'est la
+mauvaise qu'on colle.
 
 ### Nouveautés de cette version
 
-```
-Riskelo now speaks English. The interface, the manual and six thousand new
-questions — written for an American reader, not translated — come with it, and
-the app follows your device's language.
-
-Sixteen new school packs cover the American curriculum from grade 6 to grade 9:
-History, Geography, English and Science. The French packs are unchanged.
-```
+**La note de la version en cours est dans [README.md](README.md)**, en
+français et en anglais.
 
 ## Les dix-sept articles à créer
 

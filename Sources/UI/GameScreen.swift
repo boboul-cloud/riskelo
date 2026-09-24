@@ -858,12 +858,21 @@ private struct AssaultPanel: View {
     private func legendeDesDes(_ g: GameState) -> String {
         let une = session.draftQuestions == 1
         if g.rules.mode == .des {
-            // Le défenseur en oppose deux dès qu'il a deux hommes, quoi qu'on
-            // annonce : ce qu'on choisit ici, c'est seulement combien de dés on
-            // lui oppose, et les deux plus forts de chaque main se comparent.
-            let defense = min(2, g.armies(session.target ?? ""))
+            // La machine en oppose deux dès qu'elle a deux hommes, quoi qu'on
+            // annonce ; un humain choisit un dé ou deux après l'annonce. Ce
+            // qu'on choisit ici, c'est seulement combien de dés on lui oppose,
+            // et les plus forts de chaque main se comparent.
+            let cible = session.target ?? ""
+            let defense = min(2, g.armies(cible))
+            let aSonChoix = g.choisitSesDes(g.owner[cible] ?? -1, garnison: g.armies(cible))
             switch session.draftQuestions {
             case 1:
+                if aSonChoix {
+                    return dit("""
+                               Un dé contre un ou deux, à son choix. L'égalité lui profite : \
+                               il faut faire mieux, pas aussi bien.
+                               """)
+                }
                 return defense > 1
                     ? dit("""
                           Un dé contre ses deux. L'égalité lui profite : il faut faire mieux, \
@@ -874,15 +883,25 @@ private struct AssaultPanel: View {
                           pas aussi bien.
                           """)
             case 2:
-                return dit("""
-                           Deux dés. Les deux meilleurs de chaque main se comparent, et le \
-                           jet peut coûter un homme à chacun.
-                           """)
+                return aSonChoix
+                    ? dit("""
+                          Deux dés contre un ou deux, à son choix. Contre deux, le jet peut \
+                          coûter un homme à chacun.
+                          """)
+                    : dit("""
+                          Deux dés. Les deux meilleurs de chaque main se comparent, et le \
+                          jet peut coûter un homme à chacun.
+                          """)
             default:
-                return dit("""
-                           Trois dés contre ses deux. Le troisième n'affronte personne — il \
-                           rend seulement les deux autres meilleurs.
-                           """)
+                return aSonChoix
+                    ? dit("""
+                          Trois dés contre un ou deux, à son choix. Le troisième n'affronte \
+                          personne — il rend seulement les autres meilleurs.
+                          """)
+                    : dit("""
+                          Trois dés contre ses deux. Le troisième n'affronte personne — il \
+                          rend seulement les deux autres meilleurs.
+                          """)
             }
         }
         if g.rules.mode == .classique {

@@ -491,7 +491,13 @@ struct GameState {
             note(.duel, questions > 1
                  ? dit("\(currentPlayer.name) attaque \(name(to)) depuis \(name(from)) — deux dés.")
                  : dit("\(currentPlayer.name) attaque \(name(to)) depuis \(name(from)) — un dé."))
-            lancerLesDes(&a)
+            // Un défenseur qui choisit ses dés suspend l'assaut : rien n'est
+            // encore jeté, et c'est son coup à lui qui le fera.
+            if choisitSesDes(defender, garnison: armies(to)) {
+                assault = a
+                return true
+            }
+            lancerLesDes(&a, defense: min(2, armies(to)))
             assault = a
             if a.conquered { conquer(from: a.from, to: a.to, volley: a.volley) }
             return true
@@ -527,18 +533,56 @@ struct GameState {
     /// La salve s'arrête pour les mêmes raisons qu'en questions : la place est
     /// prise, ou l'assaillant n'a plus d'homme à risquer au-delà de sa
     /// garnison.
-    private mutating func lancerLesDes(_ a: inout Assault) {
-        // Le défenseur lance tout ce qu'il peut — deux dés, ou un s'il n'a
-        // qu'un homme. Il n'a pas à le choisir : au jeu de plateau le second
-        // dé est toujours à son avantage, et un choix qui n'en est pas un
-        // n'est qu'un appui de plus à donner.
-        let defense = min(2, armies(a.to))
+    private mutating func lancerLesDes(_ a: inout Assault, defense: Int) {
         encaisser(Combat.resolveDes(Combat.lancer(attaque: a.volley, defense: defense,
                                                   using: &rng)), &a)
         // Un lancer épuise la salve : aux dés, la salve **est** le jet, et ses
         // trois dés partent ensemble. Presser la place demande un nouvel
         // assaut, comme au jeu de plateau.
         a.asked = a.volley
+    }
+
+    /// Le défenseur choisit-il ses dés ?
+    ///
+    /// Au jeu de plateau, il lance un dé ou deux, à son gré. Deux dés font
+    /// plus mal à l'assaillant — contre trois, celui-ci perd 0,92 homme par jet
+    /// au lieu de 0,34 — mais peuvent coûter deux hommes d'un coup, 37 fois
+    /// sur 100. Un seul n'en coûte jamais plus d'un. C'est la prudence contre
+    /// le rendement, et c'est à celui qui tient la place d'en juger.
+    ///
+    /// Tout défenseur humain choisit — contre un autre humain, sur le même
+    /// appareil ou au loin, comme contre la machine. La machine, elle, lance
+    /// tout ce qu'elle peut, et ne fait donc attendre personne. Un homme seul
+    /// n'a rien à choisir : il n'a qu'un dé.
+    ///
+    /// La règle se lit dans la liste des joueurs, qui ne change pas en cours
+    /// de partie : les appareils en réseau tombent donc d'accord sans avoir
+    /// à se le dire.
+    func choisitSesDes(_ defenseur: PlayerID, garnison: Int) -> Bool {
+        rules.mode == .des && garnison >= 2
+            && players.first(where: { $0.id == defenseur })?.isBot == false
+    }
+
+    /// Un assaut aux dés attend-il que le défenseur choisisse ?
+    ///
+    /// L'état n'a pas de champ pour le dire, et n'en a pas besoin : un assaut
+    /// aux dés est jeté d'un bloc, et tant qu'il ne l'est pas, sa salve n'est
+    /// pas entamée. Une partie enregistrée à cet instant se relit donc telle
+    /// quelle, sur les versions qui ne connaissent pas encore le choix.
+    var attendLaDefense: Bool {
+        guard rules.mode == .des, let a = assault else { return false }
+        return a.current == nil && !a.conquered && a.asked < a.volley
+    }
+
+    /// Le défenseur choisit un dé ou deux, et le lancer part.
+    @discardableResult
+    mutating func defendre(avec des: Int) -> Bool {
+        guard attendLaDefense, var a = assault,
+              des >= 1, des <= min(2, armies(a.to)) else { return false }
+        lancerLesDes(&a, defense: des)
+        assault = a
+        if a.conquered { conquer(from: a.from, to: a.to, volley: a.volley) }
+        return true
     }
 
     /// Ce qu'un échange coûte, et à qui.

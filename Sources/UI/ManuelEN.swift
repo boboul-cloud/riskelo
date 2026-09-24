@@ -221,13 +221,15 @@ enum ManuelEN {
         blocs: [
             .p("The first two modes replace the die with a question. This one goes "
                + "the other way: there is no question at all, and you play the board "
-               + "game's rule as it stands. You declare the assault, the dice fall, "
-               + "and everything is settled at once."),
+               + "game's rule as it stands. You declare the assault, the defender "
+               + "picks their dice, and everything is settled in one throw."),
             .h("The throw"),
             .p("The attacker calls one, two or three dice — one troop more than the "
                + "dice called, since you never attack with your garrison. The defender "
-               + "answers with two, or one if a single troop holds the place; they do "
-               + "not choose, the second die always being in their favour."),
+               + "answers with one die or two, as they choose, once the call is made "
+               + "and before anything falls — on one device, across devices, and "
+               + "against the machine. The machine always answers with two; and a "
+               + "place held by a single troop has only one."),
             .p("Both hands are sorted highest to lowest and compared pair by pair: best "
                + "against best, then next against next. The attacker's third die faces "
                + "no one — it only makes the other two better."),
@@ -242,7 +244,19 @@ enum ManuelEN {
             .note("At three dice against two, the attacker loses 0.92 troops where the "
                   + "defender loses 1.08: attacking pays here, where the question "
                   + "discourages it. Always throw everything you can — the defender "
-                  + "answers with two dice whatever happens."),
+                  + "never answers with more than two dice."),
+            .h("One die or two"),
+            .p("Two dice hurt the attacker more, but can cost you two troops at once — "
+               + "37 times in 100 against three dice. One never costs you more than "
+               + "one. It is caution against return:"),
+            .tableau(["Against three dice", "You lose", "The attacker loses"],
+                     [["Two dice", "1.08 troops", "0.92 troops"],
+                      ["One die", "0.66 troops", "0.34 troops"]]),
+            .p("Two dice remain the better return: the attacker pays more for each "
+               + "troop they take from you. One die is for when the place must hold "
+               + "this turn: a garrison of two cannot fall on a single throw. Against "
+               + "a single attacking die only one pair is compared, and the second "
+               + "die costs you no extra risk."),
             .note("The game keeps its shape all the same. Measured over three-player "
                   + "games played by the machine: eight turns with dice, seven in "
                   + "classic, eight in showdown. What changes is the number of "
@@ -252,8 +266,9 @@ enum ManuelEN {
             .h("What goes away"),
             .p("No subject to choose before an assault, no timer, no raise, and no "
                + "knowledge file to consult: there is nothing to know about anyone. "
-               + "Setup drops the question mix and the scholar's reinforcement on its "
-               + "own, since neither has anything left to act on."),
+               + "Setup drops the question mix, the scholar's reinforcement and the "
+               + "machine's knowledge on its own, since none of them has anything left "
+               + "to act on: against the machine, only its strategy counts."),
             .h("What stays"),
             .p("Everything else: reinforcements, continents, territory cards, private "
                + "objectives, the end-of-turn move, the victory threshold. And the "
@@ -267,8 +282,9 @@ enum ManuelEN {
                 "Anyone who wants to see where the rest comes from: play one with dice, "
                 + "then the same one in classic, and the variant explains itself.",
             ]),
-            .note("Across devices the dice fall on both sides with nothing sent: the "
-                  + "two devices draw the same sequence from the same seed. It is the "
+            .note("Across devices the dice fall on both sides with nothing sent but "
+                  + "the call and the defender's choice: the two devices draw the same "
+                  + "sequence from the same seed. It is the "
                   + "same mechanism that lets a game resume where it was left."),
         ])
 

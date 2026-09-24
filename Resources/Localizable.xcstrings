@@ -267,6 +267,16 @@
         }
       }
     },
+    "%@ choisit ses dés…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ is choosing their dice…"
+          }
+        }
+      }
+    },
     "%@ est prise.": {
       "localizations": {
         "en": {
@@ -759,6 +769,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@, c'est à vous !"
+          }
+        }
+      }
+    },
+    "%@, combien de dés opposez-vous ?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, how many dice do you defend with?"
           }
         }
       }
@@ -2931,6 +2951,26 @@
         }
       }
     },
+    "Deux dés contre un ou deux, à son choix. Contre deux, le jet peut coûter un homme à chacun.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Two dice against one or two, their choice. Against two, the throw can cost each side a troop."
+          }
+        }
+      }
+    },
+    "Deux dés à l'assaut": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Two dice attacking"
+          }
+        }
+      }
+    },
     "Deux dés. Les deux meilleurs de chaque main se comparent, et le jet peut coûter un homme à chacun.": {
       "localizations": {
         "en": {
@@ -3372,6 +3412,16 @@
         }
       }
     },
+    "Face à un seul dé, ne risque rien de plus": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Against a single die, risks nothing more"
+          }
+        }
+      }
+    },
     "Facile": {
       "localizations": {
         "en": {
@@ -3539,6 +3589,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Français"
+          }
+        }
+      }
+    },
+    "Frappe plus fort, mais peut coûter deux hommes": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hits harder, but can cost two troops"
           }
         }
       }
@@ -4562,12 +4622,12 @@
         }
       }
     },
-    "Le jeu de plateau tel quel : l'assaillant lance jusqu'à trois dés, le défenseur deux, et les mains triées se comparent paire par paire. Un même jet peut coûter un homme à chacun. Tout le reste ne bouge pas.": {
+    "Le jeu de plateau tel quel : l'assaillant lance jusqu'à trois dés, le défenseur un ou deux à son choix — la machine toujours deux —, et les mains triées se comparent paire par paire. Un même jet peut coûter un homme à chacun. Tout le reste ne bouge pas.": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "The board game as it stands: the attacker throws up to three dice, the defender two, and the sorted hands are compared pair by pair. One throw can cost each side a troop. Everything else stays put."
+            "value": "The board game as it stands: the attacker throws up to three dice, the defender one or two as they choose — the machine always two — and the sorted hands are compared pair by pair. One throw can cost each side a troop. Everything else stays put."
           }
         }
       }
@@ -5307,6 +5367,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mêlées"
+          }
+        }
+      }
+    },
+    "Ne coûte jamais plus d'un homme": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Never costs more than one troop"
           }
         }
       }
@@ -7311,6 +7381,26 @@
         }
       }
     },
+    "Trois dés contre un ou deux, à son choix. Le troisième n'affronte personne — il rend seulement les autres meilleurs.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Three dice against one or two, their choice. The third faces no one — it only makes the others better."
+          }
+        }
+      }
+    },
+    "Trois dés à l'assaut": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Three dice attacking"
+          }
+        }
+      }
+    },
     "Trois symboles identiques, ou trois différents. Le prochain échange vaut %lld hommes.": {
       "localizations": {
         "en": {
@@ -7435,6 +7525,26 @@
           "stringUnit": {
             "state": "translated",
             "value": "One die against their two. Ties go to them: you have to do better, not just as well."
+          }
+        }
+      }
+    },
+    "Un dé contre un ou deux, à son choix. L'égalité lui profite : il faut faire mieux, pas aussi bien.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One die against one or two, their choice. Ties go to them: you have to do better, not just as well."
+          }
+        }
+      }
+    },
+    "Un dé à l'assaut": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One die attacking"
           }
         }
       }

@@ -84,6 +84,8 @@ struct ReseauTests {
             .answer(.chosen(2, elapsed: 4.25)),
             .answer(.timeout),
             .relancer,
+            .defendre(1),
+            .defendre(2),
             .dismissAssault,
             .occupy(3),
             .fortify(from: "A1", to: "A2", count: 2),

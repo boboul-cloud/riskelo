@@ -54,7 +54,11 @@ enum Message: Codable {
     /// assaut qui se tranche à la déclaration au lieu d'attendre des
     /// réponses. Un appareil resté en 1.3 ne sait pas décoder le mode et,
     /// s'il le savait, attendrait une question qui ne viendra jamais.
-    static let dialecte = 9
+    /// 10 : aux dés, le défenseur humain choisit un dé ou deux — un coup de
+    /// plus dans `Action`. Un appareil en dialecte 9 jetterait les dés dès la
+    /// déclaration pendant que l'autre attendrait le choix : deux parties
+    /// différentes, sans que rien ne le dise.
+    static let dialecte = 10
 
     /// La partie entière, envoyée par celui qui l'a ouverte — à chacun son
     /// rang, et le compte des coups déjà joués.

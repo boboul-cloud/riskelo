@@ -35,7 +35,7 @@ ajouter une du Monde réel est un plus, pas une obligation.
 
 ## La note de version — français
 
-1035 caractères sur 4 000.
+1249 caractères sur 4 000.
 
 ```
 LE MONDE RÉEL
@@ -44,7 +44,8 @@ LE MONDE RÉEL
 • La carte se promène et se rapproche sous le doigt. Les noms paraissent à mesure qu'on rapproche, sans jamais se chevaucher ; le nombre d'hommes, lui, se lit toujours.
 
 LES DÉS, COMME DANS LA BOÎTE
-• Pour ceux qui préfèrent le jeu de plateau : un troisième mode, sans question. L'assaillant lance jusqu'à trois dés, le défenseur deux ; les plus forts se comparent paire par paire, et l'égalité va au défenseur. Un même lancer peut coûter un homme à chacun.
+• Pour ceux qui préfèrent le jeu de plateau : un troisième mode, sans question. L'assaillant lance jusqu'à trois dés, le défenseur un ou deux, à son choix ; les plus forts se comparent paire par paire, et l'égalité va au défenseur. Un même lancer peut coûter un homme à chacun.
+• Deux dés font plus mal à l'assaillant, mais peuvent coûter deux hommes d'un coup ; un seul n'en coûte jamais plus d'un. Le choix se fait à chaque assaut, contre un ami comme contre la machine.
 • Il se choisit à la mise en place, à côté du Classique et du Face à face, et se joue aussi à plusieurs appareils : les deux écrans voient tomber les mêmes dés.
 
 iPhone, iPad et Mac, comme toujours.
@@ -52,7 +53,7 @@ iPhone, iPad et Mac, comme toujours.
 
 ## La note de version — anglais
 
-877 caractères sur 4 000.
+1074 caractères sur 4 000.
 
 ```
 THE REAL WORLD
@@ -61,7 +62,8 @@ THE REAL WORLD
 • Drag and pinch the map. Names appear as you zoom in and never overlap; the number of men in each territory always shows.
 
 DICE, JUST LIKE THE BOX
-• For those who prefer the board game: a third mode, with no questions. The attacker rolls up to three dice, the defender two; the highest are compared pair by pair, and ties go to the defender. A single roll can cost each side a man.
+• For those who prefer the board game: a third mode, with no questions. The attacker rolls up to three dice, the defender one or two, as they choose; the highest are compared pair by pair, and ties go to the defender. A single roll can cost each side a man.
+• Two dice hurt the attacker more, but can cost two men at once; one never costs more than one. The choice comes with every assault, against a friend or against the machine.
 • Choose it when you set up, alongside Classic and Showdown. It plays across devices too: both screens see the same dice fall.
 
 iPhone, iPad and Mac, as always.
@@ -210,11 +212,14 @@ iPhone, iPad and Mac — one app, in English and French.
 
 ## Avant d'envoyer
 
-- [x] Les essais automatiques : 221, tous verts sur Mac, le 24 septembre 2026
-- [ ] Une partie sur le **Monde réel** et une **aux dés**, sur un vrai iPhone
+- [x] Les essais automatiques : 229, tous verts sur le simulateur iPhone, le
+      24 septembre 2026 — après l'ajout du choix du défenseur aux dés
+- [ ] Une partie sur le **Monde réel** et une **aux dés**, sur un vrai iPhone —
+      en se faisant attaquer, pour voir le choix « un dé ou deux »
 - [ ] Une partie **aux dés à deux appareils** : la note annonce que les deux
-      écrans voient tomber les mêmes dés. Un essai automatique le vérifie,
-      mais personne ne l'a encore joué sur deux vrais téléphones.
+      écrans voient tomber les mêmes dés, et le choix du défenseur voyage d'un
+      téléphone à l'autre. Des essais automatiques le vérifient, mais personne
+      ne l'a encore joué sur deux vrais téléphones.
 - [ ] Build 9 envoyé, et choisi dans la version 1.5
 - [ ] Note de version collée, en français et en anglais
 - [ ] Description remplacée, dans les deux langues (conseillé)
@@ -242,7 +247,7 @@ Les titres viennent des notes réellement publiées, relues chez Apple.
 | 1.2 | 8 septembre | les conquêtes personnelles décident la partie |
 | 1.3 | 17 septembre | le jeu au loin, la table à plusieurs appareils |
 | 1.4 (build 8) | 19 septembre | reprendre un autre soir, plusieurs parties à la fois, le français ou l'anglais |
-| **1.5 (build 9)** | à envoyer | le Monde réel, les dés |
+| **1.5 (build 9)** | à envoyer | le Monde réel, les dés — et le défenseur qui choisit un dé ou deux |
 
 Les notes de la 1.3 et de la 1.4 reprenaient à leur suite les sections des
 versions d'avant. Celle de la 1.5 ne dit que ce qui est neuf ; pour garder

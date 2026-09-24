@@ -36,6 +36,9 @@ final class GameSession {
         case adversaireRepond
         case asking
         case revealed
+        /// Aux dés : le défenseur humain choisit un dé ou deux. Rien n'est
+        /// jeté tant qu'il ne l'a pas fait — ni ici, ni sur l'autre appareil.
+        case defense
         /// Aux dés : une paire de faces, et ce qu'elle coûte. Le moteur a déjà
         /// tout tranché à la déclaration — cette étape n'est que le récit, et
         /// c'est la seule du jeu qui n'attende rien de personne.
@@ -96,7 +99,7 @@ final class GameSession {
     var partCouverte: Double {
         switch stage {
         case .handover, .asking, .revealed, .summary: return 0.55
-        case .adversaireRepond: return 0.4
+        case .adversaireRepond, .defense: return 0.4
         default: break
         }
         // Les deux panneaux de préparation prennent le bas de l'écran comme le
@@ -847,6 +850,27 @@ final class GameSession {
         return !(player(qui)?.isBot ?? true)
     }
 
+    /// Aux dés, le défenseur qui choisit ses dés tient-il cet appareil ?
+    ///
+    /// Sur un seul appareil, oui toujours : seul un humain choisit, et tous
+    /// les humains sont ici. En réseau, seulement s'il est de mon rang — les
+    /// autres voient qu'il choisit, et attendent.
+    var defenseurIci: Bool {
+        guard game.attendLaDefense, let a = game.assault else { return false }
+        return enReseau ? a.defender == monRang : !(player(a.defender)?.isBot ?? true)
+    }
+
+    /// Le choix peut-il partir ? Le fil doit tenir : un coup joué dans le
+    /// vide jetterait les dés ici et nulle part ailleurs.
+    var aMoiDeDefendre: Bool { defenseurIci && filTenu && stage == .defense }
+
+    func defendre(_ des: Int) {
+        guard aMoiDeDefendre else { return }
+        jouer(.defendre(des))
+        stage = nil
+        resume()
+    }
+
     /// Le défenseur peut-il doubler, et est-ce à moi de le décider ?
     var puisJeRelancer: Bool {
         game.peutRelancer && aMoiDeRepondre && stage == .asking && report == nil
@@ -1143,7 +1167,19 @@ final class GameSession {
                 continue
             }
 
-            // 1 bis. Les dés sont déjà jetés : l'écran les montre un par un.
+            // 1 bis. Aux dés, le défenseur humain n'a pas encore choisi ses
+            // dés. Rien n'est jeté : on attend son coup — ici s'il tient
+            // l'appareil, de l'autre appareil sinon. La machine, elle, ne
+            // choisit jamais : elle lance tout ce qu'elle peut, à la
+            // déclaration.
+            if game.attendLaDefense {
+                report = nil
+                thinking = false
+                stage = .defense
+                return
+            }
+
+            // 1 ter. Les dés sont déjà jetés : l'écran les montre un par un.
             //
             // Rien n'attend ici de coup à jouer, ni en solitaire ni en réseau —
             // les deux appareils ont tiré les mêmes faces de la même graine et

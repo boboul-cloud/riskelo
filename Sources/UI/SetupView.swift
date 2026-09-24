@@ -124,9 +124,10 @@ struct SetupView: View {
                             if mode == .des {
                                 Text("""
                                      Le jeu de plateau tel quel : l'assaillant lance jusqu'à \
-                                     trois dés, le défenseur deux, et les mains triées se \
-                                     comparent paire par paire. Un même jet peut coûter un homme \
-                                     à chacun. Tout le reste ne bouge pas.
+                                     trois dés, le défenseur un ou deux à son choix — la machine \
+                                     toujours deux —, et les mains triées se comparent paire par \
+                                     paire. Un même jet peut coûter un homme à chacun. Tout le \
+                                     reste ne bouge pas.
                                      """)
                                     .font(.caption2).foregroundStyle(Palette.dim.opacity(0.8))
                             }
@@ -175,6 +176,11 @@ struct SetupView: View {
                                     .font(.caption2).foregroundStyle(Palette.dim)
                             }
 
+                            // Aux dés, la culture ne décide de rien : il n'y a
+                            // pas de question. Le curseur restait pourtant là,
+                            // et promettait une machine plus ou moins forte
+                            // qu'il ne réglait pas. Seule la stratégie compte.
+                            if mode.interroge {
                             reglage("Culture de la machine") {
                                 HStack {
                                     Text(libelleNiveau).font(.subheadline.weight(.medium))
@@ -185,6 +191,7 @@ struct SetupView: View {
                                 }
                                 Slider(value: $niveau, in: 0.35...0.90, step: 0.05)
                                     .tint(Palette.camp(1))
+                            }
                             }
                         }
 

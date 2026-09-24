@@ -5,11 +5,11 @@
 //  Le mode « dés » : le jeu de plateau tel quel, sans question.
 //
 //  Il a deux propriétés qu'aucun autre mode n'a, et ce sont les deux qu'il
-//  faut clouer. La première : l'assaut se tranche entièrement au moment où on
-//  le déclare — il n'attend rien, et rien ne peut donc l'attendre. La
-//  seconde : les faces sortent du hasard de la partie, et non de celui de
-//  l'appareil, sans quoi deux téléphones en réseau ne verraient pas tomber
-//  les mêmes hommes.
+//  faut clouer. La première : l'assaut se tranche d'un seul jet — à la
+//  déclaration quand la machine défend, au choix du défenseur quand c'est un
+//  humain, et rien d'autre ne l'attend. La seconde : les faces sortent du
+//  hasard de la partie, et non de celui de l'appareil, sans quoi deux
+//  téléphones en réseau ne verraient pas tomber les mêmes hommes.
 //
 //  Le reste — les renforts, les continents, les cartes, les conquêtes — ne
 //  sait même pas que le mode existe, et c'est ce qu'on vérifie en finissant
@@ -26,8 +26,18 @@ struct DesTests {
         var r = Rules(); r.mode = .des; return r
     }
 
-    private func partie(_ n: Int = 2, seed: UInt64 = 42) -> GameState {
-        GameState.start(players: (0 ..< n).map { Player(id: $0, name: "J\($0)") },
+    /// Les premiers joueurs sont des humains, les autres des machines.
+    ///
+    /// Un seul humain par défaut, qui ouvre la partie : il attaque donc une
+    /// machine, qui lance tout ce qu'elle peut sans rien choisir, et l'assaut
+    /// se tranche à la déclaration. Le choix du défenseur humain a ses
+    /// propres essais, plus bas.
+    private func partie(_ n: Int = 2, seed: UInt64 = 42, humains: Int = 1) -> GameState {
+        GameState.start(players: (0 ..< n).map { i in
+                            Player(id: i, name: "J\(i)",
+                                   kind: i < humains ? .humain
+                                                     : .machine(niveau: 0.7, style: .moyenne))
+                        },
                         rules: regles(), seed: seed)
     }
 
@@ -123,8 +133,9 @@ struct DesTests {
 
     // MARK: - L'assaut
 
-    /// Tout est joué à la déclaration, et en un seul jet : aucune question
-    /// n'attend, et l'assaut est déjà fini quand la fonction rend la main.
+    /// Contre la machine, tout est joué à la déclaration, et en un seul jet :
+    /// aucune question n'attend, et l'assaut est déjà fini quand la fonction
+    /// rend la main.
     @Test func lAssautSeTrancheEnUnLancer() {
         var g = partie()
         g.debugSkipToAttack()
@@ -160,10 +171,10 @@ struct DesTests {
         #expect(!g.canDeclare(from: base, to: cible, questions: 2))
     }
 
-    /// Le défenseur oppose deux dés dès qu'il a deux hommes, et un seul s'il
-    /// n'en a qu'un. Il ne le choisit pas : au jeu de plateau le second dé est
-    /// toujours à son avantage.
-    @Test func leDefenseurEnOpposeDeuxDesQuIlLePeut() {
+    /// La machine oppose deux dés dès qu'elle a deux hommes, et un seul si
+    /// elle n'en a qu'un. Elle ne choisit pas : contre trois dés, le second
+    /// lui fait perdre plus d'hommes mais en coûte davantage à l'assaillant.
+    @Test func laMachineEnOpposeDeuxDesQuElleLePeut() {
         for (garnison, attendu) in [(1, 1), (2, 2), (9, 2)] {
             var g = partie(2, seed: 3)
             g.debugSkipToAttack()
@@ -297,6 +308,178 @@ struct DesTests {
         // questions, où il en faut plus de cent, parce qu'un jet prend jusqu'à
         // deux hommes là où une question n'en prend qu'un.
         #expect(jets > 120, "seulement \(jets) jets sur six parties")
+    }
+
+    // MARK: - Le choix du défenseur
+
+    /// Un humain qui défend choisit ses dés : l'assaut déclaré attend son
+    /// coup, et rien n'est jeté d'ici là — ni hommes perdus, ni faces tirées.
+    @Test func lHumainQuiDefendChoisitSesDes() {
+        // Deux humains : le premier attaque le second.
+        var g = partie(2, seed: 5, humains: 2)
+        g.debugSkipToAttack()
+        guard let (base, cible) = g.debugFirstAssault(minArmies: 6, targetArmies: 4) else {
+            Issue.record("pas de front"); return
+        }
+        var avant = g.rng
+        let declare = g.declareAssault(from: base, to: cible, questions: 3, category: nil)
+        #expect(declare)
+        #expect(g.attendLaDefense)
+        #expect(g.assault?.reports.isEmpty == true, "rien n'est jeté avant le choix")
+        #expect(g.assault?.isOver == false)
+        #expect(g.armies(base) == 6)
+        #expect(g.armies(cible) == 4)
+        var apres = g.rng
+        let tirages = (apres.next(), avant.next())
+        #expect(tirages.0 == tirages.1, "aucun dé n'est tiré d'avance")
+        #expect(g.quiRepond == nil, "il n'y a toujours pas de question")
+        // L'assaut en suspens ne se range pas, et on ne passe pas au
+        // déplacement par-dessus.
+        g.dismissAssault()
+        g.advance()
+        #expect(g.assault != nil)
+        #expect(g.phase == .attack)
+    }
+
+    /// Un dé ou deux, et le lancer suit le choix.
+    @Test func leLancerSuitLeChoix() {
+        for des in [1, 2] {
+            var g = partie(2, seed: 5, humains: 2)
+            g.debugSkipToAttack()
+            guard let (base, cible) = g.debugFirstAssault(minArmies: 6, targetArmies: 4)
+            else { Issue.record("pas de front"); return }
+            g.declareAssault(from: base, to: cible, questions: 3, category: nil)
+            let defend = g.defendre(avec: des)
+            #expect(defend)
+            #expect(!g.attendLaDefense)
+            guard let a = g.assault, let r = a.reports.first, let l = r.lancer else {
+                Issue.record("aucun lancer"); return
+            }
+            #expect(l.attaque.count == 3)
+            #expect(l.defense.count == des)
+            #expect(a.isOver, "un jet épuise la salve")
+            #expect(g.armies(base) == 6 - r.coutAttaquant)
+            #expect(g.armies(cible) == 4 - r.coutDefenseur)
+            #expect(r.coutDefenseur <= des, "on ne perd pas plus d'hommes que de dés")
+        }
+    }
+
+    /// Contre la machine aussi : l'humain qui défend choisit, quand bien
+    /// même il est seul à la table.
+    @Test func contreLaMachineLHumainChoisitAussi() {
+        // La machine ouvre, et l'humain défend.
+        var g = GameState.start(
+            players: [Player(id: 0, name: "M", kind: .machine(niveau: 0.7, style: .moyenne)),
+                      Player(id: 1, name: "H")],
+            rules: regles(), seed: 8)
+        g.debugSkipToAttack()
+        guard let (base, cible) = g.debugFirstAssault(minArmies: 6, targetArmies: 4) else {
+            Issue.record("pas de front"); return
+        }
+        g.declareAssault(from: base, to: cible, questions: 3, category: nil)
+        #expect(g.attendLaDefense)
+    }
+
+    /// La machine attend le choix de l'humain au lieu de passer outre. Sans
+    /// ce garde, elle tentait un nouvel assaut par-dessus celui en suspens.
+    @Test func laMachineAttendLeChoixDuDefenseur() {
+        var g = GameState.start(
+            players: [Player(id: 0, name: "M", kind: .machine(niveau: 0.7, style: .moyenne)),
+                      Player(id: 1, name: "H")],
+            rules: regles(), seed: 8)
+        g.debugSkipToAttack()
+        guard let (base, cible) = g.debugFirstAssault(minArmies: 6, targetArmies: 4) else {
+            Issue.record("pas de front"); return
+        }
+        g.declareAssault(from: base, to: cible, questions: 3, category: nil)
+        let empreinte = g.digest
+        let premier = BotRunner.step(&g)
+        let second = BotRunner.step(&g)
+        #expect(premier == .waitingForHuman)
+        #expect(second == .waitingForHuman)
+        #expect(g.digest == empreinte, "rien n'a bougé")
+        g.defendre(avec: 1)
+        let ensuite = BotRunner.step(&g)
+        #expect(ensuite != .waitingForHuman, "le choix fait, la machine reprend")
+    }
+
+    /// Un homme seul n'a qu'un dé : il n'y a rien à lui demander, et l'assaut
+    /// se tranche à la déclaration, comme contre la machine.
+    @Test func unHommeSeulNaRienAChoisir() {
+        var g = partie(2, seed: 5, humains: 2)
+        g.debugSkipToAttack()
+        guard let (base, cible) = g.debugFirstAssault(minArmies: 6, targetArmies: 1) else {
+            Issue.record("pas de front"); return
+        }
+        g.declareAssault(from: base, to: cible, questions: 3, category: nil)
+        #expect(!g.attendLaDefense)
+        #expect(g.assault?.reports.first?.lancer?.defense.count == 1)
+    }
+
+    /// Ni zéro, ni trois dés, ni de choix hors de propos.
+    @Test func unChoixHorsDeLaRegleEstRefuse() {
+        var g = partie(2, seed: 5, humains: 2)
+        g.debugSkipToAttack()
+        guard let (base, cible) = g.debugFirstAssault(minArmies: 6, targetArmies: 4) else {
+            Issue.record("pas de front"); return
+        }
+        // Hors du `#expect` : le coup est mutant.
+        let sansAssaut = g.defendre(avec: 2)
+        #expect(!sansAssaut, "aucun assaut n'attend")
+        g.declareAssault(from: base, to: cible, questions: 2, category: nil)
+        let zero = g.defendre(avec: 0)
+        let trois = g.defendre(avec: 3)
+        #expect(!zero)
+        #expect(!trois)
+        #expect(g.attendLaDefense, "un refus ne jette rien")
+        let deux = g.defendre(avec: 2)
+        #expect(deux)
+        let encore = g.defendre(avec: 1)
+        #expect(!encore, "on ne choisit pas deux fois")
+    }
+
+    /// Le choix est un coup comme un autre : il passe le fil, il vient du
+    /// défenseur, et deux appareils qui le reçoivent tirent les mêmes faces.
+    @Test func leChoixVoyageSurLeFil() {
+        var g = partie(2, seed: 21, humains: 2)
+        g.debugSkipToAttack()
+        guard let (base, cible) = g.debugFirstAssault(minArmies: 9, targetArmies: 9) else {
+            Issue.record("pas de front"); return
+        }
+        g.apply(.declareAssault(from: base, to: cible, questions: 3, category: nil))
+        let coup = Action.defendre(1)
+        #expect(coup.author(in: g) == g.owner[cible])
+
+        guard let data = Message.coup(coup, numero: 4, empreinte: 1).data,
+              case let .message(.coup(recu, _, _)) = Message.lire(data) else {
+            Issue.record("le choix ne passe pas le fil"); return
+        }
+        #expect(recu == coup)
+
+        var ici = g, laBas = g
+        ici.apply(coup)
+        laBas.apply(recu)
+        #expect(ici.digest == laBas.digest)
+        #expect(ici.digest != g.digest, "le lancer change la partie")
+        #expect(ici.assault?.reports.first?.lancer == laBas.assault?.reports.first?.lancer)
+    }
+
+    /// Une partie enregistrée pendant que le défenseur hésite se rouvre sur
+    /// la même hésitation, et jette ensuite les mêmes dés.
+    @Test func unePartieRepriseAttendEncoreLeChoix() throws {
+        var g = partie(2, seed: 34, humains: 2)
+        g.debugSkipToAttack()
+        guard let (base, cible) = g.debugFirstAssault(minArmies: 9, targetArmies: 9) else {
+            Issue.record("pas de front"); return
+        }
+        g.declareAssault(from: base, to: cible, questions: 3, category: nil)
+        var reprise = try JSONDecoder().decode(GameState.self,
+                                               from: JSONEncoder().encode(g))
+        #expect(reprise.attendLaDefense)
+        g.defendre(avec: 2)
+        reprise.defendre(avec: 2)
+        #expect(g.assault?.reports.first?.lancer == reprise.assault?.reports.first?.lancer)
+        #expect(g.digest == reprise.digest)
     }
 
     /// Aucune question n'est tirée de la banque. Sans quoi le mode dépendrait

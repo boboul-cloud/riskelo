@@ -53,9 +53,102 @@ struct DuelOverlay: View {
         case .handover: handover
         case .adversaireRepond: adversaire
         case .asking, .revealed: question
+        case .defense: defense
         case .desLances: lancer
         case .summary: summary
         }
+    }
+
+    // MARK: - Un dé ou deux
+
+    /// Le défenseur choisit ses dés.
+    ///
+    /// Chaque bouton dit ce qu'il risque, parce que c'est tout le choix : deux
+    /// dés font plus mal à l'assaillant mais peuvent coûter deux hommes d'un
+    /// coup, un seul n'en coûte jamais plus d'un. Face à un seul dé, le second
+    /// ne risque rien de plus — une seule paire se compare — et le bouton le
+    /// dit aussi, plutôt que d'agiter un danger qui n'existe pas.
+    ///
+    /// Les deux boutons ont le même poids. L'écran n'a pas à souffler la
+    /// réponse : c'est la seule décision que le mode laisse au défenseur.
+    @ViewBuilder private var defense: some View {
+        if let a = session.assault, let attaquant = session.player(a.attacker),
+           let defenseur = session.player(a.defender) {
+            VStack(spacing: 18) {
+                Image(systemName: "shield.lefthalf.filled")
+                    .font(.system(size: 40))
+                    .foregroundStyle(Palette.camp(defenseur.id))
+                VStack(spacing: 6) {
+                    Text("\(attaquant.name) attaque \(session.game.name(a.to))")
+                        .font(.title3.weight(.semibold))
+                    Text(desALAssaut(a.volley))
+                        .foregroundStyle(Palette.dim)
+                }
+                .multilineTextAlignment(.center)
+
+                if session.defenseurIci {
+                    Text("\(defenseur.name), combien de dés opposez-vous ?")
+                        .font(.headline)
+                        .multilineTextAlignment(.center)
+                    HStack(spacing: 10) {
+                        choixDeDefense(1, risque: "Ne coûte jamais plus d'un homme",
+                                       camp: defenseur.id)
+                        choixDeDefense(2, risque: a.volley > 1
+                                       ? "Frappe plus fort, mais peut coûter deux hommes"
+                                       : "Face à un seul dé, ne risque rien de plus",
+                                       camp: defenseur.id)
+                    }
+                    .disabled(!session.aMoiDeDefendre)
+                } else {
+                    Label("\(defenseur.name) choisit ses dés…", systemImage: "ellipsis.bubble")
+                        .font(.headline)
+                        .foregroundStyle(Palette.dim)
+                }
+            }
+            .foregroundStyle(Palette.ink)
+            .frame(maxWidth: .infinity)
+        }
+    }
+
+    /// Le nombre de dés de l'assaut, en toutes lettres. Trois phrases et non
+    /// un nombre suivi d'un « s » : le pluriel de « dé » se fait par une
+    /// lettre en français et par un mot entier en anglais.
+    private func desALAssaut(_ n: Int) -> String {
+        switch n {
+        case 1:  dit("Un dé à l'assaut")
+        case 2:  dit("Deux dés à l'assaut")
+        default: dit("Trois dés à l'assaut")
+        }
+    }
+
+    private func choixDeDefense(_ des: Int, risque: String.LocalizationValue,
+                                camp: PlayerID) -> some View {
+        Button { withAnimation { session.defendre(des) } } label: {
+            VStack(spacing: 6) {
+                HStack(spacing: 2) {
+                    ForEach(0 ..< des, id: \.self) { k in
+                        Image(systemName: k == 0 ? "die.face.5.fill" : "die.face.3.fill")
+                    }
+                }
+                .font(.system(size: 26))
+                Text(des == 1 ? dit("Un dé") : dit("Deux dés"))
+                    .font(.headline)
+                Text(dit(risque))
+                    .font(.caption)
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .opacity(0.85)
+            }
+            .frame(maxWidth: .infinity, minHeight: 112)
+            .padding(.vertical, 6)
+            .padding(.horizontal, 2)
+        }
+        .buttonStyle(.borderedProminent)
+        // Un rectangle aux coins ronds, et non la gélule d'iOS 26 : sur un
+        // bouton de trois lignes, la gélule devenait un ovale qui rognait la
+        // dernière.
+        .buttonBorderShape(.roundedRectangle(radius: 16))
+        .tint(Palette.camp(camp))
     }
 
     // MARK: - Les dés

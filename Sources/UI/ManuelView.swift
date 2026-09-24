@@ -571,12 +571,14 @@ enum Manuel {
             .p("Les deux premiers modes remplacent le dé par une question. Celui-ci "
                + "fait le chemin inverse : il n'y a plus de question du tout, et l'on "
                + "joue la règle du jeu de plateau telle quelle. On déclare l'assaut, "
-               + "les dés tombent, et tout est réglé d'un coup."),
+               + "le défenseur choisit ses dés, et tout est réglé d'un jet."),
             .h("Le lancer"),
             .p("L'assaillant annonce un, deux ou trois dés — il lui faut un homme de "
                + "plus par dé, car on n'attaque jamais avec sa garnison. Le défenseur "
-               + "en oppose deux, ou un seul s'il ne tient la place qu'à un homme ; il "
-               + "ne le choisit pas, le second dé lui étant toujours favorable."),
+               + "répond par un dé ou deux, à son choix, une fois l'annonce faite et "
+               + "avant que rien ne tombe — sur un même appareil, au loin, et contre la "
+               + "machine. La machine, elle, oppose toujours deux dés ; et une place "
+               + "tenue par un seul homme n'en a qu'un."),
             .p("Les deux mains se trient du plus fort au plus faible et se comparent "
                + "paire par paire : le meilleur contre le meilleur, puis le suivant "
                + "contre le suivant. Le troisième dé de l'assaillant n'affronte "
@@ -592,7 +594,19 @@ enum Manuel {
             .note("À trois dés contre deux, l'assaillant perd 0,92 homme quand le "
                   + "défenseur en perd 1,08 : l'attaque paye, là où la question la "
                   + "décourage. Lancez toujours tout ce que vous pouvez — le défenseur "
-                  + "n'oppose que deux dés quoi qu'il arrive."),
+                  + "n'oppose jamais plus de deux dés."),
+            .h("Un dé ou deux"),
+            .p("Deux dés font plus mal à l'assaillant, mais peuvent vous coûter deux "
+               + "hommes d'un coup — 37 fois sur 100 contre trois dés. Un seul ne vous "
+               + "en coûte jamais plus d'un. C'est la prudence contre le rendement :"),
+            .tableau(["Contre trois dés", "Vous perdez", "L'assaillant perd"],
+                     [["Deux dés", "1,08 homme", "0,92 homme"],
+                      ["Un dé", "0,66 homme", "0,34 homme"]]),
+            .p("Deux dés restent le meilleur rendement : l'assaillant paie plus cher "
+               + "chaque homme qu'il vous prend. Un seul dé sert quand la place doit "
+               + "tenir ce tour-ci : une garnison de deux hommes ne tombe pas sur un "
+               + "seul jet. Face à un seul dé d'assaut, une seule paire se compare, et "
+               + "le second dé ne vous fait courir aucun risque de plus."),
             .note("La partie garde pourtant sa forme. Mesuré sur des parties à trois "
                   + "menées par la machine : huit tours aux dés, sept en classique, huit "
                   + "en face à face. Ce qui change est le nombre d'échanges — 66 au lieu "
@@ -602,8 +616,9 @@ enum Manuel {
             .p("Il n'y a plus de terrain à choisir avant l'assaut, plus de sablier, "
                + "plus de relance, et plus de dossier de culture à consulter : il n'y "
                + "a rien à savoir sur personne. La mise en place retire d'elle-même le "
-               + "dosage des questions et le renfort d'érudition, qui ne portent plus "
-               + "sur rien."),
+               + "dosage des questions, le renfort d'érudition et la culture de la "
+               + "machine, qui ne portent plus sur rien : contre elle, seule sa "
+               + "stratégie compte."),
             .h("Ce qui ne bouge pas"),
             .p("Tout le reste : les renforts, les continents, les cartes de territoire, "
                + "les conquêtes personnelles, le déplacement de fin de tour, le seuil "
@@ -617,8 +632,9 @@ enum Manuel {
                 "À qui veut voir d'où vient le reste : jouez-en une aux dés, puis la "
                 + "même en classique, et la variante s'explique d'elle-même.",
             ]),
-            .note("En réseau, les dés tombent des deux côtés sans que rien ne circule : "
-                  + "les deux appareils tirent la même suite depuis la même graine. "
+            .note("En réseau, les dés tombent des deux côtés sans que rien ne circule "
+                  + "que l'annonce et le choix du défenseur : les deux appareils tirent "
+                  + "la même suite depuis la même graine. "
                   + "C'est le même mécanisme qui permet de reprendre une partie là où "
                   + "on l'a laissée."),
         ])

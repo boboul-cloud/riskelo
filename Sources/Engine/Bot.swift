@@ -398,9 +398,9 @@ enum Bot {
                 }
                 let plan = Plan(from: from, to: to,
                                 // Aux dés, toujours le maximum : le défenseur
-                                // n'oppose que deux dés quoi qu'il arrive, si
-                                // bien qu'un troisième améliore les deux
-                                // comparaisons sans rien risquer de plus.
+                                // n'oppose jamais plus de deux dés, si bien
+                                // qu'un troisième améliore les comparaisons
+                                // sans rien risquer de plus.
                                 questions: g.rules.mode == .des
                                     ? g.volleyMax(from: from)
                                     : min(g.volleyMax(from: from), advantage >= 2 ? 2 : 1),

@@ -378,7 +378,11 @@ final class Relais: Fil {
             while true {
                 try? await Task.sleep(for: .seconds(20))
                 guard let self, self.socket === tache, !self.raccroche else { return }
-                tache.sendPing { erreur in
+                // Faible ici aussi. Sans cela, cette fermeture reprenait le
+                // `self` ferme du `guard` juste au-dessus, et le `[weak self]`
+                // de la tâche plus bas ne relâchait plus rien : le relais
+                // restait tenu jusqu'au retour du battement.
+                tache.sendPing { [weak self] erreur in
                     guard let erreur else { return }
                     print("Riskelo — salon : battement sans écho (\(erreur))")
                     Task { @MainActor [weak self] in

@@ -75,8 +75,7 @@ final class Sons {
 
     func jouer(_ signal: Signal) {
         guard Sons.actifs, !enPanne, let tampon = tampon(signal) else { return }
-        demarrer()
-        guard moteur.isRunning else { return }
+        guard moteur.isRunning else { demarrer(puis: signal); return }
         // `interrupts` : un second verdict qui tombe vite coupe le premier
         // plutôt que de sonner par-dessus.
         voix.scheduleBuffer(tampon, at: nil, options: .interrupts, completionHandler: nil)
@@ -90,17 +89,57 @@ final class Sons {
     /// l'on choisirait au casque un son que l'application ne joue pas.
     func rendu(_ signal: Signal) -> AVAudioPCMBuffer? { tampon(signal) }
 
-    private func demarrer() {
-        guard !moteur.isRunning, !enPanne else { return }
+    #if os(iOS)
+    /// La session audio en train de se préparer, s'il y en a une.
+    private var preparation: Task<Void, Never>?
+    /// Le son demandé pendant ce temps, et quand. Le dernier l'emporte.
+    private var enAttente: (signal: Signal, quand: Date)?
+    #endif
+
+    /// Met le moteur en marche, puis joue ce signal.
+    ///
+    /// Une session « ambiante » : le jeu ne coupe pas la musique de qui joue
+    /// en écoutant la sienne, et le bouton silence de l'iPhone le fait taire
+    /// — c'est ce qu'on attend d'un bruitage, pas d'un lecteur.
+    ///
+    /// La session se règle **hors du fil de l'écran**. Réglée dessus, elle
+    /// pouvait le faire attendre : le système audio répond parfois tard — un
+    /// appel en cours, un casque sans fil qui se branche —, et c'est l'écran
+    /// entier qui se figeait le temps de sa réponse. Xcode le signalait.
+    /// L'activation qui n'attend pas n'existe qu'à partir d'iOS 27 ; celle-ci
+    /// vaut pour tous.
+    ///
+    /// Le son demandé entre-temps part dès que la session est prête — s'il
+    /// est encore d'actualité : une note qui arriverait une seconde après le
+    /// geste ne dirait plus rien de ce geste.
+    private func demarrer(puis signal: Signal) {
+        guard !enPanne else { return }
         #if os(iOS)
-        // Une session « ambiante » : le jeu ne coupe pas la musique de qui
-        // joue en écoutant la sienne, et le bouton silence de l'iPhone le
-        // fait taire — c'est ce qu'on attend d'un bruitage, pas d'un lecteur.
-        let session = AVAudioSession.sharedInstance()
-        try? session.setCategory(.ambient, mode: .default, options: [.mixWithOthers])
-        try? session.setActive(true)
+        enAttente = (signal, Date())
+        guard preparation == nil else { return }
+        preparation = Task { [weak self] in
+            await Task.detached(priority: .userInitiated) {
+                let session = AVAudioSession.sharedInstance()
+                try? session.setCategory(.ambient, mode: .default, options: [.mixWithOthers])
+                try? session.setActive(true)
+            }.value
+            guard let self else { return }
+            self.preparation = nil
+            do { try self.moteur.start() } catch { self.enPanne = true; return }
+            // Démarré sans erreur mais à l'arrêt : jouer rappellerait le
+            // démarrage, et ainsi de suite. Ce son-là se perd ; le suivant
+            // réessaiera, comme avant.
+            guard self.moteur.isRunning else { self.enAttente = nil; return }
+            if let attente = self.enAttente {
+                self.enAttente = nil
+                if Date().timeIntervalSince(attente.quand) < 0.6 { self.jouer(attente.signal) }
+            }
+        }
+        #else
+        do { try moteur.start() } catch { enPanne = true; return }
+        guard moteur.isRunning else { return }
+        jouer(signal)
         #endif
-        do { try moteur.start() } catch { enPanne = true }
     }
 
     // MARK: - Les partitions

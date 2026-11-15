@@ -1199,6 +1199,38 @@
         }
       }
     },
+    "2D": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2D"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2D"
+          }
+        }
+      }
+    },
+    "3D": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3D"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3D"
+          }
+        }
+      }
+    },
     "?": {
       "localizations": {
         "fr": {
@@ -5091,6 +5123,22 @@
         }
       }
     },
+    "Les terres se lèvent en dalles, et ce qui est en jeu se soulève. Un doigt promène la table, deux la rapprochent ou la font tourner. Le bouton 3D, en haut du plateau, fait la même chose en cours de partie.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The territories rise as tiles, and whatever is in play lifts up. One finger moves the table, two bring it closer or turn it. The 3D button, at the top of the board, does the same during a game."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les terres se lèvent en dalles, et ce qui est en jeu se soulève. Un doigt promène la table, deux la rapprochent ou la font tourner. Le bouton 3D, en haut du plateau, fait la même chose en cours de partie."
+          }
+        }
+      }
+    },
     "Les trois niveaux, comme dans une boîte de jeu.": {
       "localizations": {
         "en": {
@@ -6008,6 +6056,38 @@
         }
       }
     },
+    "Plateau en relief": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3D board"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plateau en relief"
+          }
+        }
+      }
+    },
+    "Plateau à plat": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flat board"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plateau à plat"
+          }
+        }
+      }
+    },
     "Pologne": {
       "extractionState": "stale",
       "localizations": {
@@ -6137,6 +6217,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Québec"
+          }
+        }
+      }
+    },
+    "Recentrer le plateau": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recenter the board"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recentrer le plateau"
           }
         }
       }

@@ -25,9 +25,11 @@ struct DuelOverlay: View {
                     .padding(.bottom, 20)
                     .frame(maxWidth: 620)
                     .background(
+                        // Translucide, et sans ombre : l'ombre d'une feuille
+                        // translucide se verrait au travers d'elle, et
+                        // assombrirait justement le plateau qu'on veut voir.
                         UnevenRoundedRectangle(topLeadingRadius: 22, topTrailingRadius: 22)
-                            .fill(Palette.panel)
-                            .shadow(color: .black.opacity(0.5), radius: 14, y: -4)
+                            .fill(Palette.feuille)
                     )
                     .overlay(alignment: .top) {
                         // La poignée : elle dit que c'est une feuille posée

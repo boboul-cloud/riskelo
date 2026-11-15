@@ -45,13 +45,22 @@ struct BoardView: View {
             let radius = layout.typicalRadius * side
             let couvert = partCouverte(geo.frame(in: .named(Espace.ecran)))
             let repere = Repere(couvert: couvert, stage: session.stage, cible: session.target)
+            // Ce qui s'écrit sous le panneau s'efface : il est translucide, et
+            // un nom vu au travers se mêlait à son texte — « Brésil » sous
+            // « il y trébuche » se lisait « Bril y strébuche ». Les terres,
+            // elles, restent visibles ; seuls les mots se taisent.
+            let ecrit = { (y: CGFloat) -> Bool in
+                !sousLePanneau(y, hauteurVue: geo.size.height, side: side,
+                               aspect: layout.aspect, couvert: couvert)
+            }
             ZStack {
                 ForEach(session.plateau.map.order, id: \.self) { id in
                     if let boucles = layout.shapes[id] {
                         contour(id, boucles: boucles, side: side)
                     } else {
-                        tile(id, side: side, radius: radius,
-                             center: layout.centers[id] ?? Point(x: 0, y: 0))
+                        let centre = layout.centers[id] ?? Point(x: 0, y: 0)
+                        tile(id, side: side, radius: radius, center: centre,
+                             ecrit: ecrit(centre.y * side))
                     }
                 }
                 traversees(side: side, radius: radius)
@@ -75,6 +84,7 @@ struct BoardView: View {
                         if let legende = legendes[id] {
                             EtiquetteDessinee(legende: legende, nombre: session.plateau.armies(id),
                                               echelle: echelle)
+                                .opacity(ecrit(legende.centre.y) ? 1 : 0)
                         }
                     }
                 }
@@ -150,7 +160,9 @@ struct BoardView: View {
                 }
             }
             .overlay(alignment: .bottomTrailing) {
-                if deplace {
+                // Pas sous un panneau : il se voyait au travers, sans qu'on
+                // puisse l'atteindre.
+                if deplace, couvert == 0 {
                     Button {
                         withAnimation(.snappy) { zoom = 1; decalage = .zero; remonteAppliquee = 0 }
                     } label: {
@@ -243,6 +255,17 @@ struct BoardView: View {
         if let a = session.assautAffiche { return (a.from, a.to) }
         if let base = session.selected, let cible = session.target { return (base, cible) }
         return nil
+    }
+
+    /// Ce qui est écrit à cette hauteur du plateau tombe-t-il sous le
+    /// panneau ? La hauteur est en points du plateau non rapproché ; on la
+    /// porte à l'écran comme le fait le rapprochement, puis le glissement.
+    private func sousLePanneau(_ y: CGFloat, hauteurVue: CGFloat, side: CGFloat,
+                               aspect: Double, couvert: CGFloat) -> Bool {
+        guard couvert > 0 else { return false }
+        let aLEcran = hauteurVue / 2 + decalage.height + glisse.height
+            + echelle * (y - side * CGFloat(aspect) / 2)
+        return aLEcran > hauteurVue * (1 - couvert) - 6
     }
 
     /// Une place est-elle là où on peut la voir : dans l'écran, et au-dessus
@@ -360,14 +383,15 @@ struct BoardView: View {
 
     // MARK: - Une case
 
-    private func tile(_ id: TerritoryID, side: CGFloat, radius: CGFloat, center: Point) -> some View {
+    private func tile(_ id: TerritoryID, side: CGFloat, radius: CGFloat, center: Point,
+                      ecrit: Bool) -> some View {
         let largeur: CGFloat = radius * 1.732 * 0.97
         let hauteur: CGFloat = radius * 2 * 0.97
         return Hexagon()
             .fill(fill(id))
             .overlay(Hexagon().strokeBorder(border(id), lineWidth: borderWidth(id)))
             .overlay(frontiere(id, radius: radius))
-            .overlay(legende(id, radius: radius, echelle: echelle))
+            .overlay(legende(id, radius: radius, echelle: echelle).opacity(ecrit ? 1 : 0))
             .frame(width: largeur, height: hauteur)
             .contentShape(Hexagon())
             .position(x: center.x * side, y: center.y * side)
@@ -482,31 +506,15 @@ struct BoardView: View {
         return session.selected == id || isTarget(id) ? 3 : 1.5
     }
 
-    /// Une case sur laquelle le joueur peut agir maintenant.
+    /// Une case sur laquelle le joueur peut agir maintenant. La règle est
+    /// écrite une fois, sur la partie : le plateau en relief la lit aussi.
     private func playable(_ id: TerritoryID) -> Bool {
-        let g = session.plateau
-        guard !g.currentPlayer.isBot else { return true }
-        switch g.phase {
-        case .reinforcement: return g.owner[id] == g.currentPlayer.id
-        case .attack: return g.canLaunch(from: id)
-        case .fortify: return g.owner[id] == g.currentPlayer.id
-        default: return true
-        }
+        session.plateau.estJouable(id)
     }
 
     /// Une cible atteignable depuis la case retenue.
     private func isTarget(_ id: TerritoryID) -> Bool {
-        guard let base = session.selected else { return false }
-        let g = session.plateau
-        switch g.phase {
-        case .attack:
-            return g.map.areAdjacent(base, id) && g.owner[id] != g.currentPlayer.id
-        case .fortify:
-            return id != base && g.owner[id] == g.currentPlayer.id
-                && g.areLinked(base, id, for: g.currentPlayer.id)
-        default:
-            return false
-        }
+        session.plateau.estCible(id, depuis: session.selected)
     }
 }
 

@@ -523,6 +523,10 @@ enum ManuelEN {
                 + "what it does depends on the current step.",
                 "Two fingers to zoom, one finger dragging to pan. The button at the "
                 + "bottom right recenters it.",
+                "The 3D button, at the top right of the board, raises it in relief: "
+                + "territories become tiles, whatever is in play lifts up, and two "
+                + "fingers turning rotate the table. The 2D button lays it flat again. "
+                + "The choice holds for every game; it needs iOS 18 or macOS 15.",
                 "The playable territories are the only ones not in shadow.",
                 "A bright hairline marks continental borders; a thin dotted line, the "
                 + "sea crossings.",

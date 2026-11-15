@@ -33,6 +33,7 @@ struct SetupView: View {
     /// garde d'une partie à l'autre. D'où les préférences du système plutôt
     /// qu'un état de cette vue.
     @AppStorage(Sons.cle) private var sons = true
+    @AppStorage(Relief.cle) private var relief = false
     /// Le nom de celui qui tient l'appareil. Comme le son, il vaut pour
     /// l'application et non pour une partie.
     @AppStorage(Pseudo.cle) private var pseudo = ""
@@ -342,6 +343,27 @@ struct SetupView: View {
                                 }
                             }
                             .tint(Palette.held)
+                        }
+
+                        if Relief.possible {
+                            reglage("Plateau") {
+                                Toggle(isOn: $relief) {
+                                    VStack(alignment: .leading, spacing: 2) {
+                                        Text("Plateau en relief")
+                                            .font(.subheadline.weight(.medium))
+                                            .foregroundStyle(Palette.ink)
+                                        Text("""
+                                             Les terres se lèvent en dalles, et ce qui est en \
+                                             jeu se soulève. Un doigt promène la table, deux la \
+                                             rapprochent ou la font tourner. Le bouton 3D, en \
+                                             haut du plateau, fait la même chose en cours de \
+                                             partie.
+                                             """)
+                                            .font(.caption2).foregroundStyle(Palette.dim)
+                                    }
+                                }
+                                .tint(Palette.held)
+                            }
                         }
 
                         VStack(spacing: 4) {

@@ -886,6 +886,11 @@ enum Manuel {
                 + "qu'il fait dépend de l'étape en cours.",
                 "Deux doigts pour agrandir, un doigt qui glisse pour déplacer la carte. "
                 + "Le bouton en bas à droite la recentre.",
+                "Le bouton 3D, en haut à droite du plateau, le met en relief : les "
+                + "territoires deviennent des dalles, ce qui est en jeu se soulève, et "
+                + "deux doigts qui tournent font tourner la table. Le bouton 2D le remet "
+                + "à plat. Le choix vaut pour toutes les parties ; il demande iOS 18 ou "
+                + "macOS 15.",
                 "Les territoires jouables sont les seuls qui ne soient pas dans l'ombre.",
                 "Un liseré vif marque les frontières de continent ; un trait fin, les "
                 + "liaisons maritimes.",

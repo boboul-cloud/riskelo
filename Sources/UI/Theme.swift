@@ -104,6 +104,15 @@ enum Palette {
     static let mauve  = Color(red: 0.75, green: 0.40, blue: 0.62)
     static let orange = Color(red: 0.88, green: 0.52, blue: 0.24)
 
+    /// Le fond des panneaux qui couvrent le bas du plateau — l'assaut, le
+    /// déplacement, la feuille du duel.
+    ///
+    /// Translucide : le plateau se voit au travers. Il ne recule pas pour
+    /// faire tenir les deux places au-dessus du panneau — il glisse, et garde
+    /// le rapprochement du joueur —, et ce qui déborde dessous doit rester
+    /// visible. Assez couvrant pour lire, assez peu pour voir.
+    static let feuille = panel.opacity(0.78)
+
     static let sea = Color(red: 0.09, green: 0.12, blue: 0.16)
     static let ink = Color(red: 0.93, green: 0.94, blue: 0.95)
     static let dim = Color(red: 0.58, green: 0.62, blue: 0.68)

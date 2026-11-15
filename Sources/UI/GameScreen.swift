@@ -58,6 +58,17 @@ struct GameScreen: View {
     /// plateau s'en sert pour savoir ce qui lui reste vraiment.
     @State private var hautCouvert: CGFloat?
 
+    /// Un panneau couvre-t-il le bas de l'écran — l'assaut, le déplacement,
+    /// la feuille du duel ?
+    private var basCouvert: Bool {
+        if let stage = session.stage, stage != .announcing { return true }
+        guard session.target != nil else { return false }
+        switch session.game.phase {
+        case .attack, .fortify: return true
+        default: return false
+        }
+    }
+
     var body: some View {
         ZStack {
             Palette.sea.ignoresSafeArea()
@@ -68,11 +79,14 @@ struct GameScreen: View {
                 // consigne et le bouton. On lisait le compte des terres à
                 // l'endroit même où l'on cherchait le prochain geste.
                 StandingsBar(session: session)
-                BoardView(session: session, hautCouvert: hautCouvert)
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 6)
+                PlateauChoisi(session: session, hautCouvert: hautCouvert)
                     .overlay { AnnonceDePhase(session: session) }
                 BottomBar(session: session)
+                    // Le panneau est translucide, et la consigne qu'il
+                    // recouvre se lisait au travers, mêlée à son propre texte.
+                    // Elle s'efface tant qu'il est là ; de toute façon on ne
+                    // pouvait pas l'atteindre.
+                    .opacity(basCouvert ? 0 : 1)
             }
             if session.target != nil, case .attack = session.game.phase {
                 AssaultPanel(session: session).transition(.move(edge: .bottom).combined(with: .opacity))
@@ -135,6 +149,66 @@ struct GameScreen: View {
             ManuelView(onClose: { manuelOuvert = false })
         }
         .preferredColorScheme(.dark)
+    }
+}
+
+// MARK: - À plat ou en relief
+
+/// Le réglage du plateau en relief. Il vaut pour toutes les parties : on
+/// regarde le plateau d'une façon ou de l'autre, ce n'est pas une règle du
+/// jeu.
+enum Relief {
+    static let cle = "riskelo.relief"
+
+    /// Le relief demande un système récent — iOS 18, macOS 15. Plus ancien,
+    /// le bouton ne paraît pas, et le plateau reste à plat.
+    static var possible: Bool {
+        if #available(iOS 18.0, macOS 15.0, *) { return true }
+        return false
+    }
+
+}
+
+/// Le plateau, à plat ou en relief, et le bouton qui passe de l'un à l'autre.
+///
+/// Le bouton est posé sur le plateau même, dans son coin, et non dans la barre
+/// du haut : elle porte déjà sept boutons sur un téléphone, et c'est le
+/// plateau qu'il change.
+private struct PlateauChoisi: View {
+    let session: GameSession
+    let hautCouvert: CGFloat?
+    @AppStorage(Relief.cle) private var relief = false
+
+    var body: some View {
+        Group {
+            if relief && Relief.possible {
+                if #available(iOS 18.0, macOS 15.0, *) {
+                    // Bord à bord : la table en relief n'a pas de cadre, et
+                    // la marge du plateau à plat n'y laissait qu'une bande de
+                    // mer sans rien dedans.
+                    Plateau3DView(session: session, hautCouvert: hautCouvert)
+                }
+            } else {
+                BoardView(session: session, hautCouvert: hautCouvert)
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 6)
+            }
+        }
+        .overlay(alignment: .topTrailing) {
+            if Relief.possible {
+                Button { relief.toggle() } label: {
+                    Text(relief ? "2D" : "3D")
+                        .font(.system(size: 13, weight: .heavy, design: .rounded))
+                        .padding(.horizontal, 10).padding(.vertical, 6)
+                        .background(Palette.panel.opacity(0.92), in: Capsule())
+                        .overlay(Capsule().strokeBorder(Palette.dim.opacity(0.35), lineWidth: 1))
+                        .foregroundStyle(Palette.ink)
+                }
+                .buttonStyle(.plain)
+                .padding(10)
+                .accessibilityLabel(Text(relief ? "Plateau à plat" : "Plateau en relief"))
+            }
+        }
     }
 }
 
@@ -830,9 +904,9 @@ private struct AssaultPanel: View {
                     .tint(Palette.lost)
                 }
                 .padding(18)
-                .background(Palette.panel, in: RoundedRectangle(cornerRadius: 20))
+                .background(Palette.feuille, in: RoundedRectangle(cornerRadius: 20))
                 // Le panneau prend la couleur de celui qui attaque, en liseré
-                // seulement : le fond reste mat, sinon les six camemberts
+                // seulement : le fond reste sombre, sinon les six camemberts
                 // posés dessus deviendraient illisibles. Assez pour rappeler,
                 // à deux sur le même écran, qui tient le doigt sur le bouton.
                 .overlay(RoundedRectangle(cornerRadius: 20)
@@ -1021,7 +1095,7 @@ private struct FortifyPanel: View {
                     }
                 }
                 .padding(18)
-                .background(Palette.panel, in: RoundedRectangle(cornerRadius: 20))
+                .background(Palette.feuille, in: RoundedRectangle(cornerRadius: 20))
                 .padding(10)
                 .frame(maxWidth: 460)
                 .couvreLeBas()

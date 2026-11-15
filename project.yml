@@ -22,8 +22,13 @@ settings:
     # Le numéro qu'on lit sur l'App Store, et celui qui compte les envois.
     # Le premier ne bouge qu'à une vraie version ; le second monte à chaque
     # dépôt sur App Store Connect, qui refuse deux fois le même.
-    MARKETING_VERSION: "1.5"
-    CURRENT_PROJECT_VERSION: "9"
+    #
+    # Le second ne revient jamais en arrière, même quand le premier change :
+    # l'iPhone accepterait de recompter depuis 1 à chaque version, mais le
+    # Mac App Store exige un numéro plus grand que tous ceux déjà reçus. Une
+    # seule suite : 8 pour la 1.4, 9 pour la 1.5, 10 pour la 2.0.
+    MARKETING_VERSION: "2.0"
+    CURRENT_PROJECT_VERSION: "10"
     # Posée ici et non dans Xcode : « xcodegen generate » réécrit le projet,
     # et une équipe renseignée à la main disparaîtrait à la régénération.
     DEVELOPMENT_TEAM: 38DQ8FW23J

@@ -1,53 +1,99 @@
-# Soumission à l'App Store — Riskelo 1.5 (build 9)
+# Soumission à l'App Store — Riskelo 2.0 (build 10)
 
-**Pour coller la 1.5 : [FEUILLE-DE-SOUMISSION-1.5.md](FEUILLE-DE-SOUMISSION-1.5.md).**
-Ce README garde le détail et les explications.
+> **Ce qui est chez Apple**, relu en lecture seule le 22 novembre 2026 : la
+> **1.5 (build 9) est en vente**, sur iPhone et iPad. La **2.0 (build 10) est
+> soumise** depuis le 22 novembre à 6 h 12, heure de Paris : elle **attend la
+> revue**. Il n'y a pas de version Mac sur l'App Store.
 
-> **Ce qui est chez Apple**, relu en lecture seule le 24 septembre 2026 : la
-> **1.4 (build 8) est en vente**, sur iPhone et iPad. Les **34 packs sont
-> approuvés**. Il n'y a pas de version Mac sur l'App Store.
+## En clair : où en est la 2.0
 
-## En clair : la mise à jour 1.5
+La 2.0 apporte le plateau en relief, les panneaux translucides, le son qui ne
+fige plus l'écran et le mode d'emploi corrigé. Elle est déjà partie :
 
-L'application, ses packs, ses questionnaires et ses captures sont déjà chez
-Apple, et ils y restent. Tout se remplit à la main : la fenêtre d'AgentDouble
-ne propose que les apps pas encore en vente. Chaque texte est plus bas, avec
-son nombre de caractères, prêt à copier.
+1. ~~Envoyer le build 10~~ — **fait** le 22 novembre à 6 h 09.
+2. ~~Créer la version 2.0 et y choisir le build 10~~ — **fait**.
+3. ~~Coller la note de version, en français et en anglais~~ — **fait**. Relue
+   chez Apple : elle est mot pour mot celle qui est plus bas.
+4. ~~Soumettre à la revue~~ — **fait**.
 
-1. ~~Envoyer le build 9~~ — **fait**.
-2. **Créer la version 1.5** : le « + » à côté de « App iOS », puis « 1.5 ».
-   Dans la section « Build » de la nouvelle page, choisir le **build 9**.
-3. **Sur la page de la version 1.5, en français** — le menu de langue est en
-   haut à droite de la page. Remplacer quatre cases :
-   - **Texte promotionnel** ;
-   - **Description** — le texte en entier, à la place de l'ancien ;
-   - **Mots-clés** ;
-   - **Nouveautés de cette version** — la note de version.
-4. **Même page, en anglais** : les mêmes quatre cases, avec les textes
-   anglais, et en plus deux adresses, qui pointaient vers les pages
-   françaises :
+La description, le texte promotionnel et les mots-clés sont ceux de la 1.5,
+repris tels quels : c'était voulu, il n'y avait rien à y changer.
+
+**Reste une chose à décider** : la relecture du 22 novembre a trouvé cinq
+cases que la feuille de la 1.5 demandait de remplir et qui ne l'ont jamais
+été. La section suivante les donne, et dit comment les corriger.
+
+---
+
+## Les cases oubliées depuis la 1.5
+
+| Case | Ce qu'Apple a | Ce qu'il faudrait |
+|---|---|---|
+| **Sous-titre** français | vide | `Conquête et culture générale` |
+| **Sous-titre** anglais | vide | `Conquest and trivia` |
+| **URL d'assistance**, fiche anglaise | la page française | `https://boboul-cloud.github.io/riskelo/en/support.html` |
+| **URL marketing**, fiche anglaise | la page française | `https://boboul-cloud.github.io/riskelo/en/` |
+| **Politique de confidentialité**, fiche anglaise | la page française | `https://boboul-cloud.github.io/riskelo/en/privacy.html` |
+| **Notes pour la revue** | « deux minutes » | « une semaine » — la phrase est plus bas |
+
+Et une sixième que l'outil de lecture ne peut pas voir, parce qu'Apple ne la
+montre pas par son interface de programmation : **« Confidentialité de
+l'app »** doit dire « Oui : identifiant de l'appareil » (tableau plus bas).
+À vérifier à l'œil.
+
+Pourquoi ça compte :
+
+- **Le sous-titre** est lu par la recherche de l'App Store. Les mots-clés de
+  la 1.5 ont laissé de côté « conquête » et « culture générale » parce que le
+  sous-titre devait les porter : sans lui, ces mots ne sont nulle part, et
+  quelqu'un qui cherche « culture générale » ne tombe pas sur Riskelo.
+- **Les notes pour la revue** disent au relecteur que le relais garde le
+  numéro de l'appareil deux minutes. C'est une semaine depuis la 1.4, et la
+  politique de confidentialité le dit. Le relecteur qui compare les deux voit
+  une contradiction.
+- **La fiche anglaise** envoie un joueur anglais sur des pages en français.
+
+### Deux façons de faire
+
+Tant que la 2.0 attend la revue, Apple **verrouille** ces cases. Seule
+« Confidentialité de l'app » se change à tout moment, sans toucher à la
+version : celle-là se vérifie tout de suite, quoi qu'on choisisse.
+
+- **A. Maintenant** : retirer la 2.0 de la revue, remplir les cases, la
+  soumettre de nouveau. Dix minutes, et la 2.0 repasse en fin de file —
+  d'ordinaire un jour ou deux de plus. Le build 10 reste attaché, rien n'est
+  à renvoyer.
+- **B. À la prochaine version** : laisser la 2.0 suivre son cours, et remplir
+  les cases quand une 2.1 sera créée.
+
+### A, pas à pas, dans l'ordre des pages d'App Store Connect
+
+1. **Page de la version 2.0** : en haut, **« Retirer de la vérification »**
+   (le libellé peut varier un peu). La version passe à « Rejetée par le
+   développeur » : c'est le nom normal de cet état, ce n'est pas un refus
+   d'Apple.
+2. **Même page, en anglais** (menu de langue en haut à droite) :
    - **URL d'assistance** : `https://boboul-cloud.github.io/riskelo/en/support.html`
    - **URL marketing** : `https://boboul-cloud.github.io/riskelo/en/`
-5. **Plus bas sur la même page, « Informations sur la vérification de
-   l'app » ▸ Notes** : les notes de la 1.4 y sont reprises d'office. Une
-   seule phrase est devenue fausse ; la remplacer (elle est juste en
-   dessous).
-6. **« Informations sur l'app »**, dans le menu de gauche : le
-   **Sous-titre**, en français puis en anglais.
-7. **« Confidentialité de l'app »**, dans le menu de gauche :
-   - passer la réponse à **« Oui »**, avec les quatre réponses du tableau
-     plus bas ;
-   - en anglais, l'adresse de la **politique de confidentialité** :
-     `https://boboul-cloud.github.io/riskelo/en/privacy.html`
-8. **Relire la page de la version 1.5**, dans les deux langues, puis
-   **soumettre à la revue**.
+3. **Plus bas, « Informations sur la vérification de l'app » ▸ Notes** :
+   remplacer la phrase ci-dessous. Chez Apple, elle est coupée sur deux
+   lignes : chercher « deux minutes ».
+4. **« Informations sur l'app »**, menu de gauche : le **Sous-titre**, en
+   français puis en anglais.
+5. **« Confidentialité de l'app »**, menu de gauche : vérifier les réponses du
+   tableau plus bas, et, en anglais, l'adresse de la **politique de
+   confidentialité** :
+   `https://boboul-cloud.github.io/riskelo/en/privacy.html`
+6. **Page de la version 2.0** : vérifier que le **build 10** y est toujours,
+   puis la soumettre de nouveau (le bouton en haut à droite).
 
 ### La phrase à remplacer dans les notes pour la revue
 
-Dans le paragraphe « 2. AU LOIN, AVEC UN CODE », remplacer :
+Dans le paragraphe « 2. AU LOIN, AVEC UN CODE », remplacer ces deux lignes :
 
 ```
-Il connaît un identifiant tiré au sort à l'installation, le garde deux minutes après la partie pour permettre d'en reprendre une coupée, puis l'efface.
+Il connaît un identifiant tiré au sort à l'installation, le garde deux minutes
+après la partie pour permettre d'en reprendre une coupée, puis l'efface.
 ```
 
 par :
@@ -56,20 +102,10 @@ par :
 Il connaît un identifiant tiré au sort à l'installation, le garde une semaine après la dernière séance pour qu'une partie se reprenne un autre soir, puis l'efface.
 ```
 
-Ce qui change par rapport à la 1.4, en plus des textes :
-
-- **La fiche anglaise renvoie enfin vers les pages anglaises du site**
-  (assistance, confidentialité, site). Elle renvoyait vers les pages
-  françaises.
-- **La déclaration de confidentialité** passe de « Aucune donnée collectée »
-  à « Oui : un identifiant d'appareil ». Depuis la 1.4, le relais du jeu au
-  loin garde une semaine, au lieu de deux minutes, le numéro tiré au sort de
-  chaque appareil, pour qu'une partie se reprenne un autre soir. Apple
-  compte cela comme une donnée collectée. La politique de confidentialité du
-  site le dit, et la note de version l'annonce, comme la politique le
-  promet.
-- Les packs, déjà approuvés, n'ont pas à être joints de nouveau, et la
-  classification par âge ne change pas.
+Les notes passent ainsi de 3 971 à 3 983 caractères sur 4 000. Le fichier
+[notes-pour-la-revue.md](notes-pour-la-revue.md) porte en plus une phrase sur
+la carte du monde, ajoutée après coup : avec elle, on arriverait à 4 131
+caractères. Elle reste donc dans le dossier, pas chez Apple.
 
 ### Confidentialité de l'app — les réponses
 
@@ -81,19 +117,122 @@ Ce qui change par rapport à la 1.4, en plus des textes :
 | Est-elle liée à l'identité de l'utilisateur ? | **Non** |
 | Sert-elle au suivi ? | **Non** |
 
-### Les adresses de la fiche anglaise
+Pourquoi « Oui » : depuis la 1.4, le relais du jeu au loin garde une semaine
+le numéro tiré au sort de chaque appareil, pour qu'une partie se reprenne un
+autre soir. Apple compte cela comme une donnée collectée. La politique de
+confidentialité du site le dit, et la note de la 1.5 l'a annoncé.
 
-| Champ | Adresse |
-|---|---|
-| URL d'assistance | `https://boboul-cloud.github.io/riskelo/en/support.html` |
-| URL marketing | `https://boboul-cloud.github.io/riskelo/en/` |
-| Politique de confidentialité | `https://boboul-cloud.github.io/riskelo/en/privacy.html` |
+---
 
-La fiche française garde les siennes.
+## La note de version — français
+
+1 169 caractères sur 4 000. C'est celle qui est chez Apple.
+
+```
+LE PLATEAU EN RELIEF
+• Un bouton « 3D », en haut à droite du plateau, lève la carte en relief : chaque territoire devient une dalle taillée dans son contour, bordée de la couleur de son continent, et un fanion porte le nombre d'hommes.
+• Ce qui est en jeu se soulève, et la flèche d'assaut saute en arc d'une terre à l'autre.
+• Un doigt promène la table, deux la rapprochent ou la font tourner.
+• C'est une option : le bouton « 2D » remet le plateau à plat, et le réglage « Plateau en relief » fait la même chose avant la partie. Le relief demande iOS 18 (macOS 15 sur Mac) ; sur un système plus ancien, rien ne change.
+
+LA CARTE RESTE EN VUE
+• Les panneaux du bas — l'assaut, le déplacement, la feuille du duel — sont translucides : on voit la carte au travers, à plat comme en relief.
+• Quand un panneau monte, le plateau glisse au lieu de reculer, et garde le rapprochement que vous aviez choisi.
+
+ET AUSSI
+• Le son ne fige plus l'écran quand l'appareil tarde à le donner, pendant un appel ou avec un casque sans fil.
+• Le mode d'emploi est à jour : il dit exactement ce que garde le relais du jeu au loin, et parle du mode Dés.
+
+iPhone, iPad et Mac, comme toujours.
+```
+
+## La note de version — anglais
+
+1 170 caractères sur 4 000. C'est celle qui est chez Apple.
+
+```
+THE BOARD IN RELIEF
+• A "3D" button, at the top right of the board, raises the map in relief: each territory becomes a tile cut to its outline, edged in its continent's color, and a flag carries its number of men.
+• Whatever is in play lifts up, and the assault arrow leaps in an arc from one territory to the next.
+• One finger moves the table; two bring it closer or turn it.
+• It is optional: the "2D" button lays the board flat again, and the "3D board" setting does the same before the game. Relief needs iOS 18 (macOS 15 on Mac); on an older system, nothing changes.
+
+THE MAP STAYS IN SIGHT
+• The panels at the bottom — the assault, the move, the duel sheet — are now translucent: you see the map through them, flat or in relief.
+• When a panel comes up, the board slides instead of pulling back, and keeps the zoom you had chosen.
+
+ALSO
+• Sound no longer freezes the screen when the device is slow to provide it, during a call or with wireless headphones.
+• The user guide is up to date: it says exactly what the relay keeps for games played far away, covers Dice mode, and its links now lead to the English pages of the website.
+
+iPhone, iPad and Mac, as always.
+```
+
+Ce que dit la note, et rien d'autre : ce qui a changé depuis la 1.5. Deux
+changements n'y sont pas, exprès : une réparation interne du jeu au loin, que
+le joueur ne voit pas, et le DMG pour Mac, qui ne passe pas par l'App Store.
+Les liens du mode d'emploi ne sont cités qu'en anglais : en français, ils
+menaient déjà aux bonnes pages.
+
+Les noms sont ceux que l'application affiche : le bouton « 3D » / « 2D », et
+le réglage « Plateau en relief », qui s'appelle « 3D board » en anglais.
+
+---
+
+## Pendant la revue
+
+- [x] Build 10 envoyé
+- [x] Version 2.0 créée, build 10 choisi
+- [x] Note de version collée, en français et en anglais
+- [x] Soumise à la revue, le 22 novembre 2026
+- [x] Les essais automatiques : 244, tous verts sur le simulateur iPhone, le
+      22 novembre 2026, sur le dernier enregistrement (7f68bad), celui du
+      build 10
+- [ ] **Une partie en relief sur un vrai iPhone** : glisser, pincer, tourner,
+      toucher une terre. La note promet ces gestes, et personne ne les a
+      encore faits au doigt — seulement le simulateur et les essais. Si
+      quelque chose cloche, la 2.0 peut encore être retirée tant que la revue
+      n'a pas commencé.
+- [ ] Une partie en relief sur un iPad, et au trackpad du Mac (macOS 15)
+- [ ] « Confidentialité de l'app » vérifiée à l'œil
+- [ ] Les cases oubliées : façon A ou B, au choix de Robert
+
+## Après l'approbation
+
+- La branche `fusion`, où sont le relief et la 2.0, rejoint `main`, comme la
+  1.5 l'avait fait.
+- Sur le Mac, reprendre la version App Store à la place de la 1.5.
+- Le site ne cite aucun numéro de version : rien n'y est obligatoire. Il
+  pourra parler du relief, si Robert le veut.
+
+---
+
+## Ce qui est déjà parti
+
+Les titres viennent des notes réellement publiées, relues chez Apple.
+
+| Version | Créée le | Ce qu'annonçait sa note |
+|---|---|---|
+| 1.0 | 30 août 2026 | la première version |
+| 1.1 | 7 septembre | les conquêtes personnelles, les questions, votre nom et le son, la lisibilité |
+| 1.2 | 8 septembre | les conquêtes personnelles décident la partie |
+| 1.3 | 17 septembre | le jeu au loin, la table à plusieurs appareils |
+| 1.4 (build 8) | 19 septembre | reprendre un autre soir, plusieurs parties à la fois, le français ou l'anglais |
+| 1.5 (build 9) | 24 septembre | le Monde réel, les dés — et le défenseur qui choisit un dé ou deux |
+| **2.0 (build 10)** | 22 novembre — en attente de revue | le plateau en relief, les panneaux translucides |
+
+La note de la 1.5, et sa feuille complète, restent dans
+[FEUILLE-DE-SOUMISSION-1.5.md](FEUILLE-DE-SOUMISSION-1.5.md).
+
+Le build monte à chaque envoi, sans jamais revenir en arrière : le prochain
+après le 10 sera le 11. Il ne monte que sur demande de Robert.
 
 ---
 
 ## Le sous-titre, le texte promotionnel et les mots-clés
+
+Inchangés depuis la 1.5. Le texte promotionnel et les mots-clés sont ceux
+qui sont en ligne ; le sous-titre, lui, n'a jamais été posé (voir plus haut).
 
 Sous-titre français — 28 caractères sur 30 :
 
@@ -120,8 +259,9 @@ Texte promotionnel anglais — 154 caractères sur 170 :
 ```
 
 Mots-clés français — 97 caractères sur 100. « conquête » et « culture
-générale » sont maintenant dans le sous-titre, qu'Apple indexe déjà : ils
-laissent leur place à « dés », « géographie », « histoire » et « questions ».
+générale » ont laissé leur place à « dés », « géographie », « histoire » et
+« questions », parce que le sous-titre devait les porter : il faut donc le
+poser pour qu'Apple les lise.
 
 ```
 stratégie,quiz,dés,plateau,territoires,duel,solo,famille,hors ligne,géographie,histoire,questions
@@ -136,67 +276,12 @@ quiz,strategy,board,territory,turn-based,offline,online,multiplayer,family,geogr
 
 ---
 
-## La note de version — français
+## La description — inchangée depuis la 1.5
 
-1545 caractères sur 4 000.
-
-```
-LE MONDE RÉEL
-• Un quatrième plateau : le monde tel qu'il est, dessiné d'après les vraies côtes. Les quarante-deux territoires et les six continents du Monde, mais vingt traversées par la mer au lieu de trois — le Kamtchatka retrouve sa distance, et l'on n'y joue plus pareil.
-• Le Monde en hexagones reste : ce sont deux parties différentes, et l'on choisit à la mise en place.
-• La carte se promène et se rapproche sous le doigt. Les noms paraissent à mesure qu'on rapproche, sans jamais se chevaucher ; le nombre d'hommes, lui, se lit toujours.
-
-LES DÉS, COMME DANS LA BOÎTE
-• Pour ceux qui préfèrent le jeu de plateau : un troisième mode, sans question. L'assaillant lance jusqu'à trois dés, le défenseur un ou deux, à son choix ; les plus forts se comparent paire par paire, et l'égalité va au défenseur. Un même lancer peut coûter un homme à chacun.
-• Deux dés font plus mal à l'assaillant, mais peuvent coûter deux hommes d'un coup ; un seul n'en coûte jamais plus d'un. Le choix se fait à chaque assaut, contre un ami comme contre la machine.
-• Il se choisit à la mise en place, à côté du Classique et du Face à face, et se joue aussi à plusieurs appareils : les deux écrans voient tomber les mêmes dés.
-
-LA CONFIDENTIALITÉ, DITE EXACTEMENT
-• Pour qu'une partie au loin se reprenne un autre soir, le relais garde une semaine un numéro tiré au sort à l'installation. Il ne désigne personne, et aucun nom ne lui parvient. La fiche de l'App Store et la politique de confidentialité le disent désormais.
-
-iPhone, iPad et Mac, comme toujours.
-```
-
-## La note de version — anglais
-
-1334 caractères sur 4 000.
-
-```
-THE REAL WORLD
-• A fourth board: the world as it is, drawn from the real coastlines. The World's forty-two territories and six continents, but twenty sea crossings instead of three — Kamchatka is far away again, and it no longer plays the same.
-• The hexagon World stays: they are two different games, and you choose when you set up.
-• Drag and pinch the map. Names appear as you zoom in and never overlap; the number of men in each territory always shows.
-
-DICE, JUST LIKE THE BOX
-• For those who prefer the board game: a third mode, with no questions. The attacker rolls up to three dice, the defender one or two, as they choose; the highest are compared pair by pair, and ties go to the defender. A single roll can cost each side a man.
-• Two dice hurt the attacker more, but can cost two men at once; one never costs more than one. The choice comes with every assault, against a friend or against the machine.
-• Choose it when you set up, alongside Classic and Showdown. It plays across devices too: both screens see the same dice fall.
-
-PRIVACY, STATED EXACTLY
-• So that a game far away can pick up again another evening, the relay keeps a number drawn at random at installation for a week. It designates nobody, and no name ever reaches it. The App Store page and the privacy policy now say so.
-
-iPhone, iPad and Mac, as always.
-```
-
-Ce que dit la note, et rien d'autre : ce qui a changé depuis la 1.4. Les
-noms des modes et des plateaux sont ceux que l'application affiche dans
-chaque langue — « Face à face » est « Showdown » en anglais.
-
----
-
-## La description à jour
-
-Quatre retouches à la description de la 1.4, rien d'autre :
-
-- « Deux manières de se battre » devient **trois**, avec une ligne pour les
-  **Dés** ;
-- « Trois plateaux » devient **quatre**, avec une ligne pour le **Monde
-  réel** — et le Monde est dit « en hexagones », pour qu'on les distingue ;
-- pour tenir sous les 4 000 caractères, deux phrases se resserrent : le
-  paragraphe sur la partie au loin (la note de la 1.4 l'a déjà dit en
-  détail) et celle sur les questions qui ne reviennent pas.
-
-Chaque texte se colle **en entier**, à la place de l'ancien.
+C'est celle qui est en ligne : la 2.0 l'a reprise telle quelle, relue chez
+Apple le 22 novembre. Elle ne parle pas du relief. En français, elle tient à
+20 caractères près : pour y ajouter une ligne, il faudrait en couper une
+autre. C'est un choix pour une version suivante, si Robert le veut.
 
 ### Français — 3980 caractères sur 4 000
 
@@ -258,9 +343,6 @@ iPhone, iPad et Mac — une seule application, en français et en anglais.
 
 ### Anglais — 3921 caractères sur 4 000
 
-La version anglaise tenait sans rien couper : seules les deux lignes neuves
-et les deux titres changent.
-
 ```
 Riskelo is a turn-based conquest game where the roll of the dice is replaced by a trivia question.
 
@@ -319,65 +401,10 @@ iPhone, iPad and Mac — one app, in English and French.
 
 ---
 
-## Avant d'envoyer
-
-- [x] Les essais automatiques : 233, tous verts sur le simulateur iPhone, le
-      24 septembre 2026 — après le choix du défenseur aux dés, et le plateau
-      qui attend la fin des dés pour montrer la prise
-- [ ] Une partie sur le **Monde réel** et une **aux dés**, sur un vrai iPhone —
-      en se faisant attaquer, pour voir le choix « un dé ou deux »
-- [ ] Une partie **aux dés à deux appareils** : la note annonce que les deux
-      écrans voient tomber les mêmes dés, et le choix du défenseur voyage d'un
-      téléphone à l'autre. Des essais automatiques le vérifient, mais personne
-      ne l'a encore joué sur deux vrais téléphones.
-- [x] Build 9 envoyé
-- [ ] Version 1.5 créée dans App Store Connect
-- [ ] Textes collés, en français puis en anglais : texte promotionnel,
-      description, mots-clés, note de version — et les deux adresses anglaises
-- [ ] La phrase des notes pour la revue remplacée
-- [ ] Sous-titre remplacé, dans les deux langues
-- [ ] « Confidentialité de l'app » passée à « Oui »
-- [ ] Page de la version 1.5 relue, en français et en anglais — le build 9
-      y est bien choisi
-- [ ] Soumis à la revue
-
-## À côté de la mise à jour
-
-- [x] La **page d'invitation** du jeu au loin — celle qu'on reçoit par
-      message — mène maintenant à la vraie fiche de l'App Store,
-      <https://apps.apple.com/app/riskelo/id6806804539>, au lieu d'une adresse
-      d'exemple. Serveur redéployé le 24 septembre 2026 (version `3987b40d`),
-      et son essai de bout en bout passe contre le serveur réel. Cela ne
-      dépendait pas de la 1.5 et n'attend aucune revue d'Apple.
-
----
-
-## Ce qui est déjà parti
-
-Les titres viennent des notes réellement publiées, relues chez Apple.
-
-| Version | Créée le | Ce qu'annonçait sa note |
-|---|---|---|
-| 1.0 | 30 août 2026 | la première version |
-| 1.1 | 7 septembre | les conquêtes personnelles, les questions, votre nom et le son, la lisibilité |
-| 1.2 | 8 septembre | les conquêtes personnelles décident la partie |
-| 1.3 | 17 septembre | le jeu au loin, la table à plusieurs appareils |
-| 1.4 (build 8) | 19 septembre | reprendre un autre soir, plusieurs parties à la fois, le français ou l'anglais |
-| **1.5 (build 9)** | build envoyé le 24 septembre | le Monde réel, les dés — et le défenseur qui choisit un dé ou deux |
-
-Les notes de la 1.3 et de la 1.4 reprenaient à leur suite les sections des
-versions d'avant. Celle de la 1.5 ne dit que ce qui est neuf ; pour garder
-l'habitude, il suffit de coller sous elle la note de la 1.4, sans sa
-dernière ligne « iPhone, iPad et Mac » — les deux tiennent ensemble sous les
-4 000 caractères, dans chaque langue.
-
-Le build monte à chaque envoi, et App Store Connect refuse deux fois le même
-numéro : le prochain après le 9 sera le 10.
-
 ## Le reste du dossier
 
 Ces fichiers servent à une **première** soumission, ou quand une question de
-la fiche change. Pour une mise à jour comme la 1.5, cette page suffit.
+la fiche change. Pour une mise à jour comme la 2.0, cette page suffit.
 
 | Fichier | Ce qu'il contient |
 |---|---|

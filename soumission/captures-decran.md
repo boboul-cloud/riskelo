@@ -156,14 +156,14 @@ xcrun simctl list devices          # trouver l'appareil
 xcrun simctl boot "iPhone 17 Pro Max"
 open -a Simulator
 # jouer jusqu'à l'écran voulu, puis :
-xcrun simctl io booted screenshot ~/Desktop/riskelo-01-duel.png
+xcrun simctl io booted screenshot /Volumes/Travail/Projets/riskelo-01-duel.png
 ```
 
 Sur le Mac, `⌘⇧4` puis la barre d'espace photographie la fenêtre seule — mais
 elle ajoute une ombre portée qu'Apple refuse. Pour l'éviter :
 
 ```bash
-screencapture -o -w ~/Desktop/riskelo-mac-01.png
+screencapture -o -w /Volumes/Travail/Projets/riskelo-mac-01.png
 ```
 
 ## Ce qui fait rejeter une capture

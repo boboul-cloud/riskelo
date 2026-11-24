@@ -666,7 +666,7 @@ Celles du Mac restent à prendre à la main, et seulement si la version Mac part
 aussi — `⌘⇧4` puis la barre d'espace ajoute une ombre portée qu'Apple refuse :
 
 ```bash
-screencapture -o -w ~/Desktop/riskelo-mac-01.png
+screencapture -o -w /Volumes/Travail/Projets/riskelo-mac-01.png
 ```
 
 Ce qui fait rejeter une capture : une maquette d'appareil dessinée autour de
